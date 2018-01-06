@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="loginvm"
+            type="com.bsuperiorsystem.doctor_app.Activity.Login.LoginViewModel">
+        </variable>
+    </data>
+
+<RelativeLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Login.LoginActivity">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/login_welcome_text"
+        android:layout_marginRight="@dimen/login_margins_horizontally"
+        android:layout_marginLeft="@dimen/login_margins_horizontally"
+        android:text="@string/welcome_to_medlynk"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:textColor="@color/welcome_text_color"
+        />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/edtUserName"
+        android:hint="@string/email"
+        android:layout_marginRight="@dimen/login_margins_horizontally"
+        android:layout_marginLeft="@dimen/login_margins_horizontally">
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_action_person"
+            android:textColorHint="@color/icons_color"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtPassWord"
+        android:hint="@string/password"
+        android:layout_below="@id/edtUserName"
+        android:layout_marginRight="@dimen/login_margins_horizontally"
+        android:layout_marginLeft="@dimen/login_margins_horizontally"
+        android:layout_marginBottom="15dp">
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:textColorHint="@color/icons_color"
+            android:drawableLeft="@drawable/ic_action_password"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnLogin"
+        android:layout_below="@id/edtPassWord"
+        android:background="@drawable/custom_button_main"
+        android:text="@string/login"
+        android:textColor="@color/white"
+        android:layout_marginRight="@dimen/login_margins_horizontally"
+        android:layout_marginLeft="@dimen/login_margins_horizontally"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtCreateAccount"
+        android:text="@string/create_an_account"
+        android:layout_below="@id/btnLogin"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="@dimen/login_margins_horizontally"
+        android:textColor="@color/colorPrimary"
+        android:onClick="@{loginvm::signUpActivity}"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtForgetPassword"
+        android:text="@string/forget_password"
+        android:layout_below="@id/txtCreateAccount"
+        android:layout_marginLeft="@dimen/login_margins_horizontally"
+        android:textColor="@color/colorPrimary"
+        android:onClick="@{loginvm::forgetPasswordActivity}"
+        />
+
+    <ProgressBar
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/progressbar"
+        />
+
+</RelativeLayout>
+
+</layout>

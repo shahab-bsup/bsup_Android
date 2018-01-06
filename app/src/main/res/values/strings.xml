@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Doctor_App</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="create_an_account">Create Account</string>
+    <string name="forget_password">Forget Password</string>
+    <string name="login">Login</string>
+    <string name="welcome_to_medlynk">Welcome to Medlynk</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="reset_password_explanation">Please enter Email and Birth Date and click on \"Send Reset Password Link\" button.</string>
+    <string name="birth_date">Birth Date</string>
+    <string name="send_reset_password_link">Send Reset Password Link</string>
+    <string name="enter_new_password">Please enter new password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_new_password">Confirm New Password</string>
+    <string name="reset_my_password">Reset My Password</string>
+    <string name="new_account">New Account</string>
+    <string name="provide_new_account_info">Please provide details below to create your new Medlynk account</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="middle_name">Middle Name (Optional)</string>
+    <string name="retype_password">Retype Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="confirmation_email">A confirmation email is sent to you</string>
+    <string name="welcome_page_first_text">Medlynk will assist you in providing information to your doctor.</string>
+    <string name="welcome_page_second_text">On the next screen, you will be able to search for your doctor\'s account. Don\'t worry if you can\'t find their account number, you will still be able to use Medlynk. We\'ll guide you through this.</string>
+    <string name="get_started">OK, Let\'s Start</string>
+    <string name="go_to_questions">Go to question set already in progress</string>
+    <string name="enter_doctor_id">Please enter your doctor</string>
+    <string name="id">identification number (ID)</string>
+    <string name="example_doctor_id">Ex: 1234567</string>
+    <string name="search">Search</string>
+    <string name="search_text">Or select a doctor identification number (ID) that you searched before:</string>
+    <string name="do_not_know_dr_id">I DON\'T KNOW MY DOCTOR ID</string>
+</resources>

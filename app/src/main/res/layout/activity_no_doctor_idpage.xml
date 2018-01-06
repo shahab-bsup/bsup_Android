@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bsuperiorsystem.doctor_app.Activity.NoDoctorIDPage">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/logo">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgBackButton"
+            android:src="@drawable/ic_action_home_button"
+            android:layout_marginTop="@dimen/home_button_margin_top"
+            android:layout_marginLeft="15dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="NO DOCTOR ID"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:textSize="30sp"
+            android:padding="10dp"
+            />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/title_text"
+        android:layout_below="@id/logo"
+        android:text="Here's how to proceed:"
+        android:layout_marginLeft="10dp"
+        android:textSize="20sp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="some content goes here!"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:textSize="40sp"
+        />
+
+    <android.support.v7.widget.AppCompatCheckBox
+        android:id="@+id/check_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btnSGoToQuestions"
+        android:layout_alignLeft="@id/btnSGoToQuestions"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/white"
+        android:lineSpacingMultiplier="2"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSGoToQuestions"
+        android:background="@drawable/custom_button_main"
+        android:text="@string/get_started"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="@dimen/welcome_button_margins_horizontally"
+        android:layout_marginLeft="@dimen/welcome_button_margins_horizontally"
+        android:layout_marginBottom="15dp"
+        />
+
+</RelativeLayout>

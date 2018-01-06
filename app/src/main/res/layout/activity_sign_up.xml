@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bsuperiorsystem.doctor_app.Activity.SignUp.SignUpActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/relative_layout_signup_info">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imgBackButton"
+                android:src="@drawable/ic_action_home_button"
+                android:layout_alignLeft="@id/txtNewAccount"
+                android:layout_marginTop="@dimen/home_button_margin_top"
+                />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtNewAccount"
+                android:text="@string/new_account"
+                android:textColor="@color/welcome_text_color"
+                android:layout_marginLeft="@dimen/reset_margin_left"
+                android:layout_marginTop="@dimen/reset_margin_up"
+                android:textSize="@dimen/reset_password_text_size"
+                />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/new_account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/txtNewAccount"
+                android:layout_below="@+id/txtNewAccount"
+                android:layout_marginRight="15dp"
+                android:text="@string/provide_new_account_info"
+                android:textSize="20sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edtFirstName"
+                android:hint="@string/first_name"
+                android:layout_below="@id/new_account"
+                android:layout_marginRight="@dimen/login_margins_horizontally"
+                android:layout_marginLeft="@dimen/login_margins_horizontally"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:drawableLeft="@drawable/ic_action_person"
+                android:textColorHint="@color/icons_color"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edtLastName"
+                android:hint="@string/last_name"
+                android:layout_below="@id/edtFirstName"
+                android:layout_marginRight="@dimen/login_margins_horizontally"
+                android:layout_marginLeft="@dimen/login_margins_horizontally"
+                android:layout_marginBottom="10dp"
+                android:textColorHint="@color/icons_color"
+                android:drawableLeft="@drawable/ic_action_person"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edtMiddleName"
+                android:hint="@string/middle_name"
+                android:layout_below="@id/edtLastName"
+                android:layout_marginRight="@dimen/login_margins_horizontally"
+                android:layout_marginLeft="@dimen/login_margins_horizontally"
+                android:layout_marginBottom="10dp"
+                android:textColorHint="@color/icons_color"
+                android:drawableLeft="@drawable/ic_action_person"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edtBirthDate"
+                android:hint="@string/birth_date"
+                android:layout_below="@id/edtMiddleName"
+                android:layout_marginRight="@dimen/login_margins_horizontally"
+                android:layout_marginLeft="@dimen/login_margins_horizontally"
+                android:layout_marginBottom="10dp"
+                android:textColorHint="@color/icons_color"
+                android:drawableLeft="@drawable/ic_action_calendar"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edtEmail"
+                android:hint="@string/email"
+                android:layout_below="@id/edtBirthDate"
+                android:layout_marginRight="@dimen/login_margins_horizontally"
+                android:layout_marginLeft="@dimen/login_margins_horizontally"
+                android:layout_marginBottom="10dp"
+                android:textColorHint="@color/icons_color"
+                android:drawableLeft="@drawable/ic_action_envelop"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edtFirstPassword"
+                android:hint="@string/password"
+                android:layout_below="@+id/edtEmail"
+                android:layout_marginRight="@dimen/login_margins_horizontally"
+                android:layout_marginLeft="@dimen/login_margins_horizontally"
+                android:drawableLeft="@drawable/ic_action_password"
+                android:textColorHint="@color/icons_color"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edtRetypedPassWord"
+                android:hint="@string/retype_password"
+                android:layout_below="@id/edtFirstPassword"
+                android:layout_marginRight="@dimen/login_margins_horizontally"
+                android:layout_marginLeft="@dimen/login_margins_horizontally"
+                android:layout_marginBottom="15dp"
+                android:textColorHint="@color/icons_color"
+                android:drawableLeft="@drawable/ic_action_password"
+                />
+
+        </RelativeLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnSignUp"
+            android:layout_below="@id/relative_layout_signup_info"
+            android:background="@drawable/custom_button_main"
+            android:text="@string/sign_up"
+            android:textColor="@color/white"
+            android:layout_marginRight="@dimen/login_margins_horizontally"
+            android:layout_marginLeft="@dimen/login_margins_horizontally"
+            android:layout_marginBottom="25dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtConfirmationEmail"
+            android:layout_below="@+id/btnSignUp"
+            android:text="@string/confirmation_email"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_marginBottom="10dp" />
+
+    </LinearLayout>
+
+</ScrollView>
