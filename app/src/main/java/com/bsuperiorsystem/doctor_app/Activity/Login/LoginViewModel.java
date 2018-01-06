@@ -22,7 +22,7 @@ public class LoginViewModel implements LoginModel{
     public void setVisibility(View view){
         view.setVisibility(View.VISIBLE);
     }
-
+ 
     public void forgetPasswordActivity(View view){
         mContext.startActivity(new Intent(mContext, ResetPasswordActivity.class));
     }
