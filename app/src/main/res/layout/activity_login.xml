@@ -40,6 +40,7 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_action_person"
             android:textColorHint="@color/icons_color"
+            android:addTextChangedListener="@{loginvm.emailWatcher}"
             />
     </android.support.design.widget.TextInputLayout>
 
@@ -57,8 +58,7 @@
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:textColorHint="@color/icons_color"
-            android:drawableLeft="@drawable/ic_action_password"
-            />
+            android:drawableLeft="@drawable/ic_action_password"/>
     </android.support.design.widget.TextInputLayout>
 
     <Button
@@ -71,6 +71,7 @@
         android:textColor="@color/white"
         android:layout_marginRight="@dimen/login_margins_horizontally"
         android:layout_marginLeft="@dimen/login_margins_horizontally"
+        android:onClick="@{loginvm::submit}"
         />
 
     <TextView

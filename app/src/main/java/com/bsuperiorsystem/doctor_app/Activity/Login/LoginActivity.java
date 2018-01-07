@@ -18,11 +18,9 @@ import com.bsuperiorsystem.doctor_app.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button login;
-    TextView create_account, forget_account;
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
+
         super.onCreate(savedInstanceState);
         ActivityLoginBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
         LoginViewModel loginViewModel = new LoginViewModel(this);
