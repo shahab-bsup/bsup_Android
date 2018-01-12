@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bsuperiorsystem.doctor_app.Activity.SearchDoctor.SearchActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/logo">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgBackButton"
+            android:src="@drawable/ic_action_home_button"
+            android:layout_marginTop="@dimen/home_button_margin_top"
+            android:layout_marginLeft="15dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Logo PlaceHolder"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:textSize="30sp"
+            android:padding="10dp"
+            />
+    </RelativeLayout>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtEnterID"
+        android:text="@string/enter_doctor_id"
+        android:layout_below="@id/logo"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/enter_doctor_id_size"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/id"
+        android:text="@string/id"
+        android:layout_below="@id/txtEnterID"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/id_text_size"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        />
+
+    <android.support.v7.widget.AppCompatEditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/edtDoctorID"
+        android:layout_below="@id/id"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:paddingStart="10dp"
+        android:hint="@string/example_doctor_id"
+        android:background="@drawable/custom_edit_text_doctor_id"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSearch"
+        android:layout_below="@id/edtDoctorID"
+        android:background="@drawable/custom_button_main"
+        android:text="@string/search"
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="@dimen/welcome_button_margins_horizontally"
+        android:layout_marginLeft="@dimen/welcome_button_margins_horizontally"
+        android:layout_marginBottom="15dp" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnSearch"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:text="@string/search_text"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        android:layout_alignLeft="@id/edtDoctorID"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnDo_not_know_dr_id"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/custom_button_do_not_know_dr_id"
+        android:text="@string/do_not_know_dr_id"
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="@dimen/welcome_button_margins_horizontally"
+        android:layout_marginLeft="@dimen/welcome_button_margins_horizontally"
+        android:layout_marginBottom="15dp" />
+
+</RelativeLayout>

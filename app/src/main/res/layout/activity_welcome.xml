@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bsuperiorsystem.doctor_app.Activity.Welcome.WelcomeActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/logo">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgBackButton"
+            android:src="@drawable/ic_action_home_button"
+            android:layout_marginTop="@dimen/home_button_margin_top"
+            android:layout_marginLeft="15dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Logo PlaceHolder"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:textSize="30sp"
+            android:padding="10dp"
+            />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/imgWelcomePage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/logo"
+        android:src="@drawable/stethoscope"
+        android:scaleType="centerCrop"
+        android:layout_marginTop="@dimen/image_in_welcome_page"
+        />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/txtFirstText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/imgWelcomePage"
+        android:layout_alignEnd="@id/imgWelcomePage"
+        android:layout_below="@+id/imgWelcomePage"
+        android:layout_marginTop="18dp"
+        android:textSize="15dp"
+        android:textColor="@color/welcome_text_color"
+        android:text="@string/welcome_page_first_text"
+        />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/txtSecondText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/imgWelcomePage"
+        android:layout_alignEnd="@id/txtFirstText"
+        android:layout_below="@+id/txtFirstText"
+        android:layout_marginTop="18dp"
+        android:textSize="15dp"
+        android:textColor="@color/welcome_text_color"
+        android:text="@string/welcome_page_second_text"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnStart"
+        android:layout_below="@id/txtSecondText"
+        android:background="@drawable/custom_button_main"
+        android:text="@string/get_started"
+        android:textColor="@color/white"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="@dimen/welcome_button_margins_horizontally"
+        android:layout_marginLeft="@dimen/welcome_button_margins_horizontally"
+        android:layout_marginBottom="15dp"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnGoToQuestions"
+        android:layout_below="@id/btnStart"
+        android:text="@string/go_to_questions"
+        android:textColor="@color/icons_color"
+        android:textSize="10sp"
+        android:background="@drawable/already_askeds_button_welcome_page"
+        android:layout_marginRight="@dimen/welcome_button_margins_horizontally"
+        android:layout_marginLeft="@dimen/welcome_button_margins_horizontally"
+        />
+
+</RelativeLayout>
