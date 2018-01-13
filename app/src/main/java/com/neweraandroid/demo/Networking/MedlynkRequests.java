@@ -112,8 +112,18 @@ public class MedlynkRequests {
         } );
     }
 
+    //verifying who is trying to reset his/her password!
     public static void sendResetPasswordRequest(){
 
+    }
+
+    //reset password actually!
+    public static void resetPasswordRequest(String token, String email, String password, String confirmedPassword){
+        HashMap<String, String> body = new HashMap<> (  );
+        body.put ( Constants.EMAIL, email );
+        body.put ( Constants.PASSWORD, password );
+        body.put ( Constants.CONFIRMED_PASSWORD, confirmedPassword );
+        body.put ( Constants.TOKEN, token);
     }
 
 }

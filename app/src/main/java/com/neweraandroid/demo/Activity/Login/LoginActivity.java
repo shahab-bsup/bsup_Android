@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +16,7 @@ import com.neweraandroid.demo.Activity.SignUp.SignUpActivity;
 import com.neweraandroid.demo.Constants;
 import com.neweraandroid.demo.CustomViews.SnackController;
 import com.neweraandroid.demo.Essentials.SharedPreferenceManager;
+import com.neweraandroid.demo.Essentials.Utils;
 import com.neweraandroid.demo.Model.PrimaryTokenResponse;
 import com.neweraandroid.demo.Networking.MedlynkRequests;
 import com.neweraandroid.demo.R;
@@ -56,8 +56,8 @@ public class LoginActivity extends AppCompatActivity implements
         int id = view.getId ();
         switch (id){
             case R.id.btnLogin:{
-                isEmailValid = email.getText ().length () == 0 ? false : validateEmail ( email.getText ().toString () );
-                isPassWordValid = password.getText ().length () == 0 ? false : validatePassWord ( password.getText ().toString () );
+                isEmailValid = email.getText ().length () == 0 ? false : Utils.isEmailValid ( email.getText ().toString () );
+                isPassWordValid = password.getText ().length () == 0 ? false : Utils.isPasswordValid ( password.getText ().toString () );
                 if(  isEmailValid && isPassWordValid){
                     /*TODO send the request to server!!!*/
                     MedlynkRequests.getPrimaryAccessToken ( LoginActivity.this, email.getText ().toString (), password.getText ().toString () );
@@ -91,14 +91,6 @@ public class LoginActivity extends AppCompatActivity implements
                 break;
             }
         }
-    }
-
-    private boolean validatePassWord(String password) {
-        return password.length () >= 6 ? true : false;
-    }
-
-    private boolean validateEmail(String email) {
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     @Override

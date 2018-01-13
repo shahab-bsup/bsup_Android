@@ -1,30 +1,43 @@
 package com.neweraandroid.demo.Activity.ResetPassword;
 
-import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
-import com.neweraandroid.demo.Activity.SearchDoctor.SearchActivity;
+import com.neweraandroid.demo.CustomViews.SnackController;
+import com.neweraandroid.demo.Essentials.Utils;
+import com.neweraandroid.demo.Networking.MedlynkRequests;
 import com.neweraandroid.demo.R;
 
 
-public class ResetPasswordActivity extends AppCompatActivity {
+public class ResetPasswordActivity extends AppCompatActivity
+implements ResetPasswordViewHolder.OnButtonClickListener{
 
-    Button button;
+    View view;
+    private ResetPasswordViewHolder viewHolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_reset_password);
-        button = (Button) findViewById ( R.id.btnResetPassword );
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(ResetPasswordActivity.this, SearchActivity.class));
-            }
-        });
+        if( savedInstanceState == null ){
+            view = findViewById ( R.id.activity_reset_password );
+            viewHolder = new ResetPasswordViewHolder ( view );
+            viewHolder.setOnButtonClickListener ( this );
+        }
+    }
 
+    @Override
+    public void onClick(String email, String confirmedEmail) {
+        if( !Utils.isEmailValid ( email ) ){
+            viewHolder.getPasswordEditText ().setError ( "Email is not valid!" );
+        } else if( !email.equals ( confirmedEmail ) ){
+            SnackController.getInstance ()
+                    .init ( ResetPasswordActivity.this, R.string.confirmation_did_not_match, Snackbar.LENGTH_LONG )
+                    .showSnackBar ();
+        } else{
+
+        }
     }
 }
