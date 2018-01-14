@@ -6,24 +6,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 
 import com.neweraandroid.demo.Activity.Welcome.WelcomeActivity;
 import com.neweraandroid.demo.R;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    Button button;
+    View view;
+    SignUpViewHolder viewHolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        button = (Button) findViewById( R.id.btnSignUp);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(SignUpActivity.this, WelcomeActivity.class));
-            }
-        });
+        view = findViewById ( R.id.parent_sign_up );
+        viewHolder = new SignUpViewHolder ( view );
     }
+
 }

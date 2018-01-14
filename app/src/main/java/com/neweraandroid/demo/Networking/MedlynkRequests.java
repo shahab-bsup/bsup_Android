@@ -1,14 +1,19 @@
 package com.neweraandroid.demo.Networking;
 
+import android.content.Context;
+
 import com.google.gson.Gson;
+import com.neweraandroid.demo.Activity.SignUp.OnSignUpListener;
 import com.neweraandroid.demo.Activity.Splash.InitialTokenListener;
 import com.neweraandroid.demo.Activity.Login.PrimaryAccessTokenListener;
 import com.neweraandroid.demo.Activity.Splash.RefreshTokenListener;
 import com.neweraandroid.demo.Constants;
 import com.neweraandroid.demo.Model.InitialTokenResponse;
+import com.neweraandroid.demo.Model.InitiateResponse;
 import com.neweraandroid.demo.Model.PrimaryTokenErrorResponse;
 import com.neweraandroid.demo.Model.PrimaryTokenResponse;
 import com.neweraandroid.demo.Model.RenewTokenResponse;
+import com.neweraandroid.demo.Model.SignUpErrorResponse;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
@@ -126,4 +131,33 @@ public class MedlynkRequests {
         body.put ( Constants.TOKEN, token);
     }
 
+    public static void signUpNewUser(Context context, final OnSignUpListener onSignUpListener, HashMap<String, String> body){
+        Call<InitiateResponse> call = MedlynkRestAPI.getRegisterRetrofit ( context )
+                .signUp ( body );
+        call.enqueue ( new Callback<InitiateResponse> () {
+            @Override
+            public void onResponse(Call<InitiateResponse> call, Response<InitiateResponse> response) {
+                if (response.isSuccessful ()) {
+                    onSignUpListener.onSignUpSuccess ();
+                } else {
+                    Gson gson = new Gson ();
+                    try {
+                        SignUpErrorResponse errorResponse = gson.fromJson ( response.errorBody ().string (), SignUpErrorResponse.class );
+                        onSignUpListener.onSignUpFailure ( errorResponse.getMessage (), Constants.EXCEPTION_TYPE.NO_EXCEPTION );
+                    } catch (IOException e) {
+                        e.printStackTrace ();
+                        onSignUpListener.onSignUpFailure ( Constants.EXCEPTION_TYPE.ERROR_RESPONSE_PARSING_EXCEPTION );
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<InitiateResponse> call, Throwable t) {
+                if( t instanceof SocketTimeoutException){
+                    onSignUpListener.onSignUpFailure ( Constants.EXCEPTION_TYPE.SOCKET_TIMEOUT_EXCEPTION );
+                }else {
+                    onSignUpListener.onSignUpFailure ( Constants.EXCEPTION_TYPE.RETROFIT_EXCEPTION );
+                }
+            }
+        } );
+    }
 }

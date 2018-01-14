@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/parent_sign_up"
     tools:context="com.neweraandroid.demo.Activity.SignUp.SignUpActivity">
 
     <LinearLayout
@@ -84,12 +85,54 @@
                 android:drawableLeft="@drawable/ic_action_person"
                 />
 
-            <EditText
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/edtBirthDate"
-                android:hint="@string/birth_date"
+                android:orientation="horizontal"
+                android:id="@+id/genderLayout"
                 android:layout_below="@id/edtMiddleName"
+                android:layout_alignLeft="@id/edtMiddleName"
+                android:layout_marginRight="@dimen/login_margins_horizontally"
+                android:layout_marginLeft="@dimen/login_margins_horizontally"
+                android:layout_marginBottom="10dp">
+
+                <RadioGroup
+                    android:id="@+id/radio_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="male"
+                        android:textSize="10sp"
+                        android:layout_weight="1"
+                        />
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="female"
+                        android:textSize="10sp"
+                        android:layout_weight="1"
+                        />
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="prefer not to say"
+                        android:textSize="10sp"
+                        android:layout_weight="1"
+                        />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnBirthDate"
+                android:hint="@string/birth_date"
+                android:gravity="start|center_vertical"
+                android:layout_below="@id/genderLayout"
                 android:layout_marginRight="@dimen/login_margins_horizontally"
                 android:layout_marginLeft="@dimen/login_margins_horizontally"
                 android:layout_marginBottom="10dp"
@@ -102,7 +145,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/edtEmail"
                 android:hint="@string/email"
-                android:layout_below="@id/edtBirthDate"
+                android:layout_below="@id/btnBirthDate"
                 android:layout_marginRight="@dimen/login_margins_horizontally"
                 android:layout_marginLeft="@dimen/login_margins_horizontally"
                 android:layout_marginBottom="10dp"
@@ -149,16 +192,6 @@
             android:layout_marginLeft="@dimen/login_margins_horizontally"
             android:layout_marginBottom="25dp"
             />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/txtConfirmationEmail"
-            android:layout_below="@+id/btnSignUp"
-            android:text="@string/confirmation_email"
-            android:textSize="20dp"
-            android:gravity="center"
-            android:layout_marginBottom="10dp" />
 
     </LinearLayout>
 

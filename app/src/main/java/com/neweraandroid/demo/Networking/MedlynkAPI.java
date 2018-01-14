@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.neweraandroid.demo.Model.InitialTokenResponse;
+import com.neweraandroid.demo.Model.InitiateResponse;
 import com.neweraandroid.demo.Model.PrimaryTokenResponse;
 import com.neweraandroid.demo.Model.RenewTokenResponse;
 
@@ -17,7 +18,7 @@ import retrofit2.http.POST;
  * Created by Shahab on 1/11/2018.
  */
 
-public interface BsupAPI {
+public interface MedlynkAPI {
 
     //get an initial token for just registered user!
     @POST("/oauth/token")
@@ -31,4 +32,6 @@ public interface BsupAPI {
     @POST("/oauth/token")
     Call<RenewTokenResponse> getNewToken(@Body @Nullable Map<String, String> map);
 
+    @POST("/api/register")
+    Call<InitiateResponse> signUp(@Body @Nullable Map<String, String> map);
 }
