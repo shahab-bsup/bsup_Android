@@ -88,7 +88,7 @@ public class MedlynkRestAPI {
                     public Response intercept(Chain chain) throws IOException {
                         Request.Builder request = chain.request ().newBuilder ();
                         SharedPreferenceManager manager = new SharedPreferenceManager ( context );
-                        request.addHeader ( "Authorization ",  manager.getInitialTokenType () + " " + manager.getInitialToken ());
+                        request.addHeader ( "Authorization", manager.getInitialToken ());
                         request.addHeader ( "Accept", "application/json" );
                         return chain.proceed ( request.build () );
                     }

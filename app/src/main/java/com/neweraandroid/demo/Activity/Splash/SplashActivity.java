@@ -75,7 +75,7 @@ public class SplashActivity extends AppCompatActivity implements
     public void onInitialTokenSuccess(Response<InitialTokenResponse> response) {
         SharedPreferenceManager manager = new SharedPreferenceManager ( SplashActivity.this );
         manager.setInitialTokenType ( response.body ().getTokenType () );
-        manager.setInitialToken ( response.body ().getTokenType () +" " + response.body ().getAccessToken () );
+        manager.setInitialToken ( response.body ().getAccessToken () );
         manager.setInitialExpireToken ( response.body ().getExpiresIn () );
         startActivity ( new Intent ( SplashActivity.this, LoginActivity.class ) );
     }

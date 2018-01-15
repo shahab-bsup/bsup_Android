@@ -12,7 +12,7 @@ import java.util.HashMap;
 
 public class SignUpNetworkLayer {
 
-    public void callSignUpRout(Context context, OnSignUpListener onSignUpListener, HashMap<String, String> body) {
-        MedlynkRequests.signUpNewUser ( context, onSignUpListener, body );
+    public void callSignUpRout(Context context, OnSignUpListener onSignUpListener, HashMap<String, Object> body) {
+        MedlynkRequests.signUp ( context, onSignUpListener, body );
     }
 }

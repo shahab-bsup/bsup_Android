@@ -8,6 +8,7 @@ import com.neweraandroid.demo.Model.InitiateResponse;
 import com.neweraandroid.demo.Model.PrimaryTokenResponse;
 import com.neweraandroid.demo.Model.RenewTokenResponse;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -33,5 +34,5 @@ public interface MedlynkAPI {
     Call<RenewTokenResponse> getNewToken(@Body @Nullable Map<String, String> map);
 
     @POST("/api/register")
-    Call<InitiateResponse> signUp(@Body @Nullable Map<String, String> map);
+    Call<InitiateResponse> signUp(@Body @Nullable Map<String, Object> map);
 }

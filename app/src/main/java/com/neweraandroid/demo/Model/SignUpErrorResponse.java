@@ -10,31 +10,24 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class SignUpErrorResponse {
-
-    @SerializedName( "message" )
+    @SerializedName("message")
     @Expose
     @Nullable
     private String message;
-
-    @SerializedName ( "error" )
+    @SerializedName("errors")
     @Expose
     @Nullable
-    private String error;
-
+    private Errors errors;
     public String getMessage() {
         return message;
     }
-
     public void setMessage(String message) {
         this.message = message;
     }
-
-    public String getError() {
-        return error;
+    public Errors getErrors() {
+        return errors;
     }
-
-    public void setError(String error) {
-        this.error = error;
+    public void setErrors(Errors errors) {
+        this.errors = errors;
     }
-
 }

@@ -131,7 +131,7 @@ public class MedlynkRequests {
         body.put ( Constants.TOKEN, token);
     }
 
-    public static void signUpNewUser(Context context, final OnSignUpListener onSignUpListener, HashMap<String, String> body){
+    public static void signUp(Context context, final OnSignUpListener onSignUpListener, HashMap<String, Object> body){
         Call<InitiateResponse> call = MedlynkRestAPI.getRegisterRetrofit ( context )
                 .signUp ( body );
         call.enqueue ( new Callback<InitiateResponse> () {
@@ -143,7 +143,7 @@ public class MedlynkRequests {
                     Gson gson = new Gson ();
                     try {
                         SignUpErrorResponse errorResponse = gson.fromJson ( response.errorBody ().string (), SignUpErrorResponse.class );
-                        onSignUpListener.onSignUpFailure ( errorResponse.getMessage (), Constants.EXCEPTION_TYPE.NO_EXCEPTION );
+                        onSignUpListener.onSignUpFailure ( errorResponse.getErrors ().getEmail ().get ( 0 ).toString (), Constants.EXCEPTION_TYPE.NO_EXCEPTION );
                     } catch (IOException e) {
                         e.printStackTrace ();
                         onSignUpListener.onSignUpFailure ( Constants.EXCEPTION_TYPE.ERROR_RESPONSE_PARSING_EXCEPTION );
