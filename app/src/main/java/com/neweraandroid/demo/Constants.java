@@ -30,6 +30,7 @@ public class Constants {
     public static final String SCOPE = "scope";
     public static final String EMAIL = "email";
     public static final String CONFIRMED_PASSWORD = "password_confirmation";
+    public static final String SelectedDoctor = "Selected Doctor";
 
     public enum EXCEPTION_TYPE{
         BAD_EXCEPTION,

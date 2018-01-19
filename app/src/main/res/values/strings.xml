@@ -38,4 +38,5 @@
     <string name="timeout_exception">Timed out Operation!</string>
     <string name="something_bad_happened">Something bad happened :(</string>
     <string name="confirmation_did_not_match">Password Confirmation did not match!</string>
+    <string name="asset_statements" translatable="false">[{\n  \"relation\": [\"delegate_permission/common.handle_all_urls\"],\n  \"target\": {\n    \"namespace\": \"web\",\n    \"site\": \"https://medlynk.tk\",\n  }\n}]</string>
 </resources>

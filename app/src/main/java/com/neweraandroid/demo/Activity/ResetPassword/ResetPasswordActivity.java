@@ -1,5 +1,7 @@
 package com.neweraandroid.demo.Activity.ResetPassword;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,13 +21,29 @@ implements ResetPasswordViewHolder.OnButtonClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView( R.layout.activity_reset_password);
-        if( savedInstanceState == null ){
+        super.onCreate ( savedInstanceState );
+        setContentView ( R.layout.activity_reset_password );
+        if (savedInstanceState == null) {
             view = findViewById ( R.id.activity_reset_password );
             viewHolder = new ResetPasswordViewHolder ( view );
             viewHolder.setOnButtonClickListener ( this );
         }
+        // ATTENTION: This was auto-generated to handle app links.
+        handleIntent ();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent ( intent );
+        System.out.println ("onNewIntent!");
+    }
+
+    private void handleIntent() {
+        Intent appLinkIntent = getIntent ();
+        String appLinkAction = appLinkIntent.getAction ();
+        Uri appLinkData = appLinkIntent.getData ();
+        System.out.println ("appLinkData = ");
+
     }
 
     @Override

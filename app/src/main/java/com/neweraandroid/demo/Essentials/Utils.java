@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.annotation.Nullable;
 import android.util.Patterns;
+import android.view.View;
 
 import com.neweraandroid.demo.Networking.MedlynkRestAPI;
 

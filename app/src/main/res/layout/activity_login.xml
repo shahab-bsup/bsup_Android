@@ -25,6 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:hint="@string/email"
+            android:textColorHint="@color/colorAccent"
             android:id="@+id/layoutEMail"
             app:errorEnabled="true"
             android:layout_marginRight="@dimen/login_margins_horizontally"
@@ -33,6 +34,8 @@
                 android:id="@+id/edtUserName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:imeOptions="actionNext"
                 android:drawableLeft="@drawable/ic_action_person"
                 android:textColorHint="@color/icons_color"
                 />
@@ -44,6 +47,7 @@
             app:errorEnabled="true"
             android:id="@+id/layoutPassword"
             android:hint="@string/password"
+            android:textColorHint="@color/colorAccent"
             android:layout_below="@id/layoutEMail"
             android:layout_marginRight="@dimen/login_margins_horizontally"
             android:layout_marginLeft="@dimen/login_margins_horizontally"
@@ -53,6 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
+                android:imeOptions="actionDone"
                 android:textColorHint="@color/icons_color"
                 android:drawableLeft="@drawable/ic_action_password"/>
         </android.support.design.widget.TextInputLayout>

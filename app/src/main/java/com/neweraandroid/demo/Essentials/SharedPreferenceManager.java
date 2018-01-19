@@ -28,6 +28,9 @@ public class SharedPreferenceManager{
     public void setPrimaryTokenType(String tokenType){
         this.sharedPreferences.edit ().putString ( Constants.PRIMARY_TOKEN_TYPE, tokenType ).apply ();
     }
+    public String getPrimaryTokenType(){
+        return this.sharedPreferences.getString ( Constants.PRIMARY_TOKEN_TYPE, null );
+    }
     public String getPrimaryToken( ){
         return this.sharedPreferences.getString ( Constants.Primary_Token, null );
     }
@@ -74,5 +77,11 @@ public class SharedPreferenceManager{
     }
     public long getLastRefreshTokenSetTime(){
         return this.sharedPreferences.getLong ( Constants.RECEIVED_REFRESH_TOKEN_TIME_IN_MILLIS, 0 );
+    }
+    public void setEmail(String email){
+        this.sharedPreferences.edit ().putString ( Constants.EMAIL, email ).apply ();
+    }
+    public String getEmail(){
+        return this.sharedPreferences.getString ( Constants.EMAIL, null );
     }
 }

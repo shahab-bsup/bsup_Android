@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bsuperiorsystem.doctor_app.Activity.SearchDoctor.SearchActivity">
+    android:id="@+id/parent_search_activity"
+    tools:context="com.neweraandroid.demo.Activity.SearchDoctor.SearchActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -66,6 +67,8 @@
         android:layout_marginRight="20dp"
         android:paddingStart="10dp"
         android:hint="@string/example_doctor_id"
+        android:inputType="numberDecimal"
+        android:imeOptions="actionDone"
         android:background="@drawable/custom_edit_text_doctor_id"
         />
 

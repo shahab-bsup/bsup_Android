@@ -5,6 +5,7 @@ import android.content.Context;
 import com.neweraandroid.demo.Essentials.SharedPreferenceManager;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -58,7 +59,7 @@ public class MedlynkRestAPI {
                     public Response intercept(Chain chain) throws IOException {
                         Request.Builder request = chain.request ().newBuilder ();
                         SharedPreferenceManager manager = new SharedPreferenceManager ( context );
-                        request.addHeader ( "Authorization ",  manager.getPrimaryExpireToken () + " " + manager.getPrimaryToken ());
+                        request.addHeader ( "Authorization",  manager.getPrimaryTokenType () + " " + manager.getPrimaryToken ());
                         request.addHeader ( "Accept", "application/json" );
                         return chain.proceed ( request.build () );
                     }
@@ -94,9 +95,9 @@ public class MedlynkRestAPI {
                     }
                 } ).addInterceptor ( httpLoggingInterceptor )
                 .retryOnConnectionFailure ( false )
-                .readTimeout ( 60, java.util.concurrent.TimeUnit.SECONDS )
-                .writeTimeout ( 60, java.util.concurrent.TimeUnit.SECONDS )
-                .connectTimeout ( 60, java.util.concurrent.TimeUnit.SECONDS )
+                .readTimeout ( 60, TimeUnit.SECONDS )
+                .writeTimeout ( 60, TimeUnit.SECONDS )
+                .connectTimeout ( 60, TimeUnit.SECONDS )
                 .build ();
         retrofit = new Retrofit.Builder()
                 .baseUrl ( BASE_URL )

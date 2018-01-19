@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -23,7 +25,9 @@ import com.neweraandroid.demo.R;
 
 public class LoginActivity extends AppCompatActivity implements
         View.OnClickListener ,
-        PrimaryAccessTokenListener{
+        OnPrimaryAccessTokenListener,
+        OnResendConfirmationListener
+{
 
 //    LoginViewModel loginViewModel;
     Button submit;
@@ -31,6 +35,7 @@ public class LoginActivity extends AppCompatActivity implements
     TextView create_new_account, forget_password;
     ProgressBar progressBar;
     boolean isEmailValid, isPassWordValid;
+    private SharedPreferenceManager sharedPreferenceManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +53,7 @@ public class LoginActivity extends AppCompatActivity implements
             forget_password = findViewById ( R.id.txtForgetPassword );
             forget_password.setOnClickListener ( this );
             submit.setOnClickListener ( this );
+            sharedPreferenceManager = new SharedPreferenceManager ( this );
         }
     }
 
@@ -56,10 +62,12 @@ public class LoginActivity extends AppCompatActivity implements
         int id = view.getId ();
         switch (id){
             case R.id.btnLogin:{
+                hideSoftKeyBoard ();
                 isEmailValid = email.getText ().length () == 0 ? false : Utils.isEmailValid ( email.getText ().toString () );
                 isPassWordValid = password.getText ().length () == 0 ? false : Utils.isPasswordValid ( password.getText ().toString () );
                 if(  isEmailValid && isPassWordValid){
                     /*TODO send the request to server!!!*/
+                    sharedPreferenceManager.setEmail ( email.getText ().toString () );
                     MedlynkRequests.getPrimaryAccessToken ( LoginActivity.this, email.getText ().toString (), password.getText ().toString () );
                 }else if ( !isEmailValid && !isPassWordValid ){
                     email.setError ( "Email is Not Valid!" );
@@ -106,7 +114,19 @@ public class LoginActivity extends AppCompatActivity implements
 
     @Override
     public void onPrimaryAccessTokenFailure(String errorMessage, Constants.EXCEPTION_TYPE exception_type) {
-        if( exception_type == Constants.EXCEPTION_TYPE.NO_EXCEPTION ){
+        if( errorMessage.equals ( "You have to confirm your account." ) ){
+            SnackController.getInstance ().
+                    init ( LoginActivity.this, errorMessage, Snackbar.LENGTH_LONG )
+                    .setAction ( "Resend", new View.OnClickListener () {
+                        @Override
+                        public void onClick(View view) {
+                            MedlynkRequests.resendConfirmationEmail ( LoginActivity.this,
+                                    LoginActivity.this, sharedPreferenceManager.getEmail ());
+                        }
+                    } )
+                    .showSnackBar ();
+        }
+        else if( exception_type == Constants.EXCEPTION_TYPE.NO_EXCEPTION ){
             SnackController.getInstance ().
                     init ( LoginActivity.this, errorMessage, Snackbar.LENGTH_LONG )
                     .showSnackBar ();
@@ -130,6 +150,32 @@ public class LoginActivity extends AppCompatActivity implements
                     init ( LoginActivity.this, R.string.something_bad_happened, Snackbar.LENGTH_LONG )
                     .setAction ( R.string.try_again, LoginActivity.this )
                     .showSnackBar ();
+        }
+    }
+
+    @Override
+    public void onResendConfirmationLinkSuccess() {
+        SnackController.getInstance ().init ( LoginActivity.this,
+                "Sent to " +sharedPreferenceManager.getEmail (),
+                Snackbar.LENGTH_LONG)
+                .showSnackBar ();
+    }
+
+    @Override
+    public void onResendConfirmationLinkFailure(String errorMessage, Constants.EXCEPTION_TYPE exception_type) {
+
+    }
+
+    @Override
+    public void onResendConfirmationLinkFailure(Constants.EXCEPTION_TYPE exception_type) {
+        System.out.println ("Failure Occurred!");
+    }
+
+    private void hideSoftKeyBoard(){
+        View view = this.getCurrentFocus ();
+        if(view != null){
+            InputMethodManager imm = (InputMethodManager) this.getSystemService ( INPUT_METHOD_SERVICE );
+            imm.hideSoftInputFromWindow ( view.getWindowToken (), 0 );
         }
     }
 }

@@ -12,9 +12,22 @@ import com.google.gson.annotations.SerializedName;
 public class Errors implements Serializable
 {
 
+    @SerializedName ( "message" )
+    @Expose
+    String message;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     @SerializedName("email")
     @Expose
     private List<String> email = null;
+
     private final static long serialVersionUID = -6759493907826777711L;
 
     public List<String> getEmail() {
@@ -24,5 +37,4 @@ public class Errors implements Serializable
     public void setEmail(List<String> email) {
         this.email = email;
     }
-
 }

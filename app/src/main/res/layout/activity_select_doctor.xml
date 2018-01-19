@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/parent_select_doctor"
+    tools:context="com.neweraandroid.demo.Activity.SelectDoctor.SelectDoctorActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <com.neweraandroid.demo.CustomViews.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="Let's talk to your doctor"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp"
+        android:id="@+id/txt1"
+        />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/team_doctor"
+        android:layout_below="@id/txt1"
+        android:id="@+id/img"
+        android:scaleType="centerCrop">
+    </ImageView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/img"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-30dp"
+        app:cardCornerRadius="5dp"
+        android:paddingTop="80dp"
+        app:cardElevation="5dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.neweraandroid.demo.CustomViews.CustomTextView
+                android:layout_margin="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="aghaShahab"
+                android:textSize="30sp"
+                android:id="@+id/doctorName"
+                android:textColor="@color/colorPrimary">
+            </com.neweraandroid.demo.CustomViews.CustomTextView>
+            <com.neweraandroid.demo.CustomViews.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/doctorId"
+                android:layout_margin="15dp"
+                android:layout_below="@+id/doctorName"
+                android:layout_alignLeft="@id/doctorName" />
+
+            <com.neweraandroid.demo.CustomViews.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/doctorPhone"
+                android:layout_margin="15dp"
+                android:layout_below="@id/doctorId"
+                android:layout_alignLeft="@id/doctorName" />
+
+            <com.neweraandroid.demo.CustomViews.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/doctorName"
+                android:layout_below="@id/doctorPhone"
+                android:layout_margin="15dp"
+                android:id="@+id/doctorBio" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_button_main"
+                android:layout_below="@id/doctorBio"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="15dp"
+                android:text="Select This Doctor"
+                android:textColor="@color/white"
+                android:paddingRight="20dp"
+                android:paddingLeft="20dp"
+                android:id="@+id/btnSelectDoctor"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <com.neweraandroid.demo.CustomViews.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/card"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp"
+        android:textColor="@color/colorAccent"
+        android:text="Wrong Doctor? (Try Again)"
+        android:id="@+id/tryAgain"
+        android:textSize="15sp"
+        />
+
+
+    </RelativeLayout>
+
+</ScrollView>
