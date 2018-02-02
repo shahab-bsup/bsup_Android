@@ -19,6 +19,7 @@ import com.neweraandroid.demo.Constants;
 import com.neweraandroid.demo.CustomViews.SnackController;
 import com.neweraandroid.demo.Essentials.SharedPreferenceManager;
 import com.neweraandroid.demo.Essentials.Utils;
+import com.neweraandroid.demo.Model.CurrentUserResponse;
 import com.neweraandroid.demo.Model.PrimaryTokenResponse;
 import com.neweraandroid.demo.Networking.MedlynkRequests;
 import com.neweraandroid.demo.R;
@@ -94,8 +95,11 @@ public class LoginActivity extends AppCompatActivity implements
                 break;
             }
 
-            case android.support.design.R.id.snackbar_action:{
-                submit.setOnClickListener ( LoginActivity.this );
+            case android.support.design.R.id.snackbar_action: {
+                if( sharedPreferenceManager.getPrimaryToken () == null ) {
+                    System.out.println ( "sharedPreferenceManager.getPrimaryToken () == null" );
+                    submit.setOnClickListener ( LoginActivity.this );
+                }
                 break;
             }
         }
@@ -110,6 +114,7 @@ public class LoginActivity extends AppCompatActivity implements
         manager.setRefreshToken ( response.getRefreshToken () );
 
         startActivity ( new Intent ( LoginActivity.this, SearchActivity.class ) );
+
     }
 
     @Override
@@ -156,7 +161,7 @@ public class LoginActivity extends AppCompatActivity implements
     @Override
     public void onResendConfirmationLinkSuccess() {
         SnackController.getInstance ().init ( LoginActivity.this,
-                "Sent to " +sharedPreferenceManager.getEmail (),
+                "Sent to " + sharedPreferenceManager.getEmail (),
                 Snackbar.LENGTH_LONG)
                 .showSnackBar ();
     }
@@ -178,4 +183,5 @@ public class LoginActivity extends AppCompatActivity implements
             imm.hideSoftInputFromWindow ( view.getWindowToken (), 0 );
         }
     }
+
 }

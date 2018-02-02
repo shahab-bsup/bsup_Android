@@ -2,21 +2,29 @@ package com.neweraandroid.demo.Activity.ResetPassword;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.PersistableBundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
+import com.neweraandroid.demo.Activity.Login.LoginActivity;
+import com.neweraandroid.demo.Constants;
 import com.neweraandroid.demo.CustomViews.SnackController;
+import com.neweraandroid.demo.Essentials.SharedPreferenceManager;
 import com.neweraandroid.demo.Essentials.Utils;
 import com.neweraandroid.demo.Networking.MedlynkRequests;
 import com.neweraandroid.demo.R;
 
 
 public class ResetPasswordActivity extends AppCompatActivity
-implements ResetPasswordViewHolder.OnButtonClickListener{
+implements ResetPasswordViewHolder.OnButtonClickListener,
+OnResetPasswordListener
+{
 
     View view;
+    String reset_token;
     private ResetPasswordViewHolder viewHolder;
 
     @Override
@@ -28,34 +36,62 @@ implements ResetPasswordViewHolder.OnButtonClickListener{
             viewHolder = new ResetPasswordViewHolder ( view );
             viewHolder.setOnButtonClickListener ( this );
         }
+
         // ATTENTION: This was auto-generated to handle app links.
         handleIntent ();
     }
 
     @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent ( intent );
-        System.out.println ("onNewIntent!");
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState ( outState, outPersistentState );
+        outState.putString ( Constants.Reset_Token, reset_token );
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState ( savedInstanceState );
+        reset_token = savedInstanceState.getString ( Constants.Reset_Token );
     }
 
     private void handleIntent() {
         Intent appLinkIntent = getIntent ();
-        String appLinkAction = appLinkIntent.getAction ();
         Uri appLinkData = appLinkIntent.getData ();
-        System.out.println ("appLinkData = ");
+        reset_token = String.valueOf ( appLinkData ).substring ( 34 );
+    }
+
+
+
+    @Override
+    public void onClick(String password, String confirmedEmail) {
+        if( password.length () < 6 ){
+            SnackController.getInstance ().
+                    init ( ResetPasswordActivity.this,
+                            "Password must be at least 6 characters!")
+                    .showSnackBar ();
+        } else if( !password.equals ( confirmedEmail ) ){
+            SnackController.getInstance ().
+                    init ( ResetPasswordActivity.this,
+                            "Passwords does not match!")
+                    .showSnackBar ();
+        } else{
+            SharedPreferenceManager manager = new SharedPreferenceManager ( ResetPasswordActivity.this );
+            MedlynkRequests.resetPassword ( ResetPasswordActivity.this, reset_token, manager.getEmail (), password , ResetPasswordActivity.this);
+        }
+    }
+
+    @Override
+    public void onResetPasswordSuccess(String message) {
+        Toast.makeText ( this, message + "\nLogin Now!", Toast.LENGTH_SHORT ).show ();
+        startActivity ( new Intent ( ResetPasswordActivity.this, LoginActivity.class ) );
+    }
+
+    @Override
+    public void onResetPasswordFailure(String message, Constants.EXCEPTION_TYPE exception_type) {
 
     }
 
     @Override
-    public void onClick(String email, String confirmedEmail) {
-        if( !Utils.isEmailValid ( email ) ){
-            viewHolder.getPasswordEditText ().setError ( "Email is not valid!" );
-        } else if( !email.equals ( confirmedEmail ) ){
-            SnackController.getInstance ()
-                    .init ( ResetPasswordActivity.this, R.string.confirmation_did_not_match, Snackbar.LENGTH_LONG )
-                    .showSnackBar ();
-        } else{
+    public void onResetPasswordFailure(Constants.EXCEPTION_TYPE exception_type) {
 
-        }
     }
 }

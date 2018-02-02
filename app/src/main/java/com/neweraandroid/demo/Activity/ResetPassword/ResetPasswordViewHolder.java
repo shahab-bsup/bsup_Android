@@ -46,6 +46,6 @@ public class ResetPasswordViewHolder extends RecyclerView.ViewHolder {
     }
 
     interface OnButtonClickListener{
-        void onClick(String email, String confirmedEmail);
+        void onClick(String password, String confirmedEmail);
     }
 }

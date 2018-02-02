@@ -31,6 +31,9 @@ public class Constants {
     public static final String EMAIL = "email";
     public static final String CONFIRMED_PASSWORD = "password_confirmation";
     public static final String SelectedDoctor = "Selected Doctor";
+    public static final String Reset_Token = "Reset Token";
+    public static final String No_Doctor_ID_Preferences = "No DoctorID Preference";
+    public static final String Current_User_Info = "Current User Info";
 
     public enum EXCEPTION_TYPE{
         BAD_EXCEPTION,

@@ -48,6 +48,7 @@ public class SplashActivity extends AppCompatActivity implements
                 if( manager.getInitialToken () == null ){
                     MedlynkRequests.getInitialToken ( this );
                 }else if( manager.getPrimaryToken () == null ) {
+                    System.out.println ("initial token = " + manager.getInitialToken ());
                     new Timer()
                             .schedule ( new TimerTask () {
                                 @Override

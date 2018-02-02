@@ -9,7 +9,7 @@ import android.widget.Button;
 import com.neweraandroid.demo.R;
 
 /**
- * Created by Shahab on 1/19/2018.
+ * Created by Shahab on 1/19/2018...
  */
 
 public class SearchActivityViewHolder extends RecyclerView.ViewHolder {

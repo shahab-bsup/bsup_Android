@@ -13,14 +13,14 @@ public class SearchDoctorResponse implements Serializable {
 
     @SerializedName("data")
     @Expose
-    private SearchDoctorResponse searchDoctorResponse;
+    private ReceivedMedicalInfo receivedMedicalInfo;
     private final static long serialVersionUID = -2420979164143381626L;
 
-    public SearchDoctorResponse getSearchDoctorResponse() {
-        return searchDoctorResponse;
+    public ReceivedMedicalInfo getReceivedMedicalInfo() {
+        return receivedMedicalInfo;
     }
 
-    public void setSearchDoctorResponse(SearchDoctorResponse searchDoctorResponse) {
-        this.searchDoctorResponse = searchDoctorResponse;
+    public void setReceivedMedicalInfo(ReceivedMedicalInfo receivedMedicalInfo) {
+        this.receivedMedicalInfo = receivedMedicalInfo;
     }
 }

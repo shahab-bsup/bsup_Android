@@ -12,4 +12,5 @@
     <color name="icons_color">#3e3e3e</color>
     <color name="edit_text_underline_color">#979797</color>
     <color name="do_not_know_doctor_id">#c8c8c8</color>
+    <color name="green_next_button_questions">#6ad969</color>
 </resources>

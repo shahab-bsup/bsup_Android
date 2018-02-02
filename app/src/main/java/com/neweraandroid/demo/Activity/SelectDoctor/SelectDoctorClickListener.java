@@ -1,7 +1,9 @@
 package com.neweraandroid.demo.Activity.SelectDoctor;
 
 import android.content.Context;
-import android.view.View;
+import android.content.Intent;
+
+import com.neweraandroid.demo.Activity.StartQuestionSet.StartAppointmentActivity;
 
 /**
  * Created by Shahab on 1/20/2018.
@@ -15,8 +17,9 @@ public class SelectDoctorClickListener {
         this.context = context;
     }
 
-    public void onSelectDoctorClicked(){
+    public void onSelectDoctorClicked(String doctorID){
         System.out.println ("onSelectDoctorClicked");
+        context.startActivity ( new Intent ( context, StartAppointmentActivity.class ).putExtra ( "Doctor ID" , doctorID) );
     }
 
     public void onWrongDoctorIdClicked() {

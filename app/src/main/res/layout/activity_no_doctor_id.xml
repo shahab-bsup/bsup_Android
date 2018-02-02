@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.neweraandroid.demo.Activity.NoDoctorIdPage.NoDoctorIdActivity">
+
+    <include android:id="@+id/toolbar_no_doctor_id"
+        layout="@layout/toolbar_layout">
+    </include>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar_no_doctor_id"
+        android:layout_marginTop="30dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.neweraandroid.demo.CustomViews.CustomTextView
+                android:id="@+id/txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:layout_below="@id/toolbar_no_doctor_id"
+                android:text="@string/how_to_proceed_no_doctor_id"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="20dp"
+                />
+
+            <com.neweraandroid.demo.CustomViews.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_doctor_id_process_1"
+                android:layout_margin="20dp"
+                />
+
+            <com.neweraandroid.demo.CustomViews.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_doctor_id_process_2"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                />
+
+            <com.neweraandroid.demo.CustomViews.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_doctor_id_process_3"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="20dp">
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/chkbox_no_drid"
+                    android:layout_centerVertical="true" />
+
+                <com.neweraandroid.demo.CustomViews.CustomTextView
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/chkbox_no_drid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/no_doctor_id_process_4"
+                    />
+            </RelativeLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnGoToQuestionsNoDoctorId"
+                android:background="@drawable/custom_button_main"
+                android:text="@string/go_to_questions_no_doctor_id"
+                android:textColor="@color/white"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="@dimen/welcome_button_margins_horizontally"
+                android:layout_marginLeft="@dimen/welcome_button_margins_horizontally"
+                android:layout_marginBottom="15dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

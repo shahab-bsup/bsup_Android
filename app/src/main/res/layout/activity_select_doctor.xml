@@ -55,35 +55,88 @@
                 android:id="@+id/doctorName"
                 android:textColor="@color/colorPrimary">
             </com.neweraandroid.demo.CustomViews.CustomTextView>
-            <com.neweraandroid.demo.CustomViews.CustomTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/doctorId"
-                android:layout_margin="15dp"
-                android:layout_below="@+id/doctorName"
-                android:layout_alignLeft="@id/doctorName" />
 
-            <com.neweraandroid.demo.CustomViews.CustomTextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:id="@+id/layout_doctor_id"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/doctorPhone"
-                android:layout_margin="15dp"
-                android:layout_below="@id/doctorId"
-                android:layout_alignLeft="@id/doctorName" />
+                android:orientation="horizontal"
+                android:layout_below="@+id/doctorName">
+                <com.neweraandroid.demo.CustomViews.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/doctor_id"
+                    android:layout_marginLeft="15dp"
+                    android:layout_alignLeft="@id/doctorName" />
+                <com.neweraandroid.demo.CustomViews.CustomTextView
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/doctorId"
+                    android:layout_marginLeft="15dp"
+                    android:layout_below="@+id/doctorName"
+                    android:layout_alignLeft="@id/doctorName" />
+            </LinearLayout>
 
-            <com.neweraandroid.demo.CustomViews.CustomTextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/layout_doctor_phone"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@id/doctorName"
-                android:layout_below="@id/doctorPhone"
-                android:layout_margin="15dp"
-                android:id="@+id/doctorBio" />
+                android:orientation="horizontal"
+                android:layout_below="@+id/layout_doctor_id"
+                android:layout_margin="10dp">
+
+                <com.neweraandroid.demo.CustomViews.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/doctor_phone_number"
+                    android:layout_marginLeft="15dp"
+                    android:layout_below="@id/doctorId"
+                    android:layout_alignLeft="@id/doctorName" />
+                <com.neweraandroid.demo.CustomViews.CustomTextView
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/doctorPhone"
+                    android:layout_marginLeft="15dp"
+                    android:layout_below="@id/doctorId"
+                    android:layout_alignLeft="@id/doctorName" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_doctor_bio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/layout_doctor_phone"
+                android:layout_margin="10dp">
+
+                <com.neweraandroid.demo.CustomViews.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/doctorName"
+                    android:layout_below="@id/layout_doctor_phone"
+                    android:layout_marginLeft="15dp"
+                    android:text="@string/doctor_bio"
+                    />
+                <com.neweraandroid.demo.CustomViews.CustomTextView
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/doctorName"
+                    android:layout_below="@id/layout_doctor_phone"
+                    android:layout_marginLeft="15dp"
+                    android:id="@+id/doctorBio" />
+
+            </LinearLayout>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/custom_button_main"
-                android:layout_below="@id/doctorBio"
+                android:layout_below="@id/layout_doctor_bio"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="15dp"
                 android:text="Select This Doctor"
@@ -104,9 +157,7 @@
         android:textColor="@color/colorAccent"
         android:text="Wrong Doctor? (Try Again)"
         android:id="@+id/tryAgain"
-        android:textSize="15sp"
-        />
-
+        android:textSize="15sp" />
 
     </RelativeLayout>
 

@@ -39,4 +39,31 @@
     <string name="something_bad_happened">Something bad happened :(</string>
     <string name="confirmation_did_not_match">Password Confirmation did not match!</string>
     <string name="asset_statements" translatable="false">[{\n  \"relation\": [\"delegate_permission/common.handle_all_urls\"],\n  \"target\": {\n    \"namespace\": \"web\",\n    \"site\": \"https://medlynk.tk\",\n  }\n}]</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="doctor_id">Doctor ID:</string>
+    <string name="doctor_phone_number">Phone Number:</string>
+    <string name="doctor_bio">Bio:</string>
+    <string name="question_set_clue">In preparation for your doctor appointment, please select an option below that most closely matches the reason for your visit</string>
+    <string name="discuss_a_new_symptom">To discuss a new symptom</string>
+    <string name="refill_notes">This questionnaire will collect some important background information from you regarding any medication you need a refill for. You will be prompted to complete it once for EACH medication that you need refilled.</string>
+    <string name="refill_button">OK, Let\'s Start</string>
+    <string name="refill_toolbar_text">Refill A Medication</string>
+    <string name="more_discuss_start_symptom">What if I have more to discuss?</string>
+    <string name="see_more"><i><u>see more</u></i></string>
+    <string name="no_option_is_suitable_in_appointments">What if none of the options are suitable for my appointment?</string>
+    <string name="how_to_proceed_no_doctor_id"><b>Here's how to proceed:</b></string>
+    <string name="no_doctor_id_process_1">Using the button below you can still access all the question sets, and fill in your responses. At the end, you will have the option to PRINT your information. You will need a printer on your local network to do this.</string>
+    <string name="no_doctor_id_process_2">Once you have printed your information, bring this with you to your doctor appointment, and provide the printout to reception as soon as you arrive. Although we cannot make any guarantees, the vast majority of offices will take your printout, and your doctor will have the opportunity to review this before beginning your visit.</string>
+    <string name="no_doctor_id_process_3">When you print your information, it will not only show your responses, but also a medical style note that is formatted in a way that is easy for your doctor to review.</string>
+    <string name="no_doctor_id_process_4">Got it! Next time when I click on the link \"I don\'t know my doctor ID\", skip the current page.</string>
+    <string name="no_doctor_id">No Doctor ID</string>
+    <string name="go_to_questions_no_doctor_id">Go to Questions</string>
+    <string name="new_symptom">NEW SYMPTOM</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="next">NEXT</string>
+    <string name="new_symptom_first_question">What is the <b><i>main</i></b> symptom that is concerning you today?</string>
+
 </resources>

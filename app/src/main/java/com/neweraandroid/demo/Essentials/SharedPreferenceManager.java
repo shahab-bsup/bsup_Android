@@ -3,7 +3,9 @@ package com.neweraandroid.demo.Essentials;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.google.gson.Gson;
 import com.neweraandroid.demo.Constants;
+import com.neweraandroid.demo.Model.CurrentUserInfo;
 
 import java.util.Calendar;
 
@@ -83,5 +85,22 @@ public class SharedPreferenceManager{
     }
     public String getEmail(){
         return this.sharedPreferences.getString ( Constants.EMAIL, null );
+    }
+
+    public void setUserPreferencesNoDoctorID(Boolean noDoctorIDPreference){
+        this.sharedPreferences.edit ().putBoolean ( Constants.No_Doctor_ID_Preferences, noDoctorIDPreference ).apply ();
+    }
+    public Boolean getUserPreferencesNoDoctorID(){
+        return this.sharedPreferences.getBoolean ( Constants.No_Doctor_ID_Preferences, false );
+    }
+
+    public void setCurrentUser(CurrentUserInfo currentUserInfo){
+        Gson gson = new Gson ();
+        String currentUserInfoString = gson.toJson ( currentUserInfo );
+        this.sharedPreferences.edit ().putString ( Constants.Current_User_Info, currentUserInfoString ).apply ();
+    }
+
+    public String getCurrentUserInfo(){
+        return this.sharedPreferences.getString ( Constants.Current_User_Info, null );
     }
 }

@@ -44,9 +44,7 @@ public class MedlynkRestAPI {
                     .client ( okHttpClient )
                     .addConverterFactory ( GsonConverterFactory.create () )
             .build ();
-            if(  medLynkAPI == null){
                 medLynkAPI= retrofit.create ( MedlynkAPI.class );
-            }
         return medLynkAPI;
     }
 
@@ -74,9 +72,7 @@ public class MedlynkRestAPI {
                 .client ( okHttpClient )
                 .addConverterFactory ( GsonConverterFactory.create () )
                 .build ();
-        if(  medLynkAPI == null){
             medLynkAPI= retrofit.create ( MedlynkAPI.class );
-        }
         return medLynkAPI;
     }
 
@@ -104,10 +100,7 @@ public class MedlynkRestAPI {
                 .client ( okHttpClient )
                 .addConverterFactory ( GsonConverterFactory.create () )
                 .build ();
-        if(  medLynkAPI == null){
-            medLynkAPI= retrofit.create ( MedlynkAPI.class );
-        }
+            medLynkAPI = retrofit.create ( MedlynkAPI.class );
         return medLynkAPI;
     }
-
 }

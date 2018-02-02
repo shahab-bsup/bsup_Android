@@ -1,10 +1,13 @@
 package com.neweraandroid.demo.Networking;
 
 import android.content.Context;
-import android.icu.text.IDNA;
+import android.view.View;
 
 import com.google.gson.Gson;
+import com.neweraandroid.demo.Activity.Login.OnGetCurrentUserInfoListener;
 import com.neweraandroid.demo.Activity.Login.OnResendConfirmationListener;
+import com.neweraandroid.demo.Activity.NoDoctorIdPage.OnNoDoctorIDPreferencesListener;
+import com.neweraandroid.demo.Activity.ResetPassword.OnResetPasswordListener;
 import com.neweraandroid.demo.Activity.SearchDoctor.OnSearchDoctorListener;
 import com.neweraandroid.demo.Activity.SendResetPasswordRequestActivity.OnSendResetPasswordRequestListener;
 import com.neweraandroid.demo.Activity.SignUp.OnSignUpListener;
@@ -12,6 +15,9 @@ import com.neweraandroid.demo.Activity.Splash.InitialTokenListener;
 import com.neweraandroid.demo.Activity.Login.OnPrimaryAccessTokenListener;
 import com.neweraandroid.demo.Activity.Splash.RefreshTokenListener;
 import com.neweraandroid.demo.Constants;
+import com.neweraandroid.demo.CustomViews.SnackController;
+import com.neweraandroid.demo.Essentials.Utils;
+import com.neweraandroid.demo.Model.CurrentUserResponse;
 import com.neweraandroid.demo.Model.Errors;
 import com.neweraandroid.demo.Model.InitialTokenResponse;
 import com.neweraandroid.demo.Model.InitiateResponse;
@@ -20,6 +26,7 @@ import com.neweraandroid.demo.Model.PrimaryTokenResponse;
 import com.neweraandroid.demo.Model.RenewTokenResponse;
 import com.neweraandroid.demo.Model.SearchDoctorResponse;
 import com.neweraandroid.demo.Model.SignUpErrorResponse;
+import com.neweraandroid.demo.R;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
@@ -158,12 +165,40 @@ public class MedlynkRequests {
     }
 
     //reset password actually!!!
-    public static void resetPasswordRequest(String token, String email, String password, String confirmedPassword){
+    public static void resetPassword(Context context, String reset_token, String password, String email, final OnResetPasswordListener listener){
         HashMap<String, String> body = new HashMap<> (  );
         body.put ( Constants.EMAIL, email );
         body.put ( Constants.PASSWORD, password );
-        body.put ( Constants.CONFIRMED_PASSWORD, confirmedPassword );
-        body.put ( Constants.TOKEN, token);
+        body.put ( Constants.CONFIRMED_PASSWORD, password );
+        body.put ( Constants.TOKEN, reset_token);
+
+        Call<InitiateResponse> call = MedlynkRestAPI.getRegisterRetrofit ( context ).resetPassword ( body );
+        call.enqueue ( new Callback<InitiateResponse> () {
+            @Override
+            public void onResponse(Call<InitiateResponse> call, Response<InitiateResponse> response) {
+                if( response.isSuccessful () ){
+                    listener.onResetPasswordSuccess (response.body ().getMessage ());
+                }else{
+                    Gson gson = new Gson ();
+                    try {
+                        Errors errorResponse = gson.fromJson ( response.errorBody ().string (), Errors.class );
+                        listener.onResetPasswordFailure ( errorResponse.getMessage ().toString (), Constants.EXCEPTION_TYPE.NO_EXCEPTION );
+                    } catch (IOException e) {
+                        e.printStackTrace ();
+                        listener.onResetPasswordFailure ( Constants.EXCEPTION_TYPE.ERROR_RESPONSE_PARSING_EXCEPTION );
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<InitiateResponse> call, Throwable t) {
+                if( t instanceof SocketTimeoutException){
+                    listener.onResetPasswordFailure ( Constants.EXCEPTION_TYPE.SOCKET_TIMEOUT_EXCEPTION );
+                }else {
+                    listener.onResetPasswordFailure ( Constants.EXCEPTION_TYPE.RETROFIT_EXCEPTION );
+                }
+            }
+        } );
     }
 
     public static void signUp(Context context, final OnSignUpListener onSignUpListener, HashMap<String, Object> body){
@@ -242,6 +277,59 @@ public class MedlynkRequests {
                     listener.onSearchDoctorFailure ( Constants.EXCEPTION_TYPE.SOCKET_TIMEOUT_EXCEPTION );
                 }else {
                     listener.onSearchDoctorFailure ( Constants.EXCEPTION_TYPE.RETROFIT_EXCEPTION );
+                }
+            }
+        } );
+    }
+
+    public static void setUserPreferencesNoDoctorID(final Context context, final OnNoDoctorIDPreferencesListener listener, final HashMap<String, Object> body){
+        if(!Utils.isDeviceConnected ( context )){
+            SnackController.getInstance ().init ( context, context.getString ( R.string.no_intenet_connection ) )
+                    .setAction ( context.getString ( R.string.try_again ), new View.OnClickListener () {
+                        @Override
+                        public void onClick(View view) {
+                            setUserPreferencesNoDoctorID ( context, listener, body );
+                        }
+                    } );
+        }
+        Call<Boolean> call = MedlynkRestAPI.getMainRetrofit ( context ).setUserPreferences ( body );
+        call.enqueue ( new Callback<Boolean> () {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if( response.isSuccessful () ){
+                    listener.onNoDoctorIDSuccess (response.body ());
+                }else{
+                    listener.onNoDoctorIDFailure ();
+                }
+            }
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                if( t instanceof SocketTimeoutException ){
+                    listener.onNoDoctorIDFailure ( Constants.EXCEPTION_TYPE.SOCKET_TIMEOUT_EXCEPTION );
+                }else{
+                    listener.onNoDoctorIDFailure ();
+                }
+            }
+        } );
+    }
+
+    public static void getCurrentUserInfo(Context context, final OnGetCurrentUserInfoListener listener){
+        Call<CurrentUserResponse> call = MedlynkRestAPI.getMainRetrofit ( context ).getCurrentUserInfo ();
+        call.enqueue ( new Callback<CurrentUserResponse> () {
+            @Override
+            public void onResponse(Call<CurrentUserResponse> call, Response<CurrentUserResponse> response) {
+                if( response.isSuccessful () ){
+                    listener.onGetCurrentUserInfoSuccess (response.body ());
+                }else{
+                    listener.onGetCurrentUserInfoFailure ( Constants.EXCEPTION_TYPE.NO_EXCEPTION );
+                }
+            }
+            @Override
+            public void onFailure(Call<CurrentUserResponse> call, Throwable t) {
+                if( t instanceof SocketTimeoutException ){
+                    listener.onGetCurrentUserInfoFailure ( Constants.EXCEPTION_TYPE.SOCKET_TIMEOUT_EXCEPTION );
+                }else{
+                    listener.onGetCurrentUserInfoFailure ( Constants.EXCEPTION_TYPE.RETROFIT_EXCEPTION );
                 }
             }
         } );

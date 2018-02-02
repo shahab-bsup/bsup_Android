@@ -1,15 +1,15 @@
-package com.neweraandroid.demo;
+package com.neweraandroid.demo.Activity.SendResetPasswordRequestActivity;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
+
+import com.neweraandroid.demo.R;
 
 /**
  * Created by Shahab on 1/13/2018.
