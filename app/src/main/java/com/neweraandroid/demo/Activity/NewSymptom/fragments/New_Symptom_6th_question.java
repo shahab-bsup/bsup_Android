@@ -1,44 +1,36 @@
 package com.neweraandroid.demo.Activity.NewSymptom.fragments;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.AppCompatEditText;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.neweraandroid.demo.R;
 
 /**
- * A fragment with a Google +1 button.
+ * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link OnFirstQuestionListener} interface
+ * {@link New_Symptom_6th_question.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link New_Symptom_1th_Question#newInstance} factory method to
+ * Use the {@link New_Symptom_6th_question#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class New_Symptom_1th_Question extends Fragment implements View.OnClickListener {
+public class New_Symptom_6th_question extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    public final static String TAG = New_Symptom_1th_Question.class.getSimpleName ();
-    // The request code must be 0 or greater.
-    private static final int PLUS_ONE_REQUEST_CODE = 0;
-    // The URL to +1.  Must be a valid URL.
-    private final String PLUS_ONE_URL = "http://developer.android.com";
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-    private OnFirstQuestionListener mListener;
+    private OnFragmentInteractionListener mListener;
 
-    private Button button;
-    private AppCompatEditText answer;
-
-    public New_Symptom_1th_Question() {
+    public New_Symptom_6th_question() {
         // Required empty public constructor
     }
 
@@ -48,11 +40,11 @@ public class New_Symptom_1th_Question extends Fragment implements View.OnClickLi
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment New_Symptom_1th_Question.
+     * @return A new instance of fragment New_Symptom_6th_question.
      */
     // TODO: Rename and change types and number of parameters
-    public static New_Symptom_1th_Question newInstance(String param1, String param2) {
-        New_Symptom_1th_Question fragment = new New_Symptom_1th_Question ();
+    public static New_Symptom_6th_question newInstance(String param1, String param2) {
+        New_Symptom_6th_question fragment = new New_Symptom_6th_question ();
         Bundle args = new Bundle ();
         args.putString ( ARG_PARAM1, param1 );
         args.putString ( ARG_PARAM2, param2 );
@@ -73,26 +65,24 @@ public class New_Symptom_1th_Question extends Fragment implements View.OnClickLi
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate ( R.layout.fragment_first_question, container, false );
-        button = view.findViewById ( R.id.btn_new_symptom_first_question );
-        button.setOnClickListener ( this );
-        answer = view.findViewById ( R.id.first_question_answer );
-        return view;
+        return inflater.inflate ( R.layout.fragment_new__symptom_6th_question, container, false );
     }
 
-    @Override
-    public void onResume() {
-        super.onResume ();
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction ( uri );
+        }
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach ( context );
-        if (context instanceof OnFirstQuestionListener) {
-            mListener = (OnFirstQuestionListener) context;
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException ( context.toString ()
-                    + " must implement OnSecondQuestionListener" );
+                    + " must implement OnNewSymptomEleventhQuestionListener" );
         }
     }
 
@@ -100,11 +90,6 @@ public class New_Symptom_1th_Question extends Fragment implements View.OnClickLi
     public void onDetach() {
         super.onDetach ();
         mListener = null;
-    }
-
-    @Override
-    public void onClick(View view) {
-        mListener.onFirstQuestion ( answer.getText ().toString () );
     }
 
     /**
@@ -117,9 +102,8 @@ public class New_Symptom_1th_Question extends Fragment implements View.OnClickLi
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFirstQuestionListener {
+    public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFirstQuestion(String s);
+        void onFragmentInteraction(Uri uri);
     }
-
 }

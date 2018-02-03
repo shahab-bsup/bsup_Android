@@ -65,5 +65,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="next">NEXT</string>
     <string name="new_symptom_first_question">What is the <b><i>main</i></b> symptom that is concerning you today?</string>
+    <string name="next_2">next + 2</string>
+    <string name="next_3">next + 3</string>
 
 </resources>
