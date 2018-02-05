@@ -71,7 +71,7 @@ public class New_Symptom_13th_question extends Fragment {
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.onThirteenQuestion ( uri );
+            mListener.onThirteenQuestion ();
         }
     }
 
@@ -104,6 +104,6 @@ public class New_Symptom_13th_question extends Fragment {
      */
     public interface OnNewSymptomThirteenQuestionListener {
         // TODO: Update argument type and name
-        void onThirteenQuestion(Uri uri);
+        void onThirteenQuestion();
     }
 }

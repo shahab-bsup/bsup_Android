@@ -1,16 +1,21 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.neweraandroid.demo.Activity.NewSymptom.fragments.New_Symptom_1th_question">
 
-    <!-- TODO: Update blank fragment layout -->
+    <include android:id="@+id/new_symptom_first_question"
+        layout="@layout/doctor_layout"></include>
+
     <Button
-        android:id="@+id/btn"
+        android:id="@+id/btnNextQuestion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:background="@drawable/next_button_question"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
         android:text="@string/next"
         android:textColor="@color/white"
         />

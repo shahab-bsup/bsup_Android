@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.neweraandroid.demo.R;
 
@@ -19,7 +20,7 @@ import com.neweraandroid.demo.R;
  * Use the {@link New_Symptom_3rd_question#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class New_Symptom_3rd_question extends Fragment {
+public class New_Symptom_3rd_question extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -32,7 +33,9 @@ public class New_Symptom_3rd_question extends Fragment {
 
     private OnNewSymptomThirdQuestionListener mListener;
 
-    private Button button;
+    private View question_view;
+    private TextView question;
+    private Button next, skip;
 
     public New_Symptom_3rd_question() {
         // Required empty public constructor
@@ -70,21 +73,14 @@ public class New_Symptom_3rd_question extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate ( R.layout.fragment_new__symptom_3rd_question, container, false );
-        button = view.findViewById ( R.id.btn );
-        button.setOnClickListener ( new View.OnClickListener () {
-            @Override
-            public void onClick(View view) {
-                onButtonPressed ( new Uri.Builder ().scheme ( "third question" ).build () );
-            }
-        } );
+        question_view = view.findViewById ( R.id.new_symptom_third_question );
+        question = question_view.findViewById ( R.id.txtQuestion );
+        question.setText ( R.string.new_symptom_third_question );
+        next = view.findViewById ( R.id.btnNextQuestion );
+        next.setOnClickListener ( this );
+        skip = view.findViewById ( R.id.btnSkipQuestion );
+        skip.setOnClickListener ( this );
         return view;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onThirdQuestion ( uri );
-        }
     }
 
     @Override
@@ -104,6 +100,21 @@ public class New_Symptom_3rd_question extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId ()){
+            case R.id.btnNextQuestion:{
+                mListener.onThirdQuestion (  );
+                break;
+            }
+
+            case R.id.btnSkipQuestion:{
+                mListener.onThirdQuestion ();
+                break;
+            }
+        }
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -116,6 +127,6 @@ public class New_Symptom_3rd_question extends Fragment {
      */
     public interface OnNewSymptomThirdQuestionListener {
         // TODO: Update argument type and name
-        void onThirdQuestion(Uri uri);
+        void onThirdQuestion();
     }
 }

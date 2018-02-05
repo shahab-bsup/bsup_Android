@@ -23,6 +23,7 @@ public class New_Symptom_9th_question extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    public static final String TAG = New_Symptom_9th_question.class.getSimpleName ();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -68,13 +69,6 @@ public class New_Symptom_9th_question extends Fragment {
         return inflater.inflate ( R.layout.fragment_new__symptom_9th_question, container, false );
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onNinthQuestion ( uri );
-        }
-    }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach ( context );
@@ -104,6 +98,6 @@ public class New_Symptom_9th_question extends Fragment {
      */
     public interface OnNewSymptomNinthQuestionListener {
         // TODO: Update argument type and name
-        void onNinthQuestion(Uri uri);
+        void onNinthQuestion();
     }
 }

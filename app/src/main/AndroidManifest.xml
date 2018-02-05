@@ -16,15 +16,13 @@
         <meta-data
             android:name="asset_statements"
             android:resource="@string/asset_statements" />
-
         <activity
             android:name=".Activity.Splash.SplashActivity"
             android:noHistory="true"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
@@ -67,18 +65,15 @@
             android:screenOrientation="portrait" />
         <activity android:name=".Activity.SelectDoctor.SelectDoctorActivity" />
 
-        <receiver android:name=".NewAppWidget">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/new_app_widget_info" />
-        </receiver>
-
         <activity android:name=".Activity.StartQuestionSet.StartAppointmentActivity" />
-        <activity android:name=".Activity.NewSymptom.NewSymptomActivity" />
+
+        <activity android:name=".Activity.NewSymptom.NewSymptomActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"></action>
+                <category android:name="android.intent.category.LAUNCHER"></category>
+            </intent-filter>
+        </activity>
+
         <activity android:name=".Activity.Start_a_Refill.Start_A_New_RefillActivity" />
         <activity android:name=".Activity.Refill.Refill_A_Medication_Activity" />
         <activity android:name=".Activity.NoDoctorIdPage.NoDoctorIdActivity"

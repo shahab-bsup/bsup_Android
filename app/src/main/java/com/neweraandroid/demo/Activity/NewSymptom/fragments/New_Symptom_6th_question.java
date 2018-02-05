@@ -13,7 +13,7 @@ import com.neweraandroid.demo.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link New_Symptom_6th_question.OnFragmentInteractionListener} interface
+ * {@link New_Symptom_6th_question.OnNewSymptomSixthQuestionListener} interface
  * to handle interaction events.
  * Use the {@link New_Symptom_6th_question#newInstance} factory method to
  * create an instance of this fragment.
@@ -23,12 +23,13 @@ public class New_Symptom_6th_question extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    public static final String TAG = New_Symptom_6th_question.class.getSimpleName ();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+    private OnNewSymptomSixthQuestionListener mListener;
 
     public New_Symptom_6th_question() {
         // Required empty public constructor
@@ -68,18 +69,11 @@ public class New_Symptom_6th_question extends Fragment {
         return inflater.inflate ( R.layout.fragment_new__symptom_6th_question, container, false );
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction ( uri );
-        }
-    }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach ( context );
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof OnNewSymptomSixthQuestionListener) {
+            mListener = (OnNewSymptomSixthQuestionListener) context;
         } else {
             throw new RuntimeException ( context.toString ()
                     + " must implement OnNewSymptomEleventhQuestionListener" );
@@ -102,8 +96,8 @@ public class New_Symptom_6th_question extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
+    public interface OnNewSymptomSixthQuestionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onSixthQuestion();
     }
 }

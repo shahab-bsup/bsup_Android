@@ -23,6 +23,7 @@ public class New_Symptom_12th_question extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    public static final String TAG = New_Symptom_12th_question.class.getSimpleName ();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -71,7 +72,7 @@ public class New_Symptom_12th_question extends Fragment {
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.onTwelveQuestion ( uri );
+            mListener.onTwelveQuestion ();
         }
     }
 
@@ -104,6 +105,6 @@ public class New_Symptom_12th_question extends Fragment {
      */
     public interface OnNewSymptomTwelveQuestionListener {
         // TODO: Update argument type and name
-        void onTwelveQuestion(Uri uri);
+        void onTwelveQuestion();
     }
 }

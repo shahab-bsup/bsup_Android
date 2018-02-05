@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.neweraandroid.demo.R;
 
@@ -18,17 +20,22 @@ import com.neweraandroid.demo.R;
  * Use the {@link New_Symptom_4th_question#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class New_Symptom_4th_question extends Fragment {
+public class New_Symptom_4th_question extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    public static final String TAG = New_Symptom_4th_question.class.getSimpleName ();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     private OnNewSymptomFourthQuestionListener mListener;
+
+    private View question_view;
+    private Button next, skip;
+    private TextView question;
 
     public New_Symptom_4th_question() {
         // Required empty public constructor
@@ -65,14 +72,15 @@ public class New_Symptom_4th_question extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate ( R.layout.fragment_new__symptom_4th_question, container, false );
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFourthQuestion ( uri );
-        }
+        View view = inflater.inflate ( R.layout.fragment_new__symptom_4th_question, container, false );
+        question_view = view.findViewById ( R.id.new_symptom_fourth_question );
+        question = question_view.findViewById ( R.id.txtQuestion );
+        question.setText ( R.string.new_symptom_fourth_question );
+        next = view.findViewById ( R.id.btnNextQuestion );
+        next.setOnClickListener ( this );
+        skip = view.findViewById ( R.id.btnSkipQuestion );
+        skip.setOnClickListener ( this );
+        return view;
     }
 
     @Override
@@ -92,11 +100,27 @@ public class New_Symptom_4th_question extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId ()){
+            case R.id.btnNextQuestion:{
+                mListener.onFourthQuestion ();
+
+                break;
+            }
+            case R.id.btnSkipQuestion:{
+                mListener.onFourthQuestion ();
+
+                break;
+            }
+        }
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
-     * activity
+     * activity...
      * <p>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
@@ -105,7 +129,7 @@ public class New_Symptom_4th_question extends Fragment {
 
     public interface OnNewSymptomFourthQuestionListener {
         // TODO: Update argument type and name
-        void onFourthQuestion(Uri uri);
+        void onFourthQuestion();
     }
 
 }

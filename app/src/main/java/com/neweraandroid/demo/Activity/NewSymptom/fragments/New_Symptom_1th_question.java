@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.neweraandroid.demo.R;
 
@@ -19,7 +20,7 @@ import com.neweraandroid.demo.R;
  * Use the {@link New_Symptom_1th_question#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class New_Symptom_1th_question extends Fragment {
+public class New_Symptom_1th_question extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -31,7 +32,8 @@ public class New_Symptom_1th_question extends Fragment {
     private String mParam2;
 
     private OnNewSymptomFirstQuestionListener mListener;
-
+    private View question_view;
+    private TextView first_question, see_more;
     private Button button;
 
     public New_Symptom_1th_question() {
@@ -70,21 +72,15 @@ public class New_Symptom_1th_question extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate ( R.layout.fragment_new__symptom_1th_question, container, false );
-        button = view.findViewById ( R.id.btn );
-        button.setOnClickListener ( new View.OnClickListener () {
-            @Override
-            public void onClick(View view) {
-                onButtonPressed ( new Uri.Builder ().scheme ( "first question" ).build () );
-            }
-        } );
+        question_view = view.findViewById ( R.id.new_symptom_first_question );
+        first_question = question_view.findViewById ( R.id.txtQuestion );
+        button = view.findViewById ( R.id.btnNextQuestion );
+        button.setOnClickListener ( this );
+        see_more= question_view.findViewById ( R.id.txtQuestion_see_more );
+        see_more.setVisibility ( View.VISIBLE );
+        see_more.setOnClickListener ( this );
+        first_question.setText ( R.string.new_symptom_first_question );
         return view;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFirstQuestion ( uri );
-        }
     }
 
     @Override
@@ -101,7 +97,22 @@ public class New_Symptom_1th_question extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach ();
+        System.out.println ();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId ()){
+            case R.id.txtQuestion_see_more:{
+                see_more.setText ( R.string.see_more_new_symptom_first_question );
+                break;
+            }
+            case R.id.btnNextQuestion:{
+                mListener.onFirstQuestion ();
+                break;
+            }
+        }
     }
 
     /**
@@ -116,6 +127,6 @@ public class New_Symptom_1th_question extends Fragment {
      */
     public interface OnNewSymptomFirstQuestionListener {
         // TODO: Update argument type and name
-        void onFirstQuestion(Uri uri);
+        void onFirstQuestion();
     }
 }

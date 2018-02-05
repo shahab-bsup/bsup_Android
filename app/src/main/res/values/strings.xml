@@ -61,11 +61,13 @@
     <string name="go_to_questions_no_doctor_id">Go to Questions</string>
     <string name="new_symptom">NEW SYMPTOM</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="next">NEXT</string>
+    <string name="skip">skip</string>
     <string name="new_symptom_first_question">What is the <b><i>main</i></b> symptom that is concerning you today?</string>
-    <string name="next_2">next + 2</string>
-    <string name="next_3">next + 3</string>
+    <string name="see_more_new_symptom_first_question"><b>(For now, try to pick the most bothersome symptom only.)</b></string>
+    <string name="new_symptom_second_question">Please briefly describe if you think there was something that made the symptom start (such as an injury)?</string>
+    <string name="new_symptom_third_question">How long ago did this symptom start?\n(* if this has been a recurrent symptom, please focus on the CURRENT episode only for now)</string>
+    <string name="new_symptom_fourth_question">How frequently does this symptom bother you?</string>
 
 </resources>
