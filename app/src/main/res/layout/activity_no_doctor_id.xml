@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.neweraandroid.demo.Activity.NoDoctorIdPage.NoDoctorIdActivity">
+    tools:context="com.neweraandroid.demo.tk.neweraandroid.demo.Activity.NoDoctorIdPage.NoDoctorIdActivity">
 
     <include android:id="@+id/toolbar_no_doctor_id"
         layout="@layout/toolbar_layout">
@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.neweraandroid.demo.CustomViews.CustomTextView
+            <tk.medlynk.patient.android.CustomViews.CustomTextView
                 android:id="@+id/txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -33,14 +33,14 @@
                 android:layout_marginLeft="20dp"
                 />
 
-            <com.neweraandroid.demo.CustomViews.CustomTextView
+            <tk.medlynk.patient.android.CustomViews.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/no_doctor_id_process_1"
                 android:layout_margin="20dp"
                 />
 
-            <com.neweraandroid.demo.CustomViews.CustomTextView
+            <tk.medlynk.patient.android.CustomViews.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/no_doctor_id_process_2"
@@ -49,7 +49,7 @@
                 android:layout_marginBottom="20dp"
                 />
 
-            <com.neweraandroid.demo.CustomViews.CustomTextView
+            <tk.medlynk.patient.android.CustomViews.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/no_doctor_id_process_3"
@@ -67,7 +67,7 @@
                     android:id="@+id/chkbox_no_drid"
                     android:layout_centerVertical="true" />
 
-                <com.neweraandroid.demo.CustomViews.CustomTextView
+                <tk.medlynk.patient.android.CustomViews.CustomTextView
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/chkbox_no_drid"
                     android:layout_width="match_parent"

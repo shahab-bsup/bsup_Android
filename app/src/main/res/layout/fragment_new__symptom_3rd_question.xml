@@ -2,10 +2,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.neweraandroid.demo.Activity.NewSymptom.fragments.New_Symptom_3rd_question">
+    tools:context="tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_3rd_question">
 
     <include android:id="@+id/new_symptom_third_question"
         layout="@layout/doctor_layout"></include>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_below="@id/new_symptom_third_question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layoutDirection="rtl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:id="@+id/patient_row">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/patient_icon"
+                    android:id="@+id/doctor_icon"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    />
+
+                <include layout="@layout/new_symptom_third_answer_row"
+                    android:id="@+id/years_ago_layout"></include>
+
+            </LinearLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_i_do_not_know"
+                android:layout_below="@id/or"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="20dp"
+                android:text="@string/i_do_not_know"
+                android:textColor="@color/answers_text_color"
+                android:padding="10dp"
+                android:background="@drawable/answer_not_selected" />
+
+        </RelativeLayout>
+
+    </android.support.v4.widget.NestedScrollView>
 
     <LinearLayout
         android:layoutDirection="rtl"

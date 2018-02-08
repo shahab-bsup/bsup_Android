@@ -64,10 +64,35 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="next">NEXT</string>
     <string name="skip">skip</string>
-    <string name="new_symptom_first_question">What is the <b><i>main</i></b> symptom that is concerning you today?</string>
+
     <string name="see_more_new_symptom_first_question"><b>(For now, try to pick the most bothersome symptom only.)</b></string>
+    <string name="new_symptom_first_question">What is the <b><i>main</i></b> symptom that is concerning you today?</string>
     <string name="new_symptom_second_question">Please briefly describe if you think there was something that made the symptom start (such as an injury)?</string>
     <string name="new_symptom_third_question">How long ago did this symptom start?\n(* if this has been a recurrent symptom, please focus on the CURRENT episode only for now)</string>
     <string name="new_symptom_fourth_question">How frequently does this symptom bother you?</string>
+    <string name="new_symptom_fifth_question">How intense is the symptom?</string>
+    <string name="new_symptom_sixth_question">Please describe how your symptom affects you on your worst days.</string>
+    <string name="new_symptom_seventh_question">Please describe how your symptom affects you on your best days.</string>
+    <string name="new_symptom_eighth_question">Is there anything you have noted that makes the symptom worse?\n(Ex - rest, sleep, eating, fluid intake, exercise)</string>
+    <string name="new_symptom_ninth_question">Please list any other symptoms you are having that you are concerned may be related to this one.</string>
+    <string name="new_symptom_tenth_question">Overall, is the symptom getting:</string>
+    <string name="new_symptom_eleventh_question">Have you had any:</string>
+    <string name="new_symptom_twelve_question">Please indicate what treatments you have tried so far (please select all treatments previously tried):</string>
+    <string name="new_symptom_thirteen_question">Please list medications tried</string>
+    <string name="new_symptom_fourteen_question">Any recent changes in your regular medications?</string>
+    <string name="new_symptom_fifteen_question">Any new supplements/non-prescribed herbs etc that you recently started taking?</string>
+    <string name="new_symptom_sixteen_question">What makes you particularly concerned about this symptom today? (can pick more than one here)</string>
+    <string name="new_symptom_seventeen_question">Have you had this symptom in the past?</string>
+    <string name="new_symptom_eighteen_question">How long does the symptom last when it occurs?</string>
+    <string name="new_symptom_nineteen_question">What makes you particularly concerned about <b><u>this particular</u></b> episode? (can pick more than one here)</string>
+    <string name="new_symptom_twenty_question">Please indicate what treatments you have tried for <b><u>past</u></b> past episodes (please select all treatments previously tried):</string>
+    <string name="new_symptom_twenty1_question">Please list any medications you have tried for<b><u>past</u></b> episodes:</string>
+    <string name="type_answer_here">Type answer here</string>
+    <string name="or"><b>Or</b></string>
+    <string name="i_do_not_know">I don\'t know</string>
+    <string name="year_ago"><b>Years</b> Ago</string>
+    <string name="months_ago"><b>Months</b> Ago</string>
+    <string name="weeks_ago"><b>Weeks</b> Ago</string>
+    <string name="days_ago"><b>Days</b> Ago</string>
 
 </resources>

@@ -17,7 +17,7 @@
         android:layout_centerVertical="true"
     />
 
-    <com.neweraandroid.demo.CustomViews.CustomTextView
+    <tk.medlynk.patient.android.CustomViews.CustomTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"

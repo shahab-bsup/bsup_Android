@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:id="@+id/parent_refill_a_medication"
     android:background="@color/white"
-    tools:context="com.neweraandroid.demo.Activity.Start_a_Refill.Start_A_New_RefillActivity">
+    tools:context="com.neweraandroid.demo.tk.neweraandroid.demo.Activity.Start_a_Refill.Start_A_New_RefillActivity">
 
     <include android:id="@+id/refill_toolbar_layout"
         layout="@layout/toolbar_layout"></include>
@@ -23,7 +23,7 @@
         android:layout_centerHorizontal="true"
         />
 
-    <com.neweraandroid.demo.CustomViews.CustomTextView
+    <tk.medlynk.patient.android.CustomViews.CustomTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txtRefill_note"

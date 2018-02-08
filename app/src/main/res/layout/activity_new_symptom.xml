@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.neweraandroid.demo.Activity.NewSymptom.NewSymptomActivity">
+    tools:context="com.neweraandroid.demo.tk.neweraandroid.demo.Activity.NewSymptom.NewSymptomActivity">
 
     <include android:id="@+id/new_symptom_toolbar_layout"
         layout="@layout/questions_toolbar_layout"></include>

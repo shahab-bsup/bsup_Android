@@ -17,7 +17,7 @@
             android:name="asset_statements"
             android:resource="@string/asset_statements" />
         <activity
-            android:name=".Activity.Splash.SplashActivity"
+            android:name="tk.medlynk.patient.android.Activity.Splash.SplashActivity"
             android:noHistory="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.Login.LoginActivity"
+            android:name="tk.medlynk.patient.android.Activity.Login.LoginActivity"
             android:noHistory="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -36,10 +36,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.SendResetPasswordRequestActivity.SendResetPasswordRequestActivity"
+            android:name="tk.medlynk.patient.android.Activity.SendResetPasswordRequestActivity.SendResetPasswordRequestActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.ResetPassword.ResetPasswordActivity"
+            android:name="tk.medlynk.patient.android.Activity.ResetPassword.ResetPasswordActivity"
             android:screenOrientation="portrait">
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
@@ -54,29 +54,27 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.SignUp.SignUpActivity"
+            android:name="tk.medlynk.patient.android.Activity.SignUp.SignUpActivity"
             android:noHistory="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.Welcome.WelcomeActivity"
+            android:name="tk.medlynk.patient.android.Activity.Welcome.WelcomeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.SearchDoctor.SearchActivity"
+            android:name="tk.medlynk.patient.android.Activity.SearchDoctor.SearchActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".Activity.SelectDoctor.SelectDoctorActivity" />
-
-        <activity android:name=".Activity.StartQuestionSet.StartAppointmentActivity" />
-
-        <activity android:name=".Activity.NewSymptom.NewSymptomActivity">
+        <activity android:name="tk.medlynk.patient.android.Activity.SelectDoctor.SelectDoctorActivity" />
+        <activity android:name="tk.medlynk.patient.android.Activity.StartQuestionSet.StartAppointmentActivity" />
+        <activity android:name="tk.medlynk.patient.android.Activity.NewSymptom.NewSymptomActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"></action>
-                <category android:name="android.intent.category.LAUNCHER"></category>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".Activity.Start_a_Refill.Start_A_New_RefillActivity" />
-        <activity android:name=".Activity.Refill.Refill_A_Medication_Activity" />
-        <activity android:name=".Activity.NoDoctorIdPage.NoDoctorIdActivity"
+        <activity android:name="tk.medlynk.patient.android.Activity.Start_a_Refill.Start_A_New_RefillActivity" />
+        <activity android:name="tk.medlynk.patient.android.Activity.Refill.Refill_A_Medication_Activity" />
+        <activity android:name="tk.medlynk.patient.android.Activity.NoDoctorIdPage.NoDoctorIdActivity"
             android:noHistory="true"></activity>
     </application>
 

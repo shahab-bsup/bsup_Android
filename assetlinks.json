@@ -2,7 +2,7 @@
   "relation": ["delegate_permission/common.handle_all_urls"],
   "target": {
     "namespace": "android_app",
-    "package_name": "com.neweraandroid.demo",
+    "package_name": "tk.medlynk.patient.android",
     "sha256_cert_fingerprints":
     ["C7:C1:ED:3E:13:1B:2E:65:1E:CC:D0:49:EB:F1:72:14:AF:31:D6:10:E8:5E:00:4D:7E:5D:FD:C4:56:9D:BA:9F"]
   }

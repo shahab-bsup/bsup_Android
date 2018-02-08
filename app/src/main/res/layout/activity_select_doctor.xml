@@ -6,13 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/parent_select_doctor"
-    tools:context="com.neweraandroid.demo.Activity.SelectDoctor.SelectDoctorActivity">
+    tools:context="com.neweraandroid.demo.tk.neweraandroid.demo.Activity.SelectDoctor.SelectDoctorActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <com.neweraandroid.demo.CustomViews.CustomTextView
+    <tk.medlynk.patient.android.CustomViews.CustomTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -45,7 +45,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <com.neweraandroid.demo.CustomViews.CustomTextView
+            <tk.medlynk.patient.android.CustomViews.CustomTextView
                 android:layout_margin="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
                 android:textSize="30sp"
                 android:id="@+id/doctorName"
                 android:textColor="@color/colorPrimary">
-            </com.neweraandroid.demo.CustomViews.CustomTextView>
+            </tk.medlynk.patient.android.CustomViews.CustomTextView>
 
             <LinearLayout
                 android:layout_margin="10dp"
@@ -63,13 +63,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_below="@+id/doctorName">
-                <com.neweraandroid.demo.CustomViews.CustomTextView
+                <tk.medlynk.patient.android.CustomViews.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/doctor_id"
                     android:layout_marginLeft="15dp"
                     android:layout_alignLeft="@id/doctorName" />
-                <com.neweraandroid.demo.CustomViews.CustomTextView
+                <tk.medlynk.patient.android.CustomViews.CustomTextView
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -87,14 +87,14 @@
                 android:layout_below="@+id/layout_doctor_id"
                 android:layout_margin="10dp">
 
-                <com.neweraandroid.demo.CustomViews.CustomTextView
+                <tk.medlynk.patient.android.CustomViews.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/doctor_phone_number"
                     android:layout_marginLeft="15dp"
                     android:layout_below="@id/doctorId"
                     android:layout_alignLeft="@id/doctorName" />
-                <com.neweraandroid.demo.CustomViews.CustomTextView
+                <tk.medlynk.patient.android.CustomViews.CustomTextView
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -113,7 +113,7 @@
                 android:layout_below="@+id/layout_doctor_phone"
                 android:layout_margin="10dp">
 
-                <com.neweraandroid.demo.CustomViews.CustomTextView
+                <tk.medlynk.patient.android.CustomViews.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@id/doctorName"
@@ -121,7 +121,7 @@
                     android:layout_marginLeft="15dp"
                     android:text="@string/doctor_bio"
                     />
-                <com.neweraandroid.demo.CustomViews.CustomTextView
+                <tk.medlynk.patient.android.CustomViews.CustomTextView
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -148,7 +148,7 @@
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 
-    <com.neweraandroid.demo.CustomViews.CustomTextView
+    <tk.medlynk.patient.android.CustomViews.CustomTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/card"

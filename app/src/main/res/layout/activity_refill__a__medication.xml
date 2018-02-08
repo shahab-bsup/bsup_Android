@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.neweraandroid.demo.Activity.Refill.Refill_A_Medication_Activity">
+    tools:context="com.neweraandroid.demo.tk.neweraandroid.demo.Activity.Refill.Refill_A_Medication_Activity">
 
 </android.support.constraint.ConstraintLayout>

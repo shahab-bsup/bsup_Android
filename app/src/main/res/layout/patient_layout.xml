@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    android:layoutDirection="rtl"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layoutDirection="rtl">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -15,7 +14,7 @@
         android:layout_marginTop="10dp"
         android:layout_centerVertical="true" />
 
-        <com.neweraandroid.demo.CustomViews.CustomTextView
+        <tk.medlynk.patient.android.CustomViews.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/txtQuestion"

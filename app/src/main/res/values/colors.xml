@@ -13,4 +13,6 @@
     <color name="edit_text_underline_color">#979797</color>
     <color name="do_not_know_doctor_id">#c8c8c8</color>
     <color name="green_next_button_questions">#6ad969</color>
+    <color name="answers_background_color">#f1f3f8</color>
+    <color name="answers_text_color">#a8b2c1</color>
 </resources>

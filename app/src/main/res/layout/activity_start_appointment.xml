@@ -6,12 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/parent"
-    tools:context="com.neweraandroid.demo.Activity.StartQuestionSet.StartAppointmentActivity">
+    tools:context="com.neweraandroid.demo.tk.neweraandroid.demo.Activity.StartQuestionSet.StartAppointmentActivity">
 
     <include android:id="@+id/toolbar_start_question_set"
         layout="@layout/toolbar_layout"></include>
 
-    <com.neweraandroid.demo.CustomViews.CustomTextView
+    <tk.medlynk.patient.android.CustomViews.CustomTextView
         android:layout_below="@id/toolbar_start_question_set"
         android:id="@+id/question_set_clue"
         android:layout_margin="15dp"
@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/discuss_new_sysmptom"
                     />
-                <com.neweraandroid.demo.CustomViews.CustomTextView
+                <tk.medlynk.patient.android.CustomViews.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/discuss_a_new_symptom"
@@ -84,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/review_symptoms"
                     />
-                <com.neweraandroid.demo.CustomViews.CustomTextView
+                <tk.medlynk.patient.android.CustomViews.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/discuss_a_new_symptom"
@@ -135,7 +135,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/refill_a_medication" />
 
-                <com.neweraandroid.demo.CustomViews.CustomTextView
+                <tk.medlynk.patient.android.CustomViews.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/discuss_a_new_symptom"
@@ -167,7 +167,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/review_test_results"
                     />
-                <com.neweraandroid.demo.CustomViews.CustomTextView
+                <tk.medlynk.patient.android.CustomViews.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/discuss_a_new_symptom"
@@ -181,7 +181,7 @@
 
     </LinearLayout>
 
-    <com.neweraandroid.demo.CustomViews.CustomTextView
+    <tk.medlynk.patient.android.CustomViews.CustomTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/more_discuss_start_symptom"
@@ -193,7 +193,7 @@
         android:id="@+id/txt"
         />
 
-    <com.neweraandroid.demo.CustomViews.CustomTextView
+    <tk.medlynk.patient.android.CustomViews.CustomTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/see_more_discuss_more"
@@ -203,7 +203,7 @@
         android:layout_below="@id/txt"
         />
 
-    <com.neweraandroid.demo.CustomViews.CustomTextView
+    <tk.medlynk.patient.android.CustomViews.CustomTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/no_option_is_suitable_in_appointments"
@@ -215,7 +215,7 @@
         android:layout_marginTop="15dp"
         />
 
-    <com.neweraandroid.demo.CustomViews.CustomTextView
+    <tk.medlynk.patient.android.CustomViews.CustomTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/see_more_no_suitable_options"

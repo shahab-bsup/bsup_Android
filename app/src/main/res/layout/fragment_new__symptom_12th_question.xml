@@ -1,13 +1,39 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.neweraandroid.demo.Activity.NewSymptom.fragments.New_Symptom_12th_question">
+    tools:context="com.neweraandroid.demo.tk.neweraandroid.demo.Activity.NewSymptom.fragments.New_Symptom_12th_question">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <include android:id="@+id/new_symptom_twelve_question"
+        layout="@layout/doctor_layout"></include>
+
+    <LinearLayout
+        android:layoutDirection="rtl"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/btnNextQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/next_button_question"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="10dp"
+            android:text="@string/next"
+            android:textColor="@color/white" />
 
-</FrameLayout>
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/btnSkipQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_button_main"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="10dp"
+            android:text="@string/skip"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+</RelativeLayout>

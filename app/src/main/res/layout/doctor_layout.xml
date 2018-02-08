@@ -21,11 +21,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="10dp"
+        android:padding="5dp"
+        android:layout_marginRight="10dp"
         android:layout_toRightOf="@id/doctor_icon"
         android:layout_alignTop="@id/doctor_icon">
 
-        <com.neweraandroid.demo.CustomViews.CustomTextView
+        <tk.medlynk.patient.android.CustomViews.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/txtQuestion"
@@ -35,9 +36,11 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:textColor="@color/colorPrimary"
-            android:padding="10dp"/>
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:paddingBottom="10dp"/>
 
-        <com.neweraandroid.demo.CustomViews.CustomTextView
+        <tk.medlynk.patient.android.CustomViews.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/txtQuestion_see_more"
