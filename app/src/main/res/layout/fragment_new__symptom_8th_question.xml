@@ -3,11 +3,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.neweraandroid.demo.tk.neweraandroid.demo.Activity.NewSymptom.fragments.New_Symptom_8th_question">
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_8th_question">
 
-    <include android:id="@+id/new_symptom_eighth_question"
-        layout="@layout/doctor_layout"></include>
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/new_symptom_third_question_scroll_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <include
+                    android:id="@+id/new_symptom_eighth_question"
+                    layout="@layout/doctor_layout" />
+                <LinearLayout
+                    android:layout_marginTop="40dp"
+                    android:layout_below="@id/new_symptom_eighth_question"
+                    android:layoutDirection="rtl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:id="@+id/patient_row">
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/patient_icon"
+                        android:id="@+id/doctor_icon"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true" />
+                    <com.medlynk.shahab.myviewselection.ViewSelection
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        app:button_type="true"
+                        app:number_of_views="4"
+                        android:id="@+id/answerNumbers" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
 
     <LinearLayout
         android:layoutDirection="rtl"

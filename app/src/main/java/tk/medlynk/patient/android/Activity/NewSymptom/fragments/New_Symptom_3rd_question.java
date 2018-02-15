@@ -9,7 +9,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
+
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.ViewHolders.New_Symptom_Third_Question_View_Holder;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -79,6 +82,7 @@ public class New_Symptom_3rd_question extends Fragment implements View.OnClickLi
         next.setOnClickListener ( this );
         skip = view.findViewById ( R.id.btnSkipQuestion );
         skip.setOnClickListener ( this );
+        New_Symptom_Third_Question_View_Holder viewHolder = new New_Symptom_Third_Question_View_Holder ( view );
         return view;
     }
 

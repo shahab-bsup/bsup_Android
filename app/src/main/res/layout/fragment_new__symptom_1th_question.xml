@@ -9,33 +9,30 @@
     android:descendantFocusability="beforeDescendants"
     tools:context="tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_1th_question">
 
-    <include android:id="@+id/new_symptom_first_question"
-        layout="@layout/doctor_layout"></include>
-
     <android.support.v4.widget.NestedScrollView
-        android:layout_below="@id/new_symptom_first_question"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
+            <include android:id="@+id/new_symptom_first_question"
+                layout="@layout/doctor_layout"></include>
             <LinearLayout
+                android:layout_below="@id/new_symptom_first_question"
                 android:layoutDirection="rtl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:src="@drawable/patient_icon"
                     android:id="@+id/doctor_icon"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
                     />
 
                 <android.support.v7.widget.AppCompatEditText
@@ -50,7 +47,6 @@
                     android:hint="@string/type_answer_here"
                     android:inputType="text"
                     android:imeOptions="actionDone"
-                    android:layout_gravity="center_vertical"
                     android:background="@drawable/custom_edit_text_doctor_id"/>
 
             </LinearLayout>

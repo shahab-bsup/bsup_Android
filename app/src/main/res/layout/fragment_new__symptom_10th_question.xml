@@ -3,11 +3,81 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.neweraandroid.demo.tk.neweraandroid.demo.Activity.NewSymptom.fragments.New_Symptom_10th_question">
+    android:background="@color/white"
+    tools:context="tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_10th_question">
 
-    <include android:id="@+id/new_symptom_tenth_question"
-        layout="@layout/doctor_layout"></include>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include android:id="@+id/new_symptom_tenth_question"
+                layout="@layout/doctor_layout"></include>
+
+            <LinearLayout
+                android:layout_below="@id/new_symptom_tenth_question"
+                android:layoutDirection="rtl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/patient_row">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/patient_icon"
+                    android:id="@+id/doctor_icon"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    />
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/new_symptom_tenth_answer"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:padding="10dp"
+                    android:hint="@string/type_answer_here"
+                    android:inputType="text"
+                    android:imeOptions="actionDone"
+                    android:background="@drawable/custom_edit_text_doctor_id"/>
+
+            </LinearLayout>
+
+            <tk.medlynk.patient.android.CustomViews.CustomTextView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/or"
+                android:id="@+id/or"
+                android:textSize="35sp"
+                android:layout_below="@id/patient_row"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_have_not_noted"
+                android:layout_below="@id/or"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="20dp"
+                android:text="@string/have_not_noted_any"
+                android:textColor="@color/answers_text_color"
+                android:padding="10dp"
+                android:background="@drawable/answer_not_selected" />
+
+        </RelativeLayout>
+
+    </android.support.v4.widget.NestedScrollView>
 
     <LinearLayout
         android:layoutDirection="rtl"

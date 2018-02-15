@@ -37,10 +37,7 @@
     <string name="somethig_went_wrong">Something Went Wrong!</string>
     <string name="timeout_exception">Timed out Operation!</string>
     <string name="something_bad_happened">Something bad happened :(</string>
-    <string name="confirmation_did_not_match">Password Confirmation did not match!</string>
     <string name="asset_statements" translatable="false">[{\n  \"relation\": [\"delegate_permission/common.handle_all_urls\"],\n  \"target\": {\n    \"namespace\": \"web\",\n    \"site\": \"https://medlynk.tk\",\n  }\n}]</string>
-    <string name="appwidget_text">EXAMPLE</string>
-    <string name="add_widget">Add widget</string>
     <string name="doctor_id">Doctor ID:</string>
     <string name="doctor_phone_number">Phone Number:</string>
     <string name="doctor_bio">Bio:</string>
@@ -71,7 +68,6 @@
     <string name="new_symptom_third_question">How long ago did this symptom start?\n(* if this has been a recurrent symptom, please focus on the CURRENT episode only for now)</string>
     <string name="new_symptom_fourth_question">How frequently does this symptom bother you?</string>
     <string name="new_symptom_fifth_question">How intense is the symptom?</string>
-    <string name="new_symptom_sixth_question">Please describe how your symptom affects you on your worst days.</string>
     <string name="new_symptom_seventh_question">Please describe how your symptom affects you on your best days.</string>
     <string name="new_symptom_eighth_question">Is there anything you have noted that makes the symptom worse?\n(Ex - rest, sleep, eating, fluid intake, exercise)</string>
     <string name="new_symptom_ninth_question">Please list any other symptoms you are having that you are concerned may be related to this one.</string>
@@ -85,14 +81,45 @@
     <string name="new_symptom_seventeen_question">Have you had this symptom in the past?</string>
     <string name="new_symptom_eighteen_question">How long does the symptom last when it occurs?</string>
     <string name="new_symptom_nineteen_question">What makes you particularly concerned about <b><u>this particular</u></b> episode? (can pick more than one here)</string>
-    <string name="new_symptom_twenty_question">Please indicate what treatments you have tried for <b><u>past</u></b> past episodes (please select all treatments previously tried):</string>
     <string name="new_symptom_twenty1_question">Please list any medications you have tried for<b><u>past</u></b> episodes:</string>
     <string name="type_answer_here">Type answer here</string>
     <string name="or"><b>Or</b></string>
     <string name="i_do_not_know">I don\'t know</string>
+
     <string name="year_ago"><b>Years</b> Ago</string>
     <string name="months_ago"><b>Months</b> Ago</string>
     <string name="weeks_ago"><b>Weeks</b> Ago</string>
     <string name="days_ago"><b>Days</b> Ago</string>
+    
+    <string name="constantly">Constantly</string>
+    <string name="everyday">Everyday</string>
+    <string name="almost_every_day">Almost Every day</string>
+    <string name="a_few_times_per_week">A few times per week</string>
+    <string name="weekly">Weekly</string>
+    <string name="monthly">Monthly</string>
+    <string name="one_tow_times_per_year">One-two times per year</string>
+    <string name="a_few_times_ever">A few times ever</string>
+    <string name="varies_quite_a_bit">Varies quite a bit</string>
+
+    <string name="mild">Mild</string>
+    <string name="moderate">Moderate</string>
+    <string name="Severe">Severe</string>
+    
+    <string name="worst_day">Worst Day</string>
+    <string name="best_day">Best Day</string>
+    <string name="have_not_noted_any">Have not noted any</string>
+    <string name="under_development">Under Development</string>
+    <string-array name="question_3_choices">
+        <item>Can not get out of bed</item>
+        <item>Can barely get of bed</item>
+        <item>Can do a few simple chores \n at home, but not much more</item>
+        <item>Can do chores at home but cannot get out to do very much</item>
+        <item>Can go out but cannot manage </item>
+        <item>Can not get out of bed</item>
+        <item>Can not get out of bed</item>
+        <item>Can not get out of bed</item>
+        <item>Can not get out of bed</item>
+        <item>Can not get out of bed</item>
+    </string-array>
 
 </resources>

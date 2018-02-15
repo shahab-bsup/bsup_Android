@@ -1,15 +1,12 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context="tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_2nd_question">
 
-    <include android:id="@+id/new_symptom_second_question"
-        layout="@layout/doctor_layout"></include>
-
     <android.support.v4.widget.NestedScrollView
-        android:layout_below="@id/new_symptom_second_question"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -17,7 +14,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <include android:id="@+id/new_symptom_second_question"
+                layout="@layout/doctor_layout"></include>
+
             <LinearLayout
+                android:layout_below="@id/new_symptom_second_question"
                 android:layoutDirection="rtl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -25,8 +26,8 @@
                 android:id="@+id/patient_row">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:src="@drawable/patient_icon"
                     android:id="@+id/doctor_icon"
                     android:layout_marginTop="10dp"
@@ -47,20 +48,19 @@
                     android:hint="@string/type_answer_here"
                     android:inputType="text"
                     android:imeOptions="actionDone"
-                    android:layout_gravity="center_vertical"
                     android:background="@drawable/custom_edit_text_doctor_id"/>
 
             </LinearLayout>
 
             <tk.medlynk.patient.android.CustomViews.CustomTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:textColor="@color/colorPrimary"
                 android:text="@string/or"
                 android:id="@+id/or"
                 android:textSize="35sp"
                 android:layout_below="@id/patient_row"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_centerHorizontal="true" />
 
             <Button

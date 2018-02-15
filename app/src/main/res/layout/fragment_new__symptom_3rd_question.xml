@@ -1,88 +1,103 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
     tools:context="tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_3rd_question">
 
-    <include android:id="@+id/new_symptom_third_question"
-        layout="@layout/doctor_layout"></include>
-
     <android.support.v4.widget.NestedScrollView
-        android:layout_below="@id/new_symptom_third_question"
+        android:id="@+id/new_symptom_third_question_scroll_area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include android:id="@+id/new_symptom_third_question"
+                    layout="@layout/doctor_layout"></include>
+
+                <LinearLayout
+                    android:layout_below="@id/new_symptom_third_question"
+                    android:layoutDirection="rtl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:id="@+id/patient_row">
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/patient_icon"
+                        android:id="@+id/doctor_icon"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true" />
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <include android:id="@+id/new_symptom_third_question_years_ago"
+                            layout="@layout/new_symptom_third_answer_row"></include>
+                        <include android:id="@+id/new_symptom_third_question_months_ago"
+                            layout="@layout/new_symptom_third_answer_row"></include>
+                        <include android:id="@+id/new_symptom_third_question_weeks_ago"
+                            layout="@layout/new_symptom_third_answer_row"></include>
+                        <include android:id="@+id/new_symptom_third_question_days_ago"
+                            layout="@layout/new_symptom_third_answer_row"></include>
+
+                        <com.medlynk.shahab.myviewselection.ViewSelection
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:button_type="true"
+                            app:number_of_views="2">
+                        </com.medlynk.shahab.myviewselection.ViewSelection>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:layoutDirection="rtl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_vertical"
-                android:id="@+id/patient_row">
-
-                <ImageView
-                    android:layout_width="wrap_content"
+                android:layout_below="@+id/new_symptom_third_question_scroll_area">
+                <Button
+                    android:layout_weight="1"
+                    android:id="@+id/btnNextQuestion"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/patient_icon"
-                    android:id="@+id/doctor_icon"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    />
+                    android:background="@drawable/next_button_question"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="10dp"
+                    android:text="@string/next"
+                    android:textColor="@color/white" />
 
-                <include layout="@layout/new_symptom_third_answer_row"
-                    android:id="@+id/years_ago_layout"></include>
+                <Button
+                    android:layout_weight="1"
+                    android:id="@+id/btnSkipQuestion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_button_main"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="10dp"
+                    android:text="@string/skip"
+                    android:textColor="@color/white" />
 
             </LinearLayout>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/btn_i_do_not_know"
-                android:layout_below="@id/or"
-                android:layout_centerHorizontal="true"
-                android:layout_margin="20dp"
-                android:text="@string/i_do_not_know"
-                android:textColor="@color/answers_text_color"
-                android:padding="10dp"
-                android:background="@drawable/answer_not_selected" />
-
-        </RelativeLayout>
+        </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
-
-    <LinearLayout
-        android:layoutDirection="rtl"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-        <Button
-            android:layout_weight="1"
-            android:id="@+id/btnNextQuestion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/next_button_question"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="10dp"
-            android:text="@string/next"
-            android:textColor="@color/white" />
-
-        <Button
-            android:layout_weight="1"
-            android:id="@+id/btnSkipQuestion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/custom_button_main"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="10dp"
-            android:text="@string/skip"
-            android:textColor="@color/white" />
-
-    </LinearLayout>
 
 </RelativeLayout>

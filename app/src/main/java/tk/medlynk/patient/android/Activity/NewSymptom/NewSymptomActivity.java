@@ -58,8 +58,7 @@ public class NewSymptomActivity extends AppCompatActivity implements
         New_Symptom_22th_question.OnNewSymptomTwenty2QuestionListener,
         New_Symptom_23th_question.OnNewSymptomTwenty3QuestionListener,
         New_Symptom_24th_question.OnNewSymptomTwenty4QuestionListener,
-        New_Symptom_25th_question.OnNewSymptomTwenty5QuestionListener
-{
+        New_Symptom_25th_question.OnNewSymptomTwenty5QuestionListener {
 
     private FragmentTransaction fragmentTransaction;
 

@@ -218,7 +218,6 @@
     <tk.medlynk.patient.android.CustomViews.CustomTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/see_more_no_suitable_options"
         android:layout_alignLeft="@id/layout_question_set"
         android:text="@string/see_more"
         android:textColor="@color/edit_text_underline_color"
