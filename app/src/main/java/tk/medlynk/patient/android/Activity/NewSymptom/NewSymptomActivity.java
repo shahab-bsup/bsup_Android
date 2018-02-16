@@ -133,7 +133,6 @@ public class NewSymptomActivity extends AppCompatActivity implements
     @Override
     public void onTwenty5Question() {
         //TODO add some code to return to the activity...
-
     }
 
     @Override
@@ -243,8 +242,8 @@ public class NewSymptomActivity extends AppCompatActivity implements
     @Override
     public void onTwelveQuestion() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.replace ( R.id.fragment_container, new New_Symptom_21th_question (), New_Symptom_21th_question.TAG ).commit ();
-        fragmentTransaction.addToBackStack ( New_Symptom_21th_question.TAG );
+        fragmentTransaction.replace ( R.id.fragment_container, new New_Symptom_13th_question (), New_Symptom_13th_question.TAG ).commit ();
+        fragmentTransaction.addToBackStack ( New_Symptom_13th_question.TAG );
     }
 
     @Override

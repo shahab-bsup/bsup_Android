@@ -7,7 +7,7 @@
     tools:context="tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_5th_question">
 
     <android.support.v4.widget.NestedScrollView
-        android:id="@+id/new_symptom_third_question_scroll_area"
+        android:id="@+id/new_symptom_fifth_question_scroll_area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -46,10 +46,11 @@
                         android:layout_width="40dp"
                         android:layout_height="wrap_content"
                         app:button_type="true"
+                        app:selectable="false"
                         app:number_of_views="10"
                         android:id="@+id/answerNumbers"/>
 
-                    <view
+                    <View
                         android:layout_marginRight="5dp"
                         android:layout_marginLeft="5dp"
                         android:background="@color/answers_background_color"
@@ -61,6 +62,8 @@
                         android:layout_height="wrap_content"
                         app:button_type="true"
                         app:number_of_views="10"
+                        app:selectable="true"
+                        app:single_select="true"
                         android:id="@+id/new_symptom_fifth_answers"/>
 
                 </LinearLayout>
@@ -71,7 +74,7 @@
                 android:layoutDirection="rtl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/new_symptom_third_question_scroll_area">
+                android:layout_below="@+id/new_symptom_fifth_question_scroll_area">
                 <Button
                     android:layout_weight="1"
                     android:id="@+id/btnNextQuestion"

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
 
 /**
@@ -19,7 +20,7 @@ import com.neweraandroid.demo.R;
  * Use the {@link New_Symptom_22th_question#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class New_Symptom_22th_question extends Fragment {
+public class New_Symptom_22th_question extends Fragment implements View.OnClickListener, ViewSelection.OnSingleItemSelectedListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -35,6 +36,8 @@ public class New_Symptom_22th_question extends Fragment {
     private View question_view;
     private Button next, skip;
     private TextView question;
+    private ViewSelection choices;
+    private String[] string_choices;
 
     public New_Symptom_22th_question() {
         // Required empty public constructor
@@ -72,7 +75,19 @@ public class New_Symptom_22th_question extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate ( R.layout.fragment_new__symptom_22th_question, container, false );
-
+        question_view = view.findViewById ( R.id.new_symptom_twenty2_question );
+        question = question_view.findViewById ( R.id.txtQuestion );
+        question.setText ( R.string.new_symptom_twenty2_question );
+        next = view.findViewById ( R.id.btnNextQuestion );
+        next.setOnClickListener ( this );
+        skip = view.findViewById ( R.id.btnSkipQuestion );
+        skip.setOnClickListener ( this );
+        choices = view.findViewById ( R.id.viewSelectionChoices );
+        choices.setOnSingleItemSelectedListener ( this );
+        string_choices = getActivity ().getResources ().getStringArray ( R.array.question_13_22_choices );
+        for (int i = 0; i < choices.getNumberOfViews (); i++) {
+            choices.setTextToButtons ( string_choices[i], i );
+        }
         return  view;
     }
 
@@ -91,6 +106,27 @@ public class New_Symptom_22th_question extends Fragment {
     public void onDetach() {
         super.onDetach ();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId ()){
+            case R.id.btnNextQuestion:{
+                mListener.onTwenty2Question ();
+
+                break;
+            }
+            case R.id.btnSkipQuestion:{
+                mListener.onTwenty2Question ();
+
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void onSingleItemSelected(int i) {
+
     }
 
     /**

@@ -39,11 +39,17 @@
                         android:layout_centerVertical="true"
                         android:layout_alignParentRight="true" />
                     <com.medlynk.shahab.myviewselection.ViewSelection
-                        android:layout_width="40dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:button_type="true"
                         app:number_of_views="5"
-                        android:id="@+id/answerNumbers" />
+                        app:selectable="true"
+                        app:single_select="true"
+                        app:unselected_background="@drawable/answer_not_selected"
+                        app:selected_background="@drawable/answer_selected"
+                        app:unselected_text_color="@color/white"
+                        app:selected_text_color="@color/black"
+                        android:id="@+id/viewSelectionChoices" />
                 </LinearLayout>
 
             </RelativeLayout>

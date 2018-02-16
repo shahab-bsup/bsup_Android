@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
 
 /**
@@ -19,7 +20,11 @@ import com.neweraandroid.demo.R;
  * Use the {@link New_Symptom_4th_question#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class New_Symptom_4th_question extends Fragment implements View.OnClickListener {
+public class New_Symptom_4th_question extends Fragment implements
+        View.OnClickListener,
+        ViewSelection.OnSingleItemSelectedListener,
+        ViewSelection.OnMultiItemSelectedListener
+{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -35,6 +40,8 @@ public class New_Symptom_4th_question extends Fragment implements View.OnClickLi
     private View question_view;
     private Button next, skip;
     private TextView question;
+    private ViewSelection choices, choiceNumbers;
+    private String[] answerChoices;
 
     public New_Symptom_4th_question() {
         // Required empty public constructor
@@ -79,6 +86,16 @@ public class New_Symptom_4th_question extends Fragment implements View.OnClickLi
         next.setOnClickListener ( this );
         skip = view.findViewById ( R.id.btnSkipQuestion );
         skip.setOnClickListener ( this );
+        choiceNumbers = view.findViewById ( R.id.viewSelectionChoiceNumbers );
+        choices = view.findViewById ( R.id.viewSelectionChoices );
+        choices.setOnSingleItemSelectedListener ( this );
+        for (int i = 0; i < choiceNumbers.getNumberOfViews (); i++) {
+            choiceNumbers.setTextToButtons ( String.valueOf ( i + 1 ), i );
+        }
+        answerChoices = getActivity ().getResources ().getStringArray ( R.array.question_3_choices );
+        for (int i = 0; i < choices.getNumberOfViews (); i++) {
+            choices.setTextToButtons ( answerChoices[i], i );
+        }
         return view;
     }
 
@@ -113,6 +130,21 @@ public class New_Symptom_4th_question extends Fragment implements View.OnClickLi
                 break;
             }
         }
+    }
+
+    @Override
+    public void onMultiItemSelected(Integer integer) {
+
+    }
+
+    @Override
+    public void onMultiItemDeselected(Integer integer) {
+
+    }
+
+    @Override
+    public void onSingleItemSelected(int i) {
+        System.out.println ( "i = [" + i + "]: " + answerChoices[i] );
     }
 
     /**

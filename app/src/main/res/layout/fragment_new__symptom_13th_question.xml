@@ -43,7 +43,14 @@
                         android:layout_height="wrap_content"
                         app:button_type="true"
                         app:number_of_views="8"
-                        android:id="@+id/answerNumbers" />
+                        app:selectable="true"
+                        app:single_select="true"
+                        app:unselected_background="@drawable/answer_not_selected"
+                        app:selected_background="@drawable/answer_selected"
+                        app:unselected_text_color="@color/white"
+                        app:selected_text_color="@color/black"
+                        android:id="@+id/viewSelectionChoices"
+                        />
                 </LinearLayout>
 
             </RelativeLayout>

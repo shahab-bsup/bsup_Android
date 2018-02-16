@@ -1,6 +1,7 @@
 package tk.medlynk.patient.android.Activity.NewSymptom.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,6 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.neweraandroid.demo.R;
+
+import tk.medlynk.patient.android.Activity.StartQuestionSet.StartAppointmentActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,9 +35,8 @@ public class New_Symptom_24th_question extends Fragment {
 
     private OnNewSymptomTwenty4QuestionListener mListener;
 
-    private View question_view;
-    private Button next, skip;
-    private TextView question;
+    Button button;
+    private View view;
 
     public New_Symptom_24th_question() {
         // Required empty public constructor
@@ -71,7 +73,16 @@ public class New_Symptom_24th_question extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate ( R.layout.fragment_new__symptom_24th_question, container, false );
+        view =  inflater.inflate ( R.layout.fragment_new__symptom_24th_question, container, false );
+        button = view.findViewById ( R.id.btnGoToQuestionSet );
+        button.setOnClickListener ( new View.OnClickListener () {
+            @Override
+            public void onClick(View view) {
+                getActivity ().startActivity ( new Intent ( getActivity (), StartAppointmentActivity.class ) );
+            }
+        } );
+
+        return view;
     }
 
     @Override
