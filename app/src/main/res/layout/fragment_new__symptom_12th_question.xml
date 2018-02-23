@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_12th_question">
+    tools:context="tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_12.New_Symptom_12th_question">
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/new_symptom_third_question_scroll_area"
@@ -51,7 +51,7 @@
                         app:button_type="true"
                         app:number_of_views="5"
                         app:selectable="true"
-                        app:single_select="true"
+                        app:single_select="false"
                         app:unselected_background="@drawable/answer_not_selected"
                         app:selected_background="@drawable/answer_selected"
                         app:unselected_text_color="@color/white"

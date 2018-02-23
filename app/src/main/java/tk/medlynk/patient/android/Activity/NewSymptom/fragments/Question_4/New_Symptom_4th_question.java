@@ -1,4 +1,4 @@
-package tk.medlynk.patient.android.Activity.NewSymptom.fragments;
+package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_4;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,9 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
+
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_3.OnThirdAnswerListener;
+import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.Model.Answer;
+import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
+import tk.medlynk.patient.android.Networking.MedlynkRequests;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,8 +30,8 @@ import com.neweraandroid.demo.R;
 public class New_Symptom_4th_question extends Fragment implements
         View.OnClickListener,
         ViewSelection.OnSingleItemSelectedListener,
-        ViewSelection.OnMultiItemSelectedListener
-{
+        ViewSelection.OnMultiItemSelectedListener,
+        OnFourthAnswerListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -42,9 +49,11 @@ public class New_Symptom_4th_question extends Fragment implements
     private TextView question;
     private ViewSelection choices, choiceNumbers;
     private String[] answerChoices;
+    private int selected_choice= -1;
+    private New_Symptom_4th_question_ViewHolder viewHolder;
 
     public New_Symptom_4th_question() {
-        // Required empty public constructor
+        // Required empty public constructor...
     }
 
     /**
@@ -79,6 +88,7 @@ public class New_Symptom_4th_question extends Fragment implements
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate ( R.layout.fragment_new__symptom_4th_question, container, false );
+        viewHolder = new New_Symptom_4th_question_ViewHolder ( view );
         question_view = view.findViewById ( R.id.new_symptom_fourth_question );
         question = question_view.findViewById ( R.id.txtQuestion );
         question.setText ( R.string.new_symptom_fourth_question );
@@ -120,7 +130,15 @@ public class New_Symptom_4th_question extends Fragment implements
     public void onClick(View view) {
         switch (view.getId ()){
             case R.id.btnNextQuestion:{
-                mListener.onFourthQuestion ();
+                if( selected_choice == -1 ){
+                    Toast.makeText ( getActivity (), "You can skip this question!", Toast.LENGTH_SHORT ).show ();
+                }else {
+                    viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
+                    Answer answer = new Answer ();
+                    SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
+                    answer.setRate ( selected_choice );
+                    MedlynkRequests.newSymptomFourthQuestionAnswer ( getActivity (), New_Symptom_4th_question.this, manager.getAppointmentID (), answer );
+                }
 
                 break;
             }
@@ -145,6 +163,21 @@ public class New_Symptom_4th_question extends Fragment implements
     @Override
     public void onSingleItemSelected(int i) {
         System.out.println ( "i = [" + i + "]: " + answerChoices[i] );
+        selected_choice  = i;
+    }
+
+    @Override
+    public void onFourthAnswerSuccess(NewSymptomAnswerResponse response) {
+        System.out.println ( "New_Symptom_4th_question.onFourthAnswerSuccess" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+        mListener.onFourthQuestion ();
+    }
+
+    @Override
+    public void onFourthAnswerFailure() {
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+        System.out.println ( "New_Symptom_4th_question.onFourthAnswerFailure" );
+
     }
 
     /**

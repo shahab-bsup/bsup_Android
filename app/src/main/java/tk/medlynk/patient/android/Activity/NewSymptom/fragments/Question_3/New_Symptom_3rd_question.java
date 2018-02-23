@@ -1,16 +1,24 @@
-package tk.medlynk.patient.android.Activity.NewSymptom.fragments;
+package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_3;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
+
+import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.Model.Answer;
+import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
+import tk.medlynk.patient.android.Networking.MedlynkRequests;
 
 
 /**
@@ -21,7 +29,8 @@ import com.neweraandroid.demo.R;
  * Use the {@link New_Symptom_3rd_question#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class New_Symptom_3rd_question extends Fragment implements View.OnClickListener, ViewSelection.OnSingleItemSelectedListener {
+public class New_Symptom_3rd_question extends Fragment implements View.OnClickListener, ViewSelection.OnSingleItemSelectedListener, OnThirdAnswerListener {
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -39,6 +48,8 @@ public class New_Symptom_3rd_question extends Fragment implements View.OnClickLi
     private Button next, skip;
     private ViewSelection choices;
     private String[] string_choices;
+    private New_Symptom_3rd_question_ViewHolder viewHolder;
+    private int selected_choice = -1;
 
     public New_Symptom_3rd_question() {
         // Required empty public constructor
@@ -76,6 +87,7 @@ public class New_Symptom_3rd_question extends Fragment implements View.OnClickLi
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate ( R.layout.fragment_new__symptom_3rd_question, container, false );
+        viewHolder = new New_Symptom_3rd_question_ViewHolder ( view );
         question_view = view.findViewById ( R.id.new_symptom_third_question );
         question = question_view.findViewById ( R.id.txtQuestion );
         question.setText ( R.string.new_symptom_third_question );
@@ -113,7 +125,36 @@ public class New_Symptom_3rd_question extends Fragment implements View.OnClickLi
     public void onClick(View view) {
         switch (view.getId ()){
             case R.id.btnNextQuestion:{
-                mListener.onThirdQuestion (  );
+                String years_duration = viewHolder.getYearsDuration ();
+                String months_duration = viewHolder.getMonthsDuration ();
+                String weeks_duration = viewHolder.getWeeksDuration ();
+                String days_duration= viewHolder.getDaysDuration ();
+                if(TextUtils.isEmpty ( years_duration ) &&
+                        TextUtils.isEmpty ( months_duration )&&
+                        TextUtils.isEmpty ( weeks_duration )&&
+                        TextUtils.isEmpty ( days_duration ) &&
+                        selected_choice == -1){
+                    Toast.makeText ( getActivity (), "You can skip this question!", Toast.LENGTH_SHORT ).show ();
+                } else if ( viewHolder.getValueFilledInput ().getValue () != 0 && selected_choice != -1 ){
+                    Toast.makeText ( getActivity (), "Just select one answer!", Toast.LENGTH_LONG ).show ();
+                } else if ( viewHolder.getValueFilledInput ().getValue () != 0 && selected_choice == -1){
+                    viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
+                    SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
+                    Answer answer = new Answer ();
+                    answer.setChoice ( viewHolder.getValueFilledInput ().getChoice () );
+                    answer.setDuration ( viewHolder.getValueFilledInput ().getValue () );
+                    MedlynkRequests.newSymptomThirdQuestionAnswer ( getActivity (), New_Symptom_3rd_question.this, manager.getAppointmentID (), answer );
+                } else {
+                    viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
+                    SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
+                    Answer answer = new Answer ();
+                    if( selected_choice == 0 ){
+                        answer.setChoice ( "e" );
+                    }else {
+                        answer.setChoice ( "f" );
+                    }
+                    MedlynkRequests.newSymptomThirdQuestionAnswer ( getActivity (), New_Symptom_3rd_question.this, manager.getAppointmentID (), answer );
+                }
                 break;
             }
 
@@ -127,6 +168,19 @@ public class New_Symptom_3rd_question extends Fragment implements View.OnClickLi
     @Override
     public void onSingleItemSelected(int i) {
         System.out.println (string_choices[i]);
+        selected_choice = i;
+    }
+
+    @Override
+    public void onThirdAnswerSuccess(NewSymptomAnswerResponse response) {
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+        mListener.onThirdQuestion ();
+    }
+
+    @Override
+    public void onThirdAnswerFailure() {
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+        System.out.println ( "New_Symptom_3rd_question.onThirdAnswerFailure" );
     }
 
     /**

@@ -1,16 +1,24 @@
-package tk.medlynk.patient.android.Activity.NewSymptom.fragments;
+package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_10;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatEditText;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
+
+import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.Model.Answer;
+import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
+import tk.medlynk.patient.android.Networking.MedlynkRequests;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,7 +28,7 @@ import com.neweraandroid.demo.R;
  * Use the {@link New_Symptom_10th_question#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class New_Symptom_10th_question extends Fragment implements View.OnClickListener, ViewSelection.OnSingleItemSelectedListener {
+public class New_Symptom_10th_question extends Fragment implements View.OnClickListener, ViewSelection.OnSingleItemSelectedListener, OnTenthAnswerListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -37,6 +45,8 @@ public class New_Symptom_10th_question extends Fragment implements View.OnClickL
     private Button next, skip;
     private TextView question;
     private ViewSelection choice;
+    private int selected_choice = -1;
+    private New_Symptom_10th_question_ViewHolder viewHolder;
 
     public New_Symptom_10th_question() {
         // Required empty public constructor
@@ -74,7 +84,7 @@ public class New_Symptom_10th_question extends Fragment implements View.OnClickL
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate ( R.layout.fragment_new__symptom_10th_question, container, false );
-
+        viewHolder = new New_Symptom_10th_question_ViewHolder ( view );
         question_view = view.findViewById ( R.id.new_symptom_tenth_question );
         question = question_view.findViewById ( R.id.txtQuestion );
         question.setText ( R.string.new_symptom_tenth_question );
@@ -110,8 +120,29 @@ public class New_Symptom_10th_question extends Fragment implements View.OnClickL
     public void onClick(View view) {
         switch (view.getId ()){
             case R.id.btnNextQuestion:{
-                mListener.onTenthQuestion ();
-
+                if(TextUtils.isEmpty ( viewHolder.getAnswer () ) && selected_choice == -1){
+                    Toast.makeText ( getActivity (), "You can skip this question!", Toast.LENGTH_SHORT ).show ();
+                }else if( !TextUtils.isEmpty ( viewHolder.getAnswer () ) ){
+                    viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
+                    Answer answer = new Answer ();
+                    answer.setReply ( viewHolder.getAnswer () );
+                    answer.setChoice ( "a" );
+                    SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
+                    MedlynkRequests.newSymptomTenthQuestionAnswer ( getActivity (),
+                            New_Symptom_10th_question.this,
+                            manager.getAppointmentID (),
+                            answer
+                            );
+                } else {
+                    viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
+                    SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
+                    Answer answer = new Answer ();
+                    answer.setChoice ( "b" );
+                    MedlynkRequests.newSymptomTenthQuestionAnswer ( getActivity (),
+                            New_Symptom_10th_question.this,
+                            manager.getAppointmentID (),
+                            answer);
+                }
                 break;
             }
             case R.id.btnSkipQuestion:{
@@ -125,6 +156,21 @@ public class New_Symptom_10th_question extends Fragment implements View.OnClickL
     @Override
     public void onSingleItemSelected(int i) {
         System.out.println ("string_choice = " + choice.getButtons ().get ( i ).getText ().toString ());
+        selected_choice = i;
+        viewHolder.setAnswerEmpty ();
+    }
+
+    @Override
+    public void onTenthAnswerSuccess(NewSymptomAnswerResponse response) {
+        System.out.println ( "New_Symptom_10th_question.onTenthAnswerSuccess" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+        mListener.onTenthQuestion ();
+    }
+
+    @Override
+    public void onTenthAnswerFailure() {
+        System.out.println ( "New_Symptom_10th_question.onTenthAnswerFailure" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
     }
 
     /**

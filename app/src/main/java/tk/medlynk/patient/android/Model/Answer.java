@@ -17,9 +17,31 @@ public class Answer implements Serializable {
     @SerializedName("choice")
     @Expose
     private String choice;
+    @SerializedName ( "duration" )
+    @Expose
+    private int duration;
     @SerializedName("rate")
     @Expose
-    private String rate;
+    private int rate;
+    @SerializedName ( "other" )
+    @Expose
+    private String other;
+
+    public String getOther() {
+        return other;
+    }
+
+    public void setOther(String other) {
+        this.other = other;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
 
     public String getReply() {
         return reply;
@@ -37,11 +59,11 @@ public class Answer implements Serializable {
         this.choice = choice;
     }
 
-    public String getRate() {
+    public int getRate() {
         return rate;
     }
 
-    public void setRate(String rate) {
+    public void setRate(int rate) {
         this.rate = rate;
     }
 }

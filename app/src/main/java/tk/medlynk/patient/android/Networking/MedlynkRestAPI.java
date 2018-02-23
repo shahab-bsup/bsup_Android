@@ -62,6 +62,7 @@ public class MedlynkRestAPI {
                         return chain.proceed ( request.build () );
                     }
                 } ).addInterceptor ( httpLoggingInterceptor )
+                .addInterceptor ( new ConnectivityInterceptor ( context ) )
                 .retryOnConnectionFailure ( false )
                 .readTimeout ( 60, java.util.concurrent.TimeUnit.SECONDS )
                 .writeTimeout ( 60, java.util.concurrent.TimeUnit.SECONDS )

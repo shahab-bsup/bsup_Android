@@ -7,6 +7,17 @@ import com.google.gson.Gson;
 import tk.medlynk.patient.android.Activity.Login.OnGetCurrentUserInfoListener;
 import tk.medlynk.patient.android.Activity.Login.OnResendConfirmationListener;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_1.OnFirstAnswerListener;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_10.OnTenthAnswerListener;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_11.OnEleventhAnswerListener;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_12.OnTwelveAnswerListener;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_2.OnSecondAnswerListener;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_3.OnThirdAnswerListener;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_4.OnFourthAnswerListener;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_5.OnFifthAnswerListener;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_6.OnSixthAnswerListener;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_7.OnSeventhAnswerListener;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_8.OnEighthAnswerListener;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_9.OnNinthAnswerListener;
 import tk.medlynk.patient.android.Activity.NoDoctorIdPage.OnNoDoctorIDPreferencesListener;
 import tk.medlynk.patient.android.Activity.ResetPassword.OnResetPasswordListener;
 import tk.medlynk.patient.android.Activity.SearchDoctor.OnSearchDoctorListener;
@@ -18,7 +29,6 @@ import tk.medlynk.patient.android.Activity.Login.OnPrimaryAccessTokenListener;
 import tk.medlynk.patient.android.Activity.Splash.RefreshTokenListener;
 import tk.medlynk.patient.android.Constants;
 import tk.medlynk.patient.android.CustomViews.SnackController;
-import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
 import tk.medlynk.patient.android.Essentials.Utils;
 import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.AppointmentsResponse;
@@ -37,6 +47,7 @@ import com.neweraandroid.demo.R;
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -385,7 +396,7 @@ public class MedlynkRequests {
         } );
     }
 
-    public static void newSymptomSecondQuestionAnswer(Context context, int appointmentID, Answer answer){
+    public static void newSymptomSecondQuestionAnswer(Context context, final OnSecondAnswerListener listener, int appointmentID, Answer answer){
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "2" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
         Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
@@ -394,16 +405,244 @@ public class MedlynkRequests {
             @Override
             public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
                 if ( response.isSuccessful () ){
+                    listener.onSecondAnswerSuccess ( response.body () );
 
                 }else{
-
+                    listener.onSecondAnswerFailure ();
                 }
             }
 
             @Override
             public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
-
+                listener.onSecondAnswerFailure ();
             }
         } );
     }
+
+    public static void newSymptomThirdQuestionAnswer(Context context, final OnThirdAnswerListener listener, int appointmentID, Answer answer){
+        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "3" );
+        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
+        Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
+                .newSymptomAnswer ( appointmentID, Constants.NEW_SYMPTOM_ANSWER_BODY );
+        call.enqueue ( new Callback<NewSymptomAnswerResponse> () {
+            @Override
+            public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
+                if ( response.isSuccessful () ){
+                    listener.onThirdAnswerSuccess ( response.body () );
+
+                }else{
+                    listener.onThirdAnswerFailure ();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
+                listener.onThirdAnswerFailure ();
+            }
+        } );
+    }
+
+    public static void newSymptomFourthQuestionAnswer(Context context, final OnFourthAnswerListener listener, int appointmentID, Answer answer){
+        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "4" );
+        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
+        Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
+                .newSymptomAnswer ( appointmentID, Constants.NEW_SYMPTOM_ANSWER_BODY );
+        call.enqueue ( new Callback<NewSymptomAnswerResponse> () {
+            @Override
+            public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
+                if ( response.isSuccessful () ){
+                    listener.onFourthAnswerSuccess ( response.body () );
+
+                }else{
+                    listener.onFourthAnswerFailure ();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
+                listener.onFourthAnswerFailure ();
+            }
+        } );
+    }
+
+    public static void newSymptomFifthQuestionAnswer(Context context, final OnFifthAnswerListener listener, int appointmentID, Answer answer){
+        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "5" );
+        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
+        Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
+                .newSymptomAnswer ( appointmentID, Constants.NEW_SYMPTOM_ANSWER_BODY );
+        call.enqueue ( new Callback<NewSymptomAnswerResponse> () {
+            @Override
+            public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
+                if ( response.isSuccessful () ){
+                    listener.onFifthAnswerSuccess ( response.body () );
+
+                }else{
+                    listener.onFifthAnswerFailure ();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
+                listener.onFifthAnswerFailure ();
+            }
+        } );
+    }
+
+    public static void newSymptomSixthQuestionAnswer(Context context, final OnSixthAnswerListener listener, int appointmentID, Answer answer){
+        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "6" );
+        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
+        Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
+                .newSymptomAnswer ( appointmentID, Constants.NEW_SYMPTOM_ANSWER_BODY );
+        call.enqueue ( new Callback<NewSymptomAnswerResponse> () {
+            @Override
+            public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
+                if ( response.isSuccessful () ){
+                    listener.onSixthAnswerSuccess ( response.body () );
+
+                }else{
+                    listener.onSixthAnswerFailure ();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
+                listener.onSixthAnswerFailure ();
+            }
+        } );
+    }
+
+    public static void newSymptomSeventhQuestionAnswer(Context context, final OnSeventhAnswerListener listener, int appointmentID, Answer answer){
+        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "7" );
+        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
+        Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
+                .newSymptomAnswer ( appointmentID, Constants.NEW_SYMPTOM_ANSWER_BODY );
+        call.enqueue ( new Callback<NewSymptomAnswerResponse> () {
+            @Override
+            public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
+                if ( response.isSuccessful () ){
+                    listener.onSeventhAnswerSuccess ( response.body () );
+
+                }else{
+                    listener.onSeventhAnswerFailure ();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
+                listener.onSeventhAnswerFailure ();
+            }
+        } );
+    }
+
+    public static void newSymptomEighthQuestionAnswer(Context context, final OnEighthAnswerListener listener, int appointmentID, List<Answer> answer){
+        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "8" );
+        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
+        Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
+                .newSymptomAnswer ( appointmentID, Constants.NEW_SYMPTOM_ANSWER_BODY );
+        call.enqueue ( new Callback<NewSymptomAnswerResponse> () {
+            @Override
+            public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
+                if ( response.isSuccessful () ){
+                    listener.onEighthAnswerSuccess ( response.body () );
+
+                }else{
+                    listener.onEightAnswerFailure ();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
+                listener.onEightAnswerFailure ();
+            }
+        } );
+    }
+
+    public static void newSymptomNinthQuestionAnswer(Context context, final OnNinthAnswerListener listener, int appointmentID, List<Answer> answer){
+        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "9" );
+        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
+        Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
+                .newSymptomAnswer ( appointmentID, Constants.NEW_SYMPTOM_ANSWER_BODY );
+        call.enqueue ( new Callback<NewSymptomAnswerResponse> () {
+            @Override
+            public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
+                if ( response.isSuccessful () ){
+                    listener.onNinthAnswerSuccess ( response.body () );
+                }else{
+                    listener.onNinthAnswerFailure ();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
+                listener.onNinthAnswerFailure ();
+            }
+        } );
+    }
+
+    public static void newSymptomTenthQuestionAnswer(Context context, final OnTenthAnswerListener listener, int appointmentID, Answer answer){
+        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "10" );
+        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
+        Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
+                .newSymptomAnswer ( appointmentID, Constants.NEW_SYMPTOM_ANSWER_BODY );
+        call.enqueue ( new Callback<NewSymptomAnswerResponse> () {
+            @Override
+            public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
+                if ( response.isSuccessful () ){
+                    listener.onTenthAnswerSuccess ( response.body () );
+                }else{
+                    listener.onTenthAnswerFailure ();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
+                listener.onTenthAnswerFailure ();
+            }
+        } );
+    }
+
+    public static void newSymptomEleventhQuestionAnswer(Context context, final OnEleventhAnswerListener listener, int appointmentID, Answer answer){
+        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "10" );
+        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
+        Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
+                .newSymptomAnswer ( appointmentID, Constants.NEW_SYMPTOM_ANSWER_BODY );
+        call.enqueue ( new Callback<NewSymptomAnswerResponse> () {
+            @Override
+            public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
+                if ( response.isSuccessful () ){
+                    listener.onEleventhAnswerSuccess ( response.body () );
+                }else{
+                    listener.onEleventhAnswerFailure ();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
+                listener.onEleventhAnswerFailure ();
+            }
+        } );
+    }
+
+    public static void newSymptomTwelveQuestionAnswer(Context context, final OnTwelveAnswerListener listener, int appointmentID, List<Answer> answer){
+        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "10" );
+        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
+        Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
+                .newSymptomAnswer ( appointmentID, Constants.NEW_SYMPTOM_ANSWER_BODY );
+        call.enqueue ( new Callback<NewSymptomAnswerResponse> () {
+            @Override
+            public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
+                if ( response.isSuccessful () ){
+                    listener.onTwelveAnswerSuccess ( response.body () );
+                }else{
+                    listener.onTwelveAnswerFailure ();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
+                listener.onTwelveAnswerFailure ();
+            }
+        } );
+    }
+
 }

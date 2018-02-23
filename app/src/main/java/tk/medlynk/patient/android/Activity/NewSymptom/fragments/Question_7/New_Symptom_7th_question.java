@@ -1,4 +1,4 @@
-package tk.medlynk.patient.android.Activity.NewSymptom.fragments;
+package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_7;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,9 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
+
+import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.Model.Answer;
+import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
+import tk.medlynk.patient.android.Networking.MedlynkRequests;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,7 +27,7 @@ import com.neweraandroid.demo.R;
  * create an instance of this fragment.
  */
 public class New_Symptom_7th_question extends Fragment implements View.OnClickListener,
-        ViewSelection.OnSingleItemSelectedListener {
+        ViewSelection.OnSingleItemSelectedListener, OnSeventhAnswerListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -39,6 +45,8 @@ public class New_Symptom_7th_question extends Fragment implements View.OnClickLi
     private TextView question;
     private ViewSelection answerChoices, choice_numbers;
     private String[] choices_strings;
+    private int selected_choice = -1;
+    private New_Symptom_7th_question_ViewHolder viewHolder;
 
     public New_Symptom_7th_question() {
         // Required empty public constructor
@@ -76,7 +84,7 @@ public class New_Symptom_7th_question extends Fragment implements View.OnClickLi
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate ( R.layout.fragment_new__symptom_7th_question, container, false );
-
+        viewHolder = new New_Symptom_7th_question_ViewHolder ( view );
         question_view = view.findViewById ( R.id.new_symptom_seventh_question );
         question = question_view.findViewById ( R.id.txtQuestion );
         question.setText ( R.string.new_symptom_seventh_question );
@@ -123,7 +131,18 @@ public class New_Symptom_7th_question extends Fragment implements View.OnClickLi
     public void onClick(View view) {
         switch (view.getId ()){
             case R.id.btnNextQuestion:{
-                mListener.onSeventhQuestion ();
+                if (selected_choice == -1){
+                    Toast.makeText ( getActivity (), "You can skip this question!", Toast.LENGTH_SHORT ).show ();
+                }else{
+                    viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
+                    Answer answer = new Answer ();
+                    SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
+                    answer.setRate ( selected_choice );
+                    MedlynkRequests.newSymptomSeventhQuestionAnswer ( getActivity (),
+                            New_Symptom_7th_question.this,
+                            manager.getAppointmentID (),
+                            answer);
+                }
                 break;
             }
             case R.id.btnSkipQuestion:{
@@ -136,6 +155,20 @@ public class New_Symptom_7th_question extends Fragment implements View.OnClickLi
     @Override
     public void onSingleItemSelected(int i) {
         System.out.println ( "i = [" + i + "]: " + choices_strings[i] );
+        selected_choice = i;
+    }
+
+    @Override
+    public void onSeventhAnswerSuccess(NewSymptomAnswerResponse response) {
+        System.out.println ( "New_Symptom_7th_question.onSeventhAnswerSuccess" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+        mListener.onSeventhQuestion ();
+    }
+
+    @Override
+    public void onSeventhAnswerFailure() {
+        System.out.println ( "New_Symptom_7th_question.onSeventhAnswerFailure" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
     }
 
     /**

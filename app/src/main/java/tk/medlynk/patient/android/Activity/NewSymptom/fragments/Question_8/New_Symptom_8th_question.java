@@ -1,4 +1,4 @@
-package tk.medlynk.patient.android.Activity.NewSymptom.fragments;
+package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_8;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,9 +8,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.Model.Answer;
+import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
+import tk.medlynk.patient.android.Networking.MedlynkRequests;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,7 +30,7 @@ import com.neweraandroid.demo.R;
  * create an instance of this fragment.
  */
 public class New_Symptom_8th_question extends Fragment implements
-        View.OnClickListener, ViewSelection.OnSingleItemSelectedListener {
+        View.OnClickListener, ViewSelection.OnSingleItemSelectedListener, ViewSelection.OnMultiItemSelectedListener, OnEighthAnswerListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -39,6 +48,8 @@ public class New_Symptom_8th_question extends Fragment implements
     private TextView question;
     private ViewSelection choices;
     private String[] string_choices;
+    private New_Symptom_8th_question_ViewHolder viewHolder;
+    private List<Answer> selected_choices = new ArrayList<> (  );
 
     public New_Symptom_8th_question() {
         // Required empty public constructor
@@ -76,7 +87,7 @@ public class New_Symptom_8th_question extends Fragment implements
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate ( R.layout.fragment_new__symptom_8th_question, container, false );
-
+        viewHolder = new New_Symptom_8th_question_ViewHolder ( view );
         question_view = view.findViewById ( R.id.new_symptom_eighth_question );
         question = question_view.findViewById ( R.id.txtQuestion );
         question.setText ( R.string.new_symptom_eighth_question );
@@ -85,7 +96,7 @@ public class New_Symptom_8th_question extends Fragment implements
         skip = view.findViewById ( R.id.btnSkipQuestion );
         skip.setOnClickListener ( this );
         choices = view.findViewById ( R.id.viewSelectionChoices );
-        choices.setOnSingleItemSelectedListener ( this );
+        choices.setOnMultiItemSelectedListener ( this );
         string_choices = getActivity ().getResources ().getStringArray ( R.array.question_8_choices );
         for (int i = 0; i < choices.getNumberOfViews (); i++) {
             choices.setTextToButtons ( string_choices[i], i );
@@ -114,8 +125,16 @@ public class New_Symptom_8th_question extends Fragment implements
     public void onClick(View view) {
         switch (view.getId ()){
             case R.id.btnNextQuestion:{
-                mListener.onEightQuestion ();
-
+                if ( selected_choices.size () == 0 ){
+                    Toast.makeText ( getActivity (), "You can skip this question!", Toast.LENGTH_SHORT ).show ();
+                }else{
+                    viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
+                    SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
+                    MedlynkRequests.newSymptomEighthQuestionAnswer ( getActivity ()
+                    , New_Symptom_8th_question.this,
+                            manager.getAppointmentID ()
+                    ,selected_choices);
+                }
                 break;
             }
             case R.id.btnSkipQuestion:{
@@ -128,6 +147,53 @@ public class New_Symptom_8th_question extends Fragment implements
     @Override
     public void onSingleItemSelected(int i) {
         System.out.println ( "i = [" + i + "]: " + string_choices[i] );
+    }
+
+    @Override
+    public void onMultiItemSelected(Integer integer) {
+        Answer answer = new Answer ();
+        switch (integer){
+            case 0:{
+                answer.setChoice ( "a" );
+                break;
+            }
+            case 1:{
+                answer.setChoice ( "b" );
+
+                break;
+            }
+            case 2:{
+                answer.setChoice ( "c" );
+
+                break;
+            }
+            case 3:{
+                answer.setChoice ( "d" );
+
+                break;
+            }
+        }
+        selected_choices.add ( answer );
+    }
+
+    @Override
+    public void onMultiItemDeselected(Integer integer) {
+        int i = integer;
+        selected_choices.remove ( i );
+    }
+
+    @Override
+    public void onEighthAnswerSuccess(NewSymptomAnswerResponse response) {
+        System.out.println ( "New_Symptom_8th_question.onEighthAnswerSuccess" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+        mListener.onEightQuestion ();
+    }
+
+    @Override
+    public void onEightAnswerFailure() {
+        System.out.println ( "New_Symptom_8th_question.onEightAnswerFailure" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+        mListener.onEightQuestion ();
     }
 
     /**

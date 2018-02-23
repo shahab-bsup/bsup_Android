@@ -1,4 +1,4 @@
-package tk.medlynk.patient.android.Activity.NewSymptom.fragments;
+package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_9;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,9 +8,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.Model.Answer;
+import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
+import tk.medlynk.patient.android.Networking.MedlynkRequests;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,7 +29,7 @@ import com.neweraandroid.demo.R;
  * Use the {@link New_Symptom_9th_question#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class New_Symptom_9th_question extends Fragment implements View.OnClickListener, ViewSelection.OnSingleItemSelectedListener {
+public class New_Symptom_9th_question extends Fragment implements View.OnClickListener, ViewSelection.OnSingleItemSelectedListener, ViewSelection.OnMultiItemSelectedListener, OnNinthAnswerListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -38,6 +47,8 @@ public class New_Symptom_9th_question extends Fragment implements View.OnClickLi
     private TextView question;
     private ViewSelection answer_choices;
     private String[] string_choices;
+    private List<Answer> selected_choices = new ArrayList<> (  );
+    private New_Symptom_9th_question_ViewHolder viewHolder;
 
     public New_Symptom_9th_question() {
         // Required empty public constructor
@@ -71,11 +82,12 @@ public class New_Symptom_9th_question extends Fragment implements View.OnClickLi
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater,
+                             ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate ( R.layout.fragment_new__symptom_9th_question, container, false );
-
+        viewHolder = new New_Symptom_9th_question_ViewHolder ( view );
         question_view = view.findViewById ( R.id.new_symptom_ninth_question );
         question = question_view.findViewById ( R.id.txtQuestion );
         question.setText ( R.string.new_symptom_ninth_question );
@@ -84,7 +96,7 @@ public class New_Symptom_9th_question extends Fragment implements View.OnClickLi
         skip = view.findViewById ( R.id.btnSkipQuestion );
         skip.setOnClickListener ( this );
         answer_choices = view.findViewById ( R.id.viewSelectionChoices );
-        answer_choices.setOnSingleItemSelectedListener ( this );
+        answer_choices.setOnMultiItemSelectedListener ( this );
         string_choices = getActivity ().getResources ().getStringArray ( R.array.question_9_choices );
         for (int i = 0; i < answer_choices.getNumberOfViews (); i++) {
             answer_choices.setTextToButtons ( string_choices[i], i );
@@ -113,8 +125,16 @@ public class New_Symptom_9th_question extends Fragment implements View.OnClickLi
     public void onClick(View view) {
         switch (view.getId ()){
             case R.id.btnNextQuestion:{
-                mListener.onNinthQuestion ();
-
+                if( selected_choices.size () == 0 ){
+                    Toast.makeText ( getActivity (), "You can skip this question!", Toast.LENGTH_SHORT ).show ();
+                }else{
+                    viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
+                    SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
+                    MedlynkRequests.newSymptomNinthQuestionAnswer ( getActivity ()
+                    , New_Symptom_9th_question.this,
+                            manager.getAppointmentID (),
+                            selected_choices);
+                }
                 break;
             }
             case R.id.btnSkipQuestion:{
@@ -128,6 +148,54 @@ public class New_Symptom_9th_question extends Fragment implements View.OnClickLi
     @Override
     public void onSingleItemSelected(int i) {
         System.out.println ( "i = [" + i + "]: " + string_choices[i] );
+    }
+
+    @Override
+    public void onMultiItemSelected(Integer integer) {
+        Answer answer = new Answer ();
+        switch (integer){
+            case 0:{
+                answer.setChoice ( "a" );
+                break;
+            }
+            case 1:{
+                answer.setChoice ( "b" );
+
+                break;
+            }
+            case 2:{
+                answer.setChoice ( "c" );
+
+                break;
+            }
+            case 3:{
+                answer.setChoice ( "d" );
+
+                break;
+            }
+        }
+        selected_choices.add ( answer );
+    }
+
+    @Override
+    public void onMultiItemDeselected(Integer integer) {
+        int i = integer;
+        selected_choices.remove ( i );
+    }
+
+    @Override
+    public void onNinthAnswerSuccess(NewSymptomAnswerResponse response) {
+        System.out.println ( "New_Symptom_9th_question.onNinthAnswerSuccess" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+        mListener.onNinthQuestion ();
+    }
+
+    @Override
+    public void onNinthAnswerFailure() {
+        System.out.println ( "New_Symptom_9th_question.onNinthAnswerFailure" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+        mListener.onNinthQuestion ();
+
     }
 
     /**

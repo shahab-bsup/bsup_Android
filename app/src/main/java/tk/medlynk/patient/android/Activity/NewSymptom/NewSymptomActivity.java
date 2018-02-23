@@ -6,9 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_10th_question;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_11th_question;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_12th_question;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_10.New_Symptom_10th_question;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_11.New_Symptom_11th_question;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_12.New_Symptom_12th_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_13th_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_14th_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_15th_question;
@@ -24,13 +24,13 @@ import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_23th
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_24th_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_25th_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_2.New_Symptom_2nd_question;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_3rd_question;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_4th_question;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_5th_question;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_6th_question;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_7th_question;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_8th_question;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_9th_question;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_3.New_Symptom_3rd_question;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_4.New_Symptom_4th_question;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_5.New_Symptom_5th_question;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_6.New_Symptom_6th_question;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_7.New_Symptom_7th_question;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_8.New_Symptom_8th_question;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_9.New_Symptom_9th_question;
 import tk.medlynk.patient.android.Constants;
 
 import com.neweraandroid.demo.R;
