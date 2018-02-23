@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context="tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_2nd_question">
+    tools:context="tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_2.New_Symptom_2nd_question">
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -16,7 +16,14 @@
 
             <include android:id="@+id/new_symptom_second_question"
                 layout="@layout/doctor_layout"></include>
-
+            <tk.medlynk.patient.android.CustomViews.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/new_symptom_second_question"
+                android:layout_centerHorizontal="true"
+                android:text="#2"
+                android:textSize="25sp"
+                />
             <LinearLayout
                 android:layout_below="@id/new_symptom_second_question"
                 android:layoutDirection="rtl"
@@ -107,5 +114,12 @@
             android:textColor="@color/white" />
 
     </LinearLayout>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progress_bar"
+        android:visibility="gone"
+        />
 
 </RelativeLayout>

@@ -1,6 +1,7 @@
 package tk.medlynk.patient.android.Activity.Login;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,8 +42,6 @@ public class LoginActivity extends AppCompatActivity implements
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_login );
 
-
-
         if( savedInstanceState == null ){
             System.out.println ("savedInstanceState in LoginActivity is null!");
             submit = findViewById ( R.id.btnLogin );
@@ -55,6 +54,20 @@ public class LoginActivity extends AppCompatActivity implements
             forget_password.setOnClickListener ( this );
             submit.setOnClickListener ( this );
             sharedPreferenceManager = new SharedPreferenceManager ( this );
+        }
+
+        handleIntent();
+
+    }
+
+    private void handleIntent() {
+        Intent appLinkIntent = getIntent ();
+        Uri appLinkData = appLinkIntent.getData ();
+        String data = String.valueOf ( appLinkData );
+        String[] strings = data.split ( "/" );
+        System.out.println (strings.length);
+        for (int i = 0; i < strings.length; i++) {
+            System.out.println (strings[i]);
         }
     }
 
@@ -114,14 +127,14 @@ public class LoginActivity extends AppCompatActivity implements
         manager.setRefreshToken ( response.getRefreshToken () );
 
         startActivity ( new Intent ( LoginActivity.this, SearchActivity.class ) );
-
+        finish ();
     }
 
     @Override
     public void onPrimaryAccessTokenFailure(String errorMessage, Constants.EXCEPTION_TYPE exception_type) {
         if( errorMessage.equals ( "You have to confirm your account." ) ){
             SnackController.getInstance ().
-                    init ( LoginActivity.this, errorMessage, Snackbar.LENGTH_LONG )
+                    init ( LoginActivity.this, errorMessage, Snackbar.LENGTH_INDEFINITE )
                     .setAction ( "Resend", new View.OnClickListener () {
                         @Override
                         public void onClick(View view) {

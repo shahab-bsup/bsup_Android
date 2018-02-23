@@ -1,8 +1,8 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     tools:context="tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_10th_question">
 
@@ -16,7 +16,13 @@
 
             <include android:id="@+id/new_symptom_tenth_question"
                 layout="@layout/doctor_layout"></include>
-
+            <tk.medlynk.patient.android.CustomViews.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="#10"
+                android:textSize="25sp"
+                />
             <LinearLayout
                 android:layout_below="@id/new_symptom_tenth_question"
                 android:layoutDirection="rtl"
@@ -51,6 +57,7 @@
                     android:background="@drawable/custom_edit_text_doctor_id"/>
 
             </LinearLayout>
+
             <tk.medlynk.patient.android.CustomViews.CustomTextView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -62,17 +69,21 @@
                 android:layout_marginTop="10dp"
                 android:layout_centerHorizontal="true" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/btn_have_not_noted"
+            <com.medlynk.shahab.myviewselection.ViewSelection
                 android:layout_below="@id/or"
                 android:layout_centerHorizontal="true"
-                android:layout_margin="20dp"
-                android:text="@string/have_not_noted_any"
-                android:textColor="@color/answers_text_color"
-                android:padding="10dp"
-                android:background="@drawable/answer_not_selected" />
+                android:layout_marginTop="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:button_type="true"
+                app:number_of_views="1"
+                app:selectable="true"
+                app:single_select="true"
+                app:unselected_background="@drawable/answer_not_selected"
+                app:selected_background="@drawable/answer_selected"
+                app:unselected_text_color="@color/white"
+                app:selected_text_color="@color/black"
+                android:id="@+id/viewSelectionChoice" />
 
         </RelativeLayout>
 
@@ -104,6 +115,12 @@
             android:layout_margin="10dp"
             android:text="@string/skip"
             android:textColor="@color/white" />
-
     </LinearLayout>
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progress_bar"
+        android:visibility="gone"
+        android:layout_alignParentRight="true"
+        />
 </RelativeLayout>

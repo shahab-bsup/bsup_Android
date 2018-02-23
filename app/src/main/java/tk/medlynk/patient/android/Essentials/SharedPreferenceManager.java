@@ -103,4 +103,11 @@ public class SharedPreferenceManager{
     public String getCurrentUserInfo(){
         return this.sharedPreferences.getString ( Constants.Current_User_Info, null );
     }
+
+    public void setAppointmentID(int id) {
+        this.sharedPreferences.edit ().putInt ( Constants.APPOINTMENT_ID, id ).apply ();
+    }
+    public int getAppointmentID(){
+        return this.sharedPreferences.getInt ( Constants.APPOINTMENT_ID, 0 );
+    }
 }

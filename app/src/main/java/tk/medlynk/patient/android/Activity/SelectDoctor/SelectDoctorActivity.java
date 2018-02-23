@@ -4,12 +4,17 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import tk.medlynk.patient.android.Constants;
+import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.Model.AppointmentsResponse;
 import tk.medlynk.patient.android.Model.SearchDoctorResponse;
+import tk.medlynk.patient.android.Networking.MedlynkRequests;
+
 import com.neweraandroid.demo.R;
 
-public class SelectDoctorActivity extends AppCompatActivity {
+public class SelectDoctorActivity extends AppCompatActivity implements OnGetAppointmentsListener {
 
     SearchDoctorResponse searchDoctorResponse;
     SelectDoctorViewHolder selectDoctorViewHolder;
@@ -26,5 +31,24 @@ public class SelectDoctorActivity extends AppCompatActivity {
             searchDoctorResponse = (SearchDoctorResponse) intent.getSerializableExtra ( Constants.SelectedDoctor );
             selectDoctorViewHolder.setData(searchDoctorResponse);
         }
+        getAppointments(searchDoctorResponse.getReceivedMedicalInfo ().getId ());
+    }
+
+    private void getAppointments(String id) {
+        MedlynkRequests.getAppointments ( this, this, id );
+    }
+
+    @Override
+    public void onGetAppointmentSuccess(AppointmentsResponse response) {
+        System.out.println ( "SelectDoctorActivity.onGetAppointmentSuccess" );
+        SharedPreferenceManager sharedPreferenceManager = new SharedPreferenceManager ( this );
+        sharedPreferenceManager.setAppointmentID(response.getData ().getId ());
+        selectDoctorViewHolder.setProgressBarVisibilityStatus ( View.GONE );
+    }
+
+    @Override
+    public void onGetAppointmentFailure() {
+        System.out.println ( "SelectDoctorActivity.onGetAppointmentFailure" );
+        selectDoctorViewHolder.setProgressBarVisibilityStatus ( View.GONE );
     }
 }

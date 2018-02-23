@@ -22,6 +22,13 @@
                 <include
                     android:id="@+id/new_symptom_twelve_question"
                     layout="@layout/doctor_layout" />
+                <tk.medlynk.patient.android.CustomViews.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="#12"
+                    android:textSize="25sp"
+                    />
                 <LinearLayout
                     android:layout_marginTop="40dp"
                     android:layout_below="@id/new_symptom_twelve_question"
@@ -55,36 +62,44 @@
 
             </RelativeLayout>
 
+            <LinearLayout
+                android:layoutDirection="rtl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true">
+                <Button
+                    android:layout_weight="1"
+                    android:id="@+id/btnNextQuestion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/next_button_question"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="10dp"
+                    android:text="@string/next"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:layout_weight="1"
+                    android:id="@+id/btnSkipQuestion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_button_main"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="10dp"
+                    android:text="@string/skip"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
 
-    <LinearLayout
-        android:layoutDirection="rtl"
-        android:layout_width="match_parent"
+    <ProgressBar
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-        <Button
-            android:layout_weight="1"
-            android:id="@+id/btnNextQuestion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/next_button_question"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="10dp"
-            android:text="@string/next"
-            android:textColor="@color/white" />
+        android:id="@+id/progress_bar"
+        android:visibility="gone"
+        />
 
-        <Button
-            android:layout_weight="1"
-            android:id="@+id/btnSkipQuestion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/custom_button_main"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="10dp"
-            android:text="@string/skip"
-            android:textColor="@color/white" />
-
-    </LinearLayout>
 </RelativeLayout>

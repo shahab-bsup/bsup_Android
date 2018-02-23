@@ -22,7 +22,13 @@
                 <include
                     android:id="@+id/new_symptom_fourth_question"
                     layout="@layout/doctor_layout" />
-
+                <tk.medlynk.patient.android.CustomViews.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="#4"
+                    android:textSize="25sp"
+                    />
                 <LinearLayout
                     android:layoutDirection="rtl"
                     android:layout_below="@id/new_symptom_fourth_question"
@@ -101,5 +107,12 @@
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progress_bar"
+        android:visibility="gone"
+        />
 
 </RelativeLayout>

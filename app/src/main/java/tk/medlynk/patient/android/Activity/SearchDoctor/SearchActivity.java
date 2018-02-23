@@ -33,7 +33,6 @@ public class SearchActivity extends AppCompatActivity implements OnGetCurrentUse
         SharedPreferenceManager sharedPreferenceManager = new SharedPreferenceManager ( SearchActivity.this );
         currentUserResponse.setCurrentUserInfo ( currentUserResponse.getCurrentUserInfo () );
         sharedPreferenceManager.setCurrentUser ( currentUserResponse.getCurrentUserInfo () );
-
     }
 
     @Override

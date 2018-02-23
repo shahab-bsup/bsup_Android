@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "851299643429",
+    "firebase_url": "https://medlynk-ad817.firebaseio.com",
+    "project_id": "medlynk-ad817",
+    "storage_bucket": "medlynk-ad817.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:851299643429:android:213db28432db9fdc",
+        "android_client_info": {
+          "package_name": "tk.medlynk.patient.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "851299643429-cufga95st39moq3op1mmgp107simk085.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYtVJ37hn6Rb3BbhZ6jAcOXryaFSxQAWo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

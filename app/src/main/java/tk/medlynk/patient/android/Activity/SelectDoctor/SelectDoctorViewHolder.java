@@ -3,6 +3,7 @@ package tk.medlynk.patient.android.Activity.SelectDoctor;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import tk.medlynk.patient.android.Model.SearchDoctorResponse;
@@ -17,6 +18,7 @@ implements View.OnClickListener{
 
     Button selectDoctor;
     TextView doctorName, doctorBio, doctorPhone, doctorId, wrongDrID;
+    ProgressBar progressBar;
     SelectDoctorClickListener clickListener;
     private String doctorID;
 
@@ -31,6 +33,7 @@ implements View.OnClickListener{
 
             }
         } );
+        progressBar = itemView.findViewById ( R.id.progress_bar );
         doctorName = itemView.findViewById ( R.id.doctorName );
         doctorBio= itemView.findViewById ( R.id.doctorBio );
         doctorPhone = itemView.findViewById (R.id.doctorPhone);
@@ -72,6 +75,11 @@ implements View.OnClickListener{
         else{
                 doctorPhone.setText ( "---" );
             }
+
+        }
+
+        public void setProgressBarVisibilityStatus(int status){
+            this.progressBar.setVisibility ( status );
         }
 
 }

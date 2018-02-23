@@ -54,6 +54,8 @@ OnResetPasswordListener
     private void handleIntent() {
         Intent appLinkIntent = getIntent ();
         Uri appLinkData = appLinkIntent.getData ();
+        String data = String.valueOf ( appLinkData );
+        String[] strings = data.split ( "/" );
         reset_token = String.valueOf ( appLinkData ).substring ( 34 );
     }
 
@@ -76,20 +78,23 @@ OnResetPasswordListener
             MedlynkRequests.resetPassword ( ResetPasswordActivity.this, reset_token, manager.getEmail (), password , ResetPasswordActivity.this);
         }
     }
-
+    
     @Override
     public void onResetPasswordSuccess(String message) {
         Toast.makeText ( this, message + "\nLogin Now!", Toast.LENGTH_SHORT ).show ();
         startActivity ( new Intent ( ResetPasswordActivity.this, LoginActivity.class ) );
+        finish ();
     }
 
     @Override
     public void onResetPasswordFailure(String message, Constants.EXCEPTION_TYPE exception_type) {
-
+        System.out.println ( "ResetPasswordActivity.onResetPasswordFailure" );
+        System.out.println ( "message = [" + message + "], exception_type = [" + exception_type + "]" );
     }
 
     @Override
     public void onResetPasswordFailure(Constants.EXCEPTION_TYPE exception_type) {
-
+        System.out.println ( "ResetPasswordActivity.onResetPasswordFailure" );
+        System.out.println ( "exception_type = [" + exception_type + "]" );
     }
 }

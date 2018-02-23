@@ -91,7 +91,24 @@
     <string name="months_ago"><b>Months</b> Ago</string>
     <string name="weeks_ago"><b>Weeks</b> Ago</string>
     <string name="days_ago"><b>Days</b> Ago</string>
+
+    <string name="mild">Mild</string>
+    <string name="moderate">Moderate</string>
+    <string name="Severe">Severe</string>
+
+    <string name="worst_day">Worst Day</string>
+    <string name="best_day">Best Day</string>
+    <string name="under_development"><b><i>Be Careful baby! :)\nUnder Development...</i></b></string>
+    <string name="congratulations"><b><i>Congratulations</i></b></string>
+    <string name="congratulations_text">You have just completed a <b>New Symptom</b> questions!</string>
+    <string name="no">No</string>
+    <string name="yes_type_here">(Yes) type here</string>
+    <string name="go_to_question_set">Go To Question Set</string>
     <string-array name="question_3_choices">
+        <item>Today</item>
+        <item>I don't know</item>
+    </string-array>
+    <string-array name="question_4_choices">
         <item>Constantly</item>
         <item>Everyday</item>
         <item>Almost Every day</item>
@@ -103,20 +120,9 @@
         <item>A few times ever</item>
         <item>Varies quite a bit</item>
     </string-array>
-
-    <string name="mild">Mild</string>
-    <string name="moderate">Moderate</string>
-    <string name="Severe">Severe</string>
-
-    <string name="worst_day">Worst Day</string>
-    <string name="best_day">Best Day</string>
-    <string name="have_not_noted_any">Have not noted any</string>
-    <string name="under_development"><b><i>Be Careful baby! :)\nUnder Development...</i></b></string>
-    <string name="congratulations"><b><i>Congratulations</i></b></string>
-    <string name="congratulations_text">You have just completed a <b>New Symptom</b> questions!</string>
-    <string name="no">No</string>
-    <string name="yes_type_here">(Yes) type here</string>
-    <string name="go_to_question_set">Go To Question Set</string>
+    <string name="question_10_choice">Have not noted any</string>
+    <string name="every">Every</string>
+    <string name="years">years</string>
     <string-array name="question_6_7_choices">
         <item>Can not get out of bed</item>
         <item>Can barely get of bed</item>
@@ -179,6 +185,16 @@
         <item>Yes</item>
         <item>No</item>
     </string-array>
+    <string-array name="question_19_before_years_choices">
+        <item>Daily</item>
+        <item>Weekly</item>
+        <item>Monthly</item>
+        <item>Yearly</item>
+    </string-array>
+    <string-array name="question_19_after_years_choices">
+        <item>Has occurred a few times or less ever</item>
+        <item>Other</item>
+    </string-array>
     <string-array name="question_21_choices">
         <item>Just need reassurance that nothing else needs to be done </item>
         <item>Problems seems to be worsening</item>
@@ -187,5 +203,7 @@
         <item>I just can't take it anymore</item>
         <item>Other</item>
     </string-array>
+    <string name="question_14">None</string>
+    <string name="none">None</string>
 
 </resources>

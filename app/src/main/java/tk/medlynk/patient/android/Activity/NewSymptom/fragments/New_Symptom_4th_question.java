@@ -92,7 +92,7 @@ public class New_Symptom_4th_question extends Fragment implements
         for (int i = 0; i < choiceNumbers.getNumberOfViews (); i++) {
             choiceNumbers.setTextToButtons ( String.valueOf ( i + 1 ), i );
         }
-        answerChoices = getActivity ().getResources ().getStringArray ( R.array.question_3_choices );
+        answerChoices = getActivity ().getResources ().getStringArray ( R.array.question_4_choices );
         for (int i = 0; i < choices.getNumberOfViews (); i++) {
             choices.setTextToButtons ( answerChoices[i], i );
         }

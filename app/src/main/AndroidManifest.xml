@@ -16,24 +16,31 @@
         <meta-data
             android:name="asset_statements"
             android:resource="@string/asset_statements" />
+
         <activity
             android:name="tk.medlynk.patient.android.Activity.Splash.SplashActivity"
             android:noHistory="true"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
         <activity
             android:name="tk.medlynk.patient.android.Activity.Login.LoginActivity"
-            android:noHistory="true"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
+            <intent-filter android:autoVerify="true">
                 <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+                    <action android:name="android.intent.action.VIEW" />
+                    <category android:name="android.intent.category.DEFAULT" />
+                    <category android:name="android.intent.category.BROWSABLE" />
+                    <data
+                        android:host="medlynk.tk"
+                        android:pathPrefix="/confirmation/confirm/"
+                        android:scheme="https"/>
+                </intent-filter>
         </activity>
         <activity
             android:name="tk.medlynk.patient.android.Activity.SendResetPasswordRequestActivity.SendResetPasswordRequestActivity"
@@ -43,10 +50,8 @@
             android:screenOrientation="portrait">
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
                 <data
                     android:host="medlynk.tk"
                     android:pathPrefix="/password/reset/"
@@ -55,7 +60,6 @@
         </activity>
         <activity
             android:name="tk.medlynk.patient.android.Activity.SignUp.SignUpActivity"
-            android:noHistory="true"
             android:screenOrientation="portrait" />
         <activity
             android:name="tk.medlynk.patient.android.Activity.Welcome.WelcomeActivity"
@@ -68,14 +72,15 @@
         <activity android:name="tk.medlynk.patient.android.Activity.NewSymptom.NewSymptomActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name="tk.medlynk.patient.android.Activity.Start_a_Refill.Start_A_New_RefillActivity" />
         <activity android:name="tk.medlynk.patient.android.Activity.Refill.Refill_A_Medication_Activity" />
-        <activity android:name="tk.medlynk.patient.android.Activity.NoDoctorIdPage.NoDoctorIdActivity"
-            android:noHistory="true"></activity>
+        <activity
+            android:name="tk.medlynk.patient.android.Activity.NoDoctorIdPage.NoDoctorIdActivity"
+            />
+        <activity android:name="tk.medlynk.patient.android.Activity.Confirmation.ConfirmationActivity"></activity>
     </application>
 
 </manifest>

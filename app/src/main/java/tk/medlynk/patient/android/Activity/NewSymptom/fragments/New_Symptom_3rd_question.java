@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
 
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.ViewHolders.New_Symptom_Third_Question_View_Holder;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,7 +21,7 @@ import tk.medlynk.patient.android.Activity.NewSymptom.fragments.ViewHolders.New_
  * Use the {@link New_Symptom_3rd_question#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class New_Symptom_3rd_question extends Fragment implements View.OnClickListener {
+public class New_Symptom_3rd_question extends Fragment implements View.OnClickListener, ViewSelection.OnSingleItemSelectedListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -38,6 +37,8 @@ public class New_Symptom_3rd_question extends Fragment implements View.OnClickLi
     private View question_view;
     private TextView question;
     private Button next, skip;
+    private ViewSelection choices;
+    private String[] string_choices;
 
     public New_Symptom_3rd_question() {
         // Required empty public constructor
@@ -82,7 +83,12 @@ public class New_Symptom_3rd_question extends Fragment implements View.OnClickLi
         next.setOnClickListener ( this );
         skip = view.findViewById ( R.id.btnSkipQuestion );
         skip.setOnClickListener ( this );
-        New_Symptom_Third_Question_View_Holder viewHolder = new New_Symptom_Third_Question_View_Holder ( view );
+        choices = view.findViewById ( R.id.viewSelectionChoices );
+        choices.setOnSingleItemSelectedListener ( this );
+        string_choices = getResources ().getStringArray ( R.array.question_3_choices );
+        for (int i = 0; i < choices.getNumberOfViews (); i++) {
+            choices.setTextToButtons ( string_choices[i], i );
+        }
         return view;
     }
 
@@ -116,6 +122,11 @@ public class New_Symptom_3rd_question extends Fragment implements View.OnClickLi
                 break;
             }
         }
+    }
+
+    @Override
+    public void onSingleItemSelected(int i) {
+        System.out.println (string_choices[i]);
     }
 
     /**

@@ -23,7 +23,14 @@
 
                 <include android:id="@+id/new_symptom_third_question"
                     layout="@layout/doctor_layout"></include>
-
+                <tk.medlynk.patient.android.CustomViews.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/new_symptom_third_question"
+                    android:layout_centerHorizontal="true"
+                    android:text="#3"
+                    android:textSize="25sp"
+                    />
                 <LinearLayout
                     android:layout_below="@id/new_symptom_third_question"
                     android:layoutDirection="rtl"
@@ -57,9 +64,15 @@
                         <com.medlynk.shahab.myviewselection.ViewSelection
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            app:number_of_views="2"
+                            app:single_select="true"
+                            app:selectable="true"
                             app:button_type="true"
-                            app:number_of_views="2">
-                        </com.medlynk.shahab.myviewselection.ViewSelection>
+                            app:unselected_background="@drawable/answer_not_selected"
+                            app:selected_background="@drawable/answer_selected"
+                            app:unselected_text_color="@color/white"
+                            app:selected_text_color="@color/black"
+                            android:id="@+id/viewSelectionChoices" />
 
                     </LinearLayout>
 
@@ -99,5 +112,12 @@
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progress_bar"
+        android:visibility="gone"
+        />
 
 </RelativeLayout>

@@ -16,14 +16,14 @@ import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_16th
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_17th_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_18th_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_19th_question;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_1th_question;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_20th_question;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_1.New_Symptom_1th_question;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_20.New_Symptom_20th_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_21th_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_22th_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_23th_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_24th_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_25th_question;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_2nd_question;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_2.New_Symptom_2nd_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_3rd_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_4th_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_5th_question;
@@ -31,6 +31,8 @@ import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_6th_
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_7th_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_8th_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_9th_question;
+import tk.medlynk.patient.android.Constants;
+
 import com.neweraandroid.demo.R;
 
 public class NewSymptomActivity extends AppCompatActivity implements
@@ -69,6 +71,7 @@ public class NewSymptomActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_new_symptom );
+        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_SET, "new_symptom" );
         toolbar_view = findViewById ( R.id.new_symptom_toolbar_layout );
         backButton = toolbar_view.findViewById ( R.id.imgBackButton );
         backButton.setOnClickListener ( new View.OnClickListener () {

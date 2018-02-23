@@ -4,12 +4,21 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    tools:context="tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_20th_question">
+    tools:context="tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_20.New_Symptom_20th_question">
 
-    <include android:id="@+id/new_symptom_twelve_question"
-        layout="@layout/doctor_layout"></include>
+    <include
+        android:id="@+id/new_symptom_twelve_question"
+        layout="@layout/doctor_layout" />
 
+    <tk.medlynk.patient.android.CustomViews.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="#20"
+        android:textSize="25sp"
+        />
     <com.airbnb.lottie.LottieAnimationView
+        android:visibility="gone"
         android:id="@+id/lottie"
         android:layout_width="200dp"
         android:layout_height="200dp"
@@ -20,6 +29,7 @@
         app:lottie_fileName="warning.json"
         />
     <tk.medlynk.patient.android.CustomViews.CustomTextView
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/under_development"
@@ -61,4 +71,10 @@
             android:textColor="@color/white" />
 
     </LinearLayout>
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progress_bar"
+        android:visibility="gone"
+        />
 </RelativeLayout>

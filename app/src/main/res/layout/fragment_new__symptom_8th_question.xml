@@ -23,6 +23,13 @@
                 <include
                     android:id="@+id/new_symptom_eighth_question"
                     layout="@layout/doctor_layout" />
+                <tk.medlynk.patient.android.CustomViews.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="#8"
+                    android:textSize="25sp"
+                    />
                 <LinearLayout
                     android:layout_marginTop="40dp"
                     android:layout_below="@id/new_symptom_eighth_question"
@@ -46,7 +53,7 @@
                         app:button_type="true"
                         app:number_of_views="4"
                         app:selectable="true"
-                        app:single_select="true"
+                        app:single_select="false"
                         app:unselected_background="@drawable/answer_not_selected"
                         app:selected_background="@drawable/answer_selected"
                         app:unselected_text_color="@color/white"
@@ -88,5 +95,12 @@
             android:textColor="@color/white" />
 
     </LinearLayout>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progress_bar"
+        android:visibility="gone"
+        />
 
 </RelativeLayout>

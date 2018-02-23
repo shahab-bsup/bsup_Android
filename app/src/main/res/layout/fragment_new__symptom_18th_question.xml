@@ -21,6 +21,13 @@
                 android:layout_height="wrap_content">
                 <include android:id="@+id/new_symptom_eighteen_question"
                     layout="@layout/doctor_layout"></include>
+                <tk.medlynk.patient.android.CustomViews.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="#18"
+                    android:textSize="25sp"
+                    />
                 <LinearLayout
                     android:layout_marginTop="40dp"
                     android:layout_below="@id/new_symptom_eighteen_question"
@@ -84,6 +91,13 @@
             android:layout_margin="10dp"
             android:text="@string/skip"
             android:textColor="@color/white" />
-
     </LinearLayout>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progress_bar"
+        android:visibility="gone"
+        />
+
 </RelativeLayout>

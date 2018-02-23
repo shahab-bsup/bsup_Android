@@ -5,9 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.neweraandroid.demo.tk.neweraandroid.demo.Activity.Login.LoginActivity">
-
-
+        tools:context="tk.medlynk.patient.android.Activity.Login.LoginActivity">
 
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="match_parent"
@@ -99,4 +97,11 @@
             android:layout_marginLeft="@dimen/login_margins_horizontally"
             android:textColor="@color/colorPrimary" />
 
-    </RelativeLayout>
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progress_bar"
+        android:visibility="gone"
+        />
+
+</RelativeLayout>

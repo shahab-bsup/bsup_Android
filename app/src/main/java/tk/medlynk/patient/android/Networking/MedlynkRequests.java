@@ -6,9 +6,11 @@ import android.view.View;
 import com.google.gson.Gson;
 import tk.medlynk.patient.android.Activity.Login.OnGetCurrentUserInfoListener;
 import tk.medlynk.patient.android.Activity.Login.OnResendConfirmationListener;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_1.OnFirstAnswerListener;
 import tk.medlynk.patient.android.Activity.NoDoctorIdPage.OnNoDoctorIDPreferencesListener;
 import tk.medlynk.patient.android.Activity.ResetPassword.OnResetPasswordListener;
 import tk.medlynk.patient.android.Activity.SearchDoctor.OnSearchDoctorListener;
+import tk.medlynk.patient.android.Activity.SelectDoctor.OnGetAppointmentsListener;
 import tk.medlynk.patient.android.Activity.SendResetPasswordRequestActivity.OnSendResetPasswordRequestListener;
 import tk.medlynk.patient.android.Activity.SignUp.OnSignUpListener;
 import tk.medlynk.patient.android.Activity.Splash.InitialTokenListener;
@@ -16,11 +18,15 @@ import tk.medlynk.patient.android.Activity.Login.OnPrimaryAccessTokenListener;
 import tk.medlynk.patient.android.Activity.Splash.RefreshTokenListener;
 import tk.medlynk.patient.android.Constants;
 import tk.medlynk.patient.android.CustomViews.SnackController;
+import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
 import tk.medlynk.patient.android.Essentials.Utils;
+import tk.medlynk.patient.android.Model.Answer;
+import tk.medlynk.patient.android.Model.AppointmentsResponse;
 import tk.medlynk.patient.android.Model.CurrentUserResponse;
 import tk.medlynk.patient.android.Model.Errors;
 import tk.medlynk.patient.android.Model.InitialTokenResponse;
 import tk.medlynk.patient.android.Model.InitiateResponse;
+import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
 import tk.medlynk.patient.android.Model.PrimaryTokenErrorResponse;
 import tk.medlynk.patient.android.Model.PrimaryTokenResponse;
 import tk.medlynk.patient.android.Model.RenewTokenResponse;
@@ -331,6 +337,72 @@ public class MedlynkRequests {
                 }else{
                     listener.onGetCurrentUserInfoFailure ( Constants.EXCEPTION_TYPE.RETROFIT_EXCEPTION );
                 }
+            }
+        } );
+    }
+
+    public static void getAppointments(Context context, final OnGetAppointmentsListener listener, String doctorId){
+        HashMap<String, String> body = new HashMap<> (  );
+        body.put ( Constants.PROVIDER_ID, doctorId );
+        Call<AppointmentsResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
+                .getAppointments ( body );
+        call.enqueue ( new Callback<AppointmentsResponse> () {
+            @Override
+            public void onResponse(Call<AppointmentsResponse> call, Response<AppointmentsResponse> response) {
+                if( response.isSuccessful () ){
+                    listener.onGetAppointmentSuccess (response.body ());
+                }else{
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AppointmentsResponse> call, Throwable t) {
+
+            }
+        } );
+    }
+
+    public static void newSymptomFirstQuestionAnswer(Context context, final OnFirstAnswerListener listener, int appointmentID, Answer answer){
+        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "1" );
+        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
+        Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
+                .newSymptomAnswer ( appointmentID, Constants.NEW_SYMPTOM_ANSWER_BODY );
+        call.enqueue ( new Callback<NewSymptomAnswerResponse> () {
+            @Override
+            public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
+                if( response.isSuccessful () ){
+                    listener.onFirstAnswerSuccess ( response.body () );
+                }else{
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
+                listener.onFirstAnswerFailure ();
+            }
+        } );
+    }
+
+    public static void newSymptomSecondQuestionAnswer(Context context, int appointmentID, Answer answer){
+        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "2" );
+        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
+        Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
+                .newSymptomAnswer ( appointmentID, Constants.NEW_SYMPTOM_ANSWER_BODY );
+        call.enqueue ( new Callback<NewSymptomAnswerResponse> () {
+            @Override
+            public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
+                if ( response.isSuccessful () ){
+
+                }else{
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
+
             }
         } );
     }

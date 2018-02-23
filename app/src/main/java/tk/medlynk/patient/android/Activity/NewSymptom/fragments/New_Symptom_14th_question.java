@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
 
 /**
@@ -19,11 +20,12 @@ import com.neweraandroid.demo.R;
  * Use the {@link New_Symptom_14th_question#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class New_Symptom_14th_question extends Fragment implements View.OnClickListener {
+public class New_Symptom_14th_question extends Fragment implements View.OnClickListener, ViewSelection.OnSingleItemSelectedListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
     public static final String TAG = New_Symptom_15th_question.class.getSimpleName ();
 
     // TODO: Rename and change types of parameters
@@ -35,6 +37,7 @@ public class New_Symptom_14th_question extends Fragment implements View.OnClickL
     private View question_view;
     private Button next, skip;
     private TextView question;
+    private ViewSelection choice;
 
     public New_Symptom_14th_question() {
         // Required empty public constructor
@@ -81,6 +84,10 @@ public class New_Symptom_14th_question extends Fragment implements View.OnClickL
         skip = view.findViewById ( R.id.btnSkipQuestion );
         skip.setOnClickListener ( this );
 
+        choice = view.findViewById ( R.id.viewSelectionChoices );
+        choice.setTextToButtons ( getActivity ().getResources ().getString ( R.string.question_14 ), 0 );
+        choice.setOnSingleItemSelectedListener ( this );
+
         return view;
     }
 
@@ -115,6 +122,11 @@ public class New_Symptom_14th_question extends Fragment implements View.OnClickL
                 break;
             }
         }
+    }
+
+    @Override
+    public void onSingleItemSelected(int i) {
+        System.out.println (choice.getButtons ().get ( 0 ).getText ().toString ());
     }
 
     /**
