@@ -1,4 +1,4 @@
-package tk.medlynk.patient.android.Activity.NewSymptom.fragments;
+package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_17;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,9 +8,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.Model.Answer;
+import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
+import tk.medlynk.patient.android.Networking.MedlynkRequests;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,7 +29,7 @@ import com.neweraandroid.demo.R;
  * Use the {@link New_Symptom_17th_question#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class New_Symptom_17th_question extends Fragment implements View.OnClickListener, ViewSelection.OnSingleItemSelectedListener {
+public class New_Symptom_17th_question extends Fragment implements View.OnClickListener, ViewSelection.OnSingleItemSelectedListener, ViewSelection.OnMultiItemSelectedListener, OnSeventeenAnswerListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER...
     private static final String ARG_PARAM1 = "param1";
@@ -38,6 +47,8 @@ public class New_Symptom_17th_question extends Fragment implements View.OnClickL
     private TextView question;
     private ViewSelection choices;
     private String[] string_choices;
+    private List<Answer> selected_choices = new ArrayList<> (  );
+    private New_Symptom_17th_question_ViewHolder viewHolder;
 
     public New_Symptom_17th_question() {
         // Required empty public constructor
@@ -75,7 +86,7 @@ public class New_Symptom_17th_question extends Fragment implements View.OnClickL
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate ( R.layout.fragment_new__symptom_17th_question, container, false );
-
+        viewHolder = new New_Symptom_17th_question_ViewHolder ( view );
         question_view = view.findViewById ( R.id.new_symptom_seventeen_question );
         question = question_view.findViewById ( R.id.txtQuestion );
         question.setText ( R.string.new_symptom_seventeen_question );
@@ -84,7 +95,7 @@ public class New_Symptom_17th_question extends Fragment implements View.OnClickL
         skip = view.findViewById ( R.id.btnSkipQuestion );
         skip.setOnClickListener ( this );
         choices = view.findViewById ( R.id.viewSelectionChoices );
-        choices.setOnSingleItemSelectedListener ( this );
+        choices.setOnMultiItemSelectedListener ( this );
         string_choices = getActivity ().getResources ().getStringArray ( R.array.question_17_choices );
         for (int i = 0; i < choices.getNumberOfViews (); i++) {
             choices.setTextToButtons ( string_choices[i], i );
@@ -113,7 +124,16 @@ public class New_Symptom_17th_question extends Fragment implements View.OnClickL
     public void onClick(View view) {
         switch (view.getId ()){
             case R.id.btnNextQuestion:{
-                mListener.onSeventeenQuestion ();
+                if( selected_choices.size () == 0 ){
+                    Toast.makeText ( getActivity (), "You can skip this question!", Toast.LENGTH_SHORT ).show ();
+                }else {
+                    viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
+                    SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
+                    MedlynkRequests.newSymptomSeventeenQuestionAnswer ( getActivity (),
+                            New_Symptom_17th_question.this,
+                            manager.getAppointmentID (),
+                            selected_choices);
+                }
 
                 break;
             }
@@ -128,6 +148,71 @@ public class New_Symptom_17th_question extends Fragment implements View.OnClickL
     @Override
     public void onSingleItemSelected(int i) {
         System.out.println ( "i = [" + i + "]: " + string_choices[i] );
+    }
+
+    @Override
+    public void onMultiItemSelected(Integer integer) {
+        System.out.println ( "New_Symptom_17th_question.onMultiItemSelected" );
+        Answer answer = new Answer ();
+        switch (integer){
+            case 0:{
+                answer.setChoice ( "a" );
+                break;
+            }
+            case 1:{
+                answer.setChoice ( "b" );
+
+                break;
+            }
+            case 2:{
+                answer.setChoice ( "c" );
+
+                break;
+            }
+            case 3:{
+                answer.setChoice ( "d" );
+
+                break;
+            }
+            case 4:{
+                answer.setChoice ( "e" );
+
+                break;
+            }
+            case 5:{
+                answer.setChoice ( "f" );
+
+                break;
+            }
+            case 6:{
+                answer.setChoice ( "g" );
+                answer.setReply ( "nothing but everything :)" );
+
+                break;
+            }
+        }
+        selected_choices.add ( answer );
+    }
+
+    @Override
+    public void onMultiItemDeselected(Integer integer) {
+        System.out.println ( "New_Symptom_17th_question.onMultiItemDeselected" );
+        int i = integer;
+        selected_choices.remove ( i );
+    }
+
+    @Override
+    public void onSeventeenAnswerSuccess(NewSymptomAnswerResponse response) {
+        System.out.println ( "New_Symptom_17th_question.onSeventeenAnswerSuccess" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+        mListener.onSeventeenQuestion ();
+    }
+
+    @Override
+    public void onSeventeenAnswerFailure() {
+        System.out.println ( "New_Symptom_17th_question.onSeventeenAnswerFailure" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+        mListener.onSeventeenQuestion ();
     }
 
     /**

@@ -1,16 +1,23 @@
-package tk.medlynk.patient.android.Activity.NewSymptom.fragments;
+package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_15;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
+
+import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.Model.Answer;
+import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
+import tk.medlynk.patient.android.Networking.MedlynkRequests;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,7 +28,7 @@ import com.neweraandroid.demo.R;
  * create an instance of this fragment.
  */
 public class New_Symptom_15th_question extends Fragment implements
-        View.OnClickListener, ViewSelection.OnSingleItemSelectedListener {
+        View.OnClickListener, ViewSelection.OnSingleItemSelectedListener, OnFifteenAnswerListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER...
     private static final String ARG_PARAM1 = "param1";
@@ -39,6 +46,8 @@ public class New_Symptom_15th_question extends Fragment implements
     private TextView question;
 
     private ViewSelection choice;
+    private New_Symptom_15th_question_ViewHolder viewHolder;
+    private  int selected_choice = -1;
 
     public New_Symptom_15th_question() {
         // Required empty public constructor
@@ -78,6 +87,7 @@ public class New_Symptom_15th_question extends Fragment implements
         View view = inflater.inflate ( R.layout.fragment_new__symptom_15th_question, container, false );
 
         question_view = view.findViewById ( R.id.new_symptom_fifteen_question );
+        viewHolder = new New_Symptom_15th_question_ViewHolder ( view );
         question = question_view.findViewById ( R.id.txtQuestion );
         question.setText ( R.string.new_symptom_fifteen_question );
         next = view.findViewById ( R.id.btnNextQuestion );
@@ -113,7 +123,29 @@ public class New_Symptom_15th_question extends Fragment implements
     public void onClick(View view) {
         switch (view.getId ()){
             case R.id.btnNextQuestion:{
-                mListener.onFifteenQuestion ();
+                String answerText = viewHolder.getAnswerText ();
+                if( selected_choice == -1 && TextUtils.isEmpty ( answerText )){
+                    Toast.makeText ( getActivity (), "You can skip this question!", Toast.LENGTH_SHORT ).show ();
+                }else if( selected_choice  == 0 ) {
+                    viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
+                    Answer answer = new Answer ();
+                    SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
+                    answer.setChoice ( "b" );
+                    MedlynkRequests.newSymptomFifteenQuestionAnswer ( getActivity (),
+                            New_Symptom_15th_question.this,
+                            manager.getAppointmentID (),
+                            answer);
+                } else{
+                    viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
+                    Answer answer = new Answer ();
+                    SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
+                    answer.setChoice ( "a" );
+                    answer.setReply ( answerText );
+                    MedlynkRequests.newSymptomFifteenQuestionAnswer ( getActivity (),
+                            New_Symptom_15th_question.this,
+                            manager.getAppointmentID (),
+                            answer);
+                }
 
                 break;
             }
@@ -128,6 +160,21 @@ public class New_Symptom_15th_question extends Fragment implements
     @Override
     public void onSingleItemSelected(int i) {
         System.out.println (choice.getButtons ().get ( 0 ).getText ().toString ());
+        selected_choice = i;
+        viewHolder.setAnswerEmpty ();
+    }
+
+    @Override
+    public void onFifteenAnswerResponse(NewSymptomAnswerResponse response) {
+        System.out.println ( "New_Symptom_15th_question.onFifteenAnswerResponse" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+        mListener.onFifteenQuestion ();
+    }
+
+    @Override
+    public void onFifteenAnswerFailure() {
+        System.out.println ( "New_Symptom_15th_question.onFifteenAnswerFailure" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
     }
 
     /**

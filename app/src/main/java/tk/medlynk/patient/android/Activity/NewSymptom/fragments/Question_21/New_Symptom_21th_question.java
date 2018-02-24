@@ -1,7 +1,6 @@
-package tk.medlynk.patient.android.Activity.NewSymptom.fragments;
+package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_21;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,26 +12,28 @@ import android.widget.TextView;
 import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
 
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_22.New_Symptom_22th_question;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link OnNewSymptomThirteenQuestionListener} interface
+ * {@link New_Symptom_21th_question.OnNewSymptomTwenty1QuestionListener} interface
  * to handle interaction events.
- * Use the {@link New_Symptom_13th_question#newInstance} factory method to
+ * Use the {@link New_Symptom_21th_question#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class New_Symptom_13th_question extends Fragment implements View.OnClickListener, ViewSelection.OnSingleItemSelectedListener {
+public class New_Symptom_21th_question extends Fragment implements View.OnClickListener, ViewSelection.OnSingleItemSelectedListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    public final static String TAG = New_Symptom_13th_question.class.getSimpleName ();
+    public static final String TAG = New_Symptom_22th_question.class.getSimpleName ();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-    private OnNewSymptomThirteenQuestionListener mListener;
+    private OnNewSymptomTwenty1QuestionListener mListener;
 
     private View question_view;
     private Button next, skip;
@@ -40,8 +41,8 @@ public class New_Symptom_13th_question extends Fragment implements View.OnClickL
     private ViewSelection choices;
     private String[] string_choices;
 
-    public New_Symptom_13th_question() {
-        // Required empty public constructor...
+    public New_Symptom_21th_question() {
+        // Required empty public constructor
     }
 
     /**
@@ -50,11 +51,11 @@ public class New_Symptom_13th_question extends Fragment implements View.OnClickL
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment New_Symptom_13th_question.
+     * @return A new instance of fragment New_Symptom_21th_question.
      */
     // TODO: Rename and change types and number of parameters
-    public static New_Symptom_13th_question newInstance(String param1, String param2) {
-        New_Symptom_13th_question fragment = new New_Symptom_13th_question ();
+    public static New_Symptom_21th_question newInstance(String param1, String param2) {
+        New_Symptom_21th_question fragment = new New_Symptom_21th_question ();
         Bundle args = new Bundle ();
         args.putString ( ARG_PARAM1, param1 );
         args.putString ( ARG_PARAM2, param2 );
@@ -75,39 +76,33 @@ public class New_Symptom_13th_question extends Fragment implements View.OnClickL
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate ( R.layout.fragment_new__symptom_13th_question, container, false );
+        View view = inflater.inflate ( R.layout.fragment_new__symptom_21th_question, container, false );
 
-        question_view = view.findViewById ( R.id.new_symptom_thirteen_question );
+        question_view = view.findViewById ( R.id.new_symptom_twenty1_question );
         question = question_view.findViewById ( R.id.txtQuestion );
-        question.setText ( R.string.new_symptom_thirteen_question );
+        question.setText ( R.string.new_symptom_twenty1_question );
         next = view.findViewById ( R.id.btnNextQuestion );
         next.setOnClickListener ( this );
         skip = view.findViewById ( R.id.btnSkipQuestion );
         skip.setOnClickListener ( this );
         choices = view.findViewById ( R.id.viewSelectionChoices );
         choices.setOnSingleItemSelectedListener ( this );
-        string_choices = getActivity ().getResources ().getStringArray ( R.array.question_13_22_choices );
+        string_choices = getActivity ().getResources ().getStringArray ( R.array.question_21_choices );
         for (int i = 0; i < choices.getNumberOfViews (); i++) {
             choices.setTextToButtons ( string_choices[i], i );
         }
-        return view;
-    }
+        return  view;
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onThirteenQuestion ();
-        }
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach ( context );
-        if (context instanceof OnNewSymptomThirteenQuestionListener) {
-            mListener = (OnNewSymptomThirteenQuestionListener) context;
+        if (context instanceof OnNewSymptomTwenty1QuestionListener) {
+            mListener = (OnNewSymptomTwenty1QuestionListener) context;
         } else {
             throw new RuntimeException ( context.toString ()
-                    + " must implement OnNewSymptomThirteenQuestionListener" );
+                    + " must implement OnNewSymptomTwenty1QuestionListener" );
         }
     }
 
@@ -121,12 +116,12 @@ public class New_Symptom_13th_question extends Fragment implements View.OnClickL
     public void onClick(View view) {
         switch (view.getId ()){
             case R.id.btnNextQuestion:{
-                mListener.onThirteenQuestion ();
+                mListener.onTwenty1Question ();
 
                 break;
             }
             case R.id.btnSkipQuestion:{
-                mListener.onThirteenQuestion ();
+                mListener.onTwenty1Question ();
 
                 break;
             }
@@ -148,8 +143,8 @@ public class New_Symptom_13th_question extends Fragment implements View.OnClickL
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnNewSymptomThirteenQuestionListener {
+    public interface OnNewSymptomTwenty1QuestionListener {
         // TODO: Update argument type and name
-        void onThirteenQuestion();
+        void onTwenty1Question();
     }
 }

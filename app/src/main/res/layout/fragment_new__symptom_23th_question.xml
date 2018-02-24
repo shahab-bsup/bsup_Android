@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    tools:context="tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_23th_question">
+    tools:context="tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_23.New_Symptom_23th_question">
 
     <include
         android:id="@+id/new_symptom_twenty3_question"
