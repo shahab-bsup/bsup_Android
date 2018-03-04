@@ -145,12 +145,12 @@ public class New_Symptom_8th_question extends Fragment implements
     }
 
     @Override
-    public void onSingleItemSelected(int i) {
+    public void onSingleItemSelected(View view, int i) {
         System.out.println ( "i = [" + i + "]: " + string_choices[i] );
     }
 
     @Override
-    public void onMultiItemSelected(Integer integer) {
+    public void onMultiItemSelected(View view, Integer integer) {
         Answer answer = new Answer ();
         switch (integer){
             case 0:{
@@ -177,7 +177,7 @@ public class New_Symptom_8th_question extends Fragment implements
     }
 
     @Override
-    public void onMultiItemDeselected(Integer integer) {
+    public void onMultiItemDeselected(View view, Integer integer) {
         int i = integer;
         selected_choices.remove ( i );
     }

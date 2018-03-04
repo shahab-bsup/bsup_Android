@@ -81,55 +81,64 @@ public class NewSymptomActivity extends AppCompatActivity implements
             }
         } );
         fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
         fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_1th_question (), New_Symptom_1th_question.TAG ).commit ();
     }
+
 
     @Override
     public void onFirstQuestion() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.replace ( R.id.fragment_container, new New_Symptom_2nd_question (), New_Symptom_2nd_question.TAG ).commit ();
+        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_2nd_question (), New_Symptom_2nd_question.TAG ).commit ();
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
         fragmentTransaction.addToBackStack ( New_Symptom_2nd_question.TAG );
     }
 
     @Override
     public void onSecondQuestion() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.replace ( R.id.fragment_container, new New_Symptom_3rd_question (), New_Symptom_3rd_question.TAG ).commit ();
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
+        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_3rd_question (), New_Symptom_3rd_question.TAG ).commit ();
         fragmentTransaction.addToBackStack ( New_Symptom_3rd_question.TAG );
     }
 
     @Override
     public void onThirdQuestion() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.replace ( R.id.fragment_container, new New_Symptom_4th_question (), New_Symptom_4th_question.TAG ).commit ();
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
+        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_4th_question (), New_Symptom_4th_question.TAG ).commit ();
         fragmentTransaction.addToBackStack ( New_Symptom_4th_question.TAG );
     }
 
     @Override
     public void onFourthQuestion() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.replace ( R.id.fragment_container, new New_Symptom_5th_question (), New_Symptom_5th_question.TAG ).commit ();
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
+        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_5th_question (), New_Symptom_5th_question.TAG ).commit ();
         fragmentTransaction.addToBackStack ( New_Symptom_5th_question.TAG );
     }
 
     @Override
     public void onFifthQuestion() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.replace ( R.id.fragment_container, new New_Symptom_6th_question (), New_Symptom_6th_question.TAG ).commit ();
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
+        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_6th_question (), New_Symptom_6th_question.TAG ).commit ();
         fragmentTransaction.addToBackStack ( New_Symptom_6th_question.TAG );
     }
 
     @Override
     public void onSixthQuestion() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.replace ( R.id.fragment_container, new New_Symptom_7th_question (), New_Symptom_7th_question.TAG ).commit ();
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
+        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_7th_question (), New_Symptom_7th_question.TAG ).commit ();
         fragmentTransaction.addToBackStack ( New_Symptom_7th_question.TAG );
     }
 
     @Override
     public void onTenthQuestion() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.replace ( R.id.fragment_container, new New_Symptom_11th_question (), New_Symptom_11th_question.TAG ).commit ();
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
+        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_11th_question (), New_Symptom_11th_question.TAG ).commit ();
         fragmentTransaction.addToBackStack ( New_Symptom_11th_question.TAG );
     }
 
@@ -141,118 +150,135 @@ public class NewSymptomActivity extends AppCompatActivity implements
     @Override
     public void onNinthQuestion() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.replace ( R.id.fragment_container, new New_Symptom_10th_question (), New_Symptom_10th_question.TAG ).commit ();
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
+        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_10th_question (), New_Symptom_10th_question.TAG ).commit ();
         fragmentTransaction.addToBackStack ( New_Symptom_10th_question.TAG );
     }
 
     @Override
     public void onEleventhQuestion() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.replace ( R.id.fragment_container, new New_Symptom_12th_question (), New_Symptom_12th_question.TAG ).commit ();
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
+        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_12th_question (), New_Symptom_12th_question.TAG ).commit ();
         fragmentTransaction.addToBackStack ( New_Symptom_12th_question.TAG );
     }
 
     @Override
     public void onEightQuestion() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.replace ( R.id.fragment_container, new New_Symptom_9th_question (), New_Symptom_9th_question.TAG ).commit ();
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
+        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_9th_question (), New_Symptom_9th_question.TAG ).commit ();
         fragmentTransaction.addToBackStack ( New_Symptom_9th_question.TAG );
     }
 
     @Override
     public void onTwentyQuestion() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.replace ( R.id.fragment_container, new New_Symptom_21th_question (), New_Symptom_21th_question.TAG ).commit ();
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
+        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_21th_question (), New_Symptom_21th_question.TAG ).commit ();
         fragmentTransaction.addToBackStack ( New_Symptom_21th_question.TAG );
     }
 
     @Override
     public void onFifteenQuestion() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.replace ( R.id.fragment_container, new New_Symptom_16th_question (), New_Symptom_16th_question.TAG ).commit ();
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
+        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_16th_question (), New_Symptom_16th_question.TAG ).commit ();
         fragmentTransaction.addToBackStack ( New_Symptom_16th_question.TAG );
     }
 
     @Override
     public void onSixteenQuestion() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.replace ( R.id.fragment_container, new New_Symptom_17th_question (), New_Symptom_17th_question.TAG ).commit ();
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
+        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_17th_question (), New_Symptom_17th_question.TAG ).commit ();
         fragmentTransaction.addToBackStack ( New_Symptom_17th_question.TAG );
     }
 
     @Override
     public void onTwenty1Question() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.replace ( R.id.fragment_container, new New_Symptom_22th_question (), New_Symptom_22th_question.TAG ).commit ();
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
+        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_22th_question (), New_Symptom_22th_question.TAG ).commit ();
         fragmentTransaction.addToBackStack ( New_Symptom_22th_question.TAG );
     }
 
     @Override
     public void onTwenty2Question() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.replace ( R.id.fragment_container, new New_Symptom_23th_question (), New_Symptom_23th_question.TAG ).commit ();
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
+        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_23th_question (), New_Symptom_23th_question.TAG ).commit ();
         fragmentTransaction.addToBackStack ( New_Symptom_23th_question.TAG );
     }
 
     @Override
     public void onTwenty3Question() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.replace ( R.id.fragment_container, new New_Symptom_24th_question (), New_Symptom_24th_question.TAG ).commit ();
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
+        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_24th_question (), New_Symptom_24th_question.TAG ).commit ();
         fragmentTransaction.addToBackStack ( New_Symptom_24th_question.TAG );
     }
 
     @Override
     public void onTwenty4Question() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.replace ( R.id.fragment_container, new New_Symptom_25th_question (), New_Symptom_25th_question.TAG ).commit ();
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
+        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_25th_question (), New_Symptom_25th_question.TAG ).commit ();
         fragmentTransaction.addToBackStack ( New_Symptom_25th_question.TAG );
     }
 
     @Override
     public void onFourteenQuestion() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.replace ( R.id.fragment_container, new New_Symptom_15th_question (), New_Symptom_15th_question.TAG ).commit ();
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
+        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_15th_question (), New_Symptom_15th_question.TAG ).commit ();
         fragmentTransaction.addToBackStack ( New_Symptom_15th_question.TAG );
     }
 
     @Override
     public void onEighteenQuestion() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.replace ( R.id.fragment_container, new New_Symptom_19th_question (), New_Symptom_19th_question.TAG ).commit ();
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
+        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_19th_question (), New_Symptom_19th_question.TAG ).commit ();
         fragmentTransaction.addToBackStack ( New_Symptom_19th_question.TAG );
     }
 
     @Override
     public void onNineteenQuestion() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.replace ( R.id.fragment_container, new New_Symptom_20th_question (), New_Symptom_20th_question.TAG ).commit ();
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
+        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_20th_question (), New_Symptom_20th_question.TAG ).commit ();
         fragmentTransaction.addToBackStack ( New_Symptom_20th_question.TAG );
     }
     @Override
     public void onSeventeenQuestion() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.replace ( R.id.fragment_container, new New_Symptom_18th_question (), New_Symptom_18th_question.TAG ).commit ();
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
+        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_18th_question (), New_Symptom_18th_question.TAG ).commit ();
         fragmentTransaction.addToBackStack ( New_Symptom_18th_question.TAG );
     }
 
     @Override
     public void onSeventhQuestion() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.replace ( R.id.fragment_container, new New_Symptom_8th_question (), New_Symptom_8th_question.TAG ).commit ();
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
+        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_8th_question (), New_Symptom_8th_question.TAG ).commit ();
         fragmentTransaction.addToBackStack ( New_Symptom_8th_question.TAG );
     }
 
     @Override
     public void onTwelveQuestion() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.replace ( R.id.fragment_container, new New_Symptom_13th_question (), New_Symptom_13th_question.TAG ).commit ();
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
+        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_13th_question (), New_Symptom_13th_question.TAG ).commit ();
         fragmentTransaction.addToBackStack ( New_Symptom_13th_question.TAG );
     }
 
     @Override
     public void onThirteenQuestion() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.replace ( R.id.fragment_container, new New_Symptom_14th_question (), New_Symptom_14th_question.TAG ).commit ();
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
+        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_14th_question (), New_Symptom_14th_question.TAG ).commit ();
         fragmentTransaction.addToBackStack ( New_Symptom_14th_question.TAG );
     }
 }

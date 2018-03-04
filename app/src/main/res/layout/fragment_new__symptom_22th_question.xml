@@ -26,8 +26,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:text="#22"
-                    android:textSize="25sp"
-                    />
+                    android:textSize="25sp" />
+
                 <LinearLayout
                     android:layout_marginTop="40dp"
                     android:layout_below="@id/new_symptom_twenty2_question"
@@ -71,7 +71,7 @@
                     android:id="@+id/btnNextQuestion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/next_button_question"
+                    android:background="@drawable/disable_next_question"
                     android:layout_alignParentBottom="true"
                     android:layout_margin="10dp"
                     android:text="@string/next"

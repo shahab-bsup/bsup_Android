@@ -49,21 +49,9 @@ public class New_Symptom_5th_question extends Fragment implements View.OnClickLi
     public New_Symptom_5th_question() {
         // Required empty public constructor
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment New_Symptom_5th_question.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static New_Symptom_5th_question newInstance(String param1, String param2) {
+    public static New_Symptom_5th_question newInstance() {
         New_Symptom_5th_question fragment = new New_Symptom_5th_question ();
         Bundle args = new Bundle ();
-        args.putString ( ARG_PARAM1, param1 );
-        args.putString ( ARG_PARAM2, param2 );
         fragment.setArguments ( args );
         return fragment;
     }
@@ -72,15 +60,14 @@ public class New_Symptom_5th_question extends Fragment implements View.OnClickLi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
         if (getArguments () != null) {
-            mParam1 = getArguments ().getString ( ARG_PARAM1 );
-            mParam2 = getArguments ().getString ( ARG_PARAM2 );
+
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view =  inflater.inflate ( R.layout.fragment_new__symptom_5th_question, container, false );
         viewHolder = new New_Symptom_5th_question_ViewHolder ( view );
         question_view = view.findViewById ( R.id.new_symptom_fifth_question );
@@ -142,7 +129,7 @@ public class New_Symptom_5th_question extends Fragment implements View.OnClickLi
     }
 
     @Override
-    public void onSingleItemSelected(int i) {
+    public void onSingleItemSelected(View view, int i) {
         System.out.println ( "New_Symptom_5th_question.onSingleItemSelected" );
         selected_choice = i;
     }

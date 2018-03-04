@@ -87,6 +87,7 @@
     <string name="or"><b>Or</b></string>
     <string name="i_do_not_know">I don\'t know</string>
 
+
     <string name="year_ago"><b>Years</b> Ago</string>
     <string name="months_ago"><b>Months</b> Ago</string>
     <string name="weeks_ago"><b>Weeks</b> Ago</string>
@@ -195,6 +196,20 @@
         <item>Has occurred a few times or less ever</item>
         <item>Other</item>
     </string-array>
+
+    <string-array name="question_20_choices">
+        <item name="year_ago"><b>Years</b> Ago</item>
+        <item name="months_ago"><b>Months</b> Ago</item>
+        <item name="weeks_ago"><b>Weeks</b> Ago</item>
+        <item name="days_ago"><b>Days</b> Ago</item>
+    </string-array>
+
+    <string-array name="question_20_other_chocies">
+        <item name="first">Always there - all day/wakes me at night</item>
+        <item name="second">All day, but I can sleep at night</item>
+        <item name="other">other</item>
+    </string-array>
+
     <string-array name="question_21_choices">
         <item>Just need reassurance that nothing else needs to be done </item>
         <item>Problems seems to be worsening</item>
@@ -205,5 +220,6 @@
     </string-array>
     <string name="question_14">None</string>
     <string name="none">None</string>
+    <string name="lasts">Lasts</string>
 
 </resources>

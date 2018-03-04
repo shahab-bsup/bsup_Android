@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:layoutDirection="rtl"
+    android:background="@drawable/unselected_state">
+
+    <tk.medlynk.patient.android.CustomViews.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lasts"
+        android:textSize="20sp"
+        />
+
+    <android.support.v7.widget.AppCompatEditText
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtLastsValue"
+        android:inputType="numberDecimal"
+        android:imeOptions="actionDone"
+        />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerLastsID"
+        android:spinnerMode="dropdown"/>
+
+</LinearLayout>

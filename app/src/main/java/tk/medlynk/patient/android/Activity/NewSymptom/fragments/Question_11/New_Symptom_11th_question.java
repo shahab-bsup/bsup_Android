@@ -167,7 +167,7 @@ public class New_Symptom_11th_question extends Fragment implements View.OnClickL
             }
             case 4: {
                 answer.setChoice ( "e" );
-                answer.setReply ( "nothing but everything!" );
+                answer.setOther ( "nothing but everything!" );
                 break;
             }
         }
@@ -175,7 +175,7 @@ public class New_Symptom_11th_question extends Fragment implements View.OnClickL
     }
 
     @Override
-    public void onSingleItemSelected(int i) {
+    public void onSingleItemSelected(View view, int i) {
         System.out.println ( "i = [" + i + "]: " + string_choices[i] );
         selected_choice = i;
     }
@@ -183,11 +183,13 @@ public class New_Symptom_11th_question extends Fragment implements View.OnClickL
     @Override
     public void onEleventhAnswerSuccess(NewSymptomAnswerResponse response) {
         System.out.println ( "New_Symptom_11th_question.onEleventhAnswerSuccess" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onEleventhQuestion ();
     }
 
     @Override
     public void onEleventhAnswerFailure() {
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         System.out.println ( "New_Symptom_11th_question.onEleventhAnswerFailure" );
     }
 

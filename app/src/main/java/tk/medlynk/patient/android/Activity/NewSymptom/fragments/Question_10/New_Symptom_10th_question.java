@@ -154,8 +154,7 @@ public class New_Symptom_10th_question extends Fragment implements View.OnClickL
     }
 
     @Override
-    public void onSingleItemSelected(int i) {
-        System.out.println ("string_choice = " + choice.getButtons ().get ( i ).getText ().toString ());
+    public void onSingleItemSelected(View view, int i) {
         selected_choice = i;
         viewHolder.setAnswerEmpty ();
     }

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <tk.medlynk.patient.android.CustomViews.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="Help a lot"
+        android:textSize="25sp"
+        android:textColor="@color/colorPrimary"
+        android:padding="10dp"
+        android:id="@+id/treatment_help_a_lot"
+        />
+
+    <tk.medlynk.patient.android.CustomViews.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="Help a little"
+        android:textSize="25sp"
+        android:textColor="@color/colorPrimary"
+        android:padding="10dp"
+        android:id="@+id/treatment_help_a_little"
+        android:layout_below="@id/treatment_help_a_lot"
+        />
+
+    <tk.medlynk.patient.android.CustomViews.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="Not helping!"
+        android:textSize="25sp"
+        android:textColor="@color/colorPrimary"
+        android:padding="10dp"
+        android:id="@+id/treatment_not_helping"
+        android:layout_below="@id/treatment_help_a_little"
+        />
+
+</RelativeLayout>

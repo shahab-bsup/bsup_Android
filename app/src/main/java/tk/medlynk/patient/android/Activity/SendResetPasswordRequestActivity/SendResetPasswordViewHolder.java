@@ -13,7 +13,8 @@ import com.neweraandroid.demo.R;
  * Created by Shahab on 1/14/2018.
  */
 
-public class SendResetPasswordViewHolder extends RecyclerView.ViewHolder implements DatePickerDialog.OnDateSetListener {
+public class SendResetPasswordViewHolder extends RecyclerView.ViewHolder
+        implements DatePickerDialog.OnDateSetListener {
 
     Button submit, birthDate;
     EditText email;

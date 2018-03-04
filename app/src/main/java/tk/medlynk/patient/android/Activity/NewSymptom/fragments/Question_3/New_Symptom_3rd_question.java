@@ -166,7 +166,7 @@ public class New_Symptom_3rd_question extends Fragment implements View.OnClickLi
     }
 
     @Override
-    public void onSingleItemSelected(int i) {
+    public void onSingleItemSelected(View view, int i) {
         System.out.println (string_choices[i]);
         selected_choice = i;
     }

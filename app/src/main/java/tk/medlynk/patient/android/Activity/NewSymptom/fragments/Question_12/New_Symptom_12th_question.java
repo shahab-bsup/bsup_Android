@@ -155,12 +155,12 @@ public class New_Symptom_12th_question extends Fragment implements View.OnClickL
     }
 
     @Override
-    public void onSingleItemSelected(int i) {
+    public void onSingleItemSelected(View view, int i) {
         System.out.println ( "i = [" + i + "]: " + string_choices[i] );
     }
 
     @Override
-    public void onMultiItemSelected(Integer integer) {
+    public void onMultiItemSelected(View view, Integer integer) {
         System.out.println ( "New_Symptom_12th_question.onMultiItemSelected" );
         Answer answer = new Answer ();
         switch (integer){
@@ -185,14 +185,13 @@ public class New_Symptom_12th_question extends Fragment implements View.OnClickL
             }
             case 4:{
                 answer.setChoice ( "e" );
-                answer.setReply ( "nothing but everything!" );
             }
         }
         selected_choices.add ( answer );
     }
 
     @Override
-    public void onMultiItemDeselected(Integer integer) {
+    public void onMultiItemDeselected(View view, Integer integer) {
         System.out.println ( "New_Symptom_12th_question.onMultiItemDeselected" );
         int i = integer;
         selected_choices.remove ( i );
@@ -201,27 +200,17 @@ public class New_Symptom_12th_question extends Fragment implements View.OnClickL
     @Override
     public void onTwelveAnswerSuccess(NewSymptomAnswerResponse response) {
         System.out.println ( "New_Symptom_12th_question.onTwelveAnswerSuccess" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onTwelveQuestion ();
     }
 
     @Override
     public void onTwelveAnswerFailure() {
         System.out.println ( "New_Symptom_12th_question.onTwelveAnswerFailure" );
-        mListener.onTwelveQuestion ();
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnNewSymptomTwelveQuestionListener {
-        // TODO: Update argument type and name
         void onTwelveQuestion();
     }
 }

@@ -160,7 +160,7 @@ public class New_Symptom_16th_question extends Fragment implements
     }
 
     @Override
-    public void onSingleItemSelected(int i) {
+    public void onSingleItemSelected(View view, int i) {
         System.out.println (choice.getButtons ().get ( 0 ).getText ().toString ());
         selected_choice = i;
         viewHolder.setAnswerEmpty ();
@@ -169,12 +169,14 @@ public class New_Symptom_16th_question extends Fragment implements
     @Override
     public void onSixteenAnswerSuccess(NewSymptomAnswerResponse response) {
         System.out.println ( "New_Symptom_16th_question.onSixteenAnswerSuccess" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onSixteenQuestion ();
     }
 
     @Override
     public void onSixteenAnswerFailure() {
         System.out.println ( "New_Symptom_16th_question.onSixteenAnswerFailure" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
     }
 
     /**

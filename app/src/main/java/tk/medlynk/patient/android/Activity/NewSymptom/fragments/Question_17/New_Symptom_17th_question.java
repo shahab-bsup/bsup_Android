@@ -146,12 +146,12 @@ public class New_Symptom_17th_question extends Fragment implements View.OnClickL
     }
 
     @Override
-    public void onSingleItemSelected(int i) {
+    public void onSingleItemSelected(View view, int i) {
         System.out.println ( "i = [" + i + "]: " + string_choices[i] );
     }
 
     @Override
-    public void onMultiItemSelected(Integer integer) {
+    public void onMultiItemSelected(View view, Integer integer) {
         System.out.println ( "New_Symptom_17th_question.onMultiItemSelected" );
         Answer answer = new Answer ();
         switch (integer){
@@ -186,7 +186,7 @@ public class New_Symptom_17th_question extends Fragment implements View.OnClickL
             }
             case 6:{
                 answer.setChoice ( "g" );
-                answer.setReply ( "nothing but everything :)" );
+                answer.setOther ( "nothing but everything :)" );
 
                 break;
             }
@@ -195,7 +195,7 @@ public class New_Symptom_17th_question extends Fragment implements View.OnClickL
     }
 
     @Override
-    public void onMultiItemDeselected(Integer integer) {
+    public void onMultiItemDeselected(View view, Integer integer) {
         System.out.println ( "New_Symptom_17th_question.onMultiItemDeselected" );
         int i = integer;
         selected_choices.remove ( i );

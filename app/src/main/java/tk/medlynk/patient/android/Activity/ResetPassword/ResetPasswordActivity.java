@@ -39,18 +39,6 @@ OnResetPasswordListener
         handleIntent ();
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        super.onSaveInstanceState ( outState, outPersistentState );
-        outState.putString ( Constants.Reset_Token, reset_token );
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState ( savedInstanceState );
-        reset_token = savedInstanceState.getString ( Constants.Reset_Token );
-    }
-
     private void handleIntent() {
         Intent appLinkIntent = getIntent ();
         Uri appLinkData = appLinkIntent.getData ();

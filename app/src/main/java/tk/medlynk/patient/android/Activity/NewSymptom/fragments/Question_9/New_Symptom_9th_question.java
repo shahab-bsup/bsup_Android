@@ -29,7 +29,12 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
  * Use the {@link New_Symptom_9th_question#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class New_Symptom_9th_question extends Fragment implements View.OnClickListener, ViewSelection.OnSingleItemSelectedListener, ViewSelection.OnMultiItemSelectedListener, OnNinthAnswerListener {
+public class New_Symptom_9th_question extends Fragment implements
+        View.OnClickListener,
+        ViewSelection.OnSingleItemSelectedListener,
+        ViewSelection.OnMultiItemSelectedListener,
+        OnNinthAnswerListener {
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -146,12 +151,12 @@ public class New_Symptom_9th_question extends Fragment implements View.OnClickLi
     }
 
     @Override
-    public void onSingleItemSelected(int i) {
+    public void onSingleItemSelected(View view, int i) {
         System.out.println ( "i = [" + i + "]: " + string_choices[i] );
     }
 
     @Override
-    public void onMultiItemSelected(Integer integer) {
+    public void onMultiItemSelected(View view, Integer integer) {
         Answer answer = new Answer ();
         switch (integer){
             case 0:{
@@ -173,12 +178,16 @@ public class New_Symptom_9th_question extends Fragment implements View.OnClickLi
 
                 break;
             }
+            case 4:{
+                answer.setChoice ( "e" );
+                answer.setOther ( "Eating water :))" );
+            }
         }
         selected_choices.add ( answer );
     }
 
     @Override
-    public void onMultiItemDeselected(Integer integer) {
+    public void onMultiItemDeselected(View view, Integer integer) {
         int i = integer;
         selected_choices.remove ( i );
     }

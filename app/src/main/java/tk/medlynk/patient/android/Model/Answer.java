@@ -23,9 +23,23 @@ public class Answer implements Serializable {
     @SerializedName("rate")
     @Expose
     private int rate;
+    @SerializedName ( "years" )
+    @Expose
+    private int years;
     @SerializedName ( "other" )
     @Expose
     private String other;
+    @SerializedName ( "helpfully" )
+    @Expose
+    private String helpfully;
+
+    public String getHelpfully() {
+        return helpfully;
+    }
+
+    public void setHelpfully(String helpfully) {
+        this.helpfully = helpfully;
+    }
 
     public String getOther() {
         return other;
@@ -65,5 +79,13 @@ public class Answer implements Serializable {
 
     public void setRate(int rate) {
         this.rate = rate;
+    }
+
+    public int getYears() {
+        return years;
+    }
+
+    public void setYears(int years) {
+        this.years = years;
     }
 }

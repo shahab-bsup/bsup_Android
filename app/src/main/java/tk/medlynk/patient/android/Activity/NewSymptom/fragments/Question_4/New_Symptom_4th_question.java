@@ -151,17 +151,17 @@ public class New_Symptom_4th_question extends Fragment implements
     }
 
     @Override
-    public void onMultiItemSelected(Integer integer) {
+    public void onMultiItemSelected(View view, Integer integer) {
 
     }
 
     @Override
-    public void onMultiItemDeselected(Integer integer) {
+    public void onMultiItemDeselected(View view, Integer integer) {
 
     }
 
     @Override
-    public void onSingleItemSelected(int i) {
+    public void onSingleItemSelected(View view, int i) {
         System.out.println ( "i = [" + i + "]: " + answerChoices[i] );
         selected_choice  = i;
     }

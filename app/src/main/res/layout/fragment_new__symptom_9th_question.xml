@@ -76,7 +76,7 @@
             android:id="@+id/btnNextQuestion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/next_button_question"
+            android:background="@drawable/disable_next_question"
             android:layout_alignParentBottom="true"
             android:layout_margin="10dp"
             android:text="@string/next"
