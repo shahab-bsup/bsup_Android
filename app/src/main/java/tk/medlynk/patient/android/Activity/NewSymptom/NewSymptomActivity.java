@@ -1,5 +1,7 @@
 package tk.medlynk.patient.android.Activity.NewSymptom;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -35,6 +37,8 @@ import tk.medlynk.patient.android.Constants;
 
 import com.neweraandroid.demo.R;
 
+import java.util.List;
+
 public class NewSymptomActivity extends AppCompatActivity implements
         New_Symptom_1th_question.OnNewSymptomFirstQuestionListener,
         New_Symptom_2nd_question.OnNewSymptomSecondQuestionListener,
@@ -62,7 +66,6 @@ public class NewSymptomActivity extends AppCompatActivity implements
         New_Symptom_24th_question.OnNewSymptomTwenty4QuestionListener,
         New_Symptom_25th_question.OnNewSymptomTwenty5QuestionListener {
 
-    private FragmentTransaction fragmentTransaction;
 
     View toolbar_view;
     ImageView backButton;
@@ -80,7 +83,7 @@ public class NewSymptomActivity extends AppCompatActivity implements
                 onBackPressed ();
             }
         } );
-        fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
         fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_1th_question (), New_Symptom_1th_question.TAG ).commit ();
     }
@@ -91,7 +94,6 @@ public class NewSymptomActivity extends AppCompatActivity implements
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_2nd_question (), New_Symptom_2nd_question.TAG ).commit ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
-        fragmentTransaction.addToBackStack ( New_Symptom_2nd_question.TAG );
     }
 
     @Override
@@ -99,7 +101,6 @@ public class NewSymptomActivity extends AppCompatActivity implements
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
         fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_3rd_question (), New_Symptom_3rd_question.TAG ).commit ();
-        fragmentTransaction.addToBackStack ( New_Symptom_3rd_question.TAG );
     }
 
     @Override
@@ -107,7 +108,6 @@ public class NewSymptomActivity extends AppCompatActivity implements
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
         fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_4th_question (), New_Symptom_4th_question.TAG ).commit ();
-        fragmentTransaction.addToBackStack ( New_Symptom_4th_question.TAG );
     }
 
     @Override
@@ -280,5 +280,12 @@ public class NewSymptomActivity extends AppCompatActivity implements
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
         fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_14th_question (), New_Symptom_14th_question.TAG ).commit ();
         fragmentTransaction.addToBackStack ( New_Symptom_14th_question.TAG );
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed ();
+        List<Fragment> fragments = getSupportFragmentManager ().getFragments ();
+        
     }
 }

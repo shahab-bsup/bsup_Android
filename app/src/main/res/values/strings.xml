@@ -205,9 +205,9 @@
     </string-array>
 
     <string-array name="question_20_other_chocies">
-        <item name="first">Always there - all day/wakes me at night</item>
-        <item name="second">All day, but I can sleep at night</item>
-        <item name="other">other</item>
+        <item>first">Always there - all day/wakes me at night</item>
+        <item>All day, but I can sleep at night</item>
+        <item>other</item>
     </string-array>
 
     <string-array name="question_21_choices">
@@ -221,5 +221,113 @@
     <string name="question_14">None</string>
     <string name="none">None</string>
     <string name="lasts">Lasts</string>
+    <string name="follow_up_symptoms_title">Follow Up Symptoms</string>
+
+    <string name="follow_up_symptoms_1st_question">Which symptom is still troubling you today (Please list one symptom only)</string>
+    <string name="follow_up_symptoms_2nd_question">Please list any other symptoms you are having that you believe are associated:</string>
+    <string name="follow_up_symptoms_3rd_question">How has your symptom changed since your last visit here?</string>
+    <string name="follow_up_symptoms_4th_question">How frequently has your symptom bothered you since your last visit?</string>
+    <string name="follow_up_symptoms_5th_question">How long does the symptom last when it occurs?</string>
+    <string name="follow_up_symptoms_6th_question">How intense is the symptom since your last visit?</string>
+    <string name="follow_up_symptoms_7th_question">On your worst day, how are your symptoms interfering with your abilities?</string>
+    <string name="follow_up_symptoms_8th_question">On your best day, how are your symptoms interfering with your abilities?</string>
+    <string name="follow_up_symptoms_9th_question">Is there anything you have noted that makes the symptom better?\n(Ex - rest, sleep, eating, fluid intake, exercise, being inside/outside, temperature outside, air quality)</string>
+    <string name="follow_up_symptoms_10th_question">Is there anything you have noted that makes the symptom worse?\n(Ex - rest, sleep, eating, fluid intake, exercise)</string>
+    <string name="follow_up_symptoms_11th_question">Please indicate what treatments you have tried so far (please select all treatments previously tried):</string>
+    <string name="follow_up_symptoms_12th_question">Please list medications tried</string>
+    <string name="follow_up_symptoms_13th_question">Have you seen another medical doctor regarding this symptom?</string>
+    <string name="follow_up_symptoms_14th_question">Since your last visit with me have you had any of the following tests for this symptom?</string>
+    <string name="follow_up_symptoms_15th_question">How worried are you about your symptoms?</string>
+
+    <string-array name="follow_up_symptoms_3rd_choices">
+        <item>Completely better</item>
+        <item>Much better</item>
+        <item>Somewhat better</item>
+        <item>A little better</item>
+        <item>About the same</item>
+        <item>A little worse</item>
+        <item>Somewhat worse</item>
+        <item>Much worse</item>
+        <item>Severe</item>
+        <item>Variable</item>
+    </string-array>
+    
+    <string-array name="follow_up_symptoms_4th_choices">
+        <item>I constant</item>
+        <item>Occurs at some point every</item>
+        <item>Occurs almost every</item>
+        <item>Occurs a few time per week</item>
+        <item>Occurs weekly</item>
+        <item>Occurs monthly</item>
+        <item>Occurs every few months</item>
+        <item>Happens one-two times per week</item>
+        <item>Has Occurred a few times ever</item>
+        <item>Varies quite a bit</item>
+    </string-array>
+    
+    <string-array name="follow_up_symptoms_5th_choices">
+        <item>Is always there - all day / wakes me at night</item>
+        <item>Is there all day, but I can sleep at night</item>
+        <item>Lasts days</item>
+        <item>Lasts hours</item>
+        <item>Last minutes</item>
+        <item>Last seconds</item>
+        <item>Other</item>
+    </string-array>
+    
+    <string-array name="follow_up_symptoms_7th_8th_choices">
+        <item>Can not get out of bed</item>
+        <item>Can barely get of bed</item>
+        <item>Can do a few simple chores \n at home, but not much more</item>
+        <item>Can do chores at home but cannot get out to do very much</item>
+        <item>Can go out but cannot manage any errands</item>
+        <item>Can go out, but cannot manage manage some errands</item>
+        <item>Can go out, do errands, but nothing intense, and do exercise</item>
+        <item>Can go out, do errands and light exercise, but no strenuous exercise</item>
+        <item>Can do whatever I usually do</item>
+    </string-array>
+    
+    <string-array name="follow_up_symptoms_9th_10th_choices">
+        <item>Haven't noted anything that makes it worse</item>
+        <item>Rest</item>
+        <item>Sleep</item>
+        <item>Exercise</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="follow_up_symptoms_11th_choices">
+        <item>Home stretches</item>
+        <item>Physiotherapist</item>
+        <item>Message therapist</item>
+        <item>Acupuncturist</item>
+        <item>Psychologist</item>
+        <item>Chiropractor</item>
+        <item>Other</item>
+        <item>Have not tried anything</item>
+    </string-array>
+
+    <string-array name="follow_up_symptoms_13th_choices">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="follow_up_symptoms_14th_choices">
+        <item>Blood tests</item>
+        <item>Urine tests</item>
+        <item>Imaging</item>
+        <item>X-ray</item>
+        <item>CT</item>
+        <item>MRI</item>
+        <item>Ultrasound</item>
+        <item>Mammogram</item>
+        <item>Bone Density scan</item>
+        <item>Cardiac investigation</item>
+        <item>EKG</item>
+        <item>Exercise stress tests </item>
+        <item>MIBI</item>
+        <item>Heart Ultrasound (echo)</item>
+        <item>Other</item>
+        <item>None of the above</item>
+    </string-array>
 
 </resources>

@@ -20,6 +20,7 @@
     <tk.medlynk.patient.android.CustomViews.CustomTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/toolbar_title"
         android:layout_centerInParent="true"
         android:text="@string/new_symptom"
         android:textColor="@color/white"
