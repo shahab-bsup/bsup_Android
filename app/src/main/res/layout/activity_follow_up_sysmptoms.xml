@@ -10,4 +10,11 @@
     <include android:id="@+id/follow_up_symptom_toolbar_layout"
         layout="@layout/questions_toolbar_layout"></include>
 
+    <FrameLayout
+        android:layout_below="@id/follow_up_symptom_toolbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/followUpFragmentsContainer"
+        ></FrameLayout>
+
 </RelativeLayout>

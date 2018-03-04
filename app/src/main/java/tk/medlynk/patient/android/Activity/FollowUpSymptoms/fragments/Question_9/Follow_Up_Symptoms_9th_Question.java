@@ -18,17 +18,19 @@ import com.neweraandroid.demo.R;
  * Use the {@link Follow_Up_Symptoms_9th_Question#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Follow_Up_Symptoms_9th_Question extends Fragment {
+public class Follow_Up_Symptoms_9th_Question extends Fragment implements Follow_Up_Symptoms_9th_Question_ViewHolder.OnFollowUpNinthQuestionViewsClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    public static final String TAG = Follow_Up_Symptoms_9th_Question.class.getSimpleName ();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     private OnFollowUpSymptomsNinthQuestionListener mListener;
+    private Follow_Up_Symptoms_9th_Question_ViewHolder viewHolder;
 
     public Follow_Up_Symptoms_9th_Question() {
         // Required empty public constructor
@@ -64,15 +66,11 @@ public class Follow_Up_Symptoms_9th_Question extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate ( R.layout.fragment_follow__up__symptoms_9th__question, container, false );
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onNinthQuestion ();
-        }
+        // Inflate the layout for this fragment...
+        View view = inflater.inflate ( R.layout.fragment_follow__up__symptoms_9th__question, container, false );
+        viewHolder = new Follow_Up_Symptoms_9th_Question_ViewHolder ( view );
+        viewHolder.setOnFollowUpNinthQuestionViewsClickListener ( this );
+        return view;
     }
 
     @Override
@@ -90,6 +88,18 @@ public class Follow_Up_Symptoms_9th_Question extends Fragment {
     public void onDetach() {
         super.onDetach ();
         mListener = null;
+    }
+
+    @Override
+    public void onNextClick() {
+        System.out.println ( "Follow_Up_Symptoms_9th_Question.onNextClick" );
+        mListener.onNinthQuestion ();
+    }
+
+    @Override
+    public void onSkipClick() {
+        System.out.println ( "Follow_Up_Symptoms_9th_Question.onSkipClick" );
+        mListener.onNinthQuestion ();
     }
 
     /**

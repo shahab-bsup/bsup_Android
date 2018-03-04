@@ -38,7 +38,6 @@ public class New_Symptom_2nd_question_ViewHolder extends RecyclerView.ViewHolder
         second_question = question_view.findViewById ( R.id.txtQuestion );
         button_next = view.findViewById ( R.id.btnNextQuestion );
         button_next.setOnClickListener ( this );
-        button_next.setClickable ( false );
         button_skip = view.findViewById ( R.id.btnSkipQuestion );
         button_skip.setOnClickListener ( this );
         choice = view.findViewById ( R.id.viewSelectionChoice );

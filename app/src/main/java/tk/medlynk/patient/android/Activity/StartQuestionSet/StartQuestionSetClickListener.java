@@ -4,12 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.FollowUpSymptomsActivity;
 import tk.medlynk.patient.android.Activity.NewSymptom.NewSymptomActivity;
 import tk.medlynk.patient.android.Activity.Start_a_Refill.Start_A_New_RefillActivity;
 import com.neweraandroid.demo.R;
 
 /**
- * Created by Shahab on 2/1/2018.
+ *
+ * Created by Shahab on 2/1/2018...
+ *
  */
 
 public class StartQuestionSetClickListener implements View.OnClickListener {
@@ -30,6 +33,7 @@ public class StartQuestionSetClickListener implements View.OnClickListener {
             }
             case R.id.review_sysmptoms:{
                 System.out.println ("review_sysmptoms");
+                context.startActivity ( new Intent ( context, FollowUpSymptomsActivity.class ) );
                 break;
             }
             case R.id.review_test_results:{

@@ -1,13 +1,79 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_7.Follow_Up_Symptoms_7th_Question">
+    android:background="@color/white">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include android:id="@+id/follow_up_symptoms_seventh_question"
+                layout="@layout/doctor_layout"></include>
+            <tk.medlynk.patient.android.CustomViews.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/follow_up_symptoms_seventh_question"
+                android:layout_centerHorizontal="true"
+                android:text="#7"
+                android:textSize="25sp"
+                />
+
+            <LinearLayout
+                android:layout_below="@id/follow_up_symptoms_seventh_question"
+                android:layoutDirection="rtl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/patient_icon"
+                    android:id="@+id/doctor_icon"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_centerVertical="true"
+                    />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        android:layoutDirection="rtl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/btnNextQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/disable_next_question"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="10dp"
+            android:clickable="false"
+            android:text="@string/next"
+            android:textColor="@color/white" />
+
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/btnSkipQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_button_main"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="10dp"
+            android:text="@string/skip"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+</RelativeLayout>
