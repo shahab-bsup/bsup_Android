@@ -13,7 +13,7 @@ import com.neweraandroid.demo.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Follow_Up_Symptoms_13th_Question.OnFragmentInteractionListener} interface
+ * {@link OnFollowUpSymptomsThirteenQuestionListener} interface
  * to handle interaction events.
  * Use the {@link Follow_Up_Symptoms_13th_Question#newInstance} factory method to
  * create an instance of this fragment.
@@ -28,7 +28,7 @@ public class Follow_Up_Symptoms_13th_Question extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+    private OnFollowUpSymptomsThirteenQuestionListener mListener;
 
     public Follow_Up_Symptoms_13th_Question() {
         // Required empty public constructor
@@ -71,18 +71,18 @@ public class Follow_Up_Symptoms_13th_Question extends Fragment {
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.onFragmentInteraction ( uri );
+            mListener.onThirteenQuestion ();
         }
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach ( context );
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof OnFollowUpSymptomsThirteenQuestionListener) {
+            mListener = (OnFollowUpSymptomsThirteenQuestionListener) context;
         } else {
             throw new RuntimeException ( context.toString ()
-                    + " must implement OnFragmentInteractionListener" );
+                    + " must implement OnFollowUpSymptomsFirstQuestionListener" );
         }
     }
 
@@ -102,8 +102,8 @@ public class Follow_Up_Symptoms_13th_Question extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
+    public interface OnFollowUpSymptomsThirteenQuestionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onThirteenQuestion();
     }
 }
