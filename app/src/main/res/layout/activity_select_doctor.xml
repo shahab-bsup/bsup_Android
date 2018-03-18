@@ -135,7 +135,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/custom_button_main"
+                android:background="@drawable/enabled_custom_button"
                 android:layout_below="@id/layout_doctor_bio"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="15dp"

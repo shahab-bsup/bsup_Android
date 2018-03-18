@@ -31,15 +31,7 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
  */
 public class New_Symptom_3rd_question extends Fragment implements View.OnClickListener, ViewSelection.OnSingleItemSelectedListener, OnThirdAnswerListener {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
     public static final String TAG = New_Symptom_3rd_question.class.getSimpleName ();
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnNewSymptomThirdQuestionListener mListener;
 
@@ -55,20 +47,10 @@ public class New_Symptom_3rd_question extends Fragment implements View.OnClickLi
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment New_Symptom_3rd_question.
-     */
-    // TODO: Rename and change types and number of parameters
     public static New_Symptom_3rd_question newInstance(String param1, String param2) {
         New_Symptom_3rd_question fragment = new New_Symptom_3rd_question ();
         Bundle args = new Bundle ();
-        args.putString ( ARG_PARAM1, param1 );
-        args.putString ( ARG_PARAM2, param2 );
+
         fragment.setArguments ( args );
         return fragment;
     }
@@ -77,8 +59,7 @@ public class New_Symptom_3rd_question extends Fragment implements View.OnClickLi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
         if (getArguments () != null) {
-            mParam1 = getArguments ().getString ( ARG_PARAM1 );
-            mParam2 = getArguments ().getString ( ARG_PARAM2 );
+
         }
     }
 
@@ -179,22 +160,13 @@ public class New_Symptom_3rd_question extends Fragment implements View.OnClickLi
 
     @Override
     public void onThirdAnswerFailure() {
-        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         System.out.println ( "New_Symptom_3rd_question.onThirdAnswerFailure" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+
+
     public interface OnNewSymptomThirdQuestionListener {
-        // TODO: Update argument type and name
         void onThirdQuestion();
     }
 }

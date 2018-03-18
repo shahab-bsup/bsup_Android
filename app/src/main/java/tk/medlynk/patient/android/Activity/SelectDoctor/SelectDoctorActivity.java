@@ -14,7 +14,9 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
 
 import com.neweraandroid.demo.R;
 
-public class SelectDoctorActivity extends AppCompatActivity implements OnGetAppointmentsListener {
+public class SelectDoctorActivity extends AppCompatActivity
+        implements OnGetAppointmentsListener,
+        SelectDoctorViewHolder.OnWrongDoctorIdClickListener{
 
     SearchDoctorResponse searchDoctorResponse;
     SelectDoctorViewHolder selectDoctorViewHolder;
@@ -26,6 +28,7 @@ public class SelectDoctorActivity extends AppCompatActivity implements OnGetAppo
         setContentView ( R.layout.activity_select_doctor );
         parent_view = findViewById ( R.id.parent_select_doctor );
         selectDoctorViewHolder = new SelectDoctorViewHolder ( parent_view );
+        selectDoctorViewHolder.setOnWrongDoctorIdClickListener ( this );
         Intent intent = getIntent ();
         if( intent != null ){
             searchDoctorResponse = (SearchDoctorResponse) intent.getSerializableExtra ( Constants.SelectedDoctor );
@@ -50,5 +53,10 @@ public class SelectDoctorActivity extends AppCompatActivity implements OnGetAppo
     public void onGetAppointmentFailure() {
         System.out.println ( "SelectDoctorActivity.onGetAppointmentFailure" );
         selectDoctorViewHolder.setProgressBarVisibilityStatus ( View.GONE );
+    }
+
+    @Override
+    public void onWrongDoctorIdClicked() {
+        onBackPressed ();
     }
 }

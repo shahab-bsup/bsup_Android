@@ -21,6 +21,11 @@ implements View.OnClickListener{
     ProgressBar progressBar;
     SelectDoctorClickListener clickListener;
     private String doctorID;
+    private OnWrongDoctorIdClickListener onWrongDoctorIdClickListener;
+
+    public void setOnWrongDoctorIdClickListener(OnWrongDoctorIdClickListener onWrongDoctorIdClickListener) {
+        this.onWrongDoctorIdClickListener = onWrongDoctorIdClickListener;
+    }
 
     public SelectDoctorViewHolder(View itemView) {
         super ( itemView );
@@ -42,7 +47,7 @@ implements View.OnClickListener{
         wrongDrID.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View view) {
-                clickListener.onWrongDoctorIdClicked();
+                onWrongDoctorIdClickListener.onWrongDoctorIdClicked ();
             }
         } );
     }
@@ -81,5 +86,9 @@ implements View.OnClickListener{
         public void setProgressBarVisibilityStatus(int status){
             this.progressBar.setVisibility ( status );
         }
+
+    interface OnWrongDoctorIdClickListener{
+        void onWrongDoctorIdClicked();
+    }
 
 }

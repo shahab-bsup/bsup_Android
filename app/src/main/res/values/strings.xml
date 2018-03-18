@@ -149,6 +149,7 @@
         <item>Eating</item>
         <item>Other</item>
     </string-array>
+
     <string-array name="question_11_choices">
         <item>Better</item>
         <item>Worse</item>
@@ -156,6 +157,7 @@
         <item>Fluctuating</item>
         <item>Other</item>
     </string-array>
+
     <string-array name="question_12_choices">
         <item>Fever</item>
         <item>Unplanned weight loss</item>
@@ -163,6 +165,7 @@
         <item>New or worsening fatigue <b><u>together</u></b> with the main symptom today</item>
         <item>None of the above</item>
     </string-array>
+
     <string-array name="question_13_22_choices">
         <item>Home stretches</item>
         <item>Physiotherapist</item>
@@ -173,6 +176,7 @@
         <item>Other</item>
         <item>Have not tried anything</item>
     </string-array>
+
     <string-array name="question_17_choices">
         <item>Just need some reassurance</item>
         <item>Not comfortable with it/want it to go away</item>
@@ -182,16 +186,19 @@
         <item>Worried it will cause my trouble on my upcomig trip</item>
         <item>Other</item>
     </string-array>
+
     <string-array name="question_18_choices">
         <item>Yes</item>
         <item>No</item>
     </string-array>
+
     <string-array name="question_19_before_years_choices">
         <item>Daily</item>
         <item>Weekly</item>
         <item>Monthly</item>
         <item>Yearly</item>
     </string-array>
+
     <string-array name="question_19_after_years_choices">
         <item>Has occurred a few times or less ever</item>
         <item>Other</item>
@@ -218,9 +225,11 @@
         <item>I just can't take it anymore</item>
         <item>Other</item>
     </string-array>
+
     <string name="question_14">None</string>
     <string name="none">None</string>
     <string name="lasts">Lasts</string>
+    <string name="follow_up_results">To review the results of a test</string>
     <string name="follow_up_symptoms_title">Follow Up Symptoms</string>
 
     <string name="follow_up_symptoms_1st_question">Which symptom is still troubling you today (Please list one symptom only)</string>
@@ -238,6 +247,11 @@
     <string name="follow_up_symptoms_13th_question">Have you seen another medical doctor regarding this symptom?</string>
     <string name="follow_up_symptoms_14th_question">Since your last visit with me have you had any of the following tests for this symptom?</string>
     <string name="follow_up_symptoms_15th_question">How worried are you about your symptoms?</string>
+    <string name="follow_up_symptom">To review a symptom that was previously discussed</string>
+    <string name="refill_A_medication">To refill a medication</string>
+    <string name="type_other">Type other in the box</string>
+    <string name="cancel">Cancel</string>
+    <string name="done">Done</string>
 
     <string-array name="follow_up_symptoms_3rd_choices">
         <item>Completely better</item>
@@ -274,7 +288,7 @@
         <item>Last seconds</item>
         <item>Other</item>
     </string-array>
-    
+
     <string-array name="follow_up_symptoms_7th_8th_choices">
         <item>Can not get out of bed</item>
         <item>Can barely get of bed</item>
@@ -286,9 +300,10 @@
         <item>Can go out, do errands and light exercise, but no strenuous exercise</item>
         <item>Can do whatever I usually do</item>
     </string-array>
-    
+
+    <string name="first_choice_follow_up_symptom_9th_10yj_choices">Have not noted anything that makes it worse</string>
+
     <string-array name="follow_up_symptoms_9th_10th_choices">
-        <item>Haven't noted anything that makes it worse</item>
         <item>Rest</item>
         <item>Sleep</item>
         <item>Exercise</item>

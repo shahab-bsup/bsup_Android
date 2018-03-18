@@ -5,16 +5,15 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Appointment implements Serializable
-{
+public class Appointment implements Serializable {
 
     @SerializedName("id")
     @Expose
     private Integer id;
     @SerializedName("question_sets")
     @Expose
-    private List<Object> questionSets = null;
-    private final static long serialVersionUID = -628283601437989675L;
+    private List<QuestionSet> questionSets = null;
+    private final static long serialVersionUID = 2340174238861800696L;
 
     public Integer getId() {
         return id;
@@ -24,12 +23,11 @@ public class Appointment implements Serializable
         this.id = id;
     }
 
-    public List<Object> getQuestionSets() {
+    public List<QuestionSet> getQuestionSets() {
         return questionSets;
     }
 
-    public void setQuestionSets(List<Object> questionSets) {
+    public void setQuestionSets(List<QuestionSet> questionSets) {
         this.questionSets = questionSets;
     }
-
 }

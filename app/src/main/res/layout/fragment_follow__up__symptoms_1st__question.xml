@@ -40,6 +40,7 @@
                     />
 
                 <android.support.v7.widget.AppCompatEditText
+                    android:text="shahab"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -63,7 +64,7 @@
         android:id="@+id/btnNextQuestion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/enable_next_question"
+        android:background="@drawable/disable_next_question"
         android:layout_alignParentBottom="true"
         android:layout_margin="10dp"
         android:text="@string/next"

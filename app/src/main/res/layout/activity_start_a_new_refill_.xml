@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnStartRefill"
-        android:background="@drawable/custom_button_main"
+        android:background="@drawable/enabled_custom_button"
         android:text="@string/refill_button"
         android:textColor="@color/white"
         android:layout_marginTop="20dp"

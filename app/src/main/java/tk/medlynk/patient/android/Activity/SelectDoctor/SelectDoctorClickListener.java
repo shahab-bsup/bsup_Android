@@ -21,8 +21,4 @@ public class SelectDoctorClickListener {
         System.out.println ("onSelectDoctorClicked");
         context.startActivity ( new Intent ( context, StartAppointmentActivity.class ).putExtra ( "Doctor ID" , doctorID) );
     }
-
-    public void onWrongDoctorIdClicked() {
-        System.out.println ("onWrongDoctorIdClicked");
-    }
 }

@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -12,10 +13,11 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import tk.medlynk.patient.android.Activity.SearchDoctor.SearchActivity;
+import tk.medlynk.patient.android.Activity.Login.LoginActivity;
 import tk.medlynk.patient.android.Constants;
 import tk.medlynk.patient.android.CustomViews.SnackController;
 import tk.medlynk.patient.android.Essentials.Utils;
+import tk.medlynk.patient.android.Model.SignUpErrorResponse;
 
 import com.neweraandroid.demo.R;
 
@@ -33,7 +35,7 @@ public class SignUpViewHolder extends RecyclerView.ViewHolder implements
         OnSignUpListener
 {
 
-    EditText firstName, lastName, middleName, email, password, confirmedPassword;
+    AppCompatEditText firstName, lastName, middleName, email, password, confirmedPassword;
     Button submit, birthDate;
     String gender = "null";
     boolean isFirstNameValid, isLastNameValid, isEmailValid;
@@ -181,21 +183,29 @@ public class SignUpViewHolder extends RecyclerView.ViewHolder implements
             calendar.set ( Calendar.MONTH, month );
             calendar.set ( Calendar.DAY_OF_MONTH, day );
             birthDate.setText ( calendar.getTime ().toString () );
+            birthDate.setTextColor ( itemView.getContext ().getResources ().getColor ( R.color.black ) );
         }
     }
 
     @Override
     public void onSignUpSuccess() {
         Toast.makeText ( parentView.getContext (), parentView.getContext ().getString ( R.string.confirmation_email ), Toast.LENGTH_SHORT ).show ();
-        parentView.getContext ().startActivity ( new Intent ( parentView.getContext (), SearchActivity.class ) );
+        parentView.getContext ().startActivity ( new Intent ( parentView.getContext (), LoginActivity.class ) );
     }
 
     @Override
-    public void onSignUpFailure(String message, Constants.EXCEPTION_TYPE exception_type) {
-        if( exception_type == Constants.EXCEPTION_TYPE.NO_EXCEPTION ){
-            SnackController.getInstance ().
-                    init ( parentView.getContext (), message, Snackbar.LENGTH_LONG )
-                    .showSnackBar ();
+    public void onSignUpFailure(SignUpErrorResponse errorResponse, Constants.EXCEPTION_TYPE exception_type) {
+        if( errorResponse.getErrors ().getEmail () != null ){
+            email.setError ( errorResponse.getErrors ().getEmail ().get ( 0 ) );
+        }
+        if( errorResponse.getErrors ().getPassword () != null ){
+            password.setText ( "" );
+            password.setError ( errorResponse.getErrors ().getPassword ().get ( 0 ) );
+            confirmedPassword.setText ( "" );
+        }
+        if( errorResponse.getErrors ().getBirthDate () != null ){
+            birthDate.setText ( errorResponse.getErrors ().getBirthDate ().get ( 0 ) );
+            birthDate.setTextColor ( itemView.getContext ().getResources ().getColor ( R.color.cpb_red ) );
         }
     }
 

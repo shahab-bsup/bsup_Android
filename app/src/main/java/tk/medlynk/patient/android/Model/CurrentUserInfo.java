@@ -30,7 +30,7 @@ public class CurrentUserInfo implements Serializable {
     private Integer id;
     @SerializedName("name")
     @Expose
-    private String name;
+    private UserName name;
     @SerializedName("email")
     @Expose
     private String email;
@@ -39,7 +39,7 @@ public class CurrentUserInfo implements Serializable {
     private String gender;
     @SerializedName("birth_date")
     @Expose
-    private String birthDate;
+    private BirthDate birthDate;
     @SerializedName("preferences")
     @Expose
     private Preferences preferences;
@@ -56,11 +56,11 @@ public class CurrentUserInfo implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
+    public UserName getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(UserName name) {
         this.name = name;
     }
 
@@ -80,11 +80,11 @@ public class CurrentUserInfo implements Serializable {
         this.gender = gender;
     }
 
-    public String getBirthDate() {
+    public BirthDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(BirthDate birthDate) {
         this.birthDate = birthDate;
     }
 

@@ -94,6 +94,7 @@ public class NewSymptomActivity extends AppCompatActivity implements
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_2nd_question (), New_Symptom_2nd_question.TAG ).commit ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
+        fragmentTransaction.addToBackStack ( New_Symptom_2nd_question.TAG );
     }
 
     @Override
@@ -101,6 +102,7 @@ public class NewSymptomActivity extends AppCompatActivity implements
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
         fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_3rd_question (), New_Symptom_3rd_question.TAG ).commit ();
+        fragmentTransaction.addToBackStack ( New_Symptom_3rd_question.TAG );
     }
 
     @Override
@@ -108,6 +110,7 @@ public class NewSymptomActivity extends AppCompatActivity implements
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
         fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_4th_question (), New_Symptom_4th_question.TAG ).commit ();
+        fragmentTransaction.addToBackStack ( New_Symptom_4th_question.TAG );
     }
 
     @Override
@@ -286,6 +289,6 @@ public class NewSymptomActivity extends AppCompatActivity implements
     public void onBackPressed() {
         super.onBackPressed ();
         List<Fragment> fragments = getSupportFragmentManager ().getFragments ();
-        
+
     }
 }

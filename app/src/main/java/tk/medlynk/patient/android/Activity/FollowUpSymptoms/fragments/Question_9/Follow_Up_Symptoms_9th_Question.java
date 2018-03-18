@@ -10,6 +10,14 @@ import android.view.ViewGroup;
 
 import com.neweraandroid.demo.R;
 
+import java.util.List;
+
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_8.Follow_Up_Symptoms_8th_Question;
+import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.Model.Answer;
+import tk.medlynk.patient.android.Model.FollowUpResultResponse;
+import tk.medlynk.patient.android.Networking.MedlynkRequests;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -18,16 +26,12 @@ import com.neweraandroid.demo.R;
  * Use the {@link Follow_Up_Symptoms_9th_Question#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Follow_Up_Symptoms_9th_Question extends Fragment implements Follow_Up_Symptoms_9th_Question_ViewHolder.OnFollowUpNinthQuestionViewsClickListener {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    public static final String TAG = Follow_Up_Symptoms_9th_Question.class.getSimpleName ();
+public class Follow_Up_Symptoms_9th_Question extends Fragment implements
+        Follow_Up_Symptoms_9th_Question_ViewHolder.OnFollowUpNinthQuestionViewsClickListener,
+        OnNinthFollowUpAnswerListener
+{
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    public static final String TAG = Follow_Up_Symptoms_9th_Question.class.getSimpleName ();
 
     private OnFollowUpSymptomsNinthQuestionListener mListener;
     private Follow_Up_Symptoms_9th_Question_ViewHolder viewHolder;
@@ -36,20 +40,9 @@ public class Follow_Up_Symptoms_9th_Question extends Fragment implements Follow_
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Follow_Up_Symptoms_9th_Question.
-     */
-    // TODO: Rename and change types and number of parameters
     public static Follow_Up_Symptoms_9th_Question newInstance(String param1, String param2) {
         Follow_Up_Symptoms_9th_Question fragment = new Follow_Up_Symptoms_9th_Question ();
         Bundle args = new Bundle ();
-        args.putString ( ARG_PARAM1, param1 );
-        args.putString ( ARG_PARAM2, param2 );
         fragment.setArguments ( args );
         return fragment;
     }
@@ -58,8 +51,7 @@ public class Follow_Up_Symptoms_9th_Question extends Fragment implements Follow_
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
         if (getArguments () != null) {
-            mParam1 = getArguments ().getString ( ARG_PARAM1 );
-            mParam2 = getArguments ().getString ( ARG_PARAM2 );
+
         }
     }
 
@@ -91,14 +83,43 @@ public class Follow_Up_Symptoms_9th_Question extends Fragment implements Follow_
     }
 
     @Override
-    public void onNextClick() {
+    public void onNextClick(Answer answer) {
         System.out.println ( "Follow_Up_Symptoms_9th_Question.onNextClick" );
-        mListener.onNinthQuestion ();
+        viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
+        SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
+        MedlynkRequests.followUpResultNinthAnswer ( getActivity (),
+                manager.getAppointmentID (),
+                Follow_Up_Symptoms_9th_Question.this,
+                answer);
+    }
+
+    @Override
+    public void onNextClick(List<Answer> answers) {
+        viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
+        SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
+        MedlynkRequests.followUpResultNinthAnswer ( getActivity (),
+                manager.getAppointmentID (),
+                Follow_Up_Symptoms_9th_Question.this,
+                answers);
     }
 
     @Override
     public void onSkipClick() {
         System.out.println ( "Follow_Up_Symptoms_9th_Question.onSkipClick" );
+        mListener.onNinthQuestion ();
+    }
+
+    @Override
+    public void onNinthAnswerSuccess(FollowUpResultResponse response) {
+        System.out.println ( "Follow_Up_Symptoms_9th_Question.onNinthAnswerSuccess" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+        mListener.onNinthQuestion ();
+    }
+
+    @Override
+    public void onNinthAnswerFailure() {
+        System.out.println ( "Follow_Up_Symptoms_9th_Question.onNinthAnswerFailure" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onNinthQuestion ();
     }
 

@@ -6,10 +6,13 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.annotation.Nullable;
 import android.util.Patterns;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import java.util.Calendar;
 
 import static android.content.Context.CONNECTIVITY_SERVICE;
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
 /**
  * Created by Shahab on 1/11/2018.
@@ -81,6 +84,13 @@ public class Utils {
 
     public static boolean isPasswordValid(String password) {
         return password.length () >= 6 ? true : false;
+    }
+
+    public static void hideSoftKeyBoard(View view){
+        if(view != null){
+            InputMethodManager imm = (InputMethodManager) view.getContext ().getSystemService ( INPUT_METHOD_SERVICE );
+            imm.hideSoftInputFromWindow ( view.getWindowToken (), 0 );
+        }
     }
 
 }

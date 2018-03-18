@@ -1,6 +1,9 @@
 package tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_1;
 
+import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -19,6 +22,7 @@ public class Follow_Up_Symptoms_1st_Question_ViewHolder extends RecyclerView.Vie
     private String question_resource;
     private Button button;
     private ProgressBar progressBar;
+    private AppCompatEditText answer_input;
     private OnFollowUpFirstQuestionViewsClickListener onFollowUpFirstQuestionViewsClickListener;
 
     public Follow_Up_Symptoms_1st_Question_ViewHolder(View itemView) {
@@ -31,6 +35,9 @@ public class Follow_Up_Symptoms_1st_Question_ViewHolder extends RecyclerView.Vie
         question.setText ( question_resource );
         button = itemView.findViewById ( R.id.btnNextQuestion );
         button.setOnClickListener ( new OnNextClickListener() );
+        button.setEnabled ( false );
+        answer_input = itemView.findViewById ( R.id.follow_up_symptom_first_answer );
+        answer_input.addTextChangedListener ( new OnAnswerInputTextWatcher() );
     }
 
     public void setProgressBarVisibilityStatus(int status ){
@@ -39,6 +46,10 @@ public class Follow_Up_Symptoms_1st_Question_ViewHolder extends RecyclerView.Vie
 
     public void setOnFollowUpFirstQuestionViewsClickListener(OnFollowUpFirstQuestionViewsClickListener onFollowUpFirstQuestionViewsClickListener) {
         this.onFollowUpFirstQuestionViewsClickListener = onFollowUpFirstQuestionViewsClickListener;
+    }
+
+    public String getAnswerInput() {
+        return answer_input.getText ().toString ();
     }
 
     private class OnNextClickListener implements View.OnClickListener {
@@ -52,5 +63,29 @@ public class Follow_Up_Symptoms_1st_Question_ViewHolder extends RecyclerView.Vie
 
     public interface OnFollowUpFirstQuestionViewsClickListener{
         void onNextClick();
+    }
+
+    private class OnAnswerInputTextWatcher implements TextWatcher {
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            if( editable.length () > 1 ){
+                button.setEnabled ( true );
+                button.setBackgroundResource ( R.drawable.enable_next_question );
+            }else{
+                button.setEnabled ( false );
+                button.setBackgroundResource ( R.drawable.disable_next_question );
+            }
+        }
     }
 }

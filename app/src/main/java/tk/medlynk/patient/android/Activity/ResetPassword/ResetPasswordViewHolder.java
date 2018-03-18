@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.neweraandroid.demo.R;
 
@@ -18,9 +19,11 @@ public class ResetPasswordViewHolder extends RecyclerView.ViewHolder {
     EditText password, confirmedPassword;
     Button button;
     OnButtonClickListener onButtonClickListener;
+    private ProgressBar progressBar;
 
     public ResetPasswordViewHolder(View itemView) {
         super ( itemView );
+        progressBar = itemView.findViewById ( R.id.progress_bar );
         password = itemView.findViewById ( R.id.edtNewPassword );
         confirmedPassword = itemView.findViewById ( R.id.edtConfirmedPassWord );
         button = itemView.findViewById ( R.id.btnResetPassword );
@@ -31,6 +34,10 @@ public class ResetPasswordViewHolder extends RecyclerView.ViewHolder {
                         confirmedPassword.getText ().toString ());
             }
         } );
+    }
+
+    public void setProgressBarVisibilityStatus( int status ){
+        this.progressBar.setVisibility ( status );
     }
 
     public EditText getPasswordEditText(){
@@ -45,7 +52,7 @@ public class ResetPasswordViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
-    interface OnButtonClickListener{
+   public interface OnButtonClickListener{
         void onClick(String password, String confirmedEmail);
     }
 }

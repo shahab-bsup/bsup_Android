@@ -1,7 +1,6 @@
 package tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_1;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,6 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.neweraandroid.demo.R;
+
+import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.Model.Answer;
+import tk.medlynk.patient.android.Model.FollowUpResultResponse;
+import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
+import tk.medlynk.patient.android.Networking.MedlynkRequests;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,7 +24,8 @@ import com.neweraandroid.demo.R;
  * create an instance of this fragment.
  */
 public class Follow_Up_Symptoms_1st_Question extends Fragment implements
-    Follow_Up_Symptoms_1st_Question_ViewHolder.OnFollowUpFirstQuestionViewsClickListener
+    Follow_Up_Symptoms_1st_Question_ViewHolder.OnFollowUpFirstQuestionViewsClickListener,
+        OnFirstFollowUpAnswerListener
     {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -96,21 +102,29 @@ public class Follow_Up_Symptoms_1st_Question extends Fragment implements
         @Override
         public void onNextClick() {
             System.out.println ( "Follow_Up_Symptoms_1st_Question.onNextClick" );
+            viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
+            SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
+            Answer answer = new Answer ();
+            answer.setReply ( viewHolder.getAnswerInput() );
+            MedlynkRequests.followUpResultFirstAnswer(getActivity (), Follow_Up_Symptoms_1st_Question.this,
+                    manager.getAppointmentID (),
+                    answer);
+        }
+
+        @Override
+        public void onFirstAnswerSuccess(FollowUpResultResponse response) {
+            System.out.println ( "Follow_Up_Symptoms_1st_Question.onFirstAnswerSuccess" );
+            viewHolder.setProgressBarVisibilityStatus ( View.GONE );
             mListener.onFirstQuestion ();
         }
 
-        /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+        @Override
+        public void onFirstAnswerFailure() {
+            System.out.println ( "Follow_Up_Symptoms_1st_Question.onFirstAnswerFailure" );
+            viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+        }
+
     public interface OnFollowUpSymptomsFirstQuestionListener {
-        // TODO: Update argument type and name
         void onFirstQuestion();
     }
 }

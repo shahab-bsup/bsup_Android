@@ -10,6 +10,11 @@ import android.view.ViewGroup;
 
 import com.neweraandroid.demo.R;
 
+import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.Model.Answer;
+import tk.medlynk.patient.android.Model.FollowUpResultResponse;
+import tk.medlynk.patient.android.Networking.MedlynkRequests;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -18,7 +23,7 @@ import com.neweraandroid.demo.R;
  * Use the {@link Follow_Up_Symptoms_2nd_Question#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Follow_Up_Symptoms_2nd_Question extends Fragment implements Follow_Up_Symptoms_2nd_Question_ViewHolder.OnFollowUpSecondQuestionViewsClickListener {
+public class Follow_Up_Symptoms_2nd_Question extends Fragment implements Follow_Up_Symptoms_2nd_Question_ViewHolder.OnFollowUpSecondQuestionViewsClickListener, OnSecondFollowUpAnswerListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -98,15 +103,32 @@ public class Follow_Up_Symptoms_2nd_Question extends Fragment implements Follow_
     }
 
     @Override
-    public void onNextClick() {
+    public void onNextClick(Answer answer) {
         System.out.println ( "Follow_Up_Symptoms_2nd_Question.onNextClick" );
-        mListener.onSecondQuestion ();
+        viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
+        SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
+        MedlynkRequests.followUpResultSecondAnswer ( getActivity (),
+                Follow_Up_Symptoms_2nd_Question.this,
+                manager.getAppointmentID (), answer);
     }
 
     @Override
     public void onSkipClick() {
         System.out.println ( "Follow_Up_Symptoms_2nd_Question.onSkipClick" );
         mListener.onSecondQuestion ();
+    }
+
+    @Override
+    public void onSecondAnswerSuccess(FollowUpResultResponse response) {
+        System.out.println ( "Follow_Up_Symptoms_2nd_Question.onSecondAnswerSuccess" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+        mListener.onSecondQuestion ();
+    }
+
+    @Override
+    public void onSecondAnswerFailure() {
+        System.out.println ( "Follow_Up_Symptoms_2nd_Question.onSecondAnswerFailure" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
     }
 
     /**

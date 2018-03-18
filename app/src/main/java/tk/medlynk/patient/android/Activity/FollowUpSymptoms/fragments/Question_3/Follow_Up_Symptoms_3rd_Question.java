@@ -10,6 +10,11 @@ import android.view.ViewGroup;
 
 import com.neweraandroid.demo.R;
 
+import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.Model.Answer;
+import tk.medlynk.patient.android.Model.FollowUpResultResponse;
+import tk.medlynk.patient.android.Networking.MedlynkRequests;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -18,16 +23,10 @@ import com.neweraandroid.demo.R;
  * Use the {@link Follow_Up_Symptoms_3rd_Question#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Follow_Up_Symptoms_3rd_Question extends Fragment implements Follow_Up_Symptoms_3rd_Question_ViewHolder.OnFollowUpThirdQuestionViewsClickListener {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    public static final String TAG = Follow_Up_Symptoms_3rd_Question.class.getSimpleName ();
+public class Follow_Up_Symptoms_3rd_Question extends Fragment
+        implements Follow_Up_Symptoms_3rd_Question_ViewHolder.OnFollowUpThirdQuestionViewsClickListener, OnThirdFollowUpAnswerListener {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    public static final String TAG = Follow_Up_Symptoms_3rd_Question.class.getSimpleName ();
 
     private OnFollowUpSymptomsThirdQuestionListener mListener;
     private Follow_Up_Symptoms_3rd_Question_ViewHolder viewHolder;
@@ -48,8 +47,6 @@ public class Follow_Up_Symptoms_3rd_Question extends Fragment implements Follow_
     public static Follow_Up_Symptoms_3rd_Question newInstance(String param1, String param2) {
         Follow_Up_Symptoms_3rd_Question fragment = new Follow_Up_Symptoms_3rd_Question ();
         Bundle args = new Bundle ();
-        args.putString ( ARG_PARAM1, param1 );
-        args.putString ( ARG_PARAM2, param2 );
         fragment.setArguments ( args );
         return fragment;
     }
@@ -58,26 +55,19 @@ public class Follow_Up_Symptoms_3rd_Question extends Fragment implements Follow_
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
         if (getArguments () != null) {
-            mParam1 = getArguments ().getString ( ARG_PARAM1 );
-            mParam2 = getArguments ().getString ( ARG_PARAM2 );
+
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater,
+                             ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate ( R.layout.fragment_follow__up__symptoms_3rd__question, container, false );
         viewHolder = new Follow_Up_Symptoms_3rd_Question_ViewHolder ( view );
         viewHolder.setOnFollowUpThirdQuestionViewsClickListener ( this );
         return view;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onThirdQuestion ();
-        }
     }
 
     @Override
@@ -98,9 +88,14 @@ public class Follow_Up_Symptoms_3rd_Question extends Fragment implements Follow_
     }
 
     @Override
-    public void onNextClick() {
+    public void onNextClick(Answer answer) {
         System.out.println ( "Follow_Up_Symptoms_3rd_Question.onNextClick" );
-        mListener.onThirdQuestion ();
+        viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
+        SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
+        MedlynkRequests.followUpResultThirdAnswer ( getActivity (),
+                manager.getAppointmentID (),
+                Follow_Up_Symptoms_3rd_Question.this,
+                answer);
     }
 
     @Override
@@ -109,18 +104,20 @@ public class Follow_Up_Symptoms_3rd_Question extends Fragment implements Follow_
         mListener.onThirdQuestion ();
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+    @Override
+    public void onThirdAnswerSuccess(FollowUpResultResponse response) {
+        System.out.println ( "Follow_Up_Symptoms_3rd_Question.onThirdAnswerSuccess" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+        mListener.onThirdQuestion ();
+    }
+
+    @Override
+    public void onThirdAnswerFailure() {
+        System.out.println ( "Follow_Up_Symptoms_3rd_Question.onThirdAnswerFailure" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+    }
+
     public interface OnFollowUpSymptomsThirdQuestionListener {
-        // TODO: Update argument type and name
         void onThirdQuestion();
     }
 }

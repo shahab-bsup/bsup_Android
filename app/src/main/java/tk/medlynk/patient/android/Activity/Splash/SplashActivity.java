@@ -58,7 +58,7 @@ public class SplashActivity extends AppCompatActivity implements
                 } else if(Utils.isPrimaryTokenExpired ( this )){
                         MedlynkRequests.getNewPrimaryToken ( this, manager.getRefreshToken () );
                 } else{
-                        //Elude the user that this is a Splash Screen!
+                        //Elude the user that this is a Splash Screen!!!
                         new Timer (  )
                                 .schedule ( new TimerTask () {
                                     @Override

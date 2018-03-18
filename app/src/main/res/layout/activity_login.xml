@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/btnLogin"
             android:layout_below="@id/layoutPassword"
-            android:background="@drawable/custom_button_main"
+            android:background="@drawable/enabled_custom_button"
             android:text="@string/login"
             android:textColor="@color/white"
             android:layout_marginRight="@dimen/login_margins_horizontally"

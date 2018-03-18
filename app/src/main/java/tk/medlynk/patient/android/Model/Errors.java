@@ -12,23 +12,17 @@ import com.google.gson.annotations.SerializedName;
 public class Errors implements Serializable
 {
 
-    @SerializedName ( "message" )
+
+    @SerializedName("birth_date")
     @Expose
-    String message;
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
+    private List<String> birthDate = null;
     @SerializedName("email")
     @Expose
     private List<String> email = null;
 
-    private final static long serialVersionUID = -6759493907826777711L;
+    @SerializedName("password")
+    @Expose
+    private List<String> password = null;
 
     public List<String> getEmail() {
         return email;
@@ -36,5 +30,21 @@ public class Errors implements Serializable
 
     public void setEmail(List<String> email) {
         this.email = email;
+    }
+
+    public List<String> getPassword() {
+        return password;
+    }
+
+    public void setPassword(List<String> password) {
+        this.password = password;
+    }
+
+    public List<String> getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(List<String> birthDate) {
+        this.birthDate = birthDate;
     }
 }

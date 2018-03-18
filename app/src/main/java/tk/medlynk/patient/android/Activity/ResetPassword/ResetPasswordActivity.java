@@ -62,6 +62,7 @@ OnResetPasswordListener
                             "Passwords does not match!")
                     .showSnackBar ();
         } else{
+            viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
             SharedPreferenceManager manager = new SharedPreferenceManager ( ResetPasswordActivity.this );
             MedlynkRequests.resetPassword ( ResetPasswordActivity.this, reset_token, manager.getEmail (), password , ResetPasswordActivity.this);
         }
@@ -69,6 +70,7 @@ OnResetPasswordListener
     
     @Override
     public void onResetPasswordSuccess(String message) {
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         Toast.makeText ( this, message + "\nLogin Now!", Toast.LENGTH_SHORT ).show ();
         startActivity ( new Intent ( ResetPasswordActivity.this, LoginActivity.class ) );
         finish ();
@@ -78,11 +80,13 @@ OnResetPasswordListener
     public void onResetPasswordFailure(String message, Constants.EXCEPTION_TYPE exception_type) {
         System.out.println ( "ResetPasswordActivity.onResetPasswordFailure" );
         System.out.println ( "message = [" + message + "], exception_type = [" + exception_type + "]" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
     }
 
     @Override
     public void onResetPasswordFailure(Constants.EXCEPTION_TYPE exception_type) {
         System.out.println ( "ResetPasswordActivity.onResetPasswordFailure" );
         System.out.println ( "exception_type = [" + exception_type + "]" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
     }
 }

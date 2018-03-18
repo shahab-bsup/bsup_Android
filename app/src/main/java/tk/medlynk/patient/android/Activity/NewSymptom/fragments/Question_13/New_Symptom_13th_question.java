@@ -63,8 +63,7 @@ public class New_Symptom_13th_question extends Fragment implements
 
         View view = inflater.inflate ( R.layout.fragment_new__symptom_13th_question, container, false );
         viewHolder = new New_Symptom_13th_question_ViewHolder ( view );
-
-
+        viewHolder.setListener ( this );
         return view;
     }
 

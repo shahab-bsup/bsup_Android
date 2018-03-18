@@ -74,7 +74,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/btnStart"
         android:layout_below="@id/txtSecondText"
-        android:background="@drawable/custom_button_main"
+        android:background="@drawable/enabled_custom_button"
         android:text="@string/get_started"
         android:textColor="@color/white"
         android:layout_marginTop="10dp"

@@ -7,6 +7,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#8898b3</color>
 
+    <color name="colorPrimaryDisabled">#FFAFC8EF</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="welcome_text_color">#8896b3</color>

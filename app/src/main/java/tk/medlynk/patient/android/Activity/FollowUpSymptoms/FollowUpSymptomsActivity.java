@@ -24,6 +24,7 @@ import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_6
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_7.Follow_Up_Symptoms_7th_Question;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_8.Follow_Up_Symptoms_8th_Question;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_9.Follow_Up_Symptoms_9th_Question;
+import tk.medlynk.patient.android.Constants;
 
 public class FollowUpSymptomsActivity extends AppCompatActivity implements
         Follow_Up_Symptoms_1st_Question.OnFollowUpSymptomsFirstQuestionListener,
@@ -51,6 +52,7 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_follow_up_sysmptoms );
+        Constants.FOLLOW_UP_RESULT_BODY.put ( Constants.QUESTION_SET, "follow_up_symptoms" );
         toolbar_view = findViewById ( R.id.follow_up_symptom_toolbar_layout );
         toolbar_title = toolbar_view.findViewById ( R.id.toolbar_title );
         toolbar_title.setText ( R.string.follow_up_symptoms_title );
@@ -62,7 +64,8 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
             }
         } );
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.add ( R.id.followUpFragmentsContainer,
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+                .add ( R.id.followUpFragmentsContainer,
                 new Follow_Up_Symptoms_1st_Question (),
                 Follow_Up_Symptoms_1st_Question.TAG)
                 .commit ();
@@ -73,7 +76,8 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
     public void onFirstQuestion() {
         System.out.println ( "FollowUpSymptomsActivity.onFirstQuestion" );
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.add(R.id.followUpFragmentsContainer,
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+                .add(R.id.followUpFragmentsContainer,
                 new Follow_Up_Symptoms_2nd_Question (),
                 Follow_Up_Symptoms_2nd_Question.TAG)
         .commit ();
@@ -84,7 +88,8 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
     public void onSecondQuestion() {
         System.out.println ( "FollowUpSymptomsActivity.onSecondQuestion" );
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.add ( R.id.followUpFragmentsContainer,
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+                .add ( R.id.followUpFragmentsContainer,
                 new Follow_Up_Symptoms_3rd_Question (),
                 Follow_Up_Symptoms_3rd_Question.TAG)
                 .commit ();
@@ -96,7 +101,8 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
     public void onThirdQuestion() {
         System.out.println ( "FollowUpSymptomsActivity.onThirdQuestion" );
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.add ( R.id.followUpFragmentsContainer,
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+                .add ( R.id.followUpFragmentsContainer,
                 new Follow_Up_Symptoms_4th_Question (),
                 Follow_Up_Symptoms_4th_Question.TAG)
                 .commit ();
@@ -108,7 +114,8 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
     public void onFourthQuestion() {
         System.out.println ( "FollowUpSymptomsActivity.onFourthQuestion" );
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.add ( R.id.followUpFragmentsContainer,
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+                .add ( R.id.followUpFragmentsContainer,
                 new Follow_Up_Symptoms_5th_Question (),
                 Follow_Up_Symptoms_5th_Question.TAG)
                 .commit ();
@@ -120,7 +127,8 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
     public void onFifthQuestion() {
         System.out.println ( "FollowUpSymptomsActivity.onFifthQuestion" );
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.add ( R.id.followUpFragmentsContainer,
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+                .add ( R.id.followUpFragmentsContainer,
                 new Follow_Up_Symptoms_6th_Question (),
                 Follow_Up_Symptoms_6th_Question.TAG)
                 .commit ();
@@ -132,7 +140,8 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
     public void onSixthQuestion() {
         System.out.println ( "FollowUpSymptomsActivity.onSixthQuestion" );
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.add ( R.id.followUpFragmentsContainer,
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+                .add ( R.id.followUpFragmentsContainer,
                 new Follow_Up_Symptoms_7th_Question (),
                 Follow_Up_Symptoms_7th_Question.TAG)
                 .commit ();
@@ -143,7 +152,8 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
     public void onSeventhQuestion() {
         System.out.println ( "FollowUpSymptomsActivity.onSeventhQuestion" );
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.add ( R.id.followUpFragmentsContainer,
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+                .add ( R.id.followUpFragmentsContainer,
                 new Follow_Up_Symptoms_8th_Question (),
                 Follow_Up_Symptoms_8th_Question.TAG)
                 .commit ();
@@ -154,7 +164,8 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
     public void onEighthQuestion() {
         System.out.println ( "FollowUpSymptomsActivity.onEighthQuestion" );
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.add ( R.id.followUpFragmentsContainer,
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+                .add ( R.id.followUpFragmentsContainer,
                 new Follow_Up_Symptoms_9th_Question (),
                 Follow_Up_Symptoms_9th_Question.TAG)
                 .commit ();
@@ -165,7 +176,8 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
     public void onNinthQuestion() {
         System.out.println ( "FollowUpSymptomsActivity.onNinthQuestion" );
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.add ( R.id.followUpFragmentsContainer,
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+                .add ( R.id.followUpFragmentsContainer,
                 new Follow_Up_Symptoms_10th_Question (),
                 Follow_Up_Symptoms_10th_Question.TAG)
                 .commit ();
@@ -177,7 +189,8 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
     public void onTenthQuestion() {
         System.out.println ( "FollowUpSymptomsActivity.onTenthQuestion" );
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.add ( R.id.followUpFragmentsContainer,
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+                .add ( R.id.followUpFragmentsContainer,
                 new Follow_Up_Symptoms_11th_Question (),
                 Follow_Up_Symptoms_11th_Question.TAG)
                 .commit ();
@@ -188,7 +201,8 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
     public void onEleventhQuestion() {
         System.out.println ( "FollowUpSymptomsActivity.onEleventhQuestion" );
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.add ( R.id.followUpFragmentsContainer,
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+                .add ( R.id.followUpFragmentsContainer,
                 new Follow_Up_Symptoms_12th_Question (),
                 Follow_Up_Symptoms_12th_Question.TAG)
                 .commit ();
@@ -200,7 +214,8 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
     public void onTwelveQuestion() {
         System.out.println ( "FollowUpSymptomsActivity.onTwelveQuestion" );
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.add ( R.id.followUpFragmentsContainer,
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+                .add ( R.id.followUpFragmentsContainer,
                 new Follow_Up_Symptoms_13th_Question (),
                 Follow_Up_Symptoms_13th_Question.TAG)
                 .commit ();
@@ -212,7 +227,8 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
     public void onThirteenQuestion() {
         System.out.println ( "FollowUpSymptomsActivity.onThirteenQuestion" );
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.add ( R.id.followUpFragmentsContainer,
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+                .add ( R.id.followUpFragmentsContainer,
                 new Follow_Up_Symptoms_14th_Question (),
                 Follow_Up_Symptoms_14th_Question.TAG)
                 .commit ();
@@ -223,7 +239,8 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
     public void onFourteenQuestion() {
         System.out.println ( "FollowUpSymptomsActivity.onFourteenQuestion" );
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.add ( R.id.followUpFragmentsContainer,
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+                .add ( R.id.followUpFragmentsContainer,
                 new Follow_Up_Symptoms_15th_Question (),
                 Follow_Up_Symptoms_15th_Question.TAG)
                 .commit ();

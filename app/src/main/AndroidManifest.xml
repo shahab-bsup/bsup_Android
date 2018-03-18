@@ -23,7 +23,6 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -64,7 +63,9 @@
         </activity>
         <activity
             android:name="tk.medlynk.patient.android.Activity.SignUp.SignUpActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" android:noHistory="true">
+        </activity>
+
         <activity
             android:name="tk.medlynk.patient.android.Activity.Welcome.WelcomeActivity"
             android:screenOrientation="portrait" />
@@ -72,7 +73,12 @@
             android:name="tk.medlynk.patient.android.Activity.SearchDoctor.SearchActivity"
             android:screenOrientation="portrait" />
         <activity android:name="tk.medlynk.patient.android.Activity.SelectDoctor.SelectDoctorActivity" />
-        <activity android:name="tk.medlynk.patient.android.Activity.StartQuestionSet.StartAppointmentActivity" />
+        <activity android:name="tk.medlynk.patient.android.Activity.StartQuestionSet.StartAppointmentActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name="tk.medlynk.patient.android.Activity.NewSymptom.NewSymptomActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -82,7 +88,10 @@
         </activity>
         <activity android:name="tk.medlynk.patient.android.Activity.Start_a_Refill.Start_A_New_RefillActivity" />
         <activity android:name="tk.medlynk.patient.android.Activity.Refill.Refill_A_Medication_Activity" />
-        <activity android:name="tk.medlynk.patient.android.Activity.NoDoctorIdPage.NoDoctorIdActivity" />
+        <activity android:name="tk.medlynk.patient.android.Activity.NoDoctorIdPage.NoDoctorIdActivity"
+            android:noHistory="true">
+
+        </activity>
         <activity android:name="tk.medlynk.patient.android.Activity.Confirmation.ConfirmationActivity" />
         <activity android:name="tk.medlynk.patient.android.Activity.FollowUpSymptoms.FollowUpSymptomsActivity"></activity>
     </application>

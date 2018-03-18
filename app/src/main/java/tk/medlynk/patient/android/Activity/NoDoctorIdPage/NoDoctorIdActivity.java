@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import tk.medlynk.patient.android.Activity.NewSymptom.NewSymptomActivity;
+import tk.medlynk.patient.android.Activity.StartQuestionSet.StartAppointmentActivity;
 import tk.medlynk.patient.android.Constants;
 import tk.medlynk.patient.android.CustomViews.SnackController;
 import tk.medlynk.patient.android.Model.CurrentUserInfo;
@@ -67,7 +68,7 @@ implements OnNoDoctorIDPreferencesListener {
     @Override
     public void onNoDoctorIDSuccess(Boolean body) {
         CurrentUserInfo.getInstance ().getPreferences ().setSkipNoDoctorIdPage ( String.valueOf ( no_doctor_ID_user_preferences ) );
-        startActivity ( new Intent ( NoDoctorIdActivity.this, NewSymptomActivity.class ) );
+        startActivity ( new Intent ( NoDoctorIdActivity.this, StartAppointmentActivity.class ) );
     }
 
     @Override

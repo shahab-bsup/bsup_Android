@@ -55,19 +55,20 @@ public class LoginActivity extends AppCompatActivity implements
             submit.setOnClickListener ( this );
             sharedPreferenceManager = new SharedPreferenceManager ( this );
         }
-
         handleIntent();
 
     }
 
     private void handleIntent() {
         Intent appLinkIntent = getIntent ();
-        Uri appLinkData = appLinkIntent.getData ();
-        String data = String.valueOf ( appLinkData );
-        String[] strings = data.split ( "/" );
-        System.out.println (strings.length);
-        for (int i = 0; i < strings.length; i++) {
-            System.out.println (strings[i]);
+        if( appLinkIntent != null ){
+            Uri appLinkData = appLinkIntent.getData ();
+            String data = String.valueOf ( appLinkData );
+            String[] strings = data.split ( "/" );
+            System.out.println (strings.length);
+            for (int i = 0; i < strings.length; i++) {
+                System.out.println (strings[i]);
+            }
         }
     }
 
@@ -123,9 +124,9 @@ public class LoginActivity extends AppCompatActivity implements
         SharedPreferenceManager manager = new SharedPreferenceManager ( LoginActivity.this );
         manager.setPrimaryToken ( response.getAccessToken () );
         manager.setPrimaryTokenType ( response.getTokenType () );
-        manager.setPrimaryExpireToken ( response.getExpiresIn () );
+        //TODO edit the expiretokentime
+        manager.setPrimaryExpireToken ( 600000000 );
         manager.setRefreshToken ( response.getRefreshToken () );
-
         startActivity ( new Intent ( LoginActivity.this, SearchActivity.class ) );
         finish ();
     }

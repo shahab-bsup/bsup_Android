@@ -45,7 +45,7 @@
                 android:text="@string/provide_new_account_info"
                 android:textSize="20sp" />
 
-            <EditText
+            <android.support.v7.widget.AppCompatEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/edtFirstName"
@@ -61,7 +61,7 @@
                 android:imeOptions="actionNext"
                 />
 
-            <EditText
+            <android.support.v7.widget.AppCompatEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/edtLastName"
@@ -76,7 +76,7 @@
                 android:imeOptions="actionNext"
                 />
 
-            <EditText
+            <android.support.v7.widget.AppCompatEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/edtMiddleName"
@@ -146,7 +146,7 @@
                 android:drawableLeft="@drawable/ic_action_calendar"
                 />
 
-            <EditText
+            <android.support.v7.widget.AppCompatEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/edtEmail"
@@ -161,7 +161,7 @@
                 android:imeOptions="actionNext"
                 />
 
-            <EditText
+            <android.support.v7.widget.AppCompatEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/edtFirstPassword"
@@ -175,7 +175,7 @@
                 android:imeOptions="actionNext"
                 />
 
-            <EditText
+            <android.support.v7.widget.AppCompatEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/edtRetypedPassWord"
@@ -197,7 +197,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/btnSignUp"
             android:layout_below="@id/relative_layout_signup_info"
-            android:background="@drawable/custom_button_main"
+            android:background="@drawable/enabled_custom_button"
             android:text="@string/sign_up"
             android:textColor="@color/white"
             android:layout_marginRight="@dimen/login_margins_horizontally"
