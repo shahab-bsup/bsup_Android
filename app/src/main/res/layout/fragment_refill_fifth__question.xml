@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <include
+                    android:id="@+id/refill_fifth_question"
+                    layout="@layout/doctor_layout"
+                    />
+
+                <tk.medlynk.patient.android.CustomViews.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="\#5"
+                    android:textSize="25.0sp" />
+
+                <LinearLayout
+                    android:id="@id/patient_row"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/refill_fifth_question"
+                    android:layout_marginTop="40.0dip"
+                    android:layoutDirection="rtl"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@id/doctor_icon"
+                        android:layout_width="100.0dip"
+                        android:layout_height="100.0dip"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10.0dip"
+                        android:layout_marginTop="10.0dip"
+                        android:src="@drawable/patient_icon" />
+
+                    <com.medlynk.shahab.myviewselection.ViewSelection xmlns:n2="http://schemas.android.com/apk/res-auto"
+                        android:id="@id/viewSelectionChoices"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        n2:button_type="true"
+                        n2:number_of_views="2"
+                        n2:selectable="true"
+                        n2:selected_background="@drawable/answer_selected"
+                        n2:selected_text_color="@color/black"
+                        n2:single_select="true"
+                        n2:unselected_background="@drawable/answer_not_selected"
+                        n2:unselected_text_color="@color/white" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layoutDirection="rtl">
+
+        <Button
+            android:id="@id/btnNextQuestion"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="10.0dip"
+            android:layout_weight="1.0"
+            android:background="@drawable/disable_next_question"
+            android:text="@string/next"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@id/btnSkipQuestion"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="10.0dip"
+            android:layout_weight="1.0"
+            android:background="@drawable/enabled_custom_button"
+            android:text="@string/skip"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+</RelativeLayout>

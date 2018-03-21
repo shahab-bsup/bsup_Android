@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="follow_up_symptoms_11th_choices">
+        <item>Home stretches</item>
+        <item>Physiotherapist</item>
+        <item>Message therapist</item>
+        <item>Acupuncturist</item>
+        <item>Psychologist</item>
+        <item>Chiropractor</item>
+        <item>Other</item>
+        <item>Have not tried anything</item>
+    </string-array>
+    <string-array name="follow_up_symptoms_13th_choices">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+    <string-array name="follow_up_symptoms_14th_choices">
+        <item>Blood tests</item>
+        <item>Urine tests</item>
+        <item>Imaging</item>
+        <item>X-ray</item>
+        <item>CT</item>
+        <item>MRI</item>
+        <item>Ultrasound</item>
+        <item>Mammogram</item>
+        <item>Bone Density scan</item>
+        <item>Cardiac investigation</item>
+        <item>EKG</item>
+        <item>Exercise stress tests</item>
+        <item>MIBI</item>
+        <item>Heart Ultrasound (echo)</item>
+        <item>Other</item>
+        <item>None of the above</item>
+    </string-array>
+    <string-array name="follow_up_symptoms_3rd_choices">
+        <item>Completely better</item>
+        <item>Much better</item>
+        <item>Somewhat better</item>
+        <item>A little better</item>
+        <item>About the same</item>
+        <item>A little worse</item>
+        <item>Somewhat worse</item>
+        <item>Much worse</item>
+        <item>Severe</item>
+        <item>Variable</item>
+    </string-array>
+    <string-array name="follow_up_symptoms_4th_choices">
+        <item>I constant</item>
+        <item>Occurs at some point every</item>
+        <item>Occurs almost every</item>
+        <item>Occurs a few time per week</item>
+        <item>Occurs weekly</item>
+        <item>Occurs monthly</item>
+        <item>Occurs every few months</item>
+        <item>Happens one-two times per week</item>
+        <item>Has Occurred a few times ever</item>
+        <item>Varies quite a bit</item>
+    </string-array>
+    <string-array name="follow_up_symptoms_5th_choices">
+        <item>Is always there - all day / wakes me at night</item>
+        <item>Is there all day, but I can sleep at night</item>
+        <item>Lasts days</item>
+        <item>Lasts hours</item>
+        <item>Last minutes</item>
+        <item>Last seconds</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="follow_up_symptoms_7th_8th_choices">
+        <item>Can not get out of bed</item>
+        <item>Can barely get of bed</item>
+        <item>"Can do a few simple chores 
+ at home, but not much more"</item>
+        <item>Can do chores at home but cannot get out to do very much</item>
+        <item>Can go out but cannot manage any errands</item>
+        <item>Can go out, but cannot manage manage some errands</item>
+        <item>Can go out, do errands, but nothing intense, and do exercise</item>
+        <item>Can go out, do errands and light exercise, but no strenuous exercise</item>
+        <item>Can do whatever I usually do</item>
+    </string-array>
+    <string-array name="follow_up_symptoms_9th_10th_choices">
+        <item>Rest</item>
+        <item>Sleep</item>
+        <item>Exercise</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="question_11_choices">
+        <item>Better</item>
+        <item>Worse</item>
+        <item>Staying the same</item>
+        <item>Fluctuating</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="question_12_choices">
+        <item>Fever</item>
+        <item>Unplanned weight loss</item>
+        <item>Night sweats</item>
+        <item>New or worsening fatigue&lt;b>&lt;u> together&lt;/u>&lt;/b> with the main symptom today</item>
+        <item>None of the above</item>
+    </string-array>
+    <string-array name="question_13_22_choices">
+        <item>Home stretches</item>
+        <item>Physiotherapist</item>
+        <item>Message therapist</item>
+        <item>Acupuncturist</item>
+        <item>Psychologist</item>
+        <item>Chiropractor</item>
+        <item>Other</item>
+        <item>Have not tried anything</item>
+    </string-array>
+    <string-array name="question_17_choices">
+        <item>Just need some reassurance</item>
+        <item>Not comfortable with it/want it to go away</item>
+        <item>Interfering with my activities</item>
+        <item>Afraid it is something serious like cancer</item>
+        <item>Family member urging me to have it evaluated</item>
+        <item>Worried it will cause my trouble on my upcomig trip</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="question_18_choices">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+    <string-array name="question_19_after_years_choices">
+        <item>Has occurred a few times or less ever</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="question_19_before_years_choices">
+        <item>Daily</item>
+        <item>Weekly</item>
+        <item>Monthly</item>
+        <item>Yearly</item>
+    </string-array>
+    <string-array name="question_20_choices">
+        <item>&lt;b>Years&lt;/b> Ago</item>
+        <item>&lt;b>Months&lt;/b> Ago</item>
+        <item>&lt;b>Weeks&lt;/b> Ago</item>
+        <item>&lt;b>Days&lt;/b> Ago</item>
+    </string-array>
+    <string-array name="question_20_other_chocies">
+        <item>first>Always there - all day/wakes me at night</item>
+        <item>All day, but I can sleep at night</item>
+        <item>other</item>
+    </string-array>
+    <string-array name="question_21_choices">
+        <item>Just need reassurance that nothing else needs to be done</item>
+        <item>Problems seems to be worsening</item>
+        <item>Afraid it means I have cancer</item>
+        <item>Starting to interfere with my activities</item>
+        <item>I just can</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="question_3_choices">
+        <item>Today</item>
+        <item>I don</item>
+    </string-array>
+    <string-array name="question_4_choices">
+        <item>Constantly</item>
+        <item>Everyday</item>
+        <item>Almost Every day</item>
+        <item>A few times per day</item>
+        <item>A few times per week</item>
+        <item>Weekly</item>
+        <item>Monthly</item>
+        <item>One-two times per year</item>
+        <item>A few times ever</item>
+        <item>Varies quite a bit</item>
+    </string-array>
+    <string-array name="question_6_7_choices">
+        <item>Can not get out of bed</item>
+        <item>Can barely get of bed</item>
+        <item>"Can do a few simple chores 
+ at home, but not much more"</item>
+        <item>Can do chores at home but cannot get out to do very much</item>
+        <item>Can go out but cannot manage any errands</item>
+        <item>Can go out, but cannot manage manage some errands</item>
+        <item>Can go out, do errands, but nothing intense, and do exercise</item>
+        <item>Can go out, do errands and light exercise, but no strenuous exercise</item>
+        <item>Can do whatever I usually do</item>
+    </string-array>
+    <string-array name="question_8_choices">
+        <item>Haven</item>
+        <item>Rest</item>
+        <item>Sleep</item>
+        <item>Exercise</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="question_9_choices">
+        <item>Haven</item>
+        <item>Rest</item>
+        <item>Sleep</item>
+        <item>Eating</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="refill_eighth_question_choices">
+        <item>Does not apply to me</item>
+        <item>Applies to me but I don</item>
+        <item>Highest glucometer reading:</item>
+        <item>Lowest glucometer reading:</item>
+        <item>Average glucometer reading:</item>
+        <item>Last hemoglobin A1C reading:</item>
+    </string-array>
+    <string-array name="refill_fifth_question_choices">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+    <string-array name="refill_fourth_question_choices">
+        <item>Hard to tell, I never han any symptoms</item>
+        <item>"Seems to be working well, 
+ my symptoms are completely gone"</item>
+        <item>My symptoms are about...</item>
+        <item>Doesn</item>
+    </string-array>
+    <string-array name="refill_second_question_choices">
+        <item>Always</item>
+        <item>"Missed a dose very 
+ rarely - nearly always take it"</item>
+        <item>Missed 1-3 doses per month</item>
+        <item>Missed 1-3 doses per week</item>
+        <item>Not taking it since...</item>
+        <item>Not taking it at all</item>
+    </string-array>
+    <string-array name="refill_second_question_fourth_choice">
+        <item>days</item>
+        <item>weeks</item>
+        <item>months</item>
+        <item>years</item>
+    </string-array>
+    <string-array name="refill_seventh_question_choices">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+    <string-array name="refill_sixth_question_choices">
+        <item>Does not apply to me</item>
+        <item>Approx. date:</item>
+        <item>Blood pressure:</item>
+    </string-array>
+</resources>

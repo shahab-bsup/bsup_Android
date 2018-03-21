@@ -345,4 +345,15 @@
         <item>None of the above</item>
     </string-array>
 
+    <string name="refill_first_question">What is the name of the first medication you need to refill today? (If you can, please list names, if not, at least list the type of medication, such as<b> ‘blood pressure pills’,</b> or<b> ‘diabetes pills’</b>)</string>
+    <string name="refill_second_question">How regularly have you been taking your medication?</string>
+    <string name="refill_third_question">Are there any side effects you think you are having from the medication?</string>
+    <string name="refill_fourth_question">How have your symptoms changed on the medication?</string>
+    <string name="refill_fifth_question">Are you satisfied with the medication overall?</string>
+    <string name="refill_sixth_question">For blood pressure medications, please let me know if/when you last checked your blood pressure on your own:</string>
+    <string name="refill_seventh_question">Has cost of the medication been a significant problem for you?</string>
+    <string name="refill_eight_question">For blood pressure medications, please let me know if/when you last checked your blood pressure on your own:</string>
+    <string name="refill_third_question_choice">No Side Effects</string>
+    <string name="refill_question_fifth_choice">Not taking it since</string>
+
 </resources>
