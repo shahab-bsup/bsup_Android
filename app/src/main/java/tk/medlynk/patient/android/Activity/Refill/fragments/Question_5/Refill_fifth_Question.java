@@ -9,10 +9,22 @@ import android.view.ViewGroup;
 
 import com.neweraandroid.demo.R;
 
-public class Refill_fifth_Question extends Fragment {
+public class Refill_fifth_Question extends Fragment implements Refill_fifth_Question_ViewHolder.OnRefillFifthQuestionClickListener {
     public static final String TAG = Refill_fifth_Question.class.getSimpleName();
     private onRefillFifthQuestionInteractionListener mListener;
     private Refill_fifth_Question_ViewHolder viewHolder;
+
+    @Override
+    public void onNextClicked() {
+        System.out.println ( "Refill_fifth_Question.onNextClicked" );
+        mListener.onRefillFifthQuestion ();
+    }
+
+    @Override
+    public void onSkipClicked() {
+        System.out.println ( "Refill_fifth_Question.onSkipClicked" );
+        mListener.onRefillFifthQuestion ();
+    }
 
     public interface onRefillFifthQuestionInteractionListener {
         void onRefillFifthQuestion();
@@ -32,7 +44,8 @@ public class Refill_fifth_Question extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_refill_fifth__question, container, false);
-        this.viewHolder = new Refill_fifth_Question_ViewHolder(view);
+        viewHolder = new Refill_fifth_Question_ViewHolder(view);
+        viewHolder.setOnRefillFifthQuestionClickListener ( this );
         return view;
     }
 

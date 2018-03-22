@@ -14,7 +14,7 @@ public class Refill_seventh_Question_ViewHolder extends ViewHolder implements On
     private ViewSelection choices;
     private Button next;
     private OnRefillSeventhQuestionClickListener onRefillSeventhQuestionClickListener;
-    private TextView question = ((TextView) this.question_view.findViewById(R.id.txtQuestion));
+    private TextView question;
     private View question_view;
     private Button skip;
     private String[] string_choices;
@@ -50,6 +50,7 @@ public class Refill_seventh_Question_ViewHolder extends ViewHolder implements On
     public Refill_seventh_Question_ViewHolder(View itemView) {
         super(itemView);
         this.question_view = itemView.findViewById(R.id.refill_seventh_question);
+        question = ((TextView) this.question_view.findViewById(R.id.txtQuestion));
         this.question.setText(R.string.refill_seventh_question);
         this.next = (Button) itemView.findViewById(R.id.btnNextQuestion);
         this.next.setOnClickListener(new OnNextClickListener());

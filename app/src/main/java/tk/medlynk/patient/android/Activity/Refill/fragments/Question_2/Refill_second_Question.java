@@ -56,9 +56,11 @@ public class Refill_second_Question extends Fragment implements OnRefillSecondQu
 
     public void onNextClicked() {
         System.out.println("Refill_second_Question.onNextClicked");
+        mListener.onRefillSecondQuestion ();
     }
 
     public void onSkipClicked() {
         System.out.println("Refill_second_Question.onSkipClicked");
+        mListener.onRefillSecondQuestion ();
     }
 }

@@ -265,7 +265,7 @@
         <item>Severe</item>
         <item>Variable</item>
     </string-array>
-    
+
     <string-array name="follow_up_symptoms_4th_choices">
         <item>I constant</item>
         <item>Occurs at some point every</item>
@@ -278,7 +278,7 @@
         <item>Has Occurred a few times ever</item>
         <item>Varies quite a bit</item>
     </string-array>
-    
+
     <string-array name="follow_up_symptoms_5th_choices">
         <item>Is always there - all day / wakes me at night</item>
         <item>Is there all day, but I can sleep at night</item>

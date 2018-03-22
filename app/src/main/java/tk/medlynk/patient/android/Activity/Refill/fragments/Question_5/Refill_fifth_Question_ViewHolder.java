@@ -14,42 +14,15 @@ public class Refill_fifth_Question_ViewHolder extends ViewHolder implements OnSi
     private ViewSelection choices;
     private Button next;
     private OnRefillFifthQuestionClickListener onRefillFifthQuestionClickListener;
-    private TextView question = ((TextView) this.question_view.findViewById(R.id.txtQuestion));
+    private TextView question ;
     private View question_view;
     private Button skip;
     private String[] string_choices;
 
-    private class OnNextClickListener implements OnClickListener {
-        private OnNextClickListener() {
-        }
-
-        public void onClick(View view) {
-            System.out.println("Refill_fifth_Question_ViewHolder");
-            System.out.println("OnNextClickListener.onClick");
-            Refill_fifth_Question_ViewHolder.this.onRefillFifthQuestionClickListener.onNextClicked();
-        }
-    }
-
-    public interface OnRefillFifthQuestionClickListener {
-        void onNextClicked();
-
-        void onSkipClicked();
-    }
-
-    private class OnSkipClickListener implements OnClickListener {
-        private OnSkipClickListener() {
-        }
-
-        public void onClick(View view) {
-            System.out.println("Refill_fifth_Question_ViewHolder");
-            System.out.println("OnSkipClickListener.onClick");
-            Refill_fifth_Question_ViewHolder.this.onRefillFifthQuestionClickListener.onSkipClicked();
-        }
-    }
-
     public Refill_fifth_Question_ViewHolder(View itemView) {
         super(itemView);
         this.question_view = itemView.findViewById(R.id.refill_fifth_question);
+        question = ((TextView) this.question_view.findViewById(R.id.txtQuestion));
         this.question.setText(R.string.refill_fifth_question);
         this.next = (Button) itemView.findViewById(R.id.btnNextQuestion);
         this.next.setOnClickListener(new OnNextClickListener());
@@ -61,6 +34,34 @@ public class Refill_fifth_Question_ViewHolder extends ViewHolder implements OnSi
         for (int i = 0; i < this.choices.getNumberOfViews(); i++) {
             this.choices.setTextToButtons(this.string_choices[i], i);
         }
+    }
+    private class OnNextClickListener implements OnClickListener {
+
+        private OnNextClickListener() {
+        }
+        public void onClick(View view) {
+            System.out.println("Refill_fifth_Question_ViewHolder");
+            System.out.println("OnNextClickListener.onClick");
+            Refill_fifth_Question_ViewHolder.this.onRefillFifthQuestionClickListener.onNextClicked();
+        }
+
+    }
+    public interface OnRefillFifthQuestionClickListener {
+
+        void onNextClicked();
+        void onSkipClicked();
+
+    }
+    private class OnSkipClickListener implements OnClickListener {
+
+        private OnSkipClickListener() {
+        }
+        public void onClick(View view) {
+            System.out.println("Refill_fifth_Question_ViewHolder");
+            System.out.println("OnSkipClickListener.onClick");
+            Refill_fifth_Question_ViewHolder.this.onRefillFifthQuestionClickListener.onSkipClicked();
+        }
+
     }
 
     public void onSingleItemSelected(View view, int i) {

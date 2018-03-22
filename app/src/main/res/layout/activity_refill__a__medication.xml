@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.neweraandroid.demo.tk.neweraandroid.demo.Activity.Refill.Refill_A_Medication_Activity">
+    android:id="@+id/parent_refill_a_medication"
+    tools:context="tk.medlynk.patient.android.Activity.Refill.Refill_A_Medication_Activity">
 
-</android.support.constraint.ConstraintLayout>
+    <include android:id="@+id/refill_toolbar_layout"
+        layout="@layout/questions_toolbar_layout"></include>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/refill_container"
+        android:layout_below="@id/refill_toolbar_layout"
+        ></FrameLayout>
+
+</RelativeLayout>

@@ -22,34 +22,6 @@ public class Refill_second_Question_ViewHolder extends ViewHolder implements OnS
     private final TextView second_question;
     private final String[] string_choices;
 
-    private class OnNextButtonClickListener implements OnClickListener {
-        private OnNextButtonClickListener() {
-        }
-
-        public void onClick(View view) {
-            System.out.println("Refill_second_Question_ViewHolder");
-            System.out.println("OnNextButtonClickListener.onClick");
-            Refill_second_Question_ViewHolder.this.onRefillSecondQuestionClickListener.onNextClicked();
-        }
-    }
-
-    public interface OnRefillSecondQuestionClickListener {
-        void onNextClicked();
-
-        void onSkipClicked();
-    }
-
-    private class OnSkipClickListener implements OnClickListener {
-        private OnSkipClickListener() {
-        }
-
-        public void onClick(View view) {
-            System.out.println("Refill_second_Question_ViewHolder");
-            System.out.println("OnSkipClickListener.onClick");
-            Refill_second_Question_ViewHolder.this.onRefillSecondQuestionClickListener.onSkipClicked();
-        }
-    }
-
     public Refill_second_Question_ViewHolder(View itemView) {
         super(itemView);
         this.progressBar = (ProgressBar) itemView.findViewById(R.id.progress_bar);
@@ -67,6 +39,35 @@ public class Refill_second_Question_ViewHolder extends ViewHolder implements OnS
         for (int i = 0; i < this.choices.getNumberOfViews(); i++) {
             this.choices.setTextToButtons(this.string_choices[i], i);
         }
+    }
+
+    private class OnNextButtonClickListener implements OnClickListener {
+
+        private OnNextButtonClickListener() {
+        }
+        public void onClick(View view) {
+            System.out.println("Refill_second_Question_ViewHolder");
+            System.out.println("OnNextButtonClickListener.onClick");
+            onRefillSecondQuestionClickListener.onNextClicked();
+        }
+
+    }
+    public interface OnRefillSecondQuestionClickListener {
+
+        void onNextClicked();
+        void onSkipClicked();
+
+    }
+    private class OnSkipClickListener implements OnClickListener {
+
+        private OnSkipClickListener() {
+        }
+        public void onClick(View view) {
+            System.out.println("Refill_second_Question_ViewHolder");
+            System.out.println("OnSkipClickListener.onClick");
+            onRefillSecondQuestionClickListener.onSkipClicked();
+        }
+
     }
 
     public void setOnRefillSecondQuestionClickListener(OnRefillSecondQuestionClickListener onRefillSecondQuestionClickListener) {

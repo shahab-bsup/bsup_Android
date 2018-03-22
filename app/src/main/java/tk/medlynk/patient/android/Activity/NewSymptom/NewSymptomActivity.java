@@ -88,7 +88,6 @@ public class NewSymptomActivity extends AppCompatActivity implements
         fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_1th_question (), New_Symptom_1th_question.TAG ).commit ();
     }
 
-
     @Override
     public void onFirstQuestion() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
