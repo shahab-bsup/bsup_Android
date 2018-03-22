@@ -9,7 +9,6 @@ import android.widget.TextView;
 import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
 
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_2.Follow_Up_Symptoms_2nd_Question_ViewHolder;
 import tk.medlynk.patient.android.Model.Answer;
 
 /**
@@ -48,7 +47,7 @@ public class Follow_Up_Symptoms_3rd_Question_ViewHolder extends RecyclerView.Vie
             choice_numbers.setTextToButtons ( String.valueOf ( i + 1 ), i );
         }
         choices = itemView.findViewById ( R.id.viewSelectionChoices );
-        string_choices = itemView.getContext ().getResources ().getStringArray ( R.array.follow_up_symptoms_3rd_choices );
+        string_choices = itemView.getContext ().getResources ().getStringArray ( R.array.FUS_3rd_choices_FUR_sixth_choices );
         for (int i = 0; i < choices.getNumberOfViews (); i++) {
             choices.setTextToButtons ( string_choices[i], i );
         }

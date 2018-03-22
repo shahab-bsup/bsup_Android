@@ -97,7 +97,7 @@ public class New_Symptom_18th_question extends Fragment implements
         skip.setOnClickListener ( this );
         choices = view.findViewById ( R.id.viewSelectionChoices );
         choices.setOnSingleItemSelectedListener ( this );
-        string_choices = getActivity ().getResources ().getStringArray ( R.array.question_18_choices );
+        string_choices = getActivity ().getResources ().getStringArray ( R.array.yes_no );
         for (int i = 0; i < choices.getNumberOfViews (); i++) {
             choices.setTextToButtons ( string_choices[i], i );
         }

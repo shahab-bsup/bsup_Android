@@ -16,8 +16,8 @@ public class Refill_first_Question_ViewHolder extends ViewHolder {
     private AppCompatEditText answer_input;
     private Button button;
     private ProgressBar progressBar;
-    private TextView question;
     private String question_resource;
+    private TextView question;
     private View question_view;
     private OnRefillFirstQuestionClickListener refillFirstQuestionClickListener;
 

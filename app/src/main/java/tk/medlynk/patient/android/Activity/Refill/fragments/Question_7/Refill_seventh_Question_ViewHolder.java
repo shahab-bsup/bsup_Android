@@ -58,7 +58,7 @@ public class Refill_seventh_Question_ViewHolder extends ViewHolder implements On
         this.skip.setOnClickListener(new OnSkipClickListener());
         this.choices = (ViewSelection) itemView.findViewById(R.id.viewSelectionChoices);
         this.choices.setOnSingleItemSelectedListener(this);
-        this.string_choices = itemView.getContext().getResources().getStringArray(R.array.refill_seventh_question_choices);
+        this.string_choices = itemView.getContext().getResources().getStringArray(R.array.yes_no);
         for (int i = 0; i < this.choices.getNumberOfViews(); i++) {
             this.choices.setTextToButtons(this.string_choices[i], i);
         }

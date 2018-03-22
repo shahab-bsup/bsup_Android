@@ -58,7 +58,7 @@
                     android:background="@color/answers_background_color" />
 
                 <com.medlynk.shahab.myviewselection.ViewSelection
-                    android:id="@+id/new_symptom_fifth_answers"
+                    android:id="@+id/viewSelectionChoices"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:button_type="true"

@@ -17,7 +17,7 @@ import com.neweraandroid.demo.R;
  * Use the {@link FollowUpResults_2nd_Question#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FollowUpResults_2nd_Question extends Fragment {
+public class FollowUpResults_2nd_Question extends Fragment implements FollowUpResults_2nd_Question_ViewHolder.OnFURSecondViewHolderListener {
 
     private OnFURSecondQuestionInteractionListener mListener;
     private FollowUpResults_2nd_Question_ViewHolder viewHolder;
@@ -48,7 +48,7 @@ public class FollowUpResults_2nd_Question extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate ( R.layout.fragment_follow_up_results_2nd__question, container, false );
         viewHolder = new FollowUpResults_2nd_Question_ViewHolder ( view );
-
+        viewHolder.setOnFURSecondViewHolderListener ( this );
         return view;
     }
 
@@ -67,6 +67,18 @@ public class FollowUpResults_2nd_Question extends Fragment {
     public void onDetach() {
         super.onDetach ();
         mListener = null;
+    }
+
+    @Override
+    public void onNextClicked() {
+        System.out.println ( "FollowUpResults_2nd_Question.onNextClicked" );
+        mListener.onFURSecondQuestion ();
+    }
+
+    @Override
+    public void onSkipClicked() {
+        System.out.println ( "FollowUpResults_2nd_Question.onSkipClicked" );
+        mListener.onFURSecondQuestion ();
     }
 
     public interface OnFURSecondQuestionInteractionListener {

@@ -23,7 +23,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/follow_up_results_eighth_question"
-                android:layout_centerHorizontal="true"
                 android:text="#8"
                 android:textSize="25sp" />
 
@@ -39,43 +38,55 @@
                     android:layout_height="100dp"
                     android:src="@drawable/patient_icon" />
 
+                <com.medlynk.shahab.myviewselection.ViewSelection
+                    android:id="@+id/viewSelectionChoices"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:button_type="true"
+                    app:number_of_views="7"
+                    app:selectable="true"
+                    app:selected_background="@drawable/answer_selected"
+                    app:selected_text_color="@color/black"
+                    app:single_select="true"
+                    app:unselected_background="@drawable/answer_not_selected"
+                    app:unselected_text_color="@color/white" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/choices"
+                android:layoutDirection="rtl">
+
+                <Button
+                    android:id="@+id/btnNextQuestion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/disable_next_question"
+                    android:clickable="false"
+                    android:text="@string/next"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/btnSkipQuestion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/enabled_custom_button"
+                    android:text="@string/skip"
+                    android:textColor="@color/white" />
 
             </LinearLayout>
 
         </RelativeLayout>
 
     </android.support.v4.widget.NestedScrollView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layoutDirection="rtl">
-
-        <Button
-            android:id="@+id/btnNextQuestion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/disable_next_question"
-            android:clickable="false"
-            android:text="@string/next"
-            android:textColor="@color/white" />
-
-        <Button
-            android:id="@+id/btnSkipQuestion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/enabled_custom_button"
-            android:text="@string/skip"
-            android:textColor="@color/white" />
-
-    </LinearLayout>
 
     <ProgressBar
         android:layout_width="wrap_content"

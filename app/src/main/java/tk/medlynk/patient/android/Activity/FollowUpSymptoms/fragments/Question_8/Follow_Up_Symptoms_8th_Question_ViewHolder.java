@@ -43,7 +43,7 @@ public class Follow_Up_Symptoms_8th_Question_ViewHolder extends RecyclerView.Vie
         for (int i = 0; i < choice_numbers.getNumberOfViews (); i++) {
             choice_numbers.setTextToButtons ( String.valueOf ( i + 1 ), i );
         }
-        choices_strings = itemView.getContext ().getResources ().getStringArray ( R.array.follow_up_symptoms_7th_8th_choices );
+        choices_strings = itemView.getContext ().getResources ().getStringArray ( R.array.FUS_7th_8th_choices_FUR_10th_11th_choices );
         answerChoices = itemView.findViewById ( R.id.viewSelectionChoices );
         for (int i = 0; i < answerChoices.getNumberOfViews (); i++) {
             answerChoices.setTextToButtons ( choices_strings[i], i );

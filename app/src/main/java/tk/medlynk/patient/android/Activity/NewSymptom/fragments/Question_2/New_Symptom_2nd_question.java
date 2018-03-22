@@ -33,15 +33,6 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
 public class New_Symptom_2nd_question extends Fragment implements
         View.OnClickListener,
         OnSecondAnswerListener, ViewSelection.OnSingleItemSelectedListener {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    public static final String TAG = New_Symptom_2nd_question.class.getSimpleName ();
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnNewSymptomSecondQuestionListener mListener;
 
@@ -57,20 +48,10 @@ public class New_Symptom_2nd_question extends Fragment implements
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment New_Symptom_2nd_question.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static New_Symptom_2nd_question newInstance(String param1, String param2) {
+    public static New_Symptom_2nd_question newInstance() {
         New_Symptom_2nd_question fragment = new New_Symptom_2nd_question ();
         Bundle args = new Bundle ();
-        args.putString ( ARG_PARAM1, param1 );
-        args.putString ( ARG_PARAM2, param2 );
+
         fragment.setArguments ( args );
         return fragment;
     }
@@ -79,8 +60,7 @@ public class New_Symptom_2nd_question extends Fragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
         if (getArguments () != null) {
-            mParam1 = getArguments ().getString ( ARG_PARAM1 );
-            mParam2 = getArguments ().getString ( ARG_PARAM2 );
+
         }
     }
 

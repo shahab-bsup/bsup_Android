@@ -30,7 +30,7 @@ public class Refill_fifth_Question_ViewHolder extends ViewHolder implements OnSi
         this.skip.setOnClickListener(new OnSkipClickListener());
         this.choices = (ViewSelection) itemView.findViewById(R.id.viewSelectionChoices);
         this.choices.setOnSingleItemSelectedListener(this);
-        this.string_choices = itemView.getContext().getResources().getStringArray(R.array.refill_fifth_question_choices);
+        this.string_choices = itemView.getContext().getResources().getStringArray(R.array.yes_no);
         for (int i = 0; i < this.choices.getNumberOfViews(); i++) {
             this.choices.setTextToButtons(this.string_choices[i], i);
         }

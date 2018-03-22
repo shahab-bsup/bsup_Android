@@ -24,16 +24,16 @@ public class Refill_second_Question_ViewHolder extends ViewHolder implements OnS
 
     public Refill_second_Question_ViewHolder(View itemView) {
         super(itemView);
-        this.progressBar = (ProgressBar) itemView.findViewById(R.id.progress_bar);
+        this.progressBar =  itemView.findViewById(R.id.progress_bar);
         this.question_view = itemView.findViewById(R.id.refill_second_question);
-        this.second_question = (TextView) this.question_view.findViewById(R.id.txtQuestion);
+        this.second_question =  this.question_view.findViewById(R.id.txtQuestion);
         this.second_question.setText(itemView.getContext().getString(R.string.refill_second_question));
-        this.button_next = (Button) itemView.findViewById(R.id.btnNextQuestion);
+        this.button_next =  itemView.findViewById(R.id.btnNextQuestion);
         this.button_next.setOnClickListener(new OnNextButtonClickListener());
         this.button_next.setEnabled(false);
-        this.button_skip = (Button) itemView.findViewById(R.id.btnSkipQuestion);
+        this.button_skip =  itemView.findViewById(R.id.btnSkipQuestion);
         this.button_skip.setOnClickListener(new OnSkipClickListener());
-        this.choices = (ViewSelection) itemView.findViewById(R.id.viewSelectionChoices);
+        this.choices =  itemView.findViewById(R.id.viewSelectionChoices);
         this.choices.setOnSingleItemSelectedListener(this);
         this.string_choices = itemView.getContext().getResources().getStringArray(R.array.refill_second_question_choices);
         for (int i = 0; i < this.choices.getNumberOfViews(); i++) {

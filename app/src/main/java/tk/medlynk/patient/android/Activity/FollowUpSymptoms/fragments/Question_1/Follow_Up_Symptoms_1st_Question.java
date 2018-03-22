@@ -27,15 +27,6 @@ public class Follow_Up_Symptoms_1st_Question extends Fragment implements
     Follow_Up_Symptoms_1st_Question_ViewHolder.OnFollowUpFirstQuestionViewsClickListener,
         OnFirstFollowUpAnswerListener
     {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    public static final String TAG = Follow_Up_Symptoms_1st_Question.class.getSimpleName ();
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnFollowUpSymptomsFirstQuestionListener mListener;
     private Follow_Up_Symptoms_1st_Question_ViewHolder viewHolder;
@@ -44,20 +35,10 @@ public class Follow_Up_Symptoms_1st_Question extends Fragment implements
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Follow_Up_Symptoms_1st_Question.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Follow_Up_Symptoms_1st_Question newInstance(String param1, String param2) {
+    public static Follow_Up_Symptoms_1st_Question newInstance() {
         Follow_Up_Symptoms_1st_Question fragment = new Follow_Up_Symptoms_1st_Question ();
         Bundle args = new Bundle ();
-        args.putString ( ARG_PARAM1, param1 );
-        args.putString ( ARG_PARAM2, param2 );
+
         fragment.setArguments ( args );
         return fragment;
     }
@@ -66,8 +47,7 @@ public class Follow_Up_Symptoms_1st_Question extends Fragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
         if (getArguments () != null) {
-            mParam1 = getArguments ().getString ( ARG_PARAM1 );
-            mParam2 = getArguments ().getString ( ARG_PARAM2 );
+
         }
     }
 

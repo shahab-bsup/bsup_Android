@@ -1,5 +1,4 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -22,8 +21,8 @@
             <tk.medlynk.patient.android.CustomViews.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
                 android:layout_below="@id/follow_up_results_twelve_question"
-                android:layout_centerHorizontal="true"
                 android:text="#12"
                 android:textSize="25sp" />
 
@@ -31,14 +30,50 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/follow_up_results_twelve_question"
-                android:id="@+id/choices"
-                android:layoutDirection="rtl">
+                android:layoutDirection="rtl"
+                android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/doctor_icon"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
                     android:src="@drawable/patient_icon" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.medlynk.shahab.myviewselection.ViewSelection
+                        android:id="@+id/single_select_choice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:button_type="true"
+                        app:number_of_views="1"
+                        app:selectable="true"
+                        app:selected_background="@drawable/answer_selected"
+                        app:selected_text_color="@color/black"
+                        app:single_select="true"
+                        app:unselected_background="@drawable/answer_not_selected"
+                        app:unselected_text_color="@color/white" />
+
+                    <com.medlynk.shahab.myviewselection.ViewSelection
+                        android:id="@+id/multi_select_choice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:button_type="true"
+                        app:number_of_views="4"
+                        app:selectable="true"
+                        app:selected_background="@drawable/answer_selected"
+                        app:selected_text_color="@color/black"
+                        app:single_select="false"
+                        app:unselected_background="@drawable/answer_not_selected"
+                        app:unselected_text_color="@color/white" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -77,11 +112,11 @@
 
     </LinearLayout>
 
+
     <ProgressBar
+        android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/progress_bar"
-        android:visibility="gone"
-        />
+        android:visibility="gone" />
 
 </RelativeLayout>

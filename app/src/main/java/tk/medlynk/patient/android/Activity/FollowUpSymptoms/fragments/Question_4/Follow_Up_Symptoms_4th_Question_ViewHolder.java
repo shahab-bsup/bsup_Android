@@ -39,7 +39,7 @@ public class Follow_Up_Symptoms_4th_Question_ViewHolder extends RecyclerView.Vie
         button_next.setEnabled ( false );
         button_skip = itemView.findViewById ( R.id.btnSkipQuestion );
         button_skip.setOnClickListener ( new OnSkipClickListener () );
-        string_choices = itemView.getContext ().getResources ().getStringArray ( R.array.follow_up_symptoms_4th_choices );
+        string_choices = itemView.getContext ().getResources ().getStringArray ( R.array.FUS_4th_choices_FUR_seventh_choices );
         choice_numbers = itemView.findViewById ( R.id.viewSelectionChoiceNumbers );
         for (int i = 0; i < choice_numbers.getNumberOfViews (); i++) {
             choice_numbers.setTextToButtons ( String.valueOf ( i + 1 ), i );
