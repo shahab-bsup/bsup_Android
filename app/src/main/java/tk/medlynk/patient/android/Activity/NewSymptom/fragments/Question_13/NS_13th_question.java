@@ -1,20 +1,14 @@
 package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_13;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
-import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
 
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_5.New_Symptom_5th_question;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_5.OnFifthAnswerListener;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
 import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
@@ -25,24 +19,24 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
  * Activities that contain this fragment must implement the
  * {@link OnNewSymptomThirteenQuestionListener} interface
  * to handle interaction events.
- * Use the {@link New_Symptom_13th_question#newInstance} factory method to
+ * Use the {@link NS_13th_question#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class New_Symptom_13th_question extends Fragment implements
-        New_Symptom_13th_question_ViewHolder.On13QuestionViewClickListener, OnThirteenAnswerListener {
+public class NS_13th_question extends Fragment implements
+        NS_13th_VH.On13QuestionViewClickListener, OnThirteenAnswerListener {
 
-    public final static String TAG = New_Symptom_13th_question.class.getSimpleName ();
+    public final static String TAG = NS_13th_question.class.getSimpleName ();
 
     private OnNewSymptomThirteenQuestionListener mListener;
-    private New_Symptom_13th_question_ViewHolder viewHolder;
+    private NS_13th_VH viewHolder;
     private Answer answer;
 
-    public New_Symptom_13th_question() {
+    public NS_13th_question() {
         // Required empty public constructor...
     }
 
-    public static New_Symptom_13th_question newInstance() {
-        New_Symptom_13th_question fragment = new New_Symptom_13th_question ();
+    public static NS_13th_question newInstance() {
+        NS_13th_question fragment = new NS_13th_question ();
         Bundle args = new Bundle ();
 
         fragment.setArguments ( args );
@@ -62,7 +56,7 @@ public class New_Symptom_13th_question extends Fragment implements
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate ( R.layout.fragment_new__symptom_13th_question, container, false );
-        viewHolder = new New_Symptom_13th_question_ViewHolder ( view );
+        viewHolder = new NS_13th_VH ( view );
         viewHolder.setListener ( this );
         return view;
     }
@@ -86,11 +80,11 @@ public class New_Symptom_13th_question extends Fragment implements
 
     @Override
     public void onNextClicked() {
-        System.out.println ( "New_Symptom_13th_question.onNextClicked" );
+        System.out.println ( "NS_13th_question.onNextClicked" );
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
         SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
         MedlynkRequests.newSymptomThirteenQuestionAnswer ( getActivity (),
-                New_Symptom_13th_question.this,
+                NS_13th_question.this,
                 manager.getAppointmentID (),
                 answer
         );
@@ -98,13 +92,13 @@ public class New_Symptom_13th_question extends Fragment implements
 
     @Override
     public void onSkipClicked() {
-        System.out.println ( "New_Symptom_13th_question.onSkipClicked" );
+        System.out.println ( "NS_13th_question.onSkipClicked" );
         mListener.onThirteenQuestion ();
     }
 
     @Override
     public void onTreatmentClicked(int position, int treatmentID) {
-        System.out.println ( "New_Symptom_13th_question.onTreatmentClicked" );
+        System.out.println ( "NS_13th_question.onTreatmentClicked" );
         answer = new Answer ();
         switch (position){
             case 0:{
@@ -154,14 +148,14 @@ public class New_Symptom_13th_question extends Fragment implements
 
     @Override
     public void onThirteenAnswerSuccess(NewSymptomAnswerResponse response) {
-        System.out.println ( "New_Symptom_13th_question.onThirteenAnswerSuccess" );
+        System.out.println ( "NS_13th_question.onThirteenAnswerSuccess" );
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
         mListener.onThirteenQuestion ();
     }
 
     @Override
     public void onThirteenAnswerFailure() {
-        System.out.println ( "New_Symptom_13th_question.onThirteenAnswerFailure" );
+        System.out.println ( "NS_13th_question.onThirteenAnswerFailure" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
     }
 

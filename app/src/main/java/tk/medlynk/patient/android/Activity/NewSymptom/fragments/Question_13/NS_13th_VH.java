@@ -14,7 +14,7 @@ import com.neweraandroid.demo.R;
  * Created by Shahab on 2/24/2018.
  */
 
-public class New_Symptom_13th_question_ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, ViewSelection.OnSingleItemSelectedListener {
+public class NS_13th_VH extends RecyclerView.ViewHolder implements View.OnClickListener, ViewSelection.OnSingleItemSelectedListener {
 
     private ProgressBar progressBar;
     private View question_view;
@@ -24,7 +24,7 @@ public class New_Symptom_13th_question_ViewHolder extends RecyclerView.ViewHolde
     private String[] string_choices;
     private On13QuestionViewClickListener listener;
 
-    public New_Symptom_13th_question_ViewHolder(View view) {
+    public NS_13th_VH(View view) {
         super ( view );
         progressBar = itemView.findViewById ( R.id.progress_bar );
         question_view = view.findViewById ( R.id.new_symptom_thirteen_question );
@@ -52,7 +52,7 @@ public class New_Symptom_13th_question_ViewHolder extends RecyclerView.ViewHolde
 
     @Override
     public void onClick(View view) {
-        System.out.println ( "New_Symptom_13th_question_ViewHolder.onClick" );
+        System.out.println ( "NS_13th_VH.onClick" );
         switch (view.getId ()){
             case R.id.btnNextQuestion:{
                 listener.onNextClicked ();
@@ -68,7 +68,7 @@ public class New_Symptom_13th_question_ViewHolder extends RecyclerView.ViewHolde
 
     @Override
     public void onSingleItemSelected(View view, final int i) {
-        System.out.println ( "New_Symptom_13th_question_ViewHolder.onSingleItemSelected" );
+        System.out.println ( "NS_13th_VH.onSingleItemSelected" );
         final AppCompatDialog dialog = new AppCompatDialog ( view.getContext () );
         dialog.setContentView ( R.layout.treatment_intensity_dialog );
         TextView help_a_lot, help_a_little, not_helping;

@@ -43,7 +43,6 @@
                     android:src="@drawable/patient_icon" />
 
                 <com.medlynk.shahab.myviewselection.ViewSelection
-                    android:id="@+id/answerNumbers"
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     app:button_type="true"

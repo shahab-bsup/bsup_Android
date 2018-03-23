@@ -72,8 +72,7 @@
                             android:id="@+id/viewSelectionChoicesBeforeLasts" />
 
                         <include
-                            layout="@layout/question_20_lasting_row"
-                            android:id="@+id/question_20_years_row" />
+                            layout="@layout/question_20_lasting_row" />
 
                         <com.medlynk.shahab.myviewselection.ViewSelection
                             android:layout_width="wrap_content"

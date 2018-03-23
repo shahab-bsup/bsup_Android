@@ -65,37 +65,34 @@
     <string name="see_more_new_symptom_first_question"><b>(For now, try to pick the most bothersome symptom only.)</b></string>
     <string name="new_symptom_first_question">What is the <b><i>main</i></b> symptom that is concerning you today?</string>
     <string name="new_symptom_second_question">Please briefly describe if you think there was something that made the symptom start (such as an injury)?</string>
-    <string name="new_symptom_third_question">How long ago did this symptom start?\n(* if this has been a recurrent symptom, please focus on the CURRENT episode only for now)</string>
+    <string name="new_symptom_third_question">How long ago did this symptom start?
+(* if this has been a recurrent symptom, please focus on the CURRENT episode only for now)</string>
     <string name="new_symptom_fourth_question">How frequently does this symptom bother you?</string>
     <string name="new_symptom_fifth_question">How intense is the symptom?</string>
+    <string name="new_symptom_sixth_question">Please describe how your symptom affects you on your worst day.</string>
     <string name="new_symptom_seventh_question">Please describe how your symptom affects you on your best days.</string>
-    <string name="new_symptom_eighth_question">Is there anything you have noted that makes the symptom worse?\n(Ex - rest, sleep, eating, fluid intake, exercise)</string>
-    <string name="new_symptom_ninth_question">Please list any other symptoms you are having that you are concerned may be related to this one.</string>
-    <string name="new_symptom_tenth_question">Overall, is the symptom getting:</string>
-    <string name="new_symptom_eleventh_question">Have you had any:</string>
-    <string name="new_symptom_twelve_question">Please indicate what treatments you have tried so far (please select all treatments previously tried):</string>
-    <string name="new_symptom_thirteen_question">Please list medications tried</string>
-    <string name="new_symptom_fourteen_question">Any recent changes in your regular medications?</string>
-    <string name="new_symptom_fifteen_question">Any new supplements/non-prescribed herbs etc that you recently started taking?</string>
-    <string name="new_symptom_sixteen_question">What makes you particularly concerned about this symptom today? (can pick more than one here)</string>
-    <string name="new_symptom_seventeen_question">Have you had this symptom in the past?</string>
-    <string name="new_symptom_eighteen_question">How long does the symptom last when it occurs?</string>
-    <string name="new_symptom_nineteen_question">What makes you particularly concerned about <b><u>this particular</u></b> episode? (can pick more than one here)</string>
-    <string name="new_symptom_twenty1_question">Please list any medications you have tried for<b><u>past</u></b> episodes:</string>
-    <string name="new_symptom_twenty2_question">Please indicate what treatments you have tried for <b><u>past</u></b> episodes (please select all treatments previously tried):</string>
+    <string name="new_symptom_eighth_question">Is there anything you have noted that makes the symptom better?
+(Ex - rest, sleep, eating, fluid intake, exercise, being inside/outside, temperature outside, air quality)</string>
+    <string name="new_symptom_ninth_question">Is there anything you have noted that makes the symptom worse?
+(Ex - rest, sleep, eating, fluid intake, exercise)</string>
+    <string name="new_symptom_tenth_question">Please list any other symptoms you are having that you are concerned may be related to this one.</string>
+    <string name="new_symptom_eleventh_question">Overall, is the symptom getting:</string>
+    <string name="new_symptom_twelve_question">Have you had any:</string>
+    <string name="new_symptom_thirteen_question">Please indicate what treatments you have tried so far (please select all treatments previously tried):</string>
+    <string name="new_symptom_fourteen_question">Please list medications tried</string>
+    <string name="new_symptom_fifteen_question">Any recent changes in your regular medications?</string>
+    <string name="new_symptom_sixteen_question">Any new supplements/non-prescribed herbs etc that you recently started taking?</string>
+    <string name="new_symptom_seventeen_question">What makes you particularly concerned about this symptom today? (can pick more than one here)</string>
+    <string name="new_symptom_eighteen_question">Have you had this symptom in the past?</string>
+    <string name="new_symptom_nineteen_question">How frequently has it bothered you since the first time you ever had the symptom?</string>
+    <string name="new_symptom_twenty_question">How long does the symptom last when it occurs?</string>
+    <string name="new_symptom_twenty1_question">What makes you particularly concerned about this particular episode? (can pick more than one here)</string>
+    <string name="new_symptom_twenty2_question">Please indicate what treatments you have tried for past episodes (please select all treatments previously tried):</string>
+    <string name="new_symptom_twenty3_question">Please list any medications you have tried for past episodes:</string>
     <string name="type_answer_here">Type answer here</string>
     <string name="or"><b>Or</b></string>
     <string name="i_do_not_know">I don\'t know</string>
 
-
-    <string name="year_ago"><b>Years</b> Ago</string>
-    <string name="months_ago"><b>Months</b> Ago</string>
-    <string name="weeks_ago"><b>Weeks</b> Ago</string>
-    <string name="days_ago"><b>Days</b> Ago</string>
-
-    <string name="mild">Mild</string>
-    <string name="moderate">Moderate</string>
-    <string name="Severe">Severe</string>
 
     <string name="worst_day">Worst Day</string>
     <string name="best_day">Best Day</string>
@@ -134,36 +131,6 @@
         <item>Can go out, do errands, but nothing intense, and do exercise</item>
         <item>Can go out, do errands and light exercise, but no strenuous exercise</item>
         <item>Can do whatever I usually do</item>
-    </string-array>
-    <string-array name="question_8_choices">
-        <item>Haven't noted anything that makes it worse</item>
-        <item>Rest</item>
-        <item>Sleep</item>
-        <item>Exercise</item>
-        <item>Other</item>
-    </string-array>
-    <string-array name="question_9_choices">
-        <item>Haven't noted anything that makes it worse</item>
-        <item>Rest</item>
-        <item>Sleep</item>
-        <item>Eating</item>
-        <item>Other</item>
-    </string-array>
-
-    <string-array name="question_11_choices">
-        <item>Better</item>
-        <item>Worse</item>
-        <item>Staying the same</item>
-        <item>Fluctuating</item>
-        <item>Other</item>
-    </string-array>
-
-    <string-array name="question_12_choices">
-        <item>Fever</item>
-        <item>Unplanned weight loss</item>
-        <item>Night sweats</item>
-        <item>New or worsening fatigue <b><u>together</u></b> with the main symptom today</item>
-        <item>None of the above</item>
     </string-array>
 
     <string-array name="question_13_22_choices">
@@ -264,7 +231,6 @@
     <string name="refill_seventh_question">Has cost of the medication been a significant problem for you?</string>
     <string name="refill_eight_question">For blood pressure medications, please let me know if/when you last checked your blood pressure on your own:</string>
     <string name="refill_third_question_choice">No Side Effects</string>
-    <string name="refill_question_fifth_choice">Not taking it since</string>
 
     <string name="FUPR_first_question">Since your last visit with me have you had any of the following tests for this symptom?</string>
     <string name="FUPR_second_question">Have you reviewed the results already in any way?</string>
@@ -279,13 +245,6 @@
     <string name="FUPR_eleventh_question">On your best day, how are your symptoms interfering with your abilities?</string>
     <string name="FUPR_twelve_question">Is there anything you have noted that makes the symptom better?
 (Ex - rest, sleep, eating, fluid intake, exercise, being inside/outside, temperature outside, air quality)</string>
-    <string name="FUPR_thirteen_question">Is there anything you have noted that makes the symptom worse?
-(Ex - rest, sleep, eating, fluid intake, exercise)</string>
-    <string name="FUPR_fourteen_question">Please indicate what treatments you have tried so far (please select all treatments previously tried):</string>
-    <string name="FUPR_fifteen_question">Please list medications tried</string>
-    <string name="FUPR_sixteen_question">Have you seen another medical doctor regarding this symptom?</string>
-    <string name="FUPR_seventeen_question">Are you worried about the results today?</string>
-    <string name="FUPR_eighteen_question">If you wish, please explain what worries you about the results today.</string>
-    <string name="FUPR_eighteen_choice">No additional comments</string>
+    <string name="enter_a_number">Enter a number</string>
 
 </resources>

@@ -6,26 +6,32 @@
     android:orientation="horizontal"
     android:layoutDirection="rtl">
 
-    <tk.medlynk.patient.android.CustomViews.CustomTextView
-        android:id="@+id/txtTime"
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.AppCompatSpinner
+        android:layout_weight="1"
+        android:id="@+id/spinnerTime"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/year_ago"
         android:textColor="@color/answers_text_color"
         android:textSize="15sp"
-        android:gravity="right"
+        android:gravity="center"
+        android:padding="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="30dp"
+        android:spinnerMode="dropdown"
+        android:scrollIndicators="left"
+        />
 
     <android.support.v7.widget.AppCompatEditText
-        android:id="@+id/edtAnswer"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:id="@+id/edtAnswerDuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:padding="10dp"
+        android:hint="@string/enter_a_number"
+        android:textSize="12sp"
+        android:gravity="center"
         android:inputType="numberDecimal"
         android:imeOptions="actionDone"
         android:background="@drawable/custom_edit_text_doctor_id" />

@@ -35,7 +35,6 @@
                 android:layout_below="@id/follow_up_results_eleventh_question">
                 <Button
                     android:elevation="25dp"
-                    android:id="@+id/worst_case"
                     android:background="@drawable/worstday_bestday_background"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -49,7 +48,6 @@
                     tools:ignore="RtlSymmetry" />
 
                 <Button
-                    android:id="@+id/best_case"
                     android:elevation="25dp"
                     android:background="@drawable/worstday_bestday_background"
                     android:layout_width="match_parent"

@@ -23,10 +23,10 @@ public class OtherDialogBuilder extends AppCompatDialog {
 
     public OtherDialogBuilder(Context context) {
         super ( context );
-        init(context);
+        init();
     }
 
-    private void init(Context context) {
+    private void init() {
         setContentView ( R.layout.other_answer_layout );
         doneButton = findViewById ( R.id.btnDone );
         doneButton.setOnClickListener ( new OnDOneClickListener() );
@@ -39,7 +39,7 @@ public class OtherDialogBuilder extends AppCompatDialog {
 
     public OtherDialogBuilder(Context context, int theme) {
         super ( context, theme );
-        init ( context );
+        init (  );
     }
 
 
@@ -88,6 +88,7 @@ public class OtherDialogBuilder extends AppCompatDialog {
     private class OnCancelClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
+            onOtherDialogListener.onOtherDialogDone ( "" );
             dismiss ();
         }
     }

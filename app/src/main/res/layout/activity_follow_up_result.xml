@@ -13,8 +13,6 @@
     <FrameLayout
         android:layout_below="@id/follow_up_results_toolbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/followUpResultsFragmentsContainer"
-        ></FrameLayout>
+        android:layout_height="match_parent"></FrameLayout>
 
 </RelativeLayout>

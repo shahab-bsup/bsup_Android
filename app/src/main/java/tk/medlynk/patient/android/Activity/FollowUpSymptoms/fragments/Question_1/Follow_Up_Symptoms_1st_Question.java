@@ -28,7 +28,8 @@ public class Follow_Up_Symptoms_1st_Question extends Fragment implements
         OnFirstFollowUpAnswerListener
     {
 
-    private OnFollowUpSymptomsFirstQuestionListener mListener;
+        public static final String TAG = Follow_Up_Symptoms_1st_Question.class.getSimpleName ();
+        private OnFollowUpSymptomsFirstQuestionListener mListener;
     private Follow_Up_Symptoms_1st_Question_ViewHolder viewHolder;
 
     public Follow_Up_Symptoms_1st_Question() {

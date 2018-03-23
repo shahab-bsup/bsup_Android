@@ -34,7 +34,6 @@
         />
 
     <android.support.v4.widget.NestedScrollView
-        android:id="@+id/new_symptom_fourteen_question_scroll_area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

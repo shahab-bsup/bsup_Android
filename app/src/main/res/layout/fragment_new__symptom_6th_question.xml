@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    tools:context="tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_6.New_Symptom_6th_question">
+    tools:context="tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_6.NS_6th_question">
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -38,7 +38,6 @@
                     android:orientation="horizontal"
                     android:layout_below="@id/new_symptom_sixth_question">
                     <Button
-                        android:id="@+id/worst_case"
                         android:background="@drawable/worstday_bestday_background"
                         android:elevation="25dp"
                         android:layout_width="match_parent"
@@ -53,7 +52,6 @@
                         tools:ignore="RtlSymmetry" />
 
                     <Button
-                        android:id="@+id/best_case"
                         android:background="@drawable/worstday_bestday_background"
                         android:elevation="25dp"
                         android:layout_width="match_parent"

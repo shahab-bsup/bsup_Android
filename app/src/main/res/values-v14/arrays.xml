@@ -4,34 +4,6 @@
         <item>Yes</item>
         <item>No</item>
     </string-array>
-    <string-array name="FUS_11th_choices_FUR_14th_choices">
-        <item>Home stretches</item>
-        <item>Physiotherapist</item>
-        <item>Message therapist</item>
-        <item>Acupuncturist</item>
-        <item>Psychologist</item>
-        <item>Chiropractor</item>
-        <item>Other</item>
-        <item>Have not tried anything</item>
-    </string-array>
-    <string-array name="follow_up_symptoms_14th_choices">
-        <item>Blood tests</item>
-        <item>Urine tests</item>
-        <item>Imaging</item>
-        <item>X-ray</item>
-        <item>CT</item>
-        <item>MRI</item>
-        <item>Ultrasound</item>
-        <item>Mammogram</item>
-        <item>Bone Density scan</item>
-        <item>Cardiac investigation</item>
-        <item>EKG</item>
-        <item>Exercise stress tests</item>
-        <item>MIBI</item>
-        <item>Heart Ultrasound (echo)</item>
-        <item>Other</item>
-        <item>None of the above</item>
-    </string-array>
     <string-array name="FUS_3rd_choices_FUR_sixth_choices">
         <item>Completely better</item>
         <item>Much better</item>
@@ -173,8 +145,8 @@
         <item>Can go out, do errands and light exercise, but no strenuous exercise</item>
         <item>Can do whatever I usually do</item>
     </string-array>
-    <string-array name="question_8_choices">
-        <item>Haven</item>
+    <string-array name="question_8_9_choices">
+        <item>Haven't noted anything that makes it worse</item>
         <item>Rest</item>
         <item>Sleep</item>
         <item>Exercise</item>
@@ -186,14 +158,6 @@
         <item>Sleep</item>
         <item>Eating</item>
         <item>Other</item>
-    </string-array>
-    <string-array name="refill_eighth_question_choices">
-        <item>Does not apply to me</item>
-        <item>Applies to me but I don</item>
-        <item>Highest glucometer reading:</item>
-        <item>Lowest glucometer reading:</item>
-        <item>Average glucometer reading:</item>
-        <item>Last hemoglobin A1C reading:</item>
     </string-array>
     <string-array name="refill_fourth_question_choices">
         <item>Hard to tell, I never han any symptoms</item>
@@ -210,12 +174,6 @@
         <item>Missed 1-3 doses per week</item>
         <item>Not taking it since...</item>
         <item>Not taking it at all</item>
-    </string-array>
-    <string-array name="refill_second_question_fourth_choice">
-        <item>days</item>
-        <item>weeks</item>
-        <item>months</item>
-        <item>years</item>
     </string-array>
     <string-array name="refill_sixth_question_choices">
         <item>Does not apply to me</item>
@@ -239,28 +197,13 @@
         <item>Heart Ultrasound (echo)</item>
         <item>Other</item>
     </string-array>
-    <string-array name="FUR_twelve_question_choices">
-        <item>Haven't noted anything that makes it better</item>
-        <item>Rest</item>
-        <item>Sleep</item>
-        <item>Exercise</item>
-        <item>Other</item>
-    </string-array>
-    <string-array name="FUR_thirteen_question_choices">
-        <item>Haven't noted anything that makes it worse</item>
-        <item>Rest</item>
-        <item>Sleep</item>
-        <item>Exercise</item>
-        <item>Other</item>
-    </string-array>
-    <string-array name="FUR_fifteen_question_choices">
-        <item>None</item>
-        <item>Add Medication</item>
-    </string-array>
-    <string-array name="FUR_seventeen_question_choices">
-        <item>Very worried</item>
-        <item>Somewhat worried</item>
-        <item>Not worried, but of course interested</item>
+
+    <string-array name="lasting_choices">
+        <item>Select</item>
+        <item><b>Years</b> Ago</item>
+        <item><b>Months</b> Ago</item>
+        <item><b>Weeks</b> Ago</item>
+        <item><b>Days</b> Ago</item>
     </string-array>
 
 </resources>
