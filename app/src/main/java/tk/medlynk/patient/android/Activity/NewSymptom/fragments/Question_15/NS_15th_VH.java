@@ -1,4 +1,4 @@
-package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_10;
+package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_15;
 
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.RecyclerView;
@@ -15,44 +15,42 @@ import com.neweraandroid.demo.R;
 import tk.medlynk.patient.android.Model.Answer;
 
 /**
- * Created by Shahab on 2/23/2018.
+ * Created by Shahab on 2/24/2018.
  */
 
-public class NS_10th_VH extends RecyclerView.ViewHolder implements ViewSelection.OnSingleItemSelectedListener, ViewSelection.OnClearStateListener {
+public class NS_15th_VH extends RecyclerView.ViewHolder implements ViewSelection.OnSingleItemSelectedListener {
 
-    private View question_view;
-    private TextView second_question;
-    private Button button_next, button_skip;
-    private AppCompatEditText tenth_answer;
     private ProgressBar progressBar;
+    private AppCompatEditText answer_input;
+    private View question_view;
+    private Button button_next, button_skip;
+    private TextView question;
     private ViewSelection choice;
-    private OnTenthNSVHListener onTenthNSVHListener;
+    private OnFifteenNSVHListener onFifteenNSVHListener;
     private Answer answer;
 
-
-    public NS_10th_VH(View itemView) {
+    public NS_15th_VH(View itemView) {
         super ( itemView );
-        progressBar = itemView.findViewById ( R.id.progress_bar );
-        question_view = itemView.findViewById ( R.id.new_symptom_tenth_question );
-        second_question = question_view.findViewById ( R.id.txtQuestion );
-        button_next = itemView.findViewById ( R.id.btnNextQuestion );
-        button_next.setOnClickListener ( new OnNextClickListener () );
-        button_next.setEnabled ( false );
-        button_skip = itemView.findViewById ( R.id.btnSkipQuestion );
-        button_skip.setOnClickListener ( new OnSkipClickListener () );
-        choice = itemView.findViewById ( R.id.viewSelectionChoice );
-        choice.setOnSingleItemSelectedListener ( this );
-        choice.setOnClearStateListener ( this );
-        choice.setTextToButtons ( itemView.getContext ().getResources ().getString ( R.string.i_do_not_know ), 0 );
-        second_question.setText ( R.string.new_symptom_tenth_question );
-        tenth_answer = itemView.findViewById ( R.id.new_symptom_tenth_answer );
-        tenth_answer.addTextChangedListener ( new AnswerWatcher () );
-        tenth_answer.setOnFocusChangeListener ( new AnswerFocusChangeListener () );
         answer = new Answer ();
+        progressBar = itemView.findViewById ( R.id.progress_bar );
+        answer_input = itemView.findViewById ( R.id.new_symptom_fifteen_answer );
+        answer_input.addTextChangedListener ( new OnAnswerTextWatcher() );
+        question_view = itemView.findViewById ( R.id.new_symptom_fifteen_question );
+        question = question_view.findViewById ( R.id.txtQuestion );
+        question.setText ( R.string.new_symptom_fifteen_question );
+        button_next = itemView.findViewById ( R.id.btnNextQuestion );
+        button_next.setOnClickListener ( new OnNextClickListener() );
+        button_skip = itemView.findViewById ( R.id.btnSkipQuestion );
+        button_skip.setOnClickListener ( new OnSkipClickListener() );
+        choice = itemView.findViewById ( R.id.viewSelectionChoice );
+        choice.setTextToButtons ( itemView.getContext ()
+                .getResources ().
+                        getString ( R.string.i_do_not_know ), 0 );
+        choice.setOnSingleItemSelectedListener ( this );
     }
 
-    public void setOnTenthNSVHListener(OnTenthNSVHListener onTenthNSVHListener) {
-        this.onTenthNSVHListener = onTenthNSVHListener;
+    public void setOnFifteenNSVHListener(OnFifteenNSVHListener onFifteenNSVHListener) {
+        this.onFifteenNSVHListener = onFifteenNSVHListener;
     }
 
     public void setProgressBarVisibilityStatus(int status ){
@@ -61,50 +59,43 @@ public class NS_10th_VH extends RecyclerView.ViewHolder implements ViewSelection
 
     @Override
     public void onSingleItemSelected(View view, int i) {
-        System.out.println ( "NS_10th_VH.onSingleItemSelected" );
-        tenth_answer.clearFocus ();
+        System.out.println ( "NS_15th_VH.onSingleItemSelected" );
         if( i == -1 ){
             button_next.setEnabled ( false );
             button_next.setBackgroundResource ( R.drawable.disable_next_question );
         }else if ( i == 0 ){
             answer = new Answer ();
             answer.setChoice ( "b" );
-            tenth_answer.setText ( "" );
+            answer_input.setText ( "" );
             button_next.setEnabled ( true );
             button_next.setBackgroundResource ( R.drawable.enable_next_question );
         }
     }
 
-    @Override
-    public void onClearState(View view) {
-        System.out.println ( "NS_10th_VH.onClearState" );
-        answer = new Answer ();
-    }
-
-    public interface OnTenthNSVHListener{
-        void onNextClicked(Answer answer);
-        void onSkipClicked();
-    }
-
     private class OnNextClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println ( "NS_10th_VH.NS_10th_VH" );
+            System.out.println ( "NS_15th_VH.NS_15th_VH" );
             System.out.println ( "OnNextClickListener.onClick" );
-            onTenthNSVHListener.onNextClicked ( answer );
+            onFifteenNSVHListener.onNextClicked ( answer );
         }
     }
 
     private class OnSkipClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println ( "NS_10th_VH.NS_10th_VH" );
+            System.out.println ( "NS_15th_VH.NS_15th_VH" );
             System.out.println ( "OnSkipClickListener.onClick" );
-            onTenthNSVHListener.onSkipClicked ();
+            onFifteenNSVHListener.onSkipClicked ();
         }
     }
 
-    private class AnswerWatcher implements TextWatcher {
+    public interface OnFifteenNSVHListener {
+        void onNextClicked(Answer answer);
+        void onSkipClicked();
+    }
+
+    private class OnAnswerTextWatcher implements TextWatcher {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -125,18 +116,6 @@ public class NS_10th_VH extends RecyclerView.ViewHolder implements ViewSelection
             }else{
                 button_next.setEnabled ( false );
                 button_next.setBackgroundResource ( R.drawable.disable_next_question );
-            }
-        }
-    }
-
-    private class AnswerFocusChangeListener implements View.OnFocusChangeListener {
-        @Override
-        public void onFocusChange(View view, boolean isFocused) {
-            if( isFocused ){
-                choice.setClear ();
-                System.out.println ( "view = [" + view + "], isFocused = [" + isFocused + "]" );
-            }else{
-                System.out.println ( "view = [" + view + "], isFocused = [" + isFocused + "]" );
             }
         }
     }

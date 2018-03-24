@@ -10,8 +10,6 @@ import android.widget.ArrayAdapter;
 
 import com.neweraandroid.demo.R;
 
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_19.New_Symptom_19th_question;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_19.OnNineteenAnswerListener;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
 import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;

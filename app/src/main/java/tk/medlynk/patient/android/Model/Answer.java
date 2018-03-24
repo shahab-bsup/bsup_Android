@@ -5,6 +5,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+import tk.medlynk.patient.android.Networking.MedlynkRequests;
+
 /**
  * Created by Shahab on 2/22/2018.
  */

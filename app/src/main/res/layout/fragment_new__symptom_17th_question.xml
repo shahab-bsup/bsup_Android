@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    tools:context="tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_17.New_Symptom_17th_question">
+    tools:context="tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_17.NS_17th_question">
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"

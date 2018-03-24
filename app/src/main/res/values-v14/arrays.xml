@@ -66,7 +66,7 @@
         <item>Fever</item>
         <item>Unplanned weight loss</item>
         <item>Night sweats</item>
-        <item>New or worsening fatigue&lt;b>&lt;u> together&lt;/u>&lt;/b> with the main symptom today</item>
+        <item>New or worsening fatigue<b> <u>together</u> </b> with the main symptom today</item>
         <item>None of the above</item>
     </string-array>
     <string-array name="question_13_22_choices">
@@ -146,11 +146,16 @@
         <item>Can do whatever I usually do</item>
     </string-array>
     <string-array name="question_8_9_choices">
-        <item>Haven't noted anything that makes it worse</item>
+        <item>Have not noted anything that makes it worse</item>
         <item>Rest</item>
         <item>Sleep</item>
         <item>Exercise</item>
         <item>Other</item>
+    </string-array>
+    <string-array name="helpfully_strings">
+        <item>Helps a lot</item>
+        <item>Helps a little</item>
+        <item>Not helping</item>
     </string-array>
     <string-array name="question_9_choices">
         <item>Haven</item>

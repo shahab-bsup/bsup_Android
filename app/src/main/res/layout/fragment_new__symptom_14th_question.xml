@@ -4,11 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    tools:context="tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_14.New_Symptom_14th_question">
-
-    <include
-        android:id="@+id/new_symptom_fourteen_question"
-        layout="@layout/doctor_layout" />
+    tools:context="tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_14.NS_14th_question">
 
     <tk.medlynk.patient.android.CustomViews.CustomTextView
         android:layout_width="wrap_content"
@@ -16,21 +12,6 @@
         android:layout_centerHorizontal="true"
         android:text="#14"
         android:textSize="25sp"
-        />
-
-    <tk.medlynk.patient.android.CustomViews.CustomTextView
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/under_development"
-        android:layout_below="@id/new_symptom_fourteen_question"
-        android:layout_centerHorizontal="true"
-        android:textSize="20sp"
-        android:gravity="center"
-        android:textColor="@color/colorPrimary"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
         />
 
     <android.support.v4.widget.NestedScrollView
@@ -72,18 +53,70 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
                         tools:ignore="RtlHardcoded" />
-                    <com.medlynk.shahab.myviewselection.ViewSelection
-                        android:layout_width="wrap_content"
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:button_type="true"
-                        app:number_of_views="1"
-                        app:selectable="true"
-                        app:single_select="true"
-                        app:unselected_background="@drawable/answer_not_selected"
-                        app:selected_background="@drawable/answer_selected"
-                        app:unselected_text_color="@color/white"
-                        app:selected_text_color="@color/black"
-                        android:id="@+id/viewSelectionChoices" />
+                        android:orientation="vertical">
+                        <com.medlynk.shahab.myviewselection.ViewSelection
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:button_type="true"
+                            app:number_of_views="1"
+                            app:selectable="true"
+                            app:single_select="true"
+                            app:unselected_background="@drawable/answer_not_selected"
+                            app:selected_background="@drawable/answer_selected"
+                            app:unselected_text_color="@color/white"
+                            app:selected_text_color="@color/black"
+                            android:id="@+id/viewSelectionChoices" />
+                        <Button
+                            android:layout_below="@id/viewSelectionChoices"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/answer_not_selected"
+                            android:text="@string/add_a_medication"
+                            android:padding="5dp"
+                            android:textColor="@color/white"
+                            android:id="@+id/add_medication" />
+                        <android.support.v7.widget.RecyclerView
+                            android:layout_below="@id/add_medication"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/recycler_view_medications"
+                            app:layoutManager="LinearLayoutManager">
+                        </android.support.v7.widget.RecyclerView>
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_below="@id/patient_row"
+                    android:layoutDirection="rtl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <Button
+                        android:layout_weight="1"
+                        android:id="@+id/btnNextQuestion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/disable_next_question"
+                        android:layout_alignParentBottom="true"
+                        android:layout_margin="10dp"
+                        android:text="@string/next"
+                        android:textColor="@color/white" />
+
+                    <Button
+                        android:layout_weight="1"
+                        android:id="@+id/btnSkipQuestion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/enabled_custom_button"
+                        android:layout_alignParentBottom="true"
+                        android:layout_margin="10dp"
+                        android:text="@string/skip"
+                        android:textColor="@color/white" />
 
                 </LinearLayout>
 
@@ -92,35 +125,6 @@
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
-
-    <LinearLayout
-        android:layoutDirection="rtl"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-        <Button
-            android:layout_weight="1"
-            android:id="@+id/btnNextQuestion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/disable_next_question"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="10dp"
-            android:text="@string/next"
-            android:textColor="@color/white" />
-
-        <Button
-            android:layout_weight="1"
-            android:id="@+id/btnSkipQuestion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/enabled_custom_button"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="10dp"
-            android:text="@string/skip"
-            android:textColor="@color/white" />
-
-    </LinearLayout>
 
     <ProgressBar
         android:layout_width="wrap_content"

@@ -1,9 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_13.NS_13th_question">
 
     <android.support.v4.widget.NestedScrollView
@@ -19,73 +19,111 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <include
                     android:id="@+id/new_symptom_thirteen_question"
                     layout="@layout/doctor_layout" />
+
                 <tk.medlynk.patient.android.CustomViews.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:text="#13"
-                    android:textSize="25sp"
-                    />
+                    android:textSize="25sp" />
+
                 <LinearLayout
-                    android:layout_marginTop="40dp"
-                    android:layout_below="@id/new_symptom_thirteen_question"
-                    android:layoutDirection="rtl"
+                    android:id="@+id/patient_row"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:id="@+id/patient_row">
+                    android:layout_below="@id/new_symptom_thirteen_question"
+                    android:layout_marginTop="40dp"
+                    android:layoutDirection="rtl"
+                    android:orientation="horizontal">
+
                     <ImageView
+                        android:id="@+id/doctor_icon"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:src="@drawable/patient_icon"
-                        android:id="@+id/doctor_icon"
-                        android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/patient_icon"
                         tools:ignore="RtlHardcoded" />
-                    <com.medlynk.shahab.myviewselection.ViewSelection
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <com.medlynk.shahab.myviewselection.ViewSelection
+                            android:id="@+id/viewSelectionChoices"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:button_type="true"
+                            app:number_of_views="7"
+                            app:selectable="true"
+                            app:selected_background="@drawable/answer_selected"
+                            app:selected_text_color="@color/black"
+                            app:single_select="false"
+                            app:unselected_background="@drawable/answer_not_selected"
+                            app:unselected_text_color="@color/white" />
+
+                        <com.medlynk.shahab.myviewselection.ViewSelection
+                            android:id="@+id/viewSelectionSecond"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/patient_row"
+                            app:button_type="true"
+                            app:number_of_views="1"
+                            app:selectable="true"
+                            app:selected_background="@drawable/answer_selected"
+                            app:selected_text_color="@color/black"
+                            app:single_select="true"
+                            app:unselected_background="@drawable/answer_not_selected"
+                            app:unselected_text_color="@color/white" />
+
+                    </LinearLayout>
+
+                    <com.medlynk.shahab.myviewselection.ViewSelection
+                        android:id="@+id/viewSelectionHelpfully"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         app:button_type="true"
-                        app:number_of_views="8"
-                        app:selectable="true"
+                        app:number_of_views="7"
+                        app:selectable="false"
+                        app:selected_background="@drawable/answer_selected"
+                        app:selected_text_color="@color/black"
                         app:single_select="true"
                         app:unselected_background="@drawable/answer_not_selected"
-                        app:selected_background="@drawable/answer_selected"
-                        app:unselected_text_color="@color/white"
-                        app:selected_text_color="@color/black"
-                        android:id="@+id/viewSelectionChoices"
-                        />
+                        app:unselected_text_color="@color/white" />
                 </LinearLayout>
 
             </RelativeLayout>
 
             <LinearLayout
-                android:layoutDirection="rtl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true">
+                android:layoutDirection="rtl">
+
                 <Button
-                    android:layout_weight="1"
                     android:id="@+id/btnNextQuestion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/disable_next_question"
                     android:layout_alignParentBottom="true"
                     android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/disable_next_question"
                     android:text="@string/next"
                     android:textColor="@color/white" />
 
                 <Button
-                    android:layout_weight="1"
                     android:id="@+id/btnSkipQuestion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/enabled_custom_button"
                     android:layout_alignParentBottom="true"
                     android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/enabled_custom_button"
                     android:text="@string/skip"
                     android:textColor="@color/white" />
 
@@ -96,10 +134,9 @@
     </android.support.v4.widget.NestedScrollView>
 
     <ProgressBar
+        android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/progress_bar"
-        android:visibility="gone"
-        />
+        android:visibility="gone" />
 
 </RelativeLayout>

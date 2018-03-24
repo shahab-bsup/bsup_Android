@@ -10,11 +10,6 @@ import android.widget.TextView;
 import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
 
-import java.util.AbstractQueue;
-import java.util.ArrayList;
-
-import tk.medlynk.patient.android.Model.Answer;
-
 /**
  * Created by Shahab on 3/2/2018.
  */
@@ -77,34 +72,7 @@ public class New_Symptom_22th_question_ViewHolder extends RecyclerView.ViewHolde
     @Override
     public void onSingleItemSelected(View view, final int i) {
         System.out.println ( "New_Symptom_22th_question_ViewHolder.onSingleItemSelected" );
-        final AppCompatDialog dialog = new AppCompatDialog ( view.getContext () );
-        dialog.setContentView ( R.layout.treatment_intensity_dialog );
-        TextView help_a_lot, help_a_little, not_helping;
-        help_a_lot = dialog.findViewById ( R.id.treatment_help_a_lot );
-        help_a_little = dialog.findViewById ( R.id.treatment_help_a_little );
-        not_helping = dialog.findViewById ( R.id.treatment_not_helping );
-        help_a_lot.setOnClickListener ( new View.OnClickListener () {
-            @Override
-            public void onClick(View view) {
-                listener.onTreatmentClicked ( i, 1 );
-                dialog.dismiss ();
-            }
-        } );
-        help_a_little.setOnClickListener ( new View.OnClickListener () {
-            @Override
-            public void onClick(View view) {
-                listener.onTreatmentClicked ( i, 2 );
-                dialog.dismiss ();
-            }
-        } );
-        not_helping.setOnClickListener ( new View.OnClickListener () {
-            @Override
-            public void onClick(View view) {
-                listener.onTreatmentClicked ( i, 3 );
-                dialog.dismiss ();
-            }
-        } );
-        dialog.show ();
+
     }
 
     public interface On22QuestionViewsClickListener{

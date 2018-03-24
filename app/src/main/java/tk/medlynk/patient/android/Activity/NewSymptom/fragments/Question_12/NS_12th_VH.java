@@ -13,14 +13,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_8.NS_8th_VH;
 import tk.medlynk.patient.android.Model.Answer;
 
 /**
  * Created by Shahab on 2/23/2018.
  */
 
-public class NS_12th_VH extends RecyclerView.ViewHolder implements ViewSelection.OnSingleItemSelectedListener, ViewSelection.OnClearStateListener, ViewSelection.OnMultiItemSelectedListener {
+public class NS_12th_VH extends RecyclerView.ViewHolder implements
+        ViewSelection.OnSingleItemSelectedListener,
+        ViewSelection.OnClearStateListener,
+        ViewSelection.OnMultiItemSelectedListener {
 
     private ProgressBar progressBar;
     private View question_view;
@@ -30,7 +32,7 @@ public class NS_12th_VH extends RecyclerView.ViewHolder implements ViewSelection
     private String[] string_choices;
     private Answer choice ;
     private List<Answer> choices;
-    private OnNinthNSVHListener onNinthNSVHListener;
+    private OnTwelveNSVHListener onNinthNSVHListener;
 
     public NS_12th_VH(View itemView) {
         super ( itemView );
@@ -52,20 +54,20 @@ public class NS_12th_VH extends RecyclerView.ViewHolder implements ViewSelection
         first = itemView.findViewById ( R.id.viewSelectionFirst );
         first.setOnSingleItemSelectedListener ( this );
         first.setOnClearStateListener ( this );
-        first.setTextToButtons ( string_choices[0], 0 );
         second = itemView.findViewById ( R.id.viewSelectionSecond );
         second.setOnMultiItemSelectedListener ( this );
         second.setOnClearStateListener ( this );
         for (int i = 0; i < second.getNumberOfViews (); i++) {
-            second.setTextToButtons ( string_choices[i+1], i );
+            second.setTextToButtons ( string_choices[i], i );
         }
+        first.setTextToButtons ( string_choices[4], 0 );
     }
 
     public void setProgressBarVisibilityStatus( int status ){
         this.progressBar.setVisibility ( status );
     }
 
-    public void setOnNinthNSVHListener(OnNinthNSVHListener onNinthNSVHListener) {
+    public void setOnNinthNSVHListener(OnTwelveNSVHListener onNinthNSVHListener) {
         this.onNinthNSVHListener = onNinthNSVHListener;
     }
 
@@ -77,7 +79,7 @@ public class NS_12th_VH extends RecyclerView.ViewHolder implements ViewSelection
             button_next.setBackgroundResource ( R.drawable.disable_next_question );
         }else{
             second.setClear ();
-            choice.setChoice ( "a" );
+            choice.setChoice ( "e" );
             button_next.setEnabled ( true );
             button_next.setBackgroundResource ( R.drawable.enable_next_question );
         }
@@ -95,6 +97,7 @@ public class NS_12th_VH extends RecyclerView.ViewHolder implements ViewSelection
     @Override
     public void onMultiItemSelected(View view, Integer integer) {
         System.out.println ( "NS_12th_VH.onMultiItemSelected" );
+        first.setClear ();
         setAnswerChoices ( integer );
     }
 
@@ -102,15 +105,20 @@ public class NS_12th_VH extends RecyclerView.ViewHolder implements ViewSelection
         Answer answer = new Answer ();
         switch (integer){
             case 0:{
-                answer.setChoice ( "b" );
+                answer.setChoice ( "a" );
                 break;
             }
             case 1:{
-                answer.setChoice ( "c" );
+                answer.setChoice ( "b" );
 
                 break;
             }
             case 2:{
+                answer.setChoice ( "c" );
+
+                break;
+            }
+            case 3:{
                 answer.setChoice ( "d" );
 
                 break;
@@ -131,32 +139,48 @@ public class NS_12th_VH extends RecyclerView.ViewHolder implements ViewSelection
         switch (i){
             case 0:{
                 while (answerIterator.hasNext ()){
-                    if( answerIterator.next ().getChoice ().equals ( "a" ) )
+                    Answer answer = answerIterator.next ();
+                    if( answer.getChoice () != null &&
+                            answer.getChoice ().equals ( "a" ) ){
                         answerIterator.remove ();
+                        break;
+                    }
                 }
 
                 break;
             }
             case 1:{
                 while (answerIterator.hasNext ()){
-                    if( answerIterator.next ().getChoice ().equals ( "b" ) )
+                    Answer answer = answerIterator.next ();
+                    if( answer.getChoice () != null &&
+                            answer.getChoice ().equals ( "b" ) ){
                         answerIterator.remove ();
+                        break;
+                    }
                 }
 
                 break;
             }
             case 2:{
                 while (answerIterator.hasNext ()){
-                    if( answerIterator.next ().getChoice ().equals ( "c" ) )
+                    Answer answer = answerIterator.next ();
+                    if( answer.getChoice () != null &&
+                            answer.getChoice ().equals ( "c" ) ){
                         answerIterator.remove ();
+                        break;
+                    }
                 }
 
                 break;
             }
             case 3:{
                 while (answerIterator.hasNext ()){
-                    if( answerIterator.next ().getChoice ().equals ( "d" ) )
+                    Answer answer = answerIterator.next ();
+                    if( answer.getChoice () != null &&
+                            answer.getChoice ().equals ( "d" ) ){
                         answerIterator.remove ();
+                        break;
+                    }
                 }
 
                 break;
@@ -190,7 +214,7 @@ public class NS_12th_VH extends RecyclerView.ViewHolder implements ViewSelection
         }
     }
 
-    public interface OnNinthNSVHListener{
+    public interface OnTwelveNSVHListener {
         void onNextClicked(Answer answer);
         void onNextClicked(List<Answer> answers);
         void onSkipClicked();

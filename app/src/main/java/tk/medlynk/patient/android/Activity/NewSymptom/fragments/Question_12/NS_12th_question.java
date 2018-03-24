@@ -1,20 +1,15 @@
 package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_12;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
@@ -32,7 +27,7 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
      */
     public class NS_12th_question extends Fragment implements
             OnTwelveAnswerListener,
-            NS_12th_VH.OnNinthNSVHListener {
+            NS_12th_VH.OnTwelveNSVHListener {
 
         public static final String TAG = NS_12th_question.class.getSimpleName ();
 

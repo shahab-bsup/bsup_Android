@@ -1,18 +1,18 @@
-package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_10;
+package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_17;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
 import tk.medlynk.patient.android.Model.Answer;
@@ -22,27 +22,27 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link OnNewSymptomTenthQuestionListener} interface
+ * {@link NS_17th_question.OnNewSymptomSeventeenQuestionListener} interface
  * to handle interaction events.
- * Use the {@link NS_10th_question#newInstance} factory method to
+ * Use the {@link NS_17th_question#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NS_10th_question extends Fragment implements
-         OnTenthAnswerListener, NS_10th_VH.OnTenthNSVHListener {
+public class NS_17th_question extends Fragment implements
+        OnSeventeenAnswerListener,
+        NS_17th_VH.OnSeventeenNSVHListener {
 
-    public static final String TAG = NS_10th_question.class.getSimpleName ();
+    public static final String TAG = NS_17th_question.class.getSimpleName ();
 
+    private OnNewSymptomSeventeenQuestionListener mListener;
 
-    private OnNewSymptomTenthQuestionListener mListener;
+    private NS_17th_VH viewHolder;
 
-    private NS_10th_VH viewHolder;
-
-    public NS_10th_question() {
+    public NS_17th_question() {
         // Required empty public constructor
     }
 
-    public static NS_10th_question newInstance(String param1, String param2) {
-        NS_10th_question fragment = new NS_10th_question ();
+    public static NS_17th_question newInstance() {
+        NS_17th_question fragment = new NS_17th_question ();
         Bundle args = new Bundle ();
 
         fragment.setArguments ( args );
@@ -61,20 +61,20 @@ public class NS_10th_question extends Fragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate ( R.layout.fragment_new__symptom_10th_question, container, false );
-        viewHolder = new NS_10th_VH ( view );
-        viewHolder.setOnTenthNSVHListener ( this );
+        View view = inflater.inflate ( R.layout.fragment_new__symptom_17th_question, container, false );
+        viewHolder = new NS_17th_VH ( view );
+        viewHolder.setOnSeventeenNSVHListener ( this );
         return view;
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach ( context );
-        if (context instanceof OnNewSymptomTenthQuestionListener) {
-            mListener = (OnNewSymptomTenthQuestionListener) context;
+        if (context instanceof OnNewSymptomSeventeenQuestionListener) {
+            mListener = (OnNewSymptomSeventeenQuestionListener) context;
         } else {
             throw new RuntimeException ( context.toString ()
-                    + " must implement OnNewSymptomTenthQuestionListener" );
+                    + " must implement OnNewSymptomSeventeenQuestionListener" );
         }
     }
 
@@ -84,39 +84,38 @@ public class NS_10th_question extends Fragment implements
         mListener = null;
     }
 
-
     @Override
-    public void onTenthAnswerSuccess(NewSymptomAnswerResponse response) {
-        System.out.println ( "NS_10th_question.onTenthAnswerSuccess" );
+    public void onSeventeenAnswerSuccess(NewSymptomAnswerResponse response) {
+        System.out.println ( "NS_17th_question.onSeventeenAnswerSuccess" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
-        mListener.onTenthQuestion ();
+        mListener.onSeventeenQuestion ();
     }
 
     @Override
-    public void onTenthAnswerFailure() {
-        System.out.println ( "NS_10th_question.onTenthAnswerFailure" );
+    public void onSeventeenAnswerFailure() {
+        System.out.println ( "NS_17th_question.onSeventeenAnswerFailure" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
-        Toast.makeText ( getActivity (), "try again later!", Toast.LENGTH_SHORT ).show ();
+        mListener.onSeventeenQuestion ();
     }
 
     @Override
-    public void onNextClicked(Answer answer) {
-        System.out.println ( "NS_10th_question.onNextClicked" );
+    public void onNextClicked(List<Answer> answer) {
+        System.out.println ( "NS_17th_question.onNextClicked" );
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
         SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
-        MedlynkRequests.newSymptomTenthQuestionAnswer ( getActivity (),
-                NS_10th_question.this,
+        MedlynkRequests.newSymptomSeventeenQuestionAnswer ( getActivity (),
+                NS_17th_question.this,
                 manager.getAppointmentID (),
                 answer);
     }
 
     @Override
     public void onSkipClicked() {
-        System.out.println ( "NS_10th_question.onSkipClicked" );
-        mListener.onTenthQuestion ();
+        System.out.println ( "NS_17th_question.onSkipClicked" );
+        mListener.onSeventeenQuestion ();
     }
 
-    public interface OnNewSymptomTenthQuestionListener {
-        void onTenthQuestion();
+    public interface OnNewSymptomSeventeenQuestionListener {
+        void onSeventeenQuestion();
     }
 }

@@ -11,12 +11,12 @@ import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_10.NS_1
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_11.NS_11th_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_12.NS_12th_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_13.NS_13th_question;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_14.New_Symptom_14th_question;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_15.New_Symptom_15th_question;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_16.New_Symptom_16th_question;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_17.New_Symptom_17th_question;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_18.New_Symptom_18th_question;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_19.New_Symptom_19th_question;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_14.NS_14th_question;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_15.NS_15th_question;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_16.NS_16th_question;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_17.NS_17th_question;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_18.NS_18th_question;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_19.NS_19th_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_1.New_Symptom_1th_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_2.NS_2nd_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_20.New_Symptom_20th_question;
@@ -52,12 +52,12 @@ public class NewSymptomActivity extends AppCompatActivity implements
         NS_11th_question.OnNewSymptomEleventhQuestionListener,
         NS_12th_question.OnNewSymptomTwelveQuestionListener,
         NS_13th_question.OnNewSymptomThirteenQuestionListener,
-        New_Symptom_14th_question.OnNewSymptomFourteenQuestionListener,
-        New_Symptom_15th_question.OnNewSymptomFifteenQuestionListener,
-        New_Symptom_16th_question.OnNewSymptomSixteenQuestionListener,
-        New_Symptom_17th_question.OnNewSymptomSeventeenQuestionListener,
-        New_Symptom_18th_question.OnNewSymptomEighteenQuestionListener,
-        New_Symptom_19th_question.OnNewSymptomNineteenQuestionListener,
+        NS_14th_question.OnNewSymptomFourteenQuestionListener,
+        NS_15th_question.OnNewSymptomFifteenQuestionListener,
+        NS_16th_question.OnNewSymptomSixteenQuestionListener,
+        NS_17th_question.OnNewSymptomSeventeenQuestionListener,
+        NS_18th_question.OnNewSymptomEighteenQuestionListener,
+        NS_19th_question.OnNewSymptomNineteenQuestionListener,
         New_Symptom_20th_question.OnNewSymptomTwentyQuestionListener,
         New_Symptom_21th_question.OnNewSymptomTwenty1QuestionListener,
         New_Symptom_22th_question.OnNewSymptomTwenty2QuestionListener,
@@ -84,7 +84,9 @@ public class NewSymptomActivity extends AppCompatActivity implements
         } );
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
-        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_1th_question (), New_Symptom_1th_question.TAG ).commit ();
+        fragmentTransaction.add ( R.id.fragment_container,
+                new New_Symptom_1th_question (),
+                New_Symptom_1th_question.TAG ).commit ();
     }
 
     @Override
@@ -184,16 +186,16 @@ public class NewSymptomActivity extends AppCompatActivity implements
     public void onFifteenQuestion() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
-        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_16th_question (), New_Symptom_16th_question.TAG ).commit ();
-        fragmentTransaction.addToBackStack ( New_Symptom_16th_question.TAG );
+        fragmentTransaction.add ( R.id.fragment_container, new NS_16th_question (), NS_16th_question.TAG ).commit ();
+        fragmentTransaction.addToBackStack ( NS_16th_question.TAG );
     }
 
     @Override
     public void onSixteenQuestion() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
-        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_17th_question (), New_Symptom_17th_question.TAG ).commit ();
-        fragmentTransaction.addToBackStack ( New_Symptom_17th_question.TAG );
+        fragmentTransaction.add ( R.id.fragment_container, new NS_17th_question (), NS_17th_question.TAG ).commit ();
+        fragmentTransaction.addToBackStack ( NS_17th_question.TAG );
     }
 
     @Override
@@ -232,16 +234,28 @@ public class NewSymptomActivity extends AppCompatActivity implements
     public void onFourteenQuestion() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
-        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_15th_question (), New_Symptom_15th_question.TAG ).commit ();
-        fragmentTransaction.addToBackStack ( New_Symptom_15th_question.TAG );
+        fragmentTransaction.add ( R.id.fragment_container, new NS_15th_question (), NS_15th_question.TAG ).commit ();
+        fragmentTransaction.addToBackStack ( NS_15th_question.TAG );
     }
 
     @Override
     public void onEighteenQuestion() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
-        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_19th_question (), New_Symptom_19th_question.TAG ).commit ();
-        fragmentTransaction.addToBackStack ( New_Symptom_19th_question.TAG );
+        fragmentTransaction.add ( R.id.fragment_container, new NS_19th_question (), NS_19th_question.TAG ).commit ();
+        fragmentTransaction.addToBackStack ( NS_19th_question.TAG );
+    }
+
+    @Override
+    public void onJumpToEnd() {
+        System.out.println ( "NewSymptomActivity.onJumpToEnd" );
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
+        fragmentTransaction.add ( R.id.fragment_container,
+                new New_Symptom_24th_question (),
+                New_Symptom_24th_question.TAG ).
+                commit ();
+        fragmentTransaction.addToBackStack ( New_Symptom_24th_question.TAG );
     }
 
     @Override
@@ -255,8 +269,8 @@ public class NewSymptomActivity extends AppCompatActivity implements
     public void onSeventeenQuestion() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
-        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_18th_question (), New_Symptom_18th_question.TAG ).commit ();
-        fragmentTransaction.addToBackStack ( New_Symptom_18th_question.TAG );
+        fragmentTransaction.add ( R.id.fragment_container, new NS_18th_question (), NS_18th_question.TAG ).commit ();
+        fragmentTransaction.addToBackStack ( NS_18th_question.TAG );
     }
 
     @Override
@@ -279,8 +293,8 @@ public class NewSymptomActivity extends AppCompatActivity implements
     public void onThirteenQuestion() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
-        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_14th_question (), New_Symptom_14th_question.TAG ).commit ();
-        fragmentTransaction.addToBackStack ( New_Symptom_14th_question.TAG );
+        fragmentTransaction.add ( R.id.fragment_container, new NS_14th_question (), NS_14th_question.TAG ).commit ();
+        fragmentTransaction.addToBackStack ( NS_14th_question.TAG );
     }
 
     @Override

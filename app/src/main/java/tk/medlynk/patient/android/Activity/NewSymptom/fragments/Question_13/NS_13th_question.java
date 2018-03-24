@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 
 import com.neweraandroid.demo.R;
 
+import java.util.List;
+
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
 import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
@@ -23,13 +25,12 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
  * create an instance of this fragment.
  */
 public class NS_13th_question extends Fragment implements
-        NS_13th_VH.On13QuestionViewClickListener, OnThirteenAnswerListener {
+        NS_13th_VH.OnThirteenNSVHListener, OnThirteenAnswerListener {
 
     public final static String TAG = NS_13th_question.class.getSimpleName ();
 
     private OnNewSymptomThirteenQuestionListener mListener;
     private NS_13th_VH viewHolder;
-    private Answer answer;
 
     public NS_13th_question() {
         // Required empty public constructor...
@@ -57,7 +58,7 @@ public class NS_13th_question extends Fragment implements
 
         View view = inflater.inflate ( R.layout.fragment_new__symptom_13th_question, container, false );
         viewHolder = new NS_13th_VH ( view );
-        viewHolder.setListener ( this );
+        viewHolder.setOnThirteenNSVHListener ( this );
         return view;
     }
 
@@ -79,7 +80,7 @@ public class NS_13th_question extends Fragment implements
     }
 
     @Override
-    public void onNextClicked() {
+    public void onNextClicked(Answer answer) {
         System.out.println ( "NS_13th_question.onNextClicked" );
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
         SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
@@ -91,59 +92,21 @@ public class NS_13th_question extends Fragment implements
     }
 
     @Override
-    public void onSkipClicked() {
-        System.out.println ( "NS_13th_question.onSkipClicked" );
-        mListener.onThirteenQuestion ();
+    public void onNextClicked(List<Answer> answers) {
+        System.out.println ( "NS_13th_question.onNextClicked" );
+        System.out.println ("list of answers");
+        viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
+        SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
+        MedlynkRequests.newSymptomThirteenQuestionAnswer ( getActivity (),
+                NS_13th_question.this,
+                manager.getAppointmentID (),
+                answers );
     }
 
     @Override
-    public void onTreatmentClicked(int position, int treatmentID) {
-        System.out.println ( "NS_13th_question.onTreatmentClicked" );
-        answer = new Answer ();
-        switch (position){
-            case 0:{
-                answer.setChoice ( "a" );
-                answer.setHelpfully ( String.valueOf ( treatmentID ) );
-                break;
-            }
-            case 1:{
-                answer.setChoice ( "b" );
-                answer.setHelpfully ( String.valueOf ( treatmentID ) );
-
-                break;
-            }
-            case 2:{
-                answer.setChoice ( "c" );
-                answer.setHelpfully ( String.valueOf ( treatmentID ) );
-
-                break;
-            }
-            case 3:{
-                answer.setChoice ( "d" );
-                answer.setHelpfully ( String.valueOf ( treatmentID ) );
-
-                break;
-            }
-            case 4:{
-                answer.setChoice ( "e" );
-                answer.setHelpfully ( String.valueOf ( treatmentID ) );
-
-                break;
-            }
-            case 5:{
-                answer.setChoice ( "f" );
-                answer.setHelpfully ( String.valueOf ( treatmentID ) );
-
-                break;
-            }
-            case 6:{
-                answer.setChoice ( "g" );
-                answer.setHelpfully ( String.valueOf ( treatmentID ) );
-                answer.setOther ( "nothing but everything!" );
-                break;
-            }
-
-        }
+    public void onSkipClicked() {
+        System.out.println ( "NS_13th_question.onSkipClicked" );
+        mListener.onThirteenQuestion ();
     }
 
     @Override
@@ -157,6 +120,7 @@ public class NS_13th_question extends Fragment implements
     public void onThirteenAnswerFailure() {
         System.out.println ( "NS_13th_question.onThirteenAnswerFailure" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+        mListener.onThirteenQuestion ();
     }
 
     public interface OnNewSymptomThirteenQuestionListener {

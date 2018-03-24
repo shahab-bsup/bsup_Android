@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <tk.medlynk.patient.android.CustomViews.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="@string/choose_one_helpfully_option"
+        android:textColor="@color/colorPrimary"
+        android:textSize="15sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:background="@drawable/custom_edit_text_doctor_id">
+        <com.medlynk.shahab.myviewselection.ViewSelection
+            android:id="@+id/helpfully_ViewSelection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            app:button_type="true"
+            app:number_of_views="3"
+            app:selectable="true"
+            app:selected_background="@drawable/answer_selected"
+            app:selected_text_color="@color/black"
+            app:single_select="true"
+            app:unselected_background="@drawable/answer_not_selected"
+            app:unselected_text_color="@color/white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/helpfully_ViewSelection"
+            android:layoutDirection="rtl">
+
+            <Button
+                android:id="@+id/btnNextQuestion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/disable_next_question"
+                android:clickable="false"
+                android:text="@string/next"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/btnSkipQuestion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/enabled_custom_button"
+                android:text="@string/skip"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

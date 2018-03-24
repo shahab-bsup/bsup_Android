@@ -246,5 +246,7 @@
     <string name="FUPR_twelve_question">Is there anything you have noted that makes the symptom better?
 (Ex - rest, sleep, eating, fluid intake, exercise, being inside/outside, temperature outside, air quality)</string>
     <string name="enter_a_number">Enter a number</string>
+    <string name="choose_one_helpfully_option">Choose a Helpfully Options</string>
+    <string name="add_a_medication">Add a medication</string>
 
 </resources>

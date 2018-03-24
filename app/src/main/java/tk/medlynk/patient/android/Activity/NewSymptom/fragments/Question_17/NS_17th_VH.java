@@ -1,4 +1,4 @@
-package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_8;
+package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_17;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -17,56 +17,40 @@ import tk.medlynk.patient.android.Essentials.OtherDialogBuilder;
 import tk.medlynk.patient.android.Model.Answer;
 
 /**
- * Created by Shahab on 2/23/2018.
+ * Created by Shahab on 2/24/2018.
  */
 
-public class NS_8th_VH extends RecyclerView.ViewHolder implements
-        ViewSelection.OnSingleItemSelectedListener,
-        ViewSelection.OnMultiItemSelectedListener,
-        OtherDialogBuilder.OnOtherDialogListener,
-        ViewSelection.OnClearStateListener {
+public class NS_17th_VH extends RecyclerView.ViewHolder implements ViewSelection.OnMultiItemSelectedListener, OtherDialogBuilder.OnOtherDialogListener {
 
     private ProgressBar progressBar;
     private View question_view;
     private Button button_next, button_skip;
     private TextView question;
-    private ViewSelection first, second;
+    private ViewSelection viewSelection;
+    List<Answer> answers = new ArrayList<> (  );
     private String[] string_choices;
-    private Answer choice ;
-    private List<Answer> choices;
-    private OnEighthNSVHListener onEighthNSVHListener;
+    private OnSeventeenNSVHListener onSeventeenNSVHListener;
 
-    public NS_8th_VH(View itemView) {
+    public NS_17th_VH(View itemView) {
         super ( itemView );
-        choices = new ArrayList<> (  );
-        choice = new Answer ();
         progressBar = itemView.findViewById ( R.id.progress_bar );
-        question_view = itemView.findViewById ( R.id.new_symptom_eighth_question );
+        question_view = itemView.findViewById ( R.id.new_symptom_seventeen_question );
         question = question_view.findViewById ( R.id.txtQuestion );
-        question.setText ( R.string.new_symptom_eighth_question );
+        question.setText ( R.string.new_symptom_seventeen_question );
         button_next = itemView.findViewById ( R.id.btnNextQuestion );
         button_next.setOnClickListener ( new OnNextClickListener() );
-        button_next.setEnabled ( false );
         button_skip = itemView.findViewById ( R.id.btnSkipQuestion );
         button_skip.setOnClickListener ( new OnSkipClickListener() );
-        string_choices = itemView.
-                getContext ().
-                getResources ().
-                getStringArray ( R.array.question_8_9_choices );
-        first = itemView.findViewById ( R.id.viewSelectionFirst );
-        first.setOnSingleItemSelectedListener ( this );
-        first.setOnClearStateListener ( this );
-        first.setTextToButtons ( string_choices[0], 0 );
-        second = itemView.findViewById ( R.id.viewSelectionSecond );
-        second.setOnMultiItemSelectedListener ( this );
-        second.setOnClearStateListener ( this );
-        for (int i = 0; i < second.getNumberOfViews (); i++) {
-            second.setTextToButtons ( string_choices[i+1], i );
+        viewSelection = itemView.findViewById ( R.id.viewSelectionChoices );
+        viewSelection.setOnMultiItemSelectedListener ( this );
+        string_choices = itemView.getContext ().getResources ().getStringArray ( R.array.question_17_choices );
+        for (int i = 0; i < viewSelection.getNumberOfViews (); i++) {
+            viewSelection.setTextToButtons ( string_choices[i], i );
         }
     }
 
-    public void setOnEighthNSVHListener(OnEighthNSVHListener onEighthNSVHListener) {
-        this.onEighthNSVHListener = onEighthNSVHListener;
+    public void setOnSeventeenNSVHListener(OnSeventeenNSVHListener onSeventeenNSVHListener) {
+        this.onSeventeenNSVHListener = onSeventeenNSVHListener;
     }
 
     public void setProgressBarVisibilityStatus(int status ){
@@ -74,24 +58,9 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
     }
 
     @Override
-    public void onSingleItemSelected(View view, int i) {
-        System.out.println ( "NS_8th_VH.onSingleItemSelected" );
-        if( i == -1 ){
-            button_next.setEnabled ( false );
-            button_next.setBackgroundResource ( R.drawable.disable_next_question );
-        }else{
-            second.setClear ();
-            choice.setChoice ( "a" );
-            button_next.setEnabled ( true );
-            button_next.setBackgroundResource ( R.drawable.enable_next_question );
-        }
-    }
-
-    @Override
     public void onMultiItemSelected(View view, Integer integer) {
-        System.out.println ( "NS_8th_VH.onMultiItemSelected" );
-        first.setClear ();
-        if( integer == 3 ){
+        System.out.println ( "NS_17th_VH.onMultiItemSelected" );
+        if( integer == 5 ){
             OtherDialogBuilder dialogBuilder = new OtherDialogBuilder ( itemView.getContext () );
             dialogBuilder.setOnOtherDialogListener ( this );
             dialogBuilder.show ();
@@ -117,9 +86,19 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
 
                 break;
             }
+            case 3:{
+                answer.setChoice ( "e" );
+
+                break;
+            }
+            case 4:{
+                answer.setChoice ( "f" );
+
+                break;
+            }
         }
-        choices.add ( answer );
-        if( choices.size () == 1 ){
+        answers.add ( answer );
+        if( answers.size () == 1 ){
             button_next.setEnabled ( true );
             button_next.setBackgroundResource ( R.drawable.enable_next_question );
         }
@@ -127,17 +106,17 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
 
     @Override
     public void onMultiItemDeselected(View view, Integer integer) {
-        System.out.println ( "NS_8th_VH.onMultiItemDeselected" );
+        System.out.println ( "NS_17th_VH.onMultiItemDeselected" );
         int i = integer;
-        Iterator<Answer> answerIterator = choices.iterator ();
+        Iterator<Answer> answerIterator = answers.iterator ();
         switch (i){
             case 0:{
-               while (answerIterator.hasNext ()){
-                   Answer answer = answerIterator.next ();
-                   if(  answer.getChoice () != null &&
-                           answer.getChoice ().equals ( "b" ) )
-                       answerIterator.remove ();
-               }
+                while (answerIterator.hasNext ()){
+                    Answer answer = answerIterator.next ();
+                    if(  answer.getChoice () != null &&
+                            answer.getChoice ().equals ( "a" ) )
+                        answerIterator.remove ();
+                }
 
                 break;
             }
@@ -145,7 +124,7 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
                 while (answerIterator.hasNext ()){
                     Answer answer = answerIterator.next ();
                     if(  answer.getChoice () != null &&
-                            answer.getChoice ().equals ( "c" ) ){
+                            answer.getChoice ().equals ( "b" ) ){
                         answerIterator.remove ();
                         break;
                     }
@@ -157,7 +136,7 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
                 while (answerIterator.hasNext ()){
                     Answer answer = answerIterator.next ();
                     if(  answer.getChoice () != null &&
-                            answer.getChoice ().equals ( "d" ) ){
+                            answer.getChoice ().equals ( "c" ) ){
                         answerIterator.remove ();
                         break;
                     }
@@ -165,6 +144,18 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
 
             }
             case 3:{
+                while (answerIterator.hasNext ()){
+                    Answer answer = answerIterator.next ();
+                    if(  answer.getChoice () != null &&
+                            answer.getChoice ().equals ( "d" ) ){
+                        answerIterator.remove ();
+                        break;
+                    }
+                }
+
+                break;
+            }
+            case 4:{
                 while (answerIterator.hasNext ()){
                     Answer answer = answerIterator.next ();
                     if(  answer.getChoice () != null &&
@@ -176,8 +167,33 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
 
                 break;
             }
+            case 5:{
+                while (answerIterator.hasNext ()){
+                    Answer answer = answerIterator.next ();
+                    if(  answer.getChoice () != null &&
+                            answer.getChoice ().equals ( "f" ) ){
+                        answerIterator.remove ();
+                        break;
+                    }
+                }
+
+                break;
+            }
+            case 6:{
+                while (answerIterator.hasNext ()){
+                    Answer answer = answerIterator.next ();
+                    if(  answer.getChoice () != null &&
+                            answer.getChoice ().equals ( "g" ) ){
+                        answerIterator.remove ();
+                        break;
+                    }
+                }
+
+                break;
+            }
+
         }
-        if( choices.size () == 0 ){
+        if( answers.size () == 0 ){
             button_next.setEnabled ( false );
             button_next.setBackgroundResource ( R.drawable.disable_next_question );
         }
@@ -185,56 +201,44 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
 
     @Override
     public void onOtherDialogDone(String otherText) {
-        System.out.println ( "NS_8th_VH.onOtherDialogDone" );
+        System.out.println ( "NS_17th_VH.onOtherDialogDone" );
         if( otherText.length () > 0 ){
             Answer answer = new Answer ();
             answer.setChoice ( "e" );
             answer.setOther ( otherText );
-            choices.add ( answer );
+            answers.add ( answer );
             button_next.setEnabled ( true );
             button_next.setBackgroundResource ( R.drawable.enable_next_question );
         } else {
-            second.getButtons ().get ( 3 ).setBackgroundResource ( R.drawable.answer_not_selected );
-            second.getButtons ().get ( 3 ).setTextColor ( itemView.
+            viewSelection.getButtons ().get ( 6 ).setBackgroundResource ( R.drawable.answer_not_selected );
+            viewSelection.getButtons ().get ( 6 ).setTextColor ( itemView.
                     getContext ().
                     getResources ().
                     getColor ( R.color.white ) );
         }
     }
 
-    @Override
-    public void onClearState(View view) {
-        System.out.println ( "NS_8th_VH.onClearState" );
-        if( view.getId () == second.getId () ){
-            choices.clear ();
-        }
-    }
 
     private class OnNextClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println ( "NS_8th_VH.NS_8th_VH" );
+            System.out.println ( "NS_17th_VH.NS_17th_VH" );
             System.out.println ( "OnNextClickListener.onClick" );
-            if( choices.size () > 0 ){
-                onEighthNSVHListener.onNextClicked ( choices );
-            }else{
-                onEighthNSVHListener.onNextClicked ( choice );
-            }
+            onSeventeenNSVHListener.onNextClicked ( answers );
         }
     }
 
     private class OnSkipClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println ( "NS_8th_VH.NS_8th_VH" );
+            System.out.println ( "NS_17th_VH.NS_17th_VH" );
             System.out.println ( "OnSkipClickListener.onClick" );
-            onEighthNSVHListener.onSkipClicked ();
+            onSeventeenNSVHListener.onSkipClicked ();
         }
     }
 
-    public interface OnEighthNSVHListener{
-        void onNextClicked(Answer answer);
-        void onNextClicked(List<Answer> answers);
+    public interface OnSeventeenNSVHListener {
+        void onNextClicked(List<Answer> answer);
         void onSkipClicked();
     }
 }

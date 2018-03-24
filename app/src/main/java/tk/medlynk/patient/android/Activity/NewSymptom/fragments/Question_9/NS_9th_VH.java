@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -35,6 +36,8 @@ public class NS_9th_VH extends RecyclerView.ViewHolder implements ViewSelection.
 
     public NS_9th_VH(View itemView) {
         super ( itemView );
+        choice = new Answer ();
+        choices = new ArrayList<> (  );
         progressBar = itemView.findViewById ( R.id.progress_bar );
         question_view = itemView.findViewById ( R.id.new_symptom_ninth_question );
         question = question_view.findViewById ( R.id.txtQuestion );
@@ -135,32 +138,48 @@ public class NS_9th_VH extends RecyclerView.ViewHolder implements ViewSelection.
         switch (i){
             case 0:{
                 while (answerIterator.hasNext ()){
-                    if( answerIterator.next ().getChoice ().equals ( "b" ) )
+                    Answer answer = answerIterator.next ();
+                    if( answer.getChoice () != null &&
+                            answer.getChoice ().equals ( "b" ) ){
                         answerIterator.remove ();
+                        break;
+                    }
                 }
 
                 break;
             }
             case 1:{
                 while (answerIterator.hasNext ()){
-                    if( answerIterator.next ().getChoice ().equals ( "c" ) )
+                    Answer answer = answerIterator.next ();
+                    if( answer.getChoice () != null &&
+                            answer.getChoice ().equals ( "c" ) ){
                         answerIterator.remove ();
+                        break;
+                    }
                 }
 
                 break;
             }
             case 2:{
                 while (answerIterator.hasNext ()){
-                    if( answerIterator.next ().getChoice ().equals ( "d" ) )
+                    Answer answer = answerIterator.next ();
+                    if( answer.getChoice () != null &&
+                            answer.getChoice ().equals ( "b" ) ){
                         answerIterator.remove ();
+                        break;
+                    }
                 }
 
                 break;
             }
             case 3:{
                 while (answerIterator.hasNext ()){
-                    if( answerIterator.next ().getChoice ().equals ( "e" ) )
+                    Answer answer = answerIterator.next ();
+                    if( answer.getChoice () != null &&
+                            answer.getChoice ().equals ( "e" ) ){
                         answerIterator.remove ();
+                        break;
+                    }
                 }
 
                 break;
@@ -182,6 +201,12 @@ public class NS_9th_VH extends RecyclerView.ViewHolder implements ViewSelection.
             choices.add ( answer );
             button_next.setEnabled ( true );
             button_next.setBackgroundResource ( R.drawable.enable_next_question );
+        }else{
+            second.getButtons ().get ( 3 ).setBackgroundResource ( R.drawable.answer_not_selected );
+            second.getButtons ().get ( 3 ).setTextColor ( itemView.
+                    getContext ().
+                    getResources ().
+                    getColor ( R.color.white ) );
         }
     }
 
