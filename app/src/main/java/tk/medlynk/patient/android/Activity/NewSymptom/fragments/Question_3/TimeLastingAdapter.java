@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.neweraandroid.demo.R;
 
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_20.NS_20th_question;
+
 /**
  * Created by Shahab on 3/23/2018.
  */
@@ -17,9 +19,13 @@ public class TimeLastingAdapter extends BaseAdapter {
     private String[] strings;
     private Context context;
 
-    public TimeLastingAdapter(Context context) {
+    public TimeLastingAdapter(Context context, String fragmentTag) {
         this.context = context;
-        strings = context.getResources ().getStringArray ( R.array.lasting_choices );
+        if( fragmentTag.equals(NS_3rd_question.TAG) ){
+            strings = context.getResources ().getStringArray ( R.array.lasting_choices );
+        }else if( fragmentTag.equals(NS_20th_question.TAG) ){
+            strings = context.getResources ().getStringArray ( R.array.lasting_choices_2 );
+        }
     }
 
     @Override

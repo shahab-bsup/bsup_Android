@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    tools:context="tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_20.New_Symptom_20th_question">
+    tools:context="tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_20.NS_20th_question">
 
     <tk.medlynk.patient.android.CustomViews.CustomTextView
         android:layout_width="wrap_content"

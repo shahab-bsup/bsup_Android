@@ -9,39 +9,39 @@ import android.widget.TextView;
 
 import com.neweraandroid.demo.R;
 
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_1.Follow_Up_Symptoms_1st_Question;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_10.Follow_Up_Symptoms_10th_Question;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_11.Follow_Up_Symptoms_11th_Question;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_12.Follow_Up_Symptoms_12th_Question;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_13.Follow_Up_Symptoms_13th_Question;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_14.Follow_Up_Symptoms_14th_Question;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_15.Follow_Up_Symptoms_15th_Question;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_2.Follow_Up_Symptoms_2nd_Question;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_3.Follow_Up_Symptoms_3rd_Question;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_4.Follow_Up_Symptoms_4th_Question;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_5.Follow_Up_Symptoms_5th_Question;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_6.Follow_Up_Symptoms_6th_Question;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_7.Follow_Up_Symptoms_7th_Question;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_8.Follow_Up_Symptoms_8th_Question;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_9.Follow_Up_Symptoms_9th_Question;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_1.FUpS_1st_Question;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_10.FUpS_10th_Question;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_11.FUpS_11th_Question;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_12.FUpS_12th_Question;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_13.FUpS_13th_Question;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_14.FUpS_14th_Question;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_15.FUpS_15th_Question;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_2.FUpS_2nd_Question;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_3.FUpS_3rd_Question;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_4.FUpS_4th_Question;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_5.FUpS_5th_Question;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_6.FUpS_6th_Question;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_7.FUpS_7th_Question;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_8.FUpS_8th_Question;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_9.FUpS_9th_Question;
 import tk.medlynk.patient.android.Constants;
 
 public class FollowUpSymptomsActivity extends AppCompatActivity implements
-        Follow_Up_Symptoms_1st_Question.OnFollowUpSymptomsFirstQuestionListener,
-        Follow_Up_Symptoms_2nd_Question.OnFollowUpSymptomsSecondQuestionListener,
-        Follow_Up_Symptoms_3rd_Question.OnFollowUpSymptomsThirdQuestionListener,
-        Follow_Up_Symptoms_4th_Question.OnFollowUpSymptomsFourthQuestionListener,
-        Follow_Up_Symptoms_5th_Question.OnFollowUpSymptomsFifthQuestionListener,
-        Follow_Up_Symptoms_6th_Question.OnFollowUpSymptomsSixthQuestionListener,
-        Follow_Up_Symptoms_7th_Question.OnFollowUpSymptomsSeventhQuestionListener,
-        Follow_Up_Symptoms_8th_Question.OnFollowUpSymptomsEighthQuestionListener,
-        Follow_Up_Symptoms_9th_Question.OnFollowUpSymptomsNinthQuestionListener,
-        Follow_Up_Symptoms_10th_Question.OnFollowUpSymptomsTenthQuestionListener,
-        Follow_Up_Symptoms_11th_Question.OnFollowUpSymptomsEleventhQuestionListener,
-        Follow_Up_Symptoms_12th_Question.OnFollowUpSymptomsTwelveQuestionListener,
-        Follow_Up_Symptoms_13th_Question.OnFollowUpSymptomsThirteenQuestionListener,
-        Follow_Up_Symptoms_14th_Question.OnFollowUpSymptomsFourteenQuestionListener,
-        Follow_Up_Symptoms_15th_Question.OnFollowUpSymptomsFifteenQuestionListener
+        FUpS_1st_Question.OnFollowUpSymptomsFirstQuestionListener,
+        FUpS_2nd_Question.OnFollowUpSymptomsSecondQuestionListener,
+        FUpS_3rd_Question.OnFollowUpSymptomsThirdQuestionListener,
+        FUpS_4th_Question.OnFollowUpSymptomsFourthQuestionListener,
+        FUpS_5th_Question.OnFollowUpSymptomsFifthQuestionListener,
+        FUpS_6th_Question.OnFollowUpSymptomsSixthQuestionListener,
+        FUpS_7th_Question.OnFollowUpSymptomsSeventhQuestionListener,
+        FUpS_8th_Question.OnFollowUpSymptomsEighthQuestionListener,
+        FUpS_9th_Question.OnFollowUpSymptomsNinthQuestionListener,
+        FUpS_10th_Question.OnFollowUpSymptomsTenthQuestionListener,
+        FUpS_11th_Question.OnFollowUpSymptomsEleventhQuestionListener,
+        FUpS_12th_Question.OnFollowUpSymptomsTwelveQuestionListener,
+        FUpS_13th_Question.OnFollowUpSymptomsThirteenQuestionListener,
+        FUpS_14th_Question.OnFollowUpSymptomsFourteenQuestionListener,
+        FUpS_15th_Question.OnFollowUpSymptomsFifteenQuestionListener
 {
 
     View toolbar_view;
@@ -52,7 +52,7 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_follow_up_sysmptoms );
-        Constants.FOLLOW_UP_RESULT_BODY.put ( Constants.QUESTION_SET, "follow_up_symptoms" );
+        Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_SET, "follow_up_symptoms" );
         toolbar_view = findViewById ( R.id.follow_up_symptom_toolbar_layout );
         toolbar_title = toolbar_view.findViewById ( R.id.toolbar_title );
         toolbar_title.setText ( R.string.follow_up_symptoms_title );
@@ -66,10 +66,10 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
                 .add ( R.id.followUpFragmentsContainer,
-                new Follow_Up_Symptoms_1st_Question (),
-                Follow_Up_Symptoms_1st_Question.TAG)
+                new FUpS_1st_Question(),
+                FUpS_1st_Question.TAG)
                 .commit ();
-        fragmentTransaction.addToBackStack ( Follow_Up_Symptoms_1st_Question.TAG );
+        fragmentTransaction.addToBackStack ( FUpS_1st_Question.TAG );
     }
 
     @Override
@@ -78,10 +78,10 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
                 .add(R.id.followUpFragmentsContainer,
-                new Follow_Up_Symptoms_2nd_Question (),
-                Follow_Up_Symptoms_2nd_Question.TAG)
+                new FUpS_2nd_Question(),
+                FUpS_2nd_Question.TAG)
         .commit ();
-        fragmentTransaction.addToBackStack ( Follow_Up_Symptoms_2nd_Question.TAG );
+        fragmentTransaction.addToBackStack ( FUpS_2nd_Question.TAG );
     }
 
     @Override
@@ -90,10 +90,10 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
                 .add ( R.id.followUpFragmentsContainer,
-                new Follow_Up_Symptoms_3rd_Question (),
-                Follow_Up_Symptoms_3rd_Question.TAG)
+                new FUpS_3rd_Question(),
+                FUpS_3rd_Question.TAG)
                 .commit ();
-        fragmentTransaction.addToBackStack ( Follow_Up_Symptoms_3rd_Question.TAG );
+        fragmentTransaction.addToBackStack ( FUpS_3rd_Question.TAG );
     }
 
 
@@ -103,10 +103,22 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
                 .add ( R.id.followUpFragmentsContainer,
-                new Follow_Up_Symptoms_4th_Question (),
-                Follow_Up_Symptoms_4th_Question.TAG)
+                new FUpS_4th_Question(),
+                FUpS_4th_Question.TAG)
                 .commit ();
-        fragmentTransaction.addToBackStack ( Follow_Up_Symptoms_4th_Question.TAG );
+        fragmentTransaction.addToBackStack ( FUpS_4th_Question.TAG );
+    }
+
+    @Override
+    public void onJumpToFUpsNinthQuestion() {
+        System.out.println("FollowUpSymptomsActivity.onJumpToFUpsNinthQuestion");
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+                .add ( R.id.followUpFragmentsContainer,
+                        new FUpS_9th_Question(),
+                        FUpS_9th_Question.TAG)
+                .commit ();
+        fragmentTransaction.addToBackStack ( FUpS_9th_Question.TAG );
     }
 
 
@@ -116,10 +128,10 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
                 .add ( R.id.followUpFragmentsContainer,
-                new Follow_Up_Symptoms_5th_Question (),
-                Follow_Up_Symptoms_5th_Question.TAG)
+                new FUpS_5th_Question(),
+                FUpS_5th_Question.TAG)
                 .commit ();
-        fragmentTransaction.addToBackStack ( Follow_Up_Symptoms_5th_Question.TAG );
+        fragmentTransaction.addToBackStack ( FUpS_5th_Question.TAG );
     }
 
 
@@ -129,10 +141,10 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
                 .add ( R.id.followUpFragmentsContainer,
-                new Follow_Up_Symptoms_6th_Question (),
-                Follow_Up_Symptoms_6th_Question.TAG)
+                new FUpS_6th_Question(),
+                FUpS_6th_Question.TAG)
                 .commit ();
-        fragmentTransaction.addToBackStack ( Follow_Up_Symptoms_6th_Question.TAG );
+        fragmentTransaction.addToBackStack ( FUpS_6th_Question.TAG );
     }
 
 
@@ -142,10 +154,10 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
                 .add ( R.id.followUpFragmentsContainer,
-                new Follow_Up_Symptoms_7th_Question (),
-                Follow_Up_Symptoms_7th_Question.TAG)
+                new FUpS_7th_Question(),
+                FUpS_7th_Question.TAG)
                 .commit ();
-        fragmentTransaction.addToBackStack ( Follow_Up_Symptoms_7th_Question.TAG );
+        fragmentTransaction.addToBackStack ( FUpS_7th_Question.TAG );
     }
 
     @Override
@@ -154,10 +166,10 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
                 .add ( R.id.followUpFragmentsContainer,
-                new Follow_Up_Symptoms_8th_Question (),
-                Follow_Up_Symptoms_8th_Question.TAG)
+                new FUpS_8th_Question(),
+                FUpS_8th_Question.TAG)
                 .commit ();
-        fragmentTransaction.addToBackStack ( Follow_Up_Symptoms_8th_Question.TAG );
+        fragmentTransaction.addToBackStack ( FUpS_8th_Question.TAG );
     }
 
     @Override
@@ -166,10 +178,10 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
                 .add ( R.id.followUpFragmentsContainer,
-                new Follow_Up_Symptoms_9th_Question (),
-                Follow_Up_Symptoms_9th_Question.TAG)
+                new FUpS_9th_Question(),
+                FUpS_9th_Question.TAG)
                 .commit ();
-        fragmentTransaction.addToBackStack ( Follow_Up_Symptoms_9th_Question.TAG );
+        fragmentTransaction.addToBackStack ( FUpS_9th_Question.TAG );
     }
 
     @Override
@@ -178,10 +190,10 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
                 .add ( R.id.followUpFragmentsContainer,
-                new Follow_Up_Symptoms_10th_Question (),
-                Follow_Up_Symptoms_10th_Question.TAG)
+                new FUpS_10th_Question(),
+                FUpS_10th_Question.TAG)
                 .commit ();
-        fragmentTransaction.addToBackStack ( Follow_Up_Symptoms_10th_Question.TAG );
+        fragmentTransaction.addToBackStack ( FUpS_10th_Question.TAG );
     }
 
 
@@ -191,10 +203,10 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
                 .add ( R.id.followUpFragmentsContainer,
-                new Follow_Up_Symptoms_11th_Question (),
-                Follow_Up_Symptoms_11th_Question.TAG)
+                new FUpS_11th_Question(),
+                FUpS_11th_Question.TAG)
                 .commit ();
-        fragmentTransaction.addToBackStack ( Follow_Up_Symptoms_11th_Question.TAG );
+        fragmentTransaction.addToBackStack ( FUpS_11th_Question.TAG );
     }
 
     @Override
@@ -203,10 +215,10 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
                 .add ( R.id.followUpFragmentsContainer,
-                new Follow_Up_Symptoms_12th_Question (),
-                Follow_Up_Symptoms_12th_Question.TAG)
+                new FUpS_12th_Question(),
+                FUpS_12th_Question.TAG)
                 .commit ();
-        fragmentTransaction.addToBackStack ( Follow_Up_Symptoms_12th_Question.TAG );
+        fragmentTransaction.addToBackStack ( FUpS_12th_Question.TAG );
     }
 
 
@@ -216,10 +228,10 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
                 .add ( R.id.followUpFragmentsContainer,
-                new Follow_Up_Symptoms_13th_Question (),
-                Follow_Up_Symptoms_13th_Question.TAG)
+                new FUpS_13th_Question(),
+                FUpS_13th_Question.TAG)
                 .commit ();
-        fragmentTransaction.addToBackStack ( Follow_Up_Symptoms_13th_Question.TAG );
+        fragmentTransaction.addToBackStack ( FUpS_13th_Question.TAG );
     }
 
 
@@ -229,10 +241,10 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
                 .add ( R.id.followUpFragmentsContainer,
-                new Follow_Up_Symptoms_14th_Question (),
-                Follow_Up_Symptoms_14th_Question.TAG)
+                new FUpS_14th_Question(),
+                FUpS_14th_Question.TAG)
                 .commit ();
-        fragmentTransaction.addToBackStack ( Follow_Up_Symptoms_14th_Question.TAG );
+        fragmentTransaction.addToBackStack ( FUpS_14th_Question.TAG );
     }
 
     @Override
@@ -241,10 +253,10 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
                 .add ( R.id.followUpFragmentsContainer,
-                new Follow_Up_Symptoms_15th_Question (),
-                Follow_Up_Symptoms_15th_Question.TAG)
+                new FUpS_15th_Question(),
+                FUpS_15th_Question.TAG)
                 .commit ();
-        fragmentTransaction.addToBackStack ( Follow_Up_Symptoms_15th_Question.TAG );
+        fragmentTransaction.addToBackStack ( FUpS_15th_Question.TAG );
     }
 
     @Override

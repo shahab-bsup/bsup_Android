@@ -9,7 +9,6 @@ import android.widget.TextView;
 import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
 
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_7.Follow_Up_Symptoms_7th_Question_ViewHolder;
 import tk.medlynk.patient.android.Model.Answer;
 
 /**

@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.List;
 
 import tk.medlynk.patient.android.Networking.MedlynkRequests;
 
@@ -34,6 +35,9 @@ public class Answer implements Serializable {
     @SerializedName ( "helpfully" )
     @Expose
     private String helpfully;
+    @SerializedName("sub_choices")
+    @Expose
+    private List<String> subChoice;
 
     public String getHelpfully() {
         return helpfully;
@@ -89,5 +93,13 @@ public class Answer implements Serializable {
 
     public void setYears(int years) {
         this.years = years;
+    }
+
+    public List<String> getSubChoice() {
+        return subChoice;
+    }
+
+    public void setSubChoice(List<String> subChoice) {
+        this.subChoice = subChoice;
     }
 }

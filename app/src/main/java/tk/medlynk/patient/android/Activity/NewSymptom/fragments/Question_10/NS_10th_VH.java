@@ -79,6 +79,8 @@ public class NS_10th_VH extends RecyclerView.ViewHolder implements ViewSelection
     public void onClearState(View view) {
         System.out.println ( "NS_10th_VH.onClearState" );
         answer = new Answer ();
+        button_next.setEnabled(false);
+        button_next.setBackgroundResource(R.drawable.disable_next_question);
     }
 
     public interface OnTenthNSVHListener{

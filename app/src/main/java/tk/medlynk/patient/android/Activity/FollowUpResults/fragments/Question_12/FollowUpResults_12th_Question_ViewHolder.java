@@ -12,7 +12,7 @@ import com.neweraandroid.demo.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_9.Follow_Up_Symptoms_9th_Question_ViewHolder;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_9.FUpS_9th_VH;
 import tk.medlynk.patient.android.Model.Answer;
 
 /**
@@ -30,7 +30,7 @@ public class FollowUpResults_12th_Question_ViewHolder extends RecyclerView.ViewH
     private String[] string_choices;
     private List<Answer> answers = new ArrayList<> (  );
     private Answer answer = new Answer ();
-    private Follow_Up_Symptoms_9th_Question_ViewHolder.OnFollowUpNinthQuestionViewsClickListener onFollowUpNinthQuestionViewsClickListener;
+    private FUpS_9th_VH.OnFUpSNinthVHListener onFollowUpNinthQuestionViewsClickListener;
     private String otherString;
     private int single_select = -1;
     private int multi_select = -1;

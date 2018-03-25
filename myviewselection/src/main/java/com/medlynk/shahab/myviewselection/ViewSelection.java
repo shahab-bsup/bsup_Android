@@ -181,10 +181,11 @@ public class ViewSelection extends LinearLayout {
                         if (onMultiItemSelectedListener == null) {
                             throw new RuntimeException ( getmContext ().toString () + " must implement " + OnMultiItemSelectedListener.class.getSimpleName () );
                         } else {
+                            buttons.get ( currentSelection ).setBackgroundDrawable ( selected_state_drawable );
+                            buttons.get ( currentSelection ).setTextColor ( selected_text_color );
                             onMultiItemSelectedListener.onMultiItemSelected ( ViewSelection.this,  currentSelection );
                         }
-                        buttons.get ( currentSelection ).setBackgroundDrawable ( selected_state_drawable );
-                        buttons.get ( currentSelection ).setTextColor ( selected_text_color );
+
                     }
                 }
             } else {

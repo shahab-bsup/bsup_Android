@@ -1,8 +1,8 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white">
 
     <android.support.v4.widget.NestedScrollView
@@ -24,12 +24,13 @@
                 />
 
             <LinearLayout
+                android:layout_marginTop="40dp"
                 android:layout_below="@id/follow_up_symptoms_thirteen_question"
                 android:layoutDirection="rtl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
+                android:orientation="horizontal"
+                android:id="@+id/patient_row">
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -38,8 +39,19 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_centerVertical="true"
-                    />
-
+                    android:layout_alignParentRight="true" />
+                <com.medlynk.shahab.myviewselection.ViewSelection
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:button_type="true"
+                    app:number_of_views="2"
+                    app:selectable="true"
+                    app:single_select="true"
+                    app:unselected_background="@drawable/answer_not_selected"
+                    app:selected_background="@drawable/answer_selected"
+                    app:unselected_text_color="@color/white"
+                    app:selected_text_color="@color/black"
+                    android:id="@+id/viewSelectionChoices" />
             </LinearLayout>
 
         </RelativeLayout>

@@ -38,7 +38,7 @@ public class FollowUpResults_1st_Question_ViewHolder extends RecyclerView.ViewHo
         sub_second.setOnMultiItemSelectedListener ( this );
         third = itemView.findViewById ( R.id.viewSelectionThird );
         third.setOnSingleItemSelectedListener ( this );
-        string_choices = itemView.getContext ().getResources ().getStringArray ( R.array.FUS_14th_choices_FUR_1th_choices );
+        string_choices = itemView.getContext ().getResources ().getStringArray ( R.array.FUR_1th_choices);
         for (int i = 0; i < first.getNumberOfViews (); i++) {
             first.setTextToButtons ( string_choices[i], i );
         }

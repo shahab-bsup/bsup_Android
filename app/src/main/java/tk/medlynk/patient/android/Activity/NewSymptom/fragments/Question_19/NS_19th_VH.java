@@ -45,7 +45,6 @@ public class NS_19th_VH extends RecyclerView.ViewHolder implements
         button_skip = view.findViewById ( R.id.btnSkipQuestion );
         button_skip.setOnClickListener ( new OnSkipClickListener() );
 
-        //fetching string choices from string resources
         before_years_strings = view.getContext ().getResources ().getStringArray ( R.array.question_19_before_years_choices );
         after_years_strings = view.getContext ().getResources ().getStringArray ( R.array.question_19_after_years_choices );
 
@@ -63,6 +62,7 @@ public class NS_19th_VH extends RecyclerView.ViewHolder implements
         after_years_viewselection.setOnClearStateListener ( this );
 
         years_view = view.findViewById ( R.id.question_19_years_row );
+
         spinner_years = years_view.findViewById ( R.id.spinner_years );
         spinner_years.setOnItemSelectedListener ( new YearsItemSelectedListener() );
     }
@@ -147,6 +147,7 @@ public class NS_19th_VH extends RecyclerView.ViewHolder implements
     @Override
     public void onClearState(View view) {
         System.out.println ( "NS_19th_VH.onClearState" );
+
     }
 
     @Override
@@ -187,7 +188,7 @@ public class NS_19th_VH extends RecyclerView.ViewHolder implements
         @Override
         public void onNothingSelected(AdapterView<?> adapterView) {
             System.out.println ( "YearsItemSelectedListener.onNothingSelected" );
-
+            years_view.setBackgroundResource ( R.drawable.answer_not_selected );
         }
     }
 

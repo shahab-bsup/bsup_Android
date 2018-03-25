@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.neweraandroid.demo.R;
 
@@ -33,8 +34,6 @@ public class NS_19th_question extends Fragment implements
 
     private String[] years_strings ={"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
     private NS_19th_VH viewHolder;
-    private int selected_choice = -1;
-    private Answer answer;
 
     public NS_19th_question() {
         // Required empty public constructor
@@ -90,16 +89,14 @@ public class NS_19th_question extends Fragment implements
     }
 
     @Override
-    public void onNextClicked() {
-        System.out.println ( "NS_19th_question.onNextClicked" );
-        if( selected_choice != -1 ){
-            viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
-            SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
-            MedlynkRequests.newSymptomNineteenQuestionAnswer ( getActivity (),
-                    NS_19th_question.this,
-                    manager.getAppointmentID (),
-                    answer);
-        }
+    public void onNextClicked(Answer answer) {
+        System.out.println("NS_19th_question.onNextClicked");
+        viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
+        SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
+        MedlynkRequests.newSymptomNineteenQuestionAnswer ( getActivity (),
+                NS_19th_question.this,
+                manager.getAppointmentID (),
+                answer);
     }
 
     @Override
@@ -108,59 +105,6 @@ public class NS_19th_question extends Fragment implements
         mListener.onNineteenQuestion ();
     }
 
-    @Override
-    public void onViewSelectionsClicked(View view, int i) {
-        selected_choice = i;
-        System.out.println ( "NS_19th_question.onViewSelectionsClicked" );
-        if( view.getId () == R.id.viewSelectionChoicesBeforeYears ){
-            System.out.println ("R.id.viewSelectionChoicesBeforeYears");
-            answer = new Answer ();
-            switch (i){
-                case 0:{
-                    answer.setChoice ( "a" );
-
-                    break;
-                }
-                case 1:{
-                    answer.setChoice ( "b" );
-
-                    break;
-                }
-                case 2:{
-                    answer.setChoice ( "c" );
-
-                    break;
-                }
-                case 3:{
-                    answer.setChoice ( "d" );
-
-                    break;
-                }
-            }
-        }else if ( view.getId () == R.id.viewSelectionChoicesAfterYears ){
-            System.out.println ("R.id.viewSelectionChoicesAfterYears");
-            answer = new Answer ();
-            switch (i){
-                case 0:{
-                    answer.setChoice ( "f" );
-                    break;
-                }
-                case 1:{
-                    answer.setChoice ( "g" );
-                    answer.setOther ( "nothing but everything!" );
-                    break;
-                }
-            }
-        }
-    }
-
-    @Override
-    public void onSpinnerItemSelected(int position) {
-        System.out.println ( "NS_19th_question.onSpinnerItemSelected" );
-        answer = new Answer ();
-        answer.setChoice ( "e" );
-        answer.setYears ( Integer.parseInt ( years_strings[position] ) );
-    }
 
     @Override
     public void onNineteenAnswerSuccess(NewSymptomAnswerResponse response) {
@@ -173,6 +117,7 @@ public class NS_19th_question extends Fragment implements
     public void onNineteenAnswerFailure() {
         System.out.println ( "NS_19th_question.onNineteenAnswerFailure" );
         viewHolder.setProgressBarVisibilityStatus (View.GONE);
+        Toast.makeText(getActivity(), "try again later!", Toast.LENGTH_SHORT).show();
     }
 
     public interface OnNewSymptomNineteenQuestionListener {

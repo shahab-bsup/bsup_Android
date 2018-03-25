@@ -185,7 +185,7 @@
         <item>Approx. date:</item>
         <item>Blood pressure:</item>
     </string-array>
-    <string-array name="FUS_14th_choices_FUR_1th_choices">
+    <string-array name="FUR_1th_choices">
         <item>Blood tests</item>
         <item>Urine tests</item>
         <item>Imaging</item>
@@ -203,12 +203,39 @@
         <item>Other</item>
     </string-array>
 
+    <string-array name="FUpS_14th_choices">
+        <item>Blood tests</item>
+        <item>Urine tests</item>
+        <item>Imaging</item>
+        <item>X-ray</item>
+        <item>CT</item>
+        <item>MRI</item>
+        <item>Ultrasound</item>
+        <item>Mammogram</item>
+        <item>Bone density scan</item>
+        <item>Cardiac investigations</item>
+        <item>EKG</item>
+        <item>Exercise stress test</item>
+        <item>MIBI</item>
+        <item>Heart Ultrasound (echo)</item>
+        <item>Other</item>
+        <item>None of the above</item>
+    </string-array>
+
     <string-array name="lasting_choices">
         <item>Select</item>
         <item><b>Years</b> Ago</item>
         <item><b>Months</b> Ago</item>
         <item><b>Weeks</b> Ago</item>
         <item><b>Days</b> Ago</item>
+    </string-array>
+
+    <string-array name="lasting_choices_2">
+        <item>Select</item>
+        <item>days in a row</item>
+        <item>hour</item>
+        <item>minutes</item>
+        <item>seconds</item>
     </string-array>
 
 </resources>

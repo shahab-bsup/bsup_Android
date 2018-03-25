@@ -9,7 +9,7 @@ import java.util.HashMap;
 public class Constants {
 
     public static final HashMap<String, Object> NEW_SYMPTOM_ANSWER_BODY = new HashMap<> (  );
-    public static final HashMap<String, Object> FOLLOW_UP_RESULT_BODY = new HashMap<> (  );
+    public static final HashMap<String, Object> FOLLOW_UP_SYMPTOM_BODY = new HashMap<> (  );
 
     public static final String INITIAL_TOKEN_TYPE = "token_type";
     public static final String Expire_INITIAL_TOKEN_INTERVAL = "expires_in";

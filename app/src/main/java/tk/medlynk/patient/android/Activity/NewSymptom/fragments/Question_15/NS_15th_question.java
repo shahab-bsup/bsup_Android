@@ -113,7 +113,7 @@ public class NS_15th_question extends Fragment implements
     @Override
     public void onSkipClicked() {
         System.out.println ( "NS_15th_question.onSkipClicked" );
-
+        mListener.onFifteenQuestion();
     }
 
     public interface OnNewSymptomFifteenQuestionListener {

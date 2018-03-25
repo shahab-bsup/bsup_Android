@@ -72,8 +72,7 @@
                             app:selected_background="@drawable/answer_selected"
                             app:unselected_text_color="@color/white"
                             app:selected_text_color="@color/black"
-                            android:id="@+id/viewSelectionChoicesBeforeYears"
-                            />
+                            android:id="@+id/viewSelectionChoicesBeforeYears" />
 
                         <include
                             layout="@layout/question_19_years_row"

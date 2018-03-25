@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp"
-    android:layoutDirection="rtl"
-    android:background="@drawable/unselected_state">
+    android:background="@drawable/answer_not_selected">
 
     <tk.medlynk.patient.android.CustomViews.CustomTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/lasts"
+        android:text="lasts"
         android:textSize="20sp"
+        android:padding="10dp"
         />
 
     <android.support.v7.widget.AppCompatEditText
@@ -20,12 +20,20 @@
         android:id="@+id/edtLastsValue"
         android:inputType="numberDecimal"
         android:imeOptions="actionDone"
+        android:padding="10dp"
         />
 
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <android.support.v7.widget.AppCompatSpinner
         android:id="@+id/spinnerLastsID"
-        android:spinnerMode="dropdown"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/answers_text_color"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp"
+        android:spinnerMode="dropdown"
+        android:scrollIndicators="left" />
 
 </LinearLayout>

@@ -18,7 +18,7 @@ import tk.medlynk.patient.android.Model.Answer;
  * Created by Shahab on 2/24/2018.
  */
 
-public class NS_16th_VH extends RecyclerView.ViewHolder implements ViewSelection.OnSingleItemSelectedListener {
+public class NS_16th_VH extends RecyclerView.ViewHolder implements ViewSelection.OnSingleItemSelectedListener, ViewSelection.OnClearStateListener {
 
     private ProgressBar progressBar;
     private AppCompatEditText answer_input;
@@ -35,6 +35,7 @@ public class NS_16th_VH extends RecyclerView.ViewHolder implements ViewSelection
         progressBar = itemView.findViewById ( R.id.progress_bar );
         answer_input = itemView.findViewById ( R.id.new_symptom_sixteen_answer );
         answer_input.addTextChangedListener ( new OnAnswerTextWatcher() );
+        answer_input.setOnFocusChangeListener(new AnswerFocusChangeListener());
         question_view = itemView.findViewById ( R.id.new_symptom_sixteen_question );
         question = question_view.findViewById ( R.id.txtQuestion );
         question.setText ( R.string.new_symptom_sixteen_question );
@@ -47,6 +48,7 @@ public class NS_16th_VH extends RecyclerView.ViewHolder implements ViewSelection
                 getResources ().
                 getString ( R.string.i_do_not_know ), 0 );
         choice.setOnSingleItemSelectedListener ( this );
+        choice.setOnClearStateListener(this);
     }
 
     public void setOnSixteenNSVHListener(OnSixteenNSVHListener onSixteenNSVHListener) {
@@ -61,6 +63,7 @@ public class NS_16th_VH extends RecyclerView.ViewHolder implements ViewSelection
     public void onSingleItemSelected(View view, int i) {
         System.out.println ( "NS_16th_VH.onSingleItemSelected" );
         if( i == -1 ){
+            answer = new Answer();
             button_next.setEnabled ( false );
             button_next.setBackgroundResource ( R.drawable.disable_next_question );
         }else if ( i == 0 ){
@@ -70,6 +73,12 @@ public class NS_16th_VH extends RecyclerView.ViewHolder implements ViewSelection
             button_next.setEnabled ( true );
             button_next.setBackgroundResource ( R.drawable.enable_next_question );
         }
+    }
+
+    @Override
+    public void onClearState(View view) {
+        System.out.println("NS_16th_VH.onClearState");
+        answer = new Answer();
     }
 
     private class OnNextClickListener implements View.OnClickListener {
@@ -119,4 +128,20 @@ public class NS_16th_VH extends RecyclerView.ViewHolder implements ViewSelection
             }
         }
     }
+
+    private class AnswerFocusChangeListener implements View.OnFocusChangeListener {
+        @Override
+        public void onFocusChange(View view, boolean isFocused) {
+            System.out.println ( "AnswerFocusChangeListener.onFocusChange" );
+            if( isFocused ){
+                choice.setClear ();
+                button_next.setEnabled ( false );
+                button_next.setBackgroundResource ( R.drawable.disable_next_question );
+                System.out.println ( "view = [" + view + "], isFocused = [" + isFocused + "]" );
+            }else{
+                System.out.println ( "view = [" + view + "], isFocused = [" + isFocused + "]" );
+            }
+        }
+    }
+
 }

@@ -7,7 +7,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -45,6 +44,7 @@ public class NS_3rd_VH extends RecyclerView.ViewHolder implements ViewSelection.
         question.setText ( R.string.new_symptom_third_question );
         button_next = itemView.findViewById ( R.id.btnNextQuestion );
         button_next.setOnClickListener ( new OnNextClickListener() );
+        button_next.setEnabled(false);
         button_skip = itemView.findViewById ( R.id.btnSkipQuestion );
         button_skip.setOnClickListener ( new OnSkipClickListener() );
         choices = itemView.findViewById ( R.id.viewSelectionChoices );
@@ -57,7 +57,7 @@ public class NS_3rd_VH extends RecyclerView.ViewHolder implements ViewSelection.
         lasting_input = lasting_row.findViewById ( R.id.edtAnswerDuration );
         lasting_input.addTextChangedListener ( new LastingInoutTextWatcher() );
         timeSpinner = lasting_row.findViewById ( R.id.spinnerTime );
-        TimeLastingAdapter timeAdapter = new TimeLastingAdapter ( itemView.getContext () );
+        TimeLastingAdapter timeAdapter = new TimeLastingAdapter ( itemView.getContext (), NS_3rd_question.TAG);
         timeSpinner.setAdapter ( timeAdapter );
         timeSpinner.setOnItemSelectedListener ( new OnLastingItemSelectedListener ());
 
@@ -79,6 +79,7 @@ public class NS_3rd_VH extends RecyclerView.ViewHolder implements ViewSelection.
             lasting_input.setText ( "" );
             timeSpinner.setSelection ( 0 );
             answer = new Answer ();
+            duration = 0;
             if( i == 0 ){
                 answer.setChoice ( "e" );
             }else if ( i == 1 ){
@@ -107,9 +108,15 @@ public class NS_3rd_VH extends RecyclerView.ViewHolder implements ViewSelection.
             System.out.println ( "NS_3rd_VH.NS_3rd_VH" );
             System.out.println ( "OnNextClickListener.onClick" );
             if( !answer.getChoice ().equals ( "e" ) && !answer.getChoice ().equals ( "f" ) ){
-                answer.setDuration ( duration );
+                if( duration == 0 ){
+                    lasting_input.setError("Specify the duration!");
+                }else{
+                    answer.setDuration ( duration );
+                    onThirdNSVHListener.onNextClicked ( answer );
+                }
+            }else{
+                onThirdNSVHListener.onNextClicked ( answer );
             }
-            onThirdNSVHListener.onNextClicked ( answer );
         }
     }
 

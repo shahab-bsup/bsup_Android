@@ -79,6 +79,8 @@ public class NS_2nd_VH extends RecyclerView.ViewHolder implements ViewSelection.
     public void onClearState(View view) {
         System.out.println ( "NS_2nd_VH.onClearState" );
         answer = new Answer ();
+        button_next.setEnabled ( false );
+        button_next.setBackgroundResource ( R.drawable.disable_next_question );
     }
 
     private class OnNextClickListener implements View.OnClickListener {

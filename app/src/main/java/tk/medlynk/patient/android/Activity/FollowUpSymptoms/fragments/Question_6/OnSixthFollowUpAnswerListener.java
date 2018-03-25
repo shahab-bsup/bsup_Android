@@ -1,7 +1,6 @@
 package tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_6;
 
-import tk.medlynk.patient.android.Model.FollowUpResultResponse;
-import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
+import tk.medlynk.patient.android.Model.FollowUpSymptomResponse;
 
 /**
  * Created by Shahab on 2/23/2018.
@@ -9,7 +8,7 @@ import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
 
 public interface OnSixthFollowUpAnswerListener {
 
-    void onSixthAnswerSuccess(FollowUpResultResponse response);
+    void onSixthAnswerSuccess(FollowUpSymptomResponse response);
     void onSixthAnswerFailure();
 
 }

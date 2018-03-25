@@ -14,8 +14,7 @@
             android:layout_height="wrap_content"
             android:text="@string/every"
             android:textColor="@color/white"
-            android:textSize="15sp"
-            />
+            android:textSize="15sp" />
 
         <Spinner
             android:layout_width="50dp"
@@ -29,7 +28,6 @@
             android:layout_height="wrap_content"
             android:text="@string/years"
             android:textColor="@color/white"
-            android:textSize="15sp"
-            />
+            android:textSize="15sp" />
 
 </LinearLayout>

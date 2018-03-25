@@ -60,7 +60,7 @@ public class NS_17th_VH extends RecyclerView.ViewHolder implements ViewSelection
     @Override
     public void onMultiItemSelected(View view, Integer integer) {
         System.out.println ( "NS_17th_VH.onMultiItemSelected" );
-        if( integer == 5 ){
+        if( integer == 6 ){
             OtherDialogBuilder dialogBuilder = new OtherDialogBuilder ( itemView.getContext () );
             dialogBuilder.setOnOtherDialogListener ( this );
             dialogBuilder.show ();
@@ -73,25 +73,35 @@ public class NS_17th_VH extends RecyclerView.ViewHolder implements ViewSelection
         Answer answer = new Answer ();
         switch (integer){
             case 0:{
-                answer.setChoice ( "b" );
+                answer.setChoice ( "a" );
                 break;
             }
             case 1:{
-                answer.setChoice ( "c" );
+                answer.setChoice ( "b" );
 
                 break;
             }
             case 2:{
-                answer.setChoice ( "d" );
+                answer.setChoice ( "c" );
 
                 break;
             }
             case 3:{
-                answer.setChoice ( "e" );
+                answer.setChoice ( "d" );
 
                 break;
             }
             case 4:{
+                answer.setChoice ( "d" );
+
+                break;
+            }
+            case 5:{
+                answer.setChoice ( "e" );
+
+                break;
+            }
+            case 6:{
                 answer.setChoice ( "f" );
 
                 break;

@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import retrofit2.http.PUT;
 import tk.medlynk.patient.android.Model.AppointmentsResponse;
 import tk.medlynk.patient.android.Model.CurrentUserResponse;
-import tk.medlynk.patient.android.Model.FollowUpResultResponse;
+import tk.medlynk.patient.android.Model.FollowUpSymptomResponse;
 import tk.medlynk.patient.android.Model.InitialTokenResponse;
 import tk.medlynk.patient.android.Model.InitiateResponse;
 import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
@@ -13,7 +13,6 @@ import tk.medlynk.patient.android.Model.PrimaryTokenResponse;
 import tk.medlynk.patient.android.Model.RenewTokenResponse;
 import tk.medlynk.patient.android.Model.SearchDoctorResponse;
 
-import java.sql.CallableStatement;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -75,6 +74,6 @@ public interface MedlynkAPI {
     Call<NewSymptomAnswerResponse> newSymptomAnswer(@Path ( "appointment_id" ) int appointmentId, @Body HashMap<String, Object> body);
 
     @PUT("/api/appointments/{appointment_id}/answers")
-    Call<FollowUpResultResponse> followUpResultAnswer(@Path ( "appointment_id" ) int appointmentId, @Body HashMap<String, Object> body);
+    Call<FollowUpSymptomResponse> followUpSymptomtAnswer(@Path ( "appointment_id" ) int appointmentId, @Body HashMap<String, Object> body);
 
 }
