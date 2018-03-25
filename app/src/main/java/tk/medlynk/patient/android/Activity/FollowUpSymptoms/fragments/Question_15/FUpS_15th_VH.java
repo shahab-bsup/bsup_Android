@@ -21,7 +21,7 @@ public class FUpS_15th_VH extends RecyclerView.ViewHolder implements ViewSelecti
     private final View question_view;
     private final TextView second_question;
     private final Button button_next;
-    private final Button button_skip;
+    private final Button button_skip; 
     private ViewSelection choices;
     private Answer answer;
     private OnFUpSFifteenVHListener onFUpSFifteenVHListener;
