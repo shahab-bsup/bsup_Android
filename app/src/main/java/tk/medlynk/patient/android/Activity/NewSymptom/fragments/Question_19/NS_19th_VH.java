@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
 
-import tk.medlynk.patient.android.Essentials.OtherDialogBuilder;
+import tk.medlynk.patient.android.Essentials.DialogueBuilder;
 import tk.medlynk.patient.android.Model.Answer;
 
 /**
@@ -22,7 +22,7 @@ import tk.medlynk.patient.android.Model.Answer;
 public class NS_19th_VH extends RecyclerView.ViewHolder implements
         ViewSelection.OnSingleItemSelectedListener,
         ViewSelection.OnClearStateListener,
-        OtherDialogBuilder.OnOtherDialogListener {
+        DialogueBuilder.OnOtherDialogListener {
 
     private ProgressBar progressBar;
     private View question_view, years_view;
@@ -106,8 +106,8 @@ public class NS_19th_VH extends RecyclerView.ViewHolder implements
                 break;
             }
             case 1:{
-                OtherDialogBuilder dialogBuilder = new OtherDialogBuilder ( itemView.getContext () );
-                dialogBuilder.setOnOtherDialogListener ( this );
+                DialogueBuilder dialogBuilder = new DialogueBuilder( itemView.getContext (), "other");
+                dialogBuilder.setOnDialogListener( this );
                 dialogBuilder.show ();
                 break;
             }

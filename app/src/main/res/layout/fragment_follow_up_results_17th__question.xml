@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context="tk.medlynk.patient.android.Activity.FollowUpResults.fragments.Question_17.FollowUpResults_17th_Question">
+    tools:context="tk.medlynk.patient.android.Activity.FollowUpResults.fragments.Question_17.FUpR_17th_Question">
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -23,7 +23,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/follow_up_results_seventeen_question"
-                android:layout_centerHorizontal="true"
                 android:text="#17"
                 android:textSize="25sp" />
 
@@ -39,6 +38,18 @@
                     android:layout_height="100dp"
                     android:src="@drawable/patient_icon" />
 
+                <com.medlynk.shahab.myviewselection.ViewSelection
+                    android:id="@+id/viewSelectionChoice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:button_type="true"
+                    app:number_of_views="3"
+                    app:selectable="true"
+                    app:selected_background="@drawable/answer_selected"
+                    app:selected_text_color="@color/black"
+                    app:single_select="true"
+                    app:unselected_background="@drawable/answer_not_selected"
+                    app:unselected_text_color="@color/white" />
 
             </LinearLayout>
 

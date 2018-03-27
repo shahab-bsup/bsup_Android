@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true">
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="fill_parent"
@@ -26,8 +28,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:text="\#8"
-                    android:textSize="25.0sp" />
+                    android:text="#8"
+                    android:textSize="25sp" />
 
                 <LinearLayout
                     android:id="@id/patient_row"
@@ -53,69 +55,127 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <com.medlynk.shahab.myviewselection.ViewSelection xmlns:n2="http://schemas.android.com/apk/res-auto"
+                        <com.medlynk.shahab.myviewselection.ViewSelection
                             android:id="@+id/viewSelectionChoicesFirst"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            n2:button_type="true"
-                            n2:number_of_views="2"
-                            n2:selectable="true"
-                            n2:selected_background="@drawable/answer_selected"
-                            n2:selected_text_color="@color/black"
-                            n2:single_select="true"
-                            n2:unselected_background="@drawable/answer_not_selected"
-                            n2:unselected_text_color="@color/white" />
+                            app:button_type="true"
+                            app:number_of_views="2"
+                            app:selectable="true"
+                            app:selected_background="@drawable/answer_selected"
+                            app:selected_text_color="@color/black"
+                            app:single_select="true"
+                            app:unselected_background="@drawable/answer_not_selected"
+                            app:unselected_text_color="@color/white" />
 
-                        <com.medlynk.shahab.myviewselection.ViewSelection xmlns:n3="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/viewSelectionChoicesSecond"
+                        <CheckBox
+                            android:id="@+id/first"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            n3:button_type="true"
-                            n3:number_of_views="4"
-                            n3:selectable="true"
-                            n3:selected_background="@drawable/answer_selected"
-                            n3:selected_text_color="@color/black"
-                            n3:single_select="false"
-                            n3:unselected_background="@drawable/answer_not_selected"
-                            n3:unselected_text_color="@color/white" />
+                            android:layout_margin="5dp"
+                            android:text="Highest glucometer reading" />
+
+                        <android.support.v7.widget.AppCompatEditText
+                            android:inputType="text"
+                            android:imeOptions="actionNext"
+                            android:id="@+id/highest_glucometer_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/custom_edit_text_doctor_id"
+                            android:hint="@string/type_answer_here"
+                            android:padding="10dp" />
+
+                        <CheckBox
+                            android:id="@+id/second"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:text="Lowest glucometer reading" />
+
+                        <android.support.v7.widget.AppCompatEditText
+                            android:inputType="text"
+                            android:imeOptions="actionNext"
+                            android:id="@+id/lowest_glucometer_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/custom_edit_text_doctor_id"
+                            android:hint="@string/type_answer_here"
+                            android:padding="10dp" />
+
+                        <CheckBox
+                            android:id="@+id/third"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:text="Average glucometer reading" />
+
+                        <android.support.v7.widget.AppCompatEditText
+                            android:inputType="text"
+                            android:imeOptions="actionNext"
+                            android:id="@+id/average_glucometer_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/custom_edit_text_doctor_id"
+                            android:hint="@string/type_answer_here"
+                            android:padding="10dp" />
+
+                        <CheckBox
+                            android:id="@+id/fourth"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:text="Last hemoglobin A1C reading:" />
+
+                        <android.support.v7.widget.AppCompatEditText
+                            android:inputType="text"
+                            android:imeOptions="actionNext"
+                            android:id="@+id/last_hemoglobin_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/custom_edit_text_doctor_id"
+                            android:hint="@string/type_answer_here"
+                            android:padding="10dp" />
+
                     </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/patient_row"
+                    android:layoutDirection="rtl">
+
+                    <Button
+                        android:id="@id/btnNextQuestion"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_margin="10.0dip"
+                        android:layout_weight="1.0"
+                        android:background="@drawable/disable_next_question"
+                        android:text="@string/next"
+                        android:textColor="@color/white" />
+
+                    <Button
+                        android:id="@id/btnSkipQuestion"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_margin="10.0dip"
+                        android:layout_weight="1.0"
+                        android:background="@drawable/enabled_custom_button"
+                        android:text="@string/skip"
+                        android:textColor="@color/white" />
                 </LinearLayout>
             </RelativeLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layoutDirection="rtl">
-
-        <Button
-            android:id="@id/btnNextQuestion"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="10.0dip"
-            android:layout_weight="1.0"
-            android:background="@drawable/disable_next_question"
-            android:text="@string/next"
-            android:textColor="@color/white" />
-
-        <Button
-            android:id="@id/btnSkipQuestion"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="10.0dip"
-            android:layout_weight="1.0"
-            android:background="@drawable/enabled_custom_button"
-            android:text="@string/skip"
-            android:textColor="@color/white" />
-    </LinearLayout>
 
     <ProgressBar
         android:id="@id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone" />
+
 </RelativeLayout>

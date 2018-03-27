@@ -4,6 +4,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.neweraandroid.demo.R;
 
@@ -15,9 +16,10 @@ import tk.medlynk.patient.android.Activity.Refill.fragments.Question_5.Refill_fi
 import tk.medlynk.patient.android.Activity.Refill.fragments.Question_6.Refill_sixth_Question;
 import tk.medlynk.patient.android.Activity.Refill.fragments.Question_7.Refill_seventh_Question;
 import tk.medlynk.patient.android.Activity.Refill.fragments.Qustion_8.Refill_eighth_Question;
+import tk.medlynk.patient.android.Constants;
 
 public class Refill_A_Medication_Activity extends AppCompatActivity implements
-        Refill_A_Medication_Activity_ViewHolder.Refill_A_Medication_ClickListener,
+        Refill_A_Medication_VH.Refill_A_Medication_ClickListener,
         Refill_first_Question.onRefillFirstQuestionInteractionListener,
         Refill_second_Question.onRefillSecondQuestionInteractionListener,
         Refill_third_Question.onRefillThirdQuestionInteractionListener,
@@ -29,20 +31,21 @@ public class Refill_A_Medication_Activity extends AppCompatActivity implements
 {
 
     private View parent;
-    private Refill_A_Medication_Activity_ViewHolder viewholder;
+    private Refill_A_Medication_VH viewholder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_refill__a__medication );
         this.parent = findViewById(R.id.parent_refill_a_medication);
-        this.viewholder = new Refill_A_Medication_Activity_ViewHolder(this.parent);
+        this.viewholder = new Refill_A_Medication_VH(this.parent);
         this.viewholder.setClickListener(this);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.add ( R.id.refill_container,
                 new Refill_first_Question (),
                 Refill_first_Question.TAG).commit ();
         fragmentTransaction.addToBackStack ( Refill_first_Question.TAG );
+        Constants.REFILL_A_MEDICATION_BODY.put ( Constants.QUESTION_SET, "refill_a_medication" );
     }
 
     @Override
@@ -115,7 +118,7 @@ public class Refill_A_Medication_Activity extends AppCompatActivity implements
         System.out.println ( "Refill_A_Medication_Activity.onRefillSeventhQuestion" );
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.add ( R.id.refill_container,
-                new Refill_first_Question (),
+                new Refill_eighth_Question (),
                 Refill_eighth_Question.TAG).commit ();
         fragmentTransaction.addToBackStack ( Refill_eighth_Question.TAG );
     }
@@ -123,6 +126,7 @@ public class Refill_A_Medication_Activity extends AppCompatActivity implements
     @Override
     public void onRefillEighthQuestion() {
         System.out.println ( "Refill_A_Medication_Activity.onRefillEighthQuestion" );
-
+        Toast.makeText(this, "You have just finished a question set!", Toast.LENGTH_SHORT).show();
+        finish();
     }
 }

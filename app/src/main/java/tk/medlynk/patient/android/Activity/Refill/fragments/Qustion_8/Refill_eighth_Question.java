@@ -6,14 +6,36 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import tk.medlynk.patient.android.Activity.Refill.fragments.Qustion_8.Refill_eighth_Question_ViewHolder.OnRefillEighthQuestionClickListener;
+import tk.medlynk.patient.android.Activity.Refill.fragments.Qustion_8.Refill_eighth_VH.OnRefillEighthVHListener;
+import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.Model.Answer;
+import tk.medlynk.patient.android.Model.MotherCallback;
+import tk.medlynk.patient.android.Model.SymptomResponse;
+import tk.medlynk.patient.android.Networking.MedlynkRequests;
 
 import com.neweraandroid.demo.R;
 
-public class Refill_eighth_Question extends Fragment implements OnRefillEighthQuestionClickListener {
+import java.util.List;
+
+public class Refill_eighth_Question extends Fragment implements OnRefillEighthVHListener,
+        MotherCallback{
     public static final String TAG = Refill_eighth_Question.class.getSimpleName();
     private onRefillEighthQuestionInteractionListener mListener;
-    private Refill_eighth_Question_ViewHolder viewHolder;
+    private Refill_eighth_VH viewHolder;
+
+    @Override
+    public void onAnswerSuccess(SymptomResponse response) {
+        System.out.println("Refill_eighth_Question.onAnswerSuccess");
+        viewHolder.setProgressBarVisibilityStatus(View.GONE);
+        mListener.onRefillEighthQuestion();
+    }
+
+    @Override
+    public void onAnswerFailure() {
+        System.out.println("Refill_eighth_Question.onAnswerFailure");
+        viewHolder.setProgressBarVisibilityStatus(View.GONE);
+        mListener.onRefillEighthQuestion();
+    }
 
     public interface onRefillEighthQuestionInteractionListener {
         void onRefillEighthQuestion();
@@ -33,8 +55,8 @@ public class Refill_eighth_Question extends Fragment implements OnRefillEighthQu
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_refill_eighth__question, container, false);
-        this.viewHolder = new Refill_eighth_Question_ViewHolder(view);
-        this.viewHolder.setOnRefillEighthQuestionClickListener(this);
+        this.viewHolder = new Refill_eighth_VH(view);
+        this.viewHolder.setOnRefillEighthVHListener(this);
         return view;
     }
 
@@ -52,11 +74,32 @@ public class Refill_eighth_Question extends Fragment implements OnRefillEighthQu
         this.mListener = null;
     }
 
-    public void onNextClicked() {
+    @Override
+    public void onNextClicked(List<Answer> answers) {
         System.out.println("Refill_eighth_Question.onNextClicked");
-        this.mListener.onRefillEighthQuestion();
+        viewHolder.setProgressBarVisibilityStatus(View.VISIBLE);
+        SharedPreferenceManager manager = new SharedPreferenceManager(getActivity());
+        MedlynkRequests.refill_eighth_question(getActivity(),
+                manager.getAppointmentID(),
+                manager.getQuestionSetID(),
+                this,
+                answers);
+
     }
 
+    @Override
+    public void onNextClicked(Answer answer) {
+        System.out.println("Refill_eighth_Question.onNextClicked");
+        viewHolder.setProgressBarVisibilityStatus(View.VISIBLE);
+        SharedPreferenceManager manager = new SharedPreferenceManager(getActivity());
+        MedlynkRequests.refill_eighth_question(getActivity(),
+                manager.getAppointmentID(),
+                manager.getQuestionSetID(),
+                this,
+                answer);
+    }
+
+    @Override
     public void onSkipClicked() {
         System.out.println("Refill_eighth_Question.onSkipClicked");
         this.mListener.onRefillEighthQuestion();

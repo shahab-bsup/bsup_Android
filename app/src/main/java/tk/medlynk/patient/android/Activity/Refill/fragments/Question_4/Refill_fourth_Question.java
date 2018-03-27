@@ -6,13 +6,33 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import tk.medlynk.patient.android.Activity.Refill.fragments.Question_4.Refill_fourth_Question_ViewHolder.OnRefillFourthQuestionClickListener;
+import tk.medlynk.patient.android.Activity.Refill.fragments.Question_4.Refill_fourth_VH.OnRefillFourthVHListener;
+import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.Model.Answer;
+import tk.medlynk.patient.android.Model.MotherCallback;
+import tk.medlynk.patient.android.Model.SymptomResponse;
+import tk.medlynk.patient.android.Networking.MedlynkRequests;
+
 import com.neweraandroid.demo.R;
 
-public class Refill_fourth_Question extends Fragment implements OnRefillFourthQuestionClickListener {
+public class Refill_fourth_Question extends Fragment implements OnRefillFourthVHListener, MotherCallback {
     public static final String TAG = Refill_fourth_Question.class.getSimpleName();
     private onRefillFourthQuestionInteractionListener mListener;
-    private Refill_fourth_Question_ViewHolder viewHolder;
+    private Refill_fourth_VH viewHolder;
+
+    @Override
+    public void onAnswerSuccess(SymptomResponse response) {
+        System.out.println("Refill_fourth_Question.onAnswerSuccess");
+        viewHolder.setProgressBarVisibilityStatus(View.GONE);
+        mListener.onRefillFourthQuestion();
+    }
+
+    @Override
+    public void onAnswerFailure() {
+        System.out.println("Refill_fourth_Question.onAnswerFailure");
+        viewHolder.setProgressBarVisibilityStatus(View.GONE);
+
+    }
 
     public interface onRefillFourthQuestionInteractionListener {
         void onRefillFourthQuestion();
@@ -32,8 +52,8 @@ public class Refill_fourth_Question extends Fragment implements OnRefillFourthQu
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_refill_fourth__question, container, false);
-        this.viewHolder = new Refill_fourth_Question_ViewHolder(view);
-        this.viewHolder.setOnRefillFourthQuestionClickListener(this);
+        this.viewHolder = new Refill_fourth_VH(view);
+        this.viewHolder.setOnRefillFourthVHListener(this);
         return view;
     }
 
@@ -51,9 +71,15 @@ public class Refill_fourth_Question extends Fragment implements OnRefillFourthQu
         this.mListener = null;
     }
 
-    public void onNextClicked() {
+    public void onNextClicked(Answer answer) {
         System.out.println("Refill_fourth_Question.onNextClicked");
-        this.mListener.onRefillFourthQuestion();
+        viewHolder.setProgressBarVisibilityStatus(View.VISIBLE);
+        SharedPreferenceManager manager = new SharedPreferenceManager(getActivity());
+        MedlynkRequests.refill_fourth_question(getActivity(),
+                manager.getAppointmentID(),
+                manager.getQuestionSetID(),
+                this,
+                answer);
     }
 
     public void onSkipClicked() {

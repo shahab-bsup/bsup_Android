@@ -10,6 +10,9 @@ public class Constants {
 
     public static final HashMap<String, Object> NEW_SYMPTOM_ANSWER_BODY = new HashMap<> (  );
     public static final HashMap<String, Object> FOLLOW_UP_SYMPTOM_BODY = new HashMap<> (  );
+    public static final HashMap<String, Object> REFILL_A_MEDICATION_BODY = new HashMap<> (  );
+
+    public static String Context_Tag;
 
     public static final String INITIAL_TOKEN_TYPE = "token_type";
     public static final String Expire_INITIAL_TOKEN_INTERVAL = "expires_in";
@@ -54,6 +57,6 @@ public class Constants {
     public static final String RECEIVED_INITIAL_TOKEN_TIME_IN_MILLIS = "recieved initial token time in millis";
     public static final String QUESTION_SET = "question_set";
     public static final String QUESTION_NUMBER = "question_number";
-    public static final String NEW_SYMPTOM = "new_symptom";
+    public static final String QUESTION_SET_ID = "question_set_id";
 
 }

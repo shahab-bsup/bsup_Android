@@ -13,15 +13,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_8.NS_8th_VH;
-import tk.medlynk.patient.android.Essentials.OtherDialogBuilder;
+import tk.medlynk.patient.android.Essentials.DialogueBuilder;
 import tk.medlynk.patient.android.Model.Answer;
 
 /**
  * Created by Shahab on 2/23/2018.
  */
 
-public class NS_9th_VH extends RecyclerView.ViewHolder implements ViewSelection.OnSingleItemSelectedListener, ViewSelection.OnClearStateListener, ViewSelection.OnMultiItemSelectedListener, OtherDialogBuilder.OnOtherDialogListener {
+public class NS_9th_VH extends RecyclerView.ViewHolder implements ViewSelection.OnSingleItemSelectedListener, ViewSelection.OnClearStateListener, ViewSelection.OnMultiItemSelectedListener, DialogueBuilder.OnOtherDialogListener {
 
     private ProgressBar progressBar;
     private View question_view;
@@ -97,8 +96,8 @@ public class NS_9th_VH extends RecyclerView.ViewHolder implements ViewSelection.
         System.out.println ( "NS_9th_VH.onMultiItemSelected" );
         first.setClear ();
         if( integer == 3 ){
-            OtherDialogBuilder dialogBuilder = new OtherDialogBuilder ( itemView.getContext () );
-            dialogBuilder.setOnOtherDialogListener ( this );
+            DialogueBuilder dialogBuilder = new DialogueBuilder( itemView.getContext (), "other");
+            dialogBuilder.setOnDialogListener( this );
             dialogBuilder.show ();
         }else{
             setAnswerChoices(integer);

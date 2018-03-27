@@ -66,7 +66,7 @@
                             n2:unselected_text_color="@color/white" />
 
                         <com.medlynk.shahab.myviewselection.ViewSelection xmlns:n3="http://schemas.android.com/apk/res-auto"
-                            android:id="@id/viewSelectionChoicesSecond"
+                            android:id="@+id/viewSelectionChoicesSecond"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             n3:button_type="true"

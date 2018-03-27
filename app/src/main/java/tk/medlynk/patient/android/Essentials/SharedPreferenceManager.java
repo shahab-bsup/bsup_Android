@@ -110,4 +110,12 @@ public class SharedPreferenceManager{
     public int getAppointmentID(){
         return this.sharedPreferences.getInt ( Constants.APPOINTMENT_ID, 0 );
     }
+
+    public void setQuestionSetID( int id ){
+        this.sharedPreferences.edit().putInt(Constants.QUESTION_SET_ID, id).apply();
+    }
+
+    public int getQuestionSetID(){
+        return this.sharedPreferences.getInt(Constants.QUESTION_SET_ID, 0);
+    }
 }

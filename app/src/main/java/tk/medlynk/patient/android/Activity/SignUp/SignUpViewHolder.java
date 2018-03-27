@@ -63,7 +63,10 @@ public class SignUpViewHolder extends RecyclerView.ViewHolder implements
             public void onClick(View view) {
                 Calendar calendar = Calendar.getInstance ();
                 DatePickerDialog datePickerDialog = new DatePickerDialog ( parentView.getContext (),
-                        SignUpViewHolder.this, calendar.get ( Calendar.YEAR ), calendar.get ( Calendar.MONTH ), calendar.get ( Calendar.DAY_OF_MONTH ));
+                        SignUpViewHolder.this,
+                        calendar.get ( Calendar.YEAR ),
+                        calendar.get ( Calendar.MONTH ),
+                        calendar.get ( Calendar.DAY_OF_MONTH ));
                 datePickerDialog.show ();
             }
         } );

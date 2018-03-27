@@ -13,14 +13,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import tk.medlynk.patient.android.Essentials.OtherDialogBuilder;
+import tk.medlynk.patient.android.Essentials.DialogueBuilder;
 import tk.medlynk.patient.android.Model.Answer;
 
 /**
  * Created by Shahab on 2/24/2018.
  */
 
-public class NS_17th_VH extends RecyclerView.ViewHolder implements ViewSelection.OnMultiItemSelectedListener, OtherDialogBuilder.OnOtherDialogListener {
+public class NS_17th_VH extends RecyclerView.ViewHolder implements ViewSelection.OnMultiItemSelectedListener, DialogueBuilder.OnOtherDialogListener {
 
     private ProgressBar progressBar;
     private View question_view;
@@ -61,8 +61,8 @@ public class NS_17th_VH extends RecyclerView.ViewHolder implements ViewSelection
     public void onMultiItemSelected(View view, Integer integer) {
         System.out.println ( "NS_17th_VH.onMultiItemSelected" );
         if( integer == 6 ){
-            OtherDialogBuilder dialogBuilder = new OtherDialogBuilder ( itemView.getContext () );
-            dialogBuilder.setOnOtherDialogListener ( this );
+            DialogueBuilder dialogBuilder = new DialogueBuilder( itemView.getContext (), "other");
+            dialogBuilder.setOnDialogListener( this );
             dialogBuilder.show ();
         }else{
             setAnswerChoices(integer);

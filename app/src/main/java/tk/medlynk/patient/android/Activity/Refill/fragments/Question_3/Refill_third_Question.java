@@ -6,13 +6,33 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import tk.medlynk.patient.android.Activity.Refill.fragments.Question_3.Refill_third_Question_ViewHolder.OnRefillThirdQuestionClickListener;
+import tk.medlynk.patient.android.Activity.Refill.fragments.Question_3.Refill_third_VH.OnRefillThirdVHListener;
+import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.Model.Answer;
+import tk.medlynk.patient.android.Model.MotherCallback;
+import tk.medlynk.patient.android.Model.SymptomResponse;
+import tk.medlynk.patient.android.Networking.MedlynkRequests;
+
 import com.neweraandroid.demo.R;
 
-public class Refill_third_Question extends Fragment implements OnRefillThirdQuestionClickListener {
+public class Refill_third_Question extends Fragment implements OnRefillThirdVHListener, MotherCallback {
+
     public static final String TAG = Refill_third_Question.class.getSimpleName();
     private onRefillThirdQuestionInteractionListener mListener;
-    private Refill_third_Question_ViewHolder viewHolder;
+    private Refill_third_VH viewHolder;
+
+    @Override
+    public void onAnswerSuccess(SymptomResponse response) {
+        System.out.println("Refill_third_Question.onAnswerSuccess");
+        viewHolder.setProgressBarVisibilityStatus(View.GONE);
+        mListener.onRefillThirdQuestion();
+    }
+
+    @Override
+    public void onAnswerFailure() {
+        System.out.println("Refill_third_Question.onAnswerFailure");
+        viewHolder.setProgressBarVisibilityStatus(View.GONE);
+    }
 
     public interface onRefillThirdQuestionInteractionListener {
         void onRefillThirdQuestion();
@@ -27,13 +47,14 @@ public class Refill_third_Question extends Fragment implements OnRefillThirdQues
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() == null) {
+
         }
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_refill_third__question, container, false);
-        this.viewHolder = new Refill_third_Question_ViewHolder(view);
-        this.viewHolder.setOnRefillThirdQuestionClickListener(this);
+        this.viewHolder = new Refill_third_VH(view);
+        this.viewHolder.setOnRefillThirdVHListener(this);
         return view;
     }
 
@@ -51,9 +72,13 @@ public class Refill_third_Question extends Fragment implements OnRefillThirdQues
         this.mListener = null;
     }
 
-    public void onNextClicked() {
+    public void onNextClicked(Answer answer) {
         System.out.println("Refill_third_Question.onNextClicked");
-        this.mListener.onRefillThirdQuestion();
+        viewHolder.setProgressBarVisibilityStatus(View.VISIBLE);
+        SharedPreferenceManager manager = new SharedPreferenceManager(getActivity());
+        MedlynkRequests.refill_third_question(getActivity(),
+                manager.getAppointmentID(), manager.getQuestionSetID(),
+                this, answer);
     }
 
     public void onSkipClicked() {

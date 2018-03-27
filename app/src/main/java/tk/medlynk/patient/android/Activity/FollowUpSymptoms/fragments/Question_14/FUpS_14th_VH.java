@@ -77,7 +77,7 @@ public class FUpS_14th_VH extends RecyclerView.ViewHolder implements ViewSelecti
 
         second.setTextToButtons ( string_choices[9], 0 );
         for (int i = 0; i < sub_second.getNumberOfViews (); i++) {
-            sub_second.setTextToButtons ( string_choices[i + 11], i );
+            sub_second.setTextToButtons ( string_choices[i + 10], i );
         }
         third.setTextToButtons ( string_choices[14], 0 );
         fourth.setTextToButtons(string_choices[15], 0 );
@@ -120,7 +120,7 @@ public class FUpS_14th_VH extends RecyclerView.ViewHolder implements ViewSelecti
             }
             if( !isExisted ){
                 List<String> strings = new ArrayList<>();
-                answer.setSubChoice(strings);
+                answer.setSubChoices(strings);
                 choices.add(answer);
                 Drawable drawable = itemView.
                         getResources().
@@ -141,7 +141,7 @@ public class FUpS_14th_VH extends RecyclerView.ViewHolder implements ViewSelecti
             }
             if( !isExisted ){
                 List<String> strings = new ArrayList<>();
-                answer.setSubChoice(strings);
+                answer.setSubChoices(strings);
                 choices.add(answer);
                 second.getButtons().get(0).setBackgroundDrawable(itemView.getContext().getResources().getDrawable(R.drawable.answer_selected));
                 second.getButtons().get(0).setTextColor(itemView.getContext().getResources().getColor(R.color.white));
@@ -158,22 +158,22 @@ public class FUpS_14th_VH extends RecyclerView.ViewHolder implements ViewSelecti
             if( answer.getChoice() != null && answer.getChoice().equals("d") ){
                 switch (i){
                     case 0:{
-                        answer.getSubChoice().add("1");
+                        answer.getSubChoices().add("1");
 
                         break;
                     }
                     case 1:{
-                        answer.getSubChoice().add("2");
+                        answer.getSubChoices().add("2");
 
                         break;
                     }
                     case 2:{
-                        answer.getSubChoice().add("3");
+                        answer.getSubChoices().add("3");
 
                         break;
                     }
                     case 3:{
-                        answer.getSubChoice().add("4");
+                        answer.getSubChoices().add("4");
 
                         break;
                     }
@@ -191,32 +191,32 @@ public class FUpS_14th_VH extends RecyclerView.ViewHolder implements ViewSelecti
             if( answer.getChoice() != null && answer.getChoice().equals("c") ){
                 switch (i){
                     case 0:{
-                        answer.getSubChoice().add("1");
+                        answer.getSubChoices().add("1");
 
                         break;
                     }
                     case 1:{
-                        answer.getSubChoice().add("2");
+                        answer.getSubChoices().add("2");
 
                         break;
                     }
                     case 2:{
-                        answer.getSubChoice().add("3");
+                        answer.getSubChoices().add("3");
 
                         break;
                     }
                     case 3:{
-                        answer.getSubChoice().add("4");
+                        answer.getSubChoices().add("4");
 
                         break;
                     }
                     case 4:{
-                        answer.getSubChoice().add("5");
+                        answer.getSubChoices().add("5");
 
                         break;
                     }
                     case 5:{
-                        answer.getSubChoice().add("6");
+                        answer.getSubChoices().add("6");
 
                         break;
                     }
@@ -243,7 +243,7 @@ public class FUpS_14th_VH extends RecyclerView.ViewHolder implements ViewSelecti
             case 2:{
                 answer.setChoice("c");
                 List<String> strings = new ArrayList<>();
-                answer.setSubChoice(strings);
+                answer.setSubChoices(strings);
                 break;
             }
         }
@@ -300,11 +300,12 @@ public class FUpS_14th_VH extends RecyclerView.ViewHolder implements ViewSelecti
                 }
             }
         }
+
         if( view.getId() == sub_first.getId() ){
             while (answerIterator.hasNext()){
                 Answer answer = answerIterator.next();
                 if( answer.getChoice() != null && answer.getChoice().equals("c") ){
-                    Iterator<String> stringIterator = answer.getSubChoice().iterator();
+                    Iterator<String> stringIterator = answer.getSubChoices().iterator();
                     while (stringIterator.hasNext()){
                         String s = stringIterator.next();
                         if( s != null && s.equals(String.valueOf(integer + 1)) ){
@@ -318,7 +319,7 @@ public class FUpS_14th_VH extends RecyclerView.ViewHolder implements ViewSelecti
             while (answerIterator.hasNext()){
                 Answer answer = answerIterator.next();
                 if( answer.getChoice() != null && answer.getChoice().equals("d") ){
-                    Iterator<String> stringIterator = answer.getSubChoice().iterator();
+                    Iterator<String> stringIterator = answer.getSubChoices().iterator();
                     while (stringIterator.hasNext()){
                         String s = stringIterator.next();
                         if( s != null && s.equals(String.valueOf(integer + 1)) ){
@@ -377,7 +378,7 @@ public class FUpS_14th_VH extends RecyclerView.ViewHolder implements ViewSelecti
                 }
             }else{
                 List<String> strings = new ArrayList<>();
-                answer.setSubChoice(strings);
+                answer.setSubChoices(strings);
                 choices.add(answer);
             }
 

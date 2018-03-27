@@ -79,7 +79,7 @@ public class FUpS__1st_VH extends RecyclerView.ViewHolder {
 
         @Override
         public void afterTextChanged(Editable editable) {
-            if( editable.length () > 1 ){
+            if( editable.length () > 0 ){
                 button.setEnabled ( true );
                 button.setBackgroundResource ( R.drawable.enable_next_question );
             }else{

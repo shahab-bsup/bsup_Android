@@ -9,14 +9,14 @@ import android.widget.TextView;
 import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
 
-import tk.medlynk.patient.android.Essentials.OtherDialogBuilder;
+import tk.medlynk.patient.android.Essentials.DialogueBuilder;
 import tk.medlynk.patient.android.Model.Answer;
 
 /**
  * Created by Shahab on 3/4/2018.
  */
 
-public class FUpS_5th_VH extends RecyclerView.ViewHolder implements ViewSelection.OnSingleItemSelectedListener, OtherDialogBuilder.OnOtherDialogListener {
+public class FUpS_5th_VH extends RecyclerView.ViewHolder implements ViewSelection.OnSingleItemSelectedListener, DialogueBuilder.OnOtherDialogListener {
 
     private final ProgressBar progressBar;
     private final View question_view;
@@ -109,9 +109,9 @@ public class FUpS_5th_VH extends RecyclerView.ViewHolder implements ViewSelectio
 
             case 6:{
                 answer.setChoice ( "g" );
-                OtherDialogBuilder dialogBuilder =
-                        new OtherDialogBuilder ( itemView.getContext () );
-                dialogBuilder.setOnOtherDialogListener ( this );
+                DialogueBuilder dialogBuilder =
+                        new DialogueBuilder( itemView.getContext (),"other" );
+                dialogBuilder.setOnDialogListener( this );
                 dialogBuilder.show ();
                 break;
             }

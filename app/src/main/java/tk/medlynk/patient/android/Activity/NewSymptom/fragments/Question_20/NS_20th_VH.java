@@ -15,7 +15,7 @@ import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
 
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_3.TimeLastingAdapter;
-import tk.medlynk.patient.android.Essentials.OtherDialogBuilder;
+import tk.medlynk.patient.android.Essentials.DialogueBuilder;
 import tk.medlynk.patient.android.Model.Answer;
 
 /**
@@ -24,7 +24,7 @@ import tk.medlynk.patient.android.Model.Answer;
 
 public class NS_20th_VH extends RecyclerView.ViewHolder implements
         ViewSelection.OnSingleItemSelectedListener,
-        ViewSelection.OnClearStateListener, OtherDialogBuilder.OnOtherDialogListener {
+        ViewSelection.OnClearStateListener, DialogueBuilder.OnOtherDialogListener {
 
     private ProgressBar progressBar;
     private View question_view;
@@ -91,8 +91,8 @@ public class NS_20th_VH extends RecyclerView.ViewHolder implements
             }
             case R.id.viewSelectionChoicesOther:{
                 viewSelectionBeforeLastsPart.setClear ();
-                OtherDialogBuilder dialogBuilder = new OtherDialogBuilder(itemView.getContext());
-                dialogBuilder.setOnOtherDialogListener(this);
+                DialogueBuilder dialogBuilder = new DialogueBuilder(itemView.getContext(), "other" );
+                dialogBuilder.setOnDialogListener(this);
                 dialogBuilder.show();
                 break;
             }

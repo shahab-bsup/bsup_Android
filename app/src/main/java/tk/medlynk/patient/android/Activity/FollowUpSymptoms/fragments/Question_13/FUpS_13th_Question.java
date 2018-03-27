@@ -89,7 +89,6 @@ public class FUpS_13th_Question extends Fragment implements
         MedlynkRequests.followUpSymptomThirteenAnswer(getActivity(),
                 manager.getAppointmentID(),
                 this, answer);
-        mListener.onThirteenQuestion ();
     }
 
     @Override

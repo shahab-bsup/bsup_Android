@@ -6,14 +6,37 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import tk.medlynk.patient.android.Activity.Refill.fragments.Question_1.Refill_first_Question_ViewHolder.OnRefillFirstQuestionClickListener;
+import tk.medlynk.patient.android.Activity.Refill.fragments.Question_1.Refill_first_VH.OnRefillFirstQuestionClickListener;
+import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.Model.Answer;
+import tk.medlynk.patient.android.Model.MotherCallback;
+import tk.medlynk.patient.android.Model.SymptomResponse;
+import tk.medlynk.patient.android.Networking.MedlynkRequests;
+
+import com.google.gson.Gson;
 import com.neweraandroid.demo.R;
 
 
-public class Refill_first_Question extends Fragment implements OnRefillFirstQuestionClickListener {
+public class Refill_first_Question extends Fragment implements
+        OnRefillFirstQuestionClickListener,
+        MotherCallback {
     public static final String TAG = Refill_first_Question.class.getSimpleName();
     private onRefillFirstQuestionInteractionListener mListener;
-    private Refill_first_Question_ViewHolder viewHolder;
+    private Refill_first_VH viewHolder;
+
+    @Override
+    public void onAnswerSuccess(SymptomResponse response) {
+        System.out.println("Refill_first_Question.onAnswerSuccess");
+        viewHolder.setProgressBarVisibilityStatus(View.GONE);
+        new SharedPreferenceManager(getActivity()).setQuestionSetID(response.getQuestionSetId());
+        mListener.onRefillFistQuestion();
+    }
+
+    @Override
+    public void onAnswerFailure() {
+        System.out.println("Refill_first_Question.onAnswerFailure");
+        viewHolder.setProgressBarVisibilityStatus(View.GONE);
+    }
 
     public interface onRefillFirstQuestionInteractionListener {
         void onRefillFistQuestion();
@@ -35,7 +58,7 @@ public class Refill_first_Question extends Fragment implements OnRefillFirstQues
                              ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_refill_first__question, container, false);
-        this.viewHolder = new Refill_first_Question_ViewHolder(view);
+        this.viewHolder = new Refill_first_VH(view);
         this.viewHolder.setRefillFirstQuestionClickListener(this);
         return view;
     }
@@ -54,8 +77,12 @@ public class Refill_first_Question extends Fragment implements OnRefillFirstQues
         this.mListener = null;
     }
 
-    public void onNextClicked() {
+    @Override
+    public void onNextClicked(Answer answer) {
         System.out.println("Refill_first_Question.onNextClicked");
-        this.mListener.onRefillFistQuestion();
+        viewHolder.setProgressBarVisibilityStatus(View.VISIBLE);
+        SharedPreferenceManager manager = new SharedPreferenceManager(getActivity());
+        MedlynkRequests.refill_first_question(getActivity(), manager.getAppointmentID(),
+                this, answer);
     }
 }

@@ -51,6 +51,7 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
+        Constants.Context_Tag = FollowUpSymptomsActivity.class.getSimpleName();
         setContentView ( R.layout.activity_follow_up_sysmptoms );
         Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_SET, "follow_up_symptoms" );
         toolbar_view = findViewById ( R.id.follow_up_symptom_toolbar_layout );

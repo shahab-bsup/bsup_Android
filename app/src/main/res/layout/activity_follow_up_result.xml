@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="tk.medlynk.patient.android.Activity.FollowUpResults.FollowUpResultActivity">
 
-    <include android:id="@+id/follow_up_results_toolbar_layout"
+    <include
+        android:id="@+id/follow_up_results_toolbar_layout"
         layout="@layout/questions_toolbar_layout"></include>
 
     <FrameLayout
-        android:layout_below="@id/follow_up_results_toolbar_layout"
+        android:id="@+id/followUpFragmentsContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></FrameLayout>
+        android:layout_height="match_parent"
+        android:layout_below="@id/follow_up_results_toolbar_layout"></FrameLayout>
 
 </RelativeLayout>

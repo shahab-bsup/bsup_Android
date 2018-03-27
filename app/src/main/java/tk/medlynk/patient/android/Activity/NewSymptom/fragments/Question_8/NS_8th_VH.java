@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import tk.medlynk.patient.android.Essentials.OtherDialogBuilder;
+import tk.medlynk.patient.android.Essentials.DialogueBuilder;
 import tk.medlynk.patient.android.Model.Answer;
 
 /**
@@ -23,7 +23,7 @@ import tk.medlynk.patient.android.Model.Answer;
 public class NS_8th_VH extends RecyclerView.ViewHolder implements
         ViewSelection.OnSingleItemSelectedListener,
         ViewSelection.OnMultiItemSelectedListener,
-        OtherDialogBuilder.OnOtherDialogListener,
+        DialogueBuilder.OnOtherDialogListener,
         ViewSelection.OnClearStateListener {
 
     private ProgressBar progressBar;
@@ -92,8 +92,8 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
         System.out.println ( "NS_8th_VH.onMultiItemSelected" );
         first.setClear ();
         if( integer == 3 ){
-            OtherDialogBuilder dialogBuilder = new OtherDialogBuilder ( itemView.getContext () );
-            dialogBuilder.setOnOtherDialogListener ( this );
+            DialogueBuilder dialogBuilder = new DialogueBuilder( itemView.getContext (), "other");
+            dialogBuilder.setOnDialogListener( this );
             dialogBuilder.show ();
         }else{
             setAnswerChoices(integer);

@@ -22,6 +22,7 @@ import retrofit2.http.GET;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import tk.medlynk.patient.android.Model.SymptomResponse;
 
 /**
  * Created by Shahab on 1/11/2018.
@@ -75,5 +76,11 @@ public interface MedlynkAPI {
 
     @PUT("/api/appointments/{appointment_id}/answers")
     Call<FollowUpSymptomResponse> followUpSymptomtAnswer(@Path ( "appointment_id" ) int appointmentId, @Body HashMap<String, Object> body);
+
+    @PUT("/api/appointments/{appointment_id}/answers")
+    Call<SymptomResponse> followUpResultAnswer(@Path ( "appointment_id" ) int appointmentId, @Body HashMap<String, Object> body);
+
+    @PUT("/api/appointments/{appointment_id}/answers")
+    Call<SymptomResponse> refillAnswer(@Path ( "appointment_id" ) int appointmentId, @Body HashMap<String, Object> body);
 
 }

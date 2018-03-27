@@ -168,8 +168,8 @@
         <item>Hard to tell, I never han any symptoms</item>
         <item>"Seems to be working well, 
  my symptoms are completely gone"</item>
-        <item>My symptoms are about...</item>
-        <item>Doesn</item>
+        <item>My symptoms are about %X better</item>
+        <item>Does not seem to be working at all / my symptoms have not improved even a little</item>
     </string-array>
     <string-array name="refill_second_question_choices">
         <item>Always</item>
@@ -184,6 +184,10 @@
         <item>Does not apply to me</item>
         <item>Approx. date:</item>
         <item>Blood pressure:</item>
+    </string-array>
+    <string-array name="refill_eighth_question_choices">
+        <item> Does not apply to me </item>
+        <item> Applies to me but I do not have this information </item>
     </string-array>
     <string-array name="FUR_1th_choices">
         <item>Blood tests</item>
@@ -230,6 +234,12 @@
         <item><b>Days</b> Ago</item>
     </string-array>
 
+    <string-array name="FUpR_17th_choices">
+        <item>Very Worried</item>
+        <item>Somewhat worried</item>
+        <item>Not worried, but of course interested</item>
+    </string-array>
+
     <string-array name="lasting_choices_2">
         <item>Select</item>
         <item>days in a row</item>
@@ -237,5 +247,18 @@
         <item>minutes</item>
         <item>seconds</item>
     </string-array>
+
+    <string-array name="FUpR_2nd_question_sub_Choices">
+        <item>By self-checking online</item>
+        <item>The testing center discussed the results with me</item>
+        <item>Another physician reviewed the results with me</item>
+    </string-array>
+
+    <string-array name="FUpR_16th_question_sub_Choices">
+        <item>A doctor at walk-in clinic</item>
+        <item>A doctor in emergency</item>
+        <item>A specialist</item>
+    </string-array>
+
 
 </resources>

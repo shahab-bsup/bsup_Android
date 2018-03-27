@@ -6,8 +6,6 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.List;
 
-import tk.medlynk.patient.android.Networking.MedlynkRequests;
-
 /**
  * Created by Shahab on 2/22/2018.
  */
@@ -37,7 +35,43 @@ public class Answer implements Serializable {
     private String helpfully;
     @SerializedName("sub_choices")
     @Expose
-    private List<String> subChoice;
+    private List<String> subChoices;
+    @SerializedName("sub_choice")
+    @Expose
+    private String subChoice;
+    @SerializedName("since")
+    @Expose
+    private int since;
+    @SerializedName("reading")
+    @Expose
+    private String reading;
+    @SerializedName("better")
+    @Expose
+    private int better;
+
+    public String getReading() {
+        return reading;
+    }
+
+    public void setReading(String reading) {
+        this.reading = reading;
+    }
+
+    public void setSince(int since) {
+        this.since = since;
+    }
+
+    public int getSince() {
+        return since;
+    }
+
+    public String getSubChoice() {
+        return subChoice;
+    }
+
+    public void setSubChoice(String subChoice) {
+        this.subChoice = subChoice;
+    }
 
     public String getHelpfully() {
         return helpfully;
@@ -95,11 +129,18 @@ public class Answer implements Serializable {
         this.years = years;
     }
 
-    public List<String> getSubChoice() {
-        return subChoice;
+    public List<String> getSubChoices() {
+        return subChoices;
     }
 
-    public void setSubChoice(List<String> subChoice) {
-        this.subChoice = subChoice;
+    public void setSubChoices(List<String> subChoices) {
+        this.subChoices = subChoices;
+    }
+
+    public void setBetter(int better) {
+        this.better = better;
+    }
+    public int getBetter(){
+        return this.better;
     }
 }

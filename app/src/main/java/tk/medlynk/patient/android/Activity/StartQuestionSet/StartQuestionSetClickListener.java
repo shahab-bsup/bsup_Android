@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
+import tk.medlynk.patient.android.Activity.FollowUpResults.FollowUpResultActivity;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.FollowUpSymptomsActivity;
 import tk.medlynk.patient.android.Activity.NewSymptom.NewSymptomActivity;
 import tk.medlynk.patient.android.Activity.Start_a_Refill.Start_A_New_RefillActivity;
@@ -38,6 +39,7 @@ public class StartQuestionSetClickListener implements View.OnClickListener {
             }
             case R.id.review_test_results:{
                 System.out.println ("review_test_results");
+                context.startActivity ( new Intent ( context, FollowUpResultActivity.class ) );
                 break;
             }
             case R.id.refill_a_medication:{

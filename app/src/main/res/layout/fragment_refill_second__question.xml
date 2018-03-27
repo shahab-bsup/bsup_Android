@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:focusableInTouchMode="true"
+    android:descendantFocusability="beforeDescendants"
     android:background="@color/white">
 
     <android.support.v4.widget.NestedScrollView
@@ -46,18 +48,39 @@
                         android:layout_marginTop="10.0dip"
                         android:src="@drawable/patient_icon" />
 
-                    <com.medlynk.shahab.myviewselection.ViewSelection xmlns:n2="http://schemas.android.com/apk/res-auto"
-                        android:id="@id/viewSelectionChoices"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        n2:button_type="true"
-                        n2:number_of_views="6"
-                        n2:selectable="true"
-                        n2:selected_background="@drawable/answer_selected"
-                        n2:selected_text_color="@color/black"
-                        n2:single_select="true"
-                        n2:unselected_background="@drawable/answer_not_selected"
-                        n2:unselected_text_color="@color/white" />
+                        android:orientation="vertical">
+                        <com.medlynk.shahab.myviewselection.ViewSelection
+                            android:id="@id/viewSelectionChoicesFirst"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:button_type="true"
+                            app:number_of_views="4"
+                            app:selectable="true"
+                            app:selected_background="@drawable/answer_selected"
+                            app:selected_text_color="@color/black"
+                            app:single_select="true"
+                            app:unselected_background="@drawable/answer_not_selected"
+                            app:unselected_text_color="@color/white" />
+
+                        <include layout="@layout/refill_second_part_layout"
+                            android:id="@+id/refill_second"></include>
+                        <com.medlynk.shahab.myviewselection.ViewSelection
+                            android:id="@+id/viewSelectionChoicesSecond"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:button_type="true"
+                            app:number_of_views="1"
+                            app:selectable="true"
+                            app:selected_background="@drawable/answer_selected"
+                            app:selected_text_color="@color/black"
+                            app:single_select="true"
+                            app:unselected_background="@drawable/answer_not_selected"
+                            app:unselected_text_color="@color/white" />
+                    </LinearLayout>
+
                 </LinearLayout>
             </RelativeLayout>
 

@@ -193,6 +193,7 @@
     <string name="lasts">Lasts</string>
     <string name="follow_up_results">To review the results of a test</string>
     <string name="follow_up_symptoms_title">Follow Up Symptoms</string>
+    <string name="follow_up_result_title">Follow Up Results</string>
 
     <string name="follow_up_symptoms_1st_question">Which symptom is still troubling you today (Please list one symptom only)</string>
     <string name="follow_up_symptoms_2nd_question">Please list any other symptoms you are having that you believe are associated:</string>
@@ -235,18 +236,14 @@
     <string name="FUPR_first_question">Since your last visit with me have you had any of the following tests for this symptom?</string>
     <string name="FUPR_second_question">Have you reviewed the results already in any way?</string>
     <string name="FUPR_third_question">Are you still having any of the symptoms/problems these tests may have been ordered for?</string>
-    <string name="FUPR_fourth_question">Which symptom is still troubling you today (Please list one symptom only)?</string>
-    <string name="FUPR_fifth_question">Please list any other symptoms you are having that you believe are associated:</string>
-    <string name="FUPR_sixth_question">How has your symptom changed since your last visit here?</string>
-    <string name="FUPR_seventh_question">How frequently has your symptom bothered you since your last visit?</string>
-    <string name="FUPR_eighth_question">How long does the symptom last when it occurs?</string>
-    <string name="FUPR_ninth_question">How intense is the symptom since your last visit?</string>
-    <string name="FUPR_tenth_question">On your worst day, how are your symptoms interfering with your abilities?</string>
-    <string name="FUPR_eleventh_question">On your best day, how are your symptoms interfering with your abilities?</string>
-    <string name="FUPR_twelve_question">Is there anything you have noted that makes the symptom better?
-(Ex - rest, sleep, eating, fluid intake, exercise, being inside/outside, temperature outside, air quality)</string>
+    <string name="FUPR_seventeen_question">Are you worried about the results today?</string>
+    <string name="FUPR_eighteen_question">If you wish, please explain what worries you about the results today.</string>
+
     <string name="enter_a_number">Enter a number</string>
     <string name="choose_one_helpfully_option">Choose a Helpfully Options</string>
     <string name="add_a_medication">Add a medication</string>
+    <string name="FUpR_2nd_sub_question">How were the results reviewed?</string>
+    <string name="FUpS_13th_sub_question">Which one?</string>
+    <string name="FUpR_18th_choice">No additional comments needed</string>
 
 </resources>

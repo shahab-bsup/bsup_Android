@@ -9,14 +9,14 @@ import android.widget.TextView;
 import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
 
-import tk.medlynk.patient.android.Essentials.OtherDialogBuilder;
+import tk.medlynk.patient.android.Essentials.DialogueBuilder;
 import tk.medlynk.patient.android.Model.Answer;
 
 /**
  * Created by Shahab on 2/23/2018.
  */
 
-public class NS_11th_VH extends RecyclerView.ViewHolder implements ViewSelection.OnSingleItemSelectedListener, OtherDialogBuilder.OnOtherDialogListener, ViewSelection.OnClearStateListener {
+public class NS_11th_VH extends RecyclerView.ViewHolder implements ViewSelection.OnSingleItemSelectedListener, DialogueBuilder.OnOtherDialogListener, ViewSelection.OnClearStateListener {
 
     private ProgressBar progressBar;
     private View question_view;
@@ -65,9 +65,9 @@ public class NS_11th_VH extends RecyclerView.ViewHolder implements ViewSelection
             button_next.setEnabled ( true );
             button_next.setBackgroundResource ( R.drawable.enable_next_question );
             if( i == 4 ){
-                OtherDialogBuilder dialogBuilder =
-                        new OtherDialogBuilder ( itemView.getContext () );
-                dialogBuilder.setOnOtherDialogListener ( this );
+                DialogueBuilder dialogBuilder =
+                        new DialogueBuilder( itemView.getContext (), "other");
+                dialogBuilder.setOnDialogListener( this );
                 dialogBuilder.show ();
             }else{
                 setAnswerChoice ( i );
