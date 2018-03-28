@@ -114,12 +114,12 @@
         <item>Problems seems to be worsening</item>
         <item>Afraid it means I have cancer</item>
         <item>Starting to interfere with my activities</item>
-        <item>I just can</item>
+        <item>I just can not take it anymore</item>
         <item>Other</item>
     </string-array>
     <string-array name="question_3_choices">
         <item>Today</item>
-        <item>I don</item>
+        <item>I do nt know</item>
     </string-array>
     <string-array name="question_4_choices">
         <item>Constantly</item>

@@ -20,9 +20,9 @@ import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_19.NS_1
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_1.New_Symptom_1th_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_2.NS_2nd_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_20.NS_20th_question;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_21.New_Symptom_21th_question;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_22.New_Symptom_22th_question;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_23.New_Symptom_23th_question;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_21.NS_21th_question;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_22.NS_22th_question;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_23.NS_23th_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_24th_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_25th_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_3.NS_3rd_question;
@@ -59,9 +59,9 @@ public class NewSymptomActivity extends AppCompatActivity implements
         NS_18th_question.OnNewSymptomEighteenQuestionListener,
         NS_19th_question.OnNewSymptomNineteenQuestionListener,
         NS_20th_question.OnNewSymptomTwentyQuestionListener,
-        New_Symptom_21th_question.OnNewSymptomTwenty1QuestionListener,
-        New_Symptom_22th_question.OnNewSymptomTwenty2QuestionListener,
-        New_Symptom_23th_question.OnNewSymptomTwenty3QuestionListener,
+        NS_21th_question.OnNewSymptomTwenty1QuestionListener,
+        NS_22th_question.OnNewSymptomTwenty2QuestionListener,
+        NS_23th_question.OnNewSymptomTwenty3QuestionListener,
         New_Symptom_24th_question.OnNewSymptomTwenty4QuestionListener,
         New_Symptom_25th_question.OnNewSymptomTwenty5QuestionListener {
 
@@ -178,8 +178,8 @@ public class NewSymptomActivity extends AppCompatActivity implements
     public void onTwentyQuestion() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
-        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_21th_question (), New_Symptom_21th_question.TAG ).commit ();
-        fragmentTransaction.addToBackStack ( New_Symptom_21th_question.TAG );
+        fragmentTransaction.add ( R.id.fragment_container, new NS_21th_question(), NS_21th_question.TAG ).commit ();
+        fragmentTransaction.addToBackStack ( NS_21th_question.TAG );
     }
 
     @Override
@@ -202,16 +202,16 @@ public class NewSymptomActivity extends AppCompatActivity implements
     public void onTwenty1Question() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
-        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_22th_question (), New_Symptom_22th_question.TAG ).commit ();
-        fragmentTransaction.addToBackStack ( New_Symptom_22th_question.TAG );
+        fragmentTransaction.add ( R.id.fragment_container, new NS_22th_question(), NS_22th_question.TAG ).commit ();
+        fragmentTransaction.addToBackStack ( NS_22th_question.TAG );
     }
 
     @Override
     public void onTwenty2Question() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
-        fragmentTransaction.add ( R.id.fragment_container, new New_Symptom_23th_question (), New_Symptom_23th_question.TAG ).commit ();
-        fragmentTransaction.addToBackStack ( New_Symptom_23th_question.TAG );
+        fragmentTransaction.add ( R.id.fragment_container, new NS_23th_question(), NS_23th_question.TAG ).commit ();
+        fragmentTransaction.addToBackStack ( NS_23th_question.TAG );
     }
 
     @Override

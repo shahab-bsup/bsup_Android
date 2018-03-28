@@ -15,7 +15,7 @@ import tk.medlynk.patient.android.Activity.Refill.fragments.Question_4.Refill_fo
 import tk.medlynk.patient.android.Activity.Refill.fragments.Question_5.Refill_fifth_Question;
 import tk.medlynk.patient.android.Activity.Refill.fragments.Question_6.Refill_sixth_Question;
 import tk.medlynk.patient.android.Activity.Refill.fragments.Question_7.Refill_seventh_Question;
-import tk.medlynk.patient.android.Activity.Refill.fragments.Qustion_8.Refill_eighth_Question;
+import tk.medlynk.patient.android.Activity.Refill.fragments.Question_8.Refill_eighth_Question;
 import tk.medlynk.patient.android.Constants;
 
 public class Refill_A_Medication_Activity extends AppCompatActivity implements

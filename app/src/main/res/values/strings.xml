@@ -102,10 +102,6 @@
     <string name="no">No</string>
     <string name="yes_type_here">(Yes) type here</string>
     <string name="go_to_question_set">Go To Question Set</string>
-    <string-array name="question_3_choices">
-        <item>Today</item>
-        <item>I don't know</item>
-    </string-array>
     <string-array name="question_4_choices">
         <item>Constantly</item>
         <item>Everyday</item>
@@ -179,15 +175,6 @@
         <item>other</item>
     </string-array>
 
-    <string-array name="question_21_choices">
-        <item>Just need reassurance that nothing else needs to be done </item>
-        <item>Problems seems to be worsening</item>
-        <item>Afraid it means I have cancer</item>
-        <item>Starting to interfere with my activities</item>
-        <item>I just can't take it anymore</item>
-        <item>Other</item>
-    </string-array>
-
     <string name="question_14">None</string>
     <string name="none">None</string>
     <string name="lasts">Lasts</string>
@@ -245,5 +232,6 @@
     <string name="FUpR_2nd_sub_question">How were the results reviewed?</string>
     <string name="FUpS_13th_sub_question">Which one?</string>
     <string name="FUpR_18th_choice">No additional comments needed</string>
+    <string name="no_previous_doctor">No Previous Doctor</string>
 
 </resources>

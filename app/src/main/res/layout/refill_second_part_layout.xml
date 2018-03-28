@@ -4,6 +4,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:background="@drawable/custom_edit_text_doctor_id"
+    android:focusableInTouchMode="true"
+    android:descendantFocusability="beforeDescendants"
     android:layoutDirection="ltr"
     android:padding="10dp">
 

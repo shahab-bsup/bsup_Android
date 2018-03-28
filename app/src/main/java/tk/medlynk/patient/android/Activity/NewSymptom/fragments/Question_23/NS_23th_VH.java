@@ -12,7 +12,7 @@ import com.neweraandroid.demo.R;
  * Created by Shahab on 3/2/2018.
  */
 
-public class New_Symptom_23th_question_ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, ViewSelection.OnSingleItemSelectedListener {
+public class NS_23th_VH extends RecyclerView.ViewHolder implements View.OnClickListener, ViewSelection.OnSingleItemSelectedListener {
 
     private View question_view;
     private Button next, skip;
@@ -20,7 +20,7 @@ public class New_Symptom_23th_question_ViewHolder extends RecyclerView.ViewHolde
     private ViewSelection choice;
     private On23QuestionViewsClickListener listener;
 
-    public New_Symptom_23th_question_ViewHolder(View view) {
+    public NS_23th_VH(View view) {
         super ( view );
         question_view = view.findViewById ( R.id.new_symptom_twenty3_question );
         question = question_view.findViewById ( R.id.txtQuestion );
@@ -40,7 +40,7 @@ public class New_Symptom_23th_question_ViewHolder extends RecyclerView.ViewHolde
 
     @Override
     public void onClick(View view) {
-        System.out.println ( "New_Symptom_23th_question_ViewHolder.onClick" );
+        System.out.println ( "NS_23th_VH.onClick" );
         switch (view.getId ()){
             case R.id.btnNextQuestion:{
                 listener.onNextClicked ();
@@ -57,7 +57,7 @@ public class New_Symptom_23th_question_ViewHolder extends RecyclerView.ViewHolde
 
     @Override
     public void onSingleItemSelected(View view, int i) {
-        System.out.println ( "New_Symptom_23th_question_ViewHolder.onSingleItemSelected" );
+        System.out.println ( "NS_23th_VH.onSingleItemSelected" );
         listener.onViewSelectionClicked ( view, i );
     }
 

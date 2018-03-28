@@ -35,6 +35,7 @@ public class NS_18th_VH extends RecyclerView.ViewHolder implements ViewSelection
         question.setText ( R.string.new_symptom_eighteen_question );
         button_next = itemView.findViewById ( R.id.btnNextQuestion );
         button_next.setOnClickListener ( new OnNextClickListener() );
+        button_next.setEnabled(false);
         button_skip = itemView.findViewById ( R.id.btnSkipQuestion );
         button_skip.setOnClickListener ( new OnSkipClickListener() );
         choices = itemView.findViewById ( R.id.viewSelectionChoices );

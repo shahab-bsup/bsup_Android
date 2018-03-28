@@ -1,120 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent_search_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/parent_search_activity"
-    tools:context="com.neweraandroid.demo.tk.neweraandroid.demo.Activity.SearchDoctor.SearchActivity">
+    tools:context="tk.medlynk.patient.android.Activity.SearchDoctor.SearchActivity">
 
     <RelativeLayout
+        android:id="@+id/logo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/logo">
+        android:layout_height="wrap_content">
+
         <ImageView
+            android:id="@+id/imgBackButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imgBackButton"
-            android:src="@drawable/ic_action_home_button"
-            android:layout_marginTop="@dimen/home_button_margin_top"
             android:layout_marginLeft="15dp"
-            />
+            android:layout_marginTop="@dimen/home_button_margin_top"
+            android:src="@drawable/ic_action_home_button" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="Logo PlaceHolder"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:textSize="30sp"
+            android:gravity="center_horizontal"
             android:padding="10dp"
-            />
+            android:text="Logo PlaceHolder"
+            android:textSize="30sp" />
     </RelativeLayout>
 
     <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/txtEnterID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txtEnterID"
-        android:text="@string/enter_doctor_id"
         android:layout_below="@id/logo"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/enter_doctor_id_size"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="5dp"
-        />
+        android:text="@string/enter_doctor_id"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/enter_doctor_id_size" />
 
     <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/id"
-        android:text="@string/id"
         android:layout_below="@id/txtEnterID"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/id_text_size"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="5dp"
-        />
+        android:text="@string/id"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/id_text_size" />
 
     <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/edtDoctorID"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:id="@+id/edtDoctorID"
         android:layout_below="@id/id"
-        android:layout_marginTop="30dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:paddingStart="10dp"
-        android:hint="@string/example_doctor_id"
-        android:inputType="numberDecimal"
-        android:imeOptions="actionDone"
+        android:layout_marginTop="30dp"
         android:background="@drawable/custom_edit_text_doctor_id"
-        />
+        android:hint="@string/example_doctor_id"
+        android:imeOptions="actionDone"
+        android:inputType="numberDecimal"
+        android:paddingStart="10dp" />
 
     <Button
+        android:id="@+id/btnSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnSearch"
         android:layout_below="@id/edtDoctorID"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="@dimen/welcome_button_margins_horizontally"
+        android:layout_marginRight="@dimen/welcome_button_margins_horizontally"
+        android:layout_marginTop="20dp"
         android:background="@drawable/enabled_custom_button"
         android:text="@string/search"
-        android:textColor="@color/white"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="@dimen/welcome_button_margins_horizontally"
-        android:layout_marginLeft="@dimen/welcome_button_margins_horizontally"
-        android:layout_marginBottom="15dp" />
+        android:textColor="@color/white" />
 
     <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/previousDoctorsText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/edtDoctorID"
         android:layout_below="@id/btnSearch"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="60dp"
         android:text="@string/search_text"
-        android:textSize="20sp"
         android:textColor="@color/colorPrimary"
-        android:layout_alignLeft="@id/edtDoctorID"
-        />
+        android:textSize="20sp" />
 
-    <Button
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/previousDoctorsText"
+        android:layout_margin="15dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/previousDoctorsList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="GridLayoutManager"
+            app:spanCount="2"
+            android:visibility="gone"/>
+
+        <ProgressBar
+            android:id="@+id/previuosDoctorsProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+        <tk.medlynk.patient.android.CustomViews.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/no_previousDoctor"
+            android:text="@string/no_previous_doctor"
+            android:textColor="@color/colorAccent"
+            android:layout_centerInParent="true"
+            android:textSize="20sp"
+            android:visibility="gone"
+            />
+    </RelativeLayout>
+
+    <Button
         android:id="@+id/btnDo_not_know_dr_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="@dimen/welcome_button_margins_horizontally"
+        android:layout_marginRight="@dimen/welcome_button_margins_horizontally"
+        android:layout_marginTop="20dp"
         android:background="@drawable/custom_button_do_not_know_dr_id"
         android:text="@string/do_not_know_dr_id"
-        android:textColor="@color/white"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="@dimen/welcome_button_margins_horizontally"
-        android:layout_marginLeft="@dimen/welcome_button_margins_horizontally"
-        android:layout_marginBottom="15dp" />
+        android:textColor="@color/white" />
 
     <ProgressBar
+        android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/progress_bar"
-        android:visibility="gone"
-        />
+        android:visibility="gone" />
 
 </RelativeLayout>

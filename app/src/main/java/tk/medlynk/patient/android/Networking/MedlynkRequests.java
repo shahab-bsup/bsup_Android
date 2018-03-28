@@ -1,19 +1,14 @@
 package tk.medlynk.patient.android.Networking;
 
 import android.content.Context;
-import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
 import com.google.gson.Gson;
 
-import tk.medlynk.patient.android.Activity.FollowUpResults.fragments.Question_3.FUpR_3rd_Question;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.FollowUpSymptomsActivity;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_1.OnFirstFollowUpAnswerListener;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_10.OnTenthFollowUpAnswerListener;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_13.FUpS_13th_Question;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_13.FUpS_13th_VH;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_13.OnThirteenFollowUpAnswerListener;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_15.FUpS_15th_Question;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_15.OnFifteenFollowUpAnswerListener;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_2.OnSecondFollowUpAnswerListener;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_3.OnThirdFollowUpAnswerListener;
@@ -48,9 +43,6 @@ import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_7.OnSev
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_8.OnEighthAnswerListener;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_9.OnNinthAnswerListener;
 import tk.medlynk.patient.android.Activity.NoDoctorIdPage.OnNoDoctorIDPreferencesListener;
-import tk.medlynk.patient.android.Activity.Refill.fragments.Question_6.Refill_sixth_Question;
-import tk.medlynk.patient.android.Activity.Refill.fragments.Question_7.Refill_seventh_Question;
-import tk.medlynk.patient.android.Activity.Refill.fragments.Qustion_8.Refill_eighth_Question;
 import tk.medlynk.patient.android.Activity.ResetPassword.OnResetPasswordListener;
 import tk.medlynk.patient.android.Activity.SearchDoctor.OnSearchDoctorListener;
 import tk.medlynk.patient.android.Activity.SelectDoctor.OnGetAppointmentsListener;
@@ -71,6 +63,7 @@ import tk.medlynk.patient.android.Model.InitialTokenResponse;
 import tk.medlynk.patient.android.Model.InitiateResponse;
 import tk.medlynk.patient.android.Model.MotherCallback;
 import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
+import tk.medlynk.patient.android.Model.PreviuosDoctorsResponse;
 import tk.medlynk.patient.android.Model.PrimaryTokenErrorResponse;
 import tk.medlynk.patient.android.Model.PrimaryTokenResponse;
 import tk.medlynk.patient.android.Model.RenewTokenResponse;
@@ -80,7 +73,6 @@ import com.neweraandroid.demo.R;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -417,6 +409,7 @@ public class MedlynkRequests {
     }
 
     public static void newSymptomFirstQuestionAnswer(Context context, final OnFirstAnswerListener listener, int appointmentID, Answer answer){
+        System.out.println("MedlynkRequests.newSymptomFirstQuestionAnswer");
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "1" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
         Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
@@ -439,6 +432,7 @@ public class MedlynkRequests {
     }
 
     public static void newSymptomSecondQuestionAnswer(Context context, final OnSecondAnswerListener listener, int appointmentID, Answer answer){
+        System.out.println("MedlynkRequests.newSymptomSecondQuestionAnswer");
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "2" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
         Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
@@ -462,6 +456,7 @@ public class MedlynkRequests {
     }
 
     public static void newSymptomThirdQuestionAnswer(Context context, final OnThirdAnswerListener listener, int appointmentID, Answer answer){
+        System.out.println("MedlynkRequests.newSymptomThirdQuestionAnswer");
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "3" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
         Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
@@ -485,6 +480,7 @@ public class MedlynkRequests {
     }
 
     public static void newSymptomFourthQuestionAnswer(Context context, final OnFourthAnswerListener listener, int appointmentID, Answer answer){
+        System.out.println("MedlynkRequests.newSymptomFourthQuestionAnswer");
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "4" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
         Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
@@ -508,6 +504,7 @@ public class MedlynkRequests {
     }
 
     public static void newSymptomFifthQuestionAnswer(Context context, final OnFifthAnswerListener listener, int appointmentID, Answer answer){
+        System.out.println("MedlynkRequests.newSymptomFifthQuestionAnswer");
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "5" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
         Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
@@ -531,6 +528,7 @@ public class MedlynkRequests {
     }
 
     public static void newSymptomSixthQuestionAnswer(Context context, final OnSixthAnswerListener listener, int appointmentID, Answer answer){
+        System.out.println("MedlynkRequests.newSymptomSixthQuestionAnswer");
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "6" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
         Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
@@ -554,6 +552,7 @@ public class MedlynkRequests {
     }
 
     public static void newSymptomSeventhQuestionAnswer(Context context, final OnSeventhAnswerListener listener, int appointmentID, Answer answer){
+        System.out.println("MedlynkRequests.newSymptomSeventhQuestionAnswer");
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "7" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
         Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
@@ -577,6 +576,7 @@ public class MedlynkRequests {
     }
 
     public static void newSymptomEighthQuestionAnswer(Context context, final OnEighthAnswerListener listener, int appointmentID, Answer answer){
+        System.out.println("MedlynkRequests.newSymptomEighthQuestionAnswer");
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "8" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
         Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
@@ -600,6 +600,7 @@ public class MedlynkRequests {
     }
 
     public static void newSymptomEighthQuestionAnswer(Context context, final OnEighthAnswerListener listener, int appointmentID, List<Answer> answer){
+        System.out.println("MedlynkRequests.newSymptomEighthQuestionAnswer");
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "8" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
         Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
@@ -623,6 +624,7 @@ public class MedlynkRequests {
     }
 
     public static void newSymptomNinthQuestionAnswer(Context context, final OnNinthAnswerListener listener, int appointmentID, Answer answer){
+        System.out.println("MedlynkRequests.newSymptomNinthQuestionAnswer");
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "9" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
         Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
@@ -645,6 +647,7 @@ public class MedlynkRequests {
     }
 
     public static void newSymptomNinthQuestionAnswer(Context context, final OnNinthAnswerListener listener, int appointmentID, List<Answer> answer){
+        System.out.println("MedlynkRequests.newSymptomNinthQuestionAnswer");
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "9" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
         Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
@@ -667,6 +670,7 @@ public class MedlynkRequests {
     }
 
     public static void newSymptomTenthQuestionAnswer(Context context, final OnTenthAnswerListener listener, int appointmentID, Answer answer){
+        System.out.println("MedlynkRequests.newSymptomTenthQuestionAnswer");
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "10" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
         Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
@@ -689,6 +693,7 @@ public class MedlynkRequests {
     }
 
     public static void newSymptomEleventhQuestionAnswer(Context context, final OnEleventhAnswerListener listener, int appointmentID, Answer answer){
+        System.out.println("MedlynkRequests.newSymptomEleventhQuestionAnswer");
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "11" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
         Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
@@ -713,6 +718,7 @@ public class MedlynkRequests {
     public static void newSymptomTwelveQuestionAnswer(Context context,
                                                       final OnTwelveAnswerListener listener, int appointmentID,
                                                       List<Answer> answer){
+        System.out.println("MedlynkRequests.newSymptomTwelveQuestionAnswer");
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "12" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
         Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
@@ -738,6 +744,7 @@ public class MedlynkRequests {
     public static void newSymptomTwelveQuestionAnswer(Context context,
                                                       final OnTwelveAnswerListener listener, int appointmentID,
                                                       Answer answer){
+        System.out.println("MedlynkRequests.newSymptomTwelveQuestionAnswer");
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "12" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
         Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
@@ -761,6 +768,7 @@ public class MedlynkRequests {
     }
 
     public static void newSymptomFifteenQuestionAnswer(Context context, final OnFifteenAnswerListener listener, int appointmentID, Answer answer){
+        System.out.println("MedlynkRequests.newSymptomFifteenQuestionAnswer");
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "15" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
         Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
@@ -782,6 +790,7 @@ public class MedlynkRequests {
     }
 
     public static void newSymptomSixteenQuestionAnswer(Context context, final OnSixteenAnswerListener listener, int appointmentID, Answer answer){
+        System.out.println("MedlynkRequests.newSymptomSixteenQuestionAnswer");
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "16" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
         Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
@@ -803,6 +812,7 @@ public class MedlynkRequests {
     }
 
     public static void newSymptomSeventeenQuestionAnswer (Context context, final OnSeventeenAnswerListener listener, int appointmentID, List<Answer> answer) {
+        System.out.println("MedlynkRequests.newSymptomSeventeenQuestionAnswer");
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "17" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
         Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
@@ -824,6 +834,7 @@ public class MedlynkRequests {
     }
 
     public static void newSymptomEighteenQuestionAnswer(Context context, final OnEighteenAnswerListener listener, int appointmentID, Answer answer){
+        System.out.println("MedlynkRequests.newSymptomEighteenQuestionAnswer");
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "18" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
         Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
@@ -845,6 +856,7 @@ public class MedlynkRequests {
     }
 
     public static void newSymptomNineteenQuestionAnswer(Context context, final OnNineteenAnswerListener listener, int appointmentID, Answer answer){
+        System.out.println("MedlynkRequests.newSymptomNineteenQuestionAnswer");
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "19" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
         Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
@@ -869,8 +881,9 @@ public class MedlynkRequests {
     public static void newSymptomTwentyOneQuestionAnswer(Context context,
                                                          final OnTwentyOneAnswerListener listener,
                                                          int appointmentID,
-                                                         ArrayList<Answer> answers) {
+                                                         List<Answer> answers) {
 
+        System.out.println("MedlynkRequests.newSymptomTwentyOneQuestionAnswer");
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "21" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answers );
         Call<NewSymptomAnswerResponse>  call = MedlynkRestAPI.getMainRetrofit ( context )
@@ -897,6 +910,7 @@ public class MedlynkRequests {
                                                       final OnTwentyAnswerListener listener,
                                                       int appointmentID,
                                                       Answer answer) {
+        System.out.println("MedlynkRequests.newSymptomTwentyQuestionAnswer");
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "20" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
         Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.
@@ -923,6 +937,7 @@ public class MedlynkRequests {
                                                         final OnThirteenAnswerListener listener,
                                                         int appointmentID,
                                                         Answer answer) {
+        System.out.println("MedlynkRequests.newSymptomThirteenQuestionAnswer");
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "13" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
         Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
@@ -950,6 +965,7 @@ public class MedlynkRequests {
                                                         final OnThirteenAnswerListener listener,
                                                         int appointmentID,
                                                         List<Answer> answers) {
+        System.out.println("MedlynkRequests.newSymptomThirteenQuestionAnswer");
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "13" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answers );
         Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
@@ -1811,4 +1827,48 @@ public class MedlynkRequests {
         });
     }
 
+    public static void getPreviousDoctors(Context context, final OnSearchDoctorListener listener) {
+        System.out.println("MedlynkRequests.getPreviousDoctors");
+        Call<PreviuosDoctorsResponse> call = MedlynkRestAPI.getMainRetrofit(context).getPreviousDoctors();
+        call.enqueue(new Callback<PreviuosDoctorsResponse>() {
+            @Override
+            public void onResponse(Call<PreviuosDoctorsResponse> call, Response<PreviuosDoctorsResponse> response) {
+                if( response.isSuccessful() ){
+                    listener.onGetPreviousDoctorSuccess(response.body());
+                }
+            }
+            @Override
+            public void onFailure(Call<PreviuosDoctorsResponse> call, Throwable t) {
+                if( t instanceof SocketTimeoutException){
+                    listener.onSearchDoctorFailure ( Constants.EXCEPTION_TYPE.SOCKET_TIMEOUT_EXCEPTION );
+                }else {
+                    listener.onSearchDoctorFailure ( Constants.EXCEPTION_TYPE.RETROFIT_EXCEPTION );
+                }
+            }
+        });
+    }
+
+    public static void deleteAPreviousDoctor(Context context, final OnSearchDoctorListener listener, String doctorID) {
+        System.out.println("MedlynkRequests.deleteAPreviousDoctor");
+        Call<Boolean> call = MedlynkRestAPI.getMainRetrofit(context).deletePreviousDoctor(doctorID);
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if( response.isSuccessful() ){
+                    listener.onDeletePreviousDoctor(response.body());
+                }else{
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                if( t instanceof SocketTimeoutException){
+                    listener.onSearchDoctorFailure ( Constants.EXCEPTION_TYPE.SOCKET_TIMEOUT_EXCEPTION );
+                }else {
+                    listener.onSearchDoctorFailure ( Constants.EXCEPTION_TYPE.RETROFIT_EXCEPTION );
+                }
+            }
+        });
+    }
 }

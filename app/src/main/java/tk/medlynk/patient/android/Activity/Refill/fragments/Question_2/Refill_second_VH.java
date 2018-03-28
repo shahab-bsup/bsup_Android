@@ -55,9 +55,11 @@ public class Refill_second_VH extends ViewHolder implements OnSingleItemSelected
         second.setOnSingleItemSelectedListener(this);
         second.setOnClearStateListener(this);
         this.string_choices = itemView.getContext().getResources().getStringArray(R.array.refill_second_question_choices);
+
         for (int i = 0; i < this.first.getNumberOfViews(); i++) {
             this.first.setTextToButtons(this.string_choices[i], i);
         }
+
         second.setTextToButtons(string_choices[5], 0);
         duration_layout = itemView.findViewById(R.id.refill_second);
         days = itemView.findViewById(R.id.days);
@@ -73,7 +75,8 @@ public class Refill_second_VH extends ViewHolder implements OnSingleItemSelected
         buttons.add(months);
         buttons.add(years);
         duration_input = itemView.findViewById(R.id.duration_input);
-        duration_input.addTextChangedListener(new DurationTextWatcher());
+        duration_input.setOnFocusChangeListener(new OnDurationFocusChangedListener());
+
     }
 
     public void setProgressBarVisibilityStatus(int status ){
@@ -127,6 +130,8 @@ public class Refill_second_VH extends ViewHolder implements OnSingleItemSelected
         int id = view.getId();
         switch (id){
             case R.id.viewSelectionChoicesFirst:{
+                duration_input.clearFocus();
+                duration_input.setText("");
                 if( i == -1 ){
                     button_next.setEnabled(false);
                     button_next.setBackgroundResource(R.drawable.disable_next_question);
@@ -145,11 +150,14 @@ public class Refill_second_VH extends ViewHolder implements OnSingleItemSelected
                 break;
             }
             case R.id.viewSelectionChoicesSecond:{
+                duration_input.clearFocus();
+                duration_input.setText("");
                 Utils.hideSoftKeyBoard(itemView);
                 if( i == -1 ){
                     button_next.setEnabled(false);
                     button_next.setBackgroundResource(R.drawable.disable_next_question);
                 }else {
+                    first.setClear();
                     duration_input.setText("");
                     for (Button button : buttons) {
                         button.setBackgroundResource(R.drawable.answer_not_selected);
@@ -304,20 +312,14 @@ public class Refill_second_VH extends ViewHolder implements OnSingleItemSelected
         }
     }
 
-    private class DurationTextWatcher implements TextWatcher {
+    private class OnDurationFocusChangedListener implements View.OnFocusChangeListener {
         @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-
+        public void onFocusChange(View view, boolean b) {
+            System.out.println("OnDurationFocusChangedListener.onFocusChange");
+            if( b ){
+                first.setClear();
+                second.setClear();
+            }
         }
     }
 }

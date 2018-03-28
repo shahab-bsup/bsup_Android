@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/delete_previous_doctor"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/delete_icon" />
+        <ProgressBar
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/delete_progress_bar"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+    <tk.medlynk.patient.android.CustomViews.CustomTextView
+        android:id="@+id/doctorId_doctorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="shahab"
+        android:textSize="20sp" />
+
+</LinearLayout>

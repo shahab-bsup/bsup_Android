@@ -20,28 +20,28 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link New_Symptom_22th_question.OnNewSymptomTwenty2QuestionListener} interface
+ * {@link NS_22th_question.OnNewSymptomTwenty2QuestionListener} interface
  * to handle interaction events.
- * Use the {@link New_Symptom_22th_question#newInstance} factory method to
+ * Use the {@link NS_22th_question#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class New_Symptom_22th_question extends Fragment implements
-        New_Symptom_22th_question_ViewHolder.On22QuestionViewsClickListener, OnTwentyTwoAnswerListener {
+public class NS_22th_question extends Fragment implements
+        NS_22th_VH.On22QuestionViewsClickListener, OnTwentyTwoAnswerListener {
 
-    public static final String TAG = New_Symptom_22th_question.class.getSimpleName ();
+    public static final String TAG = NS_22th_question.class.getSimpleName ();
     private List<Answer> selected_choices = new ArrayList<> (  );
 
     private OnNewSymptomTwenty2QuestionListener mListener;
-    private New_Symptom_22th_question_ViewHolder viewHolder;
+    private NS_22th_VH viewHolder;
     private Answer answer;
 
-    public New_Symptom_22th_question() {
+    public NS_22th_question() {
         // Required empty public constructor
     }
 
 
-    public static New_Symptom_22th_question newInstance() {
-        New_Symptom_22th_question fragment = new New_Symptom_22th_question ();
+    public static NS_22th_question newInstance() {
+        NS_22th_question fragment = new NS_22th_question();
         Bundle args = new Bundle ();
         fragment.setArguments ( args );
         return fragment;
@@ -60,7 +60,7 @@ public class New_Symptom_22th_question extends Fragment implements
                              ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate ( R.layout.fragment_new__symptom_22th_question, container, false );
-        viewHolder = new New_Symptom_22th_question_ViewHolder ( view );
+        viewHolder = new NS_22th_VH( view );
         viewHolder.setListener ( this );
 
         return view;
@@ -85,11 +85,11 @@ public class New_Symptom_22th_question extends Fragment implements
 
     @Override
     public void onNextClicked() {
-        System.out.println ( "New_Symptom_22th_question.onNextClicked" );
+        System.out.println ( "NS_22th_question.onNextClicked" );
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
         SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
         MedlynkRequests.newSymptomTwentyTwoQuestionAnswer ( getActivity (),
-                New_Symptom_22th_question.this,
+                NS_22th_question.this,
                 manager.getAppointmentID (),
                 answer
         );
@@ -97,13 +97,13 @@ public class New_Symptom_22th_question extends Fragment implements
 
     @Override
     public void onSkipClicked() {
-        System.out.println ( "New_Symptom_22th_question.onSkipClicked" );
+        System.out.println ( "NS_22th_question.onSkipClicked" );
         mListener.onTwenty2Question ();
     }
 
     @Override
     public void onTreatmentClicked(int position, int treatmentID) {
-        System.out.println ( "New_Symptom_22th_question.onTreatmentClicked" );
+        System.out.println ( "NS_22th_question.onTreatmentClicked" );
         answer = new Answer ();
         switch (position) {
             case 0: {
@@ -152,14 +152,14 @@ public class New_Symptom_22th_question extends Fragment implements
 
     @Override
     public void onTwentyTwoAnswerSuccess(NewSymptomAnswerResponse response) {
-        System.out.println ( "New_Symptom_22th_question.onTwentyTwoAnswerSuccess" );
+        System.out.println ( "NS_22th_question.onTwentyTwoAnswerSuccess" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onTwenty2Question ();
     }
 
     @Override
     public void onTwentyTwoAnswerFailure() {
-        System.out.println ( "New_Symptom_22th_question.onTwentyTwoAnswerFailure" );
+        System.out.println ( "NS_22th_question.onTwentyTwoAnswerFailure" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
     }
 

@@ -82,6 +82,8 @@ public class NS_11th_VH extends RecyclerView.ViewHolder implements ViewSelection
             answer.setChoice ( "e" );
             answer.setOther ( otherText );
         }else{
+            button_next.setEnabled(false);
+            button_next.setBackgroundResource(R.drawable.disable_next_question);
             choices.setClear ();
         }
     }

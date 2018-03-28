@@ -1,4 +1,4 @@
-package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_17;
+package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_21;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -17,63 +17,69 @@ import tk.medlynk.patient.android.Essentials.DialogueBuilder;
 import tk.medlynk.patient.android.Model.Answer;
 
 /**
- * Created by Shahab on 2/24/2018.
+ * Created by Shahab on 3/2/2018.
  */
 
-public class NS_17th_VH extends RecyclerView.ViewHolder implements ViewSelection.OnMultiItemSelectedListener, DialogueBuilder.OnOtherDialogListener {
+public class NS_21th_VH extends RecyclerView.ViewHolder implements
+        ViewSelection.OnMultiItemSelectedListener,
+        DialogueBuilder.OnOtherDialogListener {
 
     private ProgressBar progressBar;
+    private final String[] string_choices;
     private View question_view;
     private Button button_next, button_skip;
     private TextView question;
-    private ViewSelection viewSelection;
-    List<Answer> answers = new ArrayList<> (  );
-    private String[] string_choices;
-    private OnSeventeenNSVHListener onSeventeenNSVHListener;
+    private ViewSelection choices;
+    private On21thQuestionVHListener on21thQuestionVHListener;
+    private final List<Answer> answers = new ArrayList<>();
 
-    public NS_17th_VH(View itemView) {
-        super ( itemView );
-        progressBar = itemView.findViewById ( R.id.progress_bar );
-        question_view = itemView.findViewById ( R.id.new_symptom_seventeen_question );
+    public NS_21th_VH(View view) {
+        super ( view );
+        progressBar = view.findViewById ( R.id.progress_bar );
+        question_view = view.findViewById ( R.id.new_symptom_twenty1_question );
         question = question_view.findViewById ( R.id.txtQuestion );
-        question.setText ( R.string.new_symptom_seventeen_question );
-        button_next = itemView.findViewById ( R.id.btnNextQuestion );
+        question.setText ( R.string.new_symptom_twenty1_question );
+        button_next = view.findViewById ( R.id.btnNextQuestion );
         button_next.setOnClickListener ( new OnNextClickListener() );
-        button_skip = itemView.findViewById ( R.id.btnSkipQuestion );
+        button_skip = view.findViewById ( R.id.btnSkipQuestion );
         button_skip.setOnClickListener ( new OnSkipClickListener() );
-        viewSelection = itemView.findViewById ( R.id.viewSelectionChoices );
-        viewSelection.setOnMultiItemSelectedListener ( this );
-        string_choices = itemView.getContext ().getResources ().getStringArray ( R.array.question_17_choices );
-        for (int i = 0; i < viewSelection.getNumberOfViews (); i++) {
-            viewSelection.setTextToButtons ( string_choices[i], i );
+        choices = view.findViewById ( R.id.viewSelectionChoices );
+        choices.setOnMultiItemSelectedListener ( this );
+        string_choices = view.getContext ().getResources ().getStringArray ( R.array.question_21_choices );
+        for (int i = 0; i < choices.getNumberOfViews (); i++) {
+            choices.setTextToButtons ( string_choices[i], i );
         }
     }
 
-    public void setOnSeventeenNSVHListener(OnSeventeenNSVHListener onSeventeenNSVHListener) {
-        this.onSeventeenNSVHListener = onSeventeenNSVHListener;
+    public void setProgressBarVisibilityStatus( int status ){
+        this.progressBar.setVisibility ( status );
     }
 
-    public void setProgressBarVisibilityStatus(int status ){
-        this.progressBar.setVisibility ( status );
+    public void setOn21thQuestionVHListener(On21thQuestionVHListener on21thQuestionVHListener) {
+        this.on21thQuestionVHListener = on21thQuestionVHListener;
     }
 
     @Override
     public void onMultiItemSelected(View view, Integer integer) {
-        System.out.println ( "NS_17th_VH.onMultiItemSelected" );
-        if( integer == 6 ){
+        System.out.println ( "NS_21th_VH.onMultiItemSelected" );
+        int i = integer;
+        if( i == 5 ){
             DialogueBuilder dialogBuilder = new DialogueBuilder( itemView.getContext (), "other");
             dialogBuilder.setOnDialogListener( this );
             dialogBuilder.show ();
         }else{
             setAnswerChoices(integer);
         }
+
     }
 
-    private void setAnswerChoices(Integer integer) {
+    private void setAnswerChoices(int i) {
         Answer answer = new Answer ();
-        switch (integer){
+        switch (i){
+
             case 0:{
                 answer.setChoice ( "a" );
+
                 break;
             }
             case 1:{
@@ -97,11 +103,6 @@ public class NS_17th_VH extends RecyclerView.ViewHolder implements ViewSelection
 
                 break;
             }
-            case 5:{
-                answer.setChoice ( "f" );
-
-                break;
-            }
         }
         answers.add ( answer );
         if( answers.size () == 1 ){
@@ -112,7 +113,7 @@ public class NS_17th_VH extends RecyclerView.ViewHolder implements ViewSelection
 
     @Override
     public void onMultiItemDeselected(View view, Integer integer) {
-        System.out.println ( "NS_17th_VH.onMultiItemDeselected" );
+        System.out.println ( "NS_21th_VH.onMultiItemDeselected" );
         int i = integer;
         Iterator<Answer> answerIterator = answers.iterator ();
         switch (i){
@@ -185,18 +186,6 @@ public class NS_17th_VH extends RecyclerView.ViewHolder implements ViewSelection
 
                 break;
             }
-            case 6:{
-                while (answerIterator.hasNext ()){
-                    Answer answer = answerIterator.next ();
-                    if(  answer.getChoice () != null &&
-                            answer.getChoice ().equals ( "g" ) ){
-                        answerIterator.remove ();
-                        break;
-                    }
-                }
-
-                break;
-            }
 
         }
         if( answers.size () == 0 ){
@@ -207,44 +196,43 @@ public class NS_17th_VH extends RecyclerView.ViewHolder implements ViewSelection
 
     @Override
     public void onOtherDialogDone(String otherText) {
-        System.out.println ( "NS_17th_VH.onOtherDialogDone" );
+        System.out.println("NS_21th_VH.onOtherDialogDone");
         if( otherText.length () > 0 ){
             Answer answer = new Answer ();
-            answer.setChoice ( "g" );
+            answer.setChoice ( "f" );
             answer.setOther ( otherText );
             answers.add ( answer );
             button_next.setEnabled ( true );
             button_next.setBackgroundResource ( R.drawable.enable_next_question );
         } else {
-            viewSelection.getButtons ().get ( 6 ).setBackgroundResource ( R.drawable.answer_not_selected );
-            viewSelection.getButtons ().get ( 6 ).setTextColor ( itemView.
+            choices.getButtons ().get ( 5 ).setBackgroundResource ( R.drawable.answer_not_selected );
+            choices.getButtons ().get ( 5 ).setTextColor ( itemView.
                     getContext ().
                     getResources ().
                     getColor ( R.color.white ) );
         }
     }
 
+    public interface On21thQuestionVHListener {
+        void onNextClicked(List<Answer> answers);
+        void onSkipClicked();
+    }
 
     private class OnNextClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println ( "NS_17th_VH.NS_17th_VH" );
-            System.out.println ( "OnNextClickListener.onClick" );
-            onSeventeenNSVHListener.onNextClicked ( answers );
+            System.out.println("NS_21th_VH.NS_21th_VH");
+            System.out.println("OnNextClickListener.onClick");
+            on21thQuestionVHListener.onNextClicked(answers);
         }
     }
 
     private class OnSkipClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println ( "NS_17th_VH.NS_17th_VH" );
-            System.out.println ( "OnSkipClickListener.onClick" );
-            onSeventeenNSVHListener.onSkipClicked ();
+            System.out.println("NS_21th_VH.NS_21th_VH");
+            System.out.println("OnSkipClickListener.onClick");
+            on21thQuestionVHListener.onSkipClicked();
         }
-    }
-
-    public interface OnSeventeenNSVHListener {
-        void onNextClicked(List<Answer> answer);
-        void onSkipClicked();
     }
 }

@@ -84,6 +84,7 @@ public class NS_18th_question extends Fragment implements
     @Override
     public void onEighteenAnswerSuccess(NewSymptomAnswerResponse response) {
         System.out.println ( "NS_18th_question.onEighteenAnswerSuccess" );
+        viewHolder.setProgressBarVisibilityStatus(View.GONE);
         if( response.getAnswer ().getChoice ().equals ( "b" ) ){
             mListener.onJumpToEnd ();
         }else{

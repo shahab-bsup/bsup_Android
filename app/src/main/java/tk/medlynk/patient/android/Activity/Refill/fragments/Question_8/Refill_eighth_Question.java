@@ -1,4 +1,4 @@
-package tk.medlynk.patient.android.Activity.Refill.fragments.Qustion_8;
+package tk.medlynk.patient.android.Activity.Refill.fragments.Question_8;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import tk.medlynk.patient.android.Activity.Refill.fragments.Qustion_8.Refill_eighth_VH.OnRefillEighthVHListener;
+import tk.medlynk.patient.android.Activity.Refill.fragments.Question_8.Refill_eighth_VH.OnRefillEighthVHListener;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
 import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.MotherCallback;

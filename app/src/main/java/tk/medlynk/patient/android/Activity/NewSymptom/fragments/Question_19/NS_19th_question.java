@@ -66,7 +66,6 @@ public class NS_19th_question extends Fragment implements
         ArrayAdapter<String> years_adapter = new ArrayAdapter<String> ( getActivity (),
                 android.R.layout.simple_spinner_dropdown_item, years_strings);
         viewHolder.setAdapter ( years_adapter );
-
         return  view;
     }
 

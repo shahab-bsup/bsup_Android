@@ -49,7 +49,6 @@ public class Refill_second_Question extends Fragment implements OnRefillSecondQu
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() == null) {
-
         }
     }
 

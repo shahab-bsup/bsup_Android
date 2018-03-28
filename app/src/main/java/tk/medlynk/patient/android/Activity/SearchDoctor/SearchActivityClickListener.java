@@ -19,12 +19,13 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
 import com.neweraandroid.demo.R;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Shahab on 1/19/2018.
  */
 
-public class SearchActivityClickListener implements OnSearchDoctorListener {
+public abstract class SearchActivityClickListener implements OnSearchDoctorListener {
 
     private Context context;
     private String doctorID;
@@ -38,6 +39,7 @@ public class SearchActivityClickListener implements OnSearchDoctorListener {
 //        MedlynkRequests.searchDoctor ( context, String.valueOf ( 17285001 ), this );
 
     }
+
 
     @Override
     public void onSearchDoctorSuccess(SearchDoctorResponse response) {

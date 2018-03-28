@@ -8,16 +8,16 @@
     android:background="@color/white">
 
     <android.support.v4.widget.NestedScrollView
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <RelativeLayout
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <include
@@ -33,7 +33,7 @@
 
                 <LinearLayout
                     android:id="@id/patient_row"
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/refill_second_question"
                     android:layout_marginTop="40.0dip"
@@ -58,6 +58,7 @@
                             android:layout_height="wrap_content"
                             app:button_type="true"
                             app:number_of_views="4"
+                            android:layout_marginBottom="20dp"
                             app:selectable="true"
                             app:selected_background="@drawable/answer_selected"
                             app:selected_text_color="@color/black"
@@ -68,6 +69,7 @@
                         <include layout="@layout/refill_second_part_layout"
                             android:id="@+id/refill_second"></include>
                         <com.medlynk.shahab.myviewselection.ViewSelection
+                            android:layout_marginTop="20dp"
                             android:id="@+id/viewSelectionChoicesSecond"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -85,14 +87,14 @@
             </RelativeLayout>
 
             <LinearLayout
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layoutDirection="rtl">
 
                 <Button
                     android:id="@id/btnNextQuestion"
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_margin="10.0dip"
@@ -103,7 +105,7 @@
 
                 <Button
                     android:id="@id/btnSkipQuestion"
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_margin="10.0dip"

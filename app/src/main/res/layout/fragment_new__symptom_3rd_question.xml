@@ -29,7 +29,6 @@
                 <tk.medlynk.patient.android.CustomViews.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/new_symptom_third_question"
                     android:layout_centerHorizontal="true"
                     android:text="#3"
                     android:textSize="25sp" />
@@ -59,9 +58,73 @@
                         android:orientation="vertical"
                         android:padding="10dp">
 
-                        <include
-                            android:id="@+id/new_symptom_third_question_lasting"
-                            layout="@layout/new_symptom_third_answer_row" />
+                        <CheckBox
+                            android:id="@+id/first"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:text="Years Ago" />
+
+                        <android.support.v7.widget.AppCompatEditText
+                            android:inputType="numberDecimal"
+                            android:imeOptions="actionDone"
+                            android:id="@+id/years_ago_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/custom_edit_text_doctor_id"
+                            android:hint="@string/type_answer_here"
+                            android:padding="10dp" />
+
+                        <CheckBox
+                            android:id="@+id/second"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:text="Months Ago" />
+
+                        <android.support.v7.widget.AppCompatEditText
+                            android:inputType="numberDecimal"
+                            android:imeOptions="actionDone"
+                            android:id="@+id/month_ago_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/custom_edit_text_doctor_id"
+                            android:hint="@string/type_answer_here"
+                            android:padding="10dp" />
+
+                        <CheckBox
+                            android:id="@+id/third"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:text="Weeks Ago" />
+
+                        <android.support.v7.widget.AppCompatEditText
+                            android:inputType="numberDecimal"
+                            android:imeOptions="actionDone"
+                            android:id="@+id/weeks_ago_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/custom_edit_text_doctor_id"
+                            android:hint="@string/type_answer_here"
+                            android:padding="10dp" />
+
+                        <CheckBox
+                            android:id="@+id/fourth"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:text="Days Ago" />
+
+                        <android.support.v7.widget.AppCompatEditText
+                            android:inputType="numberDecimal"
+                            android:imeOptions="actionDone"
+                            android:id="@+id/days_ago_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/custom_edit_text_doctor_id"
+                            android:hint="@string/type_answer_here"
+                            android:padding="10dp" />
 
                         <com.medlynk.shahab.myviewselection.ViewSelection
                             android:id="@+id/viewSelectionChoices"

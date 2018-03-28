@@ -1,4 +1,4 @@
-package tk.medlynk.patient.android.Activity.Refill.fragments.Qustion_8;
+package tk.medlynk.patient.android.Activity.Refill.fragments.Question_8;
 
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.RecyclerView.ViewHolder;
@@ -188,74 +188,6 @@ public class Refill_eighth_VH extends ViewHolder implements
     public void onClearState(View view) {
         System.out.println("Refill_eighth_VH.onClearState");
 
-    }
-
-    private class OnFirstInputTextWatcher implements TextWatcher {
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-
-        }
-    }
-
-    private class OnSecondInputTextWatcher implements TextWatcher {
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-
-        }
-    }
-
-    private class OnThirdInputTextWatcher implements TextWatcher {
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-
-        }
-    }
-
-    private class OnFourthInputTextWatcher implements TextWatcher {
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-
-        }
     }
 
     private class OnFirstCheckedChangeListener implements CompoundButton.OnCheckedChangeListener {

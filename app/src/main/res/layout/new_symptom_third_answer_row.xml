@@ -7,12 +7,12 @@
     android:layoutDirection="rtl">
 
     <android.support.v7.widget.AppCompatSpinner
-        android:layout_weight="1"
         android:id="@+id/spinnerTime"
-        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="@color/answers_text_color"
-        android:textSize="15sp"
+        android:textSize="20sp"
         android:gravity="center"
         android:padding="10dp"
         android:layout_marginRight="10dp"
@@ -20,9 +20,12 @@
         android:spinnerMode="dropdown"
         android:scrollIndicators="left" />
 
+
     <android.support.v7.widget.AppCompatEditText
+        android:layout_weight="1"
         android:id="@+id/edtAnswerDuration"
-        android:layout_width="wrap_content"
+        android:layout_toLeftOf="@id/spinnerTime"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="20dp"

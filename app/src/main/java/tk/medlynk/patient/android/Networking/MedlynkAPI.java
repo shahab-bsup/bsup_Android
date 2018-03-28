@@ -2,6 +2,7 @@ package tk.medlynk.patient.android.Networking;
 
 import android.support.annotation.Nullable;
 
+import retrofit2.http.DELETE;
 import retrofit2.http.PUT;
 import tk.medlynk.patient.android.Model.AppointmentsResponse;
 import tk.medlynk.patient.android.Model.CurrentUserResponse;
@@ -9,11 +10,13 @@ import tk.medlynk.patient.android.Model.FollowUpSymptomResponse;
 import tk.medlynk.patient.android.Model.InitialTokenResponse;
 import tk.medlynk.patient.android.Model.InitiateResponse;
 import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
+import tk.medlynk.patient.android.Model.PreviuosDoctorsResponse;
 import tk.medlynk.patient.android.Model.PrimaryTokenResponse;
 import tk.medlynk.patient.android.Model.RenewTokenResponse;
 import tk.medlynk.patient.android.Model.SearchDoctorResponse;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -83,4 +86,9 @@ public interface MedlynkAPI {
     @PUT("/api/appointments/{appointment_id}/answers")
     Call<SymptomResponse> refillAnswer(@Path ( "appointment_id" ) int appointmentId, @Body HashMap<String, Object> body);
 
+    @GET("/api/search-provider")
+    Call<PreviuosDoctorsResponse> getPreviousDoctors( );
+
+    @DELETE("/api/search-provider/{doctor_id}")
+    Call<Boolean> deletePreviousDoctor(@Path("doctor_id") String doctor_id);
 }

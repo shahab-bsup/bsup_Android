@@ -15,8 +15,10 @@ import tk.medlynk.patient.android.CustomViews.SnackController;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
 import tk.medlynk.patient.android.Model.CurrentUserInfo;
 import tk.medlynk.patient.android.Model.CurrentUserResponse;
+import tk.medlynk.patient.android.Model.PreviuosDoctorsResponse;
 import tk.medlynk.patient.android.Model.SearchDoctorResponse;
 import tk.medlynk.patient.android.Networking.MedlynkRequests;
+
 import com.neweraandroid.demo.R;
 
 import java.io.Serializable;
@@ -24,10 +26,13 @@ import java.io.Serializable;
 public class SearchActivity extends AppCompatActivity implements
         OnGetCurrentUserInfoListener,
         View.OnClickListener,
-        SearchActivityViewHolder.SearchActivityClickListener, OnSearchDoctorListener {
+        SearchActivityViewHolder.SearchActivityClickListener,
+        OnSearchDoctorListener, PreviousDoctorsAdapter.OnPDoctorClickListener {
 
     View parent_view;
     SearchActivityViewHolder viewHolder;
+    private PreviousDoctorsAdapter adapter;
+    private int going_to_be_deleted_dr_position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,10 @@ public class SearchActivity extends AppCompatActivity implements
         viewHolder = new SearchActivityViewHolder ( parent_view );
         viewHolder.setClickListener ( this );
         MedlynkRequests.getCurrentUserInfo ( this, this );
+        MedlynkRequests.getPreviousDoctors(this, this);
+        adapter = new PreviousDoctorsAdapter(this);
+        adapter.setOnPDoctorClickListener(this);
+        viewHolder.setPreviousDoctorAdapter(adapter);
     }
 
     @Override
@@ -102,6 +111,27 @@ public class SearchActivity extends AppCompatActivity implements
     }
 
     @Override
+    public void onDeletePreviousDoctor(Boolean aBoolean) {
+        System.out.println("SearchActivity.onDeletePreviousDoctor");
+        if( aBoolean ){
+            adapter.deletePreviousDoctor(going_to_be_deleted_dr_position);
+        }
+    }
+
+    @Override
+    public void onGetPreviousDoctorSuccess(PreviuosDoctorsResponse response) {
+        System.out.println("SearchActivity.onGetPreviousDoctorSuccess");
+        if( response.getData().size() == 0 ){
+            viewHolder.setPreviousDoctorsProgressBarVisibiltyStatus(View.GONE);
+            viewHolder.setNoPreviousDcotorTextVisibilityStatus(View.VISIBLE);
+        }else{
+               adapter.setPreviousDoctorsList(response.getData());
+               viewHolder.setPreviousDoctorListVisibilityStatus(View.VISIBLE);
+               viewHolder.setPreviousDoctorsProgressBarVisibiltyStatus(View.GONE);
+        }
+    }
+
+    @Override
     public void onSearchDoctorSuccess(SearchDoctorResponse response) {
         viewHolder.setProgressBarVisibilityStatus (View.GONE);
         if( response.getReceivedMedicalInfo () != null ){
@@ -138,5 +168,20 @@ public class SearchActivity extends AppCompatActivity implements
                     init ( SearchActivity.this,   R.string.something_bad_happened, Snackbar.LENGTH_LONG)
                     .showSnackBar ();
         }
+    }
+
+    @Override
+    public void onDelete(int adapterPosition, String doctorID) {
+        System.out.println("SearchActivity.onDelete");
+        going_to_be_deleted_dr_position = adapterPosition;
+        MedlynkRequests.deleteAPreviousDoctor(this, this, doctorID);
+    }
+
+    @Override
+    public void onClicked(String doctorID) {
+        System.out.println("SearchActivity.onClicked");
+        viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
+        MedlynkRequests.searchDoctor ( SearchActivity.this,
+                doctorID, SearchActivity.this);
     }
 }
