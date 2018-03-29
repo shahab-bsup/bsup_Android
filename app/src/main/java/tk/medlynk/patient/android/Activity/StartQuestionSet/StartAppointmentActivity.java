@@ -25,6 +25,7 @@ public class StartAppointmentActivity extends AppCompatActivity {
         toolbar_text = toolbar_view.findViewById ( R.id.toolbar_text );
         toolbar_text.setText ( "Question Set!" );
         backButton = toolbar_view.findViewById ( R.id.imgBackButton );
+        backButton.setVisibility ( View.GONE );
         backButton.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View view) {

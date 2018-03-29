@@ -12,23 +12,61 @@ import java.util.List;
  */
 
 public class Medication implements Serializable {
+
     @SerializedName ( "name" )
     @Expose
     private String name = "";
+
     @SerializedName ( "frequently" )
     @Expose
     private String frequently = "";
+
     @SerializedName ( "helpfully" )
     @Expose
     private String helpfully = "";
+
     @SerializedName ( "side_effects" )
     @Expose
-    private String side_effects = "";
+    private String sideEffects = "";
 
-    private boolean medicationNameError;
-    private boolean medicationFrequentlyError;
-    private boolean medicationHelpfullyError;
-    private boolean medicationSideEffectError;
+    private boolean frequentlyError;
+    private boolean helpfullyError;
+    private boolean sideEffectError;
+    private boolean nameError ;
+
+    public boolean isFrequentlyError() {
+        return frequentlyError;
+    }
+
+    public void setFrequentlyError(boolean frequentlyError) {
+        this.frequentlyError = frequentlyError;
+    }
+
+    public boolean isHelpfullyError() {
+        return helpfullyError;
+    }
+
+    public void setHelpfullyError(boolean helpfullyError) {
+        this.helpfullyError = helpfullyError;
+    }
+
+    public boolean isSideEffectError() {
+        return sideEffectError;
+    }
+
+    public void setSideEffectError(boolean sideEffectError) {
+        this.sideEffectError = sideEffectError;
+    }
+
+    public boolean isNameError() {
+        return nameError;
+    }
+
+    public void setNameError(boolean nameError) {
+        this.nameError = nameError;
+    }
+
+    private final static long serialVersionUID = -7094302714953607464L;
 
     public String getName() {
         return name;
@@ -54,43 +92,12 @@ public class Medication implements Serializable {
         this.helpfully = helpfully;
     }
 
-    public String getSide_effects() {
-        return side_effects;
+    public String getSideEffects() {
+        return sideEffects;
     }
 
-    public void setSide_effects(String side_effects) {
-        this.side_effects = side_effects;
+    public void setSideEffects(String sideEffects) {
+        this.sideEffects = sideEffects;
     }
 
-    public void setMedicationNameError(boolean isError){
-        this.medicationNameError = isError;
-    }
-
-    public boolean isMedicationNameError() {
-        return medicationNameError;
-    }
-
-    public boolean isMedicationFrequentlyError() {
-        return medicationFrequentlyError;
-    }
-
-    public void setMedicationFrequentlyError(boolean medicationFrequentlyError) {
-        this.medicationFrequentlyError = medicationFrequentlyError;
-    }
-
-    public boolean isMedicationHelpfullyError() {
-        return medicationHelpfullyError;
-    }
-
-    public void setMedicationHelpfullyError(boolean medicationHelpfullyError) {
-        this.medicationHelpfullyError = medicationHelpfullyError;
-    }
-
-    public boolean isMedicationSideEffectError() {
-        return medicationSideEffectError;
-    }
-
-    public void setMedicationSideEffectError(boolean medicationSideEffectError) {
-        this.medicationSideEffectError = medicationSideEffectError;
-    }
 }

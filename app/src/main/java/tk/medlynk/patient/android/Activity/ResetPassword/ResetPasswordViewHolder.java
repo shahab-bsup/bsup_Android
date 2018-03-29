@@ -36,6 +36,12 @@ public class ResetPasswordViewHolder extends RecyclerView.ViewHolder {
         } );
     }
 
+    public void setPassWordError(String error){
+        password.setError ( error );
+        password.setText ( "" );
+        confirmedPassword.setText ( "" );
+    }
+
     public void setProgressBarVisibilityStatus( int status ){
         this.progressBar.setVisibility ( status );
     }

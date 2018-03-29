@@ -44,7 +44,6 @@ public class Refill_A_Medication_Activity extends AppCompatActivity implements
         fragmentTransaction.add ( R.id.refill_container,
                 new Refill_first_Question (),
                 Refill_first_Question.TAG).commit ();
-        fragmentTransaction.addToBackStack ( Refill_first_Question.TAG );
         Constants.REFILL_A_MEDICATION_BODY.put ( Constants.QUESTION_SET, "refill_a_medication" );
     }
 
@@ -57,7 +56,8 @@ public class Refill_A_Medication_Activity extends AppCompatActivity implements
     public void onRefillFistQuestion() {
         System.out.println ( "Refill_A_Medication_Activity.onRefillFistQuestion" );
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.add ( R.id.refill_container,
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+                .add ( R.id.refill_container,
                 new Refill_second_Question (),
                 Refill_second_Question.TAG).commit ();
         fragmentTransaction.addToBackStack ( Refill_second_Question.TAG );
@@ -67,7 +67,8 @@ public class Refill_A_Medication_Activity extends AppCompatActivity implements
     public void onRefillSecondQuestion() {
         System.out.println ( "Refill_A_Medication_Activity.onRefillSecondQuestion" );
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.add ( R.id.refill_container,
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+                .add ( R.id.refill_container,
                 new Refill_third_Question (),
                 Refill_third_Question.TAG).commit ();
         fragmentTransaction.addToBackStack ( Refill_third_Question.TAG );
@@ -77,7 +78,8 @@ public class Refill_A_Medication_Activity extends AppCompatActivity implements
     public void onRefillThirdQuestion() {
         System.out.println ( "Refill_A_Medication_Activity.onRefillThirdQuestion" );
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.add ( R.id.refill_container,
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+                .add ( R.id.refill_container,
                 new Refill_fourth_Question (),
                 Refill_fourth_Question.TAG).commit ();
         fragmentTransaction.addToBackStack ( Refill_fourth_Question.TAG );
@@ -87,7 +89,8 @@ public class Refill_A_Medication_Activity extends AppCompatActivity implements
     public void onRefillFourthQuestion() {
         System.out.println ( "Refill_A_Medication_Activity.onRefillFourthQuestion" );
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.add ( R.id.refill_container,
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+                .add ( R.id.refill_container,
                 new Refill_fifth_Question (),
                 Refill_fifth_Question.TAG).commit ();
         fragmentTransaction.addToBackStack ( Refill_fifth_Question.TAG );
@@ -97,7 +100,8 @@ public class Refill_A_Medication_Activity extends AppCompatActivity implements
     public void onRefillFifthQuestion() {
         System.out.println ( "Refill_A_Medication_Activity.onRefillFifthQuestion" );
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.add ( R.id.refill_container,
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+                .add ( R.id.refill_container,
                 new Refill_sixth_Question (),
                 Refill_sixth_Question.TAG).commit ();
         fragmentTransaction.addToBackStack ( Refill_sixth_Question.TAG );
@@ -107,7 +111,8 @@ public class Refill_A_Medication_Activity extends AppCompatActivity implements
     public void onRefillSixthQuestion() {
         System.out.println ( "Refill_A_Medication_Activity.onRefillSixthQuestion" );
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.add ( R.id.refill_container,
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+                .add ( R.id.refill_container,
                 new Refill_seventh_Question (),
                 Refill_seventh_Question.TAG).commit ();
         fragmentTransaction.addToBackStack ( Refill_seventh_Question.TAG );
@@ -117,7 +122,8 @@ public class Refill_A_Medication_Activity extends AppCompatActivity implements
     public void onRefillSeventhQuestion() {
         System.out.println ( "Refill_A_Medication_Activity.onRefillSeventhQuestion" );
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.add ( R.id.refill_container,
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+                .add ( R.id.refill_container,
                 new Refill_eighth_Question (),
                 Refill_eighth_Question.TAG).commit ();
         fragmentTransaction.addToBackStack ( Refill_eighth_Question.TAG );

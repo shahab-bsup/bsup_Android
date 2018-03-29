@@ -11,7 +11,10 @@ import com.neweraandroid.demo.R;
 
 import java.util.List;
 
+import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
 import tk.medlynk.patient.android.Model.Answer;
+import tk.medlynk.patient.android.Model.FollowUpSymptomResponse;
+import tk.medlynk.patient.android.Networking.MedlynkRequests;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,7 +25,8 @@ import tk.medlynk.patient.android.Model.Answer;
  * create an instance of this fragment.
  */
 public class FUpS_14th_Question extends Fragment implements
-        FUpS_14th_VH.OnFUpSFourteenVHListener {
+        FUpS_14th_VH.OnFUpSFourteenVHListener,
+OnFourteenFollowUpAnswerListener{
 
     public static final String TAG = FUpS_14th_Question.class.getSimpleName ();
 
@@ -78,9 +82,12 @@ public class FUpS_14th_Question extends Fragment implements
     }
 
     @Override
-    public void onNextClick(List<Answer> choices) {
+    public void onNextClick(List<Answer> answers) {
         System.out.println ( "FUpS_14th_Question.onNextClick" );
-        mListener.onFourteenQuestion ();
+        viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
+        SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
+        MedlynkRequests.followUpSymptomFourteenAnswer ( getActivity (),
+                manager.getAppointmentID (), this, answers);
     }
 
     @Override
@@ -90,8 +97,25 @@ public class FUpS_14th_Question extends Fragment implements
     }
 
     @Override
-    public void onNextClick(Answer choice) {
+    public void onNextClick(Answer answer) {
         System.out.println("FUpS_14th_Question.onNextClick");
+        viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
+        SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
+        MedlynkRequests.followUpSymptomFourteenAnswer ( getActivity (),
+                manager.getAppointmentID (), this, answer);
+    }
+
+    @Override
+    public void onThirteenAnswerSuccess(FollowUpSymptomResponse response) {
+        System.out.println ( "FUpS_14th_Question.onThirteenAnswerSuccess" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+        mListener.onFourteenQuestion ();
+    }
+
+    @Override
+    public void onThirteenAnswerFailure() {
+        System.out.println ( "FUpS_14th_Question.onThirteenAnswerFailure" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
     }
 
 

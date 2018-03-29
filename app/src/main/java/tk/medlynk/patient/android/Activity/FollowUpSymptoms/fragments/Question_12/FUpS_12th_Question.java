@@ -7,8 +7,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.neweraandroid.demo.R;
+
+import java.util.List;
+
+import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.Model.Answer;
+import tk.medlynk.patient.android.Model.FollowUpSymptomResponse;
+import tk.medlynk.patient.android.Model.Medication;
+import tk.medlynk.patient.android.Networking.MedlynkRequests;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,7 +27,9 @@ import com.neweraandroid.demo.R;
  * Use the {@link FUpS_12th_Question#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FUpS_12th_Question extends Fragment implements FUpS_12th_VH.OnFUpSTwelveVHListener {
+public class FUpS_12th_Question extends Fragment implements
+        FUpS_12th_VH.OnFUpSTwelveVHListener,
+        OnFollowUpTwelveAnswerListener {
 
     public static final String TAG = FUpS_12th_Question.class.getSimpleName ();
 
@@ -80,15 +91,44 @@ public class FUpS_12th_Question extends Fragment implements FUpS_12th_VH.OnFUpST
     }
 
     @Override
-    public void onNextClick() {
-        System.out.println ( "FUpS_12th_Question.onNextClick" );
+    public void onNextClicked(Answer answer) {
+        System.out.println ( "FUpS_12th_Question.onNextClicked" );
+        viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
+        SharedPreferenceManager manager = new
+                SharedPreferenceManager ( getActivity () );
+        MedlynkRequests.followUpTwelveQuestionAnswer ( getActivity (),
+                this, manager.getAppointmentID (),
+                answer);
+    }
+
+    @Override
+    public void onNextClicked(List<Medication> answers) {
+        System.out.println ( "FUpS_12th_Question.onNextClicked" );
+        viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
+        SharedPreferenceManager manager = new
+                SharedPreferenceManager ( getActivity () );
+       MedlynkRequests.followUpTwelveQuestionAnswer ( getActivity (),
+               this, manager.getAppointmentID (), answers);
+    }
+
+    @Override
+    public void onSkipClicked() {
+        System.out.println ( "FUpS_12th_Question.onSkipClicked" );
         mListener.onTwelveQuestion ();
     }
 
     @Override
-    public void onSkipClick() {
-        System.out.println ( "FUpS_12th_Question.onSkipClick" );
+    public void onTwelveAnswerSuccess(FollowUpSymptomResponse response) {
+        System.out.println ( "FUpS_12th_Question.onTwelveAnswerSuccess" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onTwelveQuestion ();
+    }
+
+    @Override
+    public void onTwelveAnswerFailure() {
+        System.out.println ( "FUpS_12th_Question.onTwelveAnswerFailure" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+        Toast.makeText ( getActivity (), "try again later!", Toast.LENGTH_SHORT ).show ();
     }
 
 

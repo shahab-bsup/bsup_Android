@@ -10,10 +10,10 @@ import android.widget.Toast;
 
 import com.neweraandroid.demo.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_15.NS_15th_question;
+import tk.medlynk.patient.android.Essentials.MedicationsAdapter;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
 import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.Medication;
@@ -36,7 +36,6 @@ public class NS_14th_question extends Fragment implements
     private OnNewSymptomFourteenQuestionListener mListener;
     private NS_14th_VH viewHolder;
     private MedicationsAdapter medicationsAdapter;
-    public static List<Medication> medications;
 
     public NS_14th_question() {
         // Required empty public constructor
@@ -60,12 +59,11 @@ public class NS_14th_question extends Fragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate ( R.layout.fragment_new__symptom_14th_question, container, false );
+        View view = inflater.inflate ( R.layout.fragment_new__symptom_14th_question,
+                container,
+                false );
         viewHolder = new NS_14th_VH ( view );
         viewHolder.setOnFourteenNSVHListener ( this );
-        medicationsAdapter = new MedicationsAdapter ( getActivity () );
-        viewHolder.setAdapter ( medicationsAdapter );
-        medications = new ArrayList<> (  );
         return view;
     }
 
@@ -102,6 +100,11 @@ public class NS_14th_question extends Fragment implements
         System.out.println ( "NS_14th_question.onNextClicked" );
         System.out.println ("list of answers");
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
+        SharedPreferenceManager manager = new
+                SharedPreferenceManager ( getActivity () );
+        MedlynkRequests.newSymptomFourteenQuestionAnswer ( getActivity (),
+                this, manager.getAppointmentID (),
+                answers);
     }
 
     @Override

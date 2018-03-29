@@ -2,182 +2,215 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="10dp"
     android:background="@drawable/custom_edit_text_doctor_id"
-    android:layout_margin="5dp"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
     android:padding="10dp">
 
-    <Button
-        android:id="@+id/delete_medication"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:text="delete" />
-
-    <tk.medlynk.patient.android.CustomViews.CustomTextView
+    <TextView
         android:id="@+id/number_of_medication"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_alignParentLeft="true"
-        android:textSize="20sp"
-        />
-
-    <tk.medlynk.patient.android.CustomViews.CustomTextView
-        android:id="@+id/name_of_medication_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/number_of_medication"
-        android:padding="10dp"
-        android:text="Name of medication"
-        android:textColor="@color/black"
         android:textSize="15sp" />
 
-    <android.support.v7.widget.AppCompatEditText
-        android:id="@+id/name_of_medication_input"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/name_of_medication_text"
-        android:background="@drawable/custom_edit_text_doctor_id"
-        android:hint="@string/type_answer_here"
-        android:imeOptions="actionDone"
-        android:padding="10dp" />
+        android:layout_alignParentRight="true"
+        android:background="@drawable/unselected_state"
+        android:text="@string/delete_medication"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="10sp" />
 
-    <tk.medlynk.patient.android.CustomViews.CustomTextView
-        android:id="@+id/how_often_of_medication_text"
+    <TextView
+        android:id="@+id/txtMedicationName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnDelete"
+        android:text="@string/name_of_medication"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/medication_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/name_of_medication_input"
+        android:layout_below="@id/txtMedicationName"
+        android:imeOptions="actionDone"
+        android:inputType="text"
         android:padding="10dp"
-        android:text="How often were you taking it?"
-        android:textColor="@color/black"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/medication_name_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/medication_name"
+        android:text="@string/fill_this_field_please"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="15sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/txtHowOften"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/medication_name_error"
+        android:text="@string/how_often_medication"
         android:textSize="15sp" />
 
     <LinearLayout
         android:id="@+id/how_often_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/how_often_of_medication_text">
+        android:layout_below="@id/txtHowOften"
+        android:orientation="horizontal">
 
         <Button
-            android:id="@+id/how_often_per_directions"
+            android:id="@+id/how_often_per_direction"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Per directions"
-            android:textColor="@color/colorPrimary" />
+            android:background="@drawable/unselected_state"
+            android:text="@string/how_often_medication_per_directions"
+            android:textColor="@color/colorPrimaryDark"
+
+            android:textSize="10sp" />
 
         <Button
-            android:id="@+id/how_often_often"
+            android:id="@+id/how_often_per_often"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Often"
-            android:textColor="@color/colorPrimary" />
+            android:background="@drawable/unselected_state"
+            android:text="@string/how_often_medication_often"
+            android:textColor="@color/colorPrimaryDark"
+
+            android:textSize="10sp" />
 
         <Button
-            android:id="@+id/how_often_occasionally"
+            android:id="@+id/how_often_per_occasionally"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Occasionally"
-            android:textColor="@color/colorPrimary" />
+            android:background="@drawable/unselected_state"
+
+            android:text="@string/how_often_medication_occasionally"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="10sp" />
     </LinearLayout>
 
-    <tk.medlynk.patient.android.CustomViews.CustomTextView
-        android:id="@+id/medication_frequently_error"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/how_often_error"
+
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/how_often_layout"
-        android:padding="10dp"
-        android:text="Please select one of these option!"
-        android:textColor="@color/black"
-        android:drawableLeft="@drawable/ic_action_error"
-        android:gravity="center_vertical"
+        android:text="@string/select_one_ooption"
+        android:textColor="@android:color/holo_red_dark"
         android:textSize="15sp"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
-    <tk.medlynk.patient.android.CustomViews.CustomTextView
-        android:id="@+id/how_helpful_of_medication_text"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/txtHowHelpFul"
+
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/medication_frequently_error"
-        android:padding="10dp"
-        android:text="How helpful was it?"
-        android:textColor="@color/black"
+        android:layout_below="@id/how_often_error"
+        android:text="@string/how_helpful_medication"
         android:textSize="15sp" />
 
     <LinearLayout
         android:id="@+id/how_helpful_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/how_helpful_of_medication_text">
+        android:layout_below="@id/txtHowHelpFul"
+        android:orientation="horizontal">
 
         <Button
-            android:id="@+id/helpful_a_lot"
+            android:id="@+id/how_helpful_helps_a_lot"
+
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Helped a lot"
-            android:textColor="@color/colorPrimary" />
+            android:background="@drawable/unselected_state"
+            android:text="@string/how_helpful_medication_a_lot"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="10sp" />
 
         <Button
-            android:id="@+id/helpful_a_little"
+            android:id="@+id/how_helpful_helps_a_little"
+
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Helped a little"
-            android:textColor="@color/colorPrimary" />
+            android:background="@drawable/unselected_state"
+            android:text="@string/how_helpful_medication_helps_a_little"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="10sp" />
 
         <Button
-            android:id="@+id/helpful_not_help"
+            android:id="@+id/how_helpful_not_helping"
+
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Did not help"
-            android:textColor="@color/colorPrimary" />
+            android:background="@drawable/unselected_state"
+            android:text="@string/how_helpful_medication_not_helping"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="10sp" />
     </LinearLayout>
 
-    <tk.medlynk.patient.android.CustomViews.CustomTextView
-        android:id="@+id/medication_helpfully_error"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/how_helpful_error"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/how_helpful_layout"
-        android:padding="10dp"
-        android:text="Please select one of these option!"
-        android:textColor="@color/black"
-        android:drawableLeft="@drawable/ic_action_error"
-        android:gravity="center_vertical"
+        android:text="@string/select_one_ooption"
+        android:textColor="@android:color/holo_red_dark"
         android:textSize="15sp"
-        android:visibility="gone"
-        />
+        android:visibility="gone" />
 
-    <tk.medlynk.patient.android.CustomViews.CustomTextView
-        android:id="@+id/side_effect_text"
+    <TextView
+        android:id="@+id/txtSideEffect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/medication_helpfully_error"
-        android:padding="10dp"
-        android:text="List any side effects you think you have had from this medication:"
-        android:textColor="@color/black"
+        android:layout_below="@id/how_helpful_error"
+        android:text="@string/list_side_effect_medication"
         android:textSize="15sp" />
 
-    <android.support.v7.widget.AppCompatEditText
-        android:id="@+id/side_effects_input"
+    <EditText
+        android:id="@+id/side_effect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/side_effect_text"
-        android:background="@drawable/custom_edit_text_doctor_id"
-        android:hint="@string/type_answer_here"
+        android:layout_below="@id/txtSideEffect"
         android:imeOptions="actionDone"
-        android:padding="10dp" />
+        android:inputType="text"
+        android:padding="10dp"
+        android:textSize="10sp" />
 
-    <Button
+    <TextView
+        android:id="@+id/side_effect_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/no_side_effect"
-        android:layout_below="@id/side_effects_input"
-        android:text="@string/none"
-        />
+        android:layout_below="@id/side_effect"
+        android:text="Select one of these option please!"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="15sp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btnNoSideEffect"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/side_effect_error"
+        android:background="@drawable/unselected_state"
+        android:text="None"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="10sp" />
 
 </RelativeLayout>

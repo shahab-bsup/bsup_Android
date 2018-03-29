@@ -73,7 +73,6 @@ public class FollowUpResultActivity extends AppCompatActivity implements
                         new FUpR_1st_Question(),
                         FUpR_1st_Question.TAG)
                 .commit ();
-        fragmentTransaction.addToBackStack ( FUpR_1st_Question.TAG );
     }
 
 

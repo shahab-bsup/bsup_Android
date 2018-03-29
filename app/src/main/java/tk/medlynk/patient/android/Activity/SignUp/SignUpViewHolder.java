@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -17,7 +16,7 @@ import tk.medlynk.patient.android.Activity.Login.LoginActivity;
 import tk.medlynk.patient.android.Constants;
 import tk.medlynk.patient.android.CustomViews.SnackController;
 import tk.medlynk.patient.android.Essentials.Utils;
-import tk.medlynk.patient.android.Model.SignUpErrorResponse;
+import tk.medlynk.patient.android.Model.ErrorResponse;
 
 import com.neweraandroid.demo.R;
 
@@ -197,7 +196,7 @@ public class SignUpViewHolder extends RecyclerView.ViewHolder implements
     }
 
     @Override
-    public void onSignUpFailure(SignUpErrorResponse errorResponse, Constants.EXCEPTION_TYPE exception_type) {
+    public void onSignUpFailure(ErrorResponse errorResponse, Constants.EXCEPTION_TYPE exception_type) {
         if( errorResponse.getErrors ().getEmail () != null ){
             email.setError ( errorResponse.getErrors ().getEmail ().get ( 0 ) );
         }

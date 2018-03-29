@@ -70,7 +70,6 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
                 new FUpS_1st_Question(),
                 FUpS_1st_Question.TAG)
                 .commit ();
-        fragmentTransaction.addToBackStack ( FUpS_1st_Question.TAG );
     }
 
     @Override

@@ -233,5 +233,18 @@
     <string name="FUpS_13th_sub_question">Which one?</string>
     <string name="FUpR_18th_choice">No additional comments needed</string>
     <string name="no_previous_doctor">No Previous Doctor</string>
+    <string name="delete_medication">Delete</string>
+    <string name="name_of_medication">Name of Medication</string>
+    <string name="fill_this_field_please">fill this field please!</string>
+    <string name="how_often_medication">How often are you taking it?</string>
+    <string name="how_often_medication_per_directions">Per directions</string>
+    <string name="how_often_medication_often">Often</string>
+    <string name="how_often_medication_occasionally">Occasionally</string>
+    <string name="select_one_ooption">Select one of these option please!</string>
+    <string name="how_helpful_medication">How helpful is it?</string>
+    <string name="how_helpful_medication_a_lot">Helps a lot</string>
+    <string name="how_helpful_medication_helps_a_little">Helps a little</string>
+    <string name="how_helpful_medication_not_helping">Not helping</string>
+    <string name="list_side_effect_medication">List any side effects you think you have had from this medication:</string>
 
 </resources>

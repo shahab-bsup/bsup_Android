@@ -2,7 +2,6 @@ package tk.medlynk.patient.android.Activity.ResetPassword;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +11,7 @@ import tk.medlynk.patient.android.Activity.Login.LoginActivity;
 import tk.medlynk.patient.android.Constants;
 import tk.medlynk.patient.android.CustomViews.SnackController;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.Model.ErrorResponse;
 import tk.medlynk.patient.android.Networking.MedlynkRequests;
 import com.neweraandroid.demo.R;
 
@@ -64,23 +64,33 @@ OnResetPasswordListener
         } else{
             viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
             SharedPreferenceManager manager = new SharedPreferenceManager ( ResetPasswordActivity.this );
-            MedlynkRequests.resetPassword ( ResetPasswordActivity.this, reset_token, manager.getEmail (), password , ResetPasswordActivity.this);
+            MedlynkRequests.resetPassword ( ResetPasswordActivity.this,
+                    reset_token,
+                    manager.getEmail (),
+                    password ,
+                    ResetPasswordActivity.this);
         }
     }
     
     @Override
     public void onResetPasswordSuccess(String message) {
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
-        Toast.makeText ( this, message + "\nLogin Now!", Toast.LENGTH_SHORT ).show ();
         startActivity ( new Intent ( ResetPasswordActivity.this, LoginActivity.class ) );
         finish ();
     }
 
     @Override
-    public void onResetPasswordFailure(String message, Constants.EXCEPTION_TYPE exception_type) {
+    public void onResetPasswordFailure(ErrorResponse errorResponse, Constants.EXCEPTION_TYPE exception_type) {
         System.out.println ( "ResetPasswordActivity.onResetPasswordFailure" );
-        System.out.println ( "message = [" + message + "], exception_type = [" + exception_type + "]" );
+        System.out.println ( "message = [" + errorResponse + "], exception_type = [" + exception_type + "]" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+        if( errorResponse != null && errorResponse.getErrors () != null ){
+            if( errorResponse.getErrors ().getPassword () != null ){
+                viewHolder.setPassWordError (  errorResponse.getErrors ().getPassword ().get ( 0 )  );
+            }
+        }else{
+            Toast.makeText ( this, "something bad happened!", Toast.LENGTH_SHORT ).show ();
+        }
     }
 
     @Override

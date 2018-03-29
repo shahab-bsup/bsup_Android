@@ -145,6 +145,7 @@ public class Refill_eighth_VH extends ViewHolder implements
         this.question.setText(R.string.refill_eight_question);
         this.button_next = itemView.findViewById(R.id.btnNextQuestion);
         this.button_next.setOnClickListener(new OnNextClickListener());
+        button_next.setEnabled ( false );
         this.button_skip = itemView.findViewById(R.id.btnSkipQuestion);
         this.button_skip.setOnClickListener(new OnSkipClickListener());
         this.first_choice = itemView.findViewById(R.id.viewSelectionChoicesFirst);

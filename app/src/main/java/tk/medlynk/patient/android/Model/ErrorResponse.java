@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by Shahab on 1/15/2018.
  */
 
-public class SignUpErrorResponse {
+public class ErrorResponse {
 
     @SerializedName("message")
     @Expose

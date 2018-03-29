@@ -189,41 +189,38 @@
         <item> Does not apply to me </item>
         <item> Applies to me but I do not have this information </item>
     </string-array>
-    <string-array name="FUR_1th_choices">
-        <item>Blood tests</item>
-        <item>Urine tests</item>
-        <item>Imaging</item>
-        <item>X-ray</item>
-        <item>CT</item>
-        <item>MRI</item>
-        <item>Ultrasound</item>
-        <item>Mammogram</item>
-        <item>Bone density scan</item>
-        <item>Cardiac investigations</item>
-        <item>EKG</item>
-        <item>Exercise stress test</item>
-        <item>MIBI</item>
-        <item>Heart Ultrasound (echo)</item>
-        <item>Other</item>
-    </string-array>
 
     <string-array name="FUpS_14th_choices">
         <item>Blood tests</item>
         <item>Urine tests</item>
         <item>Imaging</item>
+        <item>Cardiac investigations</item>
+        <item>Other</item>
+        <item>None of the above</item>
+    </string-array>
+
+    <string-array name="FUpR_1th_choices">
+        <item>Blood tests</item>
+        <item>Urine tests</item>
+        <item>Imaging</item>
+        <item>Cardiac investigations</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="FUpS_14th_first_sub_choices">
         <item>X-ray</item>
         <item>CT</item>
         <item>MRI</item>
         <item>Ultrasound</item>
         <item>Mammogram</item>
         <item>Bone density scan</item>
-        <item>Cardiac investigations</item>
+    </string-array>
+
+    <string-array name="FUpS_14th_second_sub_choices">
         <item>EKG</item>
         <item>Exercise stress test</item>
         <item>MIBI</item>
         <item>Heart Ultrasound (echo)</item>
-        <item>Other</item>
-        <item>None of the above</item>
     </string-array>
 
     <string-array name="lasting_choices">

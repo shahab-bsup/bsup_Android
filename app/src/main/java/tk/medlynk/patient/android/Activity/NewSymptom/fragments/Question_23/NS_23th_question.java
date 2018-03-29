@@ -6,8 +6,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.neweraandroid.demo.R;
+
+import java.util.List;
+
+import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.Model.Answer;
+import tk.medlynk.patient.android.Model.Medication;
+import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
+import tk.medlynk.patient.android.Networking.MedlynkRequests;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,7 +27,8 @@ import com.neweraandroid.demo.R;
  * create an instance of this fragment.
  */
 public class NS_23th_question extends Fragment implements
-        NS_23th_VH.On23QuestionViewsClickListener{
+        NS_23th_VH.On23QuestionVHListener,
+        OnTwentyThreeAnswerListener {
 
     public static final String TAG = NS_23th_question.class.getSimpleName ();
 
@@ -50,7 +60,7 @@ public class NS_23th_question extends Fragment implements
 
         View view = inflater.inflate ( R.layout.fragment_new__symptom_23th_question, container, false );
         viewHolder = new NS_23th_VH( view );
-        viewHolder.setListener ( this );
+        viewHolder.setOn23QuestionVHListener ( this );
         return  view;
     }
 
@@ -72,9 +82,25 @@ public class NS_23th_question extends Fragment implements
     }
 
     @Override
-    public void onNextClicked() {
+    public void onNextClicked(Answer answer) {
         System.out.println ( "NS_23th_question.onNextClicked" );
-        mListener.onTwenty3Question ();
+        viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
+        SharedPreferenceManager manager = new
+                SharedPreferenceManager ( getActivity () );
+        MedlynkRequests.newSymptomTwentyThreeQuestionAnswer ( getActivity (),
+                 this, manager.getAppointmentID (),
+                answer);
+    }
+
+    @Override
+    public void onNextClicked(List<Medication> answers) {
+        System.out.println ( "NS_23th_question.onNextClicked" );
+        viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
+        SharedPreferenceManager manager = new
+                SharedPreferenceManager ( getActivity () );
+        MedlynkRequests.newSymptomTwentyThreeQuestionAnswer ( getActivity (),
+                this, manager.getAppointmentID (),
+                answers);
     }
 
     @Override
@@ -84,10 +110,18 @@ public class NS_23th_question extends Fragment implements
     }
 
     @Override
-    public void onViewSelectionClicked(View view, int i) {
-        System.out.println ( "NS_23th_question.onViewSelectionClicked" );
-
+    public void onTwentyThreeAnswerSuccess(NewSymptomAnswerResponse response) {
+        System.out.println ( "NS_23th_question.onTwentyThreeAnswerSuccess" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+        mListener.onTwenty3Question ();
     }
+
+    @Override
+    public void onTwentyThreeAnswerFailure() {
+        System.out.println ( "NS_23th_question.onTwentyThreeAnswerFailure" );
+        Toast.makeText ( getActivity (), "try again later!", Toast.LENGTH_SHORT ).show ();
+    }
+
 
     public interface OnNewSymptomTwenty3QuestionListener {
         void onTwenty3Question();

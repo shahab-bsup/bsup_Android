@@ -47,7 +47,7 @@ public class DialogueBuilder extends AppCompatDialog {
 
     public DialogueBuilder(Context context, int theme) {
         super ( context, theme );
-        init ( "mammad" );
+        init ( "selected_state" );
     }
 
 

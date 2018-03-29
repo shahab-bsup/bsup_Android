@@ -1,6 +1,7 @@
 package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_14;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -13,6 +14,7 @@ import com.neweraandroid.demo.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import tk.medlynk.patient.android.Essentials.MedicationsAdapter;
 import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.Medication;
 
@@ -21,19 +23,20 @@ import tk.medlynk.patient.android.Model.Medication;
  */
 
 public class NS_14th_VH extends RecyclerView.ViewHolder implements
-        ViewSelection.OnSingleItemSelectedListener {
+        ViewSelection.OnSingleItemSelectedListener, MedicationsAdapter.OnEmptyMedicationListener {
 
     private View question_view;
-    private Button button_next, button_skip, add_a_medication;
+    private Button button_next;
+    private Button button_skip;
+    private Button add_a_medication;
     private TextView question;
     private ViewSelection choice;
-    private RecyclerView medications;
     private OnFourteenNSVHListener onFourteenNSVHListener;
+    private ProgressBar progressBar;
+    private RecyclerView medications;
     private MedicationsAdapter medicationAdapter;
-    private RelativeLayout.LayoutParams layoutParams;
     private List<Medication> answers;
     private Answer answer;
-    private ProgressBar progressBar;
 
     public NS_14th_VH(View itemView) {
         super ( itemView );
@@ -54,19 +57,17 @@ public class NS_14th_VH extends RecyclerView.ViewHolder implements
         add_a_medication.setOnClickListener ( new OnAddAMedicationClicked () );
         medications = itemView.findViewById ( R.id.recycler_view_medications );
         medications.setNestedScrollingEnabled ( false );
+        medicationAdapter = new MedicationsAdapter ( itemView.getContext () );
+        medicationAdapter.setOnEmptyMedicationListener ( this );
+        medications.setAdapter ( medicationAdapter );
     }
 
-    public void setProgressBarVisibilityStatus( int status ){
+    public void setProgressBarVisibilityStatus(int status) {
         this.progressBar.setVisibility ( status );
     }
 
     public void setOnFourteenNSVHListener(OnFourteenNSVHListener onFourteenNSVHListener) {
         this.onFourteenNSVHListener = onFourteenNSVHListener;
-    }
-
-    public void setAdapter(MedicationsAdapter adapter) {
-        this.medicationAdapter = adapter;
-        this.medications.setAdapter ( adapter );
     }
 
     @Override
@@ -76,12 +77,26 @@ public class NS_14th_VH extends RecyclerView.ViewHolder implements
             answer.setChoice ( "a" );
             button_next.setEnabled ( true );
             button_next.setBackgroundResource ( R.drawable.enable_next_question );
-            NS_14th_question.medications.clear ();
-            medicationAdapter.notifyDataSetChanged ();
+            medicationAdapter.clearDataSet ();
         } else {
             button_next.setEnabled ( false );
             button_next.setBackgroundResource ( R.drawable.disable_next_question );
         }
+    }
+
+    @Override
+    public void onEmptyMedication() {
+        System.out.println ( "NS_14th_VH.onEmptyMedication" );
+        button_next.setEnabled ( false );
+        button_next.setBackgroundResource ( R.drawable.enable_next_question );
+    }
+
+    public interface OnFourteenNSVHListener {
+        void onNextClicked(Answer answer);
+
+        void onNextClicked(List<Medication> answers);
+
+        void onSkipClicked();
     }
 
     private class OnNextClickListener implements View.OnClickListener {
@@ -89,8 +104,38 @@ public class NS_14th_VH extends RecyclerView.ViewHolder implements
         public void onClick(View view) {
             System.out.println ( "NS_14th_VH.NS_14th_VH" );
             System.out.println ( "OnNextClickListener.onClick" );
-            if (NS_14th_question.medications.size () > 0) {
-                onFourteenNSVHListener.onNextClicked ( NS_14th_question.medications );
+            if (medicationAdapter.getDataSet ().size () > 0) {
+                boolean hasError = false;
+                for (Medication medication : medicationAdapter.getDataSet ()) {
+                    if (medication.getName ().length () == 0) {
+                        medication.setNameError ( true );
+                        hasError = true;
+                    } else {
+                        medication.setNameError ( false );
+                    }
+                    if (TextUtils.isEmpty ( medication.getFrequently () )) {
+                        medication.setFrequentlyError ( true );
+                        hasError = true;
+                    } else {
+                        medication.setFrequentlyError ( false );
+                    }
+                    if (TextUtils.isEmpty ( medication.getHelpfully () )) {
+                        medication.setHelpfullyError ( true );
+                        hasError = true;
+                    } else {
+                        medication.setHelpfullyError ( false );
+                    }
+                    if (medication.getSideEffects () != null) {
+                        medication.setSideEffectError ( true );
+                        hasError = true;
+                    } else {
+                        medication.setSideEffectError ( false );
+                    }
+                }
+                if (!hasError) {
+                    onFourteenNSVHListener.onNextClicked ( medicationAdapter.getDataSet () );
+                }
+                medicationAdapter.notifyDataSetChanged ();
             } else {
                 onFourteenNSVHListener.onNextClicked ( answer );
             }
@@ -106,21 +151,15 @@ public class NS_14th_VH extends RecyclerView.ViewHolder implements
         }
     }
 
-    public interface OnFourteenNSVHListener {
-        void onNextClicked(Answer answer);
-
-        void onNextClicked(List<Medication> answers);
-
-        void onSkipClicked();
-    }
-
     private class OnAddAMedicationClicked implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             System.out.println ( "OnAddAMedicationClicked.onClick" );
-            Medication medication = new Medication ();
-            NS_14th_question.medications.add ( medication );
-            medicationAdapter.notifyDataSetChanged ();
+            medicationAdapter.setMedications ( new Medication () );
+            if( medicationAdapter.getDataSet ().size () == 1 ){
+                button_next.setEnabled ( true );
+                button_next.setBackgroundResource ( R.drawable.enable_next_question );
+            }
         }
     }
 }
