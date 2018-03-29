@@ -10,6 +10,14 @@ import android.view.ViewGroup;
 
 import com.neweraandroid.demo.R;
 
+import java.util.List;
+
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_22.NS_22th_question;
+import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.Model.Answer;
+import tk.medlynk.patient.android.Model.FollowUpSymptomResponse;
+import tk.medlynk.patient.android.Networking.MedlynkRequests;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -18,10 +26,10 @@ import com.neweraandroid.demo.R;
  * Use the {@link FUpS_11th_Question#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FUpS_11th_Question extends Fragment implements FUpS_11th_VH.OnFUpSEleventhVHListener {
+public class FUpS_11th_Question extends Fragment implements
+        FUpS_11th_VH.OnFUpSEleventhVHListener, OnEleventFollowUphAnswerListener {
 
     public static final String TAG = FUpS_11th_Question.class.getSimpleName ();
-
 
     private OnFollowUpSymptomsEleventhQuestionListener mListener;
     private FUpS_11th_VH viewHolder;
@@ -80,16 +88,49 @@ public class FUpS_11th_Question extends Fragment implements FUpS_11th_VH.OnFUpSE
     }
 
     @Override
-    public void onNextClick() {
-        System.out.println ( "FUpS_11th_Question.onNextClick" );
+    public void onNextClicked(List<Answer> answers) {
+        System.out.println ( "FUpS_11th_Question.onNextClicked" );
+        viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
+        SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
+        MedlynkRequests.followUpEleventhQuestionAnswer ( getActivity (),
+                FUpS_11th_Question.this,
+                manager.getAppointmentID (),
+                answers
+        );
+    }
+
+    @Override
+    public void onNextClicked(Answer answer) {
+        System.out.println ( "FUpS_11th_Question.onNextClicked" );
+        viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
+        SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
+        MedlynkRequests.followUpEleventhQuestionAnswer ( getActivity (),
+                FUpS_11th_Question.this,
+                manager.getAppointmentID (),
+                answer
+        );
+    }
+
+    @Override
+    public void onSkipClicked() {
+        System.out.println ( "FUpS_11th_Question.onSkipClicked" );
         mListener.onEleventhQuestion ();
     }
 
     @Override
-    public void onSkipClick() {
-        System.out.println ( "FUpS_11th_Question.onSkipClick" );
+    public void onEleventhAnswerSuccess(FollowUpSymptomResponse response) {
+        System.out.println ( "FUpS_11th_Question.onEleventhAnswerSuccess" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onEleventhQuestion ();
     }
+
+    @Override
+    public void onEleventhAnswerFailure() {
+        System.out.println ( "FUpS_11th_Question.onEleventhAnswerFailure" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+        mListener.onEleventhQuestion ();
+    }
+
 
     public interface OnFollowUpSymptomsEleventhQuestionListener {
         void onEleventhQuestion();

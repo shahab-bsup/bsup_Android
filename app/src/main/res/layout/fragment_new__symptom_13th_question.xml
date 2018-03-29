@@ -50,28 +50,28 @@
                         tools:ignore="RtlHardcoded" />
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
                         <com.medlynk.shahab.myviewselection.ViewSelection
-                            android:id="@+id/viewSelectionChoices"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/viewSelectionFirst"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:button_type="true"
                             app:number_of_views="7"
                             app:selectable="true"
                             app:selected_background="@drawable/answer_selected"
                             app:selected_text_color="@color/black"
+                            app:show_helpfully_layout="true"
                             app:single_select="false"
                             app:unselected_background="@drawable/answer_not_selected"
                             app:unselected_text_color="@color/white" />
 
                         <com.medlynk.shahab.myviewselection.ViewSelection
                             android:id="@+id/viewSelectionSecond"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/patient_row"
                             app:button_type="true"
                             app:number_of_views="1"
                             app:selectable="true"
@@ -80,22 +80,8 @@
                             app:single_select="true"
                             app:unselected_background="@drawable/answer_not_selected"
                             app:unselected_text_color="@color/white" />
-
                     </LinearLayout>
 
-                    <com.medlynk.shahab.myviewselection.ViewSelection
-                        android:id="@+id/viewSelectionHelpfully"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        app:button_type="true"
-                        app:number_of_views="7"
-                        app:selectable="false"
-                        app:selected_background="@drawable/answer_selected"
-                        app:selected_text_color="@color/black"
-                        app:single_select="true"
-                        app:unselected_background="@drawable/answer_not_selected"
-                        app:unselected_text_color="@color/white" />
                 </LinearLayout>
 
             </RelativeLayout>

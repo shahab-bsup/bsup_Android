@@ -55,6 +55,32 @@ public class Refill_eighth_VH extends ViewHolder implements
                 Iterator<Answer> answerIterator = answers.iterator();
                 while (answerIterator.hasNext()){
                     Answer answer = answerIterator.next();
+//                    if( answer.getChoice () != null ){
+//                        switch (answer.getChoice ()){
+//                            case "c":{
+//                                if( first_input.length() == 0 ){
+//                                    hasError = true;
+//                                    first_input.setError("Fill this field!");
+//                                }else{
+//                                    answer.setReading(first_input.getText().toString());
+//                                }
+//
+//                                break;
+//                            }
+//                            case "d":{
+//
+//                                break;
+//                            }
+//                            case "e":{
+//
+//                                break;
+//                            }
+//                            case "f":{
+//
+//                                break;
+//                            }
+//                        }
+//                    }
                     if( answer.getChoice() != null && answer.getChoice().equals("c") ){
                         if( first_input.length() == 0 ){
                             hasError = true;
@@ -64,27 +90,27 @@ public class Refill_eighth_VH extends ViewHolder implements
                         }
                     }
                     if( answer.getChoice() != null && answer.getChoice().equals("d") ){
-                        if( first_input.length() == 0 ){
+                        if( second_input.length() == 0 ){
                             hasError = true;
-                            first_input.setError("Fill this field!");
+                            second_input.setError("Fill this field!");
                         }else{
-                            answer.setReading(first_input.getText().toString());
+                            answer.setReading(second_input.getText().toString());
                         }
                     }
                     if( answer.getChoice() != null && answer.getChoice().equals("e") ){
-                        if( first_input.length() == 0 ){
+                        if( third_input.length() == 0 ){
                             hasError = true;
-                            first_input.setError("Fill this field!");
+                            third_input.setError("Fill this field!");
                         }else{
-                            answer.setReading(first_input.getText().toString());
+                            answer.setReading(third_input.getText().toString());
                         }
                     }
                     if( answer.getChoice() != null && answer.getChoice().equals("f") ){
-                        if( first_input.length() == 0 ){
+                        if( fourth_input.length() == 0 ){
                             hasError = true;
-                            first_input.setError("Fill this field!");
+                            fourth_input.setError("Fill this field!");
                         }else{
-                            answer.setReading(first_input.getText().toString());
+                            answer.setReading(fourth_input.getText().toString());
                         }
                     }
                 }
@@ -165,6 +191,7 @@ public class Refill_eighth_VH extends ViewHolder implements
         }else if ( i == 0 ){
             for (AppCompatEditText input : inputs) {
                 input.setText("");
+                input.setError ( null );
             }
             for (CheckBox checkBox : checkBoxes) {
                 checkBox.setChecked(false);
@@ -176,6 +203,10 @@ public class Refill_eighth_VH extends ViewHolder implements
         }else if ( i == 1 ){
             for (AppCompatEditText input : inputs) {
                 input.setText("");
+                input.setError ( null );
+            }
+            for (CheckBox checkBox : checkBoxes) {
+                checkBox.setChecked(false);
             }
             answers.clear();
             button_next.setEnabled(true);
@@ -183,7 +214,6 @@ public class Refill_eighth_VH extends ViewHolder implements
             answer.setChoice("b");
         }
     }
-
 
     public void onClearState(View view) {
         System.out.println("Refill_eighth_VH.onClearState");
@@ -214,6 +244,7 @@ public class Refill_eighth_VH extends ViewHolder implements
                     }
                 }
             }else{
+                first_input.setError ( null );
                 while (answerIterator.hasNext()){
                     Answer answer = answerIterator.next();
                     if( answer.getChoice() != null && answer.getChoice().equals("c") ){
@@ -253,6 +284,7 @@ public class Refill_eighth_VH extends ViewHolder implements
                     }
                 }
             }else{
+                second_input.setError ( null );
                 while (answerIterator.hasNext()){
                     Answer answer = answerIterator.next();
                     if( answer.getChoice() != null && answer.getChoice().equals("d") ){
@@ -292,6 +324,7 @@ public class Refill_eighth_VH extends ViewHolder implements
                     }
                 }
             }else{
+                third_input.setError ( null );
                 while (answerIterator.hasNext()){
                     Answer answer = answerIterator.next();
                     if( answer.getChoice() != null && answer.getChoice().equals("e") ){
@@ -331,6 +364,7 @@ public class Refill_eighth_VH extends ViewHolder implements
                     }
                 }
             }else{
+                fourth_input.setError ( null );
                 while (answerIterator.hasNext()){
                     Answer answer = answerIterator.next();
                     if( answer.getChoice() != null && answer.getChoice().equals("f") ){

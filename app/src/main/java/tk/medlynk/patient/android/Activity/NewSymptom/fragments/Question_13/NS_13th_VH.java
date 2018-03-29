@@ -1,6 +1,5 @@
 package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_13;
 
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -15,7 +14,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import tk.medlynk.patient.android.Essentials.ForcedDialogBuilder;
-import tk.medlynk.patient.android.Essentials.HelpfullyDialogBuilder;
 import tk.medlynk.patient.android.Model.Answer;
 
 /**
@@ -23,22 +21,21 @@ import tk.medlynk.patient.android.Model.Answer;
  */
 
 public class NS_13th_VH extends RecyclerView.ViewHolder implements
-        ViewSelection.OnSingleItemSelectedListener,
-        HelpfullyDialogBuilder.OnHelpfullyDialogListener,
         ViewSelection.OnMultiItemSelectedListener,
+        ForcedDialogBuilder.OnOtherDialogListener,
+        ViewSelection.OnHelpfullyOptionsClickListener,
         ViewSelection.OnClearStateListener,
-        ForcedDialogBuilder.OnOtherDialogListener {
+        ViewSelection.OnSingleItemSelectedListener {
 
     private ProgressBar progressBar;
     private View question_view;
     private Button button_next, button_skip;
     private TextView question;
-    private ViewSelection first, helpfully_specifier, second;
+    private ViewSelection first, second;
     private String[] string_choices;
-    private OnThirteenNSVHListener onThirteenNSVHListener;
-    private int selected_choice;
     private Answer answer;
     private List<Answer> answers;
+    private OnThirteenNSVHListener onThirteenNSVHListener;
 
     public NS_13th_VH(View view) {
         super ( view );
@@ -50,23 +47,21 @@ public class NS_13th_VH extends RecyclerView.ViewHolder implements
         question.setText ( R.string.new_symptom_thirteen_question );
         button_next = view.findViewById ( R.id.btnNextQuestion );
         button_next.setOnClickListener ( new OnNextClickListener() );
+        button_next.setEnabled ( false );
         button_skip = view.findViewById ( R.id.btnSkipQuestion );
         button_skip.setOnClickListener ( new OnSkipClickListener() );
-        first = view.findViewById ( R.id.viewSelectionChoices );
+        first = view.findViewById ( R.id.viewSelectionFirst );
+        second = view.findViewById ( R.id.viewSelectionSecond );
         string_choices = view.getContext ().getResources ().getStringArray ( R.array.question_13_22_choices );
         for (int i = 0; i < first.getNumberOfViews (); i++) {
             first.setTextToButtons ( string_choices[i], i );
         }
-        helpfully_specifier = itemView.findViewById ( R.id.viewSelectionHelpfully );
-        for (Button button : helpfully_specifier.getButtons ()) {
-            button.setVisibility ( View.INVISIBLE );
-        }
-        second = itemView.findViewById ( R.id.viewSelectionSecond );
-        first.setOnMultiItemSelectedListener ( this );
-        second.setOnSingleItemSelectedListener ( this );
-        first.setOnClearStateListener ( this );
-        second.setOnClearStateListener ( this );
         second.setTextToButtons ( string_choices[7], 0 );
+        first.setOnMultiItemSelectedListener ( this );
+        first.setOnClearStateListener ( this );
+        first.setOnHelpfullyOptionClickListener ( this );
+        second.setOnSingleItemSelectedListener ( this );
+        second.setOnClearStateListener ( this );
     }
 
     public void setProgressBarVisibilityStatus( int status ){
@@ -77,156 +72,64 @@ public class NS_13th_VH extends RecyclerView.ViewHolder implements
         this.onThirteenNSVHListener = onThirteenNSVHListener;
     }
 
-    @Override
-    public void onSingleItemSelected(View view, final int i) {
-        System.out.println ( "NS_13th_VH.onSingleItemSelected" );
-        if( i == 0 ){
-            first.setClear ();
-            answer.setChoice ( "h" );
-            button_next.setEnabled ( true );
-            button_next.setBackgroundResource ( R.drawable.enable_next_question );
-            helpfully_specifier.setVisibility ( View.GONE );
-        }else{
-            button_next.setEnabled ( false );
-            button_next.setBackgroundResource ( R.drawable.disable_next_question );
-        }
-    }
-
-    @Override
-    public void onDialogDone(int helpfully_code) {
-        System.out.println ( "NS_13th_VH.onDialogDone" );
-        if( helpfully_code == -1 ){
-            first.getButtons ().get ( selected_choice ).
-                    setBackgroundResource ( R.drawable.answer_not_selected );
-            first.getButtons ().get ( selected_choice )
-                    .setTextColor ( Color.parseColor ( "#ffffff" ) );
-        }else{
-            setAnswerChoice(selected_choice, helpfully_code);
-        }
-    }
-
-    private void setAnswerChoice(int selected_choice, int helpfully_code) {
+    private void setAnswerChoice(int selected_choice) {
         Answer answer = new Answer ();
         switch (selected_choice) {
             case 0: {
                 answer.setChoice ( "a" );
-                answer.setHelpfully ( String.valueOf ( helpfully_code ) );
-                helpfully_specifier.getButtons ().
-                        get ( selected_choice ).
-                        setVisibility ( View.VISIBLE );
-                helpfully_specifier.getButtons ().get ( selected_choice )
-                        .setText ( helpFullyDeterminer ( helpfully_code ) );
+
+                answers.add ( answer );
                 break;
             }
             case 1: {
                 answer.setChoice ( "b" );
-                answer.setHelpfully ( String.valueOf ( helpfully_code ) );
-                helpfully_specifier.getButtons ().
-                        get ( selected_choice ).
-                        setVisibility ( View.VISIBLE );
-                helpfully_specifier.getButtons ().get ( selected_choice )
-                        .setText ( helpFullyDeterminer ( helpfully_code ) );
+
+                answers.add ( answer );
                 break;
             }
             case 2: {
                 answer.setChoice ( "c" );
-                answer.setHelpfully ( String.valueOf ( helpfully_code ) );
-                helpfully_specifier.getButtons ().
-                        get ( selected_choice ).
-                        setVisibility ( View.VISIBLE );
-                helpfully_specifier.getButtons ().get ( selected_choice )
-                        .setText ( helpFullyDeterminer ( helpfully_code ) );
 
+                answers.add ( answer );
                 break;
             }
             case 3: {
                 answer.setChoice ( "d" );
-                answer.setHelpfully ( String.valueOf ( helpfully_code ) );
-                helpfully_specifier.getButtons ().
-                        get ( selected_choice ).
-                        setVisibility ( View.VISIBLE );
-                helpfully_specifier.getButtons ().get ( selected_choice )
-                        .setText ( helpFullyDeterminer ( helpfully_code ) );
+
+                answers.add ( answer );
                 break;
             }
             case 4: {
                 answer.setChoice ( "e" );
-                answer.setHelpfully ( String.valueOf ( helpfully_code ) );
-                helpfully_specifier.getButtons ().
-                        get ( selected_choice ).
-                        setVisibility ( View.VISIBLE );
-                helpfully_specifier.getButtons ().get ( selected_choice )
-                        .setText ( helpFullyDeterminer ( helpfully_code ) );
 
+                answers.add ( answer );
                 break;
             }
             case 5: {
                 answer.setChoice ( "f" );
-                answer.setHelpfully ( String.valueOf ( helpfully_code ) );
-                helpfully_specifier.getButtons ().
-                        get ( selected_choice ).
-                        setVisibility ( View.VISIBLE );
-                helpfully_specifier.getButtons ().get ( selected_choice )
-                        .setText ( helpFullyDeterminer ( helpfully_code ) );
 
+                answers.add ( answer );
                 break;
             }
             case 6: {
-                helpfully_specifier.getButtons ().
-                        get ( selected_choice ).
-                        setVisibility ( View.VISIBLE );
-                helpfully_specifier.getButtons ().get ( selected_choice )
-                        .setText ( helpFullyDeterminer ( helpfully_code ) );
+                ForcedDialogBuilder dialogBuilder = new ForcedDialogBuilder ( itemView.getContext () );
+                dialogBuilder.setOnOtherDialogListener ( this );
+                dialogBuilder.show ();
 
-                otherDialogHandler ();
                 break;
             }
         }
-        answers.add ( answer );
-        second.setClear ();
         if( answers.size () == 1 ){
             button_next.setEnabled ( true );
             button_next.setBackgroundResource ( R.drawable.enable_next_question );
         }
     }
 
-    private void otherDialogHandler() {
-        ForcedDialogBuilder dialogBuilder =
-                new ForcedDialogBuilder ( itemView.getContext () );
-        dialogBuilder.setOnOtherDialogListener ( this );
-        dialogBuilder.show ();
-    }
-
-    private String helpFullyDeterminer(int helpfully_code){
-        String s = null;
-        switch (helpfully_code){
-            case 1:{
-                s = "Helps a lot";
-
-                break;
-            }
-            case 2:{
-                s = "Helps a little";
-
-                break;
-            }
-            case 3:{
-                s = "Not helping";
-
-                break;
-            }
-        }
-        return s;
-    }
-
     @Override
     public void onMultiItemSelected(View view, Integer integer) {
         System.out.println ( "NS_13th_VH.onMultiItemSelected" );
-        selected_choice = integer;
-        HelpfullyDialogBuilder dialogBuilder =
-                new HelpfullyDialogBuilder ( itemView.getContext () );
-        dialogBuilder.setOnHelpfullyDialogListener ( this );
-        dialogBuilder.show ();
+        second.setClear ();
+        setAnswerChoice ( integer );
     }
 
     @Override
@@ -322,13 +225,106 @@ public class NS_13th_VH extends RecyclerView.ViewHolder implements
 
                 break;
             }
-
         }
-        helpfully_specifier.getButtons ().get ( i )
-                .setVisibility ( View.GONE );
+
         if( answers.size () == 0 ){
             button_next.setEnabled ( false );
             button_next.setBackgroundResource ( R.drawable.disable_next_question );
+        }
+    }
+
+    @Override
+    public void onOtherDialogDone(String otherText) {
+        System.out.println ( "NS_13th_VH.onOtherDialogDone" );
+        button_next.setEnabled ( true );
+        button_next.setBackgroundResource ( R.drawable.enable_next_question );
+        Answer answer = new Answer ();
+        answer.setChoice ( "g" );
+        answer.setOther ( otherText );
+        answers.add ( answer );
+    }
+
+    @Override
+    public void onHelpFullyClicked(int position, int helpfully_option) {
+        System.out.println ( "NS_13th_VH.onHelpFullyClicked" );
+        Iterator<Answer> answerIterator = answers.iterator ();
+        switch (position) {
+            case 0: {
+                while (answerIterator.hasNext ()) {
+                    Answer answer = answerIterator.next ();
+                    if (answer.getChoice () != null && answer.getChoice ().equals ( "a" )) {
+                        answer.setHelpfully ( helpfully_option );
+                        break;
+                    }
+                }
+                break;
+            }
+            case 1: {
+                while (answerIterator.hasNext ()) {
+                    Answer answer = answerIterator.next ();
+                    if (answer.getChoice () != null && answer.getChoice ().equals ( "b" )) {
+                        answer.setHelpfully ( helpfully_option );
+                        break;
+                    }
+                }
+
+                break;
+            }
+            case 2: {
+                while (answerIterator.hasNext ()) {
+                    Answer answer = answerIterator.next ();
+                    if (answer.getChoice () != null && answer.getChoice ().equals ( "c" )) {
+                        answer.setHelpfully ( helpfully_option );
+                        break;
+                    }
+                }
+
+                break;
+            }
+
+            case 3: {
+                while (answerIterator.hasNext ()) {
+                    Answer answer = answerIterator.next ();
+                    if (answer.getChoice () != null && answer.getChoice ().equals ( "d" )) {
+                        answer.setHelpfully ( helpfully_option );
+                        break;
+                    }
+                }
+                break;
+            }
+
+            case 4: {
+                while (answerIterator.hasNext ()) {
+                    Answer answer = answerIterator.next ();
+                    if (answer.getChoice () != null && answer.getChoice ().equals ( "e" )) {
+                        answer.setHelpfully ( helpfully_option );
+                        break;
+                    }
+                }
+                break;
+            }
+
+            case 5: {
+                while (answerIterator.hasNext ()) {
+                    Answer answer = answerIterator.next ();
+                    if (answer.getChoice () != null && answer.getChoice ().equals ( "f" )) {
+                        answer.setHelpfully ( helpfully_option );
+                        break;
+                    }
+                }
+                break;
+            }
+
+            case 6: {
+                while (answerIterator.hasNext ()) {
+                    Answer answer = answerIterator.next ();
+                    if (answer.getChoice () != null && answer.getChoice ().equals ( "g" )) {
+                        answer.setHelpfully ( helpfully_option );
+                        break;
+                    }
+                }
+                break;
+            }
         }
     }
 
@@ -341,12 +337,18 @@ public class NS_13th_VH extends RecyclerView.ViewHolder implements
     }
 
     @Override
-    public void onOtherDialogDone(String otherText) {
-        System.out.println ( "NS_13th_VH.onOtherDialogDone" );
-        Answer answer = new Answer ();
-        answer.setChoice ( "g" );
-        answer.setOther ( otherText );
-        answers.add ( answer );
+    public void onSingleItemSelected(View view, int i) {
+        System.out.println ( "NS_13th_VH.onSingleItemSelected" );
+        if( i == -1 ){
+            button_next.setEnabled ( false );
+            button_next.setBackgroundResource ( R.drawable.disable_next_question );
+        }else{
+            first.setClear ();
+            button_next.setEnabled ( true );
+            button_next.setBackgroundResource ( R.drawable.enable_next_question );
+            answer = new Answer ();
+            answer.setChoice ( "h" );
+        }
     }
 
     private class OnNextClickListener implements View.OnClickListener {
@@ -355,7 +357,17 @@ public class NS_13th_VH extends RecyclerView.ViewHolder implements
             System.out.println ( "NS_13th_VH.NS_13th_VH" );
             System.out.println ( "OnNextClickListener.onClick" );
             if( answers.size () > 0 ){
-                onThirteenNSVHListener.onNextClicked ( answers );
+                boolean hasError = false;
+                for (int i = 0; i < answers.size (); i++) {
+                    if (answers.get ( i ).getHelpfully () == -1) {
+                        first.showHelpfullyOptionError ( i, View.VISIBLE );
+                        hasError = !hasError;
+                        break;
+                    }
+                }
+                if( !hasError ){
+                    onThirteenNSVHListener.onNextClicked ( answers );
+                }
             }else{
                 onThirteenNSVHListener.onNextClicked ( answer );
             }

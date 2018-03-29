@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">myViewSelection</string>
+    <string name="error_text">Please choose one of these options</string>
+    <string name="helpfully_options_3rd">Not helping</string>
+    <string name="helpfully_options_2nd">Help a little</string>
+    <string name="helpfully_options_1st">Help a lot</string>
 </resources>

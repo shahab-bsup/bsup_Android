@@ -1,6 +1,7 @@
 package tk.medlynk.patient.android.Networking;
 
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
 import com.google.gson.Gson;
@@ -8,6 +9,9 @@ import com.google.gson.Gson;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.FollowUpSymptomsActivity;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_1.OnFirstFollowUpAnswerListener;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_10.OnTenthFollowUpAnswerListener;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_11.FUpS_11th_Question;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_11.FUpS_11th_VH;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_11.OnEleventFollowUphAnswerListener;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_13.OnThirteenFollowUpAnswerListener;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_15.OnFifteenFollowUpAnswerListener;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_2.OnSecondFollowUpAnswerListener;
@@ -1033,6 +1037,28 @@ public class MedlynkRequests {
         } );
     }
 
+    public static void newSymptomTwentyTwoQuestionAnswer(Context context, final OnTwentyTwoAnswerListener listener, int appointmentID, List<Answer> answers) {
+        System.out.println ( "MedlynkRequests.newSymptomTwentyTwoQuestionAnswer" );
+        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "22" );
+        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answers );
+        Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
+                .newSymptomAnswer ( appointmentID, Constants.NEW_SYMPTOM_ANSWER_BODY );
+        call.enqueue ( new Callback<NewSymptomAnswerResponse> () {
+            @Override
+            public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
+                if( response.isSuccessful () ){
+                    listener.onTwentyTwoAnswerSuccess ( response.body () );
+                }else{
+                    listener.onTwentyTwoAnswerFailure ();
+                }
+            }
+            @Override
+            public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
+                listener.onTwentyTwoAnswerFailure ();
+            }
+        } );
+    }
+
     public static void followUpSymptomFirstAnswer(Context context, final OnFirstFollowUpAnswerListener listener, int appointmentID, Answer answer) {
         System.out.println ( "MedlynkRequests.followUpSymptomFirstAnswer" );
         if( Constants.Context_Tag.equals(FollowUpSymptomsActivity.class.getSimpleName()) ){
@@ -1870,5 +1896,65 @@ public class MedlynkRequests {
                 }
             }
         });
+    }
+
+    public static void followUpEleventhQuestionAnswer(Context context,
+                                                      final OnEleventFollowUphAnswerListener listener,
+                                                      int appointmentID,
+                                                      List<Answer> answers) {
+        System.out.println ( "MedlynkRequests.followUpEleventhQuestionAnswer" );
+        if( Constants.Context_Tag.equals(FollowUpSymptomsActivity.class.getSimpleName()) ){
+            Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "11" );
+        }else{
+            Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "14" );
+        }
+        Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.ANSWER, answers );
+        Call<FollowUpSymptomResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
+                .followUpSymptomtAnswer( appointmentID, Constants.FOLLOW_UP_SYMPTOM_BODY);
+        call.enqueue ( new Callback<FollowUpSymptomResponse> () {
+            @Override
+            public void onResponse(Call<FollowUpSymptomResponse> call, Response<FollowUpSymptomResponse> response) {
+                if( response.isSuccessful () ){
+                    listener.onEleventhAnswerSuccess ( response.body () );
+                }else{
+                    listener.onEleventhAnswerFailure ();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FollowUpSymptomResponse> call, Throwable t) {
+                listener.onEleventhAnswerFailure ();
+            }
+        } );
+    }
+
+    public static void followUpEleventhQuestionAnswer(Context context,
+                                                      final OnEleventFollowUphAnswerListener listener,
+                                                      int appointmentID,
+                                                      Answer answer) {
+        System.out.println ( "MedlynkRequests.followUpEleventhQuestionAnswer" );
+        if( Constants.Context_Tag.equals(FollowUpSymptomsActivity.class.getSimpleName()) ){
+            Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "11" );
+        }else{
+            Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "14" );
+        }
+        Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.ANSWER, answer );
+        Call<FollowUpSymptomResponse> call = MedlynkRestAPI.getMainRetrofit ( context )
+                .followUpSymptomtAnswer( appointmentID, Constants.FOLLOW_UP_SYMPTOM_BODY);
+        call.enqueue ( new Callback<FollowUpSymptomResponse> () {
+            @Override
+            public void onResponse(Call<FollowUpSymptomResponse> call, Response<FollowUpSymptomResponse> response) {
+                if( response.isSuccessful () ){
+                    listener.onEleventhAnswerSuccess ( response.body () );
+                }else{
+                    listener.onEleventhAnswerFailure ();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FollowUpSymptomResponse> call, Throwable t) {
+                listener.onEleventhAnswerFailure ();
+            }
+        } );
     }
 }

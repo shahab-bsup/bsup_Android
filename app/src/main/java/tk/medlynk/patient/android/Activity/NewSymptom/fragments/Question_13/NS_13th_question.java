@@ -112,7 +112,7 @@ public class NS_13th_question extends Fragment implements
     @Override
     public void onThirteenAnswerSuccess(NewSymptomAnswerResponse response) {
         System.out.println ( "NS_13th_question.onThirteenAnswerSuccess" );
-        viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onThirteenQuestion ();
     }
 

@@ -32,7 +32,7 @@ public class Answer implements Serializable {
     private String other;
     @SerializedName ( "helpfully" )
     @Expose
-    private String helpfully;
+    private int helpfully = -1;
     @SerializedName("sub_choices")
     @Expose
     private List<String> subChoices;
@@ -73,11 +73,11 @@ public class Answer implements Serializable {
         this.subChoice = subChoice;
     }
 
-    public String getHelpfully() {
+    public int getHelpfully() {
         return helpfully;
     }
 
-    public void setHelpfully(String helpfully) {
+    public void setHelpfully(int helpfully) {
         this.helpfully = helpfully;
     }
 
