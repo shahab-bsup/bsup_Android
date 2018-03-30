@@ -53,6 +53,7 @@ public class Refill_seventh_VH extends ViewHolder implements OnSingleItemSelecte
         this.question.setText(R.string.refill_seventh_question);
         this.button_next = (Button) itemView.findViewById(R.id.btnNextQuestion);
         this.button_next.setOnClickListener(new OnNextClickListener());
+        button_next.setEnabled ( false );
         this.button_skip = (Button) itemView.findViewById(R.id.btnSkipQuestion);
         this.button_skip.setOnClickListener(new OnSkipClickListener());
         this.first = (ViewSelection) itemView.findViewById(R.id.viewSelectionChoices);

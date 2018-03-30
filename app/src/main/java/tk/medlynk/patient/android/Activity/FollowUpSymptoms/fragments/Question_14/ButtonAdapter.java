@@ -109,7 +109,6 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.VH> {
                                 button.setBackgroundDrawable ( context.getResources ().getDrawable ( R.drawable.selected_state ) );
                                 button.setTextColor ( selected_color );
                                 optionClicked();
-
                             }else{
                                 subChoices.remove ( "2" );
                                 button.setBackgroundDrawable ( context.getResources ().getDrawable ( R.drawable.unselected_state ) );

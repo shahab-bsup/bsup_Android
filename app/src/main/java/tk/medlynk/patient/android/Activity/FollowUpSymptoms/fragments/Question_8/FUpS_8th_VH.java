@@ -37,6 +37,7 @@ public class FUpS_8th_VH extends RecyclerView.ViewHolder implements ViewSelectio
         second_question.setText ( itemView.getContext ().getString ( R.string.follow_up_symptoms_8th_question ) );
         button_next = itemView.findViewById ( R.id.btnNextQuestion );
         button_next.setOnClickListener ( new OnNextButtonClickListener () );
+        button_next.setEnabled ( false );
         button_skip = itemView.findViewById ( R.id.btnSkipQuestion );
         button_skip.setOnClickListener ( new OnSkipClickListener () );
         choice_numbers = itemView.findViewById ( R.id.viewSelectionChoiceNumbers );

@@ -15,13 +15,14 @@ import java.util.Iterator;
 import java.util.List;
 
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_14.ButtonAdapter;
+import tk.medlynk.patient.android.Essentials.DialogueBuilder;
 import tk.medlynk.patient.android.Model.Answer;
 
 /**
  * Created by Shahab on 3/22/2018.
  */
 
-public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelection.OnMultiItemSelectedListener, ViewSelection.OnClearStateListener, ViewSelection.OnSingleItemSelectedListener, ButtonAdapter.OnOptionsClickListener {
+public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelection.OnMultiItemSelectedListener, ViewSelection.OnClearStateListener, ViewSelection.OnSingleItemSelectedListener, ButtonAdapter.OnOptionsClickListener, DialogueBuilder.OnOtherDialogListener {
 
     private final String[] string_choices;
     private final Button button_next;
@@ -38,6 +39,8 @@ public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelectio
     private final ButtonAdapter firstButtonAdapter;
     private final ButtonAdapter secondButtonAdapter;
     private OnFURFirstVHListener onFURFirstVHListener;
+    private boolean isChoiceCExisted;
+    private boolean isChoiceDExisted;
 
     public FUpR_1st_VH(View itemView) {
         super ( itemView );
@@ -159,6 +162,15 @@ public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelectio
         System.out.println ( "FUpR_1st_VH.onSingleItemSelected" );
         switch (i){
             case -1:{
+                Iterator<Answer> answerIterator = answers.iterator ();
+                while (answerIterator.hasNext ()){
+                    Answer answer = answerIterator.next ();
+                    if( answer.getChoice () != null && answer.getChoice ().equals ( "e" ) ){
+                        answerIterator.remove ();
+                        break;
+                    }
+                }
+
                 if( answers.size () == 0 ){
                     button_next.setEnabled ( false );
                     button_next.setBackgroundResource ( R.drawable.disable_next_question );
@@ -166,52 +178,26 @@ public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelectio
                 break;
             }
             case 0:{
-                Answer answer = new Answer ();
-                answer.setChoice ( "e" );
-                answers.add ( answer );
-                if( answers.size () == 1 ){
-                    button_next.setEnabled ( true );
-                    button_next.setBackgroundResource ( R.drawable.enable_next_question );
-                }
+                DialogueBuilder dialogueBuilder = new DialogueBuilder ( itemView.getContext (),
+                        "other");
+                dialogueBuilder.setOnDialogListener ( this );
+                dialogueBuilder.show ();
 
                 break;
             }
-            case 1:{
-                answer.setChoice ( "f" );
-                button_next.setEnabled ( true );
-                button_next.setBackgroundResource ( R.drawable.enable_next_question );
-                first.setClear ();
-                imaging_button.setBackgroundResource ( R.drawable.answer_not_selected );
-                imaging_button.setTextColor ( white_color );
-                cardiac_button.setBackgroundResource ( R.drawable.answer_not_selected );
-                cardiac_button.setTextColor ( white_color );
-                firstButtonAdapter.clearDataSet ();
-                secondButtonAdapter.clearDataSet ();
 
-                break;
-            }
         }
     }
 
     @Override
     public void onImagingOptionsClicked() {
         System.out.println ( "FUpR_1st_VH.onImagingOptionsClicked" );
-        Iterator<Answer> answerIterator = answers.iterator ();
-        second.setClear ();
-        boolean iExisted = false;
-        while (answerIterator.hasNext ()){
-            Answer answer = answerIterator.next ();
-            if(answer.getChoice () != null &&
-                    answer.getChoice ().equals ( "c" )){
-                iExisted = !iExisted;
-                break;
-            }
-        }
-        if( !iExisted ){
+        if( !isChoiceCExisted){
             imaging_button.setBackgroundResource ( R.drawable.answer_selected );
             imaging_button.setTextColor ( Color.parseColor ( "#000000" ) );
             Answer answer = new Answer ();
             answer.setChoice ( "c" );
+            isChoiceCExisted = true;
             answers.add ( answer );
             if( answers.size () == 1 ){
                 button_next.setEnabled ( true );
@@ -223,26 +209,36 @@ public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelectio
     @Override
     public void onCardiacOptionsClicked() {
         System.out.println ( "FUpR_1st_VH.onCardiacOptionsClicked" );
-        second.setClear ();
-        Iterator<Answer> answerIterator = answers.iterator ();
-        boolean iExisted = false;
-        while (answerIterator.hasNext ()){
-            Answer answer = answerIterator.next ();
-            if(answer.getChoice () != null && answer.getChoice ().equals ( "d" )){
-                iExisted = !iExisted;
-                break;
-            }
-        }
-        if( !iExisted ){
+        if( !isChoiceDExisted ){
             cardiac_button.setBackgroundResource ( R.drawable.answer_selected );
             cardiac_button.setTextColor ( Color.parseColor ( "#000000" ) );
             Answer answer = new Answer ();
             answer.setChoice ( "d" );
+            isChoiceDExisted = true;
             answers.add ( answer );
             if( answers.size () == 1 ){
                 button_next.setEnabled ( true );
                 button_next.setBackgroundResource ( R.drawable.enable_next_question );
             }
+        }
+    }
+
+    @Override
+    public void onOtherDialogDone(String otherText) {
+        System.out.println ( "FUpR_1st_VH.onOtherDialogDone" );
+        if( otherText.length () > 0 ){
+            Answer answer = new Answer ();
+            answer.setChoice ( "e" );
+            answer.setOther ( otherText );
+            answers.add ( answer );
+            button_next.setEnabled ( true );
+            button_next.setBackgroundResource ( R.drawable.enable_next_question );
+        } else {
+            second.getButtons ().get ( 0 ).setBackgroundResource ( R.drawable.answer_not_selected );
+            second.getButtons ().get ( 0 ).setTextColor ( itemView.
+                    getContext ().
+                    getResources ().
+                    getColor ( R.color.white ) );
         }
     }
 
@@ -269,8 +265,6 @@ public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelectio
                     }
                 }
                 onFURFirstVHListener.onNextClick ( answers );
-            }else{
-                onFURFirstVHListener.onNextClick ( answer );
             }
         }
     }
@@ -293,7 +287,6 @@ public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelectio
     public interface OnFURFirstVHListener {
         void onNextClick(Answer answer);
         void onSkipClicked();
-
         void onNextClick(List<Answer> answers);
     }
 
@@ -308,6 +301,7 @@ public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelectio
                 if( answer.getChoice () != null &&
                         answer.getChoice ().equals ( "d" ) ){
                     answerIterator.remove ();
+                    isChoiceDExisted = false;
                     cardiac_button.setBackgroundResource ( R.drawable.answer_not_selected );
                     cardiac_button.setTextColor ( white_color );
                     isExisted = !isExisted;
@@ -320,6 +314,7 @@ public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelectio
                 cardiac_button.setTextColor ( Color.parseColor ( "#000000" ) );
                 Answer answer = new Answer ();
                 answer.setChoice ( "d" );
+                isChoiceDExisted = true;
                 answers.add ( answer );
                 if( answers.size () == 1 ){
                     button_next.setEnabled ( true );
@@ -343,6 +338,7 @@ public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelectio
                 if( answer.getChoice () != null &&
                         answer.getChoice ().equals ( "c" ) ){
                     answerIterator.remove ();
+                    isChoiceCExisted = false;
                     imaging_button.setBackgroundResource ( R.drawable.answer_not_selected );
                     imaging_button.setTextColor ( white_color );
                     firstButtonAdapter.clearDataSet ();
@@ -355,6 +351,7 @@ public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelectio
                 imaging_button.setTextColor ( Color.parseColor ( "#000000" ) );
                 Answer answer = new Answer ();
                 answer.setChoice ( "c" );
+                isChoiceCExisted = true;
                 answers.add ( answer );
                 if( answers.size () == 1 ){
                     button_next.setEnabled ( true );

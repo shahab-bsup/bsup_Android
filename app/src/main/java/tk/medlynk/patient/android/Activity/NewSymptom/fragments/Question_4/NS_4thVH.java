@@ -35,6 +35,7 @@ public class NS_4thVH extends RecyclerView.ViewHolder implements ViewSelection.O
         question.setText ( R.string.new_symptom_fourth_question );
         button_next = itemView.findViewById ( R.id.btnNextQuestion );
         button_next.setOnClickListener ( new OnNextClickListener() );
+        button_next.setEnabled ( false );
         button_skip = itemView.findViewById ( R.id.btnSkipQuestion );
         button_skip.setOnClickListener ( new OnSkipClickListener() );
         choiceNumbers = itemView.findViewById ( R.id.viewSelectionChoiceNumbers );

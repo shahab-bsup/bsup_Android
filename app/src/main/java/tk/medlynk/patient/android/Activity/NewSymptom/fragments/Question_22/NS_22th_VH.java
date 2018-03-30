@@ -42,6 +42,7 @@ public class NS_22th_VH extends RecyclerView.ViewHolder implements
         button_next = view.findViewById ( R.id.btnNextQuestion );
         button_next.setOnClickListener ( new OnNextClickListener () );
         button_next.setEnabled ( false );
+        button_next.setEnabled ( false );
         button_skip = view.findViewById ( R.id.btnSkipQuestion );
         button_skip.setOnClickListener ( new OnSkipClickListener () );
         first = view.findViewById ( R.id.viewSelectionFirst );

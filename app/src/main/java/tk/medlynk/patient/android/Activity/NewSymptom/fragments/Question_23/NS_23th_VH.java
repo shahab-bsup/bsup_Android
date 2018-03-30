@@ -48,6 +48,7 @@ public class NS_23th_VH extends RecyclerView.ViewHolder implements
         question.setText ( R.string.new_symptom_twenty2_question );
         button_next = view.findViewById ( R.id.btnNextQuestion );
         button_next.setOnClickListener ( new OnNextClickListener() );
+        button_next.setEnabled ( false );
         button_skip = view.findViewById ( R.id.btnSkipQuestion );
         button_skip.setOnClickListener ( new OnSkipClickListener() );
         choice = view.findViewById ( R.id.viewSelectionChoices );
