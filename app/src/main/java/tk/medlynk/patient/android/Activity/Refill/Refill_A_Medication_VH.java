@@ -15,7 +15,7 @@ public class Refill_A_Medication_VH extends ViewHolder {
     private final TextView toolbar_text;
 
     public interface Refill_A_Medication_ClickListener {
-        void OnStartRefillClicked();
+        void onBackButtonClicked();
     }
 
     public Refill_A_Medication_VH(View itemView) {
@@ -30,7 +30,7 @@ public class Refill_A_Medication_VH extends ViewHolder {
     class OnBackButtonClickListener implements OnClickListener {
 
         public void onClick(View view) {
-            clickListener.OnStartRefillClicked ();
+            clickListener.onBackButtonClicked();
         }
     }
 

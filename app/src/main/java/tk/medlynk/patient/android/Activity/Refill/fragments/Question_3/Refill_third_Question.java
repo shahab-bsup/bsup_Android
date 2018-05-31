@@ -17,7 +17,7 @@ import com.neweraandroid.demo.R;
 
 public class Refill_third_Question extends Fragment implements OnRefillThirdVHListener, MotherCallback {
 
-    public static final String TAG = Refill_third_Question.class.getSimpleName();
+    public static final String TAG = "Refill_third_Question";
     private onRefillThirdQuestionInteractionListener mListener;
     private Refill_third_VH viewHolder;
 

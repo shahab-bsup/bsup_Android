@@ -84,6 +84,7 @@ public class NewSymptomActivity extends AppCompatActivity implements
         CURRENT_FRAGMENT = NS_1th_question.TAG;
         if (getSupportFragmentManager ().
                 findFragmentByTag ( NS_1th_question.TAG ) == null) {
+
             FragmentTransaction fragmentTransaction = getSupportFragmentManager ()
                     .beginTransaction ();
             fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )

@@ -16,7 +16,7 @@ import tk.medlynk.patient.android.Model.SymptomResponse;
 import tk.medlynk.patient.android.Networking.MedlynkRequests;
 
 public class Refill_fifth_Question extends Fragment implements Refill_fifth_VH.OnRefillFifthVHListener, MotherCallback {
-    public static final String TAG = Refill_fifth_Question.class.getSimpleName();
+    public static final String TAG = "Refill_fifth_Question";
     private onRefillFifthQuestionInteractionListener mListener;
     private Refill_fifth_VH viewHolder;
 

@@ -16,7 +16,7 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
 import com.neweraandroid.demo.R;
 
 public class Refill_fourth_Question extends Fragment implements OnRefillFourthVHListener, MotherCallback {
-    public static final String TAG = Refill_fourth_Question.class.getSimpleName();
+    public static final String TAG = "Refill_fourth_Question";
     private onRefillFourthQuestionInteractionListener mListener;
     private Refill_fourth_VH viewHolder;
 

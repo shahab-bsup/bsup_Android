@@ -20,7 +20,7 @@ import com.neweraandroid.demo.R;
 public class Refill_first_Question extends Fragment implements
         OnRefillFirstQuestionClickListener,
         MotherCallback {
-    public static final String TAG = Refill_first_Question.class.getSimpleName();
+    public static final String TAG = "Refill_first_Question";
     private onRefillFirstQuestionInteractionListener mListener;
     private Refill_first_VH viewHolder;
 
