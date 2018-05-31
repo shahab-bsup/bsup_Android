@@ -9,4 +9,5 @@ import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
 public interface OnEleventhAnswerListener {
     void onEleventhAnswerSuccess(NewSymptomAnswerResponse response);
     void onEleventhAnswerFailure();
+    void onUnauthorized();
 }

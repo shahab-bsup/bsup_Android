@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Demo.iml" filepath="$PROJECT_DIR$/Demo.iml" />
-      <module fileurl="file://C:\Users\user\AndroidStudioProjects\Demo\ViewModelLessBsup.iml" filepath="C:\Users\user\AndroidStudioProjects\Demo\ViewModelLessBsup.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/myviewselection/myviewselection.iml" filepath="$PROJECT_DIR$/myviewselection/myviewselection.iml" />
     </modules>

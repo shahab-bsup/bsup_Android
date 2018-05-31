@@ -30,7 +30,7 @@ public class NS_23th_question extends Fragment implements
         NS_23th_VH.On23QuestionVHListener,
         OnTwentyThreeAnswerListener {
 
-    public static final String TAG = NS_23th_question.class.getSimpleName ();
+    public static final String TAG = "NS_23th_question";
 
     private OnNewSymptomTwenty3QuestionListener mListener;
     private NS_23th_VH viewHolder;
@@ -120,6 +120,12 @@ public class NS_23th_question extends Fragment implements
     public void onTwentyThreeAnswerFailure() {
         System.out.println ( "NS_23th_question.onTwentyThreeAnswerFailure" );
         Toast.makeText ( getActivity (), "try again later!", Toast.LENGTH_SHORT ).show ();
+    }
+
+    @Override
+    public void onUnauthorized() {
+        System.out.println ( "NS_23th_question.onUnauthorized" );
+
     }
 
 

@@ -27,9 +27,10 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
  * create an instance of this fragment.
  */
 public class NS_11th_question extends Fragment implements
-        OnEleventhAnswerListener, NS_11th_VH.OnEleventhNSVHListener {
+        OnEleventhAnswerListener,
+        NS_11th_VH.OnEleventhNSVHListener {
 
-    public static final String TAG = NS_11th_question.class.getSimpleName ();
+    public static final String TAG = "NS_11th_question";
 
     private OnNewSymptomEleventhQuestionListener mListener;
 
@@ -95,6 +96,12 @@ public class NS_11th_question extends Fragment implements
         System.out.println ( "NS_11th_question.onEleventhAnswerFailure" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         Toast.makeText ( getActivity (), "try again later!", Toast.LENGTH_SHORT ).show ();
+    }
+
+    @Override
+    public void onUnauthorized() {
+        System.out.println ( "NS_11th_question.onUnauthorized" );
+
     }
 
     @Override

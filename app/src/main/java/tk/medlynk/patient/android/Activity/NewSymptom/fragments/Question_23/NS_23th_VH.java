@@ -23,7 +23,7 @@ import tk.medlynk.patient.android.Model.Medication;
 
 public class NS_23th_VH extends RecyclerView.ViewHolder implements
         ViewSelection.OnSingleItemSelectedListener,
-        MedicationsAdapter.OnEmptyMedicationListener {
+        MedicationsAdapter.OnEmptyMedicationListener, ViewSelection.OnClearStateListener {
 
     private View question_view;
     private Button button_next;
@@ -54,6 +54,7 @@ public class NS_23th_VH extends RecyclerView.ViewHolder implements
         choice = view.findViewById ( R.id.viewSelectionChoices );
         choice.setTextToButtons ( view.getContext ().getResources ().getString ( R.string.none ), 0 );
         choice.setOnSingleItemSelectedListener ( this );
+        choice.setOnClearStateListener ( this );
         add_a_medication = itemView.findViewById ( R.id.add_medication );
         add_a_medication.setOnClickListener ( new OnAddAMedicationClicked () );
         medications = itemView.findViewById ( R.id.recycler_view_medications );
@@ -92,6 +93,12 @@ public class NS_23th_VH extends RecyclerView.ViewHolder implements
         this.progressBar.setVisibility ( status );
     }
 
+    @Override
+    public void onClearState(View view) {
+        System.out.println ( "NS_23th_VH.onClearState" );
+        answer = new Answer ();
+    }
+
     public interface On23QuestionVHListener {
         void onNextClicked(Answer answer);
         void onNextClicked(List<Medication> answers);
@@ -102,6 +109,7 @@ public class NS_23th_VH extends RecyclerView.ViewHolder implements
         @Override
         public void onClick(View view) {
             System.out.println ( "OnAddAMedicationClicked.onClick" );
+            choice.setClear ();
             medicationAdapter.setMedications ( new Medication () );
             if( medicationAdapter.getDataSet ().size () == 1 ){
                 button_next.setEnabled ( true );

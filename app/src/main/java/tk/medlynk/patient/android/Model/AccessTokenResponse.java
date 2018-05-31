@@ -9,17 +9,20 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class PrimaryTokenResponse implements Serializable
-{
+public class AccessTokenResponse implements Serializable {
+
     @SerializedName("token_type")
     @Expose
     private String tokenType;
+
     @SerializedName("expires_in")
     @Expose
     private Integer expiresIn;
+
     @SerializedName("access_token")
     @Expose
     private String accessToken;
+
     @SerializedName ( "refresh_token" )
     @Expose
     private String refreshToken;
@@ -31,8 +34,6 @@ public class PrimaryTokenResponse implements Serializable
     public void setRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
     }
-
-    private final static long serialVersionUID = 8040511778439194827L;
 
     public String getTokenType() {
         return tokenType;

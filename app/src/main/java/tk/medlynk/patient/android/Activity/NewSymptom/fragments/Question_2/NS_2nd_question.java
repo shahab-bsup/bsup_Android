@@ -27,7 +27,7 @@ public class NS_2nd_question extends Fragment implements
         OnSecondAnswerListener,
         NS_2nd_VH.OnSecondNSVHListener {
 
-    public static final String TAG = NS_2nd_question.class.getSimpleName ();
+    public static final String TAG = "NS_2nd_question";
     private OnNewSymptomSecondQuestionListener mListener;
     private NS_2nd_VH viewHolder;
 
@@ -89,6 +89,12 @@ public class NS_2nd_question extends Fragment implements
     public void onSecondAnswerFailure() {
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         Toast.makeText ( getActivity (), "try again!", Toast.LENGTH_SHORT ).show ();
+    }
+
+    @Override
+    public void onUnauthorized() {
+        System.out.println ( "NS_2nd_question.onUnauthorized" );
+
     }
 
     @Override

@@ -28,7 +28,7 @@ public class NS_20th_question extends Fragment implements
         NS_20th_VH.OnTwentyNSVHListener,
         OnTwentyAnswerListener {
 
-    public static final String TAG = NS_20th_question.class.getSimpleName ();
+    public static final String TAG = "NS_20th_question";
 
     private OnNewSymptomTwentyQuestionListener mListener;
     private NS_20th_VH viewHolder;
@@ -112,6 +112,12 @@ public class NS_20th_question extends Fragment implements
         System.out.println ( "NS_20th_question.onTwentyAnswerFailure" );
         viewHolder.setProgressVisibilityStatus ( View.GONE );
         Toast.makeText(getActivity(), "try again later!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onUnauthorized() {
+        System.out.println ( "NS_20th_question.onUnauthorized" );
+
     }
 
     public interface OnNewSymptomTwentyQuestionListener {

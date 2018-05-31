@@ -8,6 +8,8 @@ import android.widget.Button;
 
 import com.neweraandroid.demo.R;
 
+import tk.medlynk.patient.android.MyApplication;
+
 public class ConfirmationActivity extends AppCompatActivity {
 
     Button button;
@@ -16,6 +18,5 @@ public class ConfirmationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_confirmation );
-
     }
 }

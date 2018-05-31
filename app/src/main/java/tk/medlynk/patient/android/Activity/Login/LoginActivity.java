@@ -19,7 +19,7 @@ import tk.medlynk.patient.android.Constants;
 import tk.medlynk.patient.android.CustomViews.SnackController;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
 import tk.medlynk.patient.android.Essentials.Utils;
-import tk.medlynk.patient.android.Model.PrimaryTokenResponse;
+import tk.medlynk.patient.android.Model.AccessTokenResponse;
 import tk.medlynk.patient.android.Networking.MedlynkRequests;
 import com.neweraandroid.demo.R;
 
@@ -66,9 +66,6 @@ public class LoginActivity extends AppCompatActivity implements
             String data = String.valueOf ( appLinkData );
             String[] strings = data.split ( "/" );
             System.out.println (strings.length);
-            for (int i = 0; i < strings.length; i++) {
-                System.out.println (strings[i]);
-            }
         }
     }
 
@@ -83,7 +80,9 @@ public class LoginActivity extends AppCompatActivity implements
                 if(  isEmailValid && isPassWordValid){
                     /*TODO send the request to server!!!*/
                     sharedPreferenceManager.setEmail ( email.getText ().toString () );
-                    MedlynkRequests.getPrimaryAccessToken ( LoginActivity.this, email.getText ().toString (), password.getText ().toString () );
+                    sharedPreferenceManager.setPassWord(password.getText ().toString ());
+                    MedlynkRequests.getAccessToken ( LoginActivity.this, email.getText ().toString (),
+                            password.getText ().toString () );
                 }else if ( !isEmailValid && !isPassWordValid ){
                     email.setError ( "Email is Not Valid!" );
                     password.setError ( "PassWord must be at least 6 characters!" );
@@ -120,12 +119,11 @@ public class LoginActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onPrimaryAccessTokenSuccess(PrimaryTokenResponse response) {
+    public void onPrimaryAccessTokenSuccess(AccessTokenResponse response) {
         SharedPreferenceManager manager = new SharedPreferenceManager ( LoginActivity.this );
         manager.setPrimaryToken ( response.getAccessToken () );
         manager.setPrimaryTokenType ( response.getTokenType () );
-        //TODO edit the expiretokentime
-        manager.setPrimaryExpireToken ( 600000000 );
+        manager.setPrimaryExpireToken ( response.getExpiresIn () );
         manager.setRefreshToken ( response.getRefreshToken () );
         startActivity ( new Intent ( LoginActivity.this, SearchActivity.class ) );
         finish ();

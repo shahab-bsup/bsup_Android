@@ -28,7 +28,7 @@ public class NS_18th_question extends Fragment implements
         OnEighteenAnswerListener,
         NS_18th_VH.OnEighteenNSVHListener {
 
-    public static final String TAG = NS_19th_question.class.getSimpleName ();
+    public static final String TAG = "NS_18th_question";
 
     private OnNewSymptomEighteenQuestionListener mListener;
 
@@ -97,6 +97,12 @@ public class NS_18th_question extends Fragment implements
         System.out.println ( "NS_18th_question.onEighteenAnswerFailure" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         Toast.makeText ( getActivity (), "tra again later!", Toast.LENGTH_SHORT ).show ();
+    }
+
+    @Override
+    public void onUnauthorized() {
+        System.out.println ( "NS_18th_question.onUnauthorized" );
+
     }
 
     @Override

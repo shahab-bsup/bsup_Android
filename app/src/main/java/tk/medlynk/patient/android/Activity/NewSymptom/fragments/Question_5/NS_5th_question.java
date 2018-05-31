@@ -29,7 +29,7 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
 public class NS_5th_question extends Fragment implements
          OnFifthAnswerListener, NS_5th_VH.OnFifthNSVHListener {
 
-    public static final String TAG = NS_5th_question.class.getSimpleName ();
+    public static final String TAG = "NS_5th_question";
 
     private OnNewSymptomFifthQuestionListener mListener;
 
@@ -92,6 +92,12 @@ public class NS_5th_question extends Fragment implements
         System.out.println ( "NS_5th_question.onFifthAnswerFailure" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         Toast.makeText ( getActivity (), "try again later!", Toast.LENGTH_SHORT ).show ();
+    }
+
+    @Override
+    public void onUnauthorized() {
+        System.out.println ( "NS_5th_question.onUnauthorized" );
+
     }
 
     @Override

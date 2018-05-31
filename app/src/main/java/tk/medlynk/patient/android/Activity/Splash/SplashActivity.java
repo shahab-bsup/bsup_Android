@@ -37,7 +37,9 @@ public class SplashActivity extends AppCompatActivity implements
             //Check for the connectivity of the device!
             if(!Utils.isDeviceConnected ( this )){
                 SnackController.getInstance ()
-                        .init ( this, R.string.no_intenet_connection, Snackbar.LENGTH_INDEFINITE )
+                        .init ( this,
+                                R.string.no_intenet_connection,
+                                Snackbar.LENGTH_INDEFINITE )
                         .setAction ( R.string.try_again , this ).showSnackBar ();
             }else{
                 //First check for nullity of the Token...
@@ -47,12 +49,12 @@ public class SplashActivity extends AppCompatActivity implements
                 if( manager.getInitialToken () == null ){
                     MedlynkRequests.getInitialToken ( this );
                 }else if( manager.getPrimaryToken () == null ) {
-                    System.out.println ("initial token = " + manager.getInitialToken ());
                     new Timer()
                             .schedule ( new TimerTask () {
                                 @Override
                                 public void run() {
-                                    startActivity ( new Intent ( SplashActivity.this, LoginActivity.class ) );
+                                    startActivity ( new Intent ( SplashActivity.this,
+                                            LoginActivity.class ) );
                                 }
                             }, 2000 );
                 } else if(Utils.isPrimaryTokenExpired ( this )){
@@ -63,7 +65,8 @@ public class SplashActivity extends AppCompatActivity implements
                                 .schedule ( new TimerTask () {
                                     @Override
                                     public void run() {
-                                        startActivity ( new Intent ( SplashActivity.this, SearchActivity.class ) );
+                                        startActivity ( new Intent ( SplashActivity.this,
+                                                SearchActivity.class ) );
                                     }
                                 }, 3000 );
                     }

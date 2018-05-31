@@ -27,7 +27,7 @@ public class NS_4th_question extends Fragment implements
         OnFourthAnswerListener,
         NS_4thVH.OnFourthNSVHListener{
 
-    public static final String TAG = NS_4th_question.class.getSimpleName ();
+    public static final String TAG = "NS_4th_question";
 
     private OnNewSymptomFourthQuestionListener mListener;
     private NS_4thVH viewHolder;
@@ -90,6 +90,12 @@ public class NS_4th_question extends Fragment implements
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         System.out.println ( "NS_4th_question.onFourthAnswerFailure" );
         Toast.makeText ( getActivity (), "try again later!", Toast.LENGTH_SHORT ).show ();
+    }
+
+    @Override
+    public void onUnauthorized() {
+        System.out.println ( "NS_4th_question.onUnauthorized" );
+
     }
 
     @Override

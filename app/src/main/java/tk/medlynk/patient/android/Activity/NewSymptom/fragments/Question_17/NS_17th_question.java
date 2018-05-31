@@ -31,7 +31,7 @@ public class NS_17th_question extends Fragment implements
         OnSeventeenAnswerListener,
         NS_17th_VH.OnSeventeenNSVHListener {
 
-    public static final String TAG = NS_17th_question.class.getSimpleName ();
+    public static final String TAG = "NS_17th_question";
 
     private OnNewSymptomSeventeenQuestionListener mListener;
 
@@ -96,6 +96,12 @@ public class NS_17th_question extends Fragment implements
         System.out.println ( "NS_17th_question.onSeventeenAnswerFailure" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onSeventeenQuestion ();
+    }
+
+    @Override
+    public void onUnauthorized() {
+        System.out.println ( "NS_17th_question.onUnauthorized" );
+
     }
 
     @Override

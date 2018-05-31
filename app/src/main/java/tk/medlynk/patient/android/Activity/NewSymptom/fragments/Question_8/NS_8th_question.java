@@ -33,7 +33,7 @@ public class NS_8th_question extends Fragment implements
         OnEighthAnswerListener,
         NS_8th_VH.OnEighthNSVHListener {
 
-    public static final String TAG = NS_8th_question.class.getSimpleName ();
+    public static final String TAG = "NS_8th_question";
 
     private OnNewSymptomEighthQuestionListener mListener;
     private NS_8th_VH viewHolder;
@@ -97,6 +97,11 @@ public class NS_8th_question extends Fragment implements
         System.out.println ( "NS_8th_question.onEightAnswerFailure" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onEightQuestion ();
+    }
+
+    @Override
+    public void onUnauthorized() {
+        System.out.println ( "NS_8th_question.onUnauthorized" );
     }
 
     @Override

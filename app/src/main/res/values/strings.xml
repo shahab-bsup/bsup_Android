@@ -246,5 +246,15 @@
     <string name="how_helpful_medication_helps_a_little">Helps a little</string>
     <string name="how_helpful_medication_not_helping">Not helping</string>
     <string name="list_side_effect_medication">List any side effects you think you have had from this medication:</string>
+    <string name="end_of_question_set_title">Congratulations! You have completed this question set!</string>
+    <string name="end_of_question_set_body">Your responses were successfully submitted, Please note for security reasons, this information will automatically <b>deleted</b> after X days. Please select one of the following options:</string>
+    <string name="go_to_first_unanswered">TAKE ME TO FIRST UNANSWERED QUESTION</string>
+    <string name="new_question_set">NEW QUESTION SET</string>
+    <string name="progress_page">PROGRESS PAGE</string>
+    <string name="print">PRINT</string>
+    <string name="new_refill">new refill</string>
+    <string name="what_tp_print">Please select what to print:</string>
+    <string name="print_this_question_set">print this question set</string>
+    <string name="print_whole_appointment">print the whole appointment</string>
 
 </resources>

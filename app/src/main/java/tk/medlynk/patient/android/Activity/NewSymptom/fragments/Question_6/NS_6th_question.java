@@ -30,7 +30,7 @@ public class NS_6th_question extends Fragment implements
         OnSixthAnswerListener,
         NS_6th_VH.OnSixthNSVHListener {
 
-    public static final String TAG = NS_6th_question.class.getSimpleName ();
+    public static final String TAG = "NS_6th_question";
 
     private OnNewSymptomSixthQuestionListener mListener;
 
@@ -94,6 +94,12 @@ public class NS_6th_question extends Fragment implements
     public void onSixthAnswerFailure() {
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         System.out.println ( "NS_6th_question.onSixthAnswerFailure" );
+    }
+
+    @Override
+    public void onUnauthorized() {
+        System.out.println ( "NS_6th_question.onUnauthorized" );
+
     }
 
     @Override

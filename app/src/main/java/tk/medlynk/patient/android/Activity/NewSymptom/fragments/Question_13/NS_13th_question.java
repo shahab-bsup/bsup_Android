@@ -27,7 +27,7 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
 public class NS_13th_question extends Fragment implements
         NS_13th_VH.OnThirteenNSVHListener, OnThirteenAnswerListener {
 
-    public final static String TAG = NS_13th_question.class.getSimpleName ();
+    public final static String TAG = "NS_13th_question";
 
     private OnNewSymptomThirteenQuestionListener mListener;
     private NS_13th_VH viewHolder;
@@ -121,6 +121,12 @@ public class NS_13th_question extends Fragment implements
         System.out.println ( "NS_13th_question.onThirteenAnswerFailure" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onThirteenQuestion ();
+    }
+
+    @Override
+    public void onUnauthorized() {
+        System.out.println ( "NS_13th_question.onUnauthorized" );
+
     }
 
     public interface OnNewSymptomThirteenQuestionListener {

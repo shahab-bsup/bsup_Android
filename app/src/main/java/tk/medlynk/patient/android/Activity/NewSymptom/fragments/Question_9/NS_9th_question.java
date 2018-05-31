@@ -30,9 +30,10 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
  * create an instance of this fragment.
  */
 public class NS_9th_question extends Fragment implements
-        OnNinthAnswerListener, NS_9th_VH.OnNinthNSVHListener {
+        OnNinthAnswerListener,
+        NS_9th_VH.OnNinthNSVHListener {
 
-    public static final String TAG = NS_9th_question.class.getSimpleName ();
+    public static final String TAG = "NS_9th_question";
 
     private OnNewSymptomNinthQuestionListener mListener;
 
@@ -100,6 +101,12 @@ public class NS_9th_question extends Fragment implements
         System.out.println ( "NS_9th_question.onNinthAnswerFailure" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onNinthQuestion ();
+
+    }
+
+    @Override
+    public void onUnauthorized() {
+        System.out.println ( "NS_9th_question.onUnauthorized" );
 
     }
 

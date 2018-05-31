@@ -29,7 +29,8 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
 public class NS_21th_question extends Fragment implements
         NS_21th_VH.On21thQuestionVHListener,
         OnTwentyOneAnswerListener {
-    public static final String TAG = NS_22th_question.class.getSimpleName();
+
+    public static final String TAG = "NS_21th_question";
 
     private OnNewSymptomTwenty1QuestionListener mListener;
 
@@ -113,6 +114,12 @@ public class NS_21th_question extends Fragment implements
         System.out.println("NS_21th_question.onTwentyOneAnswerFailure");
         viewHolder.setProgressBarVisibilityStatus(View.GONE);
         mListener.onTwenty1Question();
+    }
+
+    @Override
+    public void onUnauthorized() {
+        System.out.println ( "NS_21th_question.onUnauthorized" );
+
     }
 
     public interface OnNewSymptomTwenty1QuestionListener {

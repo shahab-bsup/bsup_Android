@@ -31,7 +31,7 @@ public class NS_16th_question extends Fragment implements
         OnSixteenAnswerListener,
         NS_16th_VH.OnSixteenNSVHListener {
 
-    public static final String TAG = NS_16th_question.class.getSimpleName ();
+    public static final String TAG = "NS_16th_question";
 
 
     private OnNewSymptomSixteenQuestionListener mListener;
@@ -99,6 +99,12 @@ public class NS_16th_question extends Fragment implements
         System.out.println ( "NS_16th_question.onSixteenAnswerFailure" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         Toast.makeText ( getActivity (), "try again later!", Toast.LENGTH_SHORT ).show ();
+    }
+
+    @Override
+    public void onUnauthorized() {
+        System.out.println ( "NS_16th_question.onUnauthorized" );
+
     }
 
     @Override

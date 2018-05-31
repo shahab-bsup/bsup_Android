@@ -29,7 +29,7 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
 public class NS_7th_question extends Fragment implements
         OnSeventhAnswerListener, NS_7th_VH.OnSeventhNSVHListener {
 
-    public static final String TAG = NS_7th_question.class.getSimpleName ();
+    public static final String TAG = "NS_7th_question";
 
 
     private OnNewSymptomSeventhQuestionListener mListener;
@@ -93,6 +93,12 @@ public class NS_7th_question extends Fragment implements
     public void onSeventhAnswerFailure() {
         System.out.println ( "NS_7th_question.onSeventhAnswerFailure" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+    }
+
+    @Override
+    public void onUnauthorized() {
+        System.out.println ( "NS_7th_question.onUnauthorized" );
+
     }
 
     @Override

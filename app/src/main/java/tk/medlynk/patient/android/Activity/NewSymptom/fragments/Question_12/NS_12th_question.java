@@ -29,7 +29,7 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
             OnTwelveAnswerListener,
             NS_12th_VH.OnTwelveNSVHListener {
 
-        public static final String TAG = NS_12th_question.class.getSimpleName ();
+        public static final String TAG = "NS_12th_question";
 
 
     private OnNewSymptomTwelveQuestionListener mListener;
@@ -97,6 +97,12 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         Toast.makeText ( getActivity (), "try again later!", Toast.LENGTH_SHORT ).show ();
     }
+
+        @Override
+        public void onUnauthorized() {
+            System.out.println ( "NS_12th_question.onUnauthorized" );
+
+        }
 
         @Override
         public void onNextClicked(Answer answer) {

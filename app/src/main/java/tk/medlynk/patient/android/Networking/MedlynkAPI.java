@@ -11,12 +11,11 @@ import tk.medlynk.patient.android.Model.InitialTokenResponse;
 import tk.medlynk.patient.android.Model.InitiateResponse;
 import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
 import tk.medlynk.patient.android.Model.PreviuosDoctorsResponse;
-import tk.medlynk.patient.android.Model.PrimaryTokenResponse;
+import tk.medlynk.patient.android.Model.AccessTokenResponse;
 import tk.medlynk.patient.android.Model.RenewTokenResponse;
 import tk.medlynk.patient.android.Model.SearchDoctorResponse;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -39,7 +38,7 @@ public interface MedlynkAPI {
 
     //actually this is the login route which sends the username and password of the user!
     @POST("/oauth/token")
-    Call<PrimaryTokenResponse> getPrimaryToken(@Body @Nullable Map<String, String> map);
+    Call<AccessTokenResponse> getPrimaryToken(@Body @Nullable Map<String, String> map);
 
     //renew the expired token!
     @POST("/oauth/token")

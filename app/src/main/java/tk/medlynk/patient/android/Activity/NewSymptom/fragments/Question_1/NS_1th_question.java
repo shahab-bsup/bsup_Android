@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,14 +23,15 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link New_Symptom_1th_question.OnNewSymptomFirstQuestionListener} interface
+ * {@link NS_1th_question.OnNewSymptomFirstQuestionListener} interface
  * to handle interaction events.
- * Use the {@link New_Symptom_1th_question#newInstance} factory method to
+ * Use the {@link NS_1th_question#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class New_Symptom_1th_question extends Fragment implements View.OnClickListener, OnFirstAnswerListener {
+public class NS_1th_question extends Fragment implements View.OnClickListener, OnFirstAnswerListener {
 
-    public static final String TAG = New_Symptom_1th_question.class.getSimpleName ();
+    public static final String TAG = "NS_1th_question";
+//    public static final String TAG = NS_1th_question.class.getSimpleName ();
 
     private OnNewSymptomFirstQuestionListener mListener;
     private View question_view;
@@ -40,13 +40,13 @@ public class New_Symptom_1th_question extends Fragment implements View.OnClickLi
     private AppCompatEditText answerInput;
     private ProgressBar progressBar;
 
-    public New_Symptom_1th_question() {
+    public NS_1th_question() {
         // Required empty public constructor...
 
     }
 
-    public static New_Symptom_1th_question newInstance(String param1, String param2) {
-        New_Symptom_1th_question fragment = new New_Symptom_1th_question ();
+    public static NS_1th_question newInstance(String param1, String param2) {
+        NS_1th_question fragment = new NS_1th_question ();
         Bundle args = new Bundle ();
         fragment.setArguments ( args );
         return fragment;
@@ -55,7 +55,7 @@ public class New_Symptom_1th_question extends Fragment implements View.OnClickLi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
-        System.out.println ( "New_Symptom_1th_question.onCreate" );
+        System.out.println ( "NS_1th_question.onCreate" );
         if (getArguments () != null) {
 
         }
@@ -84,7 +84,7 @@ public class New_Symptom_1th_question extends Fragment implements View.OnClickLi
 
     @Override
     public void onAttach(Context context) {
-        System.out.println ( "New_Symptom_1th_question.onAttach" );
+        System.out.println ( "NS_1th_question.onAttach" );
         super.onAttach ( context );
         if (context instanceof OnNewSymptomFirstQuestionListener) {
             mListener = (OnNewSymptomFirstQuestionListener) context;
@@ -97,7 +97,7 @@ public class New_Symptom_1th_question extends Fragment implements View.OnClickLi
     @Override
     public void onDetach() {
         super.onDetach ();
-        System.out.println ( "New_Symptom_1th_question.onDetach" );
+        System.out.println ( "NS_1th_question.onDetach" );
         mListener = null;
     }
 
@@ -113,7 +113,11 @@ public class New_Symptom_1th_question extends Fragment implements View.OnClickLi
                     Answer answer = new Answer ();
                     answer.setReply ( answerInput.getText ().toString () );
                     SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );;
-                    MedlynkRequests.newSymptomFirstQuestionAnswer ( getActivity (), New_Symptom_1th_question.this, manager.getAppointmentID (), answer );
+                    MedlynkRequests.newSymptomFirstQuestionAnswer ( getActivity (),
+                            NS_1th_question.this,
+                            manager.getAppointmentID (),
+                            "1",
+                            answer );
                 break;
             }
         }
@@ -121,15 +125,21 @@ public class New_Symptom_1th_question extends Fragment implements View.OnClickLi
 
     @Override
     public void onFirstAnswerSuccess(NewSymptomAnswerResponse response) {
-        System.out.println ( "New_Symptom_1th_question.onFirstAnswerSuccess" );
+        System.out.println ( "NS_1th_question.onFirstAnswerSuccess" );
         progressBar.setVisibility ( View.GONE );
         mListener.onFirstQuestion ();
     }
 
     @Override
     public void onFirstAnswerFailure() {
-        System.out.println ( "New_Symptom_1th_question.onFirstAnswerFailure" );
+        System.out.println ( "NS_1th_question.onFirstAnswerFailure" );
         progressBar.setVisibility ( View.GONE );
+    }
+
+    @Override
+    public void onUnauthorized() {
+        System.out.println ( "NS_1th_question.onUnauthorized" );
+        SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
     }
 
     public interface OnNewSymptomFirstQuestionListener {
@@ -157,5 +167,10 @@ public class New_Symptom_1th_question extends Fragment implements View.OnClickLi
                 button.setClickable ( true );
             }
         }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged ( hidden );
     }
 }

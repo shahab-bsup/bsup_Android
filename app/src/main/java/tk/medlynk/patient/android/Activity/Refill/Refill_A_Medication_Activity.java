@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.neweraandroid.demo.R;
 
+import tk.medlynk.patient.android.Activity.Refill.fragments.End_of_Question_Set.End_of_Question_Set;
 import tk.medlynk.patient.android.Activity.Refill.fragments.Question_1.Refill_first_Question;
 import tk.medlynk.patient.android.Activity.Refill.fragments.Question_2.Refill_second_Question;
 import tk.medlynk.patient.android.Activity.Refill.fragments.Question_3.Refill_third_Question;
@@ -132,7 +133,11 @@ public class Refill_A_Medication_Activity extends AppCompatActivity implements
     @Override
     public void onRefillEighthQuestion() {
         System.out.println ( "Refill_A_Medication_Activity.onRefillEighthQuestion" );
-        Toast.makeText(this, "You have just finished a question set!", Toast.LENGTH_SHORT).show();
-        finish();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+                .add ( R.id.refill_container,
+                        new End_of_Question_Set (),
+                        End_of_Question_Set.TAG).commit ();
+        fragmentTransaction.addToBackStack ( End_of_Question_Set.TAG );
     }
 }

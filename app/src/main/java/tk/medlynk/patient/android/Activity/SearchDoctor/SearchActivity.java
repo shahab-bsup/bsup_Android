@@ -26,7 +26,7 @@ import java.io.Serializable;
 public class SearchActivity extends AppCompatActivity implements
         OnGetCurrentUserInfoListener,
         View.OnClickListener,
-        SearchActivityViewHolder.SearchActivityClickListener,
+        SearchActivityViewHolder.OnSearchActivityVHListener,
         OnSearchDoctorListener, PreviousDoctorsAdapter.OnPDoctorClickListener {
 
     View parent_view;
@@ -40,7 +40,7 @@ public class SearchActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_search_doctor);
         parent_view = findViewById ( R.id.parent_search_activity );
         viewHolder = new SearchActivityViewHolder ( parent_view );
-        viewHolder.setClickListener ( this );
+        viewHolder.setOnSearchActivityVHListener ( this );
         MedlynkRequests.getCurrentUserInfo ( this, this );
         MedlynkRequests.getPreviousDoctors(this, this);
         adapter = new PreviousDoctorsAdapter(this);
@@ -77,11 +77,6 @@ public class SearchActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onClick(View view) {
-
-    }
-
-    @Override
     public void onSearchClicked(String doctorID) {
         System.out.println ( "SearchActivity.onSearchClicked" );
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
@@ -90,7 +85,8 @@ public class SearchActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onNoDoctorIdClicked() {
+    public void onNoDoctorIDClicked() {
+        System.out.println ( "SearchActivity.onNoDoctorIDClicked" );
         if( CurrentUserInfo.getInstance () != null &&
                 CurrentUserInfo.getInstance ().getPreferences () != null &&
                 CurrentUserInfo.getInstance ().getPreferences ().getSkipNoDoctorIdPage ()
@@ -106,7 +102,7 @@ public class SearchActivity extends AppCompatActivity implements
         }
         else{
             startActivity ( new Intent ( SearchActivity.this,
-                    StartAppointmentActivity.class ) );
+                    NoDoctorIdActivity.class ) );
         }
     }
 
@@ -183,5 +179,10 @@ public class SearchActivity extends AppCompatActivity implements
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
         MedlynkRequests.searchDoctor ( SearchActivity.this,
                 doctorID, SearchActivity.this);
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 }

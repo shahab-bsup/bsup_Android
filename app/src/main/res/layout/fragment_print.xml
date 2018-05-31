@@ -1,0 +1,49 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/custom_edit_text_doctor_id"
+    android:padding="20dp"
+    android:layout_margin="20dp"
+    tools:context="tk.medlynk.patient.android.fragments.print.PrintFragment">
+
+    <tk.medlynk.patient.android.CustomViews.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/what_tp_print"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        />
+
+    <Button
+        android:id="@+id/btnPrintThisQuestionSet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/enabled_custom_button"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:text="@string/print_this_question_set"
+        android:textColor="@color/white" />
+    <Button
+        android:id="@+id/btnPrintWholeAppointment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/enabled_custom_button"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:text="@string/print_whole_appointment"
+        android:textColor="@color/white" />
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/enabled_custom_button"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:text="@string/cancel"
+        android:textColor="@color/white" />
+
+</LinearLayout>

@@ -23,7 +23,7 @@ import tk.medlynk.patient.android.Model.Medication;
  */
 
 public class NS_14th_VH extends RecyclerView.ViewHolder implements
-        ViewSelection.OnSingleItemSelectedListener, MedicationsAdapter.OnEmptyMedicationListener {
+        ViewSelection.OnSingleItemSelectedListener, MedicationsAdapter.OnEmptyMedicationListener, ViewSelection.OnClearStateListener {
 
     private View question_view;
     private Button button_next;
@@ -54,6 +54,7 @@ public class NS_14th_VH extends RecyclerView.ViewHolder implements
         choice = itemView.findViewById ( R.id.viewSelectionChoices );
         choice.setTextToButtons ( itemView.getContext ().getResources ().getString ( R.string.question_14 ), 0 );
         choice.setOnSingleItemSelectedListener ( this );
+        choice.setOnClearStateListener ( this );
         add_a_medication = itemView.findViewById ( R.id.add_medication );
         add_a_medication.setOnClickListener ( new OnAddAMedicationClicked () );
         medications = itemView.findViewById ( R.id.recycler_view_medications );
@@ -90,6 +91,12 @@ public class NS_14th_VH extends RecyclerView.ViewHolder implements
         System.out.println ( "NS_14th_VH.onEmptyMedication" );
         button_next.setEnabled ( false );
         button_next.setBackgroundResource ( R.drawable.enable_next_question );
+    }
+
+    @Override
+    public void onClearState(View view) {
+        System.out.println ( "NS_14th_VH.onClearState" );
+        answer = new Answer ();
     }
 
     public interface OnFourteenNSVHListener {
@@ -156,6 +163,7 @@ public class NS_14th_VH extends RecyclerView.ViewHolder implements
         @Override
         public void onClick(View view) {
             System.out.println ( "OnAddAMedicationClicked.onClick" );
+            choice.setClear ();
             medicationAdapter.setMedications ( new Medication () );
             if( medicationAdapter.getDataSet ().size () == 1 ){
                 button_next.setEnabled ( true );

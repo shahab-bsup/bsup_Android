@@ -21,7 +21,7 @@ import tk.medlynk.patient.android.Model.Medication;
  * Created by Shahab on 3/4/2018.
  */
 
-public class FUpS_12th_VH extends RecyclerView.ViewHolder implements ViewSelection.OnSingleItemSelectedListener, MedicationsAdapter.OnEmptyMedicationListener {
+public class FUpS_12th_VH extends RecyclerView.ViewHolder implements ViewSelection.OnSingleItemSelectedListener, MedicationsAdapter.OnEmptyMedicationListener, ViewSelection.OnClearStateListener {
 
     private final ProgressBar progressBar;
     private final View question_view;
@@ -32,12 +32,12 @@ public class FUpS_12th_VH extends RecyclerView.ViewHolder implements ViewSelecti
     private ViewSelection choice;
     private RecyclerView medications;
     private MedicationsAdapter medicationAdapter;
-    private List<Medication> answers;
     private Answer answer;
     private OnFUpSTwelveVHListener onFUpSTwelveVHListener;
 
     public FUpS_12th_VH(View itemView) {
         super ( itemView );
+        answer = new Answer ();
         progressBar = itemView.findViewById ( R.id.progress_bar );
         question_view = itemView.findViewById ( R.id.follow_up_symptoms_twelve_question );
         second_question = question_view.findViewById ( R.id.txtQuestion );
@@ -50,6 +50,7 @@ public class FUpS_12th_VH extends RecyclerView.ViewHolder implements ViewSelecti
         choice = itemView.findViewById ( R.id.viewSelectionChoices );
         choice.setTextToButtons ( itemView.getContext ().getResources ().getString ( R.string.question_14 ), 0 );
         choice.setOnSingleItemSelectedListener ( this );
+        choice.setOnClearStateListener ( this );
         add_a_medication = itemView.findViewById ( R.id.add_medication );
         add_a_medication.setOnClickListener ( new OnAddAMedicationClicked () );
         medications = itemView.findViewById ( R.id.recycler_view_medications );
@@ -82,6 +83,12 @@ public class FUpS_12th_VH extends RecyclerView.ViewHolder implements ViewSelecti
         System.out.println ( "FUpS_12th_VH.onEmptyMedication" );
         button_next.setEnabled ( false );
         button_next.setBackgroundResource ( R.drawable.enable_next_question );
+    }
+
+    @Override
+    public void onClearState(View view) {
+        System.out.println ( "FUpS_12th_VH.onClearState" );
+        answer = new Answer ();
     }
 
     private class OnNextButtonClickListener implements View.OnClickListener {
@@ -150,6 +157,7 @@ public class FUpS_12th_VH extends RecyclerView.ViewHolder implements ViewSelecti
         @Override
         public void onClick(View view) {
             System.out.println ( "OnAddAMedicationClicked.onClick" );
+            choice.setClear ();
             medicationAdapter.setMedications ( new Medication () );
             if( medicationAdapter.getDataSet ().size () == 1 ){
                 button_next.setEnabled ( true );

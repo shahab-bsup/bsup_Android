@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:focusableInTouchMode="true"
     android:descendantFocusability="beforeDescendants"
-    tools:context="tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_1.New_Symptom_1th_question">
+    tools:context="tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_1.NS_1th_question">
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"

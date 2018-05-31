@@ -1,48 +1,64 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_24th_question">
+    tools:context="tk.medlynk.patient.android.Activity.NewSymptom.fragments.End_of_Question_Set.End_of_Question_Set">
 
     <tk.medlynk.patient.android.CustomViews.CustomTextView
-        android:layout_marginTop="100dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/congratulations"
-        android:layout_centerHorizontal="true"
-        android:textSize="40sp"
-        android:gravity="center"
-        android:textColor="@color/colorPrimary"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
-        android:id="@+id/congrat"
-        />
-    <tk.medlynk.patient.android.CustomViews.CustomTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/congratulations_text"
-        android:layout_centerHorizontal="true"
+        android:text="@string/end_of_question_set_title"
         android:textSize="20sp"
-        android:gravity="center"
+        android:textStyle="bold"
         android:textColor="@color/colorPrimary"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_below="@id/congrat"
-        android:id="@+id/congrat_text"
+        android:gravity="center"
         />
-
+    <tk.medlynk.patient.android.CustomViews.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/end_of_question_set_body"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        />
     <Button
-        android:id="@+id/btnGoToQuestionSet"
+        android:id="@+id/btnFirstUnanswered"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/enabled_custom_button"
         android:layout_alignParentBottom="true"
         android:layout_margin="10dp"
-        android:text="@string/go_to_question_set"
+        android:text="@string/go_to_first_unanswered"
+        android:textColor="@color/white" />
+    <Button
+        android:id="@+id/btnNewQuestionSet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/enabled_custom_button"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:text="@string/new_question_set"
+        android:textColor="@color/white" />
+    <Button
+        android:id="@+id/btnProgressPage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/enabled_custom_button"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:text="@string/progress_page"
+        android:textColor="@color/white" />
+    <Button
+        android:id="@+id/btnPrint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/enabled_custom_button"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:text="@string/print"
         android:textColor="@color/white" />
 
-</RelativeLayout>
+</LinearLayout>

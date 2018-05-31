@@ -118,4 +118,13 @@ public class SharedPreferenceManager{
     public int getQuestionSetID(){
         return this.sharedPreferences.getInt(Constants.QUESTION_SET_ID, 0);
     }
+
+    public void setPassWord(String password) {
+        this.sharedPreferences.edit ().putString ( Constants.PASSWORD,
+                password).apply ();
+    }
+
+    public String getPassword(){
+        return this.sharedPreferences.getString ( Constants.PASSWORD, "" );
+    }
 }

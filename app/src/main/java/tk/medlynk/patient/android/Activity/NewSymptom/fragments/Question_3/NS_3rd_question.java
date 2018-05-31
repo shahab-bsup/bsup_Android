@@ -28,7 +28,7 @@ public class NS_3rd_question extends Fragment implements
         OnThirdAnswerListener,
         NS_3rd_VH.OnThirdNSVHListener {
 
-    public static final String TAG = NS_3rd_question.class.getSimpleName ();
+    public static final String TAG = "NS_3rd_question";
 
     private OnNewSymptomThirdQuestionListener mListener;
     private NS_3rd_VH viewHolder;
@@ -92,6 +92,12 @@ public class NS_3rd_question extends Fragment implements
         System.out.println ( "NS_3rd_question.onThirdAnswerFailure" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         Toast.makeText ( getActivity (), "try again later!", Toast.LENGTH_SHORT ).show ();
+    }
+
+    @Override
+    public void onUnauthorized() {
+        System.out.println ( "NS_3rd_question.onUnauthorized" );
+
     }
 
     @Override

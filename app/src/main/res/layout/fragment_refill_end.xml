@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/custom_edit_text_doctor_id"
+    android:padding="20dp"
+    android:layout_margin="20dp"
+    android:orientation="vertical">
+
+    <tk.medlynk.patient.android.CustomViews.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/end_of_question_set_title"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:gravity="center"
+        />
+    <tk.medlynk.patient.android.CustomViews.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/end_of_question_set_body"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        />
+    <Button
+        android:id="@+id/btnNewRefill"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/enable_next_question"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:text="@string/new_refill"
+        android:textColor="@color/white" />
+    <Button
+        android:id="@+id/btnFirstUnanswered"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/enabled_custom_button"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:text="@string/go_to_first_unanswered"
+        android:textColor="@color/white" />
+    <Button
+        android:id="@+id/btnNewQuestionSet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/enabled_custom_button"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:text="@string/new_question_set"
+        android:textColor="@color/white" />
+    <Button
+        android:id="@+id/btnProgressPage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/enabled_custom_button"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:text="@string/progress_page"
+        android:textColor="@color/white" />
+    <Button
+        android:id="@+id/btnPrint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/enabled_custom_button"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:text="@string/print"
+        android:textColor="@color/white" />
+
+</LinearLayout>

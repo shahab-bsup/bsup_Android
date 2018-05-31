@@ -7,7 +7,7 @@ import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
  */
 
 public interface OnTwentyOneAnswerListener {
-
     void onTwentyOneAnswerSuccess(NewSymptomAnswerResponse response);
     void onTwentyOneAnswerFailure();
+    void onUnauthorized();
 }

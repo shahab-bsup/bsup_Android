@@ -31,7 +31,7 @@ public class NS_15th_question extends Fragment implements
         OnFifteenAnswerListener,
         NS_15th_VH.OnFifteenNSVHListener {
 
-    public static final String TAG = NS_15th_question.class.getSimpleName ();
+    public static final String TAG = "NS_15th_question";
 
     private OnNewSymptomFifteenQuestionListener mListener;
 
@@ -97,6 +97,12 @@ public class NS_15th_question extends Fragment implements
         System.out.println ( "NS_15th_question.onFifteenAnswerFailure" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         Toast.makeText ( getActivity (), "try again later!", Toast.LENGTH_SHORT ).show ();
+    }
+
+    @Override
+    public void onUnauthorized() {
+        System.out.println ( "NS_15th_question.onUnauthorized" );
+
     }
 
     @Override

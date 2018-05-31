@@ -1,55 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@color/white">
 
     <ImageView
+        android:id="@+id/doctor_icon"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/doctor_icon"
-        android:id="@+id/doctor_icon"
-        android:layout_marginTop="10dp"
         android:layout_alignParentLeft="true"
-        />
+        android:layout_marginTop="50dp"
+        android:src="@drawable/doctor_icon" />
 
     <LinearLayout
-        android:layout_marginTop="10dp"
-        android:background="@drawable/question_answer_temp"
-        android:layout_width="wrap_content"
+        android:id="@+id/txtLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="5dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="-40dp"
         android:layout_toRightOf="@id/doctor_icon"
-        android:layout_alignTop="@id/doctor_icon">
+        android:orientation="vertical">
 
         <tk.medlynk.patient.android.CustomViews.CustomTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/txtQuestion"
-            android:text="@string/new_symptom_first_question"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:textColor="@color/colorPrimary"
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
-            android:paddingBottom="10dp"/>
-
-        <tk.medlynk.patient.android.CustomViews.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/bubble"
+            android:text="@string/new_symptom_first_question"
+            android:textColor="@color/colorPrimary" />
+
+        <tk.medlynk.patient.android.CustomViews.CustomTextView
             android:id="@+id/txtQuestion_see_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:padding="10dp"
             android:text="@string/see_more"
             android:textColor="@color/colorPrimary"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:padding="10dp"
-            android:visibility="gone"/>
+            android:visibility="gone" />
     </LinearLayout>
 </RelativeLayout>

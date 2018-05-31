@@ -29,7 +29,7 @@ public class NS_22th_question extends Fragment implements
         OnTwentyTwoAnswerListener,
         NS_22th_VH.On22thVHListener {
 
-    public static final String TAG = NS_22th_question.class.getSimpleName ();
+    public static final String TAG = "NS_22th_question";
 
     private OnNewSymptomTwenty2QuestionListener mListener;
     private NS_22th_VH viewHolder;
@@ -124,6 +124,12 @@ public class NS_22th_question extends Fragment implements
         System.out.println ( "NS_22th_question.onTwentyTwoAnswerFailure" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onTwenty2Question ();
+    }
+
+    @Override
+    public void onUnauthorized() {
+        System.out.println ( "NS_22th_question.onUnauthorized" );
+
     }
 
 

@@ -130,8 +130,8 @@ public class Refill_sixth_VH extends ViewHolder implements OnSingleItemSelectedL
             button_next.setBackgroundResource(R.drawable.disable_next_question);
         } else {
             answer.setChoice("a");
-            button_next.setEnabled(false);
-            button_next.setBackgroundResource(R.drawable.disable_next_question);
+            button_next.setEnabled(true);
+            button_next.setBackgroundResource(R.drawable.enable_next_question);
             second.setClear();
         }
     }
