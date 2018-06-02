@@ -1,8 +1,10 @@
 package tk.medlynk.patient.android.Activity.Refill;
 
+import android.os.Handler;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -31,6 +33,7 @@ public class Refill_A_Medication_Activity extends AppCompatActivity implements
         Refill_eighth_Question.onRefillEighthQuestionInteractionListener
 {
 
+    private static final String TAG = Refill_A_Medication_Activity.class.getSimpleName ();
     private View parent;
     private Refill_A_Medication_VH viewholder;
 
@@ -55,7 +58,7 @@ public class Refill_A_Medication_Activity extends AppCompatActivity implements
 
     @Override
     public void onRefillFistQuestion() {
-        System.out.println ( "Refill_A_Medication_Activity.onRefillFistQuestion" );
+        Log.d ( TAG, "onRefillFistQuestion " );
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
                 .add ( R.id.refill_container,
@@ -138,6 +141,6 @@ public class Refill_A_Medication_Activity extends AppCompatActivity implements
                 .add ( R.id.refill_container,
                         new End_of_Question_Set (),
                         End_of_Question_Set.TAG).commit ();
-        fragmentTransaction.addToBackStack ( End_of_Question_Set.TAG );
+        Handler handler = new Handler ( getMainLooper () );
     }
 }

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.neweraandroid.demo.R;
 
@@ -31,7 +32,6 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
 public class NS_1th_question extends Fragment implements View.OnClickListener, OnFirstAnswerListener {
 
     public static final String TAG = "NS_1th_question";
-//    public static final String TAG = NS_1th_question.class.getSimpleName ();
 
     private OnNewSymptomFirstQuestionListener mListener;
     private View question_view;
@@ -64,7 +64,7 @@ public class NS_1th_question extends Fragment implements View.OnClickListener, O
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment...
+        // Inflate the layout for this fragment
         View view = inflater.inflate ( R.layout.fragment_new__symptom_1th_question, container, false );
         progressBar = view.findViewById ( R.id.progress_bar );
         question_view = view.findViewById ( R.id.new_symptom_first_question );
@@ -73,7 +73,7 @@ public class NS_1th_question extends Fragment implements View.OnClickListener, O
         button.setBackgroundResource ( R.drawable.disable_next_question );
         button.setOnClickListener ( this );
         button.setClickable ( false );
-        see_more= question_view.findViewById ( R.id.txtQuestion_see_more );
+        see_more = question_view.findViewById ( R.id.txtQuestion_see_more );
         see_more.setVisibility ( View.VISIBLE );
         see_more.setOnClickListener ( this );
         first_question.setText ( R.string.new_symptom_first_question );
