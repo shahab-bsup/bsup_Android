@@ -87,7 +87,7 @@ public class NewSymptomActivity extends AppCompatActivity implements
 
             FragmentTransaction fragmentTransaction = getSupportFragmentManager ()
                     .beginTransaction ();
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .add ( R.id.fragment_container,
                             new NS_1th_question (),
                             NS_1th_question.TAG ).
@@ -107,17 +107,17 @@ public class NewSymptomActivity extends AppCompatActivity implements
         Log.d ( TAG, "onFirstQuestion: " );
         CURRENT_FRAGMENT = NS_2nd_question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        if (getSupportFragmentManager ().findFragmentByTag ( NS_2nd_question.TAG ) == null) {
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
-                    .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_1th_question.TAG ) )
+        //if (getSupportFragmentManager ().findFragmentByTag ( NS_2nd_question.TAG ) == null) {
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
+                    .remove ( getSupportFragmentManager ().findFragmentByTag ( NS_1th_question.TAG ) )
                     .add ( R.id.fragment_container, new NS_2nd_question (), NS_2nd_question.TAG )
                     .commitNow ();
-        } else {
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
-                    .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_1th_question.TAG ) )
+       // } else {
+            /*fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
+                    .remove ( getSupportFragmentManager ().findFragmentByTag ( NS_1th_question.TAG ) )
                     .show ( getSupportFragmentManager ().findFragmentByTag ( NS_2nd_question.TAG ) )
-                    .commitNow ();
-        }
+                    .commitNow ();*/
+        //}
     }
 
     @Override
@@ -125,17 +125,17 @@ public class NewSymptomActivity extends AppCompatActivity implements
         Log.d ( TAG, "onSecondQuestion: " );
         CURRENT_FRAGMENT = NS_3rd_question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        if (getSupportFragmentManager ().findFragmentByTag ( NS_3rd_question.TAG ) == null) {
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
-                    .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_2nd_question.TAG ) )
+       // if (getSupportFragmentManager ().findFragmentByTag ( NS_3rd_question.TAG ) == null) {
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
+                    .remove ( getSupportFragmentManager ().findFragmentByTag ( NS_2nd_question.TAG ) )
                     .add ( R.id.fragment_container, new NS_3rd_question (), NS_3rd_question.TAG )
                     .commitNow ();
-        } else {
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+       // } else {
+            /*fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_2nd_question.TAG ) )
                     .show ( getSupportFragmentManager ().findFragmentByTag ( NS_3rd_question.TAG ) )
-                    .commitNow ();
-        }
+                    .commitNow ();*/
+       // }
     }
 
     @Override
@@ -143,17 +143,17 @@ public class NewSymptomActivity extends AppCompatActivity implements
         Log.d ( TAG, "onThirdQuestion: " );
         CURRENT_FRAGMENT = NS_4th_question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        if (getSupportFragmentManager ().findFragmentByTag ( NS_4th_question.TAG ) == null) {
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
-                    .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_3rd_question.TAG ) )
+        //if (getSupportFragmentManager ().findFragmentByTag ( NS_4th_question.TAG ) == null) {
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
+                    .remove ( getSupportFragmentManager ().findFragmentByTag ( NS_3rd_question.TAG ) )
                     .add ( R.id.fragment_container, new NS_4th_question (), NS_4th_question.TAG )
                     .commitNow ();
-        }else{
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+        //}else{
+            /*fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_3rd_question.TAG ) )
                     .show (getSupportFragmentManager ().findFragmentByTag ( NS_4th_question.TAG ))
-                    .commitNow ();
-        }
+                    .commitNow ();*/
+        //}
     }
 
     @Override
@@ -161,18 +161,18 @@ public class NewSymptomActivity extends AppCompatActivity implements
         Log.d ( TAG, "onFourthQuestion: " );
         CURRENT_FRAGMENT = NS_5th_question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        if (getSupportFragmentManager ().findFragmentByTag ( NS_5th_question.TAG ) == null) {
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
-                    .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_4th_question.TAG ) )
+        //if (getSupportFragmentManager ().findFragmentByTag ( NS_5th_question.TAG ) == null) {
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
+                    .remove ( getSupportFragmentManager ().findFragmentByTag ( NS_4th_question.TAG ) )
                     .add ( R.id.fragment_container, new NS_5th_question (), NS_5th_question.TAG )
                     .commitNow ();
 
-        }else{
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+        //}else{
+            /*fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_4th_question.TAG ) )
                     .show (getSupportFragmentManager ().findFragmentByTag ( NS_5th_question.TAG ))
-                    .commitNow ();
-        }
+                    .commitNow ();*/
+        //}
     }
 
     @Override
@@ -180,18 +180,18 @@ public class NewSymptomActivity extends AppCompatActivity implements
         Log.d ( TAG, "onFifthQuestion: " );
         CURRENT_FRAGMENT = NS_6th_question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        if (getSupportFragmentManager ().findFragmentByTag ( NS_6th_question.TAG ) == null) {
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
-                    .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_5th_question.TAG ) )
+        //if (getSupportFragmentManager ().findFragmentByTag ( NS_6th_question.TAG ) == null) {
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
+                    .remove ( getSupportFragmentManager ().findFragmentByTag ( NS_5th_question.TAG ) )
                     .add ( R.id.fragment_container, new NS_6th_question (), NS_6th_question.TAG )
                     .commitNow ();
 
-        }else{
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+        //}else{
+            /*fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_5th_question.TAG ) )
                     .show (getSupportFragmentManager ().findFragmentByTag ( NS_6th_question.TAG ))
-                    .commitNow ();
-        }
+                    .commitNow ();*/
+        //}
     }
 
     @Override
@@ -199,18 +199,18 @@ public class NewSymptomActivity extends AppCompatActivity implements
         Log.d ( TAG, "onSixthQuestion: " );
         CURRENT_FRAGMENT = NS_7th_question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        if (getSupportFragmentManager ().findFragmentByTag ( NS_7th_question.TAG ) == null) {
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
-                    .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_6th_question.TAG ) )
+        //if (getSupportFragmentManager ().findFragmentByTag ( NS_7th_question.TAG ) == null) {
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
+                    .remove ( getSupportFragmentManager ().findFragmentByTag ( NS_6th_question.TAG ) )
                     .add ( R.id.fragment_container, new NS_7th_question (), NS_7th_question.TAG )
                     .commitNow ();
 
-        }else{
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+        //}else{
+            /*fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_6th_question.TAG ) )
                     .show (getSupportFragmentManager ().findFragmentByTag ( NS_7th_question.TAG ))
-                    .commitNow ();
-        }
+                    .commitNow ();*/
+        //}
     }
 
     @Override
@@ -218,18 +218,18 @@ public class NewSymptomActivity extends AppCompatActivity implements
         Log.d ( TAG, "onSeventhQuestion: " );
         CURRENT_FRAGMENT = NS_8th_question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        if (getSupportFragmentManager ().findFragmentByTag ( NS_8th_question.TAG ) == null) {
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
-                    .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_7th_question.TAG ) )
+        //if (getSupportFragmentManager ().findFragmentByTag ( NS_8th_question.TAG ) == null) {
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
+                    .remove ( getSupportFragmentManager ().findFragmentByTag ( NS_7th_question.TAG ) )
                     .add ( R.id.fragment_container, new NS_8th_question (), NS_8th_question.TAG )
                     .commitNow ();
 
-        }else{
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+        //}else{
+            /*fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_7th_question.TAG ) )
                     .show (getSupportFragmentManager ().findFragmentByTag ( NS_8th_question.TAG ))
-                    .commitNow ();
-        }
+                    .commitNow ();*/
+        //}
     }
 
     @Override
@@ -237,18 +237,18 @@ public class NewSymptomActivity extends AppCompatActivity implements
         Log.d ( TAG, "onEightQuestion: " );
         CURRENT_FRAGMENT = NS_9th_question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        if (getSupportFragmentManager ().findFragmentByTag ( NS_9th_question.TAG ) == null) {
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
-                    .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_8th_question.TAG ) )
+        //if (getSupportFragmentManager ().findFragmentByTag ( NS_9th_question.TAG ) == null) {
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
+                    .remove ( getSupportFragmentManager ().findFragmentByTag ( NS_8th_question.TAG ) )
                     .add ( R.id.fragment_container, new NS_9th_question (), NS_9th_question.TAG )
                     .commitNow ();
 
-        }else{
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+        //}else{
+            /*fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_8th_question.TAG ) )
                     .show (getSupportFragmentManager ().findFragmentByTag ( NS_9th_question.TAG ))
-                    .commitNow ();
-        }
+                    .commitNow ();*/
+        //}
     }
 
     @Override
@@ -256,39 +256,37 @@ public class NewSymptomActivity extends AppCompatActivity implements
         Log.d ( TAG, "onNinthQuestion: " );
         CURRENT_FRAGMENT = NS_10th_question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        if (getSupportFragmentManager ().findFragmentByTag ( NS_10th_question.TAG ) == null) {
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
-                    .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_9th_question.TAG ) )
+       // if (getSupportFragmentManager ().findFragmentByTag ( NS_10th_question.TAG ) == null) {
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
+                    .remove ( getSupportFragmentManager ().findFragmentByTag ( NS_9th_question.TAG ) )
                     .add ( R.id.fragment_container, new NS_10th_question (), NS_10th_question.TAG )
                     .commitNow ();
 
-        }else{
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+       // }else{
+            /*fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_9th_question.TAG ) )
                     .show (getSupportFragmentManager ().findFragmentByTag ( NS_10th_question.TAG ))
-                    .commitNow ();
-        }
+                    .commitNow ();*/
+       // }
     }
-
-
 
     @Override
     public void onTenthQuestion() {
         Log.d ( TAG, "onTenthQuestion: " );
         CURRENT_FRAGMENT = NS_11th_question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        if (getSupportFragmentManager ().findFragmentByTag ( NS_11th_question.TAG ) == null) {
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
-                    .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_10th_question.TAG ) )
+        //if (getSupportFragmentManager ().findFragmentByTag ( NS_11th_question.TAG ) == null) {
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
+                    .remove ( getSupportFragmentManager ().findFragmentByTag ( NS_10th_question.TAG ) )
                     .add ( R.id.fragment_container, new NS_11th_question (), NS_11th_question.TAG )
                     .commitNow ();
 
-        }else{
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+        //}else{
+            /*fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_10th_question.TAG ) )
                     .show (getSupportFragmentManager ().findFragmentByTag ( NS_11th_question.TAG ))
-                    .commitNow ();
-        }
+                    .commitNow ();*/
+        //}
     }
 
     @Override
@@ -296,18 +294,18 @@ public class NewSymptomActivity extends AppCompatActivity implements
         Log.d ( TAG, "onEleventhQuestion: " );
         CURRENT_FRAGMENT = NS_12th_question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        if (getSupportFragmentManager ().findFragmentByTag ( NS_12th_question.TAG ) == null) {
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
-                    .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_11th_question.TAG ) )
+        //if (getSupportFragmentManager ().findFragmentByTag ( NS_12th_question.TAG ) == null) {
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
+                    .remove ( getSupportFragmentManager ().findFragmentByTag ( NS_11th_question.TAG ) )
                     .add ( R.id.fragment_container, new NS_12th_question (), NS_12th_question.TAG )
                     .commitNow ();
 
-        }else{
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+        //}else{
+            /*fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_11th_question.TAG ) )
                     .show (getSupportFragmentManager ().findFragmentByTag ( NS_12th_question.TAG ))
-                    .commitNow ();
-        }
+                    .commitNow ();*/
+        //}
     }
 
     @Override
@@ -316,13 +314,13 @@ public class NewSymptomActivity extends AppCompatActivity implements
         CURRENT_FRAGMENT = NS_13th_question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         if (getSupportFragmentManager ().findFragmentByTag ( NS_13th_question.TAG ) == null) {
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_12th_question.TAG ) )
                     .add ( R.id.fragment_container, new NS_13th_question (), NS_13th_question.TAG )
                     .commitNow ();
 
         }else{
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_12th_question.TAG ) )
                     .show (getSupportFragmentManager ().findFragmentByTag ( NS_13th_question.TAG ))
                     .commitNow ();
@@ -335,13 +333,13 @@ public class NewSymptomActivity extends AppCompatActivity implements
         CURRENT_FRAGMENT = NS_14th_question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         if (getSupportFragmentManager ().findFragmentByTag ( NS_14th_question.TAG ) == null) {
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_13th_question.TAG ) )
                     .add ( R.id.fragment_container, new NS_14th_question (), NS_14th_question.TAG )
                     .commitNow ();
 
         }else{
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_13th_question.TAG ) )
                     .show (getSupportFragmentManager ().findFragmentByTag ( NS_14th_question.TAG ))
                     .commitNow ();
@@ -354,13 +352,13 @@ public class NewSymptomActivity extends AppCompatActivity implements
         CURRENT_FRAGMENT = NS_15th_question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         if (getSupportFragmentManager ().findFragmentByTag ( NS_15th_question.TAG ) == null) {
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_14th_question.TAG ) )
                     .add ( R.id.fragment_container, new NS_15th_question (), NS_15th_question.TAG )
                     .commitNow ();
 
         }else{
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_14th_question.TAG ) )
                     .show (getSupportFragmentManager ().findFragmentByTag ( NS_15th_question.TAG ))
                     .commitNow ();
@@ -373,13 +371,13 @@ public class NewSymptomActivity extends AppCompatActivity implements
         CURRENT_FRAGMENT = NS_16th_question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         if (getSupportFragmentManager ().findFragmentByTag ( NS_16th_question.TAG ) == null) {
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_15th_question.TAG ) )
                     .add ( R.id.fragment_container, new NS_16th_question (), NS_16th_question.TAG )
                     .commitNow ();
 
         }else{
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_15th_question.TAG ) )
                     .show (getSupportFragmentManager ().findFragmentByTag ( NS_16th_question.TAG ))
                     .commitNow ();
@@ -393,13 +391,13 @@ public class NewSymptomActivity extends AppCompatActivity implements
         FragmentTransaction fragmentTransaction =
                 getSupportFragmentManager ().beginTransaction ();
         if (getSupportFragmentManager ().findFragmentByTag ( NS_17th_question.TAG ) == null) {
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_16th_question.TAG ) )
                     .add ( R.id.fragment_container, new NS_17th_question (), NS_17th_question.TAG )
                     .commitNow ();
 
         }else{
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_16th_question.TAG ) )
                     .show (getSupportFragmentManager ().findFragmentByTag ( NS_17th_question.TAG ))
                     .commitNow ();
@@ -412,13 +410,13 @@ public class NewSymptomActivity extends AppCompatActivity implements
         CURRENT_FRAGMENT = NS_18th_question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         if (getSupportFragmentManager ().findFragmentByTag ( NS_18th_question.TAG ) == null) {
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_17th_question.TAG ) )
                     .add ( R.id.fragment_container, new NS_18th_question (), NS_18th_question.TAG )
                     .commitNow ();
 
         }else{
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_17th_question.TAG ) )
                     .show (getSupportFragmentManager ().findFragmentByTag ( NS_18th_question.TAG ))
                     .commitNow ();
@@ -431,13 +429,13 @@ public class NewSymptomActivity extends AppCompatActivity implements
         CURRENT_FRAGMENT = NS_19th_question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         if (getSupportFragmentManager ().findFragmentByTag ( NS_19th_question.TAG ) == null) {
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_19th_question.TAG ) )
                     .add ( R.id.fragment_container, new NS_19th_question (), NS_20th_question.TAG )
                     .commitNow ();
 
         }else{
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_19th_question.TAG ) )
                     .show (getSupportFragmentManager ().findFragmentByTag ( NS_20th_question.TAG ))
                     .commitNow ();
@@ -451,13 +449,13 @@ public class NewSymptomActivity extends AppCompatActivity implements
         CURRENT_FRAGMENT = NS_20th_question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         if (getSupportFragmentManager ().findFragmentByTag ( NS_20th_question.TAG ) == null) {
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_19th_question.TAG ) )
                     .add ( R.id.fragment_container, new NS_20th_question (), NS_20th_question.TAG )
                     .commitNow ();
 
         }else{
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_19th_question.TAG ) )
                     .show (getSupportFragmentManager ().findFragmentByTag ( NS_20th_question.TAG ))
                     .commitNow ();
@@ -471,13 +469,13 @@ public class NewSymptomActivity extends AppCompatActivity implements
         CURRENT_FRAGMENT = NS_21th_question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         if (getSupportFragmentManager ().findFragmentByTag ( NS_21th_question.TAG ) == null) {
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_20th_question.TAG ) )
                     .add ( R.id.fragment_container, new NS_21th_question (), NS_21th_question.TAG )
                     .commitNow ();
 
         }else{
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_20th_question.TAG ) )
                     .show (getSupportFragmentManager ().findFragmentByTag ( NS_21th_question.TAG ))
                     .commitNow ();
@@ -490,13 +488,13 @@ public class NewSymptomActivity extends AppCompatActivity implements
         CURRENT_FRAGMENT = NS_22th_question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         if (getSupportFragmentManager ().findFragmentByTag ( NS_22th_question.TAG ) == null) {
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_21th_question.TAG ) )
                     .add ( R.id.fragment_container, new NS_22th_question (), NS_22th_question.TAG )
                     .commitNow ();
 
         }else{
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_21th_question.TAG ) )
                     .show (getSupportFragmentManager ().findFragmentByTag ( NS_22th_question.TAG ))
                     .commitNow ();
@@ -509,13 +507,13 @@ public class NewSymptomActivity extends AppCompatActivity implements
         CURRENT_FRAGMENT = NS_23th_question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         if (getSupportFragmentManager ().findFragmentByTag ( NS_23th_question.TAG ) == null) {
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_22th_question.TAG ) )
                     .add ( R.id.fragment_container, new NS_23th_question (), NS_23th_question.TAG )
                     .commitNow ();
 
         }else{
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_22th_question.TAG ) )
                     .show (getSupportFragmentManager ().findFragmentByTag ( NS_23th_question.TAG ))
                     .commitNow ();
@@ -527,13 +525,13 @@ public class NewSymptomActivity extends AppCompatActivity implements
 //        CURRENT_FRAGMENT = NS_1th_question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         if (getSupportFragmentManager ().findFragmentByTag ( NS_4th_question.TAG ) == null) {
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_4th_question.TAG ) )
                     .add ( R.id.fragment_container, new NS_4th_question (), NS_5th_question.TAG )
                     .commitNow ();
 
         }else{
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_4th_question.TAG ) )
                     .show (getSupportFragmentManager ().findFragmentByTag ( NS_5th_question.TAG ))
                     .commitNow ();
@@ -545,13 +543,13 @@ public class NewSymptomActivity extends AppCompatActivity implements
         CURRENT_FRAGMENT = NS_1th_question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
         if (getSupportFragmentManager ().findFragmentByTag ( NS_4th_question.TAG ) == null) {
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_4th_question.TAG ) )
                     .add ( R.id.fragment_container, new NS_4th_question (), NS_5th_question.TAG )
                     .commitNow ();
 
         }else{
-            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
+            fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
                     .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_4th_question.TAG ) )
                     .show (getSupportFragmentManager ().findFragmentByTag ( NS_5th_question.TAG ))
                     .commitNow ();
@@ -574,7 +572,7 @@ public class NewSymptomActivity extends AppCompatActivity implements
 
         }
         FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left );
+        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right );
         fragmentTransaction.add ( R.id.fragment_container,
                 new End_of_Question_Set (),
                 End_of_Question_Set.TAG ).
@@ -600,8 +598,8 @@ public class NewSymptomActivity extends AppCompatActivity implements
             case NS_2nd_question.TAG:{
                 CURRENT_FRAGMENT = NS_1th_question.TAG ;
                 fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
-                        .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_2nd_question.TAG ) )
-                        .show ( getSupportFragmentManager ().findFragmentByTag ( NS_1th_question.TAG ) )
+                        .remove ( getSupportFragmentManager ().findFragmentByTag ( NS_2nd_question.TAG ) )
+                        .add ( R.id.fragment_container,new NS_1th_question (),NS_1th_question.TAG  )
                         .commitNow ();
 
                 break;
@@ -609,8 +607,8 @@ public class NewSymptomActivity extends AppCompatActivity implements
             case NS_3rd_question.TAG:{
                 CURRENT_FRAGMENT = NS_2nd_question.TAG;
                 fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
-                        .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_3rd_question.TAG ) )
-                        .show ( getSupportFragmentManager ().findFragmentByTag ( NS_2nd_question.TAG ) )
+                        .remove ( getSupportFragmentManager ().findFragmentByTag ( NS_3rd_question.TAG ) )
+                        .add ( R.id.fragment_container,new NS_2nd_question (),NS_2nd_question.TAG )
                         .commitNow ();
 
                 break;
@@ -618,8 +616,8 @@ public class NewSymptomActivity extends AppCompatActivity implements
             case NS_4th_question.TAG:{
                 CURRENT_FRAGMENT = NS_3rd_question.TAG;
                 fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
-                        .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_4th_question.TAG ) )
-                        .show ( getSupportFragmentManager ().findFragmentByTag ( NS_5th_question.TAG ) )
+                        .remove ( getSupportFragmentManager ().findFragmentByTag ( NS_4th_question.TAG ) )
+                        .add (R.id.fragment_container,new NS_3rd_question (),NS_3rd_question.TAG   )
                         .commitNow ();
 
                 break;
@@ -627,8 +625,8 @@ public class NewSymptomActivity extends AppCompatActivity implements
             case NS_5th_question.TAG:{
                 CURRENT_FRAGMENT = NS_4th_question.TAG;
                 fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
-                        .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_5th_question.TAG ) )
-                        .show ( getSupportFragmentManager ().findFragmentByTag ( NS_4th_question.TAG ) )
+                        .remove ( getSupportFragmentManager ().findFragmentByTag ( NS_5th_question.TAG ) )
+                        .add ( R.id.fragment_container,new NS_4th_question (),NS_4th_question.TAG  )
                         .commitNow ();
 
                 break;
@@ -636,8 +634,8 @@ public class NewSymptomActivity extends AppCompatActivity implements
             case NS_6th_question.TAG:{
                 CURRENT_FRAGMENT = NS_5th_question.TAG;
                 fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
-                        .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_6th_question.TAG ) )
-                        .show ( getSupportFragmentManager ().findFragmentByTag ( NS_5th_question.TAG ) )
+                        .remove ( getSupportFragmentManager ().findFragmentByTag ( NS_6th_question.TAG ) )
+                        .add ( R.id.fragment_container,new NS_5th_question (),NS_5th_question.TAG )
                         .commitNow ();
 
                 break;
@@ -645,8 +643,8 @@ public class NewSymptomActivity extends AppCompatActivity implements
             case NS_7th_question.TAG:{
                 CURRENT_FRAGMENT = NS_6th_question.TAG;
                 fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
-                        .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_7th_question.TAG ) )
-                        .show ( getSupportFragmentManager ().findFragmentByTag ( NS_6th_question.TAG ) )
+                        .remove ( getSupportFragmentManager ().findFragmentByTag ( NS_7th_question.TAG ) )
+                        .add ( R.id.fragment_container,new NS_6th_question (),NS_6th_question.TAG)
                         .commitNow ();
 
                 break;
@@ -654,8 +652,8 @@ public class NewSymptomActivity extends AppCompatActivity implements
             case NS_8th_question.TAG:{
                 CURRENT_FRAGMENT = NS_7th_question.TAG;
                 fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
-                        .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_8th_question.TAG ) )
-                        .show ( getSupportFragmentManager ().findFragmentByTag ( NS_7th_question.TAG ) )
+                        .remove ( getSupportFragmentManager ().findFragmentByTag ( NS_8th_question.TAG ) )
+                        .add ( R.id.fragment_container,new NS_7th_question (),NS_7th_question.TAG )
                         .commitNow ();
 
                 break;
@@ -663,8 +661,8 @@ public class NewSymptomActivity extends AppCompatActivity implements
             case NS_9th_question.TAG:{
                 CURRENT_FRAGMENT = NS_8th_question.TAG;
                 fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
-                        .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_9th_question.TAG ) )
-                        .show ( getSupportFragmentManager ().findFragmentByTag ( NS_8th_question.TAG ) )
+                        .remove ( getSupportFragmentManager ().findFragmentByTag ( NS_9th_question.TAG ) )
+                        .add ( R.id.fragment_container,new NS_8th_question (),NS_8th_question.TAG )
                         .commitNow ();
 
                 break;
@@ -672,8 +670,8 @@ public class NewSymptomActivity extends AppCompatActivity implements
             case NS_10th_question.TAG:{
                 CURRENT_FRAGMENT = NS_9th_question.TAG;
                 fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
-                        .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_10th_question.TAG ) )
-                        .show ( getSupportFragmentManager ().findFragmentByTag ( NS_9th_question.TAG ) )
+                        .remove ( getSupportFragmentManager ().findFragmentByTag ( NS_10th_question.TAG ) )
+                        .add ( R.id.fragment_container,new NS_9th_question (),NS_9th_question.TAG )
                         .commitNow ();
 
                 break;
@@ -681,8 +679,8 @@ public class NewSymptomActivity extends AppCompatActivity implements
             case NS_11th_question.TAG:{
                 CURRENT_FRAGMENT = NS_10th_question.TAG;
                 fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
-                        .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_11th_question.TAG ) )
-                        .show ( getSupportFragmentManager ().findFragmentByTag ( NS_10th_question.TAG ) )
+                        .remove ( getSupportFragmentManager ().findFragmentByTag ( NS_11th_question.TAG ) )
+                        .add ( R.id.fragment_container,new NS_10th_question (),NS_10th_question.TAG )
                         .commitNow ();
 
                 break;
@@ -690,8 +688,8 @@ public class NewSymptomActivity extends AppCompatActivity implements
             case NS_12th_question.TAG:{
                 CURRENT_FRAGMENT = NS_11th_question.TAG;
                 fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.out_right )
-                        .hide ( getSupportFragmentManager ().findFragmentByTag ( NS_12th_question.TAG ) )
-                        .show ( getSupportFragmentManager ().findFragmentByTag ( NS_11th_question.TAG ) )
+                        .remove ( getSupportFragmentManager ().findFragmentByTag ( NS_12th_question.TAG ) )
+                        .add ( R.id.fragment_container,new NS_11th_question (),NS_11th_question.TAG )
                         .commitNow ();
                 break;
             }

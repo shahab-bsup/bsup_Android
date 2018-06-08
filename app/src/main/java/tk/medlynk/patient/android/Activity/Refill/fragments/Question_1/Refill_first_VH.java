@@ -39,6 +39,10 @@ public class Refill_first_VH extends ViewHolder {
         this.answer_input.addTextChangedListener(new OnAnswerInputTextWatcher());
     }
 
+    public void setFirstRefillAnswer(String answer){
+        this.answer_input.setText ( answer );
+    }
+
     public void setProgressBarVisibilityStatus(int status ){
         this.progressBar.setVisibility ( status );
     }

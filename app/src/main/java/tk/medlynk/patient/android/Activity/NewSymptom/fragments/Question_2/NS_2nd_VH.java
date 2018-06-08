@@ -1,5 +1,7 @@
 package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_2;
 
+
+import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -11,7 +13,6 @@ import android.widget.TextView;
 
 import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
-
 import tk.medlynk.patient.android.Model.Answer;
 
 /**
@@ -30,8 +31,9 @@ public class NS_2nd_VH extends RecyclerView.ViewHolder implements ViewSelection.
     private Answer answer;
 
 
-    public NS_2nd_VH(View itemView) {
+    public NS_2nd_VH(View itemView,Answer answerDB) {
         super ( itemView );
+
         progressBar = itemView.findViewById ( R.id.progress_bar );
         question_view = itemView.findViewById ( R.id.new_symptom_second_question );
         second_question = question_view.findViewById ( R.id.txtQuestion );
@@ -49,6 +51,14 @@ public class NS_2nd_VH extends RecyclerView.ViewHolder implements ViewSelection.
         second_answer.addTextChangedListener ( new AnswerWatcher() );
         second_answer.setOnFocusChangeListener ( new AnswerFocusChangeListener() );
         answer = new Answer ();
+
+        if (answerDB!=null)
+        {
+            if ( answerDB.getChoice ().equals ( "b" )){
+                choice.setSelect ( 0 );
+                onSingleItemSelected ( itemView,0 );
+            }
+        }
     }
 
     public void setProgressBarVisibilityStatus(int status){

@@ -80,7 +80,6 @@ public class NS_4th_question extends Fragment implements
 
     @Override
     public void onFourthAnswerSuccess(NewSymptomAnswerResponse response) {
-        System.out.println ( "NS_4th_question.onFourthAnswerSuccess" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onFourthQuestion ();
     }
@@ -88,19 +87,16 @@ public class NS_4th_question extends Fragment implements
     @Override
     public void onFourthAnswerFailure() {
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
-        System.out.println ( "NS_4th_question.onFourthAnswerFailure" );
         Toast.makeText ( getActivity (), "try again later!", Toast.LENGTH_SHORT ).show ();
     }
 
     @Override
     public void onUnauthorized() {
-        System.out.println ( "NS_4th_question.onUnauthorized" );
 
     }
 
     @Override
     public void onNextClicked(Answer answer) {
-        System.out.println ( "NS_4th_question.onNextClicked" );
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
         SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
         MedlynkRequests.newSymptomFourthQuestionAnswer (getActivity (),
@@ -111,7 +107,6 @@ public class NS_4th_question extends Fragment implements
 
     @Override
     public void onSkipClicked() {
-        System.out.println ( "NS_4th_question.onSkipClicked" );
         mListener.onFourthQuestion ();
     }
 

@@ -1,24 +1,36 @@
 package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_1;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.neweraandroid.demo.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import tk.medlynk.patient.android.DataBase.DataBaseModel;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.JsonConverter;
 import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
 import tk.medlynk.patient.android.Networking.MedlynkRequests;
+import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,8 +42,10 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
  */
 public class NS_1th_question extends Fragment implements View.OnClickListener, OnFirstAnswerListener {
 
+    private MedlynkViewModel mMedlynkViewModel;
+    boolean existsRecord=false;
+
     public static final String TAG = "NS_1th_question";
-//    public static final String TAG = NS_1th_question.class.getSimpleName ();
 
     private OnNewSymptomFirstQuestionListener mListener;
     private View question_view;
@@ -64,7 +78,12 @@ public class NS_1th_question extends Fragment implements View.OnClickListener, O
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment...
+        // Inflate the layout for this fragment
+
+        mMedlynkViewModel = ViewModelProviders.of ( getActivity () ).
+                get ( MedlynkViewModel.class );
+        mMedlynkViewModel.changeName ( "mammad" );
+
         View view = inflater.inflate ( R.layout.fragment_new__symptom_1th_question, container, false );
         progressBar = view.findViewById ( R.id.progress_bar );
         question_view = view.findViewById ( R.id.new_symptom_first_question );
@@ -73,12 +92,28 @@ public class NS_1th_question extends Fragment implements View.OnClickListener, O
         button.setBackgroundResource ( R.drawable.disable_next_question );
         button.setOnClickListener ( this );
         button.setClickable ( false );
-        see_more= question_view.findViewById ( R.id.txtQuestion_see_more );
+        see_more = question_view.findViewById ( R.id.txtQuestion_see_more );
         see_more.setVisibility ( View.VISIBLE );
         see_more.setOnClickListener ( this );
         first_question.setText ( R.string.new_symptom_first_question );
         answerInput = view.findViewById ( R.id.new_symptom_first_answer );
         answerInput.addTextChangedListener ( new AnswerInputTextChangeListener() );
+
+        mMedlynkViewModel.getAnswers ( 17285001,1,1 )
+                .observe ( this, new Observer<DataBaseModel> () {
+                    @Override
+                    public void onChanged(@Nullable DataBaseModel dataBaseModel) {
+                        if (dataBaseModel!=null){
+                            existsRecord=true;
+                            JsonConverter JC = JsonConverter.getInstance ();
+                            answerInput.setText ( JC.answerJsonToAnswers(dataBaseModel.getAnswerJson())
+                                    .get ( 0 ).getReply () );
+                            Log.d ( TAG, "onChanged: "  + JC.answerJsonToAnswers(dataBaseModel.
+                                    getAnswerJson()));
+                        }
+                    }
+                } );
+
         return view;
     }
 
@@ -118,6 +153,15 @@ public class NS_1th_question extends Fragment implements View.OnClickListener, O
                             manager.getAppointmentID (),
                             "1",
                             answer );
+
+                JsonConverter JC= JsonConverter.getInstance ();
+                List<Answer> answers=new ArrayList<> (  );
+                answers.add ( answer );
+                if(existsRecord==false)
+                    mMedlynkViewModel.insertAnswersToDB ( 17285001,1,1,JC.answersToAnswerJson ( answers ) );
+                else
+                    mMedlynkViewModel.updateAnswersToDB ( 17285001,1,1,JC.answersToAnswerJson ( answers ) );
+
                 break;
             }
         }
