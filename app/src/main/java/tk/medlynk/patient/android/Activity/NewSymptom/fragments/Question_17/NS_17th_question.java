@@ -1,5 +1,6 @@
 package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_17;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,7 @@ import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
 import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
 import tk.medlynk.patient.android.Networking.MedlynkRequests;
+import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,6 +38,7 @@ public class NS_17th_question extends Fragment implements
     private OnNewSymptomSeventeenQuestionListener mListener;
 
     private NS_17th_VH viewHolder;
+    private MedlynkViewModel medlynkViewModel;
 
     public NS_17th_question() {
         // Required empty public constructor
@@ -62,6 +65,8 @@ public class NS_17th_question extends Fragment implements
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate ( R.layout.fragment_new__symptom_17th_question, container, false );
+        medlynkViewModel = ViewModelProviders.of ( getActivity () )
+                .get ( MedlynkViewModel.class );
         viewHolder = new NS_17th_VH ( view );
         viewHolder.setOnSeventeenNSVHListener ( this );
         return view;

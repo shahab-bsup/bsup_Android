@@ -13,15 +13,19 @@ import tk.medlynk.patient.android.Activity.StartQuestionSet.StartAppointmentActi
 import tk.medlynk.patient.android.Constants;
 import tk.medlynk.patient.android.CustomViews.SnackController;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.CurrentUserInfo;
 import tk.medlynk.patient.android.Model.CurrentUserResponse;
 import tk.medlynk.patient.android.Model.PreviuosDoctorsResponse;
 import tk.medlynk.patient.android.Model.SearchDoctorResponse;
 import tk.medlynk.patient.android.Networking.MedlynkRequests;
 
+import com.google.gson.Gson;
 import com.neweraandroid.demo.R;
 
 import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 
 public class SearchActivity extends AppCompatActivity implements
         OnGetCurrentUserInfoListener,
@@ -38,6 +42,14 @@ public class SearchActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_doctor);
+        List<Answer> answers = new LinkedList<> (  );
+        for (int i = 0; i < 5; i++) {
+            Answer answer = new Answer ();
+            answer.setRate ( 10 );
+            answer.setChoice ( "v" );
+            answers.add ( answer );
+        }
+        Gson gson = new Gson ();
         parent_view = findViewById ( R.id.parent_search_activity );
         viewHolder = new SearchActivityViewHolder ( parent_view );
         viewHolder.setOnSearchActivityVHListener ( this );

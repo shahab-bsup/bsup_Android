@@ -1,8 +1,14 @@
 package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_2;
 
+import android.arch.lifecycle.LifecycleOwner;
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +16,16 @@ import android.widget.Toast;
 
 import com.neweraandroid.demo.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import tk.medlynk.patient.android.DataBase.DataBaseModel;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.JsonConverter;
 import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
 import tk.medlynk.patient.android.Networking.MedlynkRequests;
+import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,6 +38,10 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
 public class NS_2nd_question extends Fragment implements
         OnSecondAnswerListener,
         NS_2nd_VH.OnSecondNSVHListener {
+
+    private MedlynkViewModel mMedlynkViewModel;
+    boolean existsRecord = false;
+    Answer answerDB;
 
     public static final String TAG = "NS_2nd_question";
     private OnNewSymptomSecondQuestionListener mListener;
@@ -56,9 +72,30 @@ public class NS_2nd_question extends Fragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment...
-        View view = inflater.inflate ( R.layout.fragment_new__symptom_2nd_question, container, false );;
-        viewHolder = new NS_2nd_VH ( view );
-        viewHolder.setOnSecondNSVHListener ( this );
+        mMedlynkViewModel= ViewModelProviders.of ( this ).get ( MedlynkViewModel.class );
+
+        final View view = inflater.inflate ( R.layout.fragment_new__symptom_2nd_question, container, false );
+
+        mMedlynkViewModel.getAnswers ( 17285001,1,2 )
+                .observe ( (LifecycleOwner) this, new Observer<DataBaseModel> () {
+                    @Override
+                    public void onChanged(@Nullable DataBaseModel dataBaseModel) {
+                        if (dataBaseModel!=null){
+                            existsRecord = true;
+                            answerDB = new Answer ();
+                            JsonConverter JC = JsonConverter.getInstance ();
+                            answerDB=JC.answerJsonToAnswers ( dataBaseModel.getAnswerJson () )
+                                    .get ( 0 );
+                            Log.d ( TAG, "onChanged: "  + answerDB);
+                        }
+                        viewHolder = new NS_2nd_VH ( view,answerDB );
+                        viewHolder.setOnSecondNSVHListener( NS_2nd_question.this);
+                    }
+
+                } );
+
+        //viewHolder = new NS_2nd_VH ( view );
+        //viewHolder.setOnSecondNSVHListener( NS_2nd_question.this);
         return view;
     }
 
@@ -106,6 +143,14 @@ public class NS_2nd_question extends Fragment implements
                 NS_2nd_question.this,
                 manager.getAppointmentID (),
                 answer);
+
+        JsonConverter JC = JsonConverter.getInstance ();
+        List<Answer> answers = new ArrayList<> (  );
+        answers.add ( answer );
+        if(existsRecord==false)
+            mMedlynkViewModel.insertAnswersToDB ( 17285001,1,2,JC.answersToAnswerJson ( answers ) );
+        else
+            mMedlynkViewModel.updateAnswersToDB ( 17285001,1,2,JC.answersToAnswerJson ( answers ) );
     }
 
     @Override
