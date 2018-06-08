@@ -13,7 +13,7 @@ import tk.medlynk.patient.android.Model.Answer;
  */
 
 public class JsonConverter {
-
+ 
     private static JsonConverter jsonConverter;
 
     private JsonConverter(){
