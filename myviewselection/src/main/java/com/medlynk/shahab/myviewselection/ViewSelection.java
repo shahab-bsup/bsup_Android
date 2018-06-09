@@ -173,6 +173,7 @@ public class ViewSelection extends LinearLayout {
         this.single_select = single_select;
     }
 
+
     public int getSelected_state_background() {
         return selected_state_background;
     }
@@ -323,6 +324,12 @@ public class ViewSelection extends LinearLayout {
 
     public void setCurrentSelection(int currentSelection) {
         this.currentSelection = currentSelection;
+    }
+
+    public void preViewOfDBResult(boolean selectable,boolean single_select,int numOfViews){
+        this.selectable=selectable;
+        this.single_select=single_select;
+        button_click_listener.onClick(buttons.get(numOfViews));
     }
 
     public void setOnHelpfullyOptionClickListener(OnHelpfullyOptionsClickListener onHelpfullyOptionClickListener) {

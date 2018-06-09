@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.neweraandroid.demo.R;
 
+import tk.medlynk.patient.android.Activity.NewSymptom.OnNewSymptomAnswerListener;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
 import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
@@ -25,7 +26,7 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
  * create an instance of this fragment.
  */
 public class NS_3rd_question extends Fragment implements
-        OnThirdAnswerListener,
+        OnNewSymptomAnswerListener,
         NS_3rd_VH.OnThirdNSVHListener {
 
     public static final String TAG = "NS_3rd_question";
@@ -82,13 +83,13 @@ public class NS_3rd_question extends Fragment implements
 
 
     @Override
-    public void onThirdAnswerSuccess(NewSymptomAnswerResponse response) {
+    public void onAnswerSuccess(NewSymptomAnswerResponse response) {
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onThirdQuestion ();
     }
 
     @Override
-    public void onThirdAnswerFailure() {
+    public void onAnswerFailure() {
         System.out.println ( "NS_3rd_question.onThirdAnswerFailure" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         Toast.makeText ( getActivity (), "try again later!", Toast.LENGTH_SHORT ).show ();

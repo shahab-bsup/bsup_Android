@@ -16,6 +16,7 @@ import com.neweraandroid.demo.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import tk.medlynk.patient.android.Activity.NewSymptom.OnNewSymptomAnswerListener;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
 import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
@@ -30,7 +31,7 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
  * create an instance of this fragment.
  */
 public class NS_8th_question extends Fragment implements
-        OnEighthAnswerListener,
+        OnNewSymptomAnswerListener,
         NS_8th_VH.OnEighthNSVHListener {
 
     public static final String TAG = "NS_8th_question";
@@ -86,14 +87,14 @@ public class NS_8th_question extends Fragment implements
     }
 
     @Override
-    public void onEighthAnswerSuccess(NewSymptomAnswerResponse response) {
+    public void onAnswerSuccess(NewSymptomAnswerResponse response) {
         System.out.println ( "NS_8th_question.onEighthAnswerSuccess" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onEightQuestion ();
     }
 
     @Override
-    public void onEightAnswerFailure() {
+    public void onAnswerFailure() {
         System.out.println ( "NS_8th_question.onEightAnswerFailure" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onEightQuestion ();

@@ -26,44 +26,50 @@ public class NS_4thVH extends RecyclerView.ViewHolder implements ViewSelection.O
     private OnFourthNSVHListener onFourthNSVHListener;
     private Answer answer;
 
-    public NS_4thVH(View itemView) {
-        super ( itemView );
-        answer = new Answer ();
-        progressBar = itemView.findViewById ( R.id.progress_bar );
-        question_view = itemView.findViewById ( R.id.new_symptom_fourth_question );
-        question = question_view.findViewById ( R.id.txtQuestion );
-        question.setText ( R.string.new_symptom_fourth_question );
-        button_next = itemView.findViewById ( R.id.btnNextQuestion );
-        button_next.setOnClickListener ( new OnNextClickListener() );
-        button_next.setEnabled ( false );
-        button_skip = itemView.findViewById ( R.id.btnSkipQuestion );
-        button_skip.setOnClickListener ( new OnSkipClickListener() );
-        choiceNumbers = itemView.findViewById ( R.id.viewSelectionChoiceNumbers );
-        choices = itemView.findViewById ( R.id.viewSelectionChoices );
-        choices.setOnSingleItemSelectedListener ( this );
-        for (int i = 0; i < choiceNumbers.getNumberOfViews (); i++) {
-            choiceNumbers.setTextToButtons ( String.valueOf ( i + 1 ), i );
+    public NS_4thVH(View itemView, Answer answerDB) {
+        super(itemView);
+        answer = new Answer();
+        progressBar = itemView.findViewById(R.id.progress_bar);
+        question_view = itemView.findViewById(R.id.new_symptom_fourth_question);
+        question = question_view.findViewById(R.id.txtQuestion);
+        question.setText(R.string.new_symptom_fourth_question);
+        button_next = itemView.findViewById(R.id.btnNextQuestion);
+        button_next.setOnClickListener(new OnNextClickListener());
+        button_next.setEnabled(false);
+        button_skip = itemView.findViewById(R.id.btnSkipQuestion);
+        button_skip.setOnClickListener(new OnSkipClickListener());
+        choiceNumbers = itemView.findViewById(R.id.viewSelectionChoiceNumbers);
+        choices = itemView.findViewById(R.id.viewSelectionChoices);
+        choices.setOnSingleItemSelectedListener(this);
+
+        for (int i = 0; i < choiceNumbers.getNumberOfViews(); i++) {
+            choiceNumbers.setTextToButtons(String.valueOf(i + 1), i);
         }
-        answerChoices = itemView.getContext ().getResources ().getStringArray ( R.array.question_4_choices );
-        for (int i = 0; i < choices.getNumberOfViews (); i++) {
-            choices.setTextToButtons ( answerChoices[i], i );
+        answerChoices = itemView.getContext().getResources().getStringArray(R.array.question_4_choices);
+        for (int i = 0; i < choices.getNumberOfViews(); i++) {
+            choices.setTextToButtons(answerChoices[i], i);
+        }
+
+        if (answerDB != null) {
+            choices.preViewOfDBResult(true,true,answerDB.getRate() - 1);
         }
     }
 
-    public void setProgressBarVisibilityStatus( int status ){
-        this.progressBar.setVisibility ( status );
+    public void setProgressBarVisibilityStatus(int status) {
+        this.progressBar.setVisibility(status);
     }
 
     @Override
     public void onSingleItemSelected(View view, int i) {
-        System.out.println ( "NS_4thVH.onSingleItemSelected" );
-        if( i == -1 ){
-            button_next.setEnabled ( false );
-            button_next.setBackgroundResource ( R.drawable.disable_next_question );
-        }else{
-            button_next.setEnabled ( true );
-            button_next.setBackgroundResource ( R.drawable.enable_next_question );
-            answer.setRate ( ++i );
+
+        System.out.println("NS_4thVH.onSingleItemSelected");
+        if (i == -1) {
+            button_next.setEnabled(false);
+            button_next.setBackgroundResource(R.drawable.disable_next_question);
+        } else {
+            button_next.setEnabled(true);
+            button_next.setBackgroundResource(R.drawable.enable_next_question);
+            answer.setRate(++i);
         }
     }
 
@@ -75,23 +81,24 @@ public class NS_4thVH extends RecyclerView.ViewHolder implements ViewSelection.O
     private class OnNextClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println ( "NS_4thVH.NS_4thVH" );
-            System.out.println ( "OnNextClickListener.onClick" );
-            onFourthNSVHListener.onNextClicked ( answer );
+            System.out.println("NS_4thVH.NS_4thVH");
+            System.out.println("OnNextClickListener.onClick");
+            onFourthNSVHListener.onNextClicked(answer);
         }
     }
 
     private class OnSkipClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println ( "NS_4thVH.NS_4thVH" );
-            System.out.println ( "OnSkipClickListener.onClick" );
-            onFourthNSVHListener.onSkipClicked ();
+            System.out.println("NS_4thVH.NS_4thVH");
+            System.out.println("OnSkipClickListener.onClick");
+            onFourthNSVHListener.onSkipClicked();
         }
     }
 
-    public interface OnFourthNSVHListener{
+    public interface OnFourthNSVHListener {
         void onNextClicked(Answer answer);
+
         void onSkipClicked();
     }
 
