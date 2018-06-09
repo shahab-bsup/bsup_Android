@@ -16,6 +16,7 @@ import com.neweraandroid.demo.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import tk.medlynk.patient.android.Activity.NewSymptom.OnNewSymptomAnswerListener;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
 import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
@@ -30,7 +31,7 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
  * create an instance of this fragment.
  */
 public class NS_9th_question extends Fragment implements
-        OnNinthAnswerListener,
+        OnNewSymptomAnswerListener,
         NS_9th_VH.OnNinthNSVHListener {
 
     public static final String TAG = "NS_9th_question";
@@ -90,14 +91,14 @@ public class NS_9th_question extends Fragment implements
     }
 
     @Override
-    public void onNinthAnswerSuccess(NewSymptomAnswerResponse response) {
+    public void onAnswerSuccess(NewSymptomAnswerResponse response) {
         System.out.println ( "NS_9th_question.onNinthAnswerSuccess" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onNinthQuestion ();
     }
 
     @Override
-    public void onNinthAnswerFailure() {
+    public void onAnswerFailure() {
         System.out.println ( "NS_9th_question.onNinthAnswerFailure" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onNinthQuestion ();

@@ -19,7 +19,7 @@ import com.neweraandroid.demo.R;
  */
 public class End_of_Question_Set extends Fragment implements End_of_Question_Set_VH.OnEndOfQuestionSetVHListener {
 
-    public static final String TAG = End_of_Question_Set.class.getSimpleName ();
+    public static final String TAG = "End_of_Question_Set";
 
     private OnNewSymptomTwenty4QuestionListener mListener;
 

@@ -1,6 +1,5 @@
 package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_1;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -17,13 +16,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.neweraandroid.demo.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import tk.medlynk.patient.android.Activity.NewSymptom.OnNewSymptomAnswerListener;
 import tk.medlynk.patient.android.DataBase.DataBaseModel;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
 import tk.medlynk.patient.android.JsonConverter;
@@ -40,10 +39,12 @@ import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
  * Use the {@link NS_1th_question#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NS_1th_question extends Fragment implements View.OnClickListener, OnFirstAnswerListener {
+public class NS_1th_question extends Fragment implements View.OnClickListener, OnNewSymptomAnswerListener {
 
     private MedlynkViewModel mMedlynkViewModel;
-    boolean existsRecord=false;
+    private boolean existsRecord = false;
+    private List<Answer> answers = new ArrayList<>();
+    private SharedPreferenceManager manager;
 
     public static final String TAG = "NS_1th_question";
 
@@ -60,17 +61,17 @@ public class NS_1th_question extends Fragment implements View.OnClickListener, O
     }
 
     public static NS_1th_question newInstance(String param1, String param2) {
-        NS_1th_question fragment = new NS_1th_question ();
-        Bundle args = new Bundle ();
-        fragment.setArguments ( args );
+        NS_1th_question fragment = new NS_1th_question();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate ( savedInstanceState );
-        System.out.println ( "NS_1th_question.onCreate" );
-        if (getArguments () != null) {
+        super.onCreate(savedInstanceState);
+        System.out.println("NS_1th_question.onCreate");
+        if (getArguments() != null) {
 
         }
     }
@@ -80,87 +81,82 @@ public class NS_1th_question extends Fragment implements View.OnClickListener, O
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        mMedlynkViewModel = ViewModelProviders.of ( getActivity () ).
-                get ( MedlynkViewModel.class );
-        mMedlynkViewModel.changeName ( "mammad" );
+        mMedlynkViewModel = ViewModelProviders.of(getActivity()).
+                get(MedlynkViewModel.class);
 
-        View view = inflater.inflate ( R.layout.fragment_new__symptom_1th_question, container, false );
-        progressBar = view.findViewById ( R.id.progress_bar );
-        question_view = view.findViewById ( R.id.new_symptom_first_question );
-        first_question = question_view.findViewById ( R.id.txtQuestion );
-        button = view.findViewById ( R.id.btnNextQuestion );
-        button.setBackgroundResource ( R.drawable.disable_next_question );
-        button.setOnClickListener ( this );
-        button.setClickable ( false );
-        see_more = question_view.findViewById ( R.id.txtQuestion_see_more );
-        see_more.setVisibility ( View.VISIBLE );
-        see_more.setOnClickListener ( this );
-        first_question.setText ( R.string.new_symptom_first_question );
-        answerInput = view.findViewById ( R.id.new_symptom_first_answer );
-        answerInput.addTextChangedListener ( new AnswerInputTextChangeListener() );
+        View view = inflater.inflate(R.layout.fragment_new__symptom_1th_question, container, false);
+        progressBar = view.findViewById(R.id.progress_bar);
+        question_view = view.findViewById(R.id.new_symptom_first_question);
+        first_question = question_view.findViewById(R.id.txtQuestion);
+        button = view.findViewById(R.id.btnNextQuestion);
+        button.setBackgroundResource(R.drawable.disable_next_question);
+        button.setOnClickListener(this);
+        button.setClickable(false);
+        see_more = question_view.findViewById(R.id.txtQuestion_see_more);
+        see_more.setVisibility(View.VISIBLE);
+        see_more.setOnClickListener(this);
+        first_question.setText(R.string.new_symptom_first_question);
+        answerInput = view.findViewById(R.id.new_symptom_first_answer);
+        answerInput.addTextChangedListener(new AnswerInputTextChangeListener());
 
-        mMedlynkViewModel.getAnswers ( 17285001,1,1 )
-                .observe ( this, new Observer<DataBaseModel> () {
+        manager = new SharedPreferenceManager(getActivity());
+
+        mMedlynkViewModel.getAnswers(manager.getAppointmentID(), 1, 1)
+                .observe(this, new Observer<DataBaseModel>() {
                     @Override
                     public void onChanged(@Nullable DataBaseModel dataBaseModel) {
-                        if (dataBaseModel!=null){
-                            existsRecord=true;
-                            JsonConverter JC = JsonConverter.getInstance ();
-                            answerInput.setText ( JC.answerJsonToAnswers(dataBaseModel.getAnswerJson())
-                                    .get ( 0 ).getReply () );
-                            Log.d ( TAG, "onChanged: "  + JC.answerJsonToAnswers(dataBaseModel.
+                        if (dataBaseModel != null) {
+                            existsRecord = true;
+                            JsonConverter JC = JsonConverter.getInstance();
+                            answerInput.setText(JC.answerJsonToAnswers(dataBaseModel.getAnswerJson())
+                                    .get(0).getReply());
+                            Log.d(TAG, "onChanged: " + JC.answerJsonToAnswers(dataBaseModel.
                                     getAnswerJson()));
                         }
                     }
-                } );
+                });
 
         return view;
     }
 
     @Override
     public void onAttach(Context context) {
-        System.out.println ( "NS_1th_question.onAttach" );
-        super.onAttach ( context );
+        System.out.println("NS_1th_question.onAttach");
+        super.onAttach(context);
         if (context instanceof OnNewSymptomFirstQuestionListener) {
             mListener = (OnNewSymptomFirstQuestionListener) context;
         } else {
-            throw new RuntimeException ( context.toString ()
-                    + " must implement OnNewSymptomFirstQuestionListener" );
+            throw new RuntimeException(context.toString()
+                    + " must implement OnNewSymptomFirstQuestionListener");
         }
     }
 
     @Override
     public void onDetach() {
-        super.onDetach ();
-        System.out.println ( "NS_1th_question.onDetach" );
+        super.onDetach();
+        System.out.println("NS_1th_question.onDetach");
         mListener = null;
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId ()){
-            case R.id.txtQuestion_see_more:{
-                see_more.setText ( R.string.see_more_new_symptom_first_question );
+        switch (view.getId()) {
+            case R.id.txtQuestion_see_more: {
+                see_more.setText(R.string.see_more_new_symptom_first_question);
                 break;
             }
-            case R.id.btnNextQuestion:{
-                    progressBar.setVisibility ( View.VISIBLE );
-                    Answer answer = new Answer ();
-                    answer.setReply ( answerInput.getText ().toString () );
-                    SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );;
-                    MedlynkRequests.newSymptomFirstQuestionAnswer ( getActivity (),
-                            NS_1th_question.this,
-                            manager.getAppointmentID (),
-                            "1",
-                            answer );
+            case R.id.btnNextQuestion: {
+                progressBar.setVisibility(View.VISIBLE);
+                Answer answer = new Answer();
+                answer.setReply(answerInput.getText().toString());
 
-                JsonConverter JC= JsonConverter.getInstance ();
-                List<Answer> answers=new ArrayList<> (  );
-                answers.add ( answer );
-                if(existsRecord==false)
-                    mMedlynkViewModel.insertAnswersToDB ( 17285001,1,1,JC.answersToAnswerJson ( answers ) );
-                else
-                    mMedlynkViewModel.updateAnswersToDB ( 17285001,1,1,JC.answersToAnswerJson ( answers ) );
+                MedlynkRequests.newSymptomFirstQuestionAnswer(getActivity(),
+                        NS_1th_question.this,
+                        manager.getAppointmentID(),
+                        "1",
+                        answer);
+
+                answers.add(answer);
 
                 break;
             }
@@ -168,22 +164,28 @@ public class NS_1th_question extends Fragment implements View.OnClickListener, O
     }
 
     @Override
-    public void onFirstAnswerSuccess(NewSymptomAnswerResponse response) {
-        System.out.println ( "NS_1th_question.onFirstAnswerSuccess" );
-        progressBar.setVisibility ( View.GONE );
-        mListener.onFirstQuestion ();
+    public void onAnswerSuccess(NewSymptomAnswerResponse response) {
+        System.out.println("NS_1th_question.onFirstAnswerSuccess");
+
+        JsonConverter JC = JsonConverter.getInstance();
+        if (existsRecord == false)
+            mMedlynkViewModel.insertAnswersToDB(manager.getAppointmentID(), 1, 1, JC.answersToAnswerJson(answers));
+        else
+            mMedlynkViewModel.updateAnswersToDB(manager.getAppointmentID(), 1, 1, JC.answersToAnswerJson(answers));
+
+        progressBar.setVisibility(View.GONE);
+        mListener.onFirstQuestion();
     }
 
     @Override
-    public void onFirstAnswerFailure() {
-        System.out.println ( "NS_1th_question.onFirstAnswerFailure" );
-        progressBar.setVisibility ( View.GONE );
+    public void onAnswerFailure() {
+        System.out.println("NS_1th_question.onFirstAnswerFailure");
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
     public void onUnauthorized() {
-        System.out.println ( "NS_1th_question.onUnauthorized" );
-        SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
+        System.out.println("NS_1th_question.onUnauthorized");
     }
 
     public interface OnNewSymptomFirstQuestionListener {
@@ -203,18 +205,18 @@ public class NS_1th_question extends Fragment implements View.OnClickListener, O
 
         @Override
         public void afterTextChanged(Editable editable) {
-            if( editable.length () == 0 ){
-                button.setBackgroundResource ( R.drawable.disable_next_question );
-                button.setClickable ( false );
-            }else{
-                button.setBackgroundResource ( R.drawable.enable_next_question );
-                button.setClickable ( true );
+            if (editable.length() == 0) {
+                button.setBackgroundResource(R.drawable.disable_next_question);
+                button.setClickable(false);
+            } else {
+                button.setBackgroundResource(R.drawable.enable_next_question);
+                button.setClickable(true);
             }
         }
     }
 
     @Override
     public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged ( hidden );
+        super.onHiddenChanged(hidden);
     }
 }

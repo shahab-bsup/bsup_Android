@@ -38,8 +38,7 @@ import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_9
 import tk.medlynk.patient.android.Activity.Login.OnGetCurrentUserInfoListener;
 import tk.medlynk.patient.android.Activity.Login.OnPrimaryAccessTokenListener;
 import tk.medlynk.patient.android.Activity.Login.OnResendConfirmationListener;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_1.OnFirstAnswerListener;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_10.OnTenthAnswerListener;
+import tk.medlynk.patient.android.Activity.NewSymptom.OnNewSymptomAnswerListener;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_11.OnEleventhAnswerListener;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_13.OnThirteenAnswerListener;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_14.OnFourteenAnswerListener;
@@ -48,18 +47,10 @@ import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_16.OnSi
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_17.OnSeventeenAnswerListener;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_18.OnEighteenAnswerListener;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_19.OnNineteenAnswerListener;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_2.OnSecondAnswerListener;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_20.OnTwentyAnswerListener;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_21.OnTwentyOneAnswerListener;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_22.OnTwentyTwoAnswerListener;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_23.OnTwentyThreeAnswerListener;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_3.OnThirdAnswerListener;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_4.OnFourthAnswerListener;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_5.OnFifthAnswerListener;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_6.OnSixthAnswerListener;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_7.OnSeventhAnswerListener;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_8.OnEighthAnswerListener;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_9.OnNinthAnswerListener;
 import tk.medlynk.patient.android.Activity.NoDoctorIdPage.OnNoDoctorIDPreferencesListener;
 import tk.medlynk.patient.android.Activity.ResetPassword.OnResetPasswordListener;
 import tk.medlynk.patient.android.Activity.SearchDoctor.OnSearchDoctorListener;
@@ -88,7 +79,6 @@ import tk.medlynk.patient.android.Model.PrimaryTokenErrorResponse;
 import tk.medlynk.patient.android.Model.RenewTokenResponse;
 import tk.medlynk.patient.android.Model.SearchDoctorResponse;
 import tk.medlynk.patient.android.Model.SymptomResponse;
-import tk.medlynk.patient.android.MyApplication;
 
 /**
  * Created by Shahab on 1/11/2018.
@@ -449,7 +439,7 @@ public class MedlynkRequests {
     }
 
     public static void newSymptomFirstQuestionAnswer(Context context,
-                                                     final OnFirstAnswerListener listener,
+                                                     final OnNewSymptomAnswerListener listener,
                                                      int appointmentID,
                                                      String question_number,
                                                      Answer answer) {
@@ -462,22 +452,22 @@ public class MedlynkRequests {
             @Override
             public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
                 if (response.isSuccessful ()) {
-                    listener.onFirstAnswerSuccess ( response.body () );
+                    listener.onAnswerSuccess ( response.body () );
                 } else if (response.code () == 401) {
                     listener.onUnauthorized ();
                 } else {
-                    listener.onFirstAnswerFailure ();
+                    listener.onAnswerFailure ();
                 }
             }
 
             @Override
             public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
-                listener.onFirstAnswerFailure ();
+                listener.onAnswerFailure ();
             }
         } );
     }
 
-    public static void newSymptomSecondQuestionAnswer(Context context, final OnSecondAnswerListener listener, int appointmentID, Answer answer) {
+    public static void newSymptomSecondQuestionAnswer(Context context, final OnNewSymptomAnswerListener listener, int appointmentID, Answer answer) {
         System.out.println ( "MedlynkRequests.newSymptomSecondQuestionAnswer" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "2" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
@@ -487,21 +477,21 @@ public class MedlynkRequests {
             @Override
             public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
                 if (response.isSuccessful ()) {
-                    listener.onSecondAnswerSuccess ( response.body () );
+                    listener.onAnswerSuccess ( response.body () );
 
                 } else {
-                    listener.onSecondAnswerFailure ();
+                    listener.onAnswerFailure ();
                 }
             }
 
             @Override
             public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
-                listener.onSecondAnswerFailure ();
+                listener.onAnswerFailure ();
             }
         } );
     }
 
-    public static void newSymptomThirdQuestionAnswer(Context context, final OnThirdAnswerListener listener, int appointmentID, Answer answer) {
+    public static void newSymptomThirdQuestionAnswer(Context context, final OnNewSymptomAnswerListener listener, int appointmentID, Answer answer) {
         System.out.println ( "MedlynkRequests.newSymptomThirdQuestionAnswer" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "3" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
@@ -511,21 +501,21 @@ public class MedlynkRequests {
             @Override
             public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
                 if (response.isSuccessful ()) {
-                    listener.onThirdAnswerSuccess ( response.body () );
+                    listener.onAnswerSuccess ( response.body () );
 
                 } else {
-                    listener.onThirdAnswerFailure ();
+                    listener.onAnswerFailure ();
                 }
             }
 
             @Override
             public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
-                listener.onThirdAnswerFailure ();
+                listener.onAnswerFailure ();
             }
         } );
     }
 
-    public static void newSymptomFourthQuestionAnswer(Context context, final OnFourthAnswerListener listener, int appointmentID, Answer answer) {
+    public static void newSymptomFourthQuestionAnswer(Context context, final OnNewSymptomAnswerListener listener, int appointmentID, Answer answer) {
         System.out.println ( "MedlynkRequests.newSymptomFourthQuestionAnswer" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "4" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
@@ -535,21 +525,21 @@ public class MedlynkRequests {
             @Override
             public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
                 if (response.isSuccessful ()) {
-                    listener.onFourthAnswerSuccess ( response.body () );
+                    listener.onAnswerSuccess ( response.body () );
 
                 } else {
-                    listener.onFourthAnswerFailure ();
+                    listener.onAnswerFailure ();
                 }
             }
 
             @Override
             public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
-                listener.onFourthAnswerFailure ();
+                listener.onAnswerFailure ();
             }
         } );
     }
 
-    public static void newSymptomFifthQuestionAnswer(Context context, final OnFifthAnswerListener listener, int appointmentID, Answer answer) {
+    public static void newSymptomFifthQuestionAnswer(Context context, final OnNewSymptomAnswerListener listener, int appointmentID, Answer answer) {
         System.out.println ( "MedlynkRequests.newSymptomFifthQuestionAnswer" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "5" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
@@ -559,21 +549,21 @@ public class MedlynkRequests {
             @Override
             public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
                 if (response.isSuccessful ()) {
-                    listener.onFifthAnswerSuccess ( response.body () );
+                    listener.onAnswerSuccess ( response.body () );
 
                 } else {
-                    listener.onFifthAnswerFailure ();
+                    listener.onAnswerFailure ();
                 }
             }
 
             @Override
             public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
-                listener.onFifthAnswerFailure ();
+                listener.onAnswerFailure ();
             }
         } );
     }
 
-    public static void newSymptomSixthQuestionAnswer(Context context, final OnSixthAnswerListener listener, int appointmentID, Answer answer) {
+    public static void newSymptomSixthQuestionAnswer(Context context, final OnNewSymptomAnswerListener listener, int appointmentID, Answer answer) {
         System.out.println ( "MedlynkRequests.newSymptomSixthQuestionAnswer" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "6" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
@@ -583,21 +573,21 @@ public class MedlynkRequests {
             @Override
             public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
                 if (response.isSuccessful ()) {
-                    listener.onSixthAnswerSuccess ( response.body () );
+                    listener.onAnswerSuccess ( response.body () );
 
                 } else {
-                    listener.onSixthAnswerFailure ();
+                    listener.onAnswerFailure ();
                 }
             }
 
             @Override
             public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
-                listener.onSixthAnswerFailure ();
+                listener.onAnswerFailure ();
             }
         } );
     }
 
-    public static void newSymptomSeventhQuestionAnswer(Context context, final OnSeventhAnswerListener listener, int appointmentID, Answer answer) {
+    public static void newSymptomSeventhQuestionAnswer(Context context, final OnNewSymptomAnswerListener listener, int appointmentID, Answer answer) {
         System.out.println ( "MedlynkRequests.newSymptomSeventhQuestionAnswer" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "7" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
@@ -607,21 +597,21 @@ public class MedlynkRequests {
             @Override
             public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
                 if (response.isSuccessful ()) {
-                    listener.onSeventhAnswerSuccess ( response.body () );
+                    listener.onAnswerSuccess ( response.body () );
 
                 } else {
-                    listener.onSeventhAnswerFailure ();
+                    listener.onAnswerFailure ();
                 }
             }
 
             @Override
             public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
-                listener.onSeventhAnswerFailure ();
+                listener.onAnswerFailure ();
             }
         } );
     }
 
-    public static void newSymptomEighthQuestionAnswer(Context context, final OnEighthAnswerListener listener, int appointmentID, Answer answer) {
+    public static void newSymptomEighthQuestionAnswer(Context context, final OnNewSymptomAnswerListener listener, int appointmentID, Answer answer) {
         System.out.println ( "MedlynkRequests.newSymptomEighthQuestionAnswer" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "8" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
@@ -631,21 +621,21 @@ public class MedlynkRequests {
             @Override
             public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
                 if (response.isSuccessful ()) {
-                    listener.onEighthAnswerSuccess ( response.body () );
+                    listener.onAnswerSuccess ( response.body () );
 
                 } else {
-                    listener.onEightAnswerFailure ();
+                    listener.onAnswerFailure ();
                 }
             }
 
             @Override
             public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
-                listener.onEightAnswerFailure ();
+                listener.onAnswerFailure ();
             }
         } );
     }
 
-    public static void newSymptomEighthQuestionAnswer(Context context, final OnEighthAnswerListener listener, int appointmentID, List<Answer> answer) {
+    public static void newSymptomEighthQuestionAnswer(Context context, final OnNewSymptomAnswerListener listener, int appointmentID, List<Answer> answer) {
         System.out.println ( "MedlynkRequests.newSymptomEighthQuestionAnswer" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "8" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
@@ -655,21 +645,21 @@ public class MedlynkRequests {
             @Override
             public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
                 if (response.isSuccessful ()) {
-                    listener.onEighthAnswerSuccess ( response.body () );
+                    listener.onAnswerSuccess ( response.body () );
 
                 } else {
-                    listener.onEightAnswerFailure ();
+                    listener.onAnswerFailure ();
                 }
             }
 
             @Override
             public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
-                listener.onEightAnswerFailure ();
+                listener.onAnswerFailure ();
             }
         } );
     }
 
-    public static void newSymptomNinthQuestionAnswer(Context context, final OnNinthAnswerListener listener, int appointmentID, Answer answer) {
+    public static void newSymptomNinthQuestionAnswer(Context context, final OnNewSymptomAnswerListener listener, int appointmentID, Answer answer) {
         System.out.println ( "MedlynkRequests.newSymptomNinthQuestionAnswer" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "9" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
@@ -679,20 +669,20 @@ public class MedlynkRequests {
             @Override
             public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
                 if (response.isSuccessful ()) {
-                    listener.onNinthAnswerSuccess ( response.body () );
+                    listener.onAnswerSuccess ( response.body () );
                 } else {
-                    listener.onNinthAnswerFailure ();
+                    listener.onAnswerFailure ();
                 }
             }
 
             @Override
             public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
-                listener.onNinthAnswerFailure ();
+                listener.onAnswerFailure ();
             }
         } );
     }
 
-    public static void newSymptomNinthQuestionAnswer(Context context, final OnNinthAnswerListener listener, int appointmentID, List<Answer> answer) {
+    public static void newSymptomNinthQuestionAnswer(Context context, final OnNewSymptomAnswerListener listener, int appointmentID, List<Answer> answer) {
         System.out.println ( "MedlynkRequests.newSymptomNinthQuestionAnswer" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "9" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
@@ -702,20 +692,20 @@ public class MedlynkRequests {
             @Override
             public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
                 if (response.isSuccessful ()) {
-                    listener.onNinthAnswerSuccess ( response.body () );
+                    listener.onAnswerSuccess ( response.body () );
                 } else {
-                    listener.onNinthAnswerFailure ();
+                    listener.onAnswerFailure ();
                 }
             }
 
             @Override
             public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
-                listener.onNinthAnswerFailure ();
+                listener.onAnswerFailure ();
             }
         } );
     }
 
-    public static void newSymptomTenthQuestionAnswer(Context context, final OnTenthAnswerListener listener, int appointmentID, Answer answer) {
+    public static void newSymptomTenthQuestionAnswer(Context context, final OnNewSymptomAnswerListener listener, int appointmentID, Answer answer) {
         System.out.println ( "MedlynkRequests.newSymptomTenthQuestionAnswer" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "10" );
         Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
@@ -725,15 +715,15 @@ public class MedlynkRequests {
             @Override
             public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
                 if (response.isSuccessful ()) {
-                    listener.onTenthAnswerSuccess ( response.body () );
+                    listener.onAnswerSuccess ( response.body () );
                 } else {
-                    listener.onTenthAnswerFailure ();
+                    listener.onAnswerFailure ();
                 }
             }
 
             @Override
             public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
-                listener.onTenthAnswerFailure ();
+                listener.onAnswerFailure ();
             }
         } );
     }

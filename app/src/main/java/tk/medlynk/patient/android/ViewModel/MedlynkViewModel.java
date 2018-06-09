@@ -7,6 +7,7 @@ import android.arch.lifecycle.LiveData;
 import java.util.List;
 
 import tk.medlynk.patient.android.DataBase.DataBaseModel;
+import tk.medlynk.patient.android.Networking.MedlynkRequests;
 import tk.medlynk.patient.android.Repository.MedlynkRepository;
 
 /**
@@ -14,8 +15,6 @@ import tk.medlynk.patient.android.Repository.MedlynkRepository;
  */
 
 public class MedlynkViewModel extends AndroidViewModel {
-
-    private String name ;
 
     private MedlynkRepository mRepository;
     private LiveData<DataBaseModel> mGetAnswers;
@@ -36,14 +35,6 @@ public class MedlynkViewModel extends AndroidViewModel {
 
     public void updateAnswersToDB(int appointmentId, int tableNumber, int questionNumber, String answersJson) {
         mRepository.UpdateAnswerRecord ( appointmentId, tableNumber, questionNumber, answersJson );
-    }
-
-    public void changeName(String name){
-        this.name = name;
-    }
-
-    public String getName(){
-        return name;
     }
 
 }

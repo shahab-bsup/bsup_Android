@@ -55,8 +55,10 @@ public class NS_2nd_VH extends RecyclerView.ViewHolder implements ViewSelection.
         if (answerDB!=null)
         {
             if ( answerDB.getChoice ().equals ( "b" )){
-                choice.setSelect ( 0 );
-                onSingleItemSelected ( itemView,0 );
+                choice.preViewOfDBResult(true,true,0);
+            }
+            else if(answerDB.getChoice ().equals ( "a" )){
+                second_answer.setText(answerDB.getReply());
             }
         }
     }

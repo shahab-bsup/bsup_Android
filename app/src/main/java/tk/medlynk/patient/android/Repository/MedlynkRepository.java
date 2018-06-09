@@ -3,14 +3,10 @@ package tk.medlynk.patient.android.Repository;
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
-import android.support.annotation.Nullable;
-
-import java.util.List;
 
 import tk.medlynk.patient.android.DataBase.AnswerDao;
 import tk.medlynk.patient.android.DataBase.DataBaseModel;
 import tk.medlynk.patient.android.DataBase.MedlynkDatabase;
-import tk.medlynk.patient.android.Model.Answer;
 
 /**
  * Created by Shahab on 6/6/2018.

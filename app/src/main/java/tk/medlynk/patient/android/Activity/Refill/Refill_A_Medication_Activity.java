@@ -1,6 +1,5 @@
 package tk.medlynk.patient.android.Activity.Refill;
 
-import android.os.Handler;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,117 +29,278 @@ public class Refill_A_Medication_Activity extends AppCompatActivity implements
         Refill_fifth_Question.onRefillFifthQuestionInteractionListener,
         Refill_sixth_Question.onRefillSixthQuestionInteractionListener,
         Refill_seventh_Question.onRefillSeventhQuestionInteractionListener,
-        Refill_eighth_Question.onRefillEighthQuestionInteractionListener
-{
+        Refill_eighth_Question.onRefillEighthQuestionInteractionListener {
 
-    private static final String TAG = Refill_A_Medication_Activity.class.getSimpleName ();
+    private static final String TAG = Refill_A_Medication_Activity.class.getSimpleName();
     private View parent;
     private Refill_A_Medication_VH viewholder;
 
+    private String CURRENT_FRAGMENT = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate ( savedInstanceState );
-        setContentView ( R.layout.activity_refill__a__medication );
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_refill__a__medication);
         this.parent = findViewById(R.id.parent_refill_a_medication);
         this.viewholder = new Refill_A_Medication_VH(this.parent);
         this.viewholder.setClickListener(this);
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.add ( R.id.refill_container,
-                new Refill_first_Question (),
-                Refill_first_Question.TAG).commit ();
-        Constants.REFILL_A_MEDICATION_BODY.put ( Constants.QUESTION_SET, "refill_a_medication" );
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.refill_container,
+                new Refill_first_Question(),
+                Refill_first_Question.TAG).commit();
+        Constants.REFILL_A_MEDICATION_BODY.put(Constants.QUESTION_SET, "refill_a_medication");
     }
 
     @Override
-    public void OnStartRefillClicked() {
-        onBackPressed ();
+    public void onBackButtonClicked() {
+       onBackPressed();
     }
 
     @Override
     public void onRefillFistQuestion() {
-        Log.d ( TAG, "onRefillFistQuestion " );
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
-                .add ( R.id.refill_container,
-                new Refill_second_Question (),
-                Refill_second_Question.TAG).commit ();
-        fragmentTransaction.addToBackStack ( Refill_second_Question.TAG );
+        System.out.println("Refill_A_Medication_Activity.onRefillFistQuestion");
+        CURRENT_FRAGMENT = Refill_second_Question.TAG;
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        if (getSupportFragmentManager().findFragmentByTag(Refill_second_Question.TAG) == null) {
+            fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.in_left)
+                    .hide(getSupportFragmentManager().findFragmentByTag(Refill_first_Question.TAG))
+                    .add(R.id.refill_container, new Refill_second_Question(), Refill_second_Question.TAG)
+                    .commitNow();
+        } else {
+            fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.in_left)
+                    .hide(getSupportFragmentManager().findFragmentByTag(Refill_first_Question.TAG))
+                    .show(getSupportFragmentManager().findFragmentByTag(Refill_second_Question.TAG))
+                    .commitNow();
+        }
     }
 
     @Override
     public void onRefillSecondQuestion() {
-        System.out.println ( "Refill_A_Medication_Activity.onRefillSecondQuestion" );
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
-                .add ( R.id.refill_container,
-                new Refill_third_Question (),
-                Refill_third_Question.TAG).commit ();
-        fragmentTransaction.addToBackStack ( Refill_third_Question.TAG );
+        Log.d(TAG, "onRefillSecondQuestion: ");
+        CURRENT_FRAGMENT = Refill_third_Question.TAG;
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        if (getSupportFragmentManager().findFragmentByTag(Refill_third_Question.TAG) == null) {
+            fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.in_left)
+                    .hide(getSupportFragmentManager().findFragmentByTag(Refill_second_Question.TAG))
+                    .add(R.id.refill_container, new Refill_third_Question(), Refill_third_Question.TAG)
+                    .commitNow();
+
+        } else {
+            fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.in_left)
+                    .hide(getSupportFragmentManager().findFragmentByTag(Refill_second_Question.TAG))
+                    .show(getSupportFragmentManager().findFragmentByTag(Refill_third_Question.TAG))
+                    .commitNow();
+        }
+
     }
 
     @Override
     public void onRefillThirdQuestion() {
-        System.out.println ( "Refill_A_Medication_Activity.onRefillThirdQuestion" );
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
-                .add ( R.id.refill_container,
-                new Refill_fourth_Question (),
-                Refill_fourth_Question.TAG).commit ();
-        fragmentTransaction.addToBackStack ( Refill_fourth_Question.TAG );
+        Log.d(TAG, "onRefillThirdQuestion: ");
+        CURRENT_FRAGMENT = Refill_fourth_Question.TAG;
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
+        if (getSupportFragmentManager().findFragmentByTag(Refill_fourth_Question.TAG) == null) {
+            fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.in_left)
+                    .hide(getSupportFragmentManager().findFragmentByTag(Refill_third_Question.TAG))
+                    .add(R.id.refill_container, new Refill_fourth_Question(), Refill_fourth_Question.TAG)
+                    .commitNow();
+
+        } else {
+            fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.in_left)
+                    .hide(getSupportFragmentManager().findFragmentByTag(Refill_third_Question.TAG))
+                    .show(getSupportFragmentManager().findFragmentByTag(Refill_fourth_Question.TAG))
+                    .commitNow();
+        }
+
     }
 
     @Override
     public void onRefillFourthQuestion() {
-        System.out.println ( "Refill_A_Medication_Activity.onRefillFourthQuestion" );
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
-                .add ( R.id.refill_container,
-                new Refill_fifth_Question (),
-                Refill_fifth_Question.TAG).commit ();
-        fragmentTransaction.addToBackStack ( Refill_fifth_Question.TAG );
+        Log.d(TAG, "onRefillFourthQuestion: ");
+        CURRENT_FRAGMENT = Refill_fifth_Question.TAG;
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        if (getSupportFragmentManager().findFragmentByTag(Refill_fifth_Question.TAG) == null) {
+            fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.in_left)
+                    .hide(getSupportFragmentManager().findFragmentByTag(Refill_fourth_Question.TAG))
+                    .add(R.id.refill_container, new Refill_fifth_Question(), Refill_fifth_Question.TAG)
+                    .commitNow();
+
+        } else {
+            fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.in_left)
+                    .hide(getSupportFragmentManager().findFragmentByTag(Refill_fourth_Question.TAG))
+                    .show(getSupportFragmentManager().findFragmentByTag(Refill_fifth_Question.TAG))
+                    .commitNow();
+        }
+
     }
 
     @Override
     public void onRefillFifthQuestion() {
-        System.out.println ( "Refill_A_Medication_Activity.onRefillFifthQuestion" );
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
-                .add ( R.id.refill_container,
-                new Refill_sixth_Question (),
-                Refill_sixth_Question.TAG).commit ();
-        fragmentTransaction.addToBackStack ( Refill_sixth_Question.TAG );
+        Log.d(TAG, "onRefillFifthQuestion: ");
+        CURRENT_FRAGMENT = Refill_sixth_Question.TAG;
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
+        if (getSupportFragmentManager().findFragmentByTag(Refill_sixth_Question.TAG) == null) {
+            fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.in_left)
+                    .hide(getSupportFragmentManager().findFragmentByTag(Refill_fifth_Question.TAG))
+                    .add(R.id.refill_container, new Refill_sixth_Question(), Refill_sixth_Question.TAG)
+                    .commitNow();
+
+        } else {
+            fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.in_left)
+                    .hide(getSupportFragmentManager().findFragmentByTag(Refill_fifth_Question.TAG))
+                    .show(getSupportFragmentManager().findFragmentByTag(Refill_sixth_Question.TAG))
+                    .commitNow();
+        }
+
     }
 
     @Override
     public void onRefillSixthQuestion() {
-        System.out.println ( "Refill_A_Medication_Activity.onRefillSixthQuestion" );
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
-                .add ( R.id.refill_container,
-                new Refill_seventh_Question (),
-                Refill_seventh_Question.TAG).commit ();
-        fragmentTransaction.addToBackStack ( Refill_seventh_Question.TAG );
+        Log.d(TAG, "onRefillSixthQuestion: ");
+        CURRENT_FRAGMENT = Refill_seventh_Question.TAG;
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
+        if (getSupportFragmentManager().findFragmentByTag(Refill_seventh_Question.TAG) == null) {
+            fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.in_left)
+                    .hide(getSupportFragmentManager().findFragmentByTag(Refill_sixth_Question.TAG))
+                    .add(R.id.refill_container, new Refill_seventh_Question(), Refill_seventh_Question.TAG)
+                    .commitNow();
+
+        } else {
+            fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.in_left)
+                    .hide(getSupportFragmentManager().findFragmentByTag(Refill_sixth_Question.TAG))
+                    .show(getSupportFragmentManager().findFragmentByTag(Refill_seventh_Question.TAG))
+                    .commitNow();
+        }
+
     }
 
     @Override
     public void onRefillSeventhQuestion() {
-        System.out.println ( "Refill_A_Medication_Activity.onRefillSeventhQuestion" );
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
-                .add ( R.id.refill_container,
-                new Refill_eighth_Question (),
-                Refill_eighth_Question.TAG).commit ();
-        fragmentTransaction.addToBackStack ( Refill_eighth_Question.TAG );
+        Log.d(TAG, "onRefillSeventhQuestion: ");
+        CURRENT_FRAGMENT = Refill_eighth_Question.TAG;
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
+        if (getSupportFragmentManager().findFragmentByTag(Refill_eighth_Question.TAG) == null) {
+            fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.in_left)
+                    .hide(getSupportFragmentManager().findFragmentByTag(Refill_seventh_Question.TAG))
+                    .add(R.id.refill_container, new Refill_eighth_Question(), Refill_eighth_Question.TAG)
+                    .commitNow();
+
+        } else {
+            fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.in_left)
+                    .hide(getSupportFragmentManager().findFragmentByTag(Refill_seventh_Question.TAG))
+                    .show(getSupportFragmentManager().findFragmentByTag(Refill_eighth_Question.TAG))
+                    .commitNow();
+        }
+
     }
 
     @Override
     public void onRefillEighthQuestion() {
-        System.out.println ( "Refill_A_Medication_Activity.onRefillEighthQuestion" );
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager ().beginTransaction ();
-        fragmentTransaction.setCustomAnimations ( R.anim.in_right, R.anim.in_left )
-                .add ( R.id.refill_container,
-                        new End_of_Question_Set (),
-                        End_of_Question_Set.TAG).commit ();
-        Handler handler = new Handler ( getMainLooper () );
+        Log.d(TAG, "onRefillEighthQuestion: ");
+        CURRENT_FRAGMENT = End_of_Question_Set.TAG;
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        if (getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG) == null) {
+            fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.in_left)
+                    .hide(getSupportFragmentManager().findFragmentByTag(Refill_eighth_Question.TAG))
+                    .add(R.id.refill_container, new End_of_Question_Set(), End_of_Question_Set.TAG)
+                    .commitNow();
+
+        } else {
+            fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.in_left)
+                    .hide(getSupportFragmentManager().findFragmentByTag(Refill_eighth_Question.TAG))
+                    .show(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                    .commitNow();
+        }
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        switch (CURRENT_FRAGMENT) {
+            case Refill_first_Question.TAG: {
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(Refill_first_Question.TAG))
+                        .commitNow();
+                finish();
+                break;
+            }
+            case Refill_second_Question.TAG: {
+                CURRENT_FRAGMENT = Refill_first_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .hide(getSupportFragmentManager().findFragmentByTag(Refill_second_Question.TAG))
+                        .show(getSupportFragmentManager().findFragmentByTag(Refill_first_Question.TAG))
+                        .commitNow();
+
+                break;
+            }
+            case Refill_third_Question.TAG: {
+                CURRENT_FRAGMENT = Refill_second_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .hide(getSupportFragmentManager().findFragmentByTag(Refill_third_Question.TAG))
+                        .show(getSupportFragmentManager().findFragmentByTag(Refill_second_Question.TAG))
+                        .commitNow();
+
+                break;
+            }
+            case Refill_fourth_Question.TAG: {
+                CURRENT_FRAGMENT = Refill_third_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .hide(getSupportFragmentManager().findFragmentByTag(Refill_fourth_Question.TAG))
+                        .show(getSupportFragmentManager().findFragmentByTag(Refill_third_Question.TAG))
+                        .commitNow();
+
+                break;
+            }
+            case Refill_fifth_Question.TAG: {
+                CURRENT_FRAGMENT = Refill_fourth_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .hide(getSupportFragmentManager().findFragmentByTag(Refill_fifth_Question.TAG))
+                        .show(getSupportFragmentManager().findFragmentByTag(Refill_fourth_Question.TAG))
+                        .commitNow();
+
+                break;
+            }
+            case Refill_sixth_Question.TAG: {
+                CURRENT_FRAGMENT = Refill_fifth_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .hide(getSupportFragmentManager().findFragmentByTag(Refill_sixth_Question.TAG))
+                        .show(getSupportFragmentManager().findFragmentByTag(Refill_fifth_Question.TAG))
+                        .commitNow();
+
+                break;
+            }
+            case Refill_seventh_Question.TAG: {
+                CURRENT_FRAGMENT = Refill_sixth_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .hide(getSupportFragmentManager().findFragmentByTag(Refill_seventh_Question.TAG))
+                        .show(getSupportFragmentManager().findFragmentByTag(Refill_sixth_Question.TAG))
+                        .commitNow();
+
+                break;
+            }
+            case Refill_eighth_Question.TAG: {
+                CURRENT_FRAGMENT = Refill_seventh_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .hide(getSupportFragmentManager().findFragmentByTag(Refill_eighth_Question.TAG))
+                        .show(getSupportFragmentManager().findFragmentByTag(Refill_seventh_Question.TAG))
+                        .commitNow();
+
+                break;
+            }
+            case End_of_Question_Set.TAG: {
+                CURRENT_FRAGMENT = Refill_eighth_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .hide(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .show(getSupportFragmentManager().findFragmentByTag(Refill_eighth_Question.TAG))
+                        .commitNow();
+
+                break;
+            }
+        }
     }
 }

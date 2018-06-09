@@ -1,8 +1,12 @@
 package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_6;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +17,19 @@ import android.widget.Toast;
 import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import tk.medlynk.patient.android.Activity.NewSymptom.OnNewSymptomAnswerListener;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_4.NS_4thVH;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_4.NS_4th_question;
+import tk.medlynk.patient.android.DataBase.DataBaseModel;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.JsonConverter;
 import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
 import tk.medlynk.patient.android.Networking.MedlynkRequests;
+import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,8 +40,15 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
  * create an instance of this fragment.
  */
 public class NS_6th_question extends Fragment implements
-        OnSixthAnswerListener,
+        OnNewSymptomAnswerListener,
         NS_6th_VH.OnSixthNSVHListener {
+
+    private MedlynkViewModel mMedlynkViewModel;
+    private boolean existsRecord = false;
+    private Answer answerDB;
+    private SharedPreferenceManager manager;
+    private List<Answer> answers = new ArrayList<>();
+
 
     public static final String TAG = "NS_6th_question";
 
@@ -60,9 +80,28 @@ public class NS_6th_question extends Fragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate ( R.layout.fragment_new__symptom_6th_question, container, false );
-        viewHolder = new NS_6th_VH ( view );
-        viewHolder.setOnSixthNSVHListener ( this );
+        final View view = inflater.inflate ( R.layout.fragment_new__symptom_6th_question, container, false );
+
+        mMedlynkViewModel = ViewModelProviders.of(getActivity()).get(MedlynkViewModel.class);
+        manager = new SharedPreferenceManager(getActivity());
+
+        mMedlynkViewModel.getAnswers(manager.getAppointmentID(), 1, 6)
+                .observe(this, new Observer<DataBaseModel>() {
+                    @Override
+                    public void onChanged(@Nullable DataBaseModel dataBaseModel) {
+                        if (dataBaseModel != null) {
+                            existsRecord = true;
+                            answerDB = new Answer();
+                            JsonConverter JC = JsonConverter.getInstance();
+                            answerDB = JC.answerJsonToAnswers(dataBaseModel.getAnswerJson())
+                                    .get(0);
+                            Log.d(TAG, "onChanged: " + answerDB);
+                        }
+
+                        viewHolder = new NS_6th_VH(view,answerDB);
+                        viewHolder.setOnSixthNSVHListener(NS_6th_question.this);
+                    }
+                });
         return view;
     }
 
@@ -84,14 +123,20 @@ public class NS_6th_question extends Fragment implements
     }
     
     @Override
-    public void onSixthAnswerSuccess(NewSymptomAnswerResponse response) {
+    public void onAnswerSuccess(NewSymptomAnswerResponse response) {
+        JsonConverter JC = JsonConverter.getInstance();
+        if (existsRecord == false)
+            mMedlynkViewModel.insertAnswersToDB(manager.getAppointmentID(), 1, 6, JC.answersToAnswerJson(answers));
+        else
+            mMedlynkViewModel.updateAnswersToDB(manager.getAppointmentID(), 1, 6, JC.answersToAnswerJson(answers));
+
         System.out.println ( "NS_6th_question.onSixthAnswerSuccess" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onSixthQuestion ();
     }
 
     @Override
-    public void onSixthAnswerFailure() {
+    public void onAnswerFailure() {
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         System.out.println ( "NS_6th_question.onSixthAnswerFailure" );
     }
@@ -111,6 +156,8 @@ public class NS_6th_question extends Fragment implements
                 NS_6th_question.this,
                 manager.getAppointmentID (),
                 answer);
+
+        answers.add(answer);
     }
 
     @Override

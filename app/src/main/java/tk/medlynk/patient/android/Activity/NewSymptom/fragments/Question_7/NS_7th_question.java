@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
 
+import tk.medlynk.patient.android.Activity.NewSymptom.OnNewSymptomAnswerListener;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
 import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
@@ -27,7 +28,7 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
  * create an instance of this fragment.
  */
 public class NS_7th_question extends Fragment implements
-        OnSeventhAnswerListener, NS_7th_VH.OnSeventhNSVHListener {
+        OnNewSymptomAnswerListener, NS_7th_VH.OnSeventhNSVHListener {
 
     public static final String TAG = "NS_7th_question";
 
@@ -83,14 +84,14 @@ public class NS_7th_question extends Fragment implements
     }
 
     @Override
-    public void onSeventhAnswerSuccess(NewSymptomAnswerResponse response) {
+    public void onAnswerSuccess(NewSymptomAnswerResponse response) {
         System.out.println ( "NS_7th_question.onSeventhAnswerSuccess" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onSeventhQuestion ();
     }
 
     @Override
-    public void onSeventhAnswerFailure() {
+    public void onAnswerFailure() {
         System.out.println ( "NS_7th_question.onSeventhAnswerFailure" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
     }

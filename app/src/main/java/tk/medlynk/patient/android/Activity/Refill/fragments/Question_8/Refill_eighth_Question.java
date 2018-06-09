@@ -19,7 +19,7 @@ import java.util.List;
 
 public class Refill_eighth_Question extends Fragment implements OnRefillEighthVHListener,
         MotherCallback{
-    public static final String TAG = Refill_eighth_Question.class.getSimpleName();
+    public static final String TAG = "Refill_eighth_Question";
     private onRefillEighthQuestionInteractionListener mListener;
     private Refill_eighth_VH viewHolder;
 
