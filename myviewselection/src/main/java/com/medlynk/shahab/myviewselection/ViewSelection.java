@@ -326,7 +326,7 @@ public class ViewSelection extends LinearLayout {
         this.currentSelection = currentSelection;
     }
 
-    public void preViewOfDBResult(boolean selectable,boolean single_select,int numOfViews){
+    public void previewOfDBResult(boolean selectable, boolean single_select, int numOfViews){
         this.selectable=selectable;
         this.single_select=single_select;
         button_click_listener.onClick(buttons.get(numOfViews));

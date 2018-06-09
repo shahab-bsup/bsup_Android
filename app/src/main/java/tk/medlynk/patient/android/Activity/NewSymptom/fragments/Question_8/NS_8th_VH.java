@@ -32,23 +32,23 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
     private TextView question;
     private ViewSelection first, second;
     private String[] string_choices;
-    private Answer choice ;
+    private Answer choice;
     private List<Answer> choices;
     private OnEighthNSVHListener onEighthNSVHListener;
 
     public NS_8th_VH(View itemView) {
         super ( itemView );
-        choices = new ArrayList<> (  );
+        choices = new ArrayList<> ();
         choice = new Answer ();
         progressBar = itemView.findViewById ( R.id.progress_bar );
         question_view = itemView.findViewById ( R.id.new_symptom_eighth_question );
         question = question_view.findViewById ( R.id.txtQuestion );
         question.setText ( R.string.new_symptom_eighth_question );
         button_next = itemView.findViewById ( R.id.btnNextQuestion );
-        button_next.setOnClickListener ( new OnNextClickListener() );
+        button_next.setOnClickListener ( new OnNextClickListener () );
         button_next.setEnabled ( false );
         button_skip = itemView.findViewById ( R.id.btnSkipQuestion );
-        button_skip.setOnClickListener ( new OnSkipClickListener() );
+        button_skip.setOnClickListener ( new OnSkipClickListener () );
         string_choices = itemView.
                 getContext ().
                 getResources ().
@@ -61,7 +61,7 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
         second.setOnMultiItemSelectedListener ( this );
         second.setOnClearStateListener ( this );
         for (int i = 0; i < second.getNumberOfViews (); i++) {
-            second.setTextToButtons ( string_choices[i+1], i );
+            second.setTextToButtons ( string_choices[i + 1], i );
         }
     }
 
@@ -69,17 +69,17 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
         this.onEighthNSVHListener = onEighthNSVHListener;
     }
 
-    public void setProgressBarVisibilityStatus(int status ){
+    public void setProgressBarVisibilityStatus(int status) {
         this.progressBar.setVisibility ( status );
     }
 
     @Override
     public void onSingleItemSelected(View view, int i) {
         System.out.println ( "NS_8th_VH.onSingleItemSelected" );
-        if( i == -1 ){
+        if (i == -1) {
             button_next.setEnabled ( false );
             button_next.setBackgroundResource ( R.drawable.disable_next_question );
-        }else{
+        } else {
             second.setClear ();
             choice.setChoice ( "a" );
             button_next.setEnabled ( true );
@@ -91,35 +91,35 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
     public void onMultiItemSelected(View view, Integer integer) {
         System.out.println ( "NS_8th_VH.onMultiItemSelected" );
         first.setClear ();
-        if( integer == 3 ){
-            DialogueBuilder dialogBuilder = new DialogueBuilder( itemView.getContext (), "other");
-            dialogBuilder.setOnDialogListener( this );
+        if (integer == 3) {
+            DialogueBuilder dialogBuilder = new DialogueBuilder ( itemView.getContext (), "other" );
+            dialogBuilder.setOnDialogListener ( this );
             dialogBuilder.show ();
-        }else{
-            setAnswerChoices(integer);
+        } else {
+            setAnswerChoices ( integer );
         }
     }
 
     private void setAnswerChoices(Integer integer) {
         Answer answer = new Answer ();
-        switch (integer){
-            case 0:{
+        switch (integer) {
+            case 0: {
                 answer.setChoice ( "b" );
                 break;
             }
-            case 1:{
+            case 1: {
                 answer.setChoice ( "c" );
 
                 break;
             }
-            case 2:{
+            case 2: {
                 answer.setChoice ( "d" );
 
                 break;
             }
         }
         choices.add ( answer );
-        if( choices.size () == 1 ){
+        if (choices.size () == 1) {
             button_next.setEnabled ( true );
             button_next.setBackgroundResource ( R.drawable.enable_next_question );
         }
@@ -130,22 +130,22 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
         System.out.println ( "NS_8th_VH.onMultiItemDeselected" );
         int i = integer;
         Iterator<Answer> answerIterator = choices.iterator ();
-        switch (i){
-            case 0:{
-               while (answerIterator.hasNext ()){
-                   Answer answer = answerIterator.next ();
-                   if(  answer.getChoice () != null &&
-                           answer.getChoice ().equals ( "b" ) )
-                       answerIterator.remove ();
-               }
+        switch (i) {
+            case 0: {
+                while (answerIterator.hasNext ()) {
+                    Answer answer = answerIterator.next ();
+                    if (answer.getChoice () != null &&
+                            answer.getChoice ().equals ( "b" ))
+                        answerIterator.remove ();
+                }
 
                 break;
             }
-            case 1:{
-                while (answerIterator.hasNext ()){
+            case 1: {
+                while (answerIterator.hasNext ()) {
                     Answer answer = answerIterator.next ();
-                    if(  answer.getChoice () != null &&
-                            answer.getChoice ().equals ( "c" ) ){
+                    if (answer.getChoice () != null &&
+                            answer.getChoice ().equals ( "c" )) {
                         answerIterator.remove ();
                         break;
                     }
@@ -153,22 +153,22 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
 
                 break;
             }
-            case 2:{
-                while (answerIterator.hasNext ()){
+            case 2: {
+                while (answerIterator.hasNext ()) {
                     Answer answer = answerIterator.next ();
-                    if(  answer.getChoice () != null &&
-                            answer.getChoice ().equals ( "d" ) ){
+                    if (answer.getChoice () != null &&
+                            answer.getChoice ().equals ( "d" )) {
                         answerIterator.remove ();
                         break;
                     }
                 }
 
             }
-            case 3:{
-                while (answerIterator.hasNext ()){
+            case 3: {
+                while (answerIterator.hasNext ()) {
                     Answer answer = answerIterator.next ();
-                    if(  answer.getChoice () != null &&
-                            answer.getChoice ().equals ( "e" ) ){
+                    if (answer.getChoice () != null &&
+                            answer.getChoice ().equals ( "e" )) {
                         answerIterator.remove ();
                         break;
                     }
@@ -177,7 +177,7 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
                 break;
             }
         }
-        if( choices.size () == 0 ){
+        if (choices.size () == 0) {
             button_next.setEnabled ( false );
             button_next.setBackgroundResource ( R.drawable.disable_next_question );
         }
@@ -186,7 +186,7 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
     @Override
     public void onOtherDialogDone(String otherText) {
         System.out.println ( "NS_8th_VH.onOtherDialogDone" );
-        if( otherText.length () > 0 ){
+        if (otherText.length () > 0) {
             Answer answer = new Answer ();
             answer.setChoice ( "e" );
             answer.setOther ( otherText );
@@ -205,9 +205,51 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
     @Override
     public void onClearState(View view) {
         System.out.println ( "NS_8th_VH.onClearState" );
-        if( view.getId () == second.getId () ){
+        if (view.getId () == second.getId ()) {
             choices.clear ();
         }
+    }
+
+    //called once there is more than one answer for this fragment
+    public void onUpdateUI(List<Answer> answers) {
+        for (Answer answer : answers) {
+            switch (answer.getChoice ()) {
+                case "b": {
+                    second.previewOfDBResult ( true, false, 0 );
+
+                    break;
+                }
+                case "c": {
+                    second.previewOfDBResult ( true, false, 1 );
+
+                    break;
+                }
+                case "d": {
+                    second.previewOfDBResult ( true, false, 2 );
+
+                    break;
+                }
+                case "e": {
+                    second.previewOfDBResult ( true, false, 3 );
+
+                    break;
+                }
+
+            }
+        }
+    }
+
+    //called once there is only one answer for this fragment
+    public void onUpdateUI(Answer answer) {
+        first.previewOfDBResult ( true, true, 0 );
+    }
+
+    public interface OnEighthNSVHListener {
+        void onNextClicked(Answer answer);
+
+        void onNextClicked(List<Answer> answers);
+
+        void onSkipClicked();
     }
 
     private class OnNextClickListener implements View.OnClickListener {
@@ -215,9 +257,9 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
         public void onClick(View view) {
             System.out.println ( "NS_8th_VH.NS_8th_VH" );
             System.out.println ( "OnNextClickListener.onClick" );
-            if( choices.size () > 0 ){
+            if (choices.size () > 0) {
                 onEighthNSVHListener.onNextClicked ( choices );
-            }else{
+            } else {
                 onEighthNSVHListener.onNextClicked ( choice );
             }
         }
@@ -230,11 +272,5 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
             System.out.println ( "OnSkipClickListener.onClick" );
             onEighthNSVHListener.onSkipClicked ();
         }
-    }
-
-    public interface OnEighthNSVHListener{
-        void onNextClicked(Answer answer);
-        void onNextClicked(List<Answer> answers);
-        void onSkipClicked();
     }
 }

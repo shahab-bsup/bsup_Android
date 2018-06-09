@@ -59,4 +59,9 @@ public class Constants {
     public static final String QUESTION_NUMBER = "question_number";
     public static final String QUESTION_SET_ID = "question_set_id";
 
+    public static final int NEW_SYMPTOM_ROW = 1;
+    public static final int FOLLOW_UP_SYMPTOMS_ROW = 2;
+    public static final int FOLLOW_UP_RESULTS_ROW = 3;
+    public static final int REFILL_A_MEDICATION_ROW = 4;
+
 }

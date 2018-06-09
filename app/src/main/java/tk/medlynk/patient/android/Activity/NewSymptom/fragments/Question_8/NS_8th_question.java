@@ -1,26 +1,28 @@
 package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_8;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import tk.medlynk.patient.android.Activity.NewSymptom.OnNewSymptomAnswerListener;
+import tk.medlynk.patient.android.Constants;
+import tk.medlynk.patient.android.DataBase.DataBaseModel;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.JsonConverter;
 import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
 import tk.medlynk.patient.android.Networking.MedlynkRequests;
+import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,6 +40,9 @@ public class NS_8th_question extends Fragment implements
 
     private OnNewSymptomEighthQuestionListener mListener;
     private NS_8th_VH viewHolder;
+    private MedlynkViewModel medlynkViewModel;
+    private SharedPreferenceManager manager;
+    private boolean existRecord = false;
 
     public NS_8th_question() {
         // Required empty public constructor
@@ -63,9 +68,34 @@ public class NS_8th_question extends Fragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate ( R.layout.fragment_new__symptom_8th_question, container, false );
-        viewHolder = new NS_8th_VH ( view );
-        viewHolder.setOnEighthNSVHListener ( this );
+        final View view = inflater.inflate ( R.layout.fragment_new__symptom_8th_question, container, false );
+        medlynkViewModel = ViewModelProviders.of ( getActivity () )
+                .get ( MedlynkViewModel.class );
+        manager = new SharedPreferenceManager ( getActivity () );
+        medlynkViewModel.getAnswers ( manager.getAppointmentID (),
+                Constants.NEW_SYMPTOM_ROW, 8 )
+                .observe ( this, new Observer<DataBaseModel> () {
+                    @Override
+                    public void onChanged(@Nullable DataBaseModel dataBaseModel) {
+                        if (dataBaseModel != null) {
+                            existRecord = true;
+                            JsonConverter jsonConverter = JsonConverter.getInstance ();
+                            if (jsonConverter.answerJsonToAnswers ( dataBaseModel.getAnswerJson () ).size () > 1) {
+                                List<Answer> answers = jsonConverter.answerJsonToAnswers ( dataBaseModel.getAnswerJson () );
+                                viewHolder = new NS_8th_VH ( view );
+                                viewHolder.onUpdateUI(answers);
+                                viewHolder.setOnEighthNSVHListener ( NS_8th_question.this );
+                            } else {
+                                Answer answer = jsonConverter.
+                                        answerJsonToAnswers ( dataBaseModel.getAnswerJson () )
+                                        .get ( 0 );
+                                viewHolder = new NS_8th_VH ( view );
+                                viewHolder.onUpdateUI(answer);
+                                viewHolder.setOnEighthNSVHListener ( NS_8th_question.this );
+                            }
+                        }
+                    }
+                } );
         return view;
     }
 
@@ -113,19 +143,19 @@ public class NS_8th_question extends Fragment implements
         MedlynkRequests.newSymptomEighthQuestionAnswer ( getActivity ()
                 , NS_8th_question.this,
                 manager.getAppointmentID ()
-                ,answer);
+                , answer );
     }
 
     @Override
     public void onNextClicked(List<Answer> answers) {
         System.out.println ( "NS_8th_question.onNextClicked" );
-        System.out.println ("list of answers!");
+        System.out.println ( "list of answers!" );
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
         SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
         MedlynkRequests.newSymptomEighthQuestionAnswer ( getActivity ()
                 , NS_8th_question.this,
                 manager.getAppointmentID ()
-                ,answers);
+                , answers );
     }
 
     @Override

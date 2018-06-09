@@ -4,7 +4,6 @@ import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -40,7 +39,7 @@ public class NS_3rd_VH extends RecyclerView.ViewHolder implements ViewSelection.
 
     ProgressBar progressBar;
 
-    public NS_3rd_VH(View itemView) {
+    public NS_3rd_VH(View itemView, Answer answerDB) {
         super(itemView);
         progressBar = itemView.findViewById(R.id.progress_bar);
         question_view = itemView.findViewById(R.id.new_symptom_third_question);
@@ -69,19 +68,56 @@ public class NS_3rd_VH extends RecyclerView.ViewHolder implements ViewSelection.
         inputs.add(fourth_input);
 
         first_checkbox = itemView.findViewById(R.id.first);
-        first_checkbox.setOnCheckedChangeListener(new OnFirstCheckedChangeListener());
+        first_checkbox.setOnCheckedChangeListener(new OnYearsCheckedChangeListener ());
         second_checkbox = itemView.findViewById(R.id.second);
-        second_checkbox.setOnCheckedChangeListener(new OnSecondCheckedChangeListener());
+        second_checkbox.setOnCheckedChangeListener(new OnMonthCheckedChangeListener ());
         third_checkbox = itemView.findViewById(R.id.third);
-        third_checkbox.setOnCheckedChangeListener(new OnThirdCheckedChangeListener());
+        third_checkbox.setOnCheckedChangeListener(new OnWeeksCheckedChangeListener ());
         fourth_checkbox = itemView.findViewById(R.id.fourth);
-        fourth_checkbox.setOnCheckedChangeListener(new OnFourthCheckedChangeListener());
+        fourth_checkbox.setOnCheckedChangeListener(new OnDaysCheckedChangeListener ());
 
         checkBoxes.add(first_checkbox);
         checkBoxes.add(second_checkbox);
         checkBoxes.add(third_checkbox);
         checkBoxes.add(fourth_checkbox);
 
+        updateUI ( answerDB );
+
+    }
+
+    private void updateUI(Answer answerDB) {
+        if( answerDB != null ){
+            switch (answerDB.getChoice ()){
+                case "a":{
+                    yearsCheckedChanged ( true );
+                    first_input.setText ( String.valueOf ( answerDB.getDuration () ) );
+                    break;
+                }
+                case "b":{
+                    monthCheckedChanged ( true );
+                    second_input.setText ( String.valueOf ( answerDB.getDuration () ) );
+                    break;
+                }
+                case "c":{
+                    weeksCheckedChanged ( true );
+                    third_input.setText ( String.valueOf ( answerDB.getDuration () ) );
+                    break;
+                }
+                case "d":{
+                    daysCheckedChanged ( true );
+                    fourth_input.setText ( String.valueOf ( answerDB.getDuration () ) );
+                    break;
+                }
+                case "e":{
+                    choice.previewOfDBResult ( true, true, 0 );
+                    break;
+                }
+                case "f":{
+                    choice.previewOfDBResult ( true, true, 1 );
+                    break;
+                }
+            }
+        }
     }
 
     public void setOnThirdNSVHListener(OnThirdNSVHListener onThirdNSVHListener) {
@@ -134,8 +170,6 @@ public class NS_3rd_VH extends RecyclerView.ViewHolder implements ViewSelection.
     private class OnNextClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println("NS_3rd_VH.NS_3rd_VH");
-            System.out.println("OnNextClickListener.onClick");
             boolean hasError = false;
             if (answer.getChoice() != null) {
                 if (answer.getChoice().equals("e") || answer.getChoice().equals("f")) {
@@ -199,123 +233,132 @@ public class NS_3rd_VH extends RecyclerView.ViewHolder implements ViewSelection.
     private class OnSkipClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println("NS_3rd_VH.NS_3rd_VH");
-            System.out.println("view = [" + view + "]");
             onThirdNSVHListener.onSkipClicked();
         }
     }
 
     public interface OnThirdNSVHListener {
         void onNextClicked(Answer answer);
-
         void onSkipClicked();
     }
 
-    private class OnFirstCheckedChangeListener implements CompoundButton.OnCheckedChangeListener {
+    private class OnYearsCheckedChangeListener implements CompoundButton.OnCheckedChangeListener {
         @Override
         public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-            System.out.println("OnFirstCheckedChangeListener.onCheckedChanged");
-            if (b) {
-                choice.setClear();
-                second_checkbox.setChecked(false);
-                third_checkbox.setChecked(false);
-                fourth_checkbox.setChecked(false);
-                second_input.setText("");
-                second_input.setError(null);
-                third_input.setText("");
-                third_input.setError(null);
-                fourth_input.setText("");
-                fourth_input.setError(null);
-                answer = new Answer();
-                answer.setChoice("a");
-                button_next.setEnabled(true);
-                button_next.setBackgroundResource(R.drawable.enable_next_question);
-            } else {
-                button_next.setEnabled(false);
-                button_next.setBackgroundResource(R.drawable.disable_next_question);
-                answer = new Answer();
-            }
+            yearsCheckedChanged ( b );
         }
     }
 
-    private class OnSecondCheckedChangeListener implements CompoundButton.OnCheckedChangeListener {
-        @Override
-        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-            System.out.println("OnSecondCheckedChangeListener.onCheckedChanged");
-            if (b) {
-                choice.setClear();
-                first_checkbox.setChecked(false);
-                third_checkbox.setChecked(false);
-                fourth_checkbox.setChecked(false);
-                first_input.setText("");
-                first_input.setError(null);
-                third_input.setText("");
-                third_input.setError(null);
-                fourth_input.setText("");
-                fourth_input.setError(null);
-                answer = new Answer();
-                answer.setChoice("b");
-                button_next.setEnabled(true);
-                button_next.setBackgroundResource(R.drawable.enable_next_question);
-            } else {
-                button_next.setEnabled(false);
-                button_next.setBackgroundResource(R.drawable.disable_next_question);
-                answer = new Answer();
-            }
+    private void yearsCheckedChanged(boolean b) {
+        if (b) {
+            choice.setClear();
+            second_checkbox.setChecked(false);
+            third_checkbox.setChecked(false);
+            fourth_checkbox.setChecked(false);
+            second_input.setText("");
+            second_input.setError(null);
+            third_input.setText("");
+            third_input.setError(null);
+            fourth_input.setText("");
+            fourth_input.setError(null);
+            answer = new Answer ();
+            answer.setChoice("a");
+            button_next.setEnabled(true);
+            button_next.setBackgroundResource( R.drawable.enable_next_question);
+        } else {
+            button_next.setEnabled(false);
+            button_next.setBackgroundResource(R.drawable.disable_next_question);
+            answer = new Answer();
         }
     }
 
-    private class OnThirdCheckedChangeListener implements CompoundButton.OnCheckedChangeListener {
+    private class OnMonthCheckedChangeListener implements CompoundButton.OnCheckedChangeListener {
         @Override
         public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-            System.out.println("OnThirdCheckedChangeListener.onCheckedChanged");
-            if (b) {
-                choice.setClear();
-                first_checkbox.setChecked(false);
-                second_checkbox.setChecked(false);
-                fourth_checkbox.setChecked(false);
-                first_input.setText("");
-                first_input.setError(null);
-                second_input.setText("");
-                second_input.setError(null);
-                fourth_input.setText("");
-                fourth_input.setError(null);
-                answer = new Answer();
-                answer.setChoice("c");
-                button_next.setEnabled(true);
-                button_next.setBackgroundResource(R.drawable.enable_next_question);
-            } else {
-                button_next.setEnabled(false);
-                button_next.setBackgroundResource(R.drawable.disable_next_question);
-                answer = new Answer();
-            }
+            monthCheckedChanged ( b );
         }
     }
 
-    private class OnFourthCheckedChangeListener implements CompoundButton.OnCheckedChangeListener {
+    private void monthCheckedChanged(boolean b) {
+        if (b) {
+            choice.setClear();
+            first_checkbox.setChecked(false);
+            third_checkbox.setChecked(false);
+            fourth_checkbox.setChecked(false);
+            first_input.setText("");
+            first_input.setError(null);
+            third_input.setText("");
+            third_input.setError(null);
+            fourth_input.setText("");
+            fourth_input.setError(null);
+            answer = new Answer ();
+            answer.setChoice("b");
+            button_next.setEnabled(true);
+            button_next.setBackgroundResource( R.drawable.enable_next_question);
+        } else {
+            button_next.setEnabled(false);
+            button_next.setBackgroundResource(R.drawable.disable_next_question);
+            answer = new Answer();
+        }
+    }
+
+    private class OnWeeksCheckedChangeListener implements CompoundButton.OnCheckedChangeListener {
         @Override
         public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-            System.out.println("OnFourthCheckedChangeListener.onCheckedChanged");
-            if (b) {
-                choice.setClear();
-                first_checkbox.setChecked(false);
-                second_checkbox.setChecked(false);
-                third_checkbox.setChecked(false);
-                first_input.setText("");
-                first_input.setError(null);
-                second_input.setText("");
-                second_input.setError(null);
-                third_input.setText("");
-                third_input.setError(null);
-                answer = new Answer();
-                answer.setChoice("d");
-                button_next.setEnabled(true);
-                button_next.setBackgroundResource(R.drawable.enable_next_question);
-            } else {
-                button_next.setEnabled(false);
-                button_next.setBackgroundResource(R.drawable.disable_next_question);
-                answer = new Answer();
-            }
+            weeksCheckedChanged ( b );
+        }
+    }
+
+    private void weeksCheckedChanged(boolean b) {
+        if (b) {
+            choice.setClear();
+            first_checkbox.setChecked(false);
+            second_checkbox.setChecked(false);
+            fourth_checkbox.setChecked(false);
+            first_input.setText("");
+            first_input.setError(null);
+            second_input.setText("");
+            second_input.setError(null);
+            fourth_input.setText("");
+            fourth_input.setError(null);
+            answer = new Answer ();
+            answer.setChoice("c");
+            button_next.setEnabled(true);
+            button_next.setBackgroundResource( R.drawable.enable_next_question);
+        } else {
+            button_next.setEnabled(false);
+            button_next.setBackgroundResource(R.drawable.disable_next_question);
+            answer = new Answer();
+        }
+    }
+
+    private class OnDaysCheckedChangeListener implements CompoundButton.OnCheckedChangeListener {
+        @Override
+        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+            daysCheckedChanged ( b );
+        }
+    }
+
+    private void daysCheckedChanged(boolean b) {
+        if (b) {
+            choice.setClear();
+            first_checkbox.setChecked(false);
+            second_checkbox.setChecked(false);
+            third_checkbox.setChecked(false);
+            first_input.setText("");
+            first_input.setError(null);
+            second_input.setText("");
+            second_input.setError(null);
+            third_input.setText("");
+            third_input.setError(null);
+            answer = new Answer ();
+            answer.setChoice("d");
+            button_next.setEnabled(true);
+            button_next.setBackgroundResource( R.drawable.enable_next_question);
+        } else {
+            button_next.setEnabled(false);
+            button_next.setBackgroundResource(R.drawable.disable_next_question);
+            answer = new Answer();
         }
     }
 }

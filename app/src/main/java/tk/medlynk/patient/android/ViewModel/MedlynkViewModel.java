@@ -4,11 +4,8 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 
-import java.util.List;
-
 import tk.medlynk.patient.android.DataBase.DataBaseModel;
-import tk.medlynk.patient.android.Networking.MedlynkRequests;
-import tk.medlynk.patient.android.Repository.MedlynkRepository;
+import tk.medlynk.patient.android.Repository.MedlynkModel;
 
 /**
  * Created by Shahab on 6/6/2018.
@@ -16,12 +13,12 @@ import tk.medlynk.patient.android.Repository.MedlynkRepository;
 
 public class MedlynkViewModel extends AndroidViewModel {
 
-    private MedlynkRepository mRepository;
+    private MedlynkModel mRepository;
     private LiveData<DataBaseModel> mGetAnswers;
 
     public MedlynkViewModel(Application application) {
         super ( application );
-        mRepository = new MedlynkRepository ( application );
+        mRepository = new MedlynkModel ( application );
     }
 
     public LiveData<DataBaseModel> getAnswers(int appointmentId, int tableNumber, int questionNumber) {

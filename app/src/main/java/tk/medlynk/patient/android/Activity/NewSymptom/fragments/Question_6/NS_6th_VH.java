@@ -50,7 +50,7 @@ public class NS_6th_VH extends RecyclerView.ViewHolder implements ViewSelection.
         answerChoices.setOnSingleItemSelectedListener ( this );
 
         if (answerDB != null) {
-            answerChoices.preViewOfDBResult(true,true,answerDB.getRate() - 1);
+            answerChoices.previewOfDBResult (true,true,answerDB.getRate() - 1);
         }
     }
 

@@ -13,7 +13,7 @@ import tk.medlynk.patient.android.Model.Answer;
  */
 
 public class JsonConverter {
- 
+
     private static JsonConverter jsonConverter;
 
     private JsonConverter(){
@@ -35,7 +35,6 @@ public class JsonConverter {
     }
 
     public List<Answer> answerJsonToAnswers(String answerJson ){
-
         Gson gson = new Gson();
         List<Answer> answers = gson.fromJson ( answerJson,new TypeToken<List<Answer>>(){}.getType () );
 

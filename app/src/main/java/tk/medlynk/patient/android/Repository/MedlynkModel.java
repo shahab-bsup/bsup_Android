@@ -12,12 +12,13 @@ import tk.medlynk.patient.android.DataBase.MedlynkDatabase;
  * Created by Shahab on 6/6/2018.
  */
 
-public class MedlynkRepository {
+//This class is intended to designate the model layer of MVVM architecture!!!
+public class MedlynkModel {
 
     private AnswerDao mAnswerDao;
     private LiveData<DataBaseModel> mGetAnswerRecord;
 
-    public MedlynkRepository(Application application) {
+    public MedlynkModel(Application application) {
 
         MedlynkDatabase db = MedlynkDatabase.getDatabase ( application );
         mAnswerDao = db.answerDao ();

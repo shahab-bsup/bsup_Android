@@ -1,7 +1,6 @@
 package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_2;
 
 import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -40,13 +39,12 @@ public class NS_2nd_question extends Fragment implements
         OnNewSymptomAnswerListener,
         NS_2nd_VH.OnSecondNSVHListener {
 
+    public static final String TAG = "NS_2nd_question";
     private MedlynkViewModel mMedlynkViewModel;
     private boolean existsRecord = false;
     private Answer answerDB;
     private SharedPreferenceManager manager;
-    private List<Answer> answers = new ArrayList<>();
-
-    public static final String TAG = "NS_2nd_question";
+    private List<Answer> answers = new ArrayList<> ();
     private OnNewSymptomSecondQuestionListener mListener;
     private NS_2nd_VH viewHolder;
 
@@ -56,17 +54,16 @@ public class NS_2nd_question extends Fragment implements
     }
 
     public static NS_2nd_question newInstance() {
-        NS_2nd_question fragment = new NS_2nd_question();
-        Bundle args = new Bundle();
-
-        fragment.setArguments(args);
+        NS_2nd_question fragment = new NS_2nd_question ();
+        Bundle args = new Bundle ();
+        fragment.setArguments ( args );
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        super.onCreate ( savedInstanceState );
+        if (getArguments () != null) {
 
         }
     }
@@ -75,93 +72,92 @@ public class NS_2nd_question extends Fragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment...
-        final View view = inflater.inflate(R.layout.fragment_new__symptom_2nd_question, container, false);
+        View view = inflater.inflate ( R.layout.fragment_new__symptom_2nd_question, container, false );
+        dbOperation ( view );
+        return view;
+    }
 
-        mMedlynkViewModel = ViewModelProviders.of(getActivity()).get(MedlynkViewModel.class);
-        manager = new SharedPreferenceManager(getActivity());
-
-        mMedlynkViewModel.getAnswers(manager.getAppointmentID(), 1, 2)
-                .observe((LifecycleOwner) this, new Observer<DataBaseModel>() {
+    private void dbOperation(final View view) {
+        mMedlynkViewModel = ViewModelProviders.of ( getActivity () ).get ( MedlynkViewModel.class );
+        manager = new SharedPreferenceManager ( getActivity () );
+        mMedlynkViewModel.getAnswers ( manager.getAppointmentID (), 1, 2 )
+                .observe ( (LifecycleOwner) this, new Observer<DataBaseModel> () {
                     @Override
                     public void onChanged(@Nullable DataBaseModel dataBaseModel) {
                         if (dataBaseModel != null) {
                             existsRecord = true;
-                            answerDB = new Answer();
-                            JsonConverter JC = JsonConverter.getInstance();
-                            answerDB = JC.answerJsonToAnswers(dataBaseModel.getAnswerJson())
-                                    .get(0);
-                            Log.d(TAG, "onChanged: " + answerDB);
+                            answerDB = new Answer ();
+                            JsonConverter JC = JsonConverter.getInstance ();
+                            answerDB = JC.answerJsonToAnswers ( dataBaseModel.getAnswerJson () )
+                                    .get ( 0 );
+                            Log.d ( TAG, "onChanged: " + answerDB );
                         }
-                        viewHolder = new NS_2nd_VH(view, answerDB);
-                        viewHolder.setOnSecondNSVHListener(NS_2nd_question.this);
+                        viewHolder = new NS_2nd_VH ( view, answerDB );
+                        viewHolder.setOnSecondNSVHListener ( NS_2nd_question.this );
                     }
 
-                });
-
-        //viewHolder = new NS_2nd_VH ( view );
-        //viewHolder.setOnSecondNSVHListener( NS_2nd_question.this);
-        return view;
+                } );
     }
 
     @Override
     public void onAttach(Context context) {
-        super.onAttach(context);
+        super.onAttach ( context );
         if (context instanceof OnNewSymptomSecondQuestionListener) {
             mListener = (OnNewSymptomSecondQuestionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnNewSymptomSecondQuestionListener");
+            throw new RuntimeException ( context.toString ()
+                    + " must implement OnNewSymptomSecondQuestionListener" );
         }
     }
 
     @Override
     public void onDetach() {
-        super.onDetach();
+        super.onDetach ();
         mListener = null;
     }
 
     @Override
     public void onAnswerSuccess(NewSymptomAnswerResponse response) {
-        JsonConverter JC = JsonConverter.getInstance();
+        JsonConverter JC = JsonConverter.getInstance ();
         if (existsRecord == false)
-            mMedlynkViewModel.insertAnswersToDB(manager.getAppointmentID(), 1, 2, JC.answersToAnswerJson(answers));
+            mMedlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (), 1, 2, JC.answersToAnswerJson ( answers ) );
         else
-            mMedlynkViewModel.updateAnswersToDB(manager.getAppointmentID(), 1, 2, JC.answersToAnswerJson(answers));
+            mMedlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (), 1, 2, JC.answersToAnswerJson ( answers ) );
 
-        viewHolder.setProgressBarVisibilityStatus(View.GONE);
-        mListener.onSecondQuestion();
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+        mListener.onSecondQuestion ();
 
     }
 
     @Override
     public void onAnswerFailure() {
-        viewHolder.setProgressBarVisibilityStatus(View.GONE);
-        Toast.makeText(getActivity(), "try again!", Toast.LENGTH_SHORT).show();
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+        Toast.makeText ( getActivity (), "try again!", Toast.LENGTH_SHORT ).show ();
     }
 
     @Override
     public void onUnauthorized() {
-        System.out.println("NS_2nd_question.onUnauthorized");
+        System.out.println ( "NS_2nd_question.onUnauthorized" );
 
     }
 
     @Override
     public void onNextClicked(Answer answer) {
-        System.out.println("NS_2nd_question.onNextClicked");
-        viewHolder.setProgressBarVisibilityStatus(View.VISIBLE);
+        System.out.println ( "NS_2nd_question.onNextClicked" );
+        viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
 
-        MedlynkRequests.newSymptomSecondQuestionAnswer(getActivity(),
+        MedlynkRequests.newSymptomSecondQuestionAnswer ( getActivity (),
                 NS_2nd_question.this,
-                manager.getAppointmentID(),
-                answer);
+                manager.getAppointmentID (),
+                answer );
 
-        answers.add(answer);
+        answers.add ( answer );
     }
 
     @Override
     public void onSkipClicked() {
-        System.out.println("NS_2nd_question.onSkipClicked");
-        mListener.onSecondQuestion();
+        System.out.println ( "NS_2nd_question.onSkipClicked" );
+        mListener.onSecondQuestion ();
     }
 
     public interface OnNewSymptomSecondQuestionListener {

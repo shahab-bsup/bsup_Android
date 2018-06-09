@@ -51,7 +51,7 @@ public class NS_4thVH extends RecyclerView.ViewHolder implements ViewSelection.O
         }
 
         if (answerDB != null) {
-            choices.preViewOfDBResult(true,true,answerDB.getRate() - 1);
+            choices.previewOfDBResult (true,true,answerDB.getRate() - 1);
         }
     }
 

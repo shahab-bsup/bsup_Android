@@ -44,7 +44,7 @@ public class NS_5th_VH extends RecyclerView.ViewHolder implements ViewSelection.
         }
 
         if (answerDB != null) {
-            choices.preViewOfDBResult(true,true,answerDB.getRate() - 1);
+            choices.previewOfDBResult (true,true,answerDB.getRate() - 1);
         }
     }
 
