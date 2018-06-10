@@ -8,7 +8,7 @@
 
     <include
         android:id="@+id/follow_up_results_toolbar_layout"
-        layout="@layout/questions_toolbar_layout"></include>
+        layout="@layout/toolbar_layout_2"></include>
 
     <FrameLayout
         android:id="@+id/followUpFragmentsContainer"

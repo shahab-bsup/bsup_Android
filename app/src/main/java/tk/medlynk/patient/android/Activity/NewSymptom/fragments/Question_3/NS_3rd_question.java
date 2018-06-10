@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -13,6 +14,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.neweraandroid.demo.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import tk.medlynk.patient.android.Activity.NewSymptom.OnNewSymptomAnswerListener;
 import tk.medlynk.patient.android.Constants;
@@ -39,17 +43,22 @@ public class NS_3rd_question extends Fragment implements
 
     public static final String TAG = "NS_3rd_question";
 
+    @Nullable
     private OnNewSymptomThirdQuestionListener mListener;
     private NS_3rd_VH viewHolder;
     private MedlynkViewModel medlynkViewModel;
+    @Nullable
     private SharedPreferenceManager manager;
-    private boolean existRecord = false;
+    private boolean existsRecord = false;
     private Answer answerDB;
+    @NonNull
+    private List<Answer> answers = new ArrayList<> ();
 
     public NS_3rd_question() {
         // Required empty public constructor
     }
 
+    @NonNull
     public static NS_3rd_question newInstance() {
         NS_3rd_question fragment = new NS_3rd_question ();
         Bundle args = new Bundle ();
@@ -85,7 +94,7 @@ public class NS_3rd_question extends Fragment implements
                     @Override
                     public void onChanged(@Nullable DataBaseModel dataBaseModel) {
                         if (dataBaseModel != null) {
-                            existRecord = true;
+                            existsRecord = true;
                             JsonConverter jsonConverter = JsonConverter.getInstance ();
                             answerDB = jsonConverter.answerJsonToAnswers ( dataBaseModel.getAnswerJson () )
                                     .get ( 0 );
@@ -117,6 +126,13 @@ public class NS_3rd_question extends Fragment implements
 
     @Override
     public void onAnswerSuccess(NewSymptomAnswerResponse response) {
+        JsonConverter JC = JsonConverter.getInstance ();
+        if (existsRecord == false)
+            medlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (), Constants.NEW_SYMPTOM_ROW,
+                    3, JC.answersToAnswerJson ( answers ) );
+        else
+            medlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (), Constants.NEW_SYMPTOM_ROW,
+                    3, JC.answersToAnswerJson ( answers ) );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onThirdQuestion ();
     }
@@ -143,6 +159,7 @@ public class NS_3rd_question extends Fragment implements
                 NS_3rd_question.this,
                 manager.getAppointmentID (),
                 answer );
+        answers.add ( answer );
     }
 
     @Override

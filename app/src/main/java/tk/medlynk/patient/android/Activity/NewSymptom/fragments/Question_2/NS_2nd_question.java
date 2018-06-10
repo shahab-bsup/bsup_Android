@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tk.medlynk.patient.android.Activity.NewSymptom.OnNewSymptomAnswerListener;
+import tk.medlynk.patient.android.Constants;
 import tk.medlynk.patient.android.DataBase.DataBaseModel;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
 import tk.medlynk.patient.android.JsonConverter;
@@ -120,9 +121,9 @@ public class NS_2nd_question extends Fragment implements
     public void onAnswerSuccess(NewSymptomAnswerResponse response) {
         JsonConverter JC = JsonConverter.getInstance ();
         if (existsRecord == false)
-            mMedlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (), 1, 2, JC.answersToAnswerJson ( answers ) );
+            mMedlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (), Constants.NEW_SYMPTOM_ROW, 2, JC.answersToAnswerJson ( answers ) );
         else
-            mMedlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (), 1, 2, JC.answersToAnswerJson ( answers ) );
+            mMedlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (), Constants.NEW_SYMPTOM_ROW, 2, JC.answersToAnswerJson ( answers ) );
 
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onSecondQuestion ();
@@ -145,7 +146,6 @@ public class NS_2nd_question extends Fragment implements
     public void onNextClicked(Answer answer) {
         System.out.println ( "NS_2nd_question.onNextClicked" );
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
-
         MedlynkRequests.newSymptomSecondQuestionAnswer ( getActivity (),
                 NS_2nd_question.this,
                 manager.getAppointmentID (),

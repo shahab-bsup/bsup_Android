@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="tk.medlynk.patient.android.Activity.NewSymptom.fragments.IntroFragment">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:src="@drawable/refill" />
+
+    <tk.medlynk.patient.android.CustomViews.CustomTextView
+        android:id="@+id/welcome_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/image"
+        android:layout_below="@id/image"
+        android:text="@string/welcome_back"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
+
+    <tk.medlynk.patient.android.CustomViews.CustomTextView
+        android:id="@+id/welcome_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/image"
+        android:layout_below="@+id/welcome_txt"
+        android:text="@string/welcome_description" />
+
+    <Button
+        android:id="@+id/btnStart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/txtSecondText"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="@dimen/welcome_button_margins_horizontally"
+        android:layout_marginRight="@dimen/welcome_button_margins_horizontally"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/enabled_custom_button"
+        android:text="@string/get_started"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

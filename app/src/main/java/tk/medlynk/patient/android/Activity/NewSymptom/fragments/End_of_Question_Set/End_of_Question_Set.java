@@ -1,6 +1,7 @@
 package tk.medlynk.patient.android.Activity.NewSymptom.fragments.End_of_Question_Set;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.neweraandroid.demo.R;
+
+import tk.medlynk.patient.android.Activity.StartQuestionSet.StartAppointmentActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,7 +22,8 @@ import com.neweraandroid.demo.R;
  */
 public class End_of_Question_Set extends Fragment implements End_of_Question_Set_VH.OnEndOfQuestionSetVHListener {
 
-    public static final String TAG = End_of_Question_Set.class.getSimpleName ();
+    public static final String TAG =
+            End_of_Question_Set.class.getSimpleName ();
 
     private OnNewSymptomTwenty4QuestionListener mListener;
 
@@ -83,6 +87,8 @@ public class End_of_Question_Set extends Fragment implements End_of_Question_Set
             }
             case 1:{
 
+                getActivity ().startActivity ( new Intent ( getActivity (), StartAppointmentActivity.class ) );
+                getActivity ().finish ();
 
                 break;
             }

@@ -8,7 +8,7 @@
     tools:context="tk.medlynk.patient.android.Activity.FollowUpSymptoms.FollowUpSymptomsActivity">
 
     <include android:id="@+id/follow_up_symptom_toolbar_layout"
-        layout="@layout/questions_toolbar_layout"></include>
+        layout="@layout/toolbar_layout_2"></include>
 
     <FrameLayout
         android:layout_below="@id/follow_up_symptom_toolbar_layout"

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import com.neweraandroid.demo.R;
 
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.End_of_Question_Set.End_of_Question_Set;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.IntroFragment;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.New_Symptom_25th_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_1.NS_1th_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_10.NS_10th_question;
@@ -37,6 +38,7 @@ import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_9.NS_9t
 import tk.medlynk.patient.android.Constants;
 
 public class NewSymptomActivity extends AppCompatActivity implements
+        IntroFragment.OnIntroFragmentListener,
         NS_1th_question.OnNewSymptomFirstQuestionListener,
         NS_2nd_question.OnNewSymptomSecondQuestionListener,
         NS_3rd_question.OnNewSymptomThirdQuestionListener,
@@ -81,25 +83,21 @@ public class NewSymptomActivity extends AppCompatActivity implements
                 onBackPressed();
             }
         });
-        CURRENT_FRAGMENT = NS_1th_question.TAG;
-        if (getSupportFragmentManager().
-                findFragmentByTag(NS_1th_question.TAG) == null) {
+        CURRENT_FRAGMENT = IntroFragment.TAG;
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                .add(R.id.fragment_container, new IntroFragment (), IntroFragment.TAG)
+                .commitNow();
+    }
 
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager()
-                    .beginTransaction();
-            fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
-                    .add(R.id.fragment_container,
-                            new NS_1th_question(),
-                            NS_1th_question.TAG).
-                    commit();
-        } else {
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager()
-                    .beginTransaction();
-            fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
-                    .show(getSupportFragmentManager().
-                            findFragmentByTag(NS_1th_question.TAG)).
-                    commitNow();
-        }
+    @Override
+    public void onIntroFragmentInteraction() {
+        Log.d ( TAG, "onIntroFragmentInteraction: " );
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                .remove(getSupportFragmentManager().findFragmentByTag(IntroFragment.TAG))
+                .add(R.id.fragment_container, new NS_1th_question (), NS_1th_question.TAG)
+                .commitNow();
     }
 
     @Override
@@ -293,11 +291,11 @@ public class NewSymptomActivity extends AppCompatActivity implements
     @Override
     public void onEighteenQuestion() {
         Log.d(TAG, "onEighteenQuestion: ");
-        CURRENT_FRAGMENT = NS_19th_question.TAG;
+        CURRENT_FRAGMENT = End_of_Question_Set.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
-                .remove(getSupportFragmentManager().findFragmentByTag(NS_19th_question.TAG))
-                .add(R.id.fragment_container, new NS_19th_question(), NS_20th_question.TAG)
+                .remove(getSupportFragmentManager().findFragmentByTag(NS_18th_question.TAG))
+                .add(R.id.fragment_container, new NS_19th_question(), End_of_Question_Set.TAG)
                 .commitNow();
     }
 

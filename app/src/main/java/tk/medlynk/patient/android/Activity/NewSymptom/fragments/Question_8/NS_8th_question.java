@@ -78,20 +78,18 @@ public class NS_8th_question extends Fragment implements
                     @Override
                     public void onChanged(@Nullable DataBaseModel dataBaseModel) {
                         if (dataBaseModel != null) {
+                            viewHolder = new NS_8th_VH ( view );
+                            viewHolder.setOnEighthNSVHListener ( NS_8th_question.this );
                             existRecord = true;
                             JsonConverter jsonConverter = JsonConverter.getInstance ();
                             if (jsonConverter.answerJsonToAnswers ( dataBaseModel.getAnswerJson () ).size () > 1) {
                                 List<Answer> answers = jsonConverter.answerJsonToAnswers ( dataBaseModel.getAnswerJson () );
-                                viewHolder = new NS_8th_VH ( view );
                                 viewHolder.onUpdateUI(answers);
-                                viewHolder.setOnEighthNSVHListener ( NS_8th_question.this );
                             } else {
                                 Answer answer = jsonConverter.
                                         answerJsonToAnswers ( dataBaseModel.getAnswerJson () )
                                         .get ( 0 );
-                                viewHolder = new NS_8th_VH ( view );
                                 viewHolder.onUpdateUI(answer);
-                                viewHolder.setOnEighthNSVHListener ( NS_8th_question.this );
                             }
                         }
                     }

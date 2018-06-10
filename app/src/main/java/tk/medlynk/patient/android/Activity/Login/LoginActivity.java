@@ -15,6 +15,7 @@ import android.widget.TextView;
 import tk.medlynk.patient.android.Activity.SearchDoctor.SearchActivity;
 import tk.medlynk.patient.android.Activity.SendResetPasswordRequestActivity.SendResetPasswordRequestActivity;
 import tk.medlynk.patient.android.Activity.SignUp.SignUpActivity;
+import tk.medlynk.patient.android.Activity.Welcome.WelcomeActivity;
 import tk.medlynk.patient.android.Constants;
 import tk.medlynk.patient.android.CustomViews.SnackController;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
@@ -125,7 +126,7 @@ public class LoginActivity extends AppCompatActivity implements
         manager.setPrimaryTokenType ( response.getTokenType () );
         manager.setPrimaryExpireToken ( response.getExpiresIn () );
         manager.setRefreshToken ( response.getRefreshToken () );
-        startActivity ( new Intent ( LoginActivity.this, SearchActivity.class ) );
+        startActivity ( new Intent ( LoginActivity.this, WelcomeActivity.class ) );
         finish ();
     }
 

@@ -65,7 +65,7 @@
         <activity
             android:name="tk.medlynk.patient.android.Activity.SignUp.SignUpActivity"
             android:noHistory="true"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name="tk.medlynk.patient.android.Activity.Welcome.WelcomeActivity"
             android:screenOrientation="portrait" />
@@ -76,6 +76,7 @@
         <activity android:name="tk.medlynk.patient.android.Activity.StartQuestionSet.StartAppointmentActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -90,10 +91,11 @@
         <activity android:name="tk.medlynk.patient.android.Activity.Refill.Refill_A_Medication_Activity" />
         <activity
             android:name="tk.medlynk.patient.android.Activity.NoDoctorIdPage.NoDoctorIdActivity"
-            android:noHistory="true"></activity>
+            android:noHistory="true" />
         <activity android:name="tk.medlynk.patient.android.Activity.Confirmation.ConfirmationActivity" />
         <activity android:name="tk.medlynk.patient.android.Activity.FollowUpSymptoms.FollowUpSymptomsActivity" />
-        <activity android:name="tk.medlynk.patient.android.Activity.FollowUpResults.FollowUpResultActivity"></activity>
+        <activity android:name="tk.medlynk.patient.android.Activity.FollowUpResults.FollowUpResultActivity" />
+        <activity android:name="tk.medlynk.patient.android.Activity.Progress.ProgressPageActivity" />
     </application>
 
 </manifest>

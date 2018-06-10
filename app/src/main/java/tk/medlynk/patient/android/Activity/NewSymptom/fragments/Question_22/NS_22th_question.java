@@ -25,6 +25,7 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
  * Use the {@link NS_22th_question#newInstance} factory method to
  * create an instance of this fragment.
  */
+@Deprecated
 public class NS_22th_question extends Fragment implements
         OnTwentyTwoAnswerListener,
         NS_22th_VH.On22thVHListener {

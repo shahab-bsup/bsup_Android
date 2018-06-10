@@ -1,99 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bsuperiorsystem.doctor_app.Activity.Welcome.WelcomeActivity">
+    tools:context="tk.medlynk.patient.android.Activity.Welcome.WelcomeActivity">
 
     <RelativeLayout
+        android:id="@+id/logo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/logo">
+        android:layout_height="wrap_content">
+
         <ImageView
+            android:id="@+id/imgBackButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imgBackButton"
-            android:src="@drawable/ic_action_home_button"
-            android:layout_marginTop="@dimen/home_button_margin_top"
             android:layout_marginLeft="15dp"
-            />
+            android:layout_marginTop="@dimen/home_button_margin_top"
+            android:src="@drawable/ic_action_home_button" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="Logo PlaceHolder"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:textSize="30sp"
+            android:gravity="center_horizontal"
             android:padding="10dp"
-            />
+            android:text="Logo PlaceHolder"
+            android:textSize="30sp" />
     </RelativeLayout>
 
     <ImageView
         android:id="@+id/imgWelcomePage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
         android:layout_below="@id/logo"
-        android:src="@drawable/stethoscope"
-        android:scaleType="centerCrop"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/image_in_welcome_page"
-        />
+        android:src="@drawable/splash" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/txtFirstText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/imgWelcomePage"
         android:layout_alignEnd="@id/imgWelcomePage"
+        android:layout_alignStart="@+id/imgWelcomePage"
         android:layout_below="@+id/imgWelcomePage"
         android:layout_marginTop="18dp"
-        android:textSize="15dp"
-        android:textColor="@color/welcome_text_color"
         android:text="@string/welcome_page_first_text"
+        android:textColor="@color/welcome_text_color"
+        android:textSize="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/txtSecondText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/imgWelcomePage"
         android:layout_alignEnd="@id/txtFirstText"
+        android:layout_alignStart="@+id/imgWelcomePage"
         android:layout_below="@+id/txtFirstText"
+        android:layout_above="@+id/btnStart"
         android:layout_marginTop="18dp"
-        android:textSize="15dp"
-        android:textColor="@color/welcome_text_color"
         android:text="@string/welcome_page_second_text"
-        />
+        android:textColor="@color/welcome_text_color"
+        android:textSize="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
 
     <Button
+        android:id="@+id/btnStart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnStart"
         android:layout_below="@id/txtSecondText"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="@dimen/welcome_button_margins_horizontally"
+        android:layout_marginRight="@dimen/welcome_button_margins_horizontally"
+        android:layout_marginTop="10dp"
         android:background="@drawable/enabled_custom_button"
         android:text="@string/get_started"
-        android:textColor="@color/white"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="@dimen/welcome_button_margins_horizontally"
-        android:layout_marginLeft="@dimen/welcome_button_margins_horizontally"
-        android:layout_marginBottom="15dp"
-        />
+        android:textColor="@color/white" />
 
     <Button
+        android:id="@+id/btnGoToQuestions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnGoToQuestions"
-        android:layout_below="@id/btnStart"
+        android:layout_marginLeft="@dimen/welcome_button_margins_horizontally"
+        android:layout_marginRight="@dimen/welcome_button_margins_horizontally"
+        android:background="@drawable/already_askeds_button_welcome_page"
         android:text="@string/go_to_questions"
         android:textColor="@color/icons_color"
-        android:textSize="10sp"
-        android:background="@drawable/already_askeds_button_welcome_page"
-        android:layout_marginRight="@dimen/welcome_button_margins_horizontally"
-        android:layout_marginLeft="@dimen/welcome_button_margins_horizontally"
-        />
+        android:layout_alignParentBottom="true"
+        android:textSize="10sp" />
 
 </RelativeLayout>

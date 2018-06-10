@@ -24,6 +24,7 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
  * Use the {@link NS_19th_question#newInstance} factory method to
  * create an instance of this fragment.
  */
+@Deprecated
 public class NS_19th_question extends Fragment implements
         NS_19th_VH.OnNineteenNSVHListener,
         OnNineteenAnswerListener {
