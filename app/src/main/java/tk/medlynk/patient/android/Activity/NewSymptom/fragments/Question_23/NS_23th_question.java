@@ -88,9 +88,9 @@ public class NS_23th_question extends Fragment implements
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
         SharedPreferenceManager manager = new
                 SharedPreferenceManager ( getActivity () );
-        MedlynkRequests.newSymptomTwentyThreeQuestionAnswer ( getActivity (),
+       /* MedlynkRequests.newSymptomTwentyThreeQuestionAnswer ( getActivity (),
                  this, manager.getAppointmentID (),
-                answer);
+                answer);*/
     }
 
     @Override
@@ -99,9 +99,9 @@ public class NS_23th_question extends Fragment implements
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
         SharedPreferenceManager manager = new
                 SharedPreferenceManager ( getActivity () );
-        MedlynkRequests.newSymptomTwentyThreeQuestionAnswer ( getActivity (),
+       /* MedlynkRequests.newSymptomTwentyThreeQuestionAnswer ( getActivity (),
                 this, manager.getAppointmentID (),
-                answers);
+                answers);*/
     }
 
     @Override

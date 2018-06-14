@@ -88,11 +88,11 @@ public class NS_22th_question extends Fragment implements
         System.out.println ("list of answers");
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
         SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
-        MedlynkRequests.newSymptomTwentyTwoQuestionAnswer ( getActivity (),
+       /* MedlynkRequests.newSymptomTwentyTwoQuestionAnswer ( getActivity (),
                 NS_22th_question.this,
                 manager.getAppointmentID (),
                 answers
-        );
+        );*/
     }
 
     @Override
@@ -100,11 +100,11 @@ public class NS_22th_question extends Fragment implements
         System.out.println ( "NS_22th_question.onNextClicked" );
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
         SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
-        MedlynkRequests.newSymptomTwentyTwoQuestionAnswer ( getActivity (),
+       /* MedlynkRequests.newSymptomTwentyTwoQuestionAnswer ( getActivity (),
                 NS_22th_question.this,
                 manager.getAppointmentID (),
                 answer
-        );
+        );*/
     }
 
     @Override

@@ -29,7 +29,7 @@ public class NS_16th_VH extends RecyclerView.ViewHolder implements ViewSelection
     private OnSixteenNSVHListener onSixteenNSVHListener;
     private Answer answer;
 
-    public NS_16th_VH(View itemView) {
+    public NS_16th_VH(View itemView,Answer answerDB) {
         super ( itemView );
         answer = new Answer ();
         progressBar = itemView.findViewById ( R.id.progress_bar );
@@ -50,6 +50,14 @@ public class NS_16th_VH extends RecyclerView.ViewHolder implements ViewSelection
                 getString ( R.string.i_do_not_know ), 0 );
         choice.setOnSingleItemSelectedListener ( this );
         choice.setOnClearStateListener(this);
+
+        if (answerDB != null) {
+            if (answerDB.getChoice ().equals ( "b" )) {
+                choice.previewOfDBResult ( true, true, 0 );
+            } else if (answerDB.getChoice ().equals ( "a" )) {
+                answer_input.setText ( answerDB.getReply () );
+            }
+        }
     }
 
     public void setOnSixteenNSVHListener(OnSixteenNSVHListener onSixteenNSVHListener) {

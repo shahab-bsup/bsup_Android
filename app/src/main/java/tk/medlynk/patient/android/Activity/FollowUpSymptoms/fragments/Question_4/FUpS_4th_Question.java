@@ -25,7 +25,7 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
  */
 public class FUpS_4th_Question extends Fragment implements FUpS_4th_VH.OnFUpSFourthVHListener, OnFourthFollowUpAnswerListener {
 
-    public static final String TAG = FUpS_4th_Question.class.getSimpleName ();
+    public static final String TAG = "FUpS_4th_Question";
 
 
     private OnFollowUpSymptomsFourthQuestionListener mListener;

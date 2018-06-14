@@ -16,7 +16,7 @@ public class ProgressPage_VH extends RecyclerView.ViewHolder {
     private final ImageView backButton;
     private final ImageView three_dotted;
     private final TextView toolbar_title;
-    private final TextView startedApointments;
+    private final TextView startedApointments=null;
     private OnProgressPageListener onProgressPageListener;
 
     public ProgressPage_VH(View itemView) {
@@ -36,7 +36,7 @@ public class ProgressPage_VH extends RecyclerView.ViewHolder {
             }
         } );
         toolbar_title = itemView.findViewById ( R.id.toolbar_title );
-        startedApointments = itemView.findViewById ( R.id.txtStartedAppointments );
+        //startedApointments = itemView.findViewById ( R.id.txtStartedAppointment );
     }
 
     public void setStartedAppointmentsText(String appointments){

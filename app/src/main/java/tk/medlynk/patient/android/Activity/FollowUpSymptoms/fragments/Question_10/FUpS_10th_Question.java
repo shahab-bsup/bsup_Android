@@ -30,7 +30,7 @@ public class FUpS_10th_Question extends Fragment
 , OnTenthFollowUpAnswerListener
 {
 
-    public static final String TAG = FUpS_10th_Question.class.getSimpleName ();
+    public static final String TAG = "FUpS_10th_Question";
 
     private OnFollowUpSymptomsTenthQuestionListener mListener;
     private FUpS_10th_VH viewHolder;

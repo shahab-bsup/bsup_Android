@@ -31,7 +31,7 @@ public class FUpS_12th_Question extends Fragment implements
         FUpS_12th_VH.OnFUpSTwelveVHListener,
         OnFollowUpTwelveAnswerListener {
 
-    public static final String TAG = FUpS_12th_Question.class.getSimpleName ();
+    public static final String TAG = "FUpS_12th_Question";
 
 
     private OnFollowUpSymptomsTwelveQuestionListener mListener;

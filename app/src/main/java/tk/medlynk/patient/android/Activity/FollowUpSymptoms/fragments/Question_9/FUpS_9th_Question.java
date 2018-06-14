@@ -29,7 +29,7 @@ public class FUpS_9th_Question extends Fragment implements
         OnNinthFollowUpAnswerListener
 {
 
-    public static final String TAG = FUpS_9th_Question.class.getSimpleName ();
+    public static final String TAG = "FUpS_9th_Question";
 
     private OnFollowUpSymptomsNinthQuestionListener mListener;
     private FUpS_9th_VH viewHolder;

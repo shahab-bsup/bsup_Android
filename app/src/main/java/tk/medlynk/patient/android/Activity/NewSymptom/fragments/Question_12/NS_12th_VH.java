@@ -34,7 +34,7 @@ public class NS_12th_VH extends RecyclerView.ViewHolder implements
     private List<Answer> choices;
     private OnTwelveNSVHListener onNinthNSVHListener;
 
-    public NS_12th_VH(View itemView) {
+    public NS_12th_VH(View itemView,List<Answer>answersDB) {
         super ( itemView );
         choices = new ArrayList<> (  );
         choice = new Answer ();
@@ -61,6 +61,22 @@ public class NS_12th_VH extends RecyclerView.ViewHolder implements
             second.setTextToButtons ( string_choices[i], i );
         }
         first.setTextToButtons ( string_choices[4], 0 );
+
+        if(answersDB!=null){
+            if(answersDB.get(0).getChoice().equals("e")){
+                first.previewOfDBResult(true,true,0);
+            }
+            else {
+                for (Answer answer:answersDB) {
+                    switch (answer.getChoice()){
+                        case "a":{second.previewOfDBResult(true,false,0);break;}
+                        case "b":{second.previewOfDBResult(true,false,1);break;}
+                        case "c":{second.previewOfDBResult(true,false,2);break;}
+                        case "d":{second.previewOfDBResult(true,false,3);break;}
+                    }
+                }
+            }
+        }
     }
 
     public void setProgressBarVisibilityStatus( int status ){

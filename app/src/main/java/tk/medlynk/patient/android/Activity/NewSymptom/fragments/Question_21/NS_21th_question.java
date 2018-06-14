@@ -90,11 +90,11 @@ public class NS_21th_question extends Fragment implements
         System.out.println("NS_21th_question.onNextClicked");
         viewHolder.setProgressBarVisibilityStatus(View.VISIBLE);
         SharedPreferenceManager manager = new SharedPreferenceManager(getActivity());
-        MedlynkRequests.newSymptomTwentyOneQuestionAnswer(getActivity(),
+       /* MedlynkRequests.newSymptomTwentyOneQuestionAnswer(getActivity(),
                 NS_21th_question.this,
                 manager.getAppointmentID(),
                 answers
-        );
+        );*/
     }
 
     @Override

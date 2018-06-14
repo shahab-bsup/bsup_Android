@@ -26,7 +26,7 @@ public class NS_7th_VH extends RecyclerView.ViewHolder implements ViewSelection.
     private OnSeventhNSVHListener onSeventhNSVHListener;
     private Answer answer;
 
-    public NS_7th_VH(View itemView) {
+    public NS_7th_VH(View itemView,Answer answerDB) {
         super ( itemView );
         answer = new Answer ();
         progressBar = itemView.findViewById ( R.id.progress_bar );
@@ -48,6 +48,10 @@ public class NS_7th_VH extends RecyclerView.ViewHolder implements ViewSelection.
             answerChoices.setTextToButtons ( choices_strings[i], i );
         }
         answerChoices.setOnSingleItemSelectedListener ( this );
+
+        if (answerDB != null) {
+            answerChoices.previewOfDBResult(true, true, answerDB.getRate() - 1);
+        }
     }
 
     public void setProgressBarVisibilityStatus( int status ){

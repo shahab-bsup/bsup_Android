@@ -28,7 +28,7 @@ public class FUpS_14th_Question extends Fragment implements
         FUpS_14th_VH.OnFUpSFourteenVHListener,
 OnFourteenFollowUpAnswerListener{
 
-    public static final String TAG = FUpS_14th_Question.class.getSimpleName ();
+    public static final String TAG = "FUpS_14th_Question";
 
     private OnFollowUpSymptomsFourteenQuestionListener mListener;
     private FUpS_14th_VH viewHolder;
