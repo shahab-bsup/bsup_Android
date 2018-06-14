@@ -1,7 +1,10 @@
 package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_12;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,14 +13,20 @@ import android.widget.Toast;
 
 import com.neweraandroid.demo.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import tk.medlynk.patient.android.Activity.NewSymptom.OnNewSymptomAnswerListener;
+import tk.medlynk.patient.android.Constants;
+import tk.medlynk.patient.android.DataBase.DataBaseModel;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.JsonConverter;
 import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
 import tk.medlynk.patient.android.Networking.MedlynkRequests;
+import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
 
-    /**
+/**
      * A simple {@link Fragment} subclass.
      * Activities that contain this fragment must implement the
      * {@link OnNewSymptomTwelveQuestionListener} interface
@@ -26,8 +35,14 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
      * create an instance of this fragment.
      */
     public class NS_12th_question extends Fragment implements
-            OnTwelveAnswerListener,
+            OnNewSymptomAnswerListener,
             NS_12th_VH.OnTwelveNSVHListener {
+
+        private MedlynkViewModel mMedlynkViewModel;
+        private boolean existsRecord = false;
+        private List<Answer> answersDB ;
+        private List<Answer> answersForDB = new ArrayList<>();
+        private SharedPreferenceManager manager;
 
         public static final String TAG = "NS_12th_question";
 
@@ -61,9 +76,30 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate ( R.layout.fragment_new__symptom_12th_question, container, false );
-        viewHolder = new NS_12th_VH ( view );
-        viewHolder.setOnNinthNSVHListener ( this );
+        dbOperation(view);
         return view;
+    }
+
+    private void dbOperation(final View view) {
+        mMedlynkViewModel = ViewModelProviders.of(getActivity()).get(MedlynkViewModel.class);
+        manager = new SharedPreferenceManager(getActivity());
+
+        mMedlynkViewModel.getAnswers(manager.getAppointmentID(), Constants.NEW_SYMPTOM_ROW, 12)
+                .observe(this, new Observer<DataBaseModel>() {
+                    @Override
+                    public void onChanged(@Nullable DataBaseModel dataBaseModel) {
+                        if (dataBaseModel != null) {
+                            existsRecord = true;
+                            answersDB=new ArrayList<>();
+                            JsonConverter JC = JsonConverter.getInstance();
+                            answersDB = JC.answerJsonToAnswers(dataBaseModel.getAnswerJson());
+                        }
+
+                        viewHolder = new NS_12th_VH(view, answersDB);
+                        viewHolder.setOnNinthNSVHListener(NS_12th_question.this);
+                    }
+                });
+
     }
 
     @Override
@@ -85,14 +121,20 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
 
 
     @Override
-    public void onTwelveAnswerSuccess(NewSymptomAnswerResponse response) {
+    public void onAnswerSuccess(NewSymptomAnswerResponse response) {
+        JsonConverter JC = JsonConverter.getInstance();
+        if (existsRecord == false)
+            mMedlynkViewModel.insertAnswersToDB(manager.getAppointmentID(), Constants.NEW_SYMPTOM_ROW, 12, JC.answersToAnswerJson(answersForDB));
+        else
+            mMedlynkViewModel.updateAnswersToDB(manager.getAppointmentID(), Constants.NEW_SYMPTOM_ROW, 12, JC.answersToAnswerJson(answersForDB));
+
         System.out.println ( "NS_12th_question.onTwelveAnswerSuccess" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onTwelveQuestion ();
     }
 
     @Override
-    public void onTwelveAnswerFailure() {
+    public void onAnswerFailure() {
         System.out.println ( "NS_12th_question.onTwelveAnswerFailure" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         Toast.makeText ( getActivity (), "try again later!", Toast.LENGTH_SHORT ).show ();
@@ -109,12 +151,13 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
             System.out.println ( "NS_12th_question.onNextClicked" );
             viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
             SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
-            MedlynkRequests.newSymptomTwelveQuestionAnswer ( getActivity (),
-                    NS_12th_question.this,
-                    manager.getAppointmentID (),
+            MedlynkRequests.newSymptomQuestionsAnswer ( getActivity (), NS_12th_question.this,
+                    manager.getAppointmentID (),"12",
                     answer
             );
 
+            answersForDB.clear();
+            answersForDB.add(answer);
         }
 
         @Override
@@ -128,6 +171,9 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
                     manager.getAppointmentID (),
                     answers
             );
+
+            answersForDB.clear();
+            answersForDB=answers;
         }
 
         @Override

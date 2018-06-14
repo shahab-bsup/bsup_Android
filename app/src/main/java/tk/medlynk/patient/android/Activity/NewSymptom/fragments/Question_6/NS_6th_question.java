@@ -23,6 +23,7 @@ import java.util.List;
 import tk.medlynk.patient.android.Activity.NewSymptom.OnNewSymptomAnswerListener;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_4.NS_4thVH;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_4.NS_4th_question;
+import tk.medlynk.patient.android.Constants;
 import tk.medlynk.patient.android.DataBase.DataBaseModel;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
 import tk.medlynk.patient.android.JsonConverter;
@@ -80,12 +81,15 @@ public class NS_6th_question extends Fragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View view = inflater.inflate ( R.layout.fragment_new__symptom_6th_question, container, false );
-
+        View view = inflater.inflate ( R.layout.fragment_new__symptom_6th_question, container, false );
+        dbOperation(view);
+        return view;
+    }
+    private void dbOperation(final View view) {
         mMedlynkViewModel = ViewModelProviders.of(getActivity()).get(MedlynkViewModel.class);
         manager = new SharedPreferenceManager(getActivity());
 
-        mMedlynkViewModel.getAnswers(manager.getAppointmentID(), 1, 6)
+        mMedlynkViewModel.getAnswers(manager.getAppointmentID(), Constants.NEW_SYMPTOM_ROW, 6)
                 .observe(this, new Observer<DataBaseModel>() {
                     @Override
                     public void onChanged(@Nullable DataBaseModel dataBaseModel) {
@@ -102,7 +106,7 @@ public class NS_6th_question extends Fragment implements
                         viewHolder.setOnSixthNSVHListener(NS_6th_question.this);
                     }
                 });
-        return view;
+
     }
 
     @Override
@@ -126,9 +130,9 @@ public class NS_6th_question extends Fragment implements
     public void onAnswerSuccess(NewSymptomAnswerResponse response) {
         JsonConverter JC = JsonConverter.getInstance();
         if (existsRecord == false)
-            mMedlynkViewModel.insertAnswersToDB(manager.getAppointmentID(), 1, 6, JC.answersToAnswerJson(answers));
+            mMedlynkViewModel.insertAnswersToDB(manager.getAppointmentID(), Constants.NEW_SYMPTOM_ROW, 6, JC.answersToAnswerJson(answers));
         else
-            mMedlynkViewModel.updateAnswersToDB(manager.getAppointmentID(), 1, 6, JC.answersToAnswerJson(answers));
+            mMedlynkViewModel.updateAnswersToDB(manager.getAppointmentID(), Constants.NEW_SYMPTOM_ROW, 6, JC.answersToAnswerJson(answers));
 
         System.out.println ( "NS_6th_question.onSixthAnswerSuccess" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
@@ -151,10 +155,9 @@ public class NS_6th_question extends Fragment implements
     public void onNextClicked(Answer answer) {
         System.out.println ( "NS_6th_question.onNextClicked" );
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
-        SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
-        MedlynkRequests.newSymptomSixthQuestionAnswer ( getActivity (),
+        MedlynkRequests.newSymptomQuestionsAnswer ( getActivity (),
                 NS_6th_question.this,
-                manager.getAppointmentID (),
+                manager.getAppointmentID (),"6",
                 answer);
 
         answers.add(answer);

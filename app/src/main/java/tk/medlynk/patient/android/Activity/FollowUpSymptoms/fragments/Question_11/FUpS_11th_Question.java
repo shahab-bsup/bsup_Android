@@ -29,7 +29,7 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
 public class FUpS_11th_Question extends Fragment implements
         FUpS_11th_VH.OnFUpSEleventhVHListener, OnEleventFollowUphAnswerListener {
 
-    public static final String TAG = FUpS_11th_Question.class.getSimpleName ();
+    public static final String TAG = "FUpS_11th_Question";
 
     private OnFollowUpSymptomsEleventhQuestionListener mListener;
     private FUpS_11th_VH viewHolder;

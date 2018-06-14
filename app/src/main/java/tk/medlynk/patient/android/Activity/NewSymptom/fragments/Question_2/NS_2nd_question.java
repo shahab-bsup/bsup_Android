@@ -45,7 +45,7 @@ public class NS_2nd_question extends Fragment implements
     private boolean existsRecord = false;
     private Answer answerDB;
     private SharedPreferenceManager manager;
-    private List<Answer> answers = new ArrayList<> ();
+    private List<Answer> answersForDB = new ArrayList<> ();
     private OnNewSymptomSecondQuestionListener mListener;
     private NS_2nd_VH viewHolder;
 
@@ -81,7 +81,7 @@ public class NS_2nd_question extends Fragment implements
     private void dbOperation(final View view) {
         mMedlynkViewModel = ViewModelProviders.of ( getActivity () ).get ( MedlynkViewModel.class );
         manager = new SharedPreferenceManager ( getActivity () );
-        mMedlynkViewModel.getAnswers ( manager.getAppointmentID (), 1, 2 )
+        mMedlynkViewModel.getAnswers ( manager.getAppointmentID (), Constants.NEW_SYMPTOM_ROW, 2 )
                 .observe ( (LifecycleOwner) this, new Observer<DataBaseModel> () {
                     @Override
                     public void onChanged(@Nullable DataBaseModel dataBaseModel) {
@@ -121,9 +121,9 @@ public class NS_2nd_question extends Fragment implements
     public void onAnswerSuccess(NewSymptomAnswerResponse response) {
         JsonConverter JC = JsonConverter.getInstance ();
         if (existsRecord == false)
-            mMedlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (), Constants.NEW_SYMPTOM_ROW, 2, JC.answersToAnswerJson ( answers ) );
+            mMedlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (), Constants.NEW_SYMPTOM_ROW, 2, JC.answersToAnswerJson ( answersForDB ) );
         else
-            mMedlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (), Constants.NEW_SYMPTOM_ROW, 2, JC.answersToAnswerJson ( answers ) );
+            mMedlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (), Constants.NEW_SYMPTOM_ROW, 2, JC.answersToAnswerJson ( answersForDB ) );
 
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onSecondQuestion ();
@@ -146,12 +146,12 @@ public class NS_2nd_question extends Fragment implements
     public void onNextClicked(Answer answer) {
         System.out.println ( "NS_2nd_question.onNextClicked" );
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
-        MedlynkRequests.newSymptomSecondQuestionAnswer ( getActivity (),
+        MedlynkRequests.newSymptomQuestionsAnswer ( getActivity (),
                 NS_2nd_question.this,
-                manager.getAppointmentID (),
+                manager.getAppointmentID (),"2",
                 answer );
 
-        answers.add ( answer );
+        answersForDB.add ( answer );
     }
 
     @Override

@@ -88,10 +88,10 @@ public class NS_20th_question extends Fragment implements
         System.out.println ( "NS_20th_question.onNextClicked" );
         viewHolder.setProgressVisibilityStatus ( View.VISIBLE );
         SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
-        MedlynkRequests.newSymptomTwentyQuestionAnswer ( getActivity (),
+        /*MedlynkRequests.newSymptomTwentyQuestionAnswer ( getActivity (),
                 NS_20th_question.this,
                 manager.getAppointmentID (),
-                answer);
+                answer);*/
     }
 
     @Override

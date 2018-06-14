@@ -26,7 +26,7 @@ public class NS_18th_VH extends RecyclerView.ViewHolder implements ViewSelection
     private OnEighteenNSVHListener onEighteenNSVHListener;
     private Answer answer;
 
-    public NS_18th_VH(View itemView) {
+    public NS_18th_VH(View itemView,Answer answerDB) {
         super ( itemView );
         answer = new Answer ();
         progressBar = itemView.findViewById ( R.id.progress_bar );
@@ -45,6 +45,15 @@ public class NS_18th_VH extends RecyclerView.ViewHolder implements ViewSelection
                 getStringArray ( R.array.yes_no );
         for (int i = 0; i < choices.getNumberOfViews (); i++) {
             choices.setTextToButtons ( string_choices[i], i );
+        }
+
+        if (answerDB != null) {
+            if (answerDB.getChoice().equals("a")){
+                choices.previewOfDBResult(true,true,0);
+            }
+            else if(answerDB.getChoice().equals("b")){
+                choices.previewOfDBResult(true,true,1);
+            }
         }
     }
 

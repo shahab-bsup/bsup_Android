@@ -12,8 +12,8 @@ public class ProgressPageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
-        setContentView ( R.layout.activity_progress_page );
-        viewHolder = new ProgressPage_VH ( findViewById ( R.id.activity_progress_page ) );
+        setContentView ( R.layout.activity_progress_page2 );
+       // viewHolder = new ProgressPage_VH ( findViewById ( R.id.activity_progress_page ) );
 
     }
 }

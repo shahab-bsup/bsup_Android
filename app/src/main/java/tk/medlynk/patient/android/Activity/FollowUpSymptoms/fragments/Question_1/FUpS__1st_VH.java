@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.neweraandroid.demo.R;
 
+import tk.medlynk.patient.android.Model.Answer;
+
 /**
  * Created by Shahab on 3/4/2018.
  */
@@ -25,7 +27,7 @@ public class FUpS__1st_VH extends RecyclerView.ViewHolder {
     private AppCompatEditText answer_input;
     private OnFUpSFirstVHListener onFUpSFirstVHListener;
 
-    public FUpS__1st_VH(View itemView) {
+    public FUpS__1st_VH(View itemView, Answer answerDB) {
         super ( itemView );
         progressBar = itemView.findViewById ( R.id.progress_bar );
         question_view = itemView.findViewById ( R.id.follow_up_symptoms_first_question );
@@ -38,6 +40,10 @@ public class FUpS__1st_VH extends RecyclerView.ViewHolder {
         button.setEnabled ( false );
         answer_input = itemView.findViewById ( R.id.follow_up_symptom_first_answer );
         answer_input.addTextChangedListener ( new OnAnswerInputTextWatcher() );
+
+        if (answerDB!=null){
+            answer_input.setText(answerDB.getReply());
+        }
     }
 
     public void setProgressBarVisibilityStatus(int status ){

@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tk.medlynk.patient.android.Activity.NewSymptom.OnNewSymptomAnswerListener;
+import tk.medlynk.patient.android.Constants;
 import tk.medlynk.patient.android.DataBase.DataBaseModel;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
 import tk.medlynk.patient.android.JsonConverter;
@@ -75,8 +76,12 @@ public class NS_5th_question extends Fragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        final View view = inflater.inflate(R.layout.fragment_new__symptom_5th_question, container, false);
+        View view = inflater.inflate(R.layout.fragment_new__symptom_5th_question, container, false);
+        dbOperation(view);
+        return view;
+    }
 
+    private void dbOperation(final View view) {
         mMedlynkViewModel = ViewModelProviders.of(getActivity()).get(MedlynkViewModel.class);
         manager = new SharedPreferenceManager(getActivity());
 
@@ -98,7 +103,6 @@ public class NS_5th_question extends Fragment implements
                     }
                 });
 
-        return view;
     }
 
     @Override
@@ -122,9 +126,9 @@ public class NS_5th_question extends Fragment implements
     public void onAnswerSuccess(NewSymptomAnswerResponse response) {
         JsonConverter JC = JsonConverter.getInstance();
         if (existsRecord == false)
-            mMedlynkViewModel.insertAnswersToDB(manager.getAppointmentID(), 1, 5, JC.answersToAnswerJson(answers));
+            mMedlynkViewModel.insertAnswersToDB(manager.getAppointmentID(), Constants.NEW_SYMPTOM_ROW, 5, JC.answersToAnswerJson(answers));
         else
-            mMedlynkViewModel.updateAnswersToDB(manager.getAppointmentID(), 1, 5, JC.answersToAnswerJson(answers));
+            mMedlynkViewModel.updateAnswersToDB(manager.getAppointmentID(), Constants.NEW_SYMPTOM_ROW, 5, JC.answersToAnswerJson(answers));
 
         System.out.println("NS_5th_question.onFifthAnswerSuccess");
         viewHolder.setProgressBarVisibilityStatus(View.GONE);
@@ -148,10 +152,9 @@ public class NS_5th_question extends Fragment implements
     public void onNextClicked(Answer answer) {
         System.out.println("NS_5th_question.onNextClicked");
         viewHolder.setProgressBarVisibilityStatus(View.VISIBLE);
-        SharedPreferenceManager manager = new SharedPreferenceManager(getActivity());
-        MedlynkRequests.newSymptomFifthQuestionAnswer(getActivity(),
+        MedlynkRequests.newSymptomQuestionsAnswer(getActivity(),
                 NS_5th_question.this,
-                manager.getAppointmentID(),
+                manager.getAppointmentID(),"5",
                 answer);
 
         answers.add(answer);
