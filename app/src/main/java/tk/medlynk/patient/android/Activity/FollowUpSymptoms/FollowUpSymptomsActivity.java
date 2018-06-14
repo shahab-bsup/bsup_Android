@@ -245,8 +245,9 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
         CURRENT_FRAGMENT = FUpS_9th_Question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                .remove(getSupportFragmentManager().findFragmentByTag(FUpS_3rd_Question.TAG))
                 .add(R.id.followUpFragmentsContainer, new FUpS_9th_Question(), FUpS_9th_Question.TAG)
-                .commit();
+                .commitNow();
     }
 
     @Override
