@@ -139,7 +139,6 @@ public class NS_9th_question extends Fragment implements
 
     @Override
     public void onAnswerSuccess(NewSymptomAnswerResponse response) {
-        Log.d ( TAG, "onAnswerSuccess " );
         JsonConverter jsonConverter = JsonConverter.getInstance ();
         if( !existRecord ){
             medlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (),

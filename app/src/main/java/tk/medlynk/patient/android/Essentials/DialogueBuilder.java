@@ -23,7 +23,8 @@ public class DialogueBuilder extends AppCompatDialog {
     private OnOtherDialogListener onOtherDialogListener;
     private TextView promptTextView;
 
-    public DialogueBuilder(Context context, String dialog_type) {
+    public DialogueBuilder(Context context,
+                           String dialog_type) {
         super ( context );
         init(dialog_type);
     }

@@ -1,6 +1,7 @@
 package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_9;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -35,9 +36,11 @@ public class NS_9th_VH extends RecyclerView.ViewHolder
     private Answer choice ;
     private List<Answer> choices;
     private OnNinthNSVHListener onNinthNSVHListener;
+    private TextView otherText;
 
     public NS_9th_VH(View itemView) {
         super ( itemView );
+        otherText = itemView.findViewById ( R.id.txtOther );
         choice = new Answer ();
         choices = new ArrayList<> (  );
         progressBar = itemView.findViewById ( R.id.progress_bar );
@@ -97,11 +100,18 @@ public class NS_9th_VH extends RecyclerView.ViewHolder
                     second.previewOfDBResult ( true,
                             false,
                             3);
-
+                    if( answer.getOther () != null && !TextUtils.isEmpty ( answer.getOther () )){
+                        setOtherTextVisibilityStatus ( View.VISIBLE );
+                        setOtherText( answer.getOther () );
+                    }
                     break;
                 }
             }
         }
+    }
+
+    private void setOtherText(String other) {
+        this.otherText.setText ( other );
     }
 
     public void setProgressBarVisibilityStatus( int status ){
@@ -114,7 +124,6 @@ public class NS_9th_VH extends RecyclerView.ViewHolder
 
     @Override
     public void onSingleItemSelected(View view, int i) {
-        System.out.println ( "NS_9th_VH.onSingleItemSelected" );
         if( i == -1 ){
             button_next.setEnabled ( false );
             button_next.setBackgroundResource ( R.drawable.disable_next_question );
@@ -128,7 +137,6 @@ public class NS_9th_VH extends RecyclerView.ViewHolder
 
     @Override
     public void onClearState(View view) {
-        System.out.println ( "NS_9th_VH.onClearState" );
         if( view.getId () == second.getId () ){
             choices.clear ();
         }
@@ -136,10 +144,11 @@ public class NS_9th_VH extends RecyclerView.ViewHolder
 
     @Override
     public void onMultiItemSelected(View view, Integer integer) {
-        System.out.println ( "NS_9th_VH.onMultiItemSelected" );
         first.setClear ();
         if( integer == 3 ){
-            DialogueBuilder dialogBuilder = new DialogueBuilder( itemView.getContext (), "other");
+            DialogueBuilder dialogBuilder =
+                    new DialogueBuilder( itemView.getContext (),
+                            "other");
             dialogBuilder.setOnDialogListener( this );
             dialogBuilder.show ();
         }else{
@@ -235,8 +244,9 @@ public class NS_9th_VH extends RecyclerView.ViewHolder
 
     @Override
     public void onOtherDialogDone(String otherText) {
-        System.out.println ( "NS_9th_VH.onOtherDialogDone" );
         if( otherText.length () > 0 ){
+            setOtherTextVisibilityStatus ( View.VISIBLE );
+            this.otherText.setText ( otherText );
             Answer answer = new Answer ();
             answer.setChoice ( "e" );
             answer.setOther ( otherText );
@@ -244,12 +254,17 @@ public class NS_9th_VH extends RecyclerView.ViewHolder
             button_next.setEnabled ( true );
             button_next.setBackgroundResource ( R.drawable.enable_next_question );
         }else{
+            setOtherTextVisibilityStatus ( View.GONE );
             second.getButtons ().get ( 3 ).setBackgroundResource ( R.drawable.answer_not_selected );
             second.getButtons ().get ( 3 ).setTextColor ( itemView.
                     getContext ().
                     getResources ().
                     getColor ( R.color.white ) );
         }
+    }
+
+    private void setOtherTextVisibilityStatus(int status){
+        this.otherText.setVisibility ( status );
     }
 
     private class OnNextClickListener implements View.OnClickListener {
