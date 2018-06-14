@@ -1059,7 +1059,7 @@ public class MedlynkRequests {
 
     public static void followUpSymptomSecondAnswer(Context context, final OnSecondFollowUpAnswerListener listener, int appointmentID, Answer answer) {
         System.out.println ( "MedlynkRequests.followUpSymptomSecondAnswer" );
-        if (Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
+        if (Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {  
             Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "2" );
         } else {
             Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "5" );
