@@ -1,7 +1,10 @@
 package tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_10;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +13,21 @@ import android.widget.Toast;
 
 import com.neweraandroid.demo.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_9.FUpS_9th_Question;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_9.FUpS_9th_VH;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_9.NS_9th_VH;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_9.NS_9th_question;
+import tk.medlynk.patient.android.Constants;
+import tk.medlynk.patient.android.DataBase.DataBaseModel;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.JsonConverter;
 import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.FollowUpSymptomResponse;
 import tk.medlynk.patient.android.Networking.MedlynkRequests;
+import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +46,10 @@ public class FUpS_10th_Question extends Fragment
 
     private OnFollowUpSymptomsTenthQuestionListener mListener;
     private FUpS_10th_VH viewHolder;
+    private MedlynkViewModel medlynkViewModel;
+    private SharedPreferenceManager manager;
+    private boolean existRecord = false;
+    private List<Answer> answersDB = new ArrayList<> (  );
 
     public FUpS_10th_Question() {
         // Required empty public constructor
@@ -61,10 +77,43 @@ public class FUpS_10th_Question extends Fragment
         View view = inflater.inflate ( R.layout.fragment_follow__up__symptoms_10th__question,
                 container,
                 false );
-
-        viewHolder = new FUpS_10th_VH( view );
-        viewHolder.setOnFUpSTenthVHListener( this );
+        dbOperation ( view );
         return view;
+    }
+
+    private void dbOperation(final View view) {
+        medlynkViewModel = ViewModelProviders.of ( getActivity () )
+                .get ( MedlynkViewModel.class );
+        manager = new SharedPreferenceManager ( getActivity () );
+        medlynkViewModel.getAnswers ( manager.getAppointmentID (),
+                Constants.FOLLOW_UP_SYMPTOMS_ROW,
+                10 ).observe ( FUpS_10th_Question.this,
+                new Observer<DataBaseModel> () {
+                    private Answer answer;
+                    private List<Answer> answers;
+                    @Override
+                    public void onChanged(@Nullable DataBaseModel dataBaseModel) {
+                        if (dataBaseModel != null) {
+                            existRecord = true;
+                            JsonConverter jsonConverter = JsonConverter.getInstance ();
+                            if (jsonConverter.answerJsonToAnswers ( dataBaseModel.getAnswerJson () ).size () > 1) {
+                                answers = new ArrayList<> ();
+                                answers = jsonConverter.answerJsonToAnswers ( dataBaseModel.getAnswerJson () );
+                            } else {
+                                answer = new Answer ();
+                                answer = jsonConverter
+                                        .answerJsonToAnswers ( dataBaseModel.getAnswerJson () ).get ( 0 );
+                            }
+                        }
+                        viewHolder = new FUpS_10th_VH( view );
+                        viewHolder.setOnFUpSTenthVHListener( FUpS_10th_Question.this );
+                        if (answers != null) {
+                            viewHolder.onUpdateUI ( answers );
+                        } else if (answer != null) {
+                            viewHolder.onUpdateUI ( answer );
+                        }
+                    }
+                } );
     }
 
     @Override
@@ -86,42 +135,54 @@ public class FUpS_10th_Question extends Fragment
 
     @Override
     public void onNextClicked(Answer answer) {
-        System.out.println ( "FUpS_10th_Question.onNextClick" );
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
         SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
         MedlynkRequests.followUpSymptomTenthAnswer( getActivity (),
                 manager.getAppointmentID (),
                 FUpS_10th_Question.this,
                 answer);
+        answersDB.clear ();
+        answersDB.add ( answer );
     }
 
     @Override
     public void onNextClicked(List<Answer> answers) {
-        System.out.println ( "FUpS_10th_Question.onNextClick" );
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
         SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
         MedlynkRequests.followUpSymptomTenthAnswer( getActivity (),
                 manager.getAppointmentID (),
                 FUpS_10th_Question.this,
                 answers);
+
+        answersDB.clear ();
+        answersDB.addAll ( answers );
     }
 
     @Override
     public void onSkipClick() {
-        System.out.println ( "FUpS_10th_Question.onSkipClick" );
         mListener.onTenthQuestion ();
     }
 
     @Override
     public void onTenthAnswerSuccess(FollowUpSymptomResponse response) {
-        System.out.println ( "FUpS_10th_Question.onTenthAnswerSuccess" );
+        JsonConverter jsonConverter = JsonConverter.getInstance ();
+        if (!existRecord) {
+            medlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (),
+                    Constants.FOLLOW_UP_SYMPTOMS_ROW,
+                    10, jsonConverter.
+                            answersToAnswerJson ( answersDB ) );
+        } else {
+            medlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (),
+                    Constants.FOLLOW_UP_SYMPTOMS_ROW,
+                    10, jsonConverter.
+                            answersToAnswerJson ( answersDB ) );
+        }
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onTenthQuestion ();
     }
 
     @Override
     public void onTenthAnswerFailure() {
-        System.out.println ( "FUpS_10th_Question.onTenthAnswerFailure" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onTenthQuestion();
     }

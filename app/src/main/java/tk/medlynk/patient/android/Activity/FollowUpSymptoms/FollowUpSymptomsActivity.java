@@ -3,10 +3,11 @@ package tk.medlynk.patient.android.Activity.FollowUpSymptoms;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.End_of_Question_Set.End_of_Question_Set;
 import com.neweraandroid.demo.R;
 
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_1.FUpS_1st_Question;
@@ -16,6 +17,7 @@ import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_1
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_13.FUpS_13th_Question;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_14.FUpS_14th_Question;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_15.FUpS_15th_Question;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_15.FUpS_15th_VH;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_2.FUpS_2nd_Question;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_3.FUpS_3rd_Question;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_4.FUpS_4th_Question;
@@ -41,8 +43,10 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
         FUpS_12th_Question.OnFollowUpSymptomsTwelveQuestionListener,
         FUpS_13th_Question.OnFollowUpSymptomsThirteenQuestionListener,
         FUpS_14th_Question.OnFollowUpSymptomsFourteenQuestionListener,
-        FUpS_15th_Question.OnFollowUpSymptomsFifteenQuestionListener {
+        FUpS_15th_Question.OnFollowUpSymptomsFifteenQuestionListener,
+        End_of_Question_Set.OnEndOfFollowUpSymptomListener{
 
+    private static final String TAG = FollowUpSymptomsActivity.class.getSimpleName ();
     View toolbar_view;
     TextView toolbar_title;
     ImageView backButton;
@@ -234,9 +238,14 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
 
     @Override
     public void onFifteenQuestion() {
-        System.out.println("FollowUpSymptomsActivity.onFifteenQuestion");
-        //CURRENT_FRAGMENT =FUpS_4th_Question.TAG;
-        finish();
+        CURRENT_FRAGMENT = End_of_Question_Set.TAG;
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                .remove(getSupportFragmentManager().findFragmentByTag( FUpS_15th_Question.TAG))
+                .add(R.id.followUpFragmentsContainer,
+                        new End_of_Question_Set (),
+                        End_of_Question_Set.TAG)
+                .commitNow();
     }
 
     @Override
@@ -373,7 +382,21 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
                         .commitNow();
                 break;
             }
+            case End_of_Question_Set.TAG:{
+                CURRENT_FRAGMENT = FUpS_15th_Question.TAG;
+                fragmentTransaction.setCustomAnimations ( R.anim.in_right,
+                        R.anim.out_right)
+                        .remove ( getSupportFragmentManager ().findFragmentByTag ( FUpS_15th_Question.TAG ) )
+                        .add ( R.id.followUpFragmentsContainer, new FUpS_15th_Question (),
+                                FUpS_15th_Question.TAG)
+                        .commitNow ();
+            }
         }
 
+    }
+
+    @Override
+    public void onEndOfFollowUp() {
+        Log.d ( TAG, "onEndOfFollowUp: " );
     }
 }

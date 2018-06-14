@@ -93,7 +93,6 @@ public class FUpS_15th_Question extends Fragment implements
                             JsonConverter JC = JsonConverter.getInstance();
                             answerDB = JC.answerJsonToAnswers(dataBaseModel.getAnswerJson())
                                     .get(0);
-                            Log.d(TAG, "onChanged: " + answerDB);
                         }
                         viewHolder = new FUpS_15th_VH(view, answerDB);
                         viewHolder.setOnFUpSFifteenVHListener(FUpS_15th_Question.this);
@@ -122,7 +121,6 @@ public class FUpS_15th_Question extends Fragment implements
 
     @Override
     public void onNextClick(Answer answer) {
-        System.out.println ( "FUpS_15th_Question.onNextClick" );
         viewHolder.setProgressBarVisibilityStatus(View.VISIBLE);
         MedlynkRequests.followUpSymptomAnswer(getActivity(),FUpS_15th_Question.this
                 ,manager.getAppointmentID(), "15",
@@ -133,7 +131,6 @@ public class FUpS_15th_Question extends Fragment implements
 
     @Override
     public void onSkipClick() {
-        System.out.println ( "FUpS_15th_Question.onSkipClick" );
         mListener.onFifteenQuestion ();
     }
 
@@ -144,8 +141,6 @@ public class FUpS_15th_Question extends Fragment implements
             mMedlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (), Constants.FOLLOW_UP_SYMPTOMS_ROW, 15, JC.answersToAnswerJson ( answersForDB ) );
         else
             mMedlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (), Constants.FOLLOW_UP_SYMPTOMS_ROW, 15, JC.answersToAnswerJson ( answersForDB ) );
-
-        System.out.println("FUpS_15th_Question.onFifteenAnswerResponse");
         viewHolder.setProgressBarVisibilityStatus(View.GONE);
         mListener.onFifteenQuestion();
     }

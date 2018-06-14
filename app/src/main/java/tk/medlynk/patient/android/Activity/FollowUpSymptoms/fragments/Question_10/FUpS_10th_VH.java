@@ -209,6 +209,46 @@ public class FUpS_10th_VH extends RecyclerView.ViewHolder implements
         }
     }
 
+    public void onUpdateUI(List<Answer> answers) {
+        for (Answer answer : answers) {
+            switch (answer.getChoice ()){
+                case "b":{
+                    second.previewOfDBResult ( true,
+                            false,
+                            0);
+
+                    break;
+                }
+                case "c":{
+                    second.previewOfDBResult ( true,
+                            false,
+                            1);
+
+                    break;
+                }
+                case "d":{
+                    second.previewOfDBResult ( true,
+                            false,
+                            2);
+
+                    break;
+                }
+                case "e":{
+                    second.previewOfDBResult ( true,
+                            false,
+                            3);
+
+                    break;
+                }
+            }
+        }
+    }
+
+    public void onUpdateUI(Answer answer) {
+        first.previewOfDBResult ( true,
+                true, 0);
+    }
+
     private class OnNextButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {

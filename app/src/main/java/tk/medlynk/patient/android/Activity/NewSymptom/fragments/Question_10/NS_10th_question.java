@@ -100,7 +100,6 @@ public class NS_10th_question extends Fragment implements
                             JsonConverter JC = JsonConverter.getInstance();
                             answerDB = JC.answerJsonToAnswers(dataBaseModel.getAnswerJson())
                                     .get(0);
-                            Log.d(TAG, "onChanged: " + answerDB);
                         }
 
                         viewHolder = new NS_10th_VH(view, answerDB);

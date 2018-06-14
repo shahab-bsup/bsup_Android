@@ -1,7 +1,10 @@
 package tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_9;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,12 +12,17 @@ import android.view.ViewGroup;
 
 import com.neweraandroid.demo.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import tk.medlynk.patient.android.Constants;
+import tk.medlynk.patient.android.DataBase.DataBaseModel;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.JsonConverter;
 import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.FollowUpSymptomResponse;
 import tk.medlynk.patient.android.Networking.MedlynkRequests;
+import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,20 +34,23 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
  */
 public class FUpS_9th_Question extends Fragment implements
         FUpS_9th_VH.OnFUpSNinthVHListener,
-        OnNinthFollowUpAnswerListener
-{
+        OnNinthFollowUpAnswerListener {
 
     public static final String TAG = "FUpS_9th_Question";
 
     private OnFollowUpSymptomsNinthQuestionListener mListener;
     private FUpS_9th_VH viewHolder;
+    private MedlynkViewModel medlynkViewModel;
+    private SharedPreferenceManager manager;
+    private boolean existRecord = false;
+    private List<Answer> answersDB = new ArrayList<> ();
 
     public FUpS_9th_Question() {
         // Required empty public constructor
     }
 
     public static FUpS_9th_Question newInstance(String param1, String param2) {
-        FUpS_9th_Question fragment = new FUpS_9th_Question();
+        FUpS_9th_Question fragment = new FUpS_9th_Question ();
         Bundle args = new Bundle ();
         fragment.setArguments ( args );
         return fragment;
@@ -58,9 +69,44 @@ public class FUpS_9th_Question extends Fragment implements
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment...
         View view = inflater.inflate ( R.layout.fragment_follow__up__symptoms_9th__question, container, false );
-        viewHolder = new FUpS_9th_VH( view );
-        viewHolder.setOnFUpSNinthVHListener( this );
+        dbOperation ( view );
         return view;
+    }
+
+    private void dbOperation(final View view) {
+        medlynkViewModel = ViewModelProviders.of ( getActivity () )
+                .get ( MedlynkViewModel.class );
+        manager = new SharedPreferenceManager ( getActivity () );
+        medlynkViewModel.getAnswers ( manager.getAppointmentID (),
+                Constants.FOLLOW_UP_SYMPTOMS_ROW,
+                9 ).observe ( FUpS_9th_Question.this,
+                new Observer<DataBaseModel> () {
+                    private Answer answer;
+                    private List<Answer> answers;
+
+                    @Override
+                    public void onChanged(@Nullable DataBaseModel dataBaseModel) {
+                        if (dataBaseModel != null) {
+                            existRecord = true;
+                            JsonConverter jsonConverter = JsonConverter.getInstance ();
+                            if (jsonConverter.answerJsonToAnswers ( dataBaseModel.getAnswerJson () ).size () > 1) {
+                                answers = new ArrayList<> ();
+                                answers = jsonConverter.answerJsonToAnswers ( dataBaseModel.getAnswerJson () );
+                            } else {
+                                answer = new Answer ();
+                                answer = jsonConverter
+                                        .answerJsonToAnswers ( dataBaseModel.getAnswerJson () ).get ( 0 );
+                            }
+                        }
+                        viewHolder = new FUpS_9th_VH ( view );
+                        viewHolder.setOnFUpSNinthVHListener ( FUpS_9th_Question.this );
+                        if (answers != null) {
+                            viewHolder.onUpdateUI ( answers );
+                        } else if (answer != null) {
+                            viewHolder.onUpdateUI ( answer );
+                        }
+                    }
+                } );
     }
 
     @Override
@@ -82,13 +128,15 @@ public class FUpS_9th_Question extends Fragment implements
 
     @Override
     public void onNextClicked(Answer answer) {
-        System.out.println ( "FUpS_9th_Question.onNextClick" );
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
         SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
-        MedlynkRequests.followUpSymptomNinthAnswer( getActivity (),
+        MedlynkRequests.followUpSymptomNinthAnswer ( getActivity (),
                 manager.getAppointmentID (),
                 FUpS_9th_Question.this,
-                answer);
+                answer );
+
+        answersDB.clear ();
+        answersDB.add ( answer );
     }
 
 
@@ -96,45 +144,46 @@ public class FUpS_9th_Question extends Fragment implements
     public void onNextClicked(List<Answer> answers) {
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
         SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
-        MedlynkRequests.followUpSymptomNinthAnswer( getActivity (),
+        MedlynkRequests.followUpSymptomNinthAnswer ( getActivity (),
                 manager.getAppointmentID (),
                 FUpS_9th_Question.this,
-                answers);
-    }
+                answers );
 
+        answersDB.clear ();
+        answersDB.addAll ( answers );
+
+    }
 
     @Override
     public void onSkipClick() {
-        System.out.println ( "FUpS_9th_Question.onSkipClick" );
         mListener.onNinthQuestion ();
     }
 
     @Override
     public void onNinthAnswerSuccess(FollowUpSymptomResponse response) {
-        System.out.println ( "FUpS_9th_Question.onNinthAnswerSuccess" );
+        JsonConverter jsonConverter = JsonConverter.getInstance ();
+        if (!existRecord) {
+            medlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (),
+                    Constants.FOLLOW_UP_SYMPTOMS_ROW,
+                    9, jsonConverter.
+                            answersToAnswerJson ( answersDB ) );
+        } else {
+            medlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (),
+                    Constants.FOLLOW_UP_SYMPTOMS_ROW,
+                    9, jsonConverter.
+                            answersToAnswerJson ( answersDB ) );
+        }
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onNinthQuestion ();
     }
 
     @Override
     public void onNinthAnswerFailure() {
-        System.out.println ( "FUpS_9th_Question.onNinthAnswerFailure" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onNinthQuestion ();
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFollowUpSymptomsNinthQuestionListener {
-        // TODO: Update argument type and name
         void onNinthQuestion();
     }
 }

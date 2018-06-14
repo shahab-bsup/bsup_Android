@@ -598,6 +598,7 @@ public class MedlynkRequests {
 
             @Override
             public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
+
                 listener.onAnswerFailure ();
             }
         } );
@@ -1262,7 +1263,6 @@ public class MedlynkRequests {
     public static void followUpSymptomNinthAnswer(Context context, int appointmentID,
                                                   final OnNinthFollowUpAnswerListener listener,
                                                   Answer answer) {
-        System.out.println ( "MedlynkRequests.followUpSymptomNinthAnswer" );
         if (Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
             Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "9" );
         } else {
@@ -1288,8 +1288,10 @@ public class MedlynkRequests {
         } );
     }
 
-    public static void followUpSymptomNinthAnswer(Context context, int appointmentID, final OnNinthFollowUpAnswerListener listener, List<Answer> answers) {
-        System.out.println ( "MedlynkRequests.followUpSymptomNinthAnswer" );
+    public static void followUpSymptomNinthAnswer(Context context,
+                                                  int appointmentID,
+                                                  final OnNinthFollowUpAnswerListener listener,
+                                                  List<Answer> answers) {
         if (Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
             Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "9" );
         } else {
@@ -1310,13 +1312,16 @@ public class MedlynkRequests {
 
             @Override
             public void onFailure(Call<FollowUpSymptomResponse> call, Throwable t) {
-                listener.onNinthAnswerFailure ();
+                if (t instanceof JsonSyntaxException)
+                    listener.onNinthAnswerSuccess (null);
             }
         } );
     }
 
-    public static void followUpSymptomTenthAnswer(Context context, int appointmentID, final OnTenthFollowUpAnswerListener listener, List<Answer> answers) {
-        System.out.println ( "MedlynkRequests.followUpSymptomTenthAnswer" );
+    public static void followUpSymptomTenthAnswer(Context context,
+                                                  int appointmentID,
+                                                  final OnTenthFollowUpAnswerListener listener,
+                                                  List<Answer> answers) {
         if (Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
             Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "10" );
         } else {
@@ -1337,7 +1342,8 @@ public class MedlynkRequests {
 
             @Override
             public void onFailure(Call<FollowUpSymptomResponse> call, Throwable t) {
-                listener.onTenthAnswerFailure ();
+                if( t instanceof JsonSyntaxException )
+                listener.onTenthAnswerSuccess (null);
             }
         } );
     }
@@ -1346,7 +1352,6 @@ public class MedlynkRequests {
                                                   int appointmentID,
                                                   final OnTenthFollowUpAnswerListener listener,
                                                   Answer answer) {
-        System.out.println ( "MedlynkRequests.followUpSymptomTenthAnswer" );
         if (Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
             Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "10" );
         } else {

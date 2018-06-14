@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/activity_progress_page"
+    tools:context="tk.medlynk.patient.android.Activity.Progress.ProgressPageActivity">
+
+    <include
+        android:id="@+id/progress_page_toolbar"
+        layout="@layout/toolbar_layout_2" />
+
+    <tk.medlynk.patient.android.CustomViews.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/progress_page_toolbar"
+        android:layout_margin="10dp"
+        android:id="@+id/txtStartedAppointments"
+        />
+
+
+</RelativeLayout>

@@ -78,9 +78,14 @@ public class NS_9th_question extends Fragment implements
                              ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View view = inflater.inflate ( R.layout.fragment_new__symptom_9th_question,
+        View view = inflater.inflate ( R.layout.fragment_new__symptom_9th_question,
                 container,
                 false );
+        dbOperation ( view );
+        return view;
+    }
+
+    private void dbOperation(final View view) {
         medlynkViewModel = ViewModelProviders.of ( getActivity () )
                 .get ( MedlynkViewModel.class );
         manager = new SharedPreferenceManager ( getActivity () );
@@ -113,7 +118,6 @@ public class NS_9th_question extends Fragment implements
                 }
             }
         } );
-        return view;
     }
 
     @Override

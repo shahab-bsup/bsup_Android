@@ -62,7 +62,7 @@ public class End_of_Question_Set extends Fragment implements End_of_Question_Set
             mListener = (OnNewSymptomTwenty4QuestionListener) context;
         } else {
             throw new RuntimeException ( context.toString ()
-                    + " must implement OnNewSymptomTwenty4QuestionListener" );
+                    + " must implement OnEndOfFollowUpSymptomListener" );
         }
     }
 
