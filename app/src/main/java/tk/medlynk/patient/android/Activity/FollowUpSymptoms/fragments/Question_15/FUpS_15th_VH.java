@@ -26,7 +26,7 @@ public class FUpS_15th_VH extends RecyclerView.ViewHolder implements ViewSelecti
     private Answer answer;
     private OnFUpSFifteenVHListener onFUpSFifteenVHListener;
 
-    public FUpS_15th_VH(View itemView) {
+    public FUpS_15th_VH(View itemView,Answer answerDB) {
         super ( itemView );
         progressBar = itemView.findViewById ( R.id.progress_bar );
         question_view = itemView.findViewById ( R.id.follow_up_symptoms_fifteen_question );
@@ -42,6 +42,10 @@ public class FUpS_15th_VH extends RecyclerView.ViewHolder implements ViewSelecti
             choices.setTextToButtons ( String.valueOf ( i + 1 ), i );
         }
         answer = new Answer ();
+
+        if (answerDB!=null){
+            choices.previewOfDBResult(true,true,answerDB.getRate()-1);
+        }
     }
 
     public void setOnFUpSFifteenVHListener(OnFUpSFifteenVHListener onFUpSFifteenVHListener) {

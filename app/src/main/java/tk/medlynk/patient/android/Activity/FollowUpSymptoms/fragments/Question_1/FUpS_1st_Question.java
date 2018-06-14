@@ -128,6 +128,7 @@ public class FUpS_1st_Question extends Fragment implements
             MedlynkRequests.followUpSymptomAnswer(getActivity (), FUpS_1st_Question.this,
                     manager.getAppointmentID (),"1",
                     answer);
+
             answersForDB.add(answer);
         }
 

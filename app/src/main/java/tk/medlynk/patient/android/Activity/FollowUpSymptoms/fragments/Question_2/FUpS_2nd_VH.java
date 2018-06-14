@@ -30,7 +30,7 @@ public class FUpS_2nd_VH extends RecyclerView.ViewHolder implements ViewSelectio
     private final AppCompatEditText answer_input;
     private OnFUpSSecondVHListener onFUpSSecondVHListener;
 
-    public FUpS_2nd_VH(View itemView) {
+    public FUpS_2nd_VH(View itemView,Answer answerDB) {
         super ( itemView );
         answer = new Answer ();
         progressBar = itemView.findViewById ( R.id.progress_bar );
@@ -49,6 +49,16 @@ public class FUpS_2nd_VH extends RecyclerView.ViewHolder implements ViewSelectio
         none.setTextToButtons ( itemView.getResources ().getString ( R.string.none), 0 );
         none.setOnSingleItemSelectedListener ( this );
         none.setOnClearStateListener(this);
+
+        if(answerDB!=null){
+            if(answerDB.getChoice().equals("a")){
+                answer_input.setText(answerDB.getReply());
+            }
+            else if(answerDB.getChoice().equals("b")){
+                none.previewOfDBResult(true,true,0);
+            }
+
+        }
     }
 
     public void setOnFUpSSecondVHListener(OnFUpSSecondVHListener onFUpSSecondVHListener) {

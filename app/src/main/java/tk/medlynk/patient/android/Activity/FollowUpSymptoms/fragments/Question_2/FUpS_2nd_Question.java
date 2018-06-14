@@ -1,19 +1,34 @@
 package tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_2;
 
+import android.arch.lifecycle.LifecycleOwner;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.neweraandroid.demo.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.OnFollowUpSymptomAnswerListener;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_1.FUpS_1st_Question;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_1.FUpS__1st_VH;
+import tk.medlynk.patient.android.Constants;
+import tk.medlynk.patient.android.DataBase.DataBaseModel;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.JsonConverter;
 import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.FollowUpSymptomResponse;
 import tk.medlynk.patient.android.Networking.MedlynkRequests;
+import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,10 +38,16 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
  * Use the {@link FUpS_2nd_Question#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FUpS_2nd_Question extends Fragment implements FUpS_2nd_VH.OnFUpSSecondVHListener, OnSecondFollowUpAnswerListener {
+public class FUpS_2nd_Question extends Fragment implements
+        FUpS_2nd_VH.OnFUpSSecondVHListener, OnFollowUpSymptomAnswerListener {
 
     public static final String TAG = "FUpS_2nd_Question";
 
+    private MedlynkViewModel mMedlynkViewModel;
+    private boolean existsRecord = false;
+    private Answer answerDB;
+    private SharedPreferenceManager manager;
+    private List<Answer> answersForDB = new ArrayList<>();
 
     private OnFollowUpSymptomsSecondQuestionListener mListener;
     private FUpS_2nd_VH viewHolder;
@@ -37,15 +58,15 @@ public class FUpS_2nd_Question extends Fragment implements FUpS_2nd_VH.OnFUpSSec
 
     public static FUpS_2nd_Question newInstance(String param1, String param2) {
         FUpS_2nd_Question fragment = new FUpS_2nd_Question();
-        Bundle args = new Bundle ();
-        fragment.setArguments ( args );
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate ( savedInstanceState );
-        if (getArguments () != null) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
 
         }
     }
@@ -54,63 +75,91 @@ public class FUpS_2nd_Question extends Fragment implements FUpS_2nd_VH.OnFUpSSec
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate ( R.layout.fragment_follow__up__symptoms_2nd__question, container, false );
-        viewHolder = new FUpS_2nd_VH( view );
-        viewHolder.setOnFUpSSecondVHListener( this );
+        View view = inflater.inflate(R.layout.fragment_follow__up__symptoms_2nd__question, container, false);
+        dbOperation(view);
         return view;
+    }
+
+    private void dbOperation(final View view) {
+        mMedlynkViewModel = ViewModelProviders.of(getActivity()).get(MedlynkViewModel.class);
+        manager = new SharedPreferenceManager(getActivity());
+        mMedlynkViewModel.getAnswers(manager.getAppointmentID(), Constants.FOLLOW_UP_SYMPTOMS_ROW, 2)
+                .observe((LifecycleOwner) this, new Observer<DataBaseModel>() {
+                    @Override
+                    public void onChanged(@Nullable DataBaseModel dataBaseModel) {
+                        if (dataBaseModel != null) {
+                            existsRecord = true;
+                            answerDB = new Answer();
+                            JsonConverter JC = JsonConverter.getInstance();
+                            answerDB = JC.answerJsonToAnswers(dataBaseModel.getAnswerJson())
+                                    .get(0);
+                            Log.d(TAG, "onChanged: " + answerDB);
+                        }
+                        viewHolder = new FUpS_2nd_VH(view, answerDB);
+                        viewHolder.setOnFUpSSecondVHListener(FUpS_2nd_Question.this);
+                    }
+
+                });
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.onSecondQuestion ();
+            mListener.onSecondQuestion();
         }
     }
 
     @Override
     public void onAttach(Context context) {
-        super.onAttach ( context );
+        super.onAttach(context);
         if (context instanceof OnFollowUpSymptomsSecondQuestionListener) {
             mListener = (OnFollowUpSymptomsSecondQuestionListener) context;
         } else {
-            throw new RuntimeException ( context.toString ()
-                    + " must implement OnFollowUpSymptomsFirstQuestionListener" );
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFollowUpSymptomsFirstQuestionListener");
         }
     }
 
     @Override
     public void onDetach() {
-        super.onDetach ();
+        super.onDetach();
         mListener = null;
     }
 
     @Override
     public void onNextClick(Answer answer) {
-        System.out.println ( "FUpS_2nd_Question.onNextClick" );
-        viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
-        SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
-        MedlynkRequests.followUpSymptomSecondAnswer( getActivity (),
-                FUpS_2nd_Question.this,
-                manager.getAppointmentID (), answer);
+        System.out.println("FUpS_2nd_Question.onNextClick");
+        viewHolder.setProgressBarVisibilityStatus(View.VISIBLE);
+        MedlynkRequests.followUpSymptomAnswer(getActivity(), FUpS_2nd_Question.this,
+                manager.getAppointmentID(), "2",
+                answer);
+
+        answersForDB.add(answer);
     }
 
     @Override
     public void onSkipClick() {
-        System.out.println ( "FUpS_2nd_Question.onSkipClick" );
-        mListener.onSecondQuestion ();
+        System.out.println("FUpS_2nd_Question.onSkipClick");
+        mListener.onSecondQuestion();
     }
 
     @Override
-    public void onSecondAnswerSuccess(FollowUpSymptomResponse response) {
-        System.out.println ( "FUpS_2nd_Question.onSecondAnswerSuccess" );
-        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
-        mListener.onSecondQuestion ();
+    public void onAnswerSuccess(FollowUpSymptomResponse response) {
+        JsonConverter JC = JsonConverter.getInstance ();
+        if (existsRecord == false)
+            mMedlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (), Constants.FOLLOW_UP_SYMPTOMS_ROW, 2, JC.answersToAnswerJson ( answersForDB ) );
+        else
+            mMedlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (), Constants.FOLLOW_UP_SYMPTOMS_ROW, 2, JC.answersToAnswerJson ( answersForDB ) );
+
+        System.out.println("FUpS_2nd_Question.onSecondAnswerSuccess");
+        viewHolder.setProgressBarVisibilityStatus(View.GONE);
+        mListener.onSecondQuestion();
     }
 
     @Override
-    public void onSecondAnswerFailure() {
-        System.out.println ( "FUpS_2nd_Question.onSecondAnswerFailure" );
-        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+    public void onAnswerFailure() {
+        System.out.println("FUpS_2nd_Question.onSecondAnswerFailure");
+        viewHolder.setProgressBarVisibilityStatus(View.GONE);
     }
 
     /**

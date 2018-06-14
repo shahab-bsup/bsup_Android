@@ -1,18 +1,33 @@
 package tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_15;
 
+import android.arch.lifecycle.LifecycleOwner;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.neweraandroid.demo.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.OnFollowUpSymptomAnswerListener;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_8.FUpS_8th_Question;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_8.FUpS_8th_VH;
+import tk.medlynk.patient.android.Constants;
+import tk.medlynk.patient.android.DataBase.DataBaseModel;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.JsonConverter;
 import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.FollowUpSymptomResponse;
 import tk.medlynk.patient.android.Networking.MedlynkRequests;
+import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,10 +38,15 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
  * create an instance of this fragment.
  */
 public class FUpS_15th_Question extends Fragment implements
-        FUpS_15th_VH.OnFUpSFifteenVHListener, OnFifteenFollowUpAnswerListener {
+        FUpS_15th_VH.OnFUpSFifteenVHListener, OnFollowUpSymptomAnswerListener {
 
     public static final String TAG = "FUpS_15th_Question";
 
+    private MedlynkViewModel mMedlynkViewModel;
+    private boolean existsRecord = false;
+    private Answer answerDB;
+    private SharedPreferenceManager manager;
+    private List<Answer> answersForDB = new ArrayList<>();
 
     private OnFollowUpSymptomsFifteenQuestionListener mListener;
     private FUpS_15th_VH viewHolder;
@@ -56,9 +76,30 @@ public class FUpS_15th_Question extends Fragment implements
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate ( R.layout.fragment_follow__up__symptoms_15th__question, container, false );
-        viewHolder = new FUpS_15th_VH( view );
-        viewHolder.setOnFUpSFifteenVHListener( this );
+        dbOperation(view);
         return view;
+    }
+
+    private void dbOperation(final View view) {
+        mMedlynkViewModel = ViewModelProviders.of(getActivity()).get(MedlynkViewModel.class);
+        manager = new SharedPreferenceManager(getActivity());
+        mMedlynkViewModel.getAnswers(manager.getAppointmentID(), Constants.FOLLOW_UP_SYMPTOMS_ROW, 15)
+                .observe((LifecycleOwner) this, new Observer<DataBaseModel>() {
+                    @Override
+                    public void onChanged(@Nullable DataBaseModel dataBaseModel) {
+                        if (dataBaseModel != null) {
+                            existsRecord = true;
+                            answerDB = new Answer();
+                            JsonConverter JC = JsonConverter.getInstance();
+                            answerDB = JC.answerJsonToAnswers(dataBaseModel.getAnswerJson())
+                                    .get(0);
+                            Log.d(TAG, "onChanged: " + answerDB);
+                        }
+                        viewHolder = new FUpS_15th_VH(view, answerDB);
+                        viewHolder.setOnFUpSFifteenVHListener(FUpS_15th_Question.this);
+                    }
+
+                });
     }
 
 
@@ -83,10 +124,11 @@ public class FUpS_15th_Question extends Fragment implements
     public void onNextClick(Answer answer) {
         System.out.println ( "FUpS_15th_Question.onNextClick" );
         viewHolder.setProgressBarVisibilityStatus(View.VISIBLE);
-        SharedPreferenceManager manager = new SharedPreferenceManager(getActivity());
-        MedlynkRequests.followUpSymptomFifteenAnswer(getActivity(),
-                manager.getAppointmentID(),
-                this, answer);
+        MedlynkRequests.followUpSymptomAnswer(getActivity(),FUpS_15th_Question.this
+                ,manager.getAppointmentID(), "15",
+                answer);
+
+        answersForDB.add(answer);
     }
 
     @Override
@@ -96,14 +138,20 @@ public class FUpS_15th_Question extends Fragment implements
     }
 
     @Override
-    public void onFifteenAnswerResponse(FollowUpSymptomResponse response) {
+    public void onAnswerSuccess(FollowUpSymptomResponse response) {
+        JsonConverter JC = JsonConverter.getInstance ();
+        if (existsRecord == false)
+            mMedlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (), Constants.FOLLOW_UP_SYMPTOMS_ROW, 15, JC.answersToAnswerJson ( answersForDB ) );
+        else
+            mMedlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (), Constants.FOLLOW_UP_SYMPTOMS_ROW, 15, JC.answersToAnswerJson ( answersForDB ) );
+
         System.out.println("FUpS_15th_Question.onFifteenAnswerResponse");
         viewHolder.setProgressBarVisibilityStatus(View.GONE);
         mListener.onFifteenQuestion();
     }
 
     @Override
-    public void onFifteenAnswerFailure() {
+    public void onAnswerFailure() {
         System.out.println("FUpS_15th_Question.onFifteenAnswerFailure");
         viewHolder.setProgressBarVisibilityStatus(View.GONE);
     }
