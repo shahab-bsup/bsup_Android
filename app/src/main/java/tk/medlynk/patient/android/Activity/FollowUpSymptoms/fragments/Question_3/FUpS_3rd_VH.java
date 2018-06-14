@@ -30,7 +30,7 @@ public class FUpS_3rd_VH extends RecyclerView.ViewHolder implements ViewSelectio
     private OnFUpSThirdVHListener onFUpSThirdVHListener;
     private Answer answer;
 
-    public FUpS_3rd_VH(View itemView) {
+    public FUpS_3rd_VH(View itemView,Answer answerDB) {
         super ( itemView );
         progressBar = itemView.findViewById ( R.id.progress_bar );
         question_view = itemView.findViewById ( R.id.follow_up_symptoms_third_question );
@@ -52,6 +52,10 @@ public class FUpS_3rd_VH extends RecyclerView.ViewHolder implements ViewSelectio
         }
         choices.setOnSingleItemSelectedListener ( this );
         answer = new Answer ();
+
+        if (answerDB!=null){
+            choices.previewOfDBResult(true,true,answerDB.getRate()-1);
+        }
     }
 
     public void setOnFUpSThirdVHListener(OnFUpSThirdVHListener onFUpSThirdVHListener) {

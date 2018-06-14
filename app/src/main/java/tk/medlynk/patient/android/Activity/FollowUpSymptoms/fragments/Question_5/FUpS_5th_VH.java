@@ -28,7 +28,7 @@ public class FUpS_5th_VH extends RecyclerView.ViewHolder implements ViewSelectio
     private OnFUpSFifthVHListener onFUpSFifthVHListener;
     private final Answer answer;
 
-    public FUpS_5th_VH(View itemView) {
+    public FUpS_5th_VH(View itemView,Answer answerDB) {
         super ( itemView );
         progressBar = itemView.findViewById ( R.id.progress_bar );
         question_view = itemView.findViewById ( R.id.follow_up_symptoms_fifth_question );
@@ -46,6 +46,10 @@ public class FUpS_5th_VH extends RecyclerView.ViewHolder implements ViewSelectio
             choices.setTextToButtons ( string_choices[i], i );
         }
         answer = new Answer ();
+
+        if (answerDB!=null){
+
+        }
     }
 
     public void setOnFUpSFifthVHListener(OnFUpSFifthVHListener onFUpSFifthVHListener) {

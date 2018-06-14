@@ -27,7 +27,7 @@ public class FUpS_7th_Question_VH extends RecyclerView.ViewHolder implements Vie
     private OnFUpSSeventhVHListener onFUpSSeventhVHListener;
     private Answer answer;
 
-    public FUpS_7th_Question_VH(View itemView) {
+    public FUpS_7th_Question_VH(View itemView,Answer answerDB) {
         super ( itemView );
         progressBar = itemView.findViewById ( R.id.progress_bar );
         question_view = itemView.findViewById ( R.id.follow_up_symptoms_seventh_question );
@@ -49,6 +49,10 @@ public class FUpS_7th_Question_VH extends RecyclerView.ViewHolder implements Vie
         }
         answerChoices.setOnSingleItemSelectedListener ( this );
         answer = new Answer ();
+
+        if(answerDB!=null){
+            answerChoices.previewOfDBResult(true,true,answerDB.getRate()-1);
+        }
     }
 
     public void setProgressBarVisibilityStatus(int status ){

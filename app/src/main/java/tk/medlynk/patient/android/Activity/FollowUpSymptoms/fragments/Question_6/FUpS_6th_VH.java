@@ -26,7 +26,7 @@ public class FUpS_6th_VH extends RecyclerView.ViewHolder implements ViewSelectio
     private Answer answer;
     private OnFUpSSixthVHListener onFUpSSixthVHListener;
 
-    public FUpS_6th_VH(View itemView) {
+    public FUpS_6th_VH(View itemView,Answer answerDB) {
         super ( itemView );
         progressBar = itemView.findViewById ( R.id.progress_bar );
         question_view = itemView.findViewById ( R.id.follow_up_symptoms_sixth_question );
@@ -43,6 +43,10 @@ public class FUpS_6th_VH extends RecyclerView.ViewHolder implements ViewSelectio
             choices.setTextToButtons ( String.valueOf ( i + 1 ), i );
         }
         answer = new Answer ();
+
+        if(answerDB!=null){
+           choices.previewOfDBResult(true,true,answerDB.getRate()-1);
+        }
     }
 
     public void setProgressBarVisibilityStatus(int status ){

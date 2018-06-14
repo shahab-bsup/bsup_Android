@@ -29,7 +29,7 @@ public class FUpS_8th_VH extends RecyclerView.ViewHolder implements ViewSelectio
     private OnFUpSEighthVHListener onFUpSEighthVHListener;
 
 
-    public FUpS_8th_VH(View itemView) {
+    public FUpS_8th_VH(View itemView,Answer answerDB) {
         super ( itemView );
         progressBar = itemView.findViewById ( R.id.progress_bar );
         question_view = itemView.findViewById ( R.id.follow_up_symptoms_eighth_question );
@@ -51,6 +51,10 @@ public class FUpS_8th_VH extends RecyclerView.ViewHolder implements ViewSelectio
         }
         answerChoices.setOnSingleItemSelectedListener ( this );
         answer = new Answer ();
+
+        if (answerDB!=null){
+            answerChoices.previewOfDBResult(true,true,answerDB.getRate()-1);
+        }
     }
 
     public void setOnFUpSEighthVHListener(OnFUpSEighthVHListener onFUpSEighthVHListener) {

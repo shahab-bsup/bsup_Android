@@ -21,20 +21,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.FollowUpSymptomsActivity;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.OnFollowUpSymptomAnswerListener;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_1.OnFirstFollowUpAnswerListener;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_10.OnTenthFollowUpAnswerListener;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_11.OnEleventFollowUphAnswerListener;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_12.OnFollowUpTwelveAnswerListener;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_13.OnThirteenFollowUpAnswerListener;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_14.OnFourteenFollowUpAnswerListener;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_15.OnFifteenFollowUpAnswerListener;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_2.OnSecondFollowUpAnswerListener;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_3.OnThirdFollowUpAnswerListener;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_4.OnFourthFollowUpAnswerListener;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_5.OnFifthFollowUpAnswerListener;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_6.OnSixthFollowUpAnswerListener;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_7.OnSeventhFollowUpAnswerListener;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_8.OnEighthFollowUpAnswerListener;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_9.OnNinthFollowUpAnswerListener;
 import tk.medlynk.patient.android.Activity.Login.OnGetCurrentUserInfoListener;
 import tk.medlynk.patient.android.Activity.Login.OnPrimaryAccessTokenListener;
@@ -44,11 +35,6 @@ import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_11.OnEl
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_13.OnThirteenAnswerListener;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_14.OnFourteenAnswerListener;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_17.OnSeventeenAnswerListener;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_19.OnNineteenAnswerListener;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_20.OnTwentyAnswerListener;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_21.OnTwentyOneAnswerListener;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_22.OnTwentyTwoAnswerListener;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_23.OnTwentyThreeAnswerListener;
 import tk.medlynk.patient.android.Activity.NoDoctorIdPage.OnNoDoctorIDPreferencesListener;
 import tk.medlynk.patient.android.Activity.ResetPassword.OnResetPasswordListener;
 import tk.medlynk.patient.android.Activity.SearchDoctor.OnSearchDoctorListener;
@@ -1029,7 +1015,7 @@ public class MedlynkRequests {
         } );
     }
 
-/*    public static void followUpSymptomFirstAnswer(Context context, final OnFirstFollowUpAnswerListener listener, int appointmentID, Answer answer) {
+/*    public static void followUpSymptomFirstAnswer(Context context, final OnFollowUpSymptomAnswerListener listener, int appointmentID, Answer answer) {
         System.out.println ( "MedlynkRequests.followUpSymptomFirstAnswer" );
         if (Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
             Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "1" );
@@ -1044,22 +1030,22 @@ public class MedlynkRequests {
             public void onResponse(Call<FollowUpSymptomResponse> call, Response<FollowUpSymptomResponse> response) {
                 if (response.isSuccessful ()) {
                     System.out.println ( "MedlynkRequests.onResponse" );
-                    listener.onFirstAnswerSuccess ( response.body () );
+                    listener.onAnswerSuccess ( response.body () );
                 } else {
-                    listener.onFirstAnswerFailure ();
+                    listener.onAnswerFailure ();
                 }
             }
 
             @Override
             public void onFailure(Call<FollowUpSymptomResponse> call, Throwable t) {
-                listener.onFirstAnswerFailure ();
+                listener.onAnswerFailure ();
             }
         } );
     }*/
 
-    public static void followUpSymptomSecondAnswer(Context context, final OnSecondFollowUpAnswerListener listener, int appointmentID, Answer answer) {
+/*    public static void followUpSymptomSecondAnswer(Context context, final OnFollowUpSymptomAnswerListener listener, int appointmentID, Answer answer) {
         System.out.println ( "MedlynkRequests.followUpSymptomSecondAnswer" );
-        if (Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {  
+        if (Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
             Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "2" );
         } else {
             Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "5" );
@@ -1071,23 +1057,23 @@ public class MedlynkRequests {
             @Override
             public void onResponse(Call<FollowUpSymptomResponse> call, Response<FollowUpSymptomResponse> response) {
                 if (response.isSuccessful ()) {
-                    listener.onSecondAnswerSuccess ( response.body () );
+                    listener.onAnswerSuccess ( response.body () );
                 } else {
-                    listener.onSecondAnswerFailure ();
+                    listener.onAnswerFailure ();
                 }
             }
 
             @Override
             public void onFailure(Call<FollowUpSymptomResponse> call, Throwable t) {
                 System.out.println ( "MedlynkRequests.onFailure" );
-                listener.onSecondAnswerFailure ();
+                listener.onAnswerFailure ();
             }
         } );
-    }
+    }*/
 
-    public static void followUpSymptomThirdAnswer(Context context,
+/*    public static void followUpSymptomThirdAnswer(Context context,
                                                   int appointmentID,
-                                                  final OnThirdFollowUpAnswerListener listener,
+                                                  final OnFollowUpSymptomAnswerListener listener,
                                                   Answer answer) {
         System.out.println ( "MedlynkRequests.followUpSymptomThirdAnswer" );
         if (Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
@@ -1103,20 +1089,20 @@ public class MedlynkRequests {
             @Override
             public void onResponse(Call<FollowUpSymptomResponse> call, Response<FollowUpSymptomResponse> response) {
                 if (response.isSuccessful ()) {
-                    listener.onThirdAnswerSuccess ( response.body () );
+                    listener.onAnswerSuccess ( response.body () );
                 } else {
-                    listener.onThirdAnswerFailure ();
+                    listener.onAnswerFailure ();
                 }
             }
 
             @Override
             public void onFailure(Call<FollowUpSymptomResponse> call, Throwable t) {
-                listener.onThirdAnswerFailure ();
+                listener.onAnswerFailure ();
             }
         } );
-    }
+    }*/
 
-    public static void followUpSymptomFourthAnswer(Context context, int appointmentID, final OnFourthFollowUpAnswerListener listener, Answer answer) {
+/*    public static void followUpSymptomFourthAnswer(Context context, int appointmentID, final OnFollowUpSymptomAnswerListener listener, Answer answer) {
         System.out.println ( "MedlynkRequests.followUpSymptomFourthAnswer" );
         if (Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
             Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "4" );
@@ -1131,22 +1117,22 @@ public class MedlynkRequests {
             @Override
             public void onResponse(Call<FollowUpSymptomResponse> call, Response<FollowUpSymptomResponse> response) {
                 if (response.isSuccessful ()) {
-                    listener.onFourthAnswerSuccess ( response.body () );
+                    listener.onAnswerSuccess ( response.body () );
                 } else {
-                    listener.onFourthAnswerFailure ();
+                    listener.onAnswerFailure ();
                 }
             }
 
             @Override
             public void onFailure(Call<FollowUpSymptomResponse> call, Throwable t) {
-                listener.onFourthAnswerFailure ();
+                listener.onAnswerFailure ();
             }
         } );
-    }
+    }*/
 
-    public static void followUpSymptomFifthAnswer(Context context,
+/*    public static void followUpSymptomFifthAnswer(Context context,
                                                   int appointmentID,
-                                                  final OnFifthFollowUpAnswerListener listener,
+                                                  final OnFollowUpSymptomAnswerListener listener,
                                                   Answer answer) {
         System.out.println ( "MedlynkRequests.followUpSymptomFifthAnswer" );
         if (Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
@@ -1161,20 +1147,20 @@ public class MedlynkRequests {
             @Override
             public void onResponse(Call<FollowUpSymptomResponse> call, Response<FollowUpSymptomResponse> response) {
                 if (response.isSuccessful ()) {
-                    listener.onFifthAnswerSuccess ( response.body () );
+                    listener.onAnswerSuccess ( response.body () );
                 } else {
-                    listener.onFifthAnswerFailure ();
+                    listener.onAnswerFailure ();
                 }
             }
 
             @Override
             public void onFailure(Call<FollowUpSymptomResponse> call, Throwable t) {
-                listener.onFifthAnswerFailure ();
+                listener.onAnswerFailure ();
             }
         } );
-    }
+    }*/
 
-    public static void followUpSymptomSixthAnswer(Context context, int appointmentID, final OnSixthFollowUpAnswerListener listener, Answer answer) {
+/*    public static void followUpSymptomSixthAnswer(Context context, int appointmentID, final OnFollowUpSymptomAnswerListener listener, Answer answer) {
         System.out.println ( "MedlynkRequests.followUpSymptomSixthAnswer" );
         if (Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
             Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "6" );
@@ -1188,20 +1174,20 @@ public class MedlynkRequests {
             @Override
             public void onResponse(Call<FollowUpSymptomResponse> call, Response<FollowUpSymptomResponse> response) {
                 if (response.isSuccessful ()) {
-                    listener.onSixthAnswerSuccess ( response.body () );
+                    listener.onAnswerSuccess ( response.body () );
                 } else {
-                    listener.onSixthAnswerFailure ();
+                    listener.onAnswerFailure ();
                 }
             }
 
             @Override
             public void onFailure(Call<FollowUpSymptomResponse> call, Throwable t) {
-                listener.onSixthAnswerFailure ();
+                listener.onAnswerFailure ();
             }
         } );
-    }
+    }*/
 
-    public static void followUpSymptomSeventhAnswer(Context context, int appointmentID, final OnSeventhFollowUpAnswerListener listener, Answer answer) {
+/*    public static void followUpSymptomSeventhAnswer(Context context, int appointmentID, final OnFollowUpSymptomAnswerListener listener, Answer answer) {
         System.out.println ( "MedlynkRequests.followUpSymptomSeventhAnswer" );
         if (Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
             Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "7" );
@@ -1215,20 +1201,20 @@ public class MedlynkRequests {
             @Override
             public void onResponse(Call<FollowUpSymptomResponse> call, Response<FollowUpSymptomResponse> response) {
                 if (response.isSuccessful ()) {
-                    listener.onSeventhAnswerSuccess ( response.body () );
+                    listener.onAnswerSuccess ( response.body () );
                 } else {
-                    listener.onSeventhAnswerFailure ();
+                    listener.onAnswerFailure ();
                 }
             }
 
             @Override
             public void onFailure(Call<FollowUpSymptomResponse> call, Throwable t) {
-                listener.onSeventhAnswerFailure ();
+                listener.onAnswerFailure ();
             }
         } );
-    }
+    }*/
 
-    public static void followUpSymptomEightAnswer(Context context, int appointmentID, final OnEighthFollowUpAnswerListener listener, Answer answer) {
+/*    public static void followUpSymptomEightAnswer(Context context, int appointmentID, final OnFollowUpSymptomAnswerListener listener, Answer answer) {
         System.out.println ( "MedlynkRequests.followUpSymptomEightAnswer" );
         if (Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
             Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "8" );
@@ -1242,19 +1228,19 @@ public class MedlynkRequests {
             @Override
             public void onResponse(Call<FollowUpSymptomResponse> call, Response<FollowUpSymptomResponse> response) {
                 if (response.isSuccessful ()) {
-                    listener.onEighthAnswerSuccess ( response.body () );
+                    listener.onAnswerSuccess ( response.body () );
                 } else {
-                    listener.onEightAnswerFailure ();
+                    listener.onAnswerFailure ();
                 }
             }
 
             @Override
             public void onFailure(Call<FollowUpSymptomResponse> call, Throwable t) {
-                listener.onEightAnswerFailure ();
+                listener.onAnswerFailure ();
             }
         } );
 
-    }
+    }*/
 
     public static void followUpSymptomNinthAnswer(Context context, int appointmentID,
                                                   final OnNinthFollowUpAnswerListener listener,
@@ -1455,9 +1441,9 @@ public class MedlynkRequests {
         } );
     }
 
-    public static void followUpSymptomFifteenAnswer(Context context,
+   /* public static void followUpSymptomFifteenAnswer(Context context,
                                                     int appointmentID,
-                                                    final OnFifteenFollowUpAnswerListener listener,
+                                                    final OnFollowUpSymptomAnswerListener listener,
                                                     Answer answer) {
         System.out.println ( "MedlynkRequests.followUpSymptomFifteenAnswer" );
         Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "15" );
@@ -1468,18 +1454,18 @@ public class MedlynkRequests {
             @Override
             public void onResponse(Call<FollowUpSymptomResponse> call, Response<FollowUpSymptomResponse> response) {
                 if (response.isSuccessful ()) {
-                    listener.onFifteenAnswerResponse ( response.body () );
+                    listener.onAnswerSuccess ( response.body () );
                 } else {
-                    listener.onFifteenAnswerFailure ();
+                    listener.onAnswerFailure ();
                 }
             }
 
             @Override
             public void onFailure(Call<FollowUpSymptomResponse> call, Throwable t) {
-                listener.onFifteenAnswerFailure ();
+                listener.onAnswerFailure ();
             }
         } );
-    }
+    }*/
 
     public static void followUpResultSeventeenAnswer(Context context,
                                                      int appointmentID,

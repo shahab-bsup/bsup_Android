@@ -1,8 +1,13 @@
 package tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_3;
 
+import android.arch.lifecycle.LifecycleOwner;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +15,20 @@ import android.widget.Toast;
 
 import com.neweraandroid.demo.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.OnFollowUpSymptomAnswerListener;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_2.FUpS_2nd_Question;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_2.FUpS_2nd_VH;
+import tk.medlynk.patient.android.Constants;
+import tk.medlynk.patient.android.DataBase.DataBaseModel;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.JsonConverter;
 import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.FollowUpSymptomResponse;
 import tk.medlynk.patient.android.Networking.MedlynkRequests;
+import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,9 +39,15 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
  * create an instance of this fragment.
  */
 public class FUpS_3rd_Question extends Fragment
-        implements FUpS_3rd_VH.OnFUpSThirdVHListener, OnThirdFollowUpAnswerListener {
+        implements FUpS_3rd_VH.OnFUpSThirdVHListener, OnFollowUpSymptomAnswerListener {
 
     public static final String TAG = "FUpS_3rd_Question";
+
+    private MedlynkViewModel mMedlynkViewModel;
+    private boolean existsRecord = false;
+    private Answer answerDB;
+    private SharedPreferenceManager manager;
+    private List<Answer> answersForDB = new ArrayList<>();
 
     private OnFollowUpSymptomsThirdQuestionListener mListener;
     private FUpS_3rd_VH viewHolder;
@@ -56,9 +77,30 @@ public class FUpS_3rd_Question extends Fragment
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate ( R.layout.fragment_follow__up__symptoms_3rd__question, container, false );
-        viewHolder = new FUpS_3rd_VH( view );
-        viewHolder.setOnFUpSThirdVHListener( this );
+       dbOperation(view);
         return view;
+    }
+
+    private void dbOperation(final View view) {
+        mMedlynkViewModel = ViewModelProviders.of(getActivity()).get(MedlynkViewModel.class);
+        manager = new SharedPreferenceManager(getActivity());
+        mMedlynkViewModel.getAnswers(manager.getAppointmentID(), Constants.FOLLOW_UP_SYMPTOMS_ROW, 3)
+                .observe((LifecycleOwner) this, new Observer<DataBaseModel>() {
+                    @Override
+                    public void onChanged(@Nullable DataBaseModel dataBaseModel) {
+                        if (dataBaseModel != null) {
+                            existsRecord = true;
+                            answerDB = new Answer();
+                            JsonConverter JC = JsonConverter.getInstance();
+                            answerDB = JC.answerJsonToAnswers(dataBaseModel.getAnswerJson())
+                                    .get(0);
+                            Log.d(TAG, "onChanged: " + answerDB);
+                        }
+                        viewHolder = new FUpS_3rd_VH(view, answerDB);
+                        viewHolder.setOnFUpSThirdVHListener(FUpS_3rd_Question.this);
+                    }
+
+                });
     }
 
     @Override
@@ -83,10 +125,11 @@ public class FUpS_3rd_Question extends Fragment
         System.out.println ( "FUpS_3rd_Question.onNextClick" );
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
         SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
-        MedlynkRequests.followUpSymptomThirdAnswer( getActivity (),
-                manager.getAppointmentID (),
-                FUpS_3rd_Question.this,
+        MedlynkRequests.followUpSymptomAnswer( getActivity (),FUpS_3rd_Question.this,
+                manager.getAppointmentID (), "3",
                 answer);
+
+        answersForDB.add(answer);
     }
 
     @Override
@@ -96,7 +139,13 @@ public class FUpS_3rd_Question extends Fragment
     }
 
     @Override
-    public void onThirdAnswerSuccess(FollowUpSymptomResponse response) {
+    public void onAnswerSuccess(FollowUpSymptomResponse response) {
+        JsonConverter JC = JsonConverter.getInstance ();
+        if (existsRecord == false)
+            mMedlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (), Constants.FOLLOW_UP_SYMPTOMS_ROW, 3, JC.answersToAnswerJson ( answersForDB ) );
+        else
+            mMedlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (), Constants.FOLLOW_UP_SYMPTOMS_ROW, 3, JC.answersToAnswerJson ( answersForDB ) );
+
         System.out.println ( "FUpS_3rd_Question.onThirdAnswerSuccess" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         if( response.getAnswer().getRate() == 1 ){
@@ -108,7 +157,7 @@ public class FUpS_3rd_Question extends Fragment
     }
 
     @Override
-    public void onThirdAnswerFailure() {
+    public void onAnswerFailure() {
         System.out.println ( "FUpS_3rd_Question.onThirdAnswerFailure" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         Toast.makeText(getActivity(), "try again!", Toast.LENGTH_SHORT).show();
