@@ -9,6 +9,7 @@ import android.view.WindowManager;
 
 import tk.medlynk.patient.android.Activity.Login.LoginActivity;
 import tk.medlynk.patient.android.Activity.SearchDoctor.SearchActivity;
+import tk.medlynk.patient.android.Activity.Welcome.WelcomeActivity;
 import tk.medlynk.patient.android.Constants;
 import tk.medlynk.patient.android.CustomViews.SnackController;
 import tk.medlynk.patient.android.Model.InitialTokenResponse;
@@ -66,7 +67,7 @@ public class SplashActivity extends AppCompatActivity implements
                                     @Override
                                     public void run() {
                                         startActivity ( new Intent ( SplashActivity.this,
-                                                SearchActivity.class ) );
+                                                WelcomeActivity.class ) );
                                     }
                                 }, 3000 );
                     }

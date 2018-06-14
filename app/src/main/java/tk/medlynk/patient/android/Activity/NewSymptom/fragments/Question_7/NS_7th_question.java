@@ -131,26 +131,22 @@ public class NS_7th_question extends Fragment implements
         else
             mMedlynkViewModel.updateAnswersToDB(manager.getAppointmentID(), Constants.NEW_SYMPTOM_ROW, 7, JC.answersToAnswerJson(answersForDB));
 
-        System.out.println("NS_7th_question.onSeventhAnswerSuccess");
         viewHolder.setProgressBarVisibilityStatus(View.GONE);
         mListener.onSeventhQuestion();
     }
 
     @Override
     public void onAnswerFailure() {
-        System.out.println ( "NS_7th_question.onSeventhAnswerFailure" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
     }
 
     @Override
     public void onUnauthorized() {
-        System.out.println ( "NS_7th_question.onUnauthorized" );
 
     }
 
     @Override
     public void onNextClicked(Answer answer) {
-        System.out.println ( "NS_7th_question.onNextClicked" );
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
         MedlynkRequests.newSymptomQuestionsAnswer ( getActivity (),
                 NS_7th_question.this,
@@ -162,12 +158,10 @@ public class NS_7th_question extends Fragment implements
 
     @Override
     public void onSkipClicked() {
-        System.out.println ( "NS_7th_question.onSkipClicked" );
         mListener.onSeventhQuestion ();
     }
 
     public interface OnNewSymptomSeventhQuestionListener {
-
         void onSeventhQuestion();
     }
 }

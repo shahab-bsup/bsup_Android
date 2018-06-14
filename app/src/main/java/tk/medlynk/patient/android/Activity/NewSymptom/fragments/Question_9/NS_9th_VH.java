@@ -20,7 +20,11 @@ import tk.medlynk.patient.android.Model.Answer;
  * Created by Shahab on 2/23/2018.
  */
 
-public class NS_9th_VH extends RecyclerView.ViewHolder implements ViewSelection.OnSingleItemSelectedListener, ViewSelection.OnClearStateListener, ViewSelection.OnMultiItemSelectedListener, DialogueBuilder.OnOtherDialogListener {
+public class NS_9th_VH extends RecyclerView.ViewHolder
+        implements ViewSelection.OnSingleItemSelectedListener,
+        ViewSelection.OnClearStateListener,
+        ViewSelection.OnMultiItemSelectedListener,
+        DialogueBuilder.OnOtherDialogListener {
 
     private ProgressBar progressBar;
     private View question_view;
@@ -31,7 +35,6 @@ public class NS_9th_VH extends RecyclerView.ViewHolder implements ViewSelection.
     private Answer choice ;
     private List<Answer> choices;
     private OnNinthNSVHListener onNinthNSVHListener;
-
 
     public NS_9th_VH(View itemView) {
         super ( itemView );
@@ -58,6 +61,46 @@ public class NS_9th_VH extends RecyclerView.ViewHolder implements ViewSelection.
         second.setOnClearStateListener ( this );
         for (int i = 0; i < second.getNumberOfViews (); i++) {
             second.setTextToButtons ( string_choices[i+1], i );
+        }
+    }
+
+    public void onUpdateUI(Answer answer){
+        first.previewOfDBResult ( true,
+                true, 0);
+    }
+
+    public void onUpdateUI(List<Answer> answers){
+        for (Answer answer : answers) {
+            switch (answer.getChoice ()){
+                case "b":{
+                    second.previewOfDBResult ( true,
+                            false,
+                            0);
+
+                    break;
+                }
+                case "c":{
+                    second.previewOfDBResult ( true,
+                            false,
+                            1);
+
+                    break;
+                }
+                case "d":{
+                    second.previewOfDBResult ( true,
+                            false,
+                            2);
+
+                    break;
+                }
+                case "e":{
+                    second.previewOfDBResult ( true,
+                            false,
+                            3);
+
+                    break;
+                }
+            }
         }
     }
 

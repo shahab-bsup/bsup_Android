@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.neweraandroid.demo.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import tk.medlynk.patient.android.Activity.NewSymptom.OnNewSymptomAnswerListener;
@@ -43,6 +44,7 @@ public class NS_8th_question extends Fragment implements
     private MedlynkViewModel medlynkViewModel;
     private SharedPreferenceManager manager;
     private boolean existRecord = false;
+    private List<Answer> answersForDB = new ArrayList<> ();
 
     public NS_8th_question() {
         // Required empty public constructor
@@ -75,22 +77,27 @@ public class NS_8th_question extends Fragment implements
         medlynkViewModel.getAnswers ( manager.getAppointmentID (),
                 Constants.NEW_SYMPTOM_ROW, 8 )
                 .observe ( this, new Observer<DataBaseModel> () {
+                    private Answer answer;
+                    private List<Answer> answers;
                     @Override
                     public void onChanged(@Nullable DataBaseModel dataBaseModel) {
                         if (dataBaseModel != null) {
-                            viewHolder = new NS_8th_VH ( view );
-                            viewHolder.setOnEighthNSVHListener ( NS_8th_question.this );
                             existRecord = true;
                             JsonConverter jsonConverter = JsonConverter.getInstance ();
                             if (jsonConverter.answerJsonToAnswers ( dataBaseModel.getAnswerJson () ).size () > 1) {
-                                List<Answer> answers = jsonConverter.answerJsonToAnswers ( dataBaseModel.getAnswerJson () );
-                                viewHolder.onUpdateUI(answers);
+                                answers = jsonConverter.answerJsonToAnswers ( dataBaseModel.getAnswerJson () );
                             } else {
-                                Answer answer = jsonConverter.
+                                answer = jsonConverter.
                                         answerJsonToAnswers ( dataBaseModel.getAnswerJson () )
                                         .get ( 0 );
-                                viewHolder.onUpdateUI(answer);
                             }
+                        }
+                        viewHolder = new NS_8th_VH ( view );
+                        viewHolder.setOnEighthNSVHListener ( NS_8th_question.this );
+                        if (answers != null) {
+                            viewHolder.onUpdateUI ( answers );
+                        } else if (answer != null) {
+                            viewHolder.onUpdateUI ( answer );
                         }
                     }
                 } );
@@ -116,49 +123,59 @@ public class NS_8th_question extends Fragment implements
 
     @Override
     public void onAnswerSuccess(NewSymptomAnswerResponse response) {
-        System.out.println ( "NS_8th_question.onEighthAnswerSuccess" );
+        JsonConverter JC = JsonConverter.getInstance();
+        if (existRecord == false)
+            medlynkViewModel.insertAnswersToDB(manager.getAppointmentID(),
+                    Constants.NEW_SYMPTOM_ROW,
+                    8,
+                    JC.answersToAnswerJson(answersForDB));
+        else
+            medlynkViewModel.updateAnswersToDB(manager.getAppointmentID(),
+                    Constants.NEW_SYMPTOM_ROW,
+                    8,
+                    JC.answersToAnswerJson(answersForDB));
+
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onEightQuestion ();
     }
 
     @Override
     public void onAnswerFailure() {
-        System.out.println ( "NS_8th_question.onEightAnswerFailure" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onEightQuestion ();
     }
 
     @Override
     public void onUnauthorized() {
-        System.out.println ( "NS_8th_question.onUnauthorized" );
+
     }
 
     @Override
     public void onNextClicked(Answer answer) {
-        System.out.println ( "NS_8th_question.onNextClicked" );
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
         SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
         MedlynkRequests.newSymptomEighthQuestionAnswer ( getActivity ()
                 , NS_8th_question.this,
                 manager.getAppointmentID ()
                 , answer );
+
+        answersForDB.add ( answer );
     }
 
     @Override
     public void onNextClicked(List<Answer> answers) {
-        System.out.println ( "NS_8th_question.onNextClicked" );
-        System.out.println ( "list of answers!" );
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
         SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
         MedlynkRequests.newSymptomEighthQuestionAnswer ( getActivity ()
                 , NS_8th_question.this,
                 manager.getAppointmentID ()
                 , answers );
+
+        answersForDB.addAll ( answers );
     }
 
     @Override
     public void onSkipClicked() {
-        System.out.println ( "NS_8th_question.onSkipClicked" );
         mListener.onEightQuestion ();
     }
 

@@ -167,7 +167,6 @@ public class NS_3rd_question extends Fragment implements
         mListener.onThirdQuestion ();
     }
 
-
     public interface OnNewSymptomThirdQuestionListener {
         void onThirdQuestion();
     }

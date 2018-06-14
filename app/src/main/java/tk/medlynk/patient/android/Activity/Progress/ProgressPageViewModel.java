@@ -9,7 +9,7 @@ import android.support.annotation.NonNull;
  */
 
 public class ProgressPageViewModel extends AndroidViewModel {
-    
+
     public ProgressPageViewModel(@NonNull Application application) {
         super ( application );
     }

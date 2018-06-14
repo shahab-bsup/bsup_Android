@@ -75,7 +75,6 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
 
     @Override
     public void onSingleItemSelected(View view, int i) {
-        System.out.println ( "NS_8th_VH.onSingleItemSelected" );
         if (i == -1) {
             button_next.setEnabled ( false );
             button_next.setBackgroundResource ( R.drawable.disable_next_question );
@@ -255,8 +254,6 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
     private class OnNextClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println ( "NS_8th_VH.NS_8th_VH" );
-            System.out.println ( "OnNextClickListener.onClick" );
             if (choices.size () > 0) {
                 onEighthNSVHListener.onNextClicked ( choices );
             } else {
