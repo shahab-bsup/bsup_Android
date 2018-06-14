@@ -28,7 +28,7 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
  */
 public class FUpR_1st_Question extends Fragment implements FUpR_1st_VH.OnFURFirstVHListener, MotherCallback {
 
-    public static final String TAG = FUpR_1st_Question.class.getSimpleName();
+    public static final String TAG = "FUpR_1st_Question";
     private OnFURFirstQuestionInteractionListener mListener;
     private FUpR_1st_VH viewHolder;
 
