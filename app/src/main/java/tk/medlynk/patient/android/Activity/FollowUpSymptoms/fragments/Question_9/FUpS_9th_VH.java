@@ -210,11 +210,49 @@ public class FUpS_9th_VH extends
         }
     }
 
+    public void onUpdateUI(List<Answer> answers) {
+        for (Answer answer : answers) {
+            switch (answer.getChoice ()){
+                case "b":{
+                    second.previewOfDBResult ( true,
+                            false,
+                            0);
+
+                    break;
+                }
+                case "c":{
+                    second.previewOfDBResult ( true,
+                            false,
+                            1);
+
+                    break;
+                }
+                case "d":{
+                    second.previewOfDBResult ( true,
+                            false,
+                            2);
+
+                    break;
+                }
+                case "e":{
+                    second.previewOfDBResult ( true,
+                            false,
+                            3);
+
+                    break;
+                }
+            }
+        }
+    }
+
+    public void onUpdateUI(Answer answer) {
+        first.previewOfDBResult ( true,
+                true, 0);
+    }
+
     private class OnNextButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println ( "FUpS_9th_VH.FUpS_9th_VH" );
-            System.out.println ( "OnNextButtonClickListener.onClick" );
             if( choices.size () > 0 ){
                 onFUpSNinthVHListener.onNextClicked ( choices );
             }else{

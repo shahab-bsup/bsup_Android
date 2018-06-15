@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
 
+import java.util.List;
+
 import tk.medlynk.patient.android.Activity.FollowUpResults.fragments.Question_16.FUpR_16th_VH;
 import tk.medlynk.patient.android.Model.Answer;
 
@@ -109,11 +111,53 @@ public class FUpS_13th_VH extends RecyclerView.ViewHolder implements ViewSelecti
         }
     }
 
+    public void onUpdateUI(Answer answer) {
+        switch (answer.getChoice ()){
+            case "a":{
+                first.previewOfDBResult ( true,
+                        true,
+                        0);
+                onUpdateSecondUI ( answer );
+                break;
+            }
+            case "b":{
+            first.previewOfDBResult ( true,
+                    true,
+                    1);
+                second_question_layout.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    private void onUpdateSecondUI(Answer answer) {
+        second_question_layout.setVisibility( View.VISIBLE);
+        switch (answer.getSubChoice ()){
+            case "1":{
+                second.previewOfDBResult ( true,
+                        true,
+                        0);
+                break;
+            }
+            case "2":{
+                second.previewOfDBResult ( true,
+                        true,
+                        1);
+
+                break;
+            }
+            case "3":{
+                second.previewOfDBResult ( true,
+                        true,
+                        2);
+
+                break;
+            }
+        }
+    }
+
     private class OnNextButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println ( "FUpS_13th_VH.FUpS_13th_VH" );
-            System.out.println ( "OnNextButtonClickListener.onClick" );
             onFUpSThirteenVHListener.onNextClick (answer);
         }
     }
@@ -121,8 +165,6 @@ public class FUpS_13th_VH extends RecyclerView.ViewHolder implements ViewSelecti
     private class OnSkipClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println ( "FUpS_13th_VH.FUpS_13th_VH" );
-            System.out.println ( "OnSkipClickListener.onClick" );
             onFUpSThirteenVHListener.onSkipClick ();
         }
     }

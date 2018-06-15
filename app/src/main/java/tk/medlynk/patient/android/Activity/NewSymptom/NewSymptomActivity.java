@@ -164,11 +164,11 @@ public class NewSymptomActivity extends AppCompatActivity implements
     @Override
     public void onSeventhQuestion() {
         Log.d(TAG, "onSeventhQuestion: ");
-        CURRENT_FRAGMENT = NS_9th_question.TAG;
+        CURRENT_FRAGMENT = NS_8th_question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
                 .remove(getSupportFragmentManager().findFragmentByTag(NS_7th_question.TAG))
-                .add(R.id.fragment_container, new NS_9th_question(), NS_9th_question.TAG)
+                .add(R.id.fragment_container, new NS_8th_question(), NS_8th_question.TAG)
                 .commitNow();
     }
 

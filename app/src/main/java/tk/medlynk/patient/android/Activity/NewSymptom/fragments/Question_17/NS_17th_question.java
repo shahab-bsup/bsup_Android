@@ -1,21 +1,26 @@
 package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_17;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.databinding.ObservableArrayList;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import tk.medlynk.patient.android.Constants;
+import tk.medlynk.patient.android.DataBase.DataBaseModel;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.JsonConverter;
 import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
 import tk.medlynk.patient.android.Networking.MedlynkRequests;
@@ -39,6 +44,9 @@ public class NS_17th_question extends Fragment implements
 
     private NS_17th_VH viewHolder;
     private MedlynkViewModel medlynkViewModel;
+    private SharedPreferenceManager manager;
+    private boolean existRecord = false;
+    private List<Answer> answersDB = new ArrayList<> (  );
 
     public NS_17th_question() {
         // Required empty public constructor
@@ -64,11 +72,31 @@ public class NS_17th_question extends Fragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate ( R.layout.fragment_new__symptom_17th_question, container, false );
+        final View view = inflater.inflate ( R.layout.fragment_new__symptom_17th_question, container, false );
         medlynkViewModel = ViewModelProviders.of ( getActivity () )
                 .get ( MedlynkViewModel.class );
-        viewHolder = new NS_17th_VH ( view );
-        viewHolder.setOnSeventeenNSVHListener ( this );
+        manager = new SharedPreferenceManager ( getActivity () );
+        medlynkViewModel.getAnswers ( manager.getAppointmentID (),
+                Constants.NEW_SYMPTOM_ROW,
+                17 ).observe ( NS_17th_question.this, new Observer<DataBaseModel> () {
+            public Answer answer;
+            public List<Answer> answers;
+
+            @Override
+            public void onChanged(@Nullable DataBaseModel dataBaseModel) {
+                if (dataBaseModel != null) {
+                    existRecord = true;
+                    JsonConverter jsonConverter = JsonConverter.getInstance ();
+                    answers = new ArrayList<> ();
+                    answers = jsonConverter.answerJsonToAnswers ( dataBaseModel.getAnswerJson () );
+                }
+                viewHolder = new NS_17th_VH ( view );
+                viewHolder.setOnSeventeenNSVHListener ( NS_17th_question.this );
+                if (answers != null) {
+                    viewHolder.onUpdateUI ( answers );
+                }
+            }
+        } );
         return view;
     }
 
@@ -91,38 +119,47 @@ public class NS_17th_question extends Fragment implements
 
     @Override
     public void onSeventeenAnswerSuccess(NewSymptomAnswerResponse response) {
-        System.out.println ( "NS_17th_question.onSeventeenAnswerSuccess" );
+        Log.d ( TAG, "onSeventeenAnswerSuccess: " );
+        JsonConverter jsonConverter = JsonConverter.getInstance ();
+        if( !existRecord ){
+            medlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (),
+                    Constants.NEW_SYMPTOM_ROW,
+                    17, jsonConverter.answersToAnswerJson ( answersDB ));
+        }else{
+            medlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (),
+                    Constants.NEW_SYMPTOM_ROW,
+                    17, jsonConverter.answersToAnswerJson ( answersDB ));
+        }
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onSeventeenQuestion ();
     }
 
     @Override
     public void onSeventeenAnswerFailure() {
-        System.out.println ( "NS_17th_question.onSeventeenAnswerFailure" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onSeventeenQuestion ();
     }
 
     @Override
     public void onUnauthorized() {
-        System.out.println ( "NS_17th_question.onUnauthorized" );
 
     }
 
     @Override
     public void onNextClicked(List<Answer> answer) {
-        System.out.println ( "NS_17th_question.onNextClicked" );
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
         SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
         MedlynkRequests.newSymptomSeventeenQuestionAnswer ( getActivity (),
                 NS_17th_question.this,
                 manager.getAppointmentID (),
-                answer);
+                answer );
+
+        answersDB.clear ();
+        answersDB.addAll ( answer );
     }
 
     @Override
     public void onSkipClicked() {
-        System.out.println ( "NS_17th_question.onSkipClicked" );
         mListener.onSeventeenQuestion ();
     }
 

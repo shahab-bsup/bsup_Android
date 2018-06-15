@@ -124,9 +124,15 @@ import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
     public void onAnswerSuccess(NewSymptomAnswerResponse response) {
         JsonConverter JC = JsonConverter.getInstance();
         if (existsRecord == false)
-            mMedlynkViewModel.insertAnswersToDB(manager.getAppointmentID(), Constants.NEW_SYMPTOM_ROW, 12, JC.answersToAnswerJson(answersForDB));
+            mMedlynkViewModel.insertAnswersToDB(manager.getAppointmentID(),
+                    Constants.NEW_SYMPTOM_ROW,
+                    12,
+                    JC.answersToAnswerJson(answersForDB));
         else
-            mMedlynkViewModel.updateAnswersToDB(manager.getAppointmentID(), Constants.NEW_SYMPTOM_ROW, 12, JC.answersToAnswerJson(answersForDB));
+            mMedlynkViewModel.updateAnswersToDB(manager.getAppointmentID(),
+                    Constants.NEW_SYMPTOM_ROW,
+                    12,
+                    JC.answersToAnswerJson(answersForDB));
 
         System.out.println ( "NS_12th_question.onTwelveAnswerSuccess" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
@@ -151,11 +157,11 @@ import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
             System.out.println ( "NS_12th_question.onNextClicked" );
             viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
             SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
-            MedlynkRequests.newSymptomQuestionsAnswer ( getActivity (), NS_12th_question.this,
+            MedlynkRequests.newSymptomQuestionsAnswer ( getActivity (),
+                    NS_12th_question.this,
                     manager.getAppointmentID (),"12",
                     answer
             );
-
             answersForDB.clear();
             answersForDB.add(answer);
         }

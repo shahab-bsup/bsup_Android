@@ -7,7 +7,6 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -24,7 +23,7 @@ import java.util.List;
 
 public class ViewSelection extends LinearLayout {
 
-    List<Button> buttons = new ArrayList<> ();
+    List<TextView> buttons = new ArrayList<TextView> ();
     List<EditText> editTexts = new ArrayList<> ();
     List<RelativeLayout> helpfully_layouts = new ArrayList<RelativeLayout> ();
     List<TextView> helpfully_options_errors = new ArrayList<> ();
@@ -72,7 +71,7 @@ public class ViewSelection extends LinearLayout {
                         buttons.get ( currentSelection ).setBackgroundDrawable ( selected_state_drawable );
                         onSingleItemSelectedListener.onSingleItemSelected ( ViewSelection.this,
                                 currentSelection );
-                        for (Button button : buttons) {
+                        for (TextView button : buttons) {
                             if (button.getId () == currentSelection) {
                                 button.setTextColor ( selected_text_color );
                                 button.setBackgroundDrawable ( selected_state_drawable );
@@ -109,7 +108,7 @@ public class ViewSelection extends LinearLayout {
                     }
                 }
             } else {
-                for (Button button : buttons) {
+                for (TextView button : buttons) {
                     button.setBackgroundDrawable ( unselectable_drawable );
                     button.setTextColor ( unselectable_text_color );
                 }
@@ -149,7 +148,7 @@ public class ViewSelection extends LinearLayout {
         this.onSingleItemSelectedListener = onSingleItemSelectedListener;
     }
 
-    public List<Button> getButtons() {
+    public List<TextView> getButtons() {
         return buttons;
     }
 
@@ -172,7 +171,6 @@ public class ViewSelection extends LinearLayout {
     public void setSingle_select(Boolean single_select) {
         this.single_select = single_select;
     }
-
 
     public int getSelected_state_background() {
         return selected_state_background;
@@ -218,22 +216,22 @@ public class ViewSelection extends LinearLayout {
             throw new RuntimeException ( ViewSelection.class.getSimpleName () + " can only have a single view type\nCurrently has both button type and EditText type!" );
         } else if (button_type)
             for (int i = 0; i < numOfViews; i++) {
-                Button button = new Button ( context );
-                button.setPadding ( 10, 10, 10, 10 );
+                TextView textView = new TextView ( context );
+                textView.setPadding ( 10, 10, 10, 10 );
                 if (selectable) {
-                    button.setBackgroundResource ( unselected_state_background );
-                    button.setTextColor ( unselected_text_color );
+                    textView.setBackgroundResource ( unselected_state_background );
+                    textView.setTextColor ( unselected_text_color );
                 } else {
-                    button.setBackgroundResource ( unselectable_background );
-                    button.setTextColor ( unselectable_text_color );
+                    textView.setBackgroundResource ( unselectable_background );
+                    textView.setTextColor ( unselectable_text_color );
                 }
                 LayoutParams layoutParams = new LayoutParams ( ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT );
                 layoutParams.setMargins ( 10, 10, 10, 10 );
-                button.setLayoutParams ( layoutParams );
-                button.setId ( i );
-                button.setOnClickListener ( button_click_listener );
-                buttons.add ( button );
-                linearLayout.addView ( button );
+                textView.setLayoutParams ( layoutParams );
+                textView.setId ( i );
+                textView.setOnClickListener ( button_click_listener );
+                buttons.add ( textView );
+                linearLayout.addView ( textView );
                 if (show_helpfully_layout) {
                     View view1 = LayoutInflater.from ( context ).inflate ( R.layout.helpfully_layout,
                             this, false );
@@ -279,6 +277,12 @@ public class ViewSelection extends LinearLayout {
         selections.set ( numOfView, true );
     }
 
+    public void previewOfDBResult(boolean selectable, boolean single_select, int numOfViews){
+        this.selectable=selectable;
+        this.single_select=single_select;
+        button_click_listener.onClick(buttons.get(numOfViews));
+    }
+
     public void unSelect(int numOfView){
         buttons.get ( numOfView ).setBackgroundResource ( R.drawable.unselected_state );
         buttons.get ( numOfView ).setTextColor ( unselected_text_color );
@@ -298,7 +302,7 @@ public class ViewSelection extends LinearLayout {
     }
 
     public void setClear() {
-        for (Button button : buttons) {
+        for (TextView button : buttons) {
             button.setTextColor ( unselected_text_color );
             button.setBackgroundDrawable ( unselected_state_drawbale );
         }
@@ -324,12 +328,6 @@ public class ViewSelection extends LinearLayout {
 
     public void setCurrentSelection(int currentSelection) {
         this.currentSelection = currentSelection;
-    }
-
-    public void previewOfDBResult(boolean selectable, boolean single_select, int numOfViews){
-        this.selectable=selectable;
-        this.single_select=single_select;
-        button_click_listener.onClick(buttons.get(numOfViews));
     }
 
     public void setOnHelpfullyOptionClickListener(OnHelpfullyOptionsClickListener onHelpfullyOptionClickListener) {

@@ -45,7 +45,7 @@ public class FUpS_1st_Question extends Fragment implements
     private boolean existsRecord = false;
     private Answer answerDB;
     private SharedPreferenceManager manager;
-    private List<Answer> answersForDB = new ArrayList<>();
+    private List<Answer> answersForDB = new ArrayList<> ();
 
     private OnFollowUpSymptomsFirstQuestionListener mListener;
     private FUpS__1st_VH viewHolder;
@@ -55,7 +55,7 @@ public class FUpS_1st_Question extends Fragment implements
     }
 
     public static FUpS_1st_Question newInstance() {
-        FUpS_1st_Question fragment = new FUpS_1st_Question();
+        FUpS_1st_Question fragment = new FUpS_1st_Question ();
         Bundle args = new Bundle ();
 
         fragment.setArguments ( args );
@@ -83,7 +83,7 @@ public class FUpS_1st_Question extends Fragment implements
         mMedlynkViewModel = ViewModelProviders.of ( getActivity () ).get ( MedlynkViewModel.class );
         manager = new SharedPreferenceManager ( getActivity () );
         mMedlynkViewModel.getAnswers ( manager.getAppointmentID (), Constants.FOLLOW_UP_SYMPTOMS_ROW, 1 )
-                .observe ( (LifecycleOwner) this, new Observer<DataBaseModel>() {
+                .observe ( (LifecycleOwner) this, new Observer<DataBaseModel> () {
                     @Override
                     public void onChanged(@Nullable DataBaseModel dataBaseModel) {
                         if (dataBaseModel != null) {
@@ -94,8 +94,8 @@ public class FUpS_1st_Question extends Fragment implements
                                     .get ( 0 );
                             Log.d ( TAG, "onChanged: " + answerDB );
                         }
-                        viewHolder = new FUpS__1st_VH( view ,answerDB);
-                        viewHolder.setOnFUpSFirstVHListener( FUpS_1st_Question.this );
+                        viewHolder = new FUpS__1st_VH ( view, answerDB );
+                        viewHolder.setOnFUpSFirstVHListener ( FUpS_1st_Question.this );
                     }
 
                 } );
@@ -119,37 +119,37 @@ public class FUpS_1st_Question extends Fragment implements
         mListener = null;
     }
 
-        @Override
-        public void onNextClick() {
-            System.out.println ( "FUpS_1st_Question.onNextClick" );
-            viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
-            Answer answer = new Answer ();
-            answer.setReply ( viewHolder.getAnswerInput() );
-            MedlynkRequests.followUpSymptomAnswer(getActivity (), FUpS_1st_Question.this,
-                    manager.getAppointmentID (),"1",
-                    answer);
+    @Override
+    public void onNextClick() {
+        System.out.println ( "FUpS_1st_Question.onNextClick" );
+        viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
+        Answer answer = new Answer ();
+        answer.setReply ( viewHolder.getAnswerInput () );
+        MedlynkRequests.followUpSymptomAnswer ( getActivity (), FUpS_1st_Question.this,
+                manager.getAppointmentID (), "1",
+                answer );
 
-            answersForDB.add(answer);
-        }
+        answersForDB.add ( answer );
+    }
 
-        @Override
-        public void onAnswerSuccess(FollowUpSymptomResponse response) {
-            JsonConverter JC = JsonConverter.getInstance ();
-            if (existsRecord == false)
-                mMedlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (), Constants.FOLLOW_UP_SYMPTOMS_ROW, 1, JC.answersToAnswerJson ( answersForDB ) );
-            else
-                mMedlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (), Constants.FOLLOW_UP_SYMPTOMS_ROW, 1, JC.answersToAnswerJson ( answersForDB ) );
+    @Override
+    public void onAnswerSuccess(FollowUpSymptomResponse response) {
+        JsonConverter JC = JsonConverter.getInstance ();
+        if (existsRecord == false)
+            mMedlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (), Constants.FOLLOW_UP_SYMPTOMS_ROW, 1, JC.answersToAnswerJson ( answersForDB ) );
+        else
+            mMedlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (), Constants.FOLLOW_UP_SYMPTOMS_ROW, 1, JC.answersToAnswerJson ( answersForDB ) );
 
-            System.out.println ( "FUpS_1st_Question.onFirstAnswerSuccess" );
-            viewHolder.setProgressBarVisibilityStatus ( View.GONE );
-            mListener.onFirstQuestion ();
-        }
+        System.out.println ( "FUpS_1st_Question.onFirstAnswerSuccess" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+        mListener.onFirstQuestion ();
+    }
 
-        @Override
-        public void onAnswerFailure() {
-            System.out.println ( "FUpS_1st_Question.onFirstAnswerFailure" );
-            viewHolder.setProgressBarVisibilityStatus ( View.GONE );
-        }
+    @Override
+    public void onAnswerFailure() {
+        System.out.println ( "FUpS_1st_Question.onFirstAnswerFailure" );
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+    }
 
     public interface OnFollowUpSymptomsFirstQuestionListener {
         void onFirstQuestion();

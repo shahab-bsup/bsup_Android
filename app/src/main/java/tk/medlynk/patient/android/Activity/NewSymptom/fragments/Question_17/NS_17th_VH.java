@@ -225,6 +225,48 @@ public class NS_17th_VH extends RecyclerView.ViewHolder implements ViewSelection
         }
     }
 
+    public void onUpdateUI(List<Answer> answers) {
+        for (Answer answer : answers) {
+            switch (answer.getChoice ()){
+                case "a":{
+                    viewSelection.previewOfDBResult ( true, false,
+                            0);
+                    break;
+                }
+                case "b":{
+                    viewSelection.previewOfDBResult ( true, false,
+                            1);
+                    break;
+                }
+                case "c":{
+                    viewSelection.previewOfDBResult ( true, false,
+                            2);
+                    break;
+                }
+                case "d":{
+                    viewSelection.previewOfDBResult ( true, false,
+                            3);
+                    break;
+                }
+                case "e":{
+                    viewSelection.previewOfDBResult ( true, false,
+                            4);
+                    break;
+                }
+                case "f":{
+                    viewSelection.previewOfDBResult ( true, false,
+                            5);
+                    break;
+                }
+                case "g":{
+                    viewSelection.previewOfDBResult ( true, false,
+                            6);
+                    break;
+                }
+            }
+        }
+    }
+
 
     private class OnNextClickListener implements View.OnClickListener {
         @Override

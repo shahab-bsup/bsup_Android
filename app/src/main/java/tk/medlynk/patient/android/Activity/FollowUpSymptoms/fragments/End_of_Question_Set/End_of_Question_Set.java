@@ -1,4 +1,4 @@
-package tk.medlynk.patient.android.Activity.NewSymptom.fragments.End_of_Question_Set;
+package tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.End_of_Question_Set;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,17 +15,16 @@ import tk.medlynk.patient.android.Activity.StartQuestionSet.StartAppointmentActi
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link End_of_Question_Set.OnNewSymptomTwenty4QuestionListener} interface
+ * {@link OnEndOfFollowUpSymptomListener} interface
  * to handle interaction events.
  * Use the {@link End_of_Question_Set#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class End_of_Question_Set extends Fragment implements End_of_Question_Set_VH.OnEndOfQuestionSetVHListener {
 
-    public static final String TAG =
-            End_of_Question_Set.class.getSimpleName ();
+    public static final String TAG = "End_of_Question_Set";
 
-    private OnNewSymptomTwenty4QuestionListener mListener;
+    private OnEndOfFollowUpSymptomListener mListener;
 
     private View view;
     private End_of_Question_Set_VH viewHolder;
@@ -62,8 +61,8 @@ public class End_of_Question_Set extends Fragment implements End_of_Question_Set
     @Override
     public void onAttach(Context context) {
         super.onAttach ( context );
-        if (context instanceof OnNewSymptomTwenty4QuestionListener) {
-            mListener = (OnNewSymptomTwenty4QuestionListener) context;
+        if (context instanceof OnEndOfFollowUpSymptomListener) {
+            mListener = (OnEndOfFollowUpSymptomListener) context;
         } else {
             throw new RuntimeException ( context.toString ()
                     + " must implement OnEndOfFollowUpSymptomListener" );
@@ -78,10 +77,8 @@ public class End_of_Question_Set extends Fragment implements End_of_Question_Set
 
     @Override
     public void onButtonClicked(int buttonId) {
-        System.out.println ( "End_of_Question_Set.onButtonClicked" );
         switch (buttonId){
             case 0:{
-
 
                 break;
             }
@@ -105,8 +102,8 @@ public class End_of_Question_Set extends Fragment implements End_of_Question_Set
         }
     }
 
-    public interface OnNewSymptomTwenty4QuestionListener {
+    public interface OnEndOfFollowUpSymptomListener {
         // TODO: Update argument type and name
-        void onTwenty4Question();
+        void onEndOfFollowUp();
     }
 }

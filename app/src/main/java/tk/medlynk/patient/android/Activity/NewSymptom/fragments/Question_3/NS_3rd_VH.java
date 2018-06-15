@@ -89,21 +89,25 @@ public class NS_3rd_VH extends RecyclerView.ViewHolder implements ViewSelection.
         if( answerDB != null ){
             switch (answerDB.getChoice ()){
                 case "a":{
+                    first_checkbox.setChecked ( true );
                     yearsCheckedChanged ( true );
                     first_input.setText ( String.valueOf ( answerDB.getDuration () ) );
                     break;
                 }
                 case "b":{
+                    second_checkbox.setChecked ( true );
                     monthCheckedChanged ( true );
                     second_input.setText ( String.valueOf ( answerDB.getDuration () ) );
                     break;
                 }
                 case "c":{
+                    third_checkbox.setChecked ( true );
                     weeksCheckedChanged ( true );
                     third_input.setText ( String.valueOf ( answerDB.getDuration () ) );
                     break;
                 }
                 case "d":{
+                    fourth_checkbox.setChecked ( true );
                     daysCheckedChanged ( true );
                     fourth_input.setText ( String.valueOf ( answerDB.getDuration () ) );
                     break;

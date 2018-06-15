@@ -148,7 +148,9 @@ public class FUpS_4th_Question extends Fragment implements
     public void onAnswerSuccess(FollowUpSymptomResponse response) {
         JsonConverter JC = JsonConverter.getInstance ();
         if (existsRecord == false)
-            mMedlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (), Constants.FOLLOW_UP_SYMPTOMS_ROW, 4, JC.answersToAnswerJson ( answersForDB ) );
+            mMedlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (),
+                    Constants.FOLLOW_UP_SYMPTOMS_ROW,
+                    4, JC.answersToAnswerJson ( answersForDB ) );
         else
             mMedlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (), Constants.FOLLOW_UP_SYMPTOMS_ROW, 4, JC.answersToAnswerJson ( answersForDB ) );
 

@@ -1,7 +1,10 @@
 package tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_13;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +12,17 @@ import android.view.ViewGroup;
 
 import com.neweraandroid.demo.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import tk.medlynk.patient.android.Constants;
+import tk.medlynk.patient.android.DataBase.DataBaseModel;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.JsonConverter;
 import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.FollowUpSymptomResponse;
 import tk.medlynk.patient.android.Networking.MedlynkRequests;
+import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,9 +38,12 @@ public class FUpS_13th_Question extends Fragment implements
 
     public static final String TAG = "FUpS_13th_Question";
 
-
     private OnFollowUpSymptomsThirteenQuestionListener mListener;
     private FUpS_13th_VH viewHolder;
+    private SharedPreferenceManager manager;
+    private MedlynkViewModel medlynkViewModel;
+    private List<Answer> answersDB = new ArrayList<> ();
+    private boolean existsRecord = false;
 
     public FUpS_13th_Question() {
         // Required empty public constructor...
@@ -38,7 +51,7 @@ public class FUpS_13th_Question extends Fragment implements
     }
 
     public static FUpS_13th_Question newInstance(String param1, String param2) {
-        FUpS_13th_Question fragment = new FUpS_13th_Question();
+        FUpS_13th_Question fragment = new FUpS_13th_Question ();
         Bundle args = new Bundle ();
         fragment.setArguments ( args );
         return fragment;
@@ -56,9 +69,37 @@ public class FUpS_13th_Question extends Fragment implements
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate ( R.layout.fragment_follow__up__symptoms_13th__question, container, false );
-        viewHolder = new FUpS_13th_VH( view );
-        viewHolder.setOnFUpSThirteenVHListener( this );
+        dbOperation ( view );
         return view;
+    }
+
+    private void dbOperation(final View view) {
+        manager = new SharedPreferenceManager ( getActivity () );
+        medlynkViewModel = ViewModelProviders.of ( getActivity () )
+                .get ( MedlynkViewModel.class );
+        medlynkViewModel.getAnswers ( manager.getAppointmentID (),
+                Constants.FOLLOW_UP_SYMPTOMS_ROW,
+                13 ).observe ( FUpS_13th_Question.this,
+                new Observer<DataBaseModel> () {
+                    private Answer answer;
+
+                    @Override
+                    public void onChanged(@Nullable DataBaseModel dataBaseModel) {
+                        if (dataBaseModel != null) {
+                            existsRecord = true;
+                            answer = new Answer ();
+                            JsonConverter jsonConverter = JsonConverter.getInstance ();
+                            answer = jsonConverter.
+                                    answerJsonToAnswers ( dataBaseModel.getAnswerJson () )
+                                    .get ( 0 );
+                        }
+                        viewHolder = new FUpS_13th_VH ( view );
+                        viewHolder.setOnFUpSThirteenVHListener ( FUpS_13th_Question.this );
+                        if (answer != null) {
+                            viewHolder.onUpdateUI ( answer );
+                        }
+                    }
+                } );
     }
 
 
@@ -81,31 +122,41 @@ public class FUpS_13th_Question extends Fragment implements
 
     @Override
     public void onNextClick(Answer answer) {
-        System.out.println ( "FUpS_13th_Question.onNextClick" );
-        viewHolder.setProgressBarVisibilityStatus(View.VISIBLE);
-        SharedPreferenceManager manager = new SharedPreferenceManager(getActivity());
-        MedlynkRequests.followUpSymptomThirteenAnswer(getActivity(),
-                manager.getAppointmentID(),
-                this, answer);
+        viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
+        SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
+        MedlynkRequests.followUpSymptomThirteenAnswer ( getActivity (),
+                manager.getAppointmentID (),
+                this, answer );
+
+        answersDB.add ( answer );
     }
 
     @Override
     public void onSkipClick() {
-        System.out.println ( "FUpS_13th_Question.onSkipClick" );
         mListener.onThirteenQuestion ();
     }
 
     @Override
     public void onThirteenAnswerSuccess(FollowUpSymptomResponse response) {
-        System.out.println("FUpS_13th_Question.onEighthAnswerSuccess");
-        viewHolder.setProgressBarVisibilityStatus(View.GONE);
-        mListener.onThirteenQuestion();
+        JsonConverter jsonConverter = JsonConverter.getInstance ();
+        if (!existsRecord) {
+            medlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (),
+                    Constants.FOLLOW_UP_SYMPTOMS_ROW,
+                    13,
+                    jsonConverter.answersToAnswerJson ( answersDB ) );
+        } else {
+            medlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (),
+                    Constants.FOLLOW_UP_SYMPTOMS_ROW,
+                    13,
+                    jsonConverter.answersToAnswerJson ( answersDB ) );
+        }
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+        mListener.onThirteenQuestion ();
     }
 
     @Override
     public void onThirteenAnswerFailure() {
-        System.out.println("FUpS_13th_Question.onEightAnswerFailure");
-        viewHolder.setProgressBarVisibilityStatus(View.GONE);
+        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
     }
 
 

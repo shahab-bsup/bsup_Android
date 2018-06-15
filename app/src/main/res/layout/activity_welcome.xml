@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -45,13 +46,12 @@
         android:layout_alignEnd="@id/imgWelcomePage"
         android:layout_alignStart="@+id/imgWelcomePage"
         android:layout_below="@+id/imgWelcomePage"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="18dp"
         android:text="@string/welcome_page_first_text"
         android:textColor="@color/welcome_text_color"
-        android:textSize="15dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        />
+        android:textSize="15dp" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/txtSecondText"
@@ -60,19 +60,18 @@
         android:layout_alignEnd="@id/txtFirstText"
         android:layout_alignStart="@+id/imgWelcomePage"
         android:layout_below="@+id/txtFirstText"
-        android:layout_above="@+id/btnStart"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="18dp"
         android:text="@string/welcome_page_second_text"
         android:textColor="@color/welcome_text_color"
-        android:textSize="15dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"/>
+        android:textSize="15dp" />
 
     <Button
         android:id="@+id/btnStart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txtSecondText"
+        android:layout_above="@+id/btnGoToQuestions"
         android:layout_marginBottom="15dp"
         android:layout_marginLeft="@dimen/welcome_button_margins_horizontally"
         android:layout_marginRight="@dimen/welcome_button_margins_horizontally"
@@ -85,12 +84,13 @@
         android:id="@+id/btnGoToQuestions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_marginLeft="@dimen/welcome_button_margins_horizontally"
         android:layout_marginRight="@dimen/welcome_button_margins_horizontally"
         android:background="@drawable/already_askeds_button_welcome_page"
         android:text="@string/go_to_questions"
         android:textColor="@color/icons_color"
-        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
         android:textSize="10sp" />
 
 </RelativeLayout>
