@@ -29,7 +29,7 @@ public class FUpR_17th_VH extends RecyclerView.ViewHolder implements ViewSelecti
     private OnFURSeventeenVHListener onFURSeventeenVHListener;
 
 
-    public FUpR_17th_VH(View itemView) {
+    public FUpR_17th_VH(View itemView,Answer answerDB) {
         super ( itemView );
         progressBar =  itemView.findViewById( R.id.progress_bar);
         question_view = itemView.findViewById(R.id.follow_up_results_seventeen_question);
@@ -45,6 +45,15 @@ public class FUpR_17th_VH extends RecyclerView.ViewHolder implements ViewSelecti
         string_choices = itemView.getContext ().getResources ().getStringArray ( R.array.FUpR_17th_choices );
         for (int i = 0; i < first.getNumberOfViews(); i++) {
             first.setTextToButtons(string_choices[i], i);
+        }
+
+        if (answerDB!=null){
+            switch (answerDB.getChoice()){
+                case "a":{first.previewOfDBResult(true,true,0);break;}
+                case "b":{first.previewOfDBResult(true,true,1);break;}
+                case "c":{first.previewOfDBResult(true,true,2);break;}
+            }
+
         }
     }
 

@@ -23,7 +23,8 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
  * Use the {@link FUpR_2nd_Question#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FUpR_2nd_Question extends Fragment implements FUpR_2nd_VH.OnFURSecondViewHolderListener, MotherCallback {
+public class FUpR_2nd_Question extends Fragment implements
+        FUpR_2nd_VH.OnFURSecondViewHolderListener, MotherCallback {
 
     public static final String TAG = "FUpR_2nd_Question";
     private OnFURSecondQuestionInteractionListener mListener;
