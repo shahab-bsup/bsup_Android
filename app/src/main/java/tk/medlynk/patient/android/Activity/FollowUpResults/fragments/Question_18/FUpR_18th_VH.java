@@ -30,7 +30,7 @@ public class FUpR_18th_VH extends RecyclerView.ViewHolder implements ViewSelecti
     private final Answer answer = new Answer();
     private OnFUREighteenVHListener onFUREighteenVHListener;
 
-    public FUpR_18th_VH(View itemView) {
+    public FUpR_18th_VH(View itemView,Answer answerDB) {
         super ( itemView );
         progressBar =  itemView.findViewById( R.id.progress_bar);
         question_view = itemView.findViewById(R.id.follow_up_results_eighteen_question);
@@ -48,6 +48,15 @@ public class FUpR_18th_VH extends RecyclerView.ViewHolder implements ViewSelecti
         answer_input = itemView.findViewById ( R.id.follow_up_result_eighteen_answer );
         answer_input.addTextChangedListener ( new OnAnswerInputTextWatcher() );
         answer_input.setOnFocusChangeListener ( new OnAnswerFocusChangeListener() );
+
+        if (answerDB!=null){
+           if (answerDB.getChoice().equals("a")){
+               answer_input.setText(answerDB.getReply());
+           }
+           else if(answerDB.getChoice().equals("b")){
+               first.previewOfDBResult(true,true,0);
+           }
+        }
     }
 
     public void setProgressBarVisibilityStatus(int status ){

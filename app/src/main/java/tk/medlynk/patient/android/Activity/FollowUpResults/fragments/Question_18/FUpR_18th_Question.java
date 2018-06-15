@@ -1,19 +1,34 @@
 package tk.medlynk.patient.android.Activity.FollowUpResults.fragments.Question_18;
 
+import android.arch.lifecycle.LifecycleOwner;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.neweraandroid.demo.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import tk.medlynk.patient.android.Activity.FollowUpResults.OnFollowUpResultAnswerListener;
+import tk.medlynk.patient.android.Activity.FollowUpResults.fragments.Question_3.FUpR_3rd_Question;
+import tk.medlynk.patient.android.Activity.FollowUpResults.fragments.Question_3.FUpR_3rd_VH;
+import tk.medlynk.patient.android.Constants;
+import tk.medlynk.patient.android.DataBase.DataBaseModel;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.JsonConverter;
 import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.MotherCallback;
 import tk.medlynk.patient.android.Model.SymptomResponse;
 import tk.medlynk.patient.android.Networking.MedlynkRequests;
+import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,11 +38,18 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
  * Use the {@link FUpR_18th_Question#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FUpR_18th_Question extends Fragment implements FUpR_18th_VH.OnFUREighteenVHListener, MotherCallback {
+public class FUpR_18th_Question extends Fragment implements
+        FUpR_18th_VH.OnFUREighteenVHListener,OnFollowUpResultAnswerListener {
 
     public static final String TAG = "FUpR_18th_Question";
     private OnFUREighteenQuestionInteractionListener mListener;
     private FUpR_18th_VH viewHolder;
+
+    private MedlynkViewModel mMedlynkViewModel;
+    private boolean existsRecord = false;
+    private Answer answerDB;
+    private SharedPreferenceManager manager;
+    private List<Answer> answersForDB = new ArrayList<>();
 
     public FUpR_18th_Question() {
         // Required empty public constructor
@@ -52,9 +74,30 @@ public class FUpR_18th_Question extends Fragment implements FUpR_18th_VH.OnFUREi
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate ( R.layout.fragment_follow_up_results_18th__question, container, false );
-        viewHolder = new FUpR_18th_VH(view);
-        viewHolder.setOnFUREighteenVHListener(this);
+       dbOperation(view);
         return view;
+    }
+
+    private void dbOperation(final View view) {
+        mMedlynkViewModel = ViewModelProviders.of ( getActivity () ).get ( MedlynkViewModel.class );
+        manager = new SharedPreferenceManager ( getActivity () );
+        mMedlynkViewModel.getAnswers ( manager.getAppointmentID (), Constants.FOLLOW_UP_RESULTS_ROW, 18 )
+                .observe ( (LifecycleOwner) this, new Observer<DataBaseModel>() {
+                    @Override
+                    public void onChanged(@Nullable DataBaseModel dataBaseModel) {
+                        if (dataBaseModel != null) {
+                            existsRecord = true;
+                            answerDB = new Answer ();
+                            JsonConverter JC = JsonConverter.getInstance ();
+                            answerDB = JC.answerJsonToAnswers ( dataBaseModel.getAnswerJson () )
+                                    .get ( 0 );
+                            Log.d ( TAG, "onChanged: " + answerDB );
+                        }
+                        viewHolder = new FUpR_18th_VH( view, answerDB );
+                        viewHolder.setOnFUREighteenVHListener ( FUpR_18th_Question.this );
+                    }
+
+                } );
     }
 
 
@@ -80,10 +123,11 @@ public class FUpR_18th_Question extends Fragment implements FUpR_18th_VH.OnFUREi
         System.out.println("FUpR_18th_Question.onNextClicked");
         viewHolder.setProgressBarVisibilityStatus(View.VISIBLE);
         SharedPreferenceManager manager = new SharedPreferenceManager(getActivity());
-        MedlynkRequests.followUpResultEighteenAnswer(getActivity(),
-                manager.getAppointmentID(),
-                this,
+        MedlynkRequests.followUpResultAnswer(getActivity(),FUpR_18th_Question.this,
+                manager.getAppointmentID(),"18",
                 answer);
+
+        answersForDB.add(answer);
     }
 
     @Override
@@ -94,6 +138,12 @@ public class FUpR_18th_Question extends Fragment implements FUpR_18th_VH.OnFUREi
 
     @Override
     public void onAnswerSuccess(SymptomResponse response) {
+        JsonConverter JC = JsonConverter.getInstance ();
+        if (existsRecord == false)
+            mMedlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (), Constants.FOLLOW_UP_RESULTS_ROW, 18, JC.answersToAnswerJson ( answersForDB ) );
+        else
+            mMedlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (), Constants.FOLLOW_UP_RESULTS_ROW, 18, JC.answersToAnswerJson ( answersForDB ) );
+
         System.out.println("FUpR_18th_Question.onAnswerSuccess");
         viewHolder.setProgressBarVisibilityStatus(View.GONE);
         mListener.onFUREighteenQuestion();

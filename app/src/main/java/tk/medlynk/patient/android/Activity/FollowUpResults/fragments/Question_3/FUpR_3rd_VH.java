@@ -27,7 +27,7 @@ public class FUpR_3rd_VH extends RecyclerView.ViewHolder implements ViewSelectio
     private final Answer answer = new Answer();
     private OnFURThirdVHListener onFURThirdVHListener;
 
-    public FUpR_3rd_VH(View itemView) {
+    public FUpR_3rd_VH(View itemView,Answer answerDB) {
         super ( itemView );
         progressBar =  itemView.findViewById( R.id.progress_bar);
         question_view = itemView.findViewById(R.id.follow_up_results_third_question);
@@ -43,6 +43,16 @@ public class FUpR_3rd_VH extends RecyclerView.ViewHolder implements ViewSelectio
         string_choices = itemView.getContext ().getResources ().getStringArray ( R.array.yes_no );
         first.setTextToButtons ( string_choices[0], 0 );
         first.setTextToButtons ( string_choices[1], 1 );
+
+        if (answerDB!=null){
+            if (answerDB.getChoice().equals("a")){
+                first.previewOfDBResult(true,true,0);
+            }
+            else if(answerDB.getChoice().equals("b")){
+                first.previewOfDBResult(true,true,1);
+            }
+
+        }
     }
 
     public void setProgressBarVisibilityStatus( int status ){
