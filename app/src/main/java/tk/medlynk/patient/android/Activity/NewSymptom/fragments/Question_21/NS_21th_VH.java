@@ -64,7 +64,7 @@ public class NS_21th_VH extends RecyclerView.ViewHolder implements
         System.out.println ( "NS_21th_VH.onMultiItemSelected" );
         int i = integer;
         if( i == 5 ){
-            DialogueBuilder dialogBuilder = new DialogueBuilder( itemView.getContext (), "other");
+            DialogueBuilder dialogBuilder = new DialogueBuilder( itemView.getContext (), "other", "shahab" );
             dialogBuilder.setOnDialogListener( this );
             dialogBuilder.show ();
         }else{

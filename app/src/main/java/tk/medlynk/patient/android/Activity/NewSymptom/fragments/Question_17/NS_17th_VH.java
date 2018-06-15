@@ -62,7 +62,7 @@ public class NS_17th_VH extends RecyclerView.ViewHolder implements ViewSelection
     public void onMultiItemSelected(View view, Integer integer) {
         System.out.println ( "NS_17th_VH.onMultiItemSelected" );
         if( integer == 6 ){
-            DialogueBuilder dialogBuilder = new DialogueBuilder( itemView.getContext (), "other");
+            DialogueBuilder dialogBuilder = new DialogueBuilder( itemView.getContext (), "other", "shahab" );
             dialogBuilder.setOnDialogListener( this );
             dialogBuilder.show ();
         }else{

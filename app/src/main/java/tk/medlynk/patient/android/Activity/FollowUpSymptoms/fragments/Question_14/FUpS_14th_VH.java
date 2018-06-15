@@ -172,7 +172,7 @@ public class FUpS_14th_VH extends RecyclerView.ViewHolder implements
             }
             case 0:{
                 DialogueBuilder dialogueBuilder = new DialogueBuilder ( itemView.getContext (),
-                        "other");
+                        "other", "shahab" );
                 dialogueBuilder.setOnDialogListener ( this );
                 dialogueBuilder.show ();
 

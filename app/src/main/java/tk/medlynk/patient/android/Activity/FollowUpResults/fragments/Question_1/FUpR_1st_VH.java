@@ -179,7 +179,7 @@ public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelectio
             }
             case 0:{
                 DialogueBuilder dialogueBuilder = new DialogueBuilder ( itemView.getContext (),
-                        "other");
+                        "other", "shahab" );
                 dialogueBuilder.setOnDialogListener ( this );
                 dialogueBuilder.show ();
 

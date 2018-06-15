@@ -126,7 +126,7 @@ public class FUpS_5th_VH extends RecyclerView.ViewHolder implements ViewSelectio
             case 6:{
                 answer.setChoice ( "g" );
                 DialogueBuilder dialogBuilder =
-                        new DialogueBuilder( itemView.getContext (),"other" );
+                        new DialogueBuilder( itemView.getContext (),"other", "shahab" );
                 dialogBuilder.setOnDialogListener( this );
                 dialogBuilder.show ();
                 break;
