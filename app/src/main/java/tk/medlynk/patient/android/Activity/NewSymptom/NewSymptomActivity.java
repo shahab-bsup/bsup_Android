@@ -22,12 +22,7 @@ import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_15.NS_1
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_16.NS_16th_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_17.NS_17th_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_18.NS_18th_question;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_19.NS_19th_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_2.NS_2nd_question;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_20.NS_20th_question;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_21.NS_21th_question;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_22.NS_22th_question;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_23.NS_23th_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_3.NS_3rd_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_4.NS_4th_question;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_5.NS_5th_question;
@@ -57,7 +52,7 @@ public class NewSymptomActivity extends AppCompatActivity implements
         NS_16th_question.OnNewSymptomSixteenQuestionListener,
         NS_17th_question.OnNewSymptomSeventeenQuestionListener,
         NS_18th_question.OnNewSymptomEighteenQuestionListener,
-        End_of_Question_Set.OnNewSymptomTwenty4QuestionListener,
+        End_of_Question_Set.OnNewSymptomEndOfQuestionSetListener,
         New_Symptom_25th_question.OnNewSymptomTwenty5QuestionListener {
 
     private static final String TAG = NewSymptomActivity.class.getSimpleName();
@@ -78,7 +73,7 @@ public class NewSymptomActivity extends AppCompatActivity implements
                 onBackPressed();
             }
         });
-        CURRENT_FRAGMENT = IntroFragment.TAG;
+        CURRENT_FRAGMENT = NS_1th_question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
                 .add(R.id.fragment_container, new NS_1th_question (), NS_1th_question.TAG)
@@ -295,24 +290,6 @@ public class NewSymptomActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onTwenty4Question() {
-        CURRENT_FRAGMENT = NS_1th_question.TAG;
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        if (getSupportFragmentManager().findFragmentByTag(NS_4th_question.TAG) == null) {
-            fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
-                    .hide(getSupportFragmentManager().findFragmentByTag(NS_4th_question.TAG))
-                    .add(R.id.fragment_container, new NS_4th_question(), NS_5th_question.TAG)
-                    .commitNow();
-
-        } else {
-            fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
-                    .hide(getSupportFragmentManager().findFragmentByTag(NS_4th_question.TAG))
-                    .show(getSupportFragmentManager().findFragmentByTag(NS_5th_question.TAG))
-                    .commitNow();
-        }
-    }
-
-    @Override
     public void onTwenty5Question() {
         //TODO add some code to return to the activity...
     }
@@ -329,9 +306,7 @@ public class NewSymptomActivity extends AppCompatActivity implements
         }
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right);
-        fragmentTransaction.add(R.id.fragment_container,
-                new End_of_Question_Set(),
-                End_of_Question_Set.TAG).
+        fragmentTransaction.add(R.id.fragment_container, new End_of_Question_Set(), End_of_Question_Set.TAG).
                 commit();
     }
 
@@ -501,6 +476,167 @@ public class NewSymptomActivity extends AppCompatActivity implements
 
                 break;
             }
+            case End_of_Question_Set.TAG: {
+                CURRENT_FRAGMENT = NS_18th_question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.fragment_container, new NS_18th_question(), NS_18th_question.TAG)
+                        .commitNow();
+
+                break;
+            }
         }
+    }
+
+    @Override
+    public void firstUnAnsweredQuestion(int questionNumber) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        switch (questionNumber){
+            case 1:{
+                CURRENT_FRAGMENT=NS_1th_question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.fragment_container, new NS_1th_question(), NS_1th_question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 2:{
+                CURRENT_FRAGMENT=NS_2nd_question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.fragment_container, new NS_2nd_question(), NS_2nd_question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 3:{
+                CURRENT_FRAGMENT=NS_3rd_question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.fragment_container, new NS_3rd_question(), NS_3rd_question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 4:{
+                CURRENT_FRAGMENT=NS_4th_question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.fragment_container, new NS_4th_question(), NS_4th_question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 5:{
+                CURRENT_FRAGMENT=NS_5th_question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.fragment_container, new NS_5th_question(), NS_5th_question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 6:{
+                CURRENT_FRAGMENT=NS_6th_question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.fragment_container, new NS_6th_question(), NS_6th_question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 7:{
+                CURRENT_FRAGMENT=NS_7th_question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.fragment_container, new NS_7th_question(), NS_7th_question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 8:{
+                CURRENT_FRAGMENT=NS_8th_question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.fragment_container, new NS_8th_question(), NS_8th_question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 9:{
+                CURRENT_FRAGMENT=NS_9th_question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.fragment_container, new NS_9th_question(), NS_9th_question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 10:{
+                CURRENT_FRAGMENT=NS_10th_question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.fragment_container, new NS_10th_question(), NS_10th_question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 11:{
+                CURRENT_FRAGMENT=NS_11th_question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.fragment_container, new NS_11th_question(), NS_11th_question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 12:{
+                CURRENT_FRAGMENT=NS_12th_question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.fragment_container, new NS_12th_question(), NS_12th_question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 13:{
+                CURRENT_FRAGMENT=NS_13th_question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.fragment_container, new NS_13th_question(), NS_13th_question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 14:{
+                CURRENT_FRAGMENT=NS_14th_question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.fragment_container, new NS_14th_question(), NS_14th_question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 15:{
+                CURRENT_FRAGMENT=NS_15th_question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.fragment_container, new NS_15th_question(), NS_15th_question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 16:{
+                CURRENT_FRAGMENT=NS_16th_question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.fragment_container, new NS_16th_question(), NS_16th_question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 17:{
+                CURRENT_FRAGMENT=NS_17th_question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.fragment_container, new NS_17th_question(), NS_17th_question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 18:{
+                CURRENT_FRAGMENT=NS_18th_question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.fragment_container, new NS_18th_question(), NS_18th_question.TAG)
+                        .commitNow();
+                break;
+            }
+        }
+
     }
 }

@@ -29,7 +29,8 @@ public class Refill_A_Medication_Activity extends AppCompatActivity implements
         Refill_fifth_Question.onRefillFifthQuestionInteractionListener,
         Refill_sixth_Question.onRefillSixthQuestionInteractionListener,
         Refill_seventh_Question.onRefillSeventhQuestionInteractionListener,
-        Refill_eighth_Question.onRefillEighthQuestionInteractionListener {
+        Refill_eighth_Question.onRefillEighthQuestionInteractionListener,
+        End_of_Question_Set.OnEndOfRefillListener{
 
     private static final String TAG = Refill_A_Medication_Activity.class.getSimpleName();
     private View parent;
@@ -228,5 +229,77 @@ public class Refill_A_Medication_Activity extends AppCompatActivity implements
                 break;
             }
         }
+    }
+
+    @Override
+    public void firstUnAnsweredQuestion(int questionNumber){
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        switch (questionNumber) {
+            case 1:{
+                CURRENT_FRAGMENT=Refill_first_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.refill_container, new Refill_first_Question(), Refill_first_Question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 2:{
+                CURRENT_FRAGMENT=Refill_second_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.refill_container, new Refill_second_Question(), Refill_second_Question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 3:{
+                CURRENT_FRAGMENT=Refill_third_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.refill_container, new Refill_third_Question(), Refill_third_Question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 4:{
+                CURRENT_FRAGMENT=Refill_fourth_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.refill_container, new Refill_fourth_Question(), Refill_fourth_Question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 5:{
+                CURRENT_FRAGMENT=Refill_fifth_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.refill_container, new Refill_fifth_Question(), Refill_fifth_Question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 6:{
+                CURRENT_FRAGMENT=Refill_sixth_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.refill_container, new Refill_sixth_Question(), Refill_sixth_Question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 7:{
+                CURRENT_FRAGMENT=Refill_seventh_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.refill_container, new Refill_seventh_Question(), Refill_seventh_Question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 8:{
+                CURRENT_FRAGMENT=Refill_eighth_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.refill_container, new Refill_eighth_Question(), Refill_eighth_Question.TAG)
+                        .commitNow();
+                break;
+            }
+        }
+
     }
 }

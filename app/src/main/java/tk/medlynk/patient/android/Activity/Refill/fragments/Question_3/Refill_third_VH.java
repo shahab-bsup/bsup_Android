@@ -52,7 +52,7 @@ public class Refill_third_VH extends ViewHolder implements
         }
     }
 
-    public Refill_third_VH(View itemView) {
+    public Refill_third_VH(View itemView,Answer answerDB) {
         super(itemView);
         this.progressBar =  itemView.findViewById(R.id.progress_bar);
         this.question_view = itemView.findViewById(R.id.refill_third_question);
@@ -71,6 +71,15 @@ public class Refill_third_VH extends ViewHolder implements
         answer_input = itemView.findViewById(R.id.refill_side_effect_input);
         answer_input.addTextChangedListener ( new OnAnswerInputTextWatcher() );
         answer_input.setOnFocusChangeListener ( new OnAnswerFocusChangeListener() );
+
+        if(answerDB!=null){
+            if (answerDB.getChoice().equals("a")){
+                answer_input.setText(answerDB.getReply());
+            }
+            else if(answerDB.getChoice().equals("b")){
+                choice.previewOfDBResult(true,true,0);
+            }
+        }
     }
 
     public void setProgressBarVisibilityStatus(int status ){
