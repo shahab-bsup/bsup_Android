@@ -159,7 +159,7 @@ public class Refill_sixth_VH extends ViewHolder implements OnSingleItemSelectedL
             }
             case 1:{
                 answer.setChoice("c");
-                DialogueBuilder dialogueBuilder = new DialogueBuilder(itemView.getContext(), "blood_pressure");
+                DialogueBuilder dialogueBuilder = new DialogueBuilder(itemView.getContext(), "blood_pressure", "shahab" );
                 dialogueBuilder.setOnDialogListener(this);
                 dialogueBuilder.show();
 

@@ -91,7 +91,7 @@ public class NS_20th_VH extends RecyclerView.ViewHolder implements
             }
             case R.id.viewSelectionChoicesOther:{
                 viewSelectionBeforeLastsPart.setClear ();
-                DialogueBuilder dialogBuilder = new DialogueBuilder(itemView.getContext(), "other" );
+                DialogueBuilder dialogBuilder = new DialogueBuilder(itemView.getContext(), "other", "shahab" );
                 dialogBuilder.setOnDialogListener(this);
                 dialogBuilder.show();
                 break;

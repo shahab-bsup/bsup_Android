@@ -24,12 +24,12 @@ public class DialogueBuilder extends AppCompatDialog {
     private TextView promptTextView;
 
     public DialogueBuilder(Context context,
-                           String dialog_type) {
+                           String dialog_type, String initialOtherText) {
         super ( context );
-        init(dialog_type);
+        init(dialog_type, initialOtherText);
     }
 
-    private void init(String dialogue_type) {
+    private void init(String dialogue_type, String initialOtherText) {
         setContentView ( R.layout.dialogue_layout);
         promptTextView = findViewById(R.id.promptText);
         if( dialogue_type.equals("other") ){
@@ -43,13 +43,14 @@ public class DialogueBuilder extends AppCompatDialog {
         cancelButton = findViewById ( R.id.btnCancel );
         cancelButton.setOnClickListener ( new OnCancelClickListener() );
         other_input = findViewById ( R.id.other_edit_text );
+        other_input.setText ( initialOtherText );
         other_input.addTextChangedListener ( new OnOtherTextChangeWatcher() );
     }
 
-    public DialogueBuilder(Context context, int theme) {
-        super ( context, theme );
-        init ( "selected_state" );
-    }
+//    public DialogueBuilder(Context context, int theme) {
+//        super ( context, theme );
+//        init ( "selected_state", initialOtherText );
+//    }
 
 
     public void setOnDialogListener(OnOtherDialogListener onOtherDialogListener) {

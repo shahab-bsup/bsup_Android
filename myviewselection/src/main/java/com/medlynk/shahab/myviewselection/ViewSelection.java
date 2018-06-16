@@ -272,15 +272,19 @@ public class ViewSelection extends LinearLayout {
     }
 
     public void setSelect(int numOfView){
-        buttons.get ( numOfView ).setBackgroundResource ( R.drawable.selected_stated );
-        buttons.get ( numOfView ).setTextColor ( selected_text_color );
+        buttons.get ( numOfView ).
+                setBackgroundResource ( R.drawable.selected_stated );
+        buttons.get ( numOfView ).
+                setTextColor ( selected_text_color );
         selections.set ( numOfView, true );
     }
 
-    public void previewOfDBResult(boolean selectable, boolean single_select, int numOfViews){
+    public void previewOfDBResult(boolean selectable,
+                                  boolean single_select,
+                                  int numOfView){
         this.selectable=selectable;
         this.single_select=single_select;
-        button_click_listener.onClick(buttons.get(numOfViews));
+        button_click_listener.onClick(buttons.get(numOfView));
     }
 
     public void unSelect(int numOfView){

@@ -91,7 +91,7 @@ public class FUpS_10th_VH extends RecyclerView.ViewHolder implements
         System.out.println ( "FUpS_10th_VH.onMultiItemSelected" );
         first.setClear ();
         if( integer == 3 ){
-            DialogueBuilder dialogBuilder = new DialogueBuilder( itemView.getContext (), "other");
+            DialogueBuilder dialogBuilder = new DialogueBuilder( itemView.getContext (), "other", "shahab" );
             dialogBuilder.setOnDialogListener( this );
             dialogBuilder.show ();
         }else{

@@ -67,7 +67,7 @@ public class NS_11th_VH extends RecyclerView.ViewHolder implements ViewSelection
             button_next.setBackgroundResource ( R.drawable.enable_next_question );
             if( i == 4 ){
                 DialogueBuilder dialogBuilder =
-                        new DialogueBuilder( itemView.getContext (), "other");
+                        new DialogueBuilder( itemView.getContext (), "other", "shahab" );
                 dialogBuilder.setOnDialogListener( this );
                 dialogBuilder.show ();
             }else{

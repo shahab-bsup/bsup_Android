@@ -112,7 +112,7 @@ public class NS_19th_VH extends RecyclerView.ViewHolder implements
                 break;
             }
             case 1: {
-                DialogueBuilder dialogBuilder = new DialogueBuilder(itemView.getContext(), "other");
+                DialogueBuilder dialogBuilder = new DialogueBuilder(itemView.getContext(), "other", "shahab" );
                 dialogBuilder.setOnDialogListener(this);
                 dialogBuilder.show();
                 break;

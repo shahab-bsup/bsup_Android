@@ -37,6 +37,8 @@ public class NS_9th_VH extends RecyclerView.ViewHolder
     private List<Answer> choices;
     private OnNinthNSVHListener onNinthNSVHListener;
     private TextView otherText;
+    private String initial_other_text = "";
+    private boolean otherExists = false;
 
     public NS_9th_VH(View itemView) {
         super ( itemView );
@@ -97,12 +99,15 @@ public class NS_9th_VH extends RecyclerView.ViewHolder
                     break;
                 }
                 case "e":{
-                    second.previewOfDBResult ( true,
-                            false,
-                            3);
-                    if( answer.getOther () != null && !TextUtils.isEmpty ( answer.getOther () )){
+//                    second.previewOfDBResult ( true,
+//                            false,
+//                            3);
+                    second.setSelect ( 3 );
+                    if( answer.getOther () != null &&
+                            !TextUtils.isEmpty ( answer.getOther () )){
                         setOtherTextVisibilityStatus ( View.VISIBLE );
                         setOtherText( answer.getOther () );
+                        initial_other_text = answer.getOther ();
                     }
                     break;
                 }
@@ -118,7 +123,8 @@ public class NS_9th_VH extends RecyclerView.ViewHolder
         this.progressBar.setVisibility ( status );
     }
 
-    public void setOnNinthNSVHListener(OnNinthNSVHListener onNinthNSVHListener) {
+    public void setOnNinthNSVHListener(OnNinthNSVHListener
+                                               onNinthNSVHListener) {
         this.onNinthNSVHListener = onNinthNSVHListener;
     }
 
@@ -148,7 +154,8 @@ public class NS_9th_VH extends RecyclerView.ViewHolder
         if( integer == 3 ){
             DialogueBuilder dialogBuilder =
                     new DialogueBuilder( itemView.getContext (),
-                            "other");
+                            "other",
+                            initial_other_text);
             dialogBuilder.setOnDialogListener( this );
             dialogBuilder.show ();
         }else{
@@ -183,7 +190,6 @@ public class NS_9th_VH extends RecyclerView.ViewHolder
 
     @Override
     public void onMultiItemDeselected(View view, Integer integer) {
-        System.out.println ( "NS_9th_VH.onMultiItemDeselected" );
         int i = integer;
         Iterator<Answer> answerIterator = choices.iterator ();
         switch (i){
@@ -225,6 +231,7 @@ public class NS_9th_VH extends RecyclerView.ViewHolder
             }
             case 3:{
                 while (answerIterator.hasNext ()){
+                    setOtherTextVisibilityStatus ( View.GONE );
                     Answer answer = answerIterator.next ();
                     if( answer.getChoice () != null &&
                             answer.getChoice ().equals ( "e" ) ){
