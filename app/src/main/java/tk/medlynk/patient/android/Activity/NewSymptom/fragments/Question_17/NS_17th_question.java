@@ -72,7 +72,10 @@ public class NS_17th_question extends Fragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View view = inflater.inflate ( R.layout.fragment_new__symptom_17th_question, container, false );
+        final View view =
+                inflater.inflate ( R.layout.fragment_new__symptom_17th_question,
+                        container,
+                        false );
         medlynkViewModel = ViewModelProviders.of ( getActivity () )
                 .get ( MedlynkViewModel.class );
         manager = new SharedPreferenceManager ( getActivity () );

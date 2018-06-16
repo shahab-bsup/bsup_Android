@@ -68,6 +68,18 @@
                             app:unselected_background="@drawable/answer_not_selected"
                             app:unselected_text_color="@color/white" />
 
+                        <tk.medlynk.patient.android.CustomViews.CustomTextView
+                            android:id="@+id/txtOther"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15dp"
+                            android:background="@drawable/other_background"
+                            android:padding="10dp"
+                            android:text="dfjdfhs"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="15sp"
+                            android:visibility="gone" />
+
                         <com.medlynk.shahab.myviewselection.ViewSelection
                             android:id="@+id/viewSelectionSecond"
                             android:layout_width="match_parent"

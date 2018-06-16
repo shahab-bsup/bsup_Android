@@ -23,7 +23,7 @@ import java.util.List;
 
 public class ViewSelection extends LinearLayout {
 
-    List<TextView> buttons = new ArrayList<TextView> ();
+    List<TextView> textViews = new ArrayList<TextView> ();
     List<EditText> editTexts = new ArrayList<> ();
     List<RelativeLayout> helpfully_layouts = new ArrayList<RelativeLayout> ();
     List<TextView> helpfully_options_errors = new ArrayList<> ();
@@ -58,26 +58,25 @@ public class ViewSelection extends LinearLayout {
             if (selectable) {
                 if (single_select) {
                     if (onSingleItemSelectedListener == null) {
-                        throw new RuntimeException ( getCurrentContext ().toString () + "must implement " +
+                        throw new RuntimeException ( getCurrentContext ().toString () +
+                                "must implement " +
                                 OnSingleItemSelectedListener.class.getSimpleName () );
                     } else if ( selections.get ( currentSelection ) ) {
-                        buttons.get ( currentSelection ).setTextColor ( unselected_text_color );
-                        buttons.get ( currentSelection ).setBackgroundDrawable ( unselected_state_drawbale );
-                        selections.set ( currentSelection, false );
-                        onSingleItemSelectedListener.onSingleItemSelected ( ViewSelection.this, -1 );
+                        unSelectionProcedure (currentSelection);
                     } else {
-                        selections.set ( currentSelection, true );
-                        buttons.get ( currentSelection ).setTextColor ( selected_text_color );
-                        buttons.get ( currentSelection ).setBackgroundDrawable ( selected_state_drawable );
-                        onSingleItemSelectedListener.onSingleItemSelected ( ViewSelection.this,
+                        selectionProcedure ( currentSelection, previous_selection );
+                        onSingleItemSelectedListener.
+                                onSingleItemSelected ( ViewSelection.this,
                                 currentSelection );
-                        for (TextView button : buttons) {
-                            if (button.getId () == currentSelection) {
-                                button.setTextColor ( selected_text_color );
-                                button.setBackgroundDrawable ( selected_state_drawable );
-                            } else if (button.getId () == previous_selection) {
-                                button.setTextColor ( unselected_text_color );
-                                button.setBackgroundDrawable ( unselected_state_drawbale );
+                        for (TextView textView : textViews) {
+                            if (textView.getId () == currentSelection) {
+                                textView.setTextColor ( selected_text_color );
+                                textView.setBackgroundDrawable(null);
+                                textView.setBackgroundDrawable ( selected_state_drawable );
+                            } else if (textView.getId () == previous_selection) {
+                                textView.setTextColor ( unselected_text_color );
+                                textView.setBackgroundDrawable(null);
+                                textView.setBackgroundDrawable ( unselected_state_drawbale );
                             }
                         }
                         previous_selection = currentSelection;
@@ -85,14 +84,18 @@ public class ViewSelection extends LinearLayout {
                 } else {
                     if (selections.get ( currentSelection )) {
                         selections.set ( currentSelection, false );
-                        buttons.get ( currentSelection ).setBackgroundDrawable ( unselected_state_drawbale );
-                        buttons.get ( currentSelection ).setTextColor ( unselected_text_color );
+                        textViews.get ( currentSelection ).setBackgroundDrawable(null);
+                        textViews.get ( currentSelection ).setBackgroundDrawable ( unselected_state_drawbale );
+                        textViews.get ( currentSelection ).setTextColor ( unselected_text_color );
                         if (show_helpfully_layout)
                             helpfully_layouts.get ( currentSelection ).setVisibility ( View.GONE );
                         if (onMultiItemSelectedListener == null) {
-                            throw new RuntimeException ( getCurrentContext ().toString () + "must implement " + OnMultiItemSelectedListener.class.getSimpleName () );
+                            throw new RuntimeException ( getCurrentContext ().toString () +
+                                    " must implement " +
+                                    OnMultiItemSelectedListener.class.getSimpleName () );
                         } else {
-                            onMultiItemSelectedListener.onMultiItemDeselected ( ViewSelection.this, currentSelection );
+                            onMultiItemSelectedListener.onMultiItemDeselected ( ViewSelection.this,
+                                    currentSelection );
                         }
                     } else {
                         selections.set ( currentSelection, true );
@@ -103,18 +106,40 @@ public class ViewSelection extends LinearLayout {
                         }
                         if (show_helpfully_layout)
                             helpfully_layouts.get ( currentSelection ).setVisibility ( View.VISIBLE );
-                        buttons.get ( currentSelection ).setBackgroundDrawable ( selected_state_drawable );
-                        buttons.get ( currentSelection ).setTextColor ( selected_text_color );
+                        textViews.get ( currentSelection ).setBackgroundDrawable ( null );
+                        textViews.get ( currentSelection ).setBackgroundDrawable ( selected_state_drawable );
+                        textViews.get ( currentSelection ).setTextColor ( selected_text_color );
                     }
                 }
             } else {
-                for (TextView button : buttons) {
+                for (TextView button : textViews) {
+                    button.setBackgroundDrawable ( null );
                     button.setBackgroundDrawable ( unselectable_drawable );
                     button.setTextColor ( unselectable_text_color );
                 }
             }
         }
     };
+
+    private void selectionProcedure(int indexOfView, int previous_selection) {
+        selections.set ( indexOfView, true );
+        textViews.get ( indexOfView ).setTextColor ( selected_text_color );
+        textViews.get ( indexOfView ).
+                setBackgroundDrawable ( null );
+        textViews.get ( indexOfView ).setBackgroundDrawable ( selected_state_drawable );
+        if( previous_selection != -1 && previous_selection != indexOfView ){
+            unSelectionProcedure ( previous_selection );
+        }
+    }
+
+    private void unSelectionProcedure(int indexOfView) {
+        textViews.get ( indexOfView ).setTextColor ( unselected_text_color );
+        textViews.get ( indexOfView ).setBackgroundDrawable ( null );
+        textViews.get ( indexOfView ).setBackgroundDrawable ( unselected_state_drawbale );
+        selections.set ( indexOfView, false );
+        onSingleItemSelectedListener.onSingleItemSelected ( ViewSelection.this,
+                -1 );
+    }
 
     public ViewSelection(Context context) {
         super ( context );
@@ -149,7 +174,7 @@ public class ViewSelection extends LinearLayout {
     }
 
     public List<TextView> getButtons() {
-        return buttons;
+        return textViews;
     }
 
     public List<EditText> getEditTexts() {
@@ -217,6 +242,7 @@ public class ViewSelection extends LinearLayout {
         } else if (button_type)
             for (int i = 0; i < numOfViews; i++) {
                 TextView textView = new TextView ( context );
+                textView.setTextSize ( 20 );
                 textView.setPadding ( 10, 10, 10, 10 );
                 if (selectable) {
                     textView.setBackgroundResource ( unselected_state_background );
@@ -230,7 +256,7 @@ public class ViewSelection extends LinearLayout {
                 textView.setLayoutParams ( layoutParams );
                 textView.setId ( i );
                 textView.setOnClickListener ( button_click_listener );
-                buttons.add ( textView );
+                textViews.add ( textView );
                 linearLayout.addView ( textView );
                 if (show_helpfully_layout) {
                     View view1 = LayoutInflater.from ( context ).inflate ( R.layout.helpfully_layout,
@@ -271,10 +297,18 @@ public class ViewSelection extends LinearLayout {
         }
     }
 
+    public void notifyDataSetChanged(){
+        for (int i = 0; i < numOfViews; i++) {
+            if( selections.get ( i ) ){
+                selectionProcedure ( i, previous_selection );
+            }
+        }
+    }
+
     public void setSelect(int numOfView){
-        buttons.get ( numOfView ).
+        textViews.get ( numOfView ).
                 setBackgroundResource ( R.drawable.selected_stated );
-        buttons.get ( numOfView ).
+        textViews.get ( numOfView ).
                 setTextColor ( selected_text_color );
         selections.set ( numOfView, true );
     }
@@ -284,12 +318,12 @@ public class ViewSelection extends LinearLayout {
                                   int numOfView){
         this.selectable=selectable;
         this.single_select=single_select;
-        button_click_listener.onClick(buttons.get(numOfView));
+        button_click_listener.onClick( textViews.get(numOfView));
     }
 
     public void unSelect(int numOfView){
-        buttons.get ( numOfView ).setBackgroundResource ( R.drawable.unselected_state );
-        buttons.get ( numOfView ).setTextColor ( unselected_text_color );
+        textViews.get ( numOfView ).setBackgroundResource ( R.drawable.unselected_state );
+        textViews.get ( numOfView ).setTextColor ( unselected_text_color );
         selections.set ( numOfView, false );
     }
 
@@ -302,13 +336,18 @@ public class ViewSelection extends LinearLayout {
     }
 
     public void setTextToButtons(String text, int position) {
-        buttons.get ( position ).setText ( text );
+        textViews.get ( position ).setText ( text );
     }
 
     public void setClear() {
-        for (TextView button : buttons) {
+        for (TextView button : textViews) {
             button.setTextColor ( unselected_text_color );
+            button.setBackgroundDrawable ( null );
             button.setBackgroundDrawable ( unselected_state_drawbale );
+        }
+        int size = selections.size ();
+        for (int i = 0; i < size; i++) {
+            selections.set ( i, false );
         }
         if (onClearStateListener == null) {
             throw new RuntimeException ( getCurrentContext ().toString () + "" +

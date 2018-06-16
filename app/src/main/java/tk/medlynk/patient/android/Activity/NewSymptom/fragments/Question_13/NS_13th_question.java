@@ -57,9 +57,13 @@ public class NS_13th_question extends Fragment implements
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate ( R.layout.fragment_new__symptom_13th_question, container, false );
+        dbOperation ( view );
+        return view;
+    }
+
+    private void dbOperation(View view) {
         viewHolder = new NS_13th_VH ( view );
         viewHolder.setOnThirteenNSVHListener ( this );
-        return view;
     }
 
     @Override

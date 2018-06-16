@@ -27,6 +27,8 @@ public class NS_13th_VH extends RecyclerView.ViewHolder implements
         ViewSelection.OnClearStateListener,
         ViewSelection.OnSingleItemSelectedListener {
 
+    private final TextView otherText;
+    private String initial_other_text = "";
     private ProgressBar progressBar;
     private View question_view;
     private Button button_next, button_skip;
@@ -39,6 +41,7 @@ public class NS_13th_VH extends RecyclerView.ViewHolder implements
 
     public NS_13th_VH(View view) {
         super ( view );
+        otherText = itemView.findViewById ( R.id.txtOther );
         answer = new Answer ();
         answers = new ArrayList<> (  );
         progressBar = itemView.findViewById ( R.id.progress_bar );
@@ -62,6 +65,14 @@ public class NS_13th_VH extends RecyclerView.ViewHolder implements
         first.setOnHelpfullyOptionClickListener ( this );
         second.setOnSingleItemSelectedListener ( this );
         second.setOnClearStateListener ( this );
+    }
+
+    private void setOtherTextVisibilityStatus(int status){
+        this.otherText.setVisibility ( status );
+    }
+
+    private void setOtherText(String other) {
+        this.otherText.setText ( other );
     }
 
     public void setProgressBarVisibilityStatus( int status ){

@@ -16,7 +16,10 @@ import tk.medlynk.patient.android.Model.Answer;
  * Created by Shahab on 2/23/2018.
  */
 
-public class NS_11th_VH extends RecyclerView.ViewHolder implements ViewSelection.OnSingleItemSelectedListener, DialogueBuilder.OnOtherDialogListener, ViewSelection.OnClearStateListener {
+public class NS_11th_VH extends RecyclerView.ViewHolder implements
+        ViewSelection.OnSingleItemSelectedListener,
+        DialogueBuilder.OnOtherDialogListener,
+        ViewSelection.OnClearStateListener {
 
     private ProgressBar progressBar;
     private View question_view;
@@ -26,9 +29,12 @@ public class NS_11th_VH extends RecyclerView.ViewHolder implements ViewSelection
     private String[] string_choices;
     private OnEleventhNSVHListener onEleventhNSVHListener;
     private Answer answer;
+    private TextView otherText;
+    private String initial_other_text = "";
 
     public NS_11th_VH(View itemView) {
         super ( itemView );
+        otherText = itemView.findViewById ( R.id.txtOther );
         answer = new Answer ();
         progressBar = itemView.findViewById ( R.id.progress_bar );
         question_view = itemView.findViewById ( R.id.new_symptom_eleventh_question );
@@ -52,14 +58,15 @@ public class NS_11th_VH extends RecyclerView.ViewHolder implements ViewSelection
         this.progressBar.setVisibility ( status );
     }
 
-    public void setOnEleventhNSVHListener(OnEleventhNSVHListener onEleventhNSVHListener) {
+    public void setOnEleventhNSVHListener(OnEleventhNSVHListener
+                                                  onEleventhNSVHListener) {
         this.onEleventhNSVHListener = onEleventhNSVHListener;
     }
 
     @Override
     public void onSingleItemSelected(View view, int i) {
-        System.out.println ( "NS_11th_VH.onSingleItemSelected" );
         if( i == -1 ){
+            setOtherTextVisibilityStatus ( View.GONE );
             button_next.setEnabled ( false );
             button_next.setBackgroundResource ( R.drawable.disable_next_question );
         }else{
@@ -67,7 +74,9 @@ public class NS_11th_VH extends RecyclerView.ViewHolder implements ViewSelection
             button_next.setBackgroundResource ( R.drawable.enable_next_question );
             if( i == 4 ){
                 DialogueBuilder dialogBuilder =
-                        new DialogueBuilder( itemView.getContext (), "other", "shahab" );
+                        new DialogueBuilder( itemView.getContext (),
+                                "other",
+                                initial_other_text);
                 dialogBuilder.setOnDialogListener( this );
                 dialogBuilder.show ();
             }else{
@@ -78,10 +87,12 @@ public class NS_11th_VH extends RecyclerView.ViewHolder implements ViewSelection
 
     @Override
     public void onOtherDialogDone(String otherText) {
-        System.out.println ( "NS_11th_VH.onOtherDialogDone" );
+        choices.notifyDataSetChanged ();
         if( otherText.length () > 0 ){
             answer.setChoice ( "e" );
             answer.setOther ( otherText );
+            setOtherTextVisibilityStatus ( View.VISIBLE );
+            setOtherText ( otherText );
         }else{
             button_next.setEnabled(false);
             button_next.setBackgroundResource(R.drawable.disable_next_question);
@@ -91,7 +102,6 @@ public class NS_11th_VH extends RecyclerView.ViewHolder implements ViewSelection
 
     @Override
     public void onClearState(View view) {
-        System.out.println ( "NS_11th_VH.onClearState" );
 
     }
 
@@ -122,19 +132,29 @@ public class NS_11th_VH extends RecyclerView.ViewHolder implements ViewSelection
                 break;
             }
             case "e":{
-                choices.previewOfDBResult ( true,
-                        true,
-                        4);
+//                choices.previewOfDBResult ( true,
+//                        true,
+//                        4);
+                choices.setSelect ( 4 );
+                setOtherTextVisibilityStatus ( View.VISIBLE );
+                setOtherText( answerDB.getOther () );
+                initial_other_text = answerDB.getOther ();
                 break;
             }
         }
     }
 
+    private void setOtherTextVisibilityStatus(int status){
+        this.otherText.setVisibility ( status );
+    }
+
+    private void setOtherText(String other) {
+        this.otherText.setText ( other );
+    }
+
     private class OnNextClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println ( "NS_11th_VH.NS_11th_VH" );
-            System.out.println ( "OnNextClickListener.onClick" );
             onEleventhNSVHListener.onNextClicked ( answer );
         }
     }
@@ -142,8 +162,6 @@ public class NS_11th_VH extends RecyclerView.ViewHolder implements ViewSelection
     private class OnSkipClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println ( "NS_11th_VH.NS_11th_VH" );
-            System.out.println ( "OnSkipClickListener.onClick" );
             onEleventhNSVHListener.onSkipClicked ();
         }
     }

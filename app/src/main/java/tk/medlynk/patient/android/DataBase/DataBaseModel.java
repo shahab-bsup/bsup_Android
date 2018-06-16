@@ -8,7 +8,8 @@ import android.support.annotation.NonNull;
  * Created by Shahab on 6/3/2018.
  */
 
-@Entity (primaryKeys = {"appointmentId", "tableNumber","questionNumber"},tableName = "tbl_AnswersDataBase" )
+@Entity (primaryKeys = {"appointmentId", "tableNumber","questionNumber"},
+        tableName = "tbl_AnswersDataBase" )
 public class DataBaseModel {
 
     @NonNull

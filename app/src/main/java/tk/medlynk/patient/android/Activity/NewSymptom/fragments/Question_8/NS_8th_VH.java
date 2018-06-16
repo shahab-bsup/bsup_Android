@@ -1,6 +1,7 @@
 package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_8;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -35,9 +36,12 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
     private Answer choice;
     private List<Answer> choices;
     private OnEighthNSVHListener onEighthNSVHListener;
+    private TextView otherText;
+    private String initial_other_text = "";
 
     public NS_8th_VH(View itemView) {
         super ( itemView );
+        otherText = itemView.findViewById ( R.id.txtOther );
         choices = new ArrayList<> ();
         choice = new Answer ();
         progressBar = itemView.findViewById ( R.id.progress_bar );
@@ -56,7 +60,8 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
         first = itemView.findViewById ( R.id.viewSelectionFirst );
         first.setOnSingleItemSelectedListener ( this );
         first.setOnClearStateListener ( this );
-        first.setTextToButtons ( string_choices[0], 0 );
+        first.setTextToButtons ( string_choices[0],
+                0 );
         second = itemView.findViewById ( R.id.viewSelectionSecond );
         second.setOnMultiItemSelectedListener ( this );
         second.setOnClearStateListener ( this );
@@ -88,10 +93,12 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
 
     @Override
     public void onMultiItemSelected(View view, Integer integer) {
-        System.out.println ( "NS_8th_VH.onMultiItemSelected" );
         first.setClear ();
         if (integer == 3) {
-            DialogueBuilder dialogBuilder = new DialogueBuilder ( itemView.getContext (), "other", "shahab" );
+            DialogueBuilder dialogBuilder =
+                    new DialogueBuilder ( itemView.getContext (),
+                            "other",
+                            initial_other_text );
             dialogBuilder.setOnDialogListener ( this );
             dialogBuilder.show ();
         } else {
@@ -126,7 +133,6 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
 
     @Override
     public void onMultiItemDeselected(View view, Integer integer) {
-        System.out.println ( "NS_8th_VH.onMultiItemDeselected" );
         int i = integer;
         Iterator<Answer> answerIterator = choices.iterator ();
         switch (i) {
@@ -165,6 +171,7 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
             }
             case 3: {
                 while (answerIterator.hasNext ()) {
+                    setOtherTextVisibilityStatus ( View.GONE );
                     Answer answer = answerIterator.next ();
                     if (answer.getChoice () != null &&
                             answer.getChoice ().equals ( "e" )) {
@@ -184,8 +191,9 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
 
     @Override
     public void onOtherDialogDone(String otherText) {
-        System.out.println ( "NS_8th_VH.onOtherDialogDone" );
         if (otherText.length () > 0) {
+            setOtherTextVisibilityStatus ( View.VISIBLE );
+            setOtherText ( otherText );
             Answer answer = new Answer ();
             answer.setChoice ( "e" );
             answer.setOther ( otherText );
@@ -203,7 +211,6 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
 
     @Override
     public void onClearState(View view) {
-        System.out.println ( "NS_8th_VH.onClearState" );
         if (view.getId () == second.getId ()) {
             choices.clear ();
         }
@@ -214,28 +221,51 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
         for (Answer answer : answers) {
             switch (answer.getChoice ()) {
                 case "b": {
-                    second.previewOfDBResult ( true, false, 0 );
+                    second.previewOfDBResult ( true,
+                            false,
+                            0 );
 
                     break;
                 }
                 case "c": {
-                    second.previewOfDBResult ( true, false, 1 );
+                    second.previewOfDBResult ( true,
+                            false,
+                            1 );
 
                     break;
                 }
                 case "d": {
-                    second.previewOfDBResult ( true, false, 2 );
+                    second.previewOfDBResult ( true,
+                            false,
+                            2 );
 
                     break;
                 }
                 case "e": {
-                    second.previewOfDBResult ( true, false, 3 );
+//                    second.previewOfDBResult ( true,
+//                            false,
+//                            3 );
+                    second.setSelect ( 3 );
+                    if( answer.getOther () != null &&
+                            !TextUtils.isEmpty ( answer.getOther () )){
+                        setOtherTextVisibilityStatus ( View.VISIBLE );
+                        setOtherText( answer.getOther () );
+                        initial_other_text = answer.getOther ();
+                    }
 
                     break;
                 }
 
             }
         }
+    }
+
+    private void setOtherText(String otherText) {
+        this.otherText.setText ( otherText );
+    }
+
+    private void setOtherTextVisibilityStatus(int status) {
+        this.otherText.setVisibility ( status );
     }
 
     //called once there is only one answer for this fragment

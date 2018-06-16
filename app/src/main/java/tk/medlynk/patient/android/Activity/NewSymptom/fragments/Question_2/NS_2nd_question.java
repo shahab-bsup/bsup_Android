@@ -7,7 +7,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -91,7 +90,6 @@ public class NS_2nd_question extends Fragment implements
                             JsonConverter JC = JsonConverter.getInstance ();
                             answerDB = JC.answerJsonToAnswers ( dataBaseModel.getAnswerJson () )
                                     .get ( 0 );
-                            Log.d ( TAG, "onChanged: " + answerDB );
                         }
                         viewHolder = new NS_2nd_VH ( view, answerDB );
                         viewHolder.setOnSecondNSVHListener ( NS_2nd_question.this );
@@ -121,9 +119,13 @@ public class NS_2nd_question extends Fragment implements
     public void onAnswerSuccess(NewSymptomAnswerResponse response) {
         JsonConverter JC = JsonConverter.getInstance ();
         if (existsRecord == false)
-            mMedlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (), Constants.NEW_SYMPTOM_ROW, 2, JC.answersToAnswerJson ( answersForDB ) );
+            mMedlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (),
+                    Constants.NEW_SYMPTOM_ROW, 2,
+                    JC.answersToAnswerJson ( answersForDB ) );
         else
-            mMedlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (), Constants.NEW_SYMPTOM_ROW, 2, JC.answersToAnswerJson ( answersForDB ) );
+            mMedlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (),
+                    Constants.NEW_SYMPTOM_ROW,
+                    2, JC.answersToAnswerJson ( answersForDB ) );
 
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onSecondQuestion ();
@@ -148,7 +150,7 @@ public class NS_2nd_question extends Fragment implements
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
         MedlynkRequests.newSymptomQuestionsAnswer ( getActivity (),
                 NS_2nd_question.this,
-                manager.getAppointmentID (),"2",
+                manager.getAppointmentID (), "2",
                 answer );
 
         answersForDB.add ( answer );
@@ -156,7 +158,6 @@ public class NS_2nd_question extends Fragment implements
 
     @Override
     public void onSkipClicked() {
-        System.out.println ( "NS_2nd_question.onSkipClicked" );
         mListener.onSecondQuestion ();
     }
 

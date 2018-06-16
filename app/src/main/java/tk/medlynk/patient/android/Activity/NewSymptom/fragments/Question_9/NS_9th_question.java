@@ -143,11 +143,13 @@ public class NS_9th_question extends Fragment implements
         if( !existRecord ){
             medlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (),
                     Constants.NEW_SYMPTOM_ROW,
-                    9, jsonConverter.answersToAnswerJson ( answersDB ));
+                    9,
+                    jsonConverter.answersToAnswerJson ( answersDB ));
         }else{
             medlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (),
                     Constants.NEW_SYMPTOM_ROW,
-                    9, jsonConverter.answersToAnswerJson ( answersDB ));
+                    9,
+                    jsonConverter.answersToAnswerJson ( answersDB ));
         }
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onNinthQuestion ();
@@ -161,7 +163,7 @@ public class NS_9th_question extends Fragment implements
 
     @Override
     public void onUnauthorized() {
-        Log.d ( TAG, "onUnauthorized: " );
+
     }
 
     @Override

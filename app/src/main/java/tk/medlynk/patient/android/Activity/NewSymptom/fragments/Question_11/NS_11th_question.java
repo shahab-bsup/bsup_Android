@@ -78,8 +78,6 @@ public class NS_11th_question extends Fragment implements
         // Inflate the layout for this fragment...
         View view = inflater.inflate ( R.layout.fragment_new__symptom_11th_question, container, false );
         dbOperation(view);
-        viewHolder = new NS_11th_VH ( view );
-        viewHolder.setOnEleventhNSVHListener ( this );
         return view;
     }
 
@@ -101,11 +99,11 @@ public class NS_11th_question extends Fragment implements
                             answerDB = JC.answerJsonToAnswers(dataBaseModel.getAnswerJson())
                                     .get(0);
                         }
-
                         viewHolder = new NS_11th_VH (view);
-                        if( answerDB != null )
-                            viewHolder.onUpdateUI(answerDB);
                         viewHolder.setOnEleventhNSVHListener (NS_11th_question.this);
+                        if( answerDB != null ) {
+                            viewHolder.onUpdateUI(answerDB);
+                        }
                     }
                 });
     }

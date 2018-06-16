@@ -59,13 +59,11 @@ public class DialogueBuilder extends AppCompatDialog {
 
     protected DialogueBuilder(Context context, boolean cancelable, OnCancelListener cancelListener) {
         super ( context, cancelable, cancelListener );
-        System.out.println ( "DialogueBuilder.DialogueBuilder" );
     }
 
     @Override
     public void show() {
         super.show ();
-        System.out.println ( "DialogueBuilder.show" );
     }
 
     public String getOtherText(){

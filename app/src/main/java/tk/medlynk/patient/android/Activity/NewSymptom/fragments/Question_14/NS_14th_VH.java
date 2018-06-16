@@ -23,7 +23,9 @@ import tk.medlynk.patient.android.Model.Medication;
  */
 
 public class NS_14th_VH extends RecyclerView.ViewHolder implements
-        ViewSelection.OnSingleItemSelectedListener, MedicationsAdapter.OnEmptyMedicationListener, ViewSelection.OnClearStateListener {
+        ViewSelection.OnSingleItemSelectedListener,
+        MedicationsAdapter.OnEmptyMedicationListener,
+        ViewSelection.OnClearStateListener {
 
     private View question_view;
     private Button button_next;
@@ -74,7 +76,6 @@ public class NS_14th_VH extends RecyclerView.ViewHolder implements
 
     @Override
     public void onSingleItemSelected(View view, int i) {
-        System.out.println ( "NS_14th_VH.onSingleItemSelected" );
         if (i == 0) {
             answer.setChoice ( "a" );
             button_next.setEnabled ( true );
@@ -88,15 +89,27 @@ public class NS_14th_VH extends RecyclerView.ViewHolder implements
 
     @Override
     public void onEmptyMedication() {
-        System.out.println ( "NS_14th_VH.onEmptyMedication" );
         button_next.setEnabled ( false );
         button_next.setBackgroundResource ( R.drawable.enable_next_question );
     }
 
     @Override
     public void onClearState(View view) {
-        System.out.println ( "NS_14th_VH.onClearState" );
         answer = new Answer ();
+    }
+
+    public void onUpdateUI(Answer answer) {
+        choice.previewOfDBResult ( true,
+                true,
+                0);
+    }
+
+    public void onUpdateUI(List<Medication> medications) {
+        for (Medication medication : medications) {
+            medicationAdapter.setMedications ( medication );
+        }
+        button_next.setEnabled ( true );
+        button_next.setBackgroundResource ( R.drawable.enable_next_question );
     }
 
     public interface OnFourteenNSVHListener {
@@ -110,8 +123,6 @@ public class NS_14th_VH extends RecyclerView.ViewHolder implements
     private class OnNextClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println ( "NS_14th_VH.NS_14th_VH" );
-            System.out.println ( "OnNextClickListener.onClick" );
             if (medicationAdapter.getDataSet ().size () > 0) {
                 boolean hasError = false;
                 for (Medication medication : medicationAdapter.getDataSet ()) {
@@ -153,8 +164,6 @@ public class NS_14th_VH extends RecyclerView.ViewHolder implements
     private class OnSkipClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println ( "NS_14th_VH.NS_14th_VH" );
-            System.out.println ( "OnSkipClickListener.onClick" );
             onFourteenNSVHListener.onSkipClicked ();
         }
     }
@@ -162,7 +171,6 @@ public class NS_14th_VH extends RecyclerView.ViewHolder implements
     private class OnAddAMedicationClicked implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println ( "OnAddAMedicationClicked.onClick" );
             choice.setClear ();
             medicationAdapter.setMedications ( new Medication () );
             if( medicationAdapter.getDataSet ().size () == 1 ){

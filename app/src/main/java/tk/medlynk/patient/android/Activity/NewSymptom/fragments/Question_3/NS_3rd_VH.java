@@ -39,7 +39,7 @@ public class NS_3rd_VH extends RecyclerView.ViewHolder implements ViewSelection.
 
     ProgressBar progressBar;
 
-    public NS_3rd_VH(View itemView, Answer answerDB) {
+    public NS_3rd_VH(View itemView) {
         super(itemView);
         progressBar = itemView.findViewById(R.id.progress_bar);
         question_view = itemView.findViewById(R.id.new_symptom_third_question);
@@ -81,12 +81,9 @@ public class NS_3rd_VH extends RecyclerView.ViewHolder implements ViewSelection.
         checkBoxes.add(third_checkbox);
         checkBoxes.add(fourth_checkbox);
 
-        updateUI ( answerDB );
-
     }
 
-    private void updateUI(Answer answerDB) {
-        if( answerDB != null ){
+    public void onUpdateUI(Answer answerDB) {
             switch (answerDB.getChoice ()){
                 case "a":{
                     first_checkbox.setChecked ( true );
@@ -121,7 +118,6 @@ public class NS_3rd_VH extends RecyclerView.ViewHolder implements ViewSelection.
                     break;
                 }
             }
-        }
     }
 
     public void setOnThirdNSVHListener(OnThirdNSVHListener onThirdNSVHListener) {

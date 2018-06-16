@@ -31,7 +31,6 @@ public class MedicationsAdapter extends RecyclerView.Adapter<MedicationsAdapter.
     private OnEmptyMedicationListener onEmptyMedicationListener;
 
     public MedicationsAdapter(Context context) {
-        System.out.println ( "MedicationsAdapter.MedicationsAdapter" );
         this.context = context;
         medications = new ArrayList<> ();
     }
@@ -42,7 +41,6 @@ public class MedicationsAdapter extends RecyclerView.Adapter<MedicationsAdapter.
 
     @Override
     public MedicationVH onCreateViewHolder(ViewGroup parent, int viewType) {
-        System.out.println ( "MedicationsAdapter.onCreateViewHolder" );
         View view = LayoutInflater.from ( context ).inflate ( R.layout.medication_row, parent, false );
         return new MedicationVH ( view );
     }
@@ -54,7 +52,6 @@ public class MedicationsAdapter extends RecyclerView.Adapter<MedicationsAdapter.
 
     @Override
     public void onBindViewHolder(MedicationVH holder, int position) {
-        System.out.println ( "MedicationsAdapter.onBindViewHolder" );
         int medication_numer = position + 1;
         holder.medication_number.setText ( "Medication #" + medication_numer );
         holder.medication_name.setText ( medications.get ( position ).getName () );
@@ -148,7 +145,6 @@ public class MedicationsAdapter extends RecyclerView.Adapter<MedicationsAdapter.
     @Override
     public void onViewAttachedToWindow(MedicationVH holder) {
         super.onViewAttachedToWindow ( holder );
-        System.out.println ( "MedicationsAdapter.onViewAttachedToWindow" );
     }
 
     private void setViewRequestFocus(TextView textView, int position) {
@@ -163,7 +159,6 @@ public class MedicationsAdapter extends RecyclerView.Adapter<MedicationsAdapter.
 
     @Override
     public int getItemCount() {
-        System.out.println ( "MedicationsAdapter.getItemCount" );
         return medications.size ();
     }
 
@@ -184,7 +179,6 @@ public class MedicationsAdapter extends RecyclerView.Adapter<MedicationsAdapter.
         Button how_helpful_not_helping;
         List<Button> options = new ArrayList<> ();
         boolean has_side_effect = false;
-
         TextView medication_name_error;
         TextView side_effect_error;
         TextView how_often_error;

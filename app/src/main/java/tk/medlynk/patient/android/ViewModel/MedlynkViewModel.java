@@ -30,8 +30,14 @@ public class MedlynkViewModel extends AndroidViewModel {
         mRepository.InsertAnswerRecord ( appointmentId, tableNumber, questionNumber, answersJson );
     }
 
-    public void updateAnswersToDB(int appointmentId, int tableNumber, int questionNumber, String answersJson) {
-        mRepository.UpdateAnswerRecord ( appointmentId, tableNumber, questionNumber, answersJson );
+    public void updateAnswersToDB(int appointmentId,
+                                  int tableNumber,
+                                  int questionNumber,
+                                  String answersJson) {
+        mRepository.UpdateAnswerRecord ( appointmentId,
+                tableNumber,
+                questionNumber,
+                answersJson );
     }
 
 }

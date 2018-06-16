@@ -38,7 +38,6 @@ public class NS_9th_VH extends RecyclerView.ViewHolder
     private OnNinthNSVHListener onNinthNSVHListener;
     private TextView otherText;
     private String initial_other_text = "";
-    private boolean otherExists = false;
 
     public NS_9th_VH(View itemView) {
         super ( itemView );
@@ -253,7 +252,7 @@ public class NS_9th_VH extends RecyclerView.ViewHolder
     public void onOtherDialogDone(String otherText) {
         if( otherText.length () > 0 ){
             setOtherTextVisibilityStatus ( View.VISIBLE );
-            this.otherText.setText ( otherText );
+            setOtherText ( otherText );
             Answer answer = new Answer ();
             answer.setChoice ( "e" );
             answer.setOther ( otherText );
@@ -277,8 +276,6 @@ public class NS_9th_VH extends RecyclerView.ViewHolder
     private class OnNextClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println ( "NS_9th_VH.NS_9th_VH" );
-            System.out.println ( "OnNextClickListener.onClick" );
             if( choices.size () > 0 ){
                 onNinthNSVHListener.onNextClicked ( choices );
             }else{
@@ -290,8 +287,6 @@ public class NS_9th_VH extends RecyclerView.ViewHolder
     private class OnSkipClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println ( "NS_9th_VH.NS_9th_VH" );
-            System.out.println ( "OnSkipClickListener.onClick" );
             onNinthNSVHListener.onSkipClicked ();
         }
     }

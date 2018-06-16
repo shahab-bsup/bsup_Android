@@ -91,7 +91,7 @@
                             android:text="dfjdfhs"
                             android:textColor="@color/colorPrimary"
                             android:textSize="15sp"
-                            android:visibility="visible" />
+                            android:visibility="gone" />
 
                     </LinearLayout>
                 </LinearLayout>
