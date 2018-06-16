@@ -45,7 +45,7 @@ public class Refill_seventh_VH extends ViewHolder implements OnSingleItemSelecte
         }
     }
 
-    public Refill_seventh_VH(View itemView) {
+    public Refill_seventh_VH(View itemView,Answer answerDB) {
         super(itemView);
         progressBar =  itemView.findViewById( R.id.progress_bar);
         this.question_view = itemView.findViewById(R.id.refill_seventh_question);
@@ -61,6 +61,15 @@ public class Refill_seventh_VH extends ViewHolder implements OnSingleItemSelecte
         this.string_choices = itemView.getContext().getResources().getStringArray(R.array.yes_no);
         for (int i = 0; i < this.first.getNumberOfViews(); i++) {
             this.first.setTextToButtons(this.string_choices[i], i);
+        }
+
+        if (answerDB!=null){
+            if (answerDB.getChoice().equals("a")){
+                first.previewOfDBResult(true,true,0);
+            }
+            else if(answerDB.getChoice().equals("b")){
+                first.previewOfDBResult(true,true,1);
+            }
         }
     }
 

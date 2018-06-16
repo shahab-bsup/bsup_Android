@@ -15,18 +15,17 @@ import tk.medlynk.patient.android.Activity.FollowUpResults.fragments.Question_17
 import tk.medlynk.patient.android.Activity.FollowUpResults.fragments.Question_18.FUpR_18th_Question;
 import tk.medlynk.patient.android.Activity.FollowUpResults.fragments.Question_2.FUpR_2nd_Question;
 import tk.medlynk.patient.android.Activity.FollowUpResults.fragments.Question_3.FUpR_3rd_Question;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_1.FUpS_1st_Question;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_10.FUpS_10th_Question;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_11.FUpS_11th_Question;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_12.FUpS_12th_Question;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_13.FUpS_13th_Question;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_14.FUpS_14th_Question;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_4.FUpS_4th_Question;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_5.FUpS_5th_Question;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_6.FUpS_6th_Question;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_7.FUpS_7th_Question;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_8.FUpS_8th_Question;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_9.FUpS_9th_Question;
+import tk.medlynk.patient.android.Activity.FollowUpResults.fragments.End_of_Question_Set.End_of_Question_Set;
 import tk.medlynk.patient.android.Constants;
 
 public class FollowUpResultActivity extends AppCompatActivity implements
@@ -44,7 +43,8 @@ public class FollowUpResultActivity extends AppCompatActivity implements
         FUpS_12th_Question.OnFollowUpSymptomsTwelveQuestionListener,
         FUpS_13th_Question.OnFollowUpSymptomsThirteenQuestionListener,
         FUpR_17th_Question.OnFURSeventeenQuestionInteractionListener,
-        FUpR_18th_Question.OnFUREighteenQuestionInteractionListener {
+        FUpR_18th_Question.OnFUREighteenQuestionInteractionListener,
+        End_of_Question_Set.OnEndOfFollowUpResultListener{
 
     View toolbar_view;
     TextView toolbar_title;
@@ -237,8 +237,12 @@ public class FollowUpResultActivity extends AppCompatActivity implements
     @Override
     public void onFUREighteenQuestion() {
         System.out.println("FollowUpResultActivity.onFUREighteenQuestion");
-        Toast.makeText(this, "This Question Set is done!", Toast.LENGTH_SHORT).show();
-        finish();
+        CURRENT_FRAGMENT = End_of_Question_Set.TAG;
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                .remove(getSupportFragmentManager().findFragmentByTag(FUpR_18th_Question.TAG))
+                .add(R.id.followUpFragmentsContainer, new End_of_Question_Set(), End_of_Question_Set.TAG)
+                .commitNow();
     }
 
     @Override
@@ -376,6 +380,27 @@ public class FollowUpResultActivity extends AppCompatActivity implements
                         .commitNow();
                 break;
             }
+            case End_of_Question_Set.TAG:{
+                CURRENT_FRAGMENT =FUpR_18th_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.followUpFragmentsContainer, new FUpR_18th_Question(), FUpR_18th_Question.TAG)
+                        .commitNow();
+                break;
+
+            }
+
+        }
+    }
+
+    @Override
+    public void firstUnAnsweredQuestion(int questionNumber) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        switch (questionNumber) {
+            case 1: {
+                CURRENT_FRAGMENT=FUpR_1st_Question.TAG;
+            }
+
 
         }
     }

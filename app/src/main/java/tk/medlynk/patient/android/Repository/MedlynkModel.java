@@ -4,6 +4,8 @@ import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
+import java.util.List;
+
 import tk.medlynk.patient.android.DataBase.AnswerDao;
 import tk.medlynk.patient.android.DataBase.DataBaseModel;
 import tk.medlynk.patient.android.DataBase.MedlynkDatabase;
@@ -17,6 +19,7 @@ public class MedlynkModel {
 
     private AnswerDao mAnswerDao;
     private LiveData<DataBaseModel> mGetAnswerRecord;
+    private LiveData<List<DataBaseModel>> mGetAnswerList;
 
     public MedlynkModel(Application application) {
 
@@ -28,6 +31,11 @@ public class MedlynkModel {
 
         mGetAnswerRecord= mAnswerDao.getAnswerRecord ( appointmentId, tableNumber, questionNumber );
         return mGetAnswerRecord;
+    }
+
+    public LiveData<List<DataBaseModel>> GetAnswersList(int appointmentId, int tableNumber){
+        mGetAnswerList=mAnswerDao.getAnswersList(appointmentId,tableNumber);
+        return mGetAnswerList;
     }
 
     public void InsertAnswerRecord(int appointmentId, int tableNumber, int questionNumber,String answerJson) {

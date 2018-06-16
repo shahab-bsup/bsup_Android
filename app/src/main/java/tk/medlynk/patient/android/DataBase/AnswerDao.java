@@ -6,6 +6,8 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
+import java.util.List;
+
 
 /**
  * Created by Shahab on 6/3/2018.
@@ -17,6 +19,10 @@ public interface AnswerDao {
     @Query("SELECT * FROM tbl_AnswersDataBase WHERE " +
             "(appointmentId IN (:appointmentId)) AND (tableNumber IN (:tableNumber)) AND (questionNumber IN (:questionNumber))")
     LiveData<DataBaseModel> getAnswerRecord(int appointmentId, int tableNumber, int questionNumber);
+
+    @Query("SELECT * FROM tbl_AnswersDataBase WHERE "+
+            "(appointmentId IN (:appointmentId)) AND (tableNumber IN (:tableNumber))")
+    LiveData<List<DataBaseModel>> getAnswersList(int appointmentId, int tableNumber);
 
     @Insert
     void insertRecord(DataBaseModel... answerRecord);
