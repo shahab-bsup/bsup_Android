@@ -56,11 +56,13 @@ public class Refill_second_VH extends ViewHolder implements OnSingleItemSelected
         second.setOnClearStateListener(this);
         this.string_choices = itemView.getContext().getResources().getStringArray(R.array.refill_second_question_choices);
 
-        for (int i = 0; i < this.first.getNumberOfViews(); i++) {
-            this.first.setTextToButtons(this.string_choices[i], i);
-        }
-
-        second.setTextToButtons(string_choices[5], 0);
+        //I know this is bad! Do not blame me please:D
+        String[] strings = {string_choices[0],string_choices[1],
+                string_choices[2],string_choices[3]};
+        first.setDataSet ( strings );
+        //I know this is bad! Do not blame me please:D
+        String[] strings1 = {string_choices[5]};
+        second.setDataSet ( strings1 );
         duration_layout = itemView.findViewById(R.id.refill_second);
         days = itemView.findViewById(R.id.days);
         days.setOnClickListener(new OnDaysClickListener());

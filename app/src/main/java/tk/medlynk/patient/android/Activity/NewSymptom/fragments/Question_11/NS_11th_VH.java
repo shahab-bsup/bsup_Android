@@ -48,10 +48,12 @@ public class NS_11th_VH extends RecyclerView.ViewHolder implements
         choices = itemView.findViewById ( R.id.viewSelectionChoices );
         choices.setOnSingleItemSelectedListener ( this );
         choices.setOnClearStateListener ( this );
-        string_choices = itemView.getContext ().getResources ().getStringArray ( R.array.question_11_choices );
-        for (int i = 0; i < choices.getNumberOfViews (); i++) {
-            choices.setTextToButtons ( string_choices[i], i );
-        }
+        string_choices = itemView
+                .getContext ()
+                .getResources ()
+                .getStringArray ( R.array.question_11_choices );
+
+        choices.setDataSet ( string_choices );
     }
 
     public void setProgressBarVisibilityStatus( int status ){
@@ -80,6 +82,8 @@ public class NS_11th_VH extends RecyclerView.ViewHolder implements
                 dialogBuilder.setOnDialogListener( this );
                 dialogBuilder.show ();
             }else{
+                setOtherTextVisibilityStatus ( View.GONE );
+                choices.unSelect ( 4 );
                 setAnswerChoice ( i );
             }
         }
@@ -87,7 +91,6 @@ public class NS_11th_VH extends RecyclerView.ViewHolder implements
 
     @Override
     public void onOtherDialogDone(String otherText) {
-        choices.notifyDataSetChanged ();
         if( otherText.length () > 0 ){
             answer.setChoice ( "e" );
             answer.setOther ( otherText );

@@ -59,13 +59,19 @@ public class NS_9th_VH extends RecyclerView.ViewHolder
         first = itemView.findViewById ( R.id.viewSelectionFirst );
         first.setOnSingleItemSelectedListener ( this );
         first.setOnClearStateListener ( this );
-        first.setTextToButtons ( string_choices[0], 0 );
+
+        //I know this is bad! Do not blame me please:D
+        String[] strings = {string_choices[0]};
+        first.setDataSet ( strings );
+
         second = itemView.findViewById ( R.id.viewSelectionSecond );
         second.setOnMultiItemSelectedListener ( this );
         second.setOnClearStateListener ( this );
-        for (int i = 0; i < second.getNumberOfViews (); i++) {
-            second.setTextToButtons ( string_choices[i+1], i );
-        }
+
+        //I know this is bad! Do not blame me please:D
+        String[] strings1 = {string_choices[1],
+        string_choices[2],string_choices[3],string_choices[4]};
+        second.setDataSet ( strings1 );
     }
 
     public void onUpdateUI(Answer answer){
@@ -261,11 +267,7 @@ public class NS_9th_VH extends RecyclerView.ViewHolder
             button_next.setBackgroundResource ( R.drawable.enable_next_question );
         }else{
             setOtherTextVisibilityStatus ( View.GONE );
-            second.getButtons ().get ( 3 ).setBackgroundResource ( R.drawable.answer_not_selected );
-            second.getButtons ().get ( 3 ).setTextColor ( itemView.
-                    getContext ().
-                    getResources ().
-                    getColor ( R.color.white ) );
+            second.unSelect ( 3 );
         }
     }
 

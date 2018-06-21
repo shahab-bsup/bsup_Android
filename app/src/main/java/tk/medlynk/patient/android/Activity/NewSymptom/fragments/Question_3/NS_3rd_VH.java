@@ -54,9 +54,7 @@ public class NS_3rd_VH extends RecyclerView.ViewHolder implements ViewSelection.
         choice.setOnSingleItemSelectedListener(this);
         choice.setOnClearStateListener(this);
         string_choices = itemView.getContext().getResources().getStringArray(R.array.question_3_choices);
-        for (int i = 0; i < choice.getNumberOfViews(); i++) {
-            choice.setTextToButtons(string_choices[i], i);
-        }
+        choice.setDataSet ( string_choices );
         first_input = itemView.findViewById(R.id.years_ago_input);
         second_input = itemView.findViewById(R.id.month_ago_input);
         third_input = itemView.findViewById(R.id.weeks_ago_input);

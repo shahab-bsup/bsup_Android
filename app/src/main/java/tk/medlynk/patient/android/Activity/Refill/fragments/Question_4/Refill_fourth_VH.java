@@ -72,11 +72,11 @@ public class Refill_fourth_VH extends ViewHolder implements
         this.button_skip.setOnClickListener(new OnSkipClickListener());
         this.choices = itemView.findViewById(R.id.viewSelectionChoices);
         this.choices.setOnSingleItemSelectedListener(this);
-        this.string_choices = itemView.getContext().getResources().getStringArray(R.array.refill_fourth_question_choices);
-        for (int i = 0; i < this.choices.getNumberOfViews(); i++) {
-            this.choices.setTextToButtons(this.string_choices[i], i);
-        }
-
+        this.string_choices = itemView
+                .getContext()
+                .getResources()
+                .getStringArray(R.array.refill_fourth_question_choices);
+        choices.setDataSet ( string_choices );
     }
 
     public void setOnRefillFourthVHListener(OnRefillFourthVHListener onRefillFourthQuestionClickListener) {

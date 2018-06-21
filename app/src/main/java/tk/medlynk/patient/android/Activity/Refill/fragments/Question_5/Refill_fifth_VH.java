@@ -36,11 +36,10 @@ public class Refill_fifth_VH extends ViewHolder implements OnSingleItemSelectedL
         this.button_skip.setOnClickListener(new OnSkipClickListener());
         this.first = (ViewSelection) itemView.findViewById(R.id.viewSelectionChoices);
         this.first.setOnSingleItemSelectedListener(this);
-        this.string_choices = itemView.getContext().getResources().getStringArray(R.array.yes_no);
-        for (int i = 0; i < this.first.getNumberOfViews(); i++) {
-            this.first.setTextToButtons(this.string_choices[i], i);
-        }
-
+        this.string_choices = itemView
+                .getContext()
+                .getResources().getStringArray(R.array.yes_no);
+        first.setDataSet ( string_choices );
         if (answerDB!=null){
             if (answerDB.getChoice().equals("a")){
                 first.previewOfDBResult(true,true,0);

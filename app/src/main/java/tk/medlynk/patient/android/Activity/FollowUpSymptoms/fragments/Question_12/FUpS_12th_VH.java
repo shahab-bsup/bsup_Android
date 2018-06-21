@@ -48,7 +48,14 @@ public class FUpS_12th_VH extends RecyclerView.ViewHolder implements ViewSelecti
         button_skip = itemView.findViewById ( R.id.btnSkipQuestion );
         button_skip.setOnClickListener ( new OnSkipClickListener () );
         choice = itemView.findViewById ( R.id.viewSelectionChoices );
-        choice.setTextToButtons ( itemView.getContext ().getResources ().getString ( R.string.question_14 ), 0 );
+
+        //I know this is bad! Do not blame me please:D
+        String[] strings = {itemView
+                .getContext ()
+                .getResources ()
+                .getString ( R.string.question_14 )};
+        choice.setDataSet ( strings );
+
         choice.setOnSingleItemSelectedListener ( this );
         choice.setOnClearStateListener ( this );
         add_a_medication = itemView.findViewById ( R.id.add_medication );

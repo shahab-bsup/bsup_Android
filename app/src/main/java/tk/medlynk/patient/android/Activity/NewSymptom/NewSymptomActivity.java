@@ -191,7 +191,6 @@ public class NewSymptomActivity extends AppCompatActivity implements
 
     @Override
     public void onTenthQuestion() {
-        Log.d(TAG, "onTenthQuestion: ");
         CURRENT_FRAGMENT = NS_11th_question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)

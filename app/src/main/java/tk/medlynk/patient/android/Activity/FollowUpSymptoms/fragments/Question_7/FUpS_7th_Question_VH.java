@@ -39,14 +39,18 @@ public class FUpS_7th_Question_VH extends RecyclerView.ViewHolder implements Vie
         button_skip = itemView.findViewById ( R.id.btnSkipQuestion );
         button_skip.setOnClickListener ( new OnSkipClickListener () );
         choice_numbers = itemView.findViewById ( R.id.viewSelectionChoiceNumbers );
-        for (int i = 0; i < choice_numbers.getNumberOfViews (); i++) {
-            choice_numbers.setTextToButtons ( String.valueOf ( i + 1 ), i );
-        }
-        choices_strings = itemView.getContext ().getResources ().getStringArray ( R.array.FUS_7th_8th_choices_FUR_10th_11th_choices );
+
+        //I know this is bad! Do not blame me please:D
+        String[] strings = {"1", "2", "3", "4", "5",
+                "6", "7", "8", "9", "10"};
+        choice_numbers.setDataSet ( strings );
+
+        choices_strings = itemView
+                .getContext ()
+                .getResources ()
+                .getStringArray ( R.array.FUS_7th_8th_choices_FUR_10th_11th_choices );
         answerChoices = itemView.findViewById ( R.id.viewSelectionChoices );
-        for (int i = 0; i < answerChoices.getNumberOfViews (); i++) {
-            answerChoices.setTextToButtons ( choices_strings[i], i );
-        }
+        answerChoices.setDataSet ( choices_strings );
         answerChoices.setOnSingleItemSelectedListener ( this );
         answer = new Answer ();
 

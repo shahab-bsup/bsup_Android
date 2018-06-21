@@ -44,17 +44,18 @@ public class FUpR_2nd_VH extends RecyclerView.ViewHolder implements ViewSelectio
         first.setOnSingleItemSelectedListener ( this );
         string_choices = itemView.getContext ().getResources ().getStringArray ( R.array.yes_no );
         sub_string_choices = itemView.getContext().getResources().getStringArray(R.array.FUpR_2nd_question_sub_Choices);
-        first.setTextToButtons ( string_choices[0], 0 );
-        first.setTextToButtons ( string_choices[1], 1 );
+
+        //I know this is bad! Do not blame me please!
+        String[] strings = {string_choices[0], string_choices[1]};
+        first.setDataSet ( strings );
+
         question_view_second = itemView.findViewById(R.id.follow_up_results_second_sub_question);
         sub_question = question_view_second.findViewById(R.id.txtQuestion);
         sub_question.setText(itemView.getContext().getResources().getString(R.string.FUpR_2nd_sub_question));
         second = itemView.findViewById(R.id.viewSelectionSubChoice);
         second.setOnSingleItemSelectedListener(this);
         second_question_layout = itemView.findViewById(R.id.sub_choice_layout);
-        for (int i = 0; i < second.getNumberOfViews(); i++) {
-            second.setTextToButtons(sub_string_choices[i], i);
-        }
+        second.setDataSet ( sub_string_choices );
     }
 
     public void setOnFURSecondViewHolderListener(OnFURSecondViewHolderListener onFURSecondViewHolderListener) {

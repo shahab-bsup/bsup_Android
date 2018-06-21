@@ -48,10 +48,11 @@ public class NS_17th_VH extends RecyclerView.ViewHolder implements ViewSelection
         button_skip.setOnClickListener ( new OnSkipClickListener() );
         viewSelection = itemView.findViewById ( R.id.viewSelectionChoices );
         viewSelection.setOnMultiItemSelectedListener ( this );
-        string_choices = itemView.getContext ().getResources ().getStringArray ( R.array.question_17_choices );
-        for (int i = 0; i < viewSelection.getNumberOfViews (); i++) {
-            viewSelection.setTextToButtons ( string_choices[i], i );
-        }
+        string_choices = itemView
+                .getContext ()
+                .getResources ()
+                .getStringArray ( R.array.question_17_choices );
+        viewSelection.setDataSet ( string_choices );
     }
 
     private void setOtherText(String other) {
@@ -232,11 +233,7 @@ public class NS_17th_VH extends RecyclerView.ViewHolder implements ViewSelection
             button_next.setEnabled ( true );
             button_next.setBackgroundResource ( R.drawable.enable_next_question );
         } else {
-            viewSelection.getButtons ().get ( 6 ).setBackgroundResource ( R.drawable.answer_not_selected );
-            viewSelection.getButtons ().get ( 6 ).setTextColor ( itemView.
-                    getContext ().
-                    getResources ().
-                    getColor ( R.color.white ) );
+            viewSelection.unSelect ( 6 );
         }
     }
 

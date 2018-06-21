@@ -49,10 +49,10 @@ public class NS_22th_VH extends RecyclerView.ViewHolder implements
         second = view.findViewById ( R.id.viewSelectionSecond );
         first.setOnSingleItemSelectedListener ( this );
         string_choices = view.getContext ().getResources ().getStringArray ( R.array.question_13_22_choices );
-        for (int i = 0; i < first.getNumberOfViews (); i++) {
-            first.setTextToButtons ( string_choices[i], i );
-        }
-        second.setTextToButtons ( string_choices[7], 0 );
+//        for (int i = 0; i < first.getNumberOfViews (); i++) {
+////            first.setTextToButtons ( string_choices[i], i );
+//        }
+//        second.setTextToButtons ( string_choices[7], 0 );
         first.setOnMultiItemSelectedListener ( this );
         first.setOnClearStateListener ( this );
         first.setOnHelpfullyOptionClickListener ( this );

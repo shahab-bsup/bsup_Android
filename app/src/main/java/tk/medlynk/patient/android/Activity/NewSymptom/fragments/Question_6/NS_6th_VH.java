@@ -40,13 +40,14 @@ public class NS_6th_VH extends RecyclerView.ViewHolder implements ViewSelection.
         button_skip.setOnClickListener ( new OnSkipClickListener() );
         string_choices= itemView.getContext ().getResources ().getStringArray ( R.array.question_6_7_choices );
         choice_numbers = itemView.findViewById ( R.id.viewSelectionChoiceNumbers );
-        for (int i = 0; i < choice_numbers.getNumberOfViews (); i++) {
-            choice_numbers.setTextToButtons ( String.valueOf ( i + 1 ), i );
-        }
+
+        //I know this is bad! Do not blame me please:D
+        String[] strings = {"1", "2", "3", "4", "5",
+                "6", "7", "8", "9", "10"};
+        choice_numbers.setDataSet ( strings );
+
         answerChoices = itemView.findViewById ( R.id.viewSelectionChoices );
-        for (int i = 0; i < answerChoices.getNumberOfViews (); i++) {
-            answerChoices.setTextToButtons ( string_choices[i], i );
-        }
+        answerChoices.setDataSet ( string_choices );
         answerChoices.setOnSingleItemSelectedListener ( this );
 
         if (answerDB != null) {

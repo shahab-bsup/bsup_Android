@@ -68,12 +68,14 @@ public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelectio
         cardiac_button.setOnClickListener ( new OnCardiacButtonClickListener () );
         imaging_button = itemView.findViewById ( R.id.third_choice );
         imaging_button.setOnClickListener ( new OnImagingClickListener () );
-        for (int i = 0; i < first.getNumberOfViews (); i++) {
-            first.setTextToButtons ( string_choices[i], i );
-        }
+        first.setDataSet ( string_choices );
         imaging_button.setText ( string_choices[2] );
         cardiac_button.setText ( string_choices[3] );
-        second.setTextToButtons ( string_choices[4], 0 );
+
+        //I know this is bad! Do not blame me please!
+        String[] strings = {string_choices[4]};
+        second.setDataSet ( strings );
+
         first_recyclerview = itemView.findViewById ( R.id.firstRecyclerView );
         first_recyclerview.setNestedScrollingEnabled ( false );
         firstButtonAdapter = new
@@ -94,7 +96,6 @@ public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelectio
 
     @Override
     public void onMultiItemSelected(View view, Integer integer) {
-        System.out.println ( "FUpR_1st_VH.onMultiItemSelected" );
         int i = integer;
         setAnswerChoices ( i );
     }
@@ -122,7 +123,6 @@ public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelectio
 
     @Override
     public void onMultiItemDeselected(View view, Integer integer) {
-        System.out.println ( "FUpR_1st_VH.onMultiItemDeselected" );
         int i = integer;
         Iterator<Answer> answerIterator = answers.iterator ();
         switch (i){
@@ -153,13 +153,11 @@ public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelectio
 
     @Override
     public void onClearState(View view) {
-        System.out.println ( "FUpR_1st_VH.onClearState" );
         answers.clear ();
     }
 
     @Override
     public void onSingleItemSelected(View view, int i) {
-        System.out.println ( "FUpR_1st_VH.onSingleItemSelected" );
         switch (i){
             case -1:{
                 Iterator<Answer> answerIterator = answers.iterator ();
@@ -191,7 +189,6 @@ public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelectio
 
     @Override
     public void onImagingOptionsClicked() {
-        System.out.println ( "FUpR_1st_VH.onImagingOptionsClicked" );
         if( !isChoiceCExisted){
             imaging_button.setBackgroundResource ( R.drawable.answer_selected );
             imaging_button.setTextColor ( Color.parseColor ( "#000000" ) );
@@ -208,7 +205,6 @@ public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelectio
 
     @Override
     public void onCardiacOptionsClicked() {
-        System.out.println ( "FUpR_1st_VH.onCardiacOptionsClicked" );
         if( !isChoiceDExisted ){
             cardiac_button.setBackgroundResource ( R.drawable.answer_selected );
             cardiac_button.setTextColor ( Color.parseColor ( "#000000" ) );
@@ -234,19 +230,13 @@ public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelectio
             button_next.setEnabled ( true );
             button_next.setBackgroundResource ( R.drawable.enable_next_question );
         } else {
-            second.getButtons ().get ( 0 ).setBackgroundResource ( R.drawable.answer_not_selected );
-            second.getButtons ().get ( 0 ).setTextColor ( itemView.
-                    getContext ().
-                    getResources ().
-                    getColor ( R.color.white ) );
+            second.unSelect ( 0 );
         }
     }
 
     private class OnNextButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println ( "FUpR_1st_VH" );
-            System.out.println ( "OnNextButtonClickListener.onClick" );
             if( answers.size() > 0 ){
                 Iterator<Answer> answerIterator = answers.iterator ();
                 while (answerIterator.hasNext ()){
@@ -278,8 +268,6 @@ public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelectio
     private class OnSkipClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println ( "FUpR_1st_VH" );
-            System.out.println ( "OnSkipClickListener.onClick" );
             onFURFirstVHListener.onSkipClicked ();
         }
     }
@@ -293,7 +281,6 @@ public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelectio
     private class OnCardiacButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println ( "OnCardiacButtonClickListener.onClick" );
             boolean isExisted = false;
             Iterator<Answer> answerIterator = answers.iterator ();
             while (answerIterator.hasNext ()){
@@ -330,7 +317,6 @@ public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelectio
     private class OnImagingClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println ( "OnImagingClickListener.onClick" );
             boolean isExisted = false;
             Iterator<Answer> answerIterator = answers.iterator ();
             while (answerIterator.hasNext ()){

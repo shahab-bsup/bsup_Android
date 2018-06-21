@@ -66,8 +66,7 @@ public class Refill_sixth_VH extends ViewHolder implements OnSingleItemSelectedL
                 }
             }
         }else{
-            second.getButtons().get(1).setBackgroundResource(R.drawable.answer_not_selected);
-            second.getButtons().get(1).setTextColor(itemView.getContext().getResources().getColor(R.color.white));
+            second.unSelect ( 1 );
         }
     }
 
@@ -110,10 +109,16 @@ public class Refill_sixth_VH extends ViewHolder implements OnSingleItemSelectedL
         this.first = (ViewSelection) itemView.findViewById(R.id.viewSelectionChoicesFirst);
         this.first.setOnSingleItemSelectedListener(this);
         this.string_choices = itemView.getContext().getResources().getStringArray(R.array.refill_sixth_question_choices);
-        this.first.setTextToButtons(this.string_choices[0], 0);
-        this.second = (ViewSelection) itemView.findViewById(R.id.viewSelectionChoicesSecond);
-        this.second.setTextToButtons(this.string_choices[1], 0);
-        this.second.setTextToButtons(this.string_choices[2], 1);
+
+        //I know this is bad! Do not blame me please:D
+        String[] strings = {string_choices[0]};
+        first.setDataSet ( strings );
+
+        //I know this is bad! Do not blame me please:D
+        this.second =  itemView.findViewById(R.id.viewSelectionChoicesSecond);
+        String[] strings1 = {string_choices[1], string_choices[2]};
+        second.setDataSet ( strings1 );
+
         this.second.setOnMultiItemSelectedListener(this);
         this.second.setOnClearStateListener(this);
         this.first.setOnClearStateListener(this);

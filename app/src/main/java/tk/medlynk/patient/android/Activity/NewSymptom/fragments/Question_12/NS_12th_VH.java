@@ -30,13 +30,13 @@ public class NS_12th_VH extends RecyclerView.ViewHolder implements
     private TextView question;
     private ViewSelection first, second;
     private String[] string_choices;
-    private Answer choice ;
+    private Answer choice;
     private List<Answer> choices;
     private OnTwelveNSVHListener onNinthNSVHListener;
 
-    public NS_12th_VH(View itemView,List<Answer>answersDB) {
+    public NS_12th_VH(View itemView, List<Answer> answersDB) {
         super ( itemView );
-        choices = new ArrayList<> (  );
+        choices = new ArrayList<> ();
         choice = new Answer ();
         progressBar = itemView.findViewById ( R.id.progress_bar );
         question_view = itemView.findViewById ( R.id.new_symptom_twelve_question );
@@ -57,29 +57,48 @@ public class NS_12th_VH extends RecyclerView.ViewHolder implements
         second = itemView.findViewById ( R.id.viewSelectionSecond );
         second.setOnMultiItemSelectedListener ( this );
         second.setOnClearStateListener ( this );
-        for (int i = 0; i < second.getNumberOfViews (); i++) {
-            second.setTextToButtons ( string_choices[i], i );
-        }
-        first.setTextToButtons ( string_choices[4], 0 );
 
-        if(answersDB!=null){
-            if(answersDB.get(0).getChoice().equals("e")){
-                first.previewOfDBResult(true,true,0);
-            }
-            else {
-                for (Answer answer:answersDB) {
-                    switch (answer.getChoice()){
-                        case "a":{second.previewOfDBResult(true,false,0);break;}
-                        case "b":{second.previewOfDBResult(true,false,1);break;}
-                        case "c":{second.previewOfDBResult(true,false,2);break;}
-                        case "d":{second.previewOfDBResult(true,false,3);break;}
+        //I know this is bad! Do not blame me please:D
+        String[] strings = {string_choices[0],
+                string_choices[1],
+                string_choices[2],
+                string_choices[3]};
+
+        second.setDataSet ( strings );
+
+        //I know this is bad! Do not blame me please:D
+        String[] strings1 = {string_choices[4]};
+        first.setDataSet ( strings1 );
+
+        if (answersDB != null) {
+            if (answersDB.get ( 0 ).getChoice ().equals ( "e" )) {
+                first.previewOfDBResult ( true, true, 0 );
+            } else {
+                for (Answer answer : answersDB) {
+                    switch (answer.getChoice ()) {
+                        case "a": {
+                            second.previewOfDBResult ( true, false, 0 );
+                            break;
+                        }
+                        case "b": {
+                            second.previewOfDBResult ( true, false, 1 );
+                            break;
+                        }
+                        case "c": {
+                            second.previewOfDBResult ( true, false, 2 );
+                            break;
+                        }
+                        case "d": {
+                            second.previewOfDBResult ( true, false, 3 );
+                            break;
+                        }
                     }
                 }
             }
         }
     }
 
-    public void setProgressBarVisibilityStatus( int status ){
+    public void setProgressBarVisibilityStatus(int status) {
         this.progressBar.setVisibility ( status );
     }
 
@@ -90,10 +109,10 @@ public class NS_12th_VH extends RecyclerView.ViewHolder implements
     @Override
     public void onSingleItemSelected(View view, int i) {
         System.out.println ( "NS_12th_VH.onSingleItemSelected" );
-        if( i == -1 ){
+        if (i == -1) {
             button_next.setEnabled ( false );
             button_next.setBackgroundResource ( R.drawable.disable_next_question );
-        }else{
+        } else {
             second.setClear ();
             choice.setChoice ( "e" );
             button_next.setEnabled ( true );
@@ -104,7 +123,7 @@ public class NS_12th_VH extends RecyclerView.ViewHolder implements
     @Override
     public void onClearState(View view) {
         System.out.println ( "NS_12th_VH.onClearState" );
-        if( view.getId () == second.getId () ){
+        if (view.getId () == second.getId ()) {
             choices.clear ();
         }
     }
@@ -119,29 +138,29 @@ public class NS_12th_VH extends RecyclerView.ViewHolder implements
 
     private void setAnswerChoices(Integer integer) {
         Answer answer = new Answer ();
-        switch (integer){
-            case 0:{
+        switch (integer) {
+            case 0: {
                 answer.setChoice ( "a" );
                 break;
             }
-            case 1:{
+            case 1: {
                 answer.setChoice ( "b" );
 
                 break;
             }
-            case 2:{
+            case 2: {
                 answer.setChoice ( "c" );
 
                 break;
             }
-            case 3:{
+            case 3: {
                 answer.setChoice ( "d" );
 
                 break;
             }
         }
         choices.add ( answer );
-        if( choices.size () == 1 ){
+        if (choices.size () == 1) {
             button_next.setEnabled ( true );
             button_next.setBackgroundResource ( R.drawable.enable_next_question );
         }
@@ -152,12 +171,12 @@ public class NS_12th_VH extends RecyclerView.ViewHolder implements
         System.out.println ( "NS_12th_VH.onMultiItemDeselected" );
         int i = integer;
         Iterator<Answer> answerIterator = choices.iterator ();
-        switch (i){
-            case 0:{
-                while (answerIterator.hasNext ()){
+        switch (i) {
+            case 0: {
+                while (answerIterator.hasNext ()) {
                     Answer answer = answerIterator.next ();
-                    if( answer.getChoice () != null &&
-                            answer.getChoice ().equals ( "a" ) ){
+                    if (answer.getChoice () != null &&
+                            answer.getChoice ().equals ( "a" )) {
                         answerIterator.remove ();
                         break;
                     }
@@ -165,11 +184,11 @@ public class NS_12th_VH extends RecyclerView.ViewHolder implements
 
                 break;
             }
-            case 1:{
-                while (answerIterator.hasNext ()){
+            case 1: {
+                while (answerIterator.hasNext ()) {
                     Answer answer = answerIterator.next ();
-                    if( answer.getChoice () != null &&
-                            answer.getChoice ().equals ( "b" ) ){
+                    if (answer.getChoice () != null &&
+                            answer.getChoice ().equals ( "b" )) {
                         answerIterator.remove ();
                         break;
                     }
@@ -177,11 +196,11 @@ public class NS_12th_VH extends RecyclerView.ViewHolder implements
 
                 break;
             }
-            case 2:{
-                while (answerIterator.hasNext ()){
+            case 2: {
+                while (answerIterator.hasNext ()) {
                     Answer answer = answerIterator.next ();
-                    if( answer.getChoice () != null &&
-                            answer.getChoice ().equals ( "c" ) ){
+                    if (answer.getChoice () != null &&
+                            answer.getChoice ().equals ( "c" )) {
                         answerIterator.remove ();
                         break;
                     }
@@ -189,11 +208,11 @@ public class NS_12th_VH extends RecyclerView.ViewHolder implements
 
                 break;
             }
-            case 3:{
-                while (answerIterator.hasNext ()){
+            case 3: {
+                while (answerIterator.hasNext ()) {
                     Answer answer = answerIterator.next ();
-                    if( answer.getChoice () != null &&
-                            answer.getChoice ().equals ( "d" ) ){
+                    if (answer.getChoice () != null &&
+                            answer.getChoice ().equals ( "d" )) {
                         answerIterator.remove ();
                         break;
                     }
@@ -202,10 +221,18 @@ public class NS_12th_VH extends RecyclerView.ViewHolder implements
                 break;
             }
         }
-        if( choices.size () == 0 ){
+        if (choices.size () == 0) {
             button_next.setEnabled ( false );
             button_next.setBackgroundResource ( R.drawable.disable_next_question );
         }
+    }
+
+    public interface OnTwelveNSVHListener {
+        void onNextClicked(Answer answer);
+
+        void onNextClicked(List<Answer> answers);
+
+        void onSkipClicked();
     }
 
     private class OnNextClickListener implements View.OnClickListener {
@@ -213,9 +240,9 @@ public class NS_12th_VH extends RecyclerView.ViewHolder implements
         public void onClick(View view) {
             System.out.println ( "NS_12th_VH.NS_12th_VH" );
             System.out.println ( "OnNextClickListener.onClick" );
-            if( choices.size () > 0 ){
+            if (choices.size () > 0) {
                 onNinthNSVHListener.onNextClicked ( choices );
-            }else{
+            } else {
                 onNinthNSVHListener.onNextClicked ( choice );
             }
         }
@@ -228,11 +255,5 @@ public class NS_12th_VH extends RecyclerView.ViewHolder implements
             System.out.println ( "OnSkipClickListener.onClick" );
             onNinthNSVHListener.onSkipClicked ();
         }
-    }
-
-    public interface OnTwelveNSVHListener {
-        void onNextClicked(Answer answer);
-        void onNextClicked(List<Answer> answers);
-        void onSkipClicked();
     }
 }

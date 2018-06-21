@@ -51,13 +51,9 @@ public class NS_19th_VH extends RecyclerView.ViewHolder implements
         before_years_viewselection = view.findViewById(R.id.viewSelectionChoicesBeforeYears);
         before_years_viewselection.setOnSingleItemSelectedListener(this);
         before_years_viewselection.setOnClearStateListener(this);
-        for (int i = 0; i < before_years_viewselection.getNumberOfViews(); i++) {
-            before_years_viewselection.setTextToButtons(before_years_strings[i], i);
-        }
+        before_years_viewselection.setDataSet ( before_years_strings );
         after_years_viewselection = view.findViewById(R.id.viewSelectionChoicesAfterYears);
-        for (int i = 0; i < after_years_viewselection.getNumberOfViews(); i++) {
-            after_years_viewselection.setTextToButtons(after_years_strings[i], i);
-        }
+        after_years_viewselection.setDataSet ( after_years_strings );
         after_years_viewselection.setOnSingleItemSelectedListener(this);
         after_years_viewselection.setOnClearStateListener(this);
 
@@ -165,11 +161,7 @@ public class NS_19th_VH extends RecyclerView.ViewHolder implements
             button_next.setEnabled(true);
             button_next.setBackgroundResource(R.drawable.enable_next_question);
         } else {
-            after_years_viewselection.getButtons().get(1).setBackgroundResource(R.drawable.answer_not_selected);
-            after_years_viewselection.getButtons().get(1).setTextColor(itemView.
-                    getContext().
-                    getResources().
-                    getColor(R.color.white));
+            after_years_viewselection.unSelect ( 1 );
         }
     }
 

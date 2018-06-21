@@ -42,10 +42,10 @@ public class FUpR_17th_VH extends RecyclerView.ViewHolder implements ViewSelecti
         button_skip.setOnClickListener(new OnSkipClickListener());
         first = itemView.findViewById ( R.id.viewSelectionChoice );
         first.setOnSingleItemSelectedListener ( this );
-        string_choices = itemView.getContext ().getResources ().getStringArray ( R.array.FUpR_17th_choices );
-        for (int i = 0; i < first.getNumberOfViews(); i++) {
-            first.setTextToButtons(string_choices[i], i);
-        }
+        string_choices = itemView.getContext ()
+                .getResources ()
+                .getStringArray ( R.array.FUpR_17th_choices );
+        first.setDataSet ( string_choices );
 
         if (answerDB!=null){
             switch (answerDB.getChoice()){
@@ -63,7 +63,6 @@ public class FUpR_17th_VH extends RecyclerView.ViewHolder implements ViewSelecti
 
     @Override
     public void onSingleItemSelected(View view, int i) {
-        System.out.println("FUpR_17th_VH.onSingleItemSelected");
         if( i == -1 ){
             button_next.setEnabled(false);
             button_next.setBackgroundResource(R.drawable.disable_next_question);

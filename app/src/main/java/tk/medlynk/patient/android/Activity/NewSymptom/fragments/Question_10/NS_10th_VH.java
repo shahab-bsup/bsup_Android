@@ -43,7 +43,11 @@ public class NS_10th_VH extends RecyclerView.ViewHolder implements ViewSelection
         choice = itemView.findViewById ( R.id.viewSelectionChoice );
         choice.setOnSingleItemSelectedListener ( this );
         choice.setOnClearStateListener ( this );
-        choice.setTextToButtons ( itemView.getContext ().getResources ().getString ( R.string.i_do_not_know ), 0 );
+        String[] strings = {itemView
+                .getContext ()
+                .getResources ()
+                .getString ( R.string.i_do_not_know )};
+        choice.setDataSet ( strings );
         second_question.setText ( R.string.new_symptom_tenth_question );
         tenth_answer = itemView.findViewById ( R.id.new_symptom_tenth_answer );
         tenth_answer.addTextChangedListener ( new AnswerWatcher () );
@@ -52,7 +56,9 @@ public class NS_10th_VH extends RecyclerView.ViewHolder implements ViewSelection
 
         if (answerDB != null) {
             if(answerDB.getChoice().equals("b")){
-                choice.previewOfDBResult(true,true,0);
+                choice.previewOfDBResult(true,
+                        true,
+                        0);
             }
             else if(answerDB.getChoice().equals("a")){
                 tenth_answer.setText(answerDB.getReply());

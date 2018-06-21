@@ -46,9 +46,9 @@ public class NS_21th_VH extends RecyclerView.ViewHolder implements
         choices = view.findViewById ( R.id.viewSelectionChoices );
         choices.setOnMultiItemSelectedListener ( this );
         string_choices = view.getContext ().getResources ().getStringArray ( R.array.question_21_choices );
-        for (int i = 0; i < choices.getNumberOfViews (); i++) {
-            choices.setTextToButtons ( string_choices[i], i );
-        }
+//        for (int i = 0; i < choices.getNumberOfViews (); i++) {
+////            choices.setTextToButtons ( string_choices[i], i );
+//        }
     }
 
     public void setProgressBarVisibilityStatus( int status ){
@@ -205,11 +205,7 @@ public class NS_21th_VH extends RecyclerView.ViewHolder implements
             button_next.setEnabled ( true );
             button_next.setBackgroundResource ( R.drawable.enable_next_question );
         } else {
-            choices.getButtons ().get ( 5 ).setBackgroundResource ( R.drawable.answer_not_selected );
-            choices.getButtons ().get ( 5 ).setTextColor ( itemView.
-                    getContext ().
-                    getResources ().
-                    getColor ( R.color.white ) );
+            choices.unSelect ( 5 );
         }
     }
 

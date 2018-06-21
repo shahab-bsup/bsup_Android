@@ -135,7 +135,6 @@ public class NS_10th_question extends Fragment implements
         else
             mMedlynkViewModel.updateAnswersToDB(manager.getAppointmentID(), Constants.NEW_SYMPTOM_ROW, 10, JC.answersToAnswerJson(answersForDB));
 
-        System.out.println ( "NS_10th_question.onTenthAnswerSuccess" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onTenthQuestion ();
     }

@@ -52,7 +52,7 @@ public class NS_23th_VH extends RecyclerView.ViewHolder implements
         button_skip = view.findViewById ( R.id.btnSkipQuestion );
         button_skip.setOnClickListener ( new OnSkipClickListener() );
         choice = view.findViewById ( R.id.viewSelectionChoices );
-        choice.setTextToButtons ( view.getContext ().getResources ().getString ( R.string.none ), 0 );
+//        choice.setTextToButtons ( view.getContext ().getResources ().getString ( R.string.none ), 0 );
         choice.setOnSingleItemSelectedListener ( this );
         choice.setOnClearStateListener ( this );
         add_a_medication = itemView.findViewById ( R.id.add_medication );

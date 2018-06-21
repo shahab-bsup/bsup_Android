@@ -45,7 +45,11 @@ public class NS_2nd_VH extends RecyclerView.ViewHolder implements ViewSelection.
         choice = itemView.findViewById ( R.id.viewSelectionChoice );
         choice.setOnSingleItemSelectedListener ( this );
         choice.setOnClearStateListener ( this );
-        choice.setTextToButtons ( itemView.getContext ().getResources ().getString ( R.string.i_do_not_know ), 0 );
+        String[] strings = {itemView
+                .getContext ()
+                .getResources ()
+                .getString ( R.string.i_do_not_know )};
+        choice.setDataSet ( strings );
         second_question.setText ( R.string.new_symptom_second_question );
         second_answer = itemView.findViewById ( R.id.new_symptom_second_answer );
         second_answer.addTextChangedListener ( new AnswerWatcher () );

@@ -62,10 +62,10 @@ public class NS_20th_VH extends RecyclerView.ViewHolder implements
         lastsValue.addTextChangedListener(new LastingInoutTextWatcher());
         lastsValue.setOnFocusChangeListener ( new LastsValueFocusChangeListener() );
         string_choices = view.getContext ().getResources ().getStringArray ( R.array.question_20_other_chocies );
-        for (int i = 0; i < viewSelectionBeforeLastsPart.getNumberOfViews (); i++) {
-            viewSelectionBeforeLastsPart.setTextToButtons ( string_choices[i], i );
-        }
-        other.setTextToButtons ( string_choices[2], 0 );
+//        for (int i = 0; i < viewSelectionBeforeLastsPart.getNumberOfViews (); i++) {
+////            viewSelectionBeforeLastsPart.setTextToButtons ( string_choices[i], i );
+//        }
+////        other.setTextToButtons ( string_choices[2], 0 );
         other.setOnSingleItemSelectedListener ( this );
         other.setOnClearStateListener ( this );
 
@@ -133,8 +133,7 @@ public class NS_20th_VH extends RecyclerView.ViewHolder implements
         }else{
             button_next.setEnabled(false);
             button_next.setBackgroundResource(R.drawable.disable_next_question);
-            other.getButtons().get(0).setBackgroundResource(R.drawable.answer_not_selected);
-            other.getButtons().get(0).setTextColor(itemView.getContext().getResources().getColor(R.color.white));
+            other.unSelect ( 0 );
         }
 
     }

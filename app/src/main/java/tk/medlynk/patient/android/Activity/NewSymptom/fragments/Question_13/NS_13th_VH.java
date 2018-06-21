@@ -55,11 +55,16 @@ public class NS_13th_VH extends RecyclerView.ViewHolder implements
         button_skip.setOnClickListener ( new OnSkipClickListener() );
         first = view.findViewById ( R.id.viewSelectionFirst );
         second = view.findViewById ( R.id.viewSelectionSecond );
-        string_choices = view.getContext ().getResources ().getStringArray ( R.array.question_13_22_choices );
-        for (int i = 0; i < first.getNumberOfViews (); i++) {
-            first.setTextToButtons ( string_choices[i], i );
-        }
-        second.setTextToButtons ( string_choices[7], 0 );
+        string_choices = view
+                .getContext ()
+                .getResources ()
+                .getStringArray ( R.array.question_13_22_choices );
+        first.setDataSet ( string_choices );
+
+        //I know this is bad! Do not blame me please:D
+        String[] strings = {string_choices[7]};
+        second.setDataSet ( strings );
+
         first.setOnMultiItemSelectedListener ( this );
         first.setOnClearStateListener ( this );
         first.setOnHelpfullyOptionClickListener ( this );

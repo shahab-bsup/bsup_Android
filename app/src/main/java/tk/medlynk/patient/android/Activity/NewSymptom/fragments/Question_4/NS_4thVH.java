@@ -42,13 +42,16 @@ public class NS_4thVH extends RecyclerView.ViewHolder implements ViewSelection.O
         choices = itemView.findViewById(R.id.viewSelectionChoices);
         choices.setOnSingleItemSelectedListener(this);
 
-        for (int i = 0; i < choiceNumbers.getNumberOfViews(); i++) {
-            choiceNumbers.setTextToButtons(String.valueOf(i + 1), i);
-        }
-        answerChoices = itemView.getContext().getResources().getStringArray(R.array.question_4_choices);
-        for (int i = 0; i < choices.getNumberOfViews(); i++) {
-            choices.setTextToButtons(answerChoices[i], i);
-        }
+        //I know this is bad! Do not blame me please:D
+        String[] strings = {"1", "2", "3", "4", "5",
+                "6", "7", "8", "9", "10"};
+        choiceNumbers.setDataSet ( strings );
+
+        answerChoices = itemView
+                .getContext()
+                .getResources()
+                .getStringArray(R.array.question_4_choices);
+        choices.setDataSet ( answerChoices );
 
         if (answerDB != null) {
             choices.previewOfDBResult (true,true,answerDB.getRate() - 1);
