@@ -4,4 +4,5 @@
     <string name="helpfully_options_3rd">Not helping</string>
     <string name="helpfully_options_2nd">Help a little</string>
     <string name="helpfully_options_1st">Help a lot</string>
+    <string name="choose_one_helpfully_option">Choose a Helpfully Options</string>
 </resources>

@@ -24,7 +24,7 @@ public class FUpS_11th_VH extends RecyclerView.ViewHolder implements
         ViewSelection.OnSingleItemSelectedListener,
         ViewSelection.OnMultiItemSelectedListener,
         ViewSelection.OnClearStateListener,
-        ViewSelection.OnHelpfullyOptionsClickListener, ForcedDialogBuilder.OnOtherDialogListener {
+        ForcedDialogBuilder.OnOtherDialogListener {
 
     private ProgressBar progressBar;
     private View question_view;
@@ -50,7 +50,7 @@ public class FUpS_11th_VH extends RecyclerView.ViewHolder implements
         first = itemView.findViewById ( R.id.viewSelectionFirst );
         second = itemView.findViewById ( R.id.viewSelectionSecond );
         first.setOnSingleItemSelectedListener ( this );
-        string_choices = itemView.getContext ().getResources ().getStringArray ( R.array.question_13_22_choices );
+        string_choices = itemView.getContext ().getResources ().getStringArray ( R.array.question_13_choices );
         first.setDataSet ( string_choices );
 
         //I know this is bad! Do not blame me please:D
@@ -59,7 +59,7 @@ public class FUpS_11th_VH extends RecyclerView.ViewHolder implements
 
         first.setOnMultiItemSelectedListener ( this );
         first.setOnClearStateListener ( this );
-        first.setOnHelpfullyOptionClickListener ( this );
+//        first.setOnHelpfullyOptionClickListener ( this );
         second.setOnSingleItemSelectedListener ( this );
         second.setOnClearStateListener ( this );
     }
@@ -127,7 +127,6 @@ public class FUpS_11th_VH extends RecyclerView.ViewHolder implements
 
     @Override
     public void onSingleItemSelected(View view, int position) {
-        System.out.println ( "FUpS_11th_VH.onSingleItemSelected" );
         if( position == -1 ){
             button_next.setEnabled ( false );
             button_next.setBackgroundResource ( R.drawable.disable_next_question );
@@ -142,7 +141,6 @@ public class FUpS_11th_VH extends RecyclerView.ViewHolder implements
 
     @Override
     public void onMultiItemSelected(View view, Integer position) {
-        System.out.println ( "FUpS_11th_VH.onMultiItemSelected" );
         second.setClear ();
         int i = position;
         setAnswerChoice ( i );
@@ -150,7 +148,6 @@ public class FUpS_11th_VH extends RecyclerView.ViewHolder implements
 
     @Override
     public void onMultiItemDeselected(View view, Integer position) {
-        System.out.println ( "FUpS_11th_VH.onMultiItemDeselected" );
         int i = position;
         Iterator<Answer> answerIterator = answers.iterator ();
         switch (i) {
@@ -251,15 +248,13 @@ public class FUpS_11th_VH extends RecyclerView.ViewHolder implements
 
     @Override
     public void onClearState(View view) {
-        System.out.println ( "FUpS_11th_VH.onClearState" );
         if (view.getId () == first.getId ()) {
             answers.clear ();
         }
     }
 
-    @Override
+//    @Override
     public void onHelpFullyClicked(int position, int helpfully_option) {
-        System.out.println ( "FUpS_11th_VH.onHelpFullyClicked" );
         Iterator<Answer> answerIterator = answers.iterator ();
         switch (position) {
             case 0: {
@@ -343,7 +338,6 @@ public class FUpS_11th_VH extends RecyclerView.ViewHolder implements
 
     @Override
     public void onOtherDialogDone(String otherText) {
-        System.out.println ( "FUpS_11th_VH.onOtherDialogDone" );
         button_next.setEnabled ( true );
         button_next.setBackgroundResource ( R.drawable.enable_next_question );
         Answer answer = new Answer ();
@@ -355,13 +349,11 @@ public class FUpS_11th_VH extends RecyclerView.ViewHolder implements
     private class OnNextButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println ( "FUpS_11th_VH.FUpS_11th_VH" );
-            System.out.println ( "OnNextButtonClickListener.onClick" );
             if (answers.size () > 0) {
                 boolean hasError = false;
                 for (int i = 0; i < answers.size (); i++) {
                     if (answers.get ( i ).getHelpfully () == -1) {
-                        first.showHelpfullyOptionError ( i, View.VISIBLE );
+//                        first.showHelpfullyOptionError ( i, View.VISIBLE );
                         hasError = !hasError;
                         break;
                     }
@@ -378,8 +370,6 @@ public class FUpS_11th_VH extends RecyclerView.ViewHolder implements
     private class OnSkipClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println ( "FUpS_11th_VH.FUpS_11th_VH" );
-            System.out.println ( "OnSkipClickListener.onClick" );
             onFUpSEleventhVHListener.onSkipClicked ();
         }
     }

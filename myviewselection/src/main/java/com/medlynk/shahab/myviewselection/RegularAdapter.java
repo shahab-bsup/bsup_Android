@@ -15,9 +15,9 @@ import java.util.List;
  * Created by Shahab on 6/21/2018.
  */
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+public class RegularAdapter extends RecyclerView.Adapter<RegularAdapter.MyViewHolder> {
 
-    private final static String TAG = MyAdapter.class.getSimpleName ();
+    private final static String TAG = RegularAdapter.class.getSimpleName ();
     private Context context;
     private List<String> strings = new LinkedList<> ();
     private SelectionPolicy selectionPolicy;
@@ -28,7 +28,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private List<Boolean> selections = new LinkedList<> ();
     private ViewSelection viewSelection;
 
-    public MyAdapter(Context context, SelectionPolicy selectionPolicy) {
+    public RegularAdapter(Context context, SelectionPolicy selectionPolicy) {
         this.context = context;
         this.selectionPolicy = selectionPolicy;
         if (selectionPolicy.isSelectable && selectionPolicy.isSingleSelect) {
@@ -159,9 +159,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         public void onClick(View v) {
             if (!selections.get ( adapterPosition )) {
                 selections.set ( adapterPosition, true );
-                onSingleItemSelectedListener.onSingleItemSelected ( viewSelection, adapterPosition );
+                onSingleItemSelectedListener
+                        .onSingleItemSelected ( viewSelection, adapterPosition );
             } else {
-                onSingleItemSelectedListener.onSingleItemSelected ( viewSelection, -1 );
+                onSingleItemSelectedListener
+                        .onSingleItemSelected ( viewSelection, -1 );
                 selections.set ( adapterPosition, false );
             }
             refreshSelections ( adapterPosition, selectionPolicy.isSingleSelect );

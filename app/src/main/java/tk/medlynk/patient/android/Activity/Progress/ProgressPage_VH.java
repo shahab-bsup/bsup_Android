@@ -16,7 +16,7 @@ public class ProgressPage_VH extends RecyclerView.ViewHolder {
     private final ImageView backButton;
     private final ImageView three_dotted;
     private final TextView toolbar_title;
-    private final TextView startedApointments=null;
+    private final TextView startedApointments = null;
     private OnProgressPageListener onProgressPageListener;
 
     public ProgressPage_VH(View itemView) {

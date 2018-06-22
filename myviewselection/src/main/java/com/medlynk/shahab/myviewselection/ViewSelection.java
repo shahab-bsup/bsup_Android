@@ -7,14 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by Shahab on 2/9/2018...
@@ -22,11 +15,8 @@ import java.util.List;
 
 public class ViewSelection extends LinearLayout {
 
-    List<RelativeLayout> helpfully_layouts = new ArrayList<RelativeLayout> ();
-    List<TextView> helpfully_options_errors = new ArrayList<> ();
     int numOfViews = 0;
     Boolean selectable = false;
-    HashMap<Integer, Integer> map = new HashMap<> ();
     Boolean single_select = false;
     Boolean button_type = false;
     Boolean edittext_type = false;
@@ -36,12 +26,14 @@ public class ViewSelection extends LinearLayout {
     private int selected_text_color;
     private int unselected_text_color;
     private int unselectable_text_color;
+    private OnHelpfullyOptionClickListener onHelpfullyOptionClickListener;
     private OnSingleItemSelectedListener onSingleItemSelectedListener;
     private OnClearStateListener onClearStateListener;
     private OnMultiItemSelectedListener onMultiItemSelectedListener;
-    private OnHelpfullyOptionsClickListener onHelpfullyOptionClickListener;
     private Context context;
-    private MyAdapter myAdapter;
+    private RegularAdapter regularAdapter;
+    private boolean isHelpfullyAdapter = false;
+    private HelpfullyAdapter helpfullyAdapter;
 
     public ViewSelection(Context context) {
         super ( context );
@@ -59,6 +51,17 @@ public class ViewSelection extends LinearLayout {
         makeView ( context, attrs );
     }
 
+    public void setOnHelpfullyOptionClickListener(OnHelpfullyOptionClickListener
+                                                          onHelpfullyOptionClickListener) {
+        this.onHelpfullyOptionClickListener = onHelpfullyOptionClickListener;
+        helpfullyAdapter.setOnHelpfullyClickListener(
+                onHelpfullyOptionClickListener);
+    }
+
+    public void showHelpfullyError(int position, int visibility_status){
+        helpfullyAdapter.presentHelpfullyError ( position, visibility_status );
+    }
+
     public void setOnClearStateListener(OnClearStateListener onClearStateListener) {
         this.onClearStateListener = onClearStateListener;
     }
@@ -72,8 +75,10 @@ public class ViewSelection extends LinearLayout {
         if (onMultiItemSelectedListener == null) {
             throw new RuntimeException ( context.toString () + " must implement " +
                     ViewSelection.OnMultiItemSelectedListener.class.getSimpleName () );
+        } else if( !isHelpfullyAdapter ) {
+            regularAdapter.setOnMultiItemSelectedListener ( this, onMultiItemSelectedListener );
         } else {
-            myAdapter.setOnMultiItemSelectedListener ( this, onMultiItemSelectedListener );
+            helpfullyAdapter.setOnMultiItemSelectedListener ( this, onMultiItemSelectedListener );
         }
     }
 
@@ -83,16 +88,16 @@ public class ViewSelection extends LinearLayout {
             throw new RuntimeException ( context.toString () + " must implement " +
                     OnSingleItemSelectedListener.class.getSimpleName () );
         } else {
-            myAdapter.setOnSingleItemSelectedListener ( this, onSingleItemSelectedListener );
+            regularAdapter.setOnSingleItemSelectedListener ( this, onSingleItemSelectedListener );
         }
     }
 
     public void setSelect(int numOfView) {
-        myAdapter.setSelect ( numOfView );
+        regularAdapter.setSelect ( numOfView );
     }
 
     public void unSelect(int numOfView) {
-        myAdapter.unSelect ( numOfView );
+        regularAdapter.unSelect ( numOfView );
     }
 
     private void makeView(Context context, AttributeSet attrs) {
@@ -105,11 +110,14 @@ public class ViewSelection extends LinearLayout {
         selected_state_background = typedArray.getResourceId ( R.styleable.ViewSelection_selected_background, R.drawable.selected_stated );
         unselected_state_background = typedArray.getResourceId ( R.styleable.ViewSelection_unselected_background, R.drawable.unselected_state );
         unselectable_background = typedArray.getResourceId ( R.styleable.ViewSelection_unselectable_background, R.drawable.unselected_state );
-        selected_text_color = typedArray.getInt ( R.styleable.ViewSelection_selected_text_color, R.color.selected_text_clolor );
-        unselected_text_color = typedArray.getInt ( R.styleable.ViewSelection_unselected_text_color, R.color.unselected_text_color );
+        selected_text_color = typedArray.getInt ( R.styleable.ViewSelection_selected_text_color,
+                R.color.selected_text_clolor );
+        unselected_text_color = typedArray.getInt ( R.styleable.ViewSelection_unselected_text_color,
+                R.color.unselected_text_color );
         unselectable_text_color = typedArray.getInt ( R.styleable.ViewSelection_unselectable_text_color, R.color.unselectable_text_color );
         selectable = typedArray.getBoolean ( R.styleable.ViewSelection_selectable, false );
         single_select = typedArray.getBoolean ( R.styleable.ViewSelection_single_select, false );
+        isHelpfullyAdapter = typedArray.getBoolean ( R.styleable.ViewSelection_helpfully_adapter, false );
         numOfViews = typedArray.getInt ( R.styleable.ViewSelection_number_of_views, 1 );
         button_type = typedArray.getBoolean ( R.styleable.ViewSelection_button_type, false );
         edittext_type = typedArray.getBoolean ( R.styleable.ViewSelection_edittext_type, false );
@@ -126,43 +134,43 @@ public class ViewSelection extends LinearLayout {
                 .setTextViewType ( true );
         SelectionPolicy selectionPolicy = builder.build ();
 
-        myAdapter = new MyAdapter ( context, selectionPolicy );
-        recyclerView.setAdapter ( myAdapter );
-        linearLayout.addView ( recyclerView );
+        if (isHelpfullyAdapter) {
+            helpfullyAdapter = new
+                    HelpfullyAdapter ( context, selectionPolicy );
+            recyclerView.setAdapter ( helpfullyAdapter );
+            linearLayout.addView ( recyclerView );
+        } else {
+            regularAdapter = new RegularAdapter ( context, selectionPolicy );
+            recyclerView.setAdapter ( regularAdapter );
+            linearLayout.addView ( recyclerView );
+        }
+
     }
 
     public void previewOfDBResult(boolean selectable,
                                   boolean single_select,
                                   int numOfView) {
-        myAdapter.setSelect ( numOfView );
-//        myAdapter.refreshSelections ( numOfView, single_select );
-    }
-
-    public void showHelpfullyOptionError(int position, int visibility_status) {
-        helpfully_options_errors.get ( position ).setVisibility ( visibility_status );
+        regularAdapter.setSelect ( numOfView );
     }
 
     public void setDataSet(String[] strings) {
-        myAdapter.setDataSet ( strings );
-    }
-
-    public void setClear() {
-        myAdapter.clearSelectionHistory ();
-        if (onClearStateListener == null) {
-            throw new RuntimeException ( getCurrentContext ().toString () + "" +
-                    " must implement OnClearStateListener" );
-        } else {
-            onClearStateListener.onClearState ( ViewSelection.this );
+        if(isHelpfullyAdapter){
+            helpfullyAdapter.setDataSet ( strings );
+        }else{
+            regularAdapter.setDataSet ( strings );
         }
     }
 
-    public void setOnHelpfullyOptionClickListener(OnHelpfullyOptionsClickListener
-                                                          onHelpfullyOptionClickListener) {
-        this.onHelpfullyOptionClickListener = onHelpfullyOptionClickListener;
-    }
-
-    private void hideHelpfullyOptionError(int position) {
-        helpfully_options_errors.get ( position ).setVisibility ( View.GONE );
+    public void setClear() {
+        if (onClearStateListener == null) {
+            throw new RuntimeException ( getCurrentContext ().toString () + "" +
+                    " must implement OnClearStateListener" );
+        } else if( !isHelpfullyAdapter ){
+            regularAdapter.clearSelectionHistory ();
+        } else{
+            helpfullyAdapter.clearSelectionHistory ();
+        }
+        onClearStateListener.onClearState ( ViewSelection.this );
     }
 
     public interface OnSingleItemSelectedListener {
@@ -171,142 +179,14 @@ public class ViewSelection extends LinearLayout {
 
     public interface OnMultiItemSelectedListener {
         void onMultiItemSelected(View view, Integer position);
-
         void onMultiItemDeselected(View view, Integer position);
+    }
+
+    public interface OnHelpfullyOptionClickListener{
+        void onHelpfullyClicked(int position, int helpfully_option);
     }
 
     public interface OnClearStateListener {
         void onClearState(View view);
-    }
-
-    public interface OnHelpfullyOptionsClickListener {
-        void onHelpFullyClicked(int position, int helpfully_option);
-    }
-
-    private class OnHelpfullyOptionClickListener implements OnClickListener {
-        int position = 0;
-
-        public OnHelpfullyOptionClickListener(int i) {
-            position = i;
-        }
-
-        @Override
-        public void onClick(View view) {
-            int id = view.getId ();
-            hideHelpfullyOptionError ( position );
-            switch (id) {
-                case 0: {
-                    if (onHelpfullyOptionClickListener == null) {
-                        throw new RuntimeException ( getCurrentContext ().toString () + " must implement OnHelpfullyOptionsClickListener" );
-                    } else {
-                        if (map.get ( position ) == null) {
-                            map.put ( position, 0 );
-                            onHelpfullyOptionClickListener.onHelpFullyClicked ( position, 0 );
-                            ((TextView) (helpfully_layouts.get ( position ).findViewById ( 0 )))
-                                    .setTextColor ( context.getResources ().getColor ( R.color.colorPrimary ) );
-                            ((TextView) (helpfully_layouts.get ( position ).findViewById ( (int) 1 )))
-                                    .setTextColor ( context.getResources ().getColor ( R.color.colorAccent ) );
-                            ((TextView) (helpfully_layouts.get ( position ).findViewById ( (int) 2 )))
-                                    .setTextColor ( context.getResources ().getColor ( R.color.colorAccent ) );
-                        } else if (map.get ( position ) != 0) {
-                            onHelpfullyOptionClickListener.onHelpFullyClicked ( position, 0 );
-                            map.clear ();
-                            map.put ( position, 0 );
-                            ((TextView) (helpfully_layouts.get ( position ).findViewById ( 0 )))
-                                    .setTextColor ( context.getResources ().getColor ( R.color.colorPrimary ) );
-                            ((TextView) (helpfully_layouts.get ( position ).findViewById ( (int) 1 )))
-                                    .setTextColor ( context.getResources ().getColor ( R.color.colorAccent ) );
-                            ((TextView) (helpfully_layouts.get ( position ).findViewById ( (int) 2 )))
-                                    .setTextColor ( context.getResources ().getColor ( R.color.colorAccent ) );
-                        } else {
-                            onHelpfullyOptionClickListener.onHelpFullyClicked ( position, -1 );
-                            if (map.containsValue ( 0 )) {
-                                ((TextView) (helpfully_layouts.get ( position ).findViewById ( 0 )))
-                                        .setTextColor ( context.getResources ().getColor ( R.color.colorAccent ) );
-                                ((TextView) (helpfully_layouts.get ( position ).findViewById ( (int) 1 )))
-                                        .setTextColor ( context.getResources ().getColor ( R.color.colorAccent ) );
-                                ((TextView) (helpfully_layouts.get ( position ).findViewById ( (int) 2 )))
-                                        .setTextColor ( context.getResources ().getColor ( R.color.colorAccent ) );
-                                map.clear ();
-                            }
-                        }
-                    }
-
-                    break;
-                }
-                case 1: {
-                    if (onHelpfullyOptionClickListener == null) {
-                        throw new RuntimeException ( getCurrentContext ().toString () + " must implement OnHelpfullyOptionsClickListener" );
-                    } else if (map.get ( position ) == null) {
-                        onHelpfullyOptionClickListener.onHelpFullyClicked ( position, 1 );
-                        map.put ( position, 1 );
-                        ((TextView) (helpfully_layouts.get ( position ).findViewById ( (int) 1 )))
-                                .setTextColor ( context.getResources ().getColor ( R.color.colorPrimary ) );
-                        ((TextView) (helpfully_layouts.get ( position ).findViewById ( (int) 0 )))
-                                .setTextColor ( context.getResources ().getColor ( R.color.colorAccent ) );
-                        ((TextView) (helpfully_layouts.get ( position ).findViewById ( (int) 2 )))
-                                .setTextColor ( context.getResources ().getColor ( R.color.colorAccent ) );
-                    } else if (map.get ( position ) != 1) {
-                        onHelpfullyOptionClickListener.onHelpFullyClicked ( position, 1 );
-                        map.clear ();
-                        map.put ( position, 1 );
-                        ((TextView) (helpfully_layouts.get ( position ).findViewById ( (int) 1 )))
-                                .setTextColor ( context.getResources ().getColor ( R.color.colorPrimary ) );
-                        ((TextView) (helpfully_layouts.get ( position ).findViewById ( (int) 0 )))
-                                .setTextColor ( context.getResources ().getColor ( R.color.colorAccent ) );
-                        ((TextView) (helpfully_layouts.get ( position ).findViewById ( (int) 2 )))
-                                .setTextColor ( context.getResources ().getColor ( R.color.colorAccent ) );
-                    } else {
-                        onHelpfullyOptionClickListener.onHelpFullyClicked ( position, -1 );
-                        if (map.containsValue ( 1 )) {
-                            ((TextView) (helpfully_layouts.get ( position ).findViewById ( 0 )))
-                                    .setTextColor ( context.getResources ().getColor ( R.color.colorAccent ) );
-                            ((TextView) (helpfully_layouts.get ( position ).findViewById ( (int) 1 )))
-                                    .setTextColor ( context.getResources ().getColor ( R.color.colorAccent ) );
-                            ((TextView) (helpfully_layouts.get ( position ).findViewById ( (int) 2 )))
-                                    .setTextColor ( context.getResources ().getColor ( R.color.colorAccent ) );
-                            map.clear ();
-                        }
-                    }
-                    break;
-                }
-                case 2: {
-                    if (onHelpfullyOptionClickListener == null) {
-                        throw new RuntimeException ( getCurrentContext ().toString () + " must implement OnHelpfullyOptionsClickListener" );
-                    } else if (map.get ( position ) == null) {
-                        onHelpfullyOptionClickListener.onHelpFullyClicked ( position, 2 );
-                        map.put ( position, 2 );
-                        ((TextView) (helpfully_layouts.get ( position ).findViewById ( (int) 2 )))
-                                .setTextColor ( context.getResources ().getColor ( R.color.colorPrimary ) );
-                        ((TextView) (helpfully_layouts.get ( position ).findViewById ( (int) 0 )))
-                                .setTextColor ( context.getResources ().getColor ( R.color.colorAccent ) );
-                        ((TextView) (helpfully_layouts.get ( position ).findViewById ( (int) 1 )))
-                                .setTextColor ( context.getResources ().getColor ( R.color.colorAccent ) );
-                    } else if (map.get ( position ) != 2) {
-                        onHelpfullyOptionClickListener.onHelpFullyClicked ( position, 2 );
-                        map.clear ();
-                        map.put ( position, 2 );
-                        ((TextView) (helpfully_layouts.get ( position ).findViewById ( (int) 2 )))
-                                .setTextColor ( context.getResources ().getColor ( R.color.colorPrimary ) );
-                        ((TextView) (helpfully_layouts.get ( position ).findViewById ( (int) 0 )))
-                                .setTextColor ( context.getResources ().getColor ( R.color.colorAccent ) );
-                        ((TextView) (helpfully_layouts.get ( position ).findViewById ( (int) 1 )))
-                                .setTextColor ( context.getResources ().getColor ( R.color.colorAccent ) );
-                    } else {
-                        onHelpfullyOptionClickListener.onHelpFullyClicked ( position, -1 );
-                        if (map.containsValue ( 2 )) {
-                            ((TextView) (helpfully_layouts.get ( position ).findViewById ( 0 )))
-                                    .setTextColor ( context.getResources ().getColor ( R.color.colorAccent ) );
-                            ((TextView) (helpfully_layouts.get ( position ).findViewById ( (int) 1 )))
-                                    .setTextColor ( context.getResources ().getColor ( R.color.colorAccent ) );
-                            ((TextView) (helpfully_layouts.get ( position ).findViewById ( (int) 2 )))
-                                    .setTextColor ( context.getResources ().getColor ( R.color.colorAccent ) );
-                            map.clear ();
-                        }
-                    }
-                    break;
-                }
-            }
-        }
     }
 }

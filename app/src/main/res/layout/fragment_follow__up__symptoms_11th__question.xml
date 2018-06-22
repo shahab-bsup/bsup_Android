@@ -52,7 +52,6 @@
                         app:button_type="true"
                         app:number_of_views="7"
                         app:selectable="true"
-                        app:show_helpfully_layout="true"
                         app:selected_background="@drawable/answer_selected"
                         app:selected_text_color="@color/black"
                         app:single_select="false"

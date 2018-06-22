@@ -4,7 +4,7 @@ import android.support.annotation.Nullable;
 
 import retrofit2.http.DELETE;
 import retrofit2.http.PUT;
-import tk.medlynk.patient.android.Model.AppointmentsResponse;
+import tk.medlynk.patient.android.Model.AppointmentResponse;
 import tk.medlynk.patient.android.Model.CurrentUserResponse;
 import tk.medlynk.patient.android.Model.FollowUpSymptomResponse;
 import tk.medlynk.patient.android.Model.InitialTokenResponse;
@@ -71,7 +71,7 @@ public interface MedlynkAPI {
     Call<CurrentUserResponse> getCurrentUserInfo();
 
     @POST("/api/appointments")
-    Call<AppointmentsResponse> getAppointments(@Body Map<String, String> body);
+    Call<AppointmentResponse> getAppointments(@Body Map<String, String> body);
 
     @PUT("/api/appointments/{appointment_id}/answers")
     Call<NewSymptomAnswerResponse> newSymptomAnswer(@Path ( "appointment_id" ) int appointmentId, @Body HashMap<String, Object> body);

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="helpfully_options">
+        <item>Help a lot</item>
+        <item>Help a little</item>
+        <item>Not helping</item>
+        <item>Not Sure</item>
+    </string-array>
+</resources>

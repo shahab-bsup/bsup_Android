@@ -58,27 +58,13 @@
                             android:id="@+id/viewSelectionFirst"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            app:button_type="true"
-                            app:number_of_views="7"
                             app:selectable="true"
+                            app:helpfully_adapter="true"
                             app:selected_background="@drawable/answer_selected"
                             app:selected_text_color="@color/black"
-                            app:show_helpfully_layout="true"
                             app:single_select="false"
                             app:unselected_background="@drawable/answer_not_selected"
-                            app:unselected_text_color="@color/white" />
-
-                        <tk.medlynk.patient.android.CustomViews.CustomTextView
-                            android:id="@+id/txtOther"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="15dp"
-                            android:background="@drawable/other_background"
-                            android:padding="10dp"
-                            android:text="dfjdfhs"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="15sp"
-                            android:visibility="gone" />
+                            app:unselected_text_color="@color/colorPrimary" />
 
                         <com.medlynk.shahab.myviewselection.ViewSelection
                             android:id="@+id/viewSelectionSecond"
@@ -88,10 +74,10 @@
                             app:number_of_views="1"
                             app:selectable="true"
                             app:selected_background="@drawable/answer_selected"
-                            app:selected_text_color="@color/black"
+                            app:selected_text_color="@color/white"
                             app:single_select="true"
                             app:unselected_background="@drawable/answer_not_selected"
-                            app:unselected_text_color="@color/white" />
+                            app:unselected_text_color="@color/colorPrimary" />
                     </LinearLayout>
 
                 </LinearLayout>

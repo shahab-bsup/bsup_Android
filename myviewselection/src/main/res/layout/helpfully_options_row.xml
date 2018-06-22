@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.medlynk.shahab.myviewselection.CustomTextView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:id="@+id/txtViewOption"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:id="@+id/textview_row"
-    android:padding="10dp"
-    android:layout_margin="10dp">
-</com.medlynk.shahab.myviewselection.CustomTextView>
+    android:orientation="vertical"
+    android:padding="10dp" />
