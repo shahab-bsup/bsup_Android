@@ -18,6 +18,7 @@ import com.neweraandroid.demo.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.FollowUpSymptomsActivity;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.OnFollowUpSymptomAnswerListener;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_6.FUpS_6th_Question;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_6.FUpS_6th_VH;
@@ -50,6 +51,7 @@ public class FUpS_7th_Question extends Fragment implements
     private List<Answer> answersForDB = new ArrayList<>();
 
     private OnFollowUpSymptomsSeventhQuestionListener mListener;
+    private OnFURTenthQuestionInteractionListener mListenerFUR;
     private FUpS_7th_Question_VH viewHolder;
 
     public FUpS_7th_Question() {
@@ -84,7 +86,7 @@ public class FUpS_7th_Question extends Fragment implements
     private void dbOperation(final View view) {
         mMedlynkViewModel = ViewModelProviders.of(getActivity()).get(MedlynkViewModel.class);
         manager = new SharedPreferenceManager(getActivity());
-        mMedlynkViewModel.getAnswers(manager.getAppointmentID(), Constants.FOLLOW_UP_SYMPTOMS_ROW, 7)
+        mMedlynkViewModel.getAnswers(manager.getAppointmentID(), Constants.FOLLOW_UP_SYMPTOMS_ROW,0, 7)
                 .observe((LifecycleOwner) this, new Observer<DataBaseModel>() {
                     @Override
                     public void onChanged(@Nullable DataBaseModel dataBaseModel) {
@@ -116,7 +118,11 @@ public class FUpS_7th_Question extends Fragment implements
         super.onAttach(context);
         if (context instanceof OnFollowUpSymptomsSeventhQuestionListener) {
             mListener = (OnFollowUpSymptomsSeventhQuestionListener) context;
-        } else {
+        }
+        else if(context instanceof OnFURTenthQuestionInteractionListener){
+            mListenerFUR = (OnFURTenthQuestionInteractionListener) context;
+        }
+        else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFollowUpSymptomsFirstQuestionListener");
         }
@@ -126,6 +132,7 @@ public class FUpS_7th_Question extends Fragment implements
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        mListenerFUR=null;
     }
 
     @Override
@@ -141,21 +148,34 @@ public class FUpS_7th_Question extends Fragment implements
 
     @Override
     public void onSkipClick() {
-        System.out.println("FUpS_7th_Question.onSkipClick");
-        mListener.onSeventhQuestion();
+        if(Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
+            System.out.println("FUpS_7th_Question.onSkipClick");
+            mListener.onSeventhQuestion();
+        }
+        else {
+            mListenerFUR.onFURTenthQuestion();
+        }
     }
 
     @Override
     public void onAnswerSuccess(FollowUpSymptomResponse response) {
-        JsonConverter JC = JsonConverter.getInstance ();
-        if (existsRecord == false)
-            mMedlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (), Constants.FOLLOW_UP_SYMPTOMS_ROW, 7, JC.answersToAnswerJson ( answersForDB ) );
-        else
-            mMedlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (), Constants.FOLLOW_UP_SYMPTOMS_ROW, 7, JC.answersToAnswerJson ( answersForDB ) );
+        if(Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
+            JsonConverter JC = JsonConverter.getInstance();
+            if (existsRecord == false)
+                mMedlynkViewModel.insertAnswersToDB(manager.getAppointmentID(), Constants.FOLLOW_UP_SYMPTOMS_ROW,
+                        0,7, JC.answersToAnswerJson(answersForDB));
+            else
+                mMedlynkViewModel.updateAnswersToDB(manager.getAppointmentID(), Constants.FOLLOW_UP_SYMPTOMS_ROW,
+                        0,7, JC.answersToAnswerJson(answersForDB));
 
-        System.out.println("FUpS_7th_Question.onSeventhAnswerSuccess");
-        viewHolder.setProgressBarVisibilityStatus(View.GONE);
-        mListener.onSeventhQuestion();
+            System.out.println("FUpS_7th_Question.onSeventhAnswerSuccess");
+            viewHolder.setProgressBarVisibilityStatus(View.GONE);
+            mListener.onSeventhQuestion();
+        }
+        else {
+            viewHolder.setProgressBarVisibilityStatus(View.GONE);
+            mListenerFUR.onFURTenthQuestion();
+        }
     }
 
     @Override
@@ -168,4 +188,8 @@ public class FUpS_7th_Question extends Fragment implements
         // TODO: Update argument type and name
         void onSeventhQuestion();
     }
+    public interface OnFURTenthQuestionInteractionListener{
+        void onFURTenthQuestion();
+    }
+
 }

@@ -87,7 +87,7 @@ public class NS_18th_question extends Fragment implements
     private void dbOperation(final View view) {
         mMedlynkViewModel = ViewModelProviders.of ( getActivity () ).get ( MedlynkViewModel.class );
         manager = new SharedPreferenceManager ( getActivity () );
-        mMedlynkViewModel.getAnswers ( manager.getAppointmentID (), Constants.NEW_SYMPTOM_ROW, 18 )
+        mMedlynkViewModel.getAnswers ( manager.getAppointmentID (), Constants.NEW_SYMPTOM_ROW,0, 18 )
                 .observe ( (LifecycleOwner) this, new Observer<DataBaseModel>() {
                     @Override
                     public void onChanged(@Nullable DataBaseModel dataBaseModel) {
@@ -126,9 +126,9 @@ public class NS_18th_question extends Fragment implements
     public void onAnswerSuccess(NewSymptomAnswerResponse response) {
         JsonConverter JC = JsonConverter.getInstance ();
         if (existsRecord == false)
-            mMedlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (), Constants.NEW_SYMPTOM_ROW, 18, JC.answersToAnswerJson ( answersForDB ) );
+            mMedlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (), Constants.NEW_SYMPTOM_ROW,0, 18, JC.answersToAnswerJson ( answersForDB ) );
         else
-            mMedlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (), Constants.NEW_SYMPTOM_ROW, 18, JC.answersToAnswerJson ( answersForDB ) );
+            mMedlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (), Constants.NEW_SYMPTOM_ROW,0,18, JC.answersToAnswerJson ( answersForDB ) );
 
         System.out.println ( "NS_18th_question.onEighteenAnswerSuccess" );
         viewHolder.setProgressBarVisibilityStatus(View.GONE);

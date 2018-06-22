@@ -103,7 +103,7 @@ public class NS_1th_question extends Fragment implements View.OnClickListener, O
 
         manager = new SharedPreferenceManager(getActivity());
 
-        mMedlynkViewModel.getAnswers(manager.getAppointmentID(), Constants.NEW_SYMPTOM_ROW, 1)
+        mMedlynkViewModel.getAnswers(manager.getAppointmentID(), Constants.NEW_SYMPTOM_ROW, 0,1)
                 .observe(this, new Observer<DataBaseModel>() {
                     @Override
                     public void onChanged(@Nullable DataBaseModel dataBaseModel) {
@@ -171,9 +171,9 @@ public class NS_1th_question extends Fragment implements View.OnClickListener, O
 
         JsonConverter JC = JsonConverter.getInstance();
         if (existsRecord == false)
-            mMedlynkViewModel.insertAnswersToDB(manager.getAppointmentID(), Constants.NEW_SYMPTOM_ROW, 1, JC.answersToAnswerJson(answers));
+            mMedlynkViewModel.insertAnswersToDB(manager.getAppointmentID(), Constants.NEW_SYMPTOM_ROW,0, 1, JC.answersToAnswerJson(answers));
         else
-            mMedlynkViewModel.updateAnswersToDB(manager.getAppointmentID(), Constants.NEW_SYMPTOM_ROW, 1, JC.answersToAnswerJson(answers));
+            mMedlynkViewModel.updateAnswersToDB(manager.getAppointmentID(), Constants.NEW_SYMPTOM_ROW, 0,1, JC.answersToAnswerJson(answers));
 
         progressBar.setVisibility(View.GONE);
         mListener.onFirstQuestion();

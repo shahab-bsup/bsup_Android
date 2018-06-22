@@ -13,6 +13,8 @@ import com.neweraandroid.demo.R;
 
 import java.util.List;
 
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.FollowUpSymptomsActivity;
+import tk.medlynk.patient.android.Constants;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
 import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.FollowUpSymptomResponse;
@@ -35,6 +37,7 @@ public class FUpS_12th_Question extends Fragment implements
 
 
     private OnFollowUpSymptomsTwelveQuestionListener mListener;
+    private OnFURFifteenQuestionInteractionListener mListenerFUR;
     private FUpS_12th_VH viewHolder;
 
     public FUpS_12th_Question() {
@@ -78,6 +81,9 @@ public class FUpS_12th_Question extends Fragment implements
         super.onAttach ( context );
         if (context instanceof OnFollowUpSymptomsTwelveQuestionListener) {
             mListener = (OnFollowUpSymptomsTwelveQuestionListener) context;
+        }
+        else if (context instanceof OnFURFifteenQuestionInteractionListener) {
+            mListenerFUR = (OnFURFifteenQuestionInteractionListener) context;
         } else {
             throw new RuntimeException ( context.toString ()
                     + " must implement OnFollowUpSymptomsFirstQuestionListener" );
@@ -88,6 +94,7 @@ public class FUpS_12th_Question extends Fragment implements
     public void onDetach() {
         super.onDetach ();
         mListener = null;
+        mListenerFUR=null;
     }
 
     @Override
@@ -113,15 +120,26 @@ public class FUpS_12th_Question extends Fragment implements
 
     @Override
     public void onSkipClicked() {
-        System.out.println ( "FUpS_12th_Question.onSkipClicked" );
-        mListener.onTwelveQuestion ();
+        if(Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
+            System.out.println("FUpS_12th_Question.onSkipClicked");
+            mListener.onTwelveQuestion();
+        }
+        else {
+            mListenerFUR.onFURFifteenQuestion();
+        }
     }
 
     @Override
     public void onTwelveAnswerSuccess(FollowUpSymptomResponse response) {
-        System.out.println ( "FUpS_12th_Question.onTwelveAnswerSuccess" );
-        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
-        mListener.onTwelveQuestion ();
+        if(Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
+            System.out.println("FUpS_12th_Question.onTwelveAnswerSuccess");
+            viewHolder.setProgressBarVisibilityStatus(View.GONE);
+            mListener.onTwelveQuestion();
+        }
+        else {
+            viewHolder.setProgressBarVisibilityStatus(View.GONE);
+            mListenerFUR.onFURFifteenQuestion();
+        }
     }
 
     @Override
@@ -134,5 +152,8 @@ public class FUpS_12th_Question extends Fragment implements
 
     public interface OnFollowUpSymptomsTwelveQuestionListener {
         void onTwelveQuestion();
+    }
+    public interface OnFURFifteenQuestionInteractionListener{
+        void onFURFifteenQuestion();
     }
 }

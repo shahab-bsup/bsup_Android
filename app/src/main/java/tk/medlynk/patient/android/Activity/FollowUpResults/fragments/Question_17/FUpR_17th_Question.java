@@ -84,7 +84,7 @@ public class FUpR_17th_Question extends Fragment implements
     private void dbOperation(final View view) {
         mMedlynkViewModel = ViewModelProviders.of ( getActivity () ).get ( MedlynkViewModel.class );
         manager = new SharedPreferenceManager ( getActivity () );
-        mMedlynkViewModel.getAnswers ( manager.getAppointmentID (), Constants.FOLLOW_UP_RESULTS_ROW, 17 )
+        mMedlynkViewModel.getAnswers ( manager.getAppointmentID (), Constants.FOLLOW_UP_RESULTS_ROW,0, 17 )
                 .observe ( (LifecycleOwner) this, new Observer<DataBaseModel>() {
                     @Override
                     public void onChanged(@Nullable DataBaseModel dataBaseModel) {
@@ -142,9 +142,9 @@ public class FUpR_17th_Question extends Fragment implements
     public void onAnswerSuccess(SymptomResponse response) {
         JsonConverter JC = JsonConverter.getInstance ();
         if (existsRecord == false)
-            mMedlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (), Constants.FOLLOW_UP_RESULTS_ROW, 17, JC.answersToAnswerJson ( answersForDB ) );
+            mMedlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (), Constants.FOLLOW_UP_RESULTS_ROW,0,17, JC.answersToAnswerJson ( answersForDB ) );
         else
-            mMedlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (), Constants.FOLLOW_UP_RESULTS_ROW, 17, JC.answersToAnswerJson ( answersForDB ) );
+            mMedlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (), Constants.FOLLOW_UP_RESULTS_ROW,0, 17, JC.answersToAnswerJson ( answersForDB ) );
 
         System.out.println("FUpR_17th_Question.onAnswerSuccess");
         viewHolder.setProgressBarVisibilityStatus(View.GONE);

@@ -89,7 +89,7 @@ public class NS_3rd_question extends Fragment implements
                 .get ( MedlynkViewModel.class );
         manager = new SharedPreferenceManager ( getActivity () );
         medlynkViewModel.getAnswers ( manager.getAppointmentID (),
-                Constants.NEW_SYMPTOM_ROW, 3 )
+                Constants.NEW_SYMPTOM_ROW, 0,3 )
                 .observe ( this, new Observer<DataBaseModel> () {
                     @Override
                     public void onChanged(@Nullable DataBaseModel dataBaseModel) {
@@ -128,10 +128,10 @@ public class NS_3rd_question extends Fragment implements
     public void onAnswerSuccess(NewSymptomAnswerResponse response) {
         JsonConverter JC = JsonConverter.getInstance ();
         if (existsRecord == false)
-            medlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (), Constants.NEW_SYMPTOM_ROW,
-                    3, JC.answersToAnswerJson ( answers ) );
+            medlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (), Constants.NEW_SYMPTOM_ROW,0
+                    ,3, JC.answersToAnswerJson ( answers ) );
         else
-            medlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (), Constants.NEW_SYMPTOM_ROW,
+            medlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (), Constants.NEW_SYMPTOM_ROW,0,
                     3, JC.answersToAnswerJson ( answers ) );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onThirdQuestion ();

@@ -37,6 +37,7 @@ import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_13.OnTh
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_14.OnFourteenAnswerListener;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_17.OnSeventeenAnswerListener;
 import tk.medlynk.patient.android.Activity.NoDoctorIdPage.OnNoDoctorIDPreferencesListener;
+import tk.medlynk.patient.android.Activity.Progress.OnProgressResponseListener;
 import tk.medlynk.patient.android.Activity.Refill.RefillResultAnswer;
 import tk.medlynk.patient.android.Activity.ResetPassword.OnResetPasswordListener;
 import tk.medlynk.patient.android.Activity.SearchDoctor.OnSearchDoctorListener;
@@ -62,6 +63,7 @@ import tk.medlynk.patient.android.Model.MotherCallback;
 import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
 import tk.medlynk.patient.android.Model.PreviuosDoctorsResponse;
 import tk.medlynk.patient.android.Model.PrimaryTokenErrorResponse;
+import tk.medlynk.patient.android.Model.ProgressResponse;
 import tk.medlynk.patient.android.Model.RenewTokenResponse;
 import tk.medlynk.patient.android.Model.SearchDoctorResponse;
 import tk.medlynk.patient.android.Model.SymptomResponse;
@@ -1008,8 +1010,7 @@ public class MedlynkRequests {
     public static void followUpSymptomAnswer(Context context, final OnFollowUpSymptomAnswerListener listener, int appointmentID,String question_number, Answer answer) {
         System.out.println ( "MedlynkRequests.followUpSymptomFirstAnswer" );
         if (Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
-            Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER,
-                    question_number );
+            Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, question_number );
         } else {
             Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER,
                     Integer.toString(Integer.parseInt(question_number)+3) );
@@ -1379,6 +1380,134 @@ public class MedlynkRequests {
         } );
     }
 
+    public static void followUpEleventhQuestionAnswer(Context context,
+                                                      final OnEleventFollowUphAnswerListener listener,
+                                                      int appointmentID,
+                                                      List<Answer> answers) {
+        System.out.println ( "MedlynkRequests.followUpEleventhQuestionAnswer" );
+        if (Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
+            Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "11" );
+        } else {
+            Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "14" );
+        }
+        Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.ANSWER, answers );
+        Call<FollowUpSymptomResponse> call = MedlynkRestAPI.getInstance().getMainRetrofit ( context )
+                .followUpSymptomtAnswer ( appointmentID, Constants.FOLLOW_UP_SYMPTOM_BODY );
+        call.enqueue ( new Callback<FollowUpSymptomResponse> () {
+            @Override
+            public void onResponse(Call<FollowUpSymptomResponse> call, Response<FollowUpSymptomResponse> response) {
+                if (response.isSuccessful ()) {
+                    listener.onEleventhAnswerSuccess ( response.body () );
+                } else {
+                    listener.onEleventhAnswerFailure ();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FollowUpSymptomResponse> call, Throwable t) {
+                if (t instanceof JsonSyntaxException) {
+                    listener.onEleventhAnswerSuccess ( null );
+                } else {
+                    listener.onEleventhAnswerFailure ();
+                }
+            }
+        } );
+    }
+
+    public static void followUpEleventhQuestionAnswer(Context context,
+                                                      final OnEleventFollowUphAnswerListener listener,
+                                                      int appointmentID,
+                                                      Answer answer) {
+        System.out.println ( "MedlynkRequests.followUpEleventhQuestionAnswer" );
+        if (Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
+            Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "11" );
+        } else {
+            Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "14" );
+        }
+        Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.ANSWER, answer );
+        Call<FollowUpSymptomResponse> call = MedlynkRestAPI.getInstance().getMainRetrofit ( context )
+                .followUpSymptomtAnswer ( appointmentID, Constants.FOLLOW_UP_SYMPTOM_BODY );
+        call.enqueue ( new Callback<FollowUpSymptomResponse> () {
+            @Override
+            public void onResponse(Call<FollowUpSymptomResponse> call, Response<FollowUpSymptomResponse> response) {
+                if (response.isSuccessful ()) {
+                    listener.onEleventhAnswerSuccess ( response.body () );
+                } else {
+                    listener.onEleventhAnswerFailure ();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FollowUpSymptomResponse> call, Throwable t) {
+                listener.onEleventhAnswerFailure ();
+            }
+        } );
+    }
+
+    public static void followUpTwelveQuestionAnswer(Context context,
+                                                    final OnFollowUpTwelveAnswerListener listener,
+                                                    int appointmentID,
+                                                    List<Medication> answers) {
+        System.out.println ( "MedlynkRequests.followUpEleventhQuestionAnswer" );
+        if (Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
+            Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "12" );
+        } else {
+            Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "15" );
+        }
+        Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.ANSWER, answers );
+        Call<FollowUpSymptomResponse> call = MedlynkRestAPI.getInstance().getMainRetrofit ( context )
+                .followUpSymptomtAnswer ( appointmentID, Constants.FOLLOW_UP_SYMPTOM_BODY );
+        call.enqueue ( new Callback<FollowUpSymptomResponse> () {
+            @Override
+            public void onResponse(Call<FollowUpSymptomResponse> call, Response<FollowUpSymptomResponse> response) {
+                if (response.isSuccessful ()) {
+                    listener.onTwelveAnswerSuccess ( response.body () );
+                } else {
+                    listener.onTwelveAnswerFailure ();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FollowUpSymptomResponse> call, Throwable t) {
+                if (t instanceof JsonSyntaxException) {
+                    listener.onTwelveAnswerSuccess ( null );
+                } else {
+                    listener.onTwelveAnswerFailure ();
+                }
+            }
+        } );
+    }
+
+    public static void followUpTwelveQuestionAnswer(Context context,
+                                                    final OnFollowUpTwelveAnswerListener listener,
+                                                    int appointmentID,
+                                                    Answer answer) {
+        System.out.println ( "MedlynkRequests.followUpEleventhQuestionAnswer" );
+        if (Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
+            Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "12" );
+        } else {
+            Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "15" );
+        }
+        Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.ANSWER, answer );
+        Call<FollowUpSymptomResponse> call = MedlynkRestAPI.getInstance().getMainRetrofit ( context )
+                .followUpSymptomtAnswer ( appointmentID, Constants.FOLLOW_UP_SYMPTOM_BODY );
+        call.enqueue ( new Callback<FollowUpSymptomResponse> () {
+            @Override
+            public void onResponse(Call<FollowUpSymptomResponse> call, Response<FollowUpSymptomResponse> response) {
+                if (response.isSuccessful ()) {
+                    listener.onTwelveAnswerSuccess ( response.body () );
+                } else {
+                    listener.onTwelveAnswerFailure ();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FollowUpSymptomResponse> call, Throwable t) {
+                listener.onTwelveAnswerFailure ();
+            }
+        } );
+    }
+
     public static void followUpSymptomThirteenAnswer(Context context,
                                                      int appointmentID,
                                                      final OnThirteenFollowUpAnswerListener listener,
@@ -1593,134 +1722,6 @@ public class MedlynkRequests {
             @Override
             public void onFailure(Call<SymptomResponse> call, Throwable t) {
                 listener.onAnswerFailure ();
-            }
-        } );
-    }
-
-    public static void followUpEleventhQuestionAnswer(Context context,
-                                                      final OnEleventFollowUphAnswerListener listener,
-                                                      int appointmentID,
-                                                      List<Answer> answers) {
-        System.out.println ( "MedlynkRequests.followUpEleventhQuestionAnswer" );
-        if (Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
-            Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "11" );
-        } else {
-            Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "14" );
-        }
-        Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.ANSWER, answers );
-        Call<FollowUpSymptomResponse> call = MedlynkRestAPI.getInstance().getMainRetrofit ( context )
-                .followUpSymptomtAnswer ( appointmentID, Constants.FOLLOW_UP_SYMPTOM_BODY );
-        call.enqueue ( new Callback<FollowUpSymptomResponse> () {
-            @Override
-            public void onResponse(Call<FollowUpSymptomResponse> call, Response<FollowUpSymptomResponse> response) {
-                if (response.isSuccessful ()) {
-                    listener.onEleventhAnswerSuccess ( response.body () );
-                } else {
-                    listener.onEleventhAnswerFailure ();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<FollowUpSymptomResponse> call, Throwable t) {
-                if (t instanceof JsonSyntaxException) {
-                    listener.onEleventhAnswerSuccess ( null );
-                } else {
-                    listener.onEleventhAnswerFailure ();
-                }
-            }
-        } );
-    }
-
-    public static void followUpEleventhQuestionAnswer(Context context,
-                                                      final OnEleventFollowUphAnswerListener listener,
-                                                      int appointmentID,
-                                                      Answer answer) {
-        System.out.println ( "MedlynkRequests.followUpEleventhQuestionAnswer" );
-        if (Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
-            Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "11" );
-        } else {
-            Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "14" );
-        }
-        Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.ANSWER, answer );
-        Call<FollowUpSymptomResponse> call = MedlynkRestAPI.getInstance().getMainRetrofit ( context )
-                .followUpSymptomtAnswer ( appointmentID, Constants.FOLLOW_UP_SYMPTOM_BODY );
-        call.enqueue ( new Callback<FollowUpSymptomResponse> () {
-            @Override
-            public void onResponse(Call<FollowUpSymptomResponse> call, Response<FollowUpSymptomResponse> response) {
-                if (response.isSuccessful ()) {
-                    listener.onEleventhAnswerSuccess ( response.body () );
-                } else {
-                    listener.onEleventhAnswerFailure ();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<FollowUpSymptomResponse> call, Throwable t) {
-                listener.onEleventhAnswerFailure ();
-            }
-        } );
-    }
-
-    public static void followUpTwelveQuestionAnswer(Context context,
-                                                    final OnFollowUpTwelveAnswerListener listener,
-                                                    int appointmentID,
-                                                    List<Medication> answers) {
-        System.out.println ( "MedlynkRequests.followUpEleventhQuestionAnswer" );
-        if (Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
-            Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "12" );
-        } else {
-            Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "15" );
-        }
-        Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.ANSWER, answers );
-        Call<FollowUpSymptomResponse> call = MedlynkRestAPI.getInstance().getMainRetrofit ( context )
-                .followUpSymptomtAnswer ( appointmentID, Constants.FOLLOW_UP_SYMPTOM_BODY );
-        call.enqueue ( new Callback<FollowUpSymptomResponse> () {
-            @Override
-            public void onResponse(Call<FollowUpSymptomResponse> call, Response<FollowUpSymptomResponse> response) {
-                if (response.isSuccessful ()) {
-                    listener.onTwelveAnswerSuccess ( response.body () );
-                } else {
-                    listener.onTwelveAnswerFailure ();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<FollowUpSymptomResponse> call, Throwable t) {
-                if (t instanceof JsonSyntaxException) {
-                    listener.onTwelveAnswerSuccess ( null );
-                } else {
-                    listener.onTwelveAnswerFailure ();
-                }
-            }
-        } );
-    }
-
-    public static void followUpTwelveQuestionAnswer(Context context,
-                                                    final OnFollowUpTwelveAnswerListener listener,
-                                                    int appointmentID,
-                                                    Answer answer) {
-        System.out.println ( "MedlynkRequests.followUpEleventhQuestionAnswer" );
-        if (Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
-            Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "12" );
-        } else {
-            Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, "15" );
-        }
-        Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.ANSWER, answer );
-        Call<FollowUpSymptomResponse> call = MedlynkRestAPI.getInstance().getMainRetrofit ( context )
-                .followUpSymptomtAnswer ( appointmentID, Constants.FOLLOW_UP_SYMPTOM_BODY );
-        call.enqueue ( new Callback<FollowUpSymptomResponse> () {
-            @Override
-            public void onResponse(Call<FollowUpSymptomResponse> call, Response<FollowUpSymptomResponse> response) {
-                if (response.isSuccessful ()) {
-                    listener.onTwelveAnswerSuccess ( response.body () );
-                } else {
-                    listener.onTwelveAnswerFailure ();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<FollowUpSymptomResponse> call, Throwable t) {
-                listener.onTwelveAnswerFailure ();
             }
         } );
     }
@@ -2136,9 +2137,30 @@ public class MedlynkRequests {
         } );
     }
 
-
-
     public static void refreshToken(Context context) {
 
     }
+
+    public static void getProgressResults(Context context, final OnProgressResponseListener listener,int appointmentId){
+
+        Call<ProgressResponse> call= MedlynkRestAPI.getInstance().getMainRetrofit(context)
+                .getCurrentAppointmentProgressData(appointmentId);
+        call.enqueue(new Callback<ProgressResponse>() {
+            @Override
+            public void onResponse(Call<ProgressResponse> call, Response<ProgressResponse> response) {
+                if(response.isSuccessful()){
+                    listener.onAnswerSuccess(response.body());
+                }else {
+                    listener.onAnswerFailure();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProgressResponse> call, Throwable t) {
+                listener.onAnswerFailure();
+            }
+        });
+    }
+
+
 }

@@ -19,6 +19,7 @@ import tk.medlynk.patient.android.Activity.Refill.fragments.Question_6.Refill_si
 import tk.medlynk.patient.android.Activity.Refill.fragments.Question_7.Refill_seventh_Question;
 import tk.medlynk.patient.android.Activity.Refill.fragments.Question_8.Refill_eighth_Question;
 import tk.medlynk.patient.android.Constants;
+import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
 
 public class Refill_A_Medication_Activity extends AppCompatActivity implements
         Refill_A_Medication_VH.Refill_A_Medication_ClickListener,
@@ -35,11 +36,13 @@ public class Refill_A_Medication_Activity extends AppCompatActivity implements
     private static final String TAG = Refill_A_Medication_Activity.class.getSimpleName();
     private View parent;
     private Refill_A_Medication_VH viewholder;
+    private SharedPreferenceManager manager;
 
     private String CURRENT_FRAGMENT = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_refill__a__medication);
         this.parent = findViewById(R.id.parent_refill_a_medication);

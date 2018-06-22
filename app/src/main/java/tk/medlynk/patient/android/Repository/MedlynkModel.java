@@ -27,33 +27,35 @@ public class MedlynkModel {
         mAnswerDao = db.answerDao ();
     }
 
-    public LiveData<DataBaseModel> GetAnswerRecord(int appointmentId, int tableNumber, int questionNumber) {
+    public LiveData<DataBaseModel> GetAnswerRecord(int appointmentId, int tableNumber,int questionSetId, int questionNumber) {
 
-        mGetAnswerRecord= mAnswerDao.getAnswerRecord ( appointmentId, tableNumber, questionNumber );
+        mGetAnswerRecord= mAnswerDao.getAnswerRecord ( appointmentId, tableNumber,questionSetId, questionNumber );
         return mGetAnswerRecord;
     }
 
-    public LiveData<List<DataBaseModel>> GetAnswersList(int appointmentId, int tableNumber){
-        mGetAnswerList=mAnswerDao.getAnswersList(appointmentId,tableNumber);
+    public LiveData<List<DataBaseModel>> GetAnswersList(int appointmentId, int tableNumber,int questionSetId){
+        mGetAnswerList=mAnswerDao.getAnswersList(appointmentId,tableNumber,questionSetId);
         return mGetAnswerList;
     }
 
-    public void InsertAnswerRecord(int appointmentId, int tableNumber, int questionNumber,String answerJson) {
+    public void InsertAnswerRecord(int appointmentId, int tableNumber,int questionSetId, int questionNumber,String answerJson) {
 
         DataBaseModel answerRecord=new DataBaseModel ();
         answerRecord.setAppointmentId ( appointmentId );
         answerRecord.setTableNumber ( tableNumber );
+        answerRecord.setQuestionSetId(questionSetId);
         answerRecord.setQuestionNumber ( questionNumber );
         answerRecord.setAnswerJson ( answerJson );
 
         new InsertAsyncTask ( mAnswerDao ).execute ( answerRecord );
     }
 
-    public void UpdateAnswerRecord(int appointmentId, int tableNumber, int questionNumber,String answersJson){
+    public void UpdateAnswerRecord(int appointmentId, int tableNumber, int questionSetId, int questionNumber,String answersJson){
 
         DataBaseModel answerRecord=new DataBaseModel ();
         answerRecord.setAppointmentId ( appointmentId );
         answerRecord.setTableNumber ( tableNumber );
+        answerRecord.setQuestionSetId(questionSetId);
         answerRecord.setQuestionNumber ( questionNumber );
         answerRecord.setAnswerJson ( answersJson );
 

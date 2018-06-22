@@ -18,6 +18,7 @@ import com.neweraandroid.demo.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.FollowUpSymptomsActivity;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.OnFollowUpSymptomAnswerListener;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_4.FUpS_4th_Question;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_4.FUpS_4th_VH;
@@ -50,6 +51,7 @@ public class FUpS_6th_Question extends Fragment implements FUpS_6th_VH.OnFUpSSix
 
 
     private OnFollowUpSymptomsSixthQuestionListener mListener;
+    private OnFURNinthQuestionInteractionListener mListenerFUR;
     private FUpS_6th_VH viewHolder;
 
     public FUpS_6th_Question() {
@@ -83,7 +85,7 @@ public class FUpS_6th_Question extends Fragment implements FUpS_6th_VH.OnFUpSSix
     private void dbOperation(final View view) {
         mMedlynkViewModel = ViewModelProviders.of(getActivity()).get(MedlynkViewModel.class);
         manager = new SharedPreferenceManager(getActivity());
-        mMedlynkViewModel.getAnswers(manager.getAppointmentID(), Constants.FOLLOW_UP_SYMPTOMS_ROW, 6)
+        mMedlynkViewModel.getAnswers(manager.getAppointmentID(), Constants.FOLLOW_UP_SYMPTOMS_ROW,0, 6)
                 .observe((LifecycleOwner) this, new Observer<DataBaseModel>() {
                     @Override
                     public void onChanged(@Nullable DataBaseModel dataBaseModel) {
@@ -115,7 +117,11 @@ public class FUpS_6th_Question extends Fragment implements FUpS_6th_VH.OnFUpSSix
         super.onAttach(context);
         if (context instanceof OnFollowUpSymptomsSixthQuestionListener) {
             mListener = (OnFollowUpSymptomsSixthQuestionListener) context;
-        } else {
+        }
+        else if(context instanceof OnFURNinthQuestionInteractionListener){
+            mListenerFUR=(OnFURNinthQuestionInteractionListener) context;
+        }
+        else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFollowUpSymptomsFirstQuestionListener");
         }
@@ -125,6 +131,7 @@ public class FUpS_6th_Question extends Fragment implements FUpS_6th_VH.OnFUpSSix
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        mListenerFUR=null;
     }
 
     @Override
@@ -140,21 +147,34 @@ public class FUpS_6th_Question extends Fragment implements FUpS_6th_VH.OnFUpSSix
 
     @Override
     public void onSkipClick() {
-        System.out.println("FUpS_6th_Question.onSkipClick");
-        mListener.onSixthQuestion();
+        if(Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
+            System.out.println("FUpS_6th_Question.onSkipClick");
+            mListener.onSixthQuestion();
+        }
+        else {
+            mListenerFUR.onFURNinthQuestion();
+        }
     }
 
     @Override
     public void onAnswerSuccess(FollowUpSymptomResponse response) {
-        JsonConverter JC = JsonConverter.getInstance ();
-        if (existsRecord == false)
-            mMedlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (), Constants.FOLLOW_UP_SYMPTOMS_ROW, 6, JC.answersToAnswerJson ( answersForDB ) );
-        else
-            mMedlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (), Constants.FOLLOW_UP_SYMPTOMS_ROW, 6, JC.answersToAnswerJson ( answersForDB ) );
+        if(Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
+            JsonConverter JC = JsonConverter.getInstance();
+            if (existsRecord == false)
+                mMedlynkViewModel.insertAnswersToDB(manager.getAppointmentID(), Constants.FOLLOW_UP_SYMPTOMS_ROW,
+                        0,6, JC.answersToAnswerJson(answersForDB));
+            else
+                mMedlynkViewModel.updateAnswersToDB(manager.getAppointmentID(), Constants.FOLLOW_UP_SYMPTOMS_ROW,
+                        0,6, JC.answersToAnswerJson(answersForDB));
 
-        System.out.println("FUpS_6th_Question.onSixthAnswerSuccess");
-        viewHolder.setProgressBarVisibilityStatus(View.GONE);
-        mListener.onSixthQuestion();
+            System.out.println("FUpS_6th_Question.onSixthAnswerSuccess");
+            viewHolder.setProgressBarVisibilityStatus(View.GONE);
+            mListener.onSixthQuestion();
+        }
+        else {
+            viewHolder.setProgressBarVisibilityStatus(View.GONE);
+            mListenerFUR.onFURNinthQuestion();
+        }
     }
 
     @Override
@@ -165,5 +185,9 @@ public class FUpS_6th_Question extends Fragment implements FUpS_6th_VH.OnFUpSSix
 
     public interface OnFollowUpSymptomsSixthQuestionListener {
         void onSixthQuestion();
+    }
+
+    public interface OnFURNinthQuestionInteractionListener{
+        void onFURNinthQuestion();
     }
 }

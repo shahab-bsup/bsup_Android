@@ -24,22 +24,22 @@ public class MedlynkViewModel extends AndroidViewModel {
         mRepository = new MedlynkModel ( application );
     }
 
-    public LiveData<DataBaseModel> getAnswers(int appointmentId, int tableNumber, int questionNumber) {
-        mGetAnswers = mRepository.GetAnswerRecord ( appointmentId, tableNumber, questionNumber );
+    public LiveData<DataBaseModel> getAnswers(int appointmentId, int tableNumber,int questionSetId, int questionNumber) {
+        mGetAnswers = mRepository.GetAnswerRecord ( appointmentId, tableNumber,questionSetId,questionNumber );
         return mGetAnswers;
     }
 
-    public LiveData<List<DataBaseModel>> getAnswersList(int appointmentId, int tableNumber){
-        mGetAnswersList=mRepository.GetAnswersList(appointmentId,tableNumber);
+    public LiveData<List<DataBaseModel>> getAnswersList(int appointmentId, int tableNumber,int questionSetId){
+        mGetAnswersList=mRepository.GetAnswersList(appointmentId,tableNumber,questionSetId);
         return mGetAnswersList;
     }
 
-    public void insertAnswersToDB(int appointmentId, int tableNumber, int questionNumber, String answersJson) {
-        mRepository.InsertAnswerRecord ( appointmentId, tableNumber, questionNumber, answersJson );
+    public void insertAnswersToDB(int appointmentId, int tableNumber,int questionSetId, int questionNumber, String answersJson) {
+        mRepository.InsertAnswerRecord ( appointmentId, tableNumber, questionSetId, questionNumber, answersJson );
     }
 
-    public void updateAnswersToDB(int appointmentId, int tableNumber, int questionNumber, String answersJson) {
-        mRepository.UpdateAnswerRecord ( appointmentId, tableNumber, questionNumber, answersJson );
+    public void updateAnswersToDB(int appointmentId, int tableNumber,int questionSetId, int questionNumber, String answersJson) {
+        mRepository.UpdateAnswerRecord ( appointmentId, tableNumber,questionSetId, questionNumber, answersJson );
     }
 
 }

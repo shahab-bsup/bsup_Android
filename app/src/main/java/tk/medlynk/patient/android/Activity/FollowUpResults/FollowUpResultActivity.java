@@ -11,20 +11,23 @@ import android.widget.Toast;
 import com.neweraandroid.demo.R;
 
 import tk.medlynk.patient.android.Activity.FollowUpResults.fragments.Question_1.FUpR_1st_Question;
-import tk.medlynk.patient.android.Activity.FollowUpResults.fragments.Question_17.FUpR_17th_Question;
-import tk.medlynk.patient.android.Activity.FollowUpResults.fragments.Question_18.FUpR_18th_Question;
 import tk.medlynk.patient.android.Activity.FollowUpResults.fragments.Question_2.FUpR_2nd_Question;
 import tk.medlynk.patient.android.Activity.FollowUpResults.fragments.Question_3.FUpR_3rd_Question;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_10.FUpS_10th_Question;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_11.FUpS_11th_Question;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_12.FUpS_12th_Question;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_13.FUpS_13th_Question;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_1.FUpS_1st_Question;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_2.FUpS_2nd_Question;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_3.FUpS_3rd_Question;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_4.FUpS_4th_Question;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_5.FUpS_5th_Question;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_6.FUpS_6th_Question;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_7.FUpS_7th_Question;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_8.FUpS_8th_Question;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_9.FUpS_9th_Question;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_10.FUpS_10th_Question;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_11.FUpS_11th_Question;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_12.FUpS_12th_Question;
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_13.FUpS_13th_Question;
+import tk.medlynk.patient.android.Activity.FollowUpResults.fragments.Question_17.FUpR_17th_Question;
+import tk.medlynk.patient.android.Activity.FollowUpResults.fragments.Question_18.FUpR_18th_Question;
 import tk.medlynk.patient.android.Activity.FollowUpResults.fragments.End_of_Question_Set.End_of_Question_Set;
 import tk.medlynk.patient.android.Constants;
 
@@ -32,16 +35,19 @@ public class FollowUpResultActivity extends AppCompatActivity implements
         FUpR_1st_Question.OnFURFirstQuestionInteractionListener,
         FUpR_2nd_Question.OnFURSecondQuestionInteractionListener,
         FUpR_3rd_Question.OnFURThirdQuestionInteractionListener,
-        FUpS_4th_Question.OnFollowUpSymptomsFourthQuestionListener,
-        FUpS_5th_Question.OnFollowUpSymptomsFifthQuestionListener,
-        FUpS_6th_Question.OnFollowUpSymptomsSixthQuestionListener,
-        FUpS_7th_Question.OnFollowUpSymptomsSeventhQuestionListener,
-        FUpS_8th_Question.OnFollowUpSymptomsEighthQuestionListener,
-        FUpS_9th_Question.OnFollowUpSymptomsNinthQuestionListener,
-        FUpS_10th_Question.OnFollowUpSymptomsTenthQuestionListener,
-        FUpS_11th_Question.OnFollowUpSymptomsEleventhQuestionListener,
-        FUpS_12th_Question.OnFollowUpSymptomsTwelveQuestionListener,
-        FUpS_13th_Question.OnFollowUpSymptomsThirteenQuestionListener,
+        FUpS_1st_Question.OnFURFourthQuestionInteractionListener,
+        FUpS_2nd_Question.OnFURFifthQuestionInteractionListener,
+        FUpS_3rd_Question.OnFURSixthQuestionInteractionListener,
+        FUpS_4th_Question.OnFURSeventhQuestionInteractionListener,
+        FUpS_5th_Question.OnFUREighthQuestionInteractionListener,
+        FUpS_6th_Question.OnFURNinthQuestionInteractionListener,
+        FUpS_7th_Question.OnFURTenthQuestionInteractionListener,
+        FUpS_8th_Question.OnFUREleventhQuestionInteractionListener,
+        FUpS_9th_Question.OnFURTwelveQuestionInteractionListener,
+        FUpS_10th_Question.OnFURThirteenQuestionInteractionListener,
+        FUpS_11th_Question.OnFURFourteenQuestionInteractionListener,
+        FUpS_12th_Question.OnFURFifteenQuestionInteractionListener,
+        FUpS_13th_Question.OnFURSixteenQuestionInteractionListener,
         FUpR_17th_Question.OnFURSeventeenQuestionInteractionListener,
         FUpR_18th_Question.OnFUREighteenQuestionInteractionListener,
         End_of_Question_Set.OnEndOfFollowUpResultListener{
@@ -101,17 +107,50 @@ public class FollowUpResultActivity extends AppCompatActivity implements
     @Override
     public void onFURThirdQuestion() {
         System.out.println("FollowUpResultActivity.onFURThirdQuestion");
-        CURRENT_FRAGMENT = FUpS_4th_Question.TAG;
+        CURRENT_FRAGMENT = FUpS_1st_Question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
                 .remove(getSupportFragmentManager().findFragmentByTag(FUpR_3rd_Question.TAG))
+                .add(R.id.followUpFragmentsContainer, new FUpS_1st_Question(), FUpS_1st_Question.TAG)
+                .commitNow();
+    }
+
+    @Override
+    public void onFURFourthQuestion() {
+        System.out.println("FollowUpResultActivity.onFourthQuestion");
+        CURRENT_FRAGMENT = FUpS_2nd_Question.TAG;
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                .remove(getSupportFragmentManager().findFragmentByTag(FUpS_1st_Question.TAG))
+                .add(R.id.followUpFragmentsContainer, new FUpS_2nd_Question(), FUpS_2nd_Question.TAG)
+                .commitNow();
+    }
+
+    @Override
+    public void onFURFifthQuestion() {
+        System.out.println("FollowUpResultActivity.onFifthQuestion");
+        CURRENT_FRAGMENT = FUpS_3rd_Question.TAG;
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                .remove(getSupportFragmentManager().findFragmentByTag(FUpS_2nd_Question.TAG))
+                .add(R.id.followUpFragmentsContainer, new FUpS_3rd_Question(), FUpS_3rd_Question.TAG)
+                .commitNow();
+    }
+
+    @Override
+    public void onFURSixthQuestion() {
+        System.out.println("FollowUpResultActivity.onSixthQuestion");
+        CURRENT_FRAGMENT = FUpS_4th_Question.TAG;
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                .remove(getSupportFragmentManager().findFragmentByTag(FUpS_3rd_Question.TAG))
                 .add(R.id.followUpFragmentsContainer, new FUpS_4th_Question(), FUpS_4th_Question.TAG)
                 .commitNow();
     }
 
     @Override
-    public void onFourthQuestion() {
-        System.out.println("FollowUpResultActivity.onFourthQuestion");
+    public void onFURSeventhQuestion() {
+        System.out.println("FollowUpResultActivity.onSeventhQuestion");
         CURRENT_FRAGMENT = FUpS_5th_Question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
@@ -121,8 +160,8 @@ public class FollowUpResultActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onFifthQuestion() {
-        System.out.println("FollowUpResultActivity.onFifthQuestion");
+    public void onFUREighthQuestion() {
+        System.out.println("FollowUpResultActivity.onEighthQuestion");
         CURRENT_FRAGMENT = FUpS_6th_Question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
@@ -132,8 +171,8 @@ public class FollowUpResultActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onSixthQuestion() {
-        System.out.println("FollowUpResultActivity.onSixthQuestion");
+    public void onFURNinthQuestion() {
+        System.out.println("FollowUpResultActivity.onNinthQuestion");
         CURRENT_FRAGMENT = FUpS_7th_Question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
@@ -142,9 +181,10 @@ public class FollowUpResultActivity extends AppCompatActivity implements
                 .commitNow();
     }
 
+
     @Override
-    public void onSeventhQuestion() {
-        System.out.println("FollowUpResultActivity.onSeventhQuestion");
+    public void onFURTenthQuestion() {
+        System.out.println("FollowUpResultActivity.onTenthQuestion");
         CURRENT_FRAGMENT = FUpS_8th_Question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
@@ -154,8 +194,8 @@ public class FollowUpResultActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onEighthQuestion() {
-        System.out.println("FollowUpResultActivity.onEighthQuestion");
+    public void onFUREleventhQuestion() {
+        System.out.println("FollowUpResultActivity.onEleventhQuestion");
         CURRENT_FRAGMENT = FUpS_9th_Question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
@@ -164,9 +204,10 @@ public class FollowUpResultActivity extends AppCompatActivity implements
                 .commitNow();
     }
 
+
     @Override
-    public void onNinthQuestion() {
-        System.out.println("FollowUpResultActivity.onNinthQuestion");
+    public void onFURTwelveQuestion() {
+        System.out.println("FollowUpResultActivity.onTwelveQuestion");
         CURRENT_FRAGMENT = FUpS_10th_Question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
@@ -175,10 +216,9 @@ public class FollowUpResultActivity extends AppCompatActivity implements
                 .commitNow();
     }
 
-
     @Override
-    public void onTenthQuestion() {
-        System.out.println("FollowUpResultActivity.onTenthQuestion");
+    public void onFURThirteenQuestion() {
+        System.out.println("FollowUpResultActivity.onThirteenQuestion");
         CURRENT_FRAGMENT = FUpS_11th_Question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
@@ -188,8 +228,8 @@ public class FollowUpResultActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onEleventhQuestion() {
-        System.out.println("FollowUpResultActivity.onEleventhQuestion");
+    public void onFURFourteenQuestion() {
+        System.out.println("FollowUpResultActivity.onFourteenQuestion");
         CURRENT_FRAGMENT = FUpS_12th_Question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
@@ -197,11 +237,9 @@ public class FollowUpResultActivity extends AppCompatActivity implements
                 .add(R.id.followUpFragmentsContainer, new FUpS_12th_Question(), FUpS_12th_Question.TAG)
                 .commitNow();
     }
-
-
     @Override
-    public void onTwelveQuestion() {
-        System.out.println("FollowUpResultActivity.onTwelveQuestion");
+    public void onFURFifteenQuestion() {
+        System.out.println("FollowUpResultActivity.onFifteenQuestion");
         CURRENT_FRAGMENT = FUpS_13th_Question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
@@ -210,10 +248,9 @@ public class FollowUpResultActivity extends AppCompatActivity implements
                 .commitNow();
     }
 
-
     @Override
-    public void onThirteenQuestion() {
-        System.out.println("FollowUpResultActivity.onThirteenQuestion");
+    public void onFURSixteenQuestion() {
+        System.out.println("FollowUpResultActivity.onFifteenQuestion");
         CURRENT_FRAGMENT = FUpR_17th_Question.TAG;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
@@ -284,11 +321,35 @@ public class FollowUpResultActivity extends AppCompatActivity implements
                 break;
             }
 
-            case FUpS_4th_Question.TAG:{
+            case FUpS_1st_Question.TAG:{
                 CURRENT_FRAGMENT =FUpR_3rd_Question.TAG;
                 fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
-                        .remove(getSupportFragmentManager().findFragmentByTag(FUpS_4th_Question.TAG))
+                        .remove(getSupportFragmentManager().findFragmentByTag(FUpS_1st_Question.TAG))
                         .add(R.id.followUpFragmentsContainer, new FUpR_3rd_Question(), FUpR_3rd_Question.TAG)
+                        .commitNow();
+                break;
+            }
+            case FUpS_2nd_Question.TAG:{
+                CURRENT_FRAGMENT =FUpS_1st_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(FUpS_2nd_Question.TAG))
+                        .add(R.id.followUpFragmentsContainer, new FUpS_1st_Question(), FUpS_1st_Question.TAG)
+                        .commitNow();
+                break;
+            }
+            case FUpS_3rd_Question.TAG:{
+                CURRENT_FRAGMENT =FUpS_2nd_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(FUpS_3rd_Question.TAG))
+                        .add(R.id.followUpFragmentsContainer, new FUpS_2nd_Question(), FUpS_2nd_Question.TAG)
+                        .commitNow();
+                break;
+            }
+            case FUpS_4th_Question.TAG:{
+                CURRENT_FRAGMENT =FUpS_3rd_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(FUpS_4th_Question.TAG))
+                        .add(R.id.followUpFragmentsContainer, new FUpS_3rd_Question(), FUpS_3rd_Question.TAG)
                         .commitNow();
                 break;
             }
@@ -398,9 +459,149 @@ public class FollowUpResultActivity extends AppCompatActivity implements
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         switch (questionNumber) {
             case 1: {
-                CURRENT_FRAGMENT=FUpR_1st_Question.TAG;
+                CURRENT_FRAGMENT =FUpR_1st_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.followUpFragmentsContainer, new FUpR_1st_Question(), FUpR_1st_Question.TAG)
+                        .commitNow();
+                break;
             }
-
+            case 2: {
+                CURRENT_FRAGMENT =FUpR_2nd_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.followUpFragmentsContainer, new FUpR_2nd_Question(), FUpR_2nd_Question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 3: {
+                CURRENT_FRAGMENT =FUpR_3rd_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.followUpFragmentsContainer, new FUpR_3rd_Question(), FUpR_3rd_Question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 4: {
+                CURRENT_FRAGMENT =FUpS_1st_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.followUpFragmentsContainer, new FUpS_1st_Question(), FUpS_1st_Question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 5: {
+                CURRENT_FRAGMENT =FUpS_2nd_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.followUpFragmentsContainer, new FUpS_2nd_Question(), FUpS_2nd_Question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 6: {
+                CURRENT_FRAGMENT =FUpS_3rd_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.followUpFragmentsContainer, new FUpS_3rd_Question(), FUpS_3rd_Question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 7: {
+                CURRENT_FRAGMENT =FUpS_4th_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.followUpFragmentsContainer, new FUpS_4th_Question(), FUpS_4th_Question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 8: {
+                CURRENT_FRAGMENT =FUpS_5th_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.followUpFragmentsContainer, new FUpS_5th_Question(), FUpS_5th_Question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 9: {
+                CURRENT_FRAGMENT =FUpS_6th_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.followUpFragmentsContainer, new FUpS_6th_Question(), FUpS_6th_Question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 10: {
+                CURRENT_FRAGMENT =FUpS_7th_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.followUpFragmentsContainer, new FUpS_7th_Question(), FUpS_7th_Question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 11: {
+                CURRENT_FRAGMENT =FUpS_8th_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.followUpFragmentsContainer, new FUpS_8th_Question(), FUpS_8th_Question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 12: {
+                CURRENT_FRAGMENT =FUpS_9th_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.followUpFragmentsContainer, new FUpS_9th_Question(), FUpS_9th_Question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 13: {
+                CURRENT_FRAGMENT =FUpS_10th_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.followUpFragmentsContainer, new FUpS_10th_Question(), FUpS_10th_Question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 14: {
+                CURRENT_FRAGMENT =FUpS_11th_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.followUpFragmentsContainer, new FUpS_11th_Question(), FUpS_11th_Question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 15: {
+                CURRENT_FRAGMENT =FUpS_12th_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.followUpFragmentsContainer, new FUpS_12th_Question(), FUpS_12th_Question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 16: {
+                CURRENT_FRAGMENT =FUpS_13th_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.followUpFragmentsContainer, new FUpS_13th_Question(), FUpS_13th_Question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 17: {
+                CURRENT_FRAGMENT =FUpR_17th_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.followUpFragmentsContainer, new FUpR_17th_Question(), FUpR_17th_Question.TAG)
+                        .commitNow();
+                break;
+            }
+            case 18: {
+                CURRENT_FRAGMENT =FUpR_18th_Question.TAG;
+                fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
+                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
+                        .add(R.id.followUpFragmentsContainer, new FUpR_18th_Question(), FUpR_18th_Question.TAG)
+                        .commitNow();
+                break;
+            }
 
         }
     }

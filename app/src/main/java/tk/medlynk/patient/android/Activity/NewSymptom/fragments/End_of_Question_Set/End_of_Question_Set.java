@@ -120,7 +120,7 @@ public class End_of_Question_Set extends Fragment implements End_of_Question_Set
     private void takeFirstUnansweredQuestion(){
         manager = new SharedPreferenceManager ( getActivity () );
         mMedlynkViewModel = ViewModelProviders.of ( getActivity () ).get ( MedlynkViewModel.class );
-        mMedlynkViewModel.getAnswersList(manager.getAppointmentID(), Constants.NEW_SYMPTOM_ROW)
+        mMedlynkViewModel.getAnswersList(manager.getAppointmentID(), Constants.NEW_SYMPTOM_ROW,0)
                 .observe(this, new Observer<List<DataBaseModel>>() {
                     @Override
                     public void onChanged(@Nullable List<DataBaseModel> dataBaseModels) {
