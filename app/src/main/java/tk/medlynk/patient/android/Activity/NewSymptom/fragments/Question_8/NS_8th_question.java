@@ -75,7 +75,7 @@ public class NS_8th_question extends Fragment implements
                 .get ( MedlynkViewModel.class );
         manager = new SharedPreferenceManager ( getActivity () );
         medlynkViewModel.getAnswers ( manager.getAppointmentID (),
-                Constants.NEW_SYMPTOM_ROW, 8 )
+                Constants.NEW_SYMPTOM_ROW,0, 8 )
                 .observe ( this, new Observer<DataBaseModel> () {
                     private Answer answer;
                     private List<Answer> answers;
@@ -126,12 +126,12 @@ public class NS_8th_question extends Fragment implements
         JsonConverter JC = JsonConverter.getInstance();
         if (existRecord == false)
             medlynkViewModel.insertAnswersToDB(manager.getAppointmentID(),
-                    Constants.NEW_SYMPTOM_ROW,
+                    Constants.NEW_SYMPTOM_ROW,0,
                     8,
                     JC.answersToAnswerJson(answersForDB));
         else
             medlynkViewModel.updateAnswersToDB(manager.getAppointmentID(),
-                    Constants.NEW_SYMPTOM_ROW,
+                    Constants.NEW_SYMPTOM_ROW,0,
                     8,
                     JC.answersToAnswerJson(answersForDB));
 

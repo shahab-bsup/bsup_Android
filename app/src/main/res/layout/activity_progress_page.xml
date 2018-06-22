@@ -1,24 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/activity_progress_page"
+    android:orientation="vertical"
     tools:context="tk.medlynk.patient.android.Activity.Progress.ProgressPageActivity">
 
-    <include
+   <include
         android:id="@+id/progress_page_toolbar"
-        layout="@layout/toolbar_layout_2" />
+        layout="@layout/toolbar_layout" />
 
     <tk.medlynk.patient.android.CustomViews.CustomTextView
+        android:id="@+id/txtStartedAppointments"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/progress_page_toolbar"
-        android:layout_margin="10dp"
-        android:id="@+id/txtStartedAppointments"
-        />
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="30dp"
+        android:padding="10dp" />
+
+    <LinearLayout
+        android:id="@+id/refill_Layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ExpandableListView
+            android:id="@+id/refill_expandableListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:dividerHeight="0.5dp"
+            android:layoutDirection="rtl"></ExpandableListView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/black" />
+    </LinearLayout>
 
 
-</RelativeLayout>
+    <LinearLayout
+        android:id="@+id/newSymptoms_Layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <include
+            android:id="@+id/progress_NewSymptoms"
+            layout="@layout/progress_item" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/followUpSymptoms_Layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <include
+            android:id="@+id/progress_FollowUpSymptoms"
+            layout="@layout/progress_item" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/followUpResult_Layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <include
+            android:id="@+id/progress_FollowUpResult"
+            layout="@layout/progress_item" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/black" />
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -9,12 +9,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.neweraandroid.demo.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.FollowUpSymptomsActivity;
 import tk.medlynk.patient.android.Constants;
 import tk.medlynk.patient.android.DataBase.DataBaseModel;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
@@ -39,6 +41,7 @@ public class FUpS_13th_Question extends Fragment implements
     public static final String TAG = "FUpS_13th_Question";
 
     private OnFollowUpSymptomsThirteenQuestionListener mListener;
+    private OnFURSixteenQuestionInteractionListener mListenerFUR;
     private FUpS_13th_VH viewHolder;
     private SharedPreferenceManager manager;
     private MedlynkViewModel medlynkViewModel;
@@ -78,7 +81,7 @@ public class FUpS_13th_Question extends Fragment implements
         medlynkViewModel = ViewModelProviders.of ( getActivity () )
                 .get ( MedlynkViewModel.class );
         medlynkViewModel.getAnswers ( manager.getAppointmentID (),
-                Constants.FOLLOW_UP_SYMPTOMS_ROW,
+                Constants.FOLLOW_UP_SYMPTOMS_ROW,0,
                 13 ).observe ( FUpS_13th_Question.this,
                 new Observer<DataBaseModel> () {
                     private Answer answer;
@@ -108,6 +111,9 @@ public class FUpS_13th_Question extends Fragment implements
         super.onAttach ( context );
         if (context instanceof OnFollowUpSymptomsThirteenQuestionListener) {
             mListener = (OnFollowUpSymptomsThirteenQuestionListener) context;
+        }
+        else if (context instanceof OnFURSixteenQuestionInteractionListener) {
+            mListenerFUR = (OnFURSixteenQuestionInteractionListener) context;
         } else {
             throw new RuntimeException ( context.toString ()
                     + " must implement OnFollowUpSymptomsFirstQuestionListener" );
@@ -118,6 +124,7 @@ public class FUpS_13th_Question extends Fragment implements
     public void onDetach() {
         super.onDetach ();
         mListener = null;
+        mListenerFUR=null;
     }
 
     @Override
@@ -133,34 +140,49 @@ public class FUpS_13th_Question extends Fragment implements
 
     @Override
     public void onSkipClick() {
-        mListener.onThirteenQuestion ();
+        if(Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
+            mListener.onThirteenQuestion();
+        }
+        else {
+            mListenerFUR.onFURSixteenQuestion();
+        }
     }
 
     @Override
     public void onThirteenAnswerSuccess(FollowUpSymptomResponse response) {
-        JsonConverter jsonConverter = JsonConverter.getInstance ();
-        if (!existsRecord) {
-            medlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (),
-                    Constants.FOLLOW_UP_SYMPTOMS_ROW,
-                    13,
-                    jsonConverter.answersToAnswerJson ( answersDB ) );
-        } else {
-            medlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (),
-                    Constants.FOLLOW_UP_SYMPTOMS_ROW,
-                    13,
-                    jsonConverter.answersToAnswerJson ( answersDB ) );
+        if(Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
+            JsonConverter jsonConverter = JsonConverter.getInstance();
+            if (!existsRecord) {
+                medlynkViewModel.insertAnswersToDB(manager.getAppointmentID(),
+                        Constants.FOLLOW_UP_SYMPTOMS_ROW,0,
+                        13,
+                        jsonConverter.answersToAnswerJson(answersDB));
+            } else {
+                medlynkViewModel.updateAnswersToDB(manager.getAppointmentID(),
+                        Constants.FOLLOW_UP_SYMPTOMS_ROW,0,
+                        13,
+                        jsonConverter.answersToAnswerJson(answersDB));
+            }
+            viewHolder.setProgressBarVisibilityStatus(View.GONE);
+            mListener.onThirteenQuestion();
         }
-        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
-        mListener.onThirteenQuestion ();
+        else {
+            viewHolder.setProgressBarVisibilityStatus(View.GONE);
+            mListenerFUR.onFURSixteenQuestion();
+        }
     }
 
     @Override
     public void onThirteenAnswerFailure() {
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+        Toast.makeText ( getActivity (), "try again later!", Toast.LENGTH_SHORT ).show ();
     }
 
 
     public interface OnFollowUpSymptomsThirteenQuestionListener {
         void onThirteenQuestion();
+    }
+    public interface OnFURSixteenQuestionInteractionListener{
+        void onFURSixteenQuestion();
     }
 }

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/progressItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layoutDirection="ltr">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <tk.medlynk.patient.android.CustomViews.CustomTextView
+            android:id="@+id/text_progressItemTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:text="To review the result of a test"
+            android:textStyle="bold"
+            android:textSize="16dp"/>
+
+        <tk.medlynk.patient.android.CustomViews.CustomTextView
+            android:id="@+id/text_progressItemDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_progressItemTitle"
+            android:layout_margin="15dp"
+            android:text="86% answered - Started on 7 JUN 2017 "
+            android:textSize="14dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layoutDirection="rtl"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/img_progressItemDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/delete" />
+
+        <ImageView
+            android:id="@+id/img_progressItemEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/edit" />
+
+        <ImageView
+            android:id="@+id/img_progressItemPrint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/printer" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

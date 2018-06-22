@@ -1,8 +1,21 @@
+
 package tk.medlynk.patient.android.Model;
 
-/**
- * Created by Shahab on 3/16/2018.
- */
+import java.util.List;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-class Answers {
+public class Answers {
+
+    @SerializedName("answer")
+    @Expose
+    private List<Answer> answersInQuestionSet;
+
+    public List<Answer> getAnswersInQuestionSet() {
+        return answersInQuestionSet;
+    }
+
+    public void setAnswersInQuestionSet(List<Answer> answersInQuestionSet) {
+        this.answersInQuestionSet = answersInQuestionSet;
+    }
 }

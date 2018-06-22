@@ -80,7 +80,7 @@ public class NS_17th_question extends Fragment implements
                 .get ( MedlynkViewModel.class );
         manager = new SharedPreferenceManager ( getActivity () );
         medlynkViewModel.getAnswers ( manager.getAppointmentID (),
-                Constants.NEW_SYMPTOM_ROW,
+                Constants.NEW_SYMPTOM_ROW,0,
                 17 ).observe ( NS_17th_question.this, new Observer<DataBaseModel> () {
             public Answer answer;
             public List<Answer> answers;
@@ -126,11 +126,11 @@ public class NS_17th_question extends Fragment implements
         JsonConverter jsonConverter = JsonConverter.getInstance ();
         if( !existRecord ){
             medlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (),
-                    Constants.NEW_SYMPTOM_ROW,
+                    Constants.NEW_SYMPTOM_ROW,0,
                     17, jsonConverter.answersToAnswerJson ( answersDB ));
         }else{
             medlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (),
-                    Constants.NEW_SYMPTOM_ROW,
+                    Constants.NEW_SYMPTOM_ROW,0,
                     17, jsonConverter.answersToAnswerJson ( answersDB ));
         }
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );

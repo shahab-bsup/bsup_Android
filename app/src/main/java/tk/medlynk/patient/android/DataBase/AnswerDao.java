@@ -17,8 +17,13 @@ import java.util.List;
 public interface AnswerDao {
 
     @Query("SELECT * FROM tbl_AnswersDataBase WHERE " +
-            "(appointmentId IN (:appointmentId)) AND (tableNumber IN (:tableNumber)) AND (questionNumber IN (:questionNumber))")
-    LiveData<DataBaseModel> getAnswerRecord(int appointmentId, int tableNumber, int questionNumber);
+            "(appointmentId IN (:appointmentId)) AND (tableNumber IN (:tableNumber))" +
+            "AND (questionSetId IN (:questionSetId))  AND (questionNumber IN (:questionNumber))")
+    LiveData<DataBaseModel> getAnswerRecord(int appointmentId, int tableNumber,int questionSetId, int questionNumber);
+
+    @Query("SELECT * FROM tbl_AnswersDataBase WHERE "+
+            "(appointmentId IN (:appointmentId)) AND (tableNumber IN (:tableNumber)) AND (questionSetId IN (:questionSetId))")
+    LiveData<List<DataBaseModel>> getAnswersList(int appointmentId, int tableNumber,int questionSetId);
 
     @Query("SELECT * FROM tbl_AnswersDataBase WHERE "+
             "(appointmentId IN (:appointmentId)) AND (tableNumber IN (:tableNumber))")

@@ -15,6 +15,7 @@ import com.neweraandroid.demo.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.FollowUpSymptomsActivity;
 import tk.medlynk.patient.android.Constants;
 import tk.medlynk.patient.android.DataBase.DataBaseModel;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
@@ -39,6 +40,7 @@ public class FUpS_9th_Question extends Fragment implements
     public static final String TAG = "FUpS_9th_Question";
 
     private OnFollowUpSymptomsNinthQuestionListener mListener;
+    private OnFURTwelveQuestionInteractionListener mListenerFUR;
     private FUpS_9th_VH viewHolder;
     private MedlynkViewModel medlynkViewModel;
     private SharedPreferenceManager manager;
@@ -78,7 +80,7 @@ public class FUpS_9th_Question extends Fragment implements
                 .get ( MedlynkViewModel.class );
         manager = new SharedPreferenceManager ( getActivity () );
         medlynkViewModel.getAnswers ( manager.getAppointmentID (),
-                Constants.FOLLOW_UP_SYMPTOMS_ROW,
+                Constants.FOLLOW_UP_SYMPTOMS_ROW,0,
                 9 ).observe ( FUpS_9th_Question.this,
                 new Observer<DataBaseModel> () {
                     private Answer answer;
@@ -114,6 +116,9 @@ public class FUpS_9th_Question extends Fragment implements
         super.onAttach ( context );
         if (context instanceof OnFollowUpSymptomsNinthQuestionListener) {
             mListener = (OnFollowUpSymptomsNinthQuestionListener) context;
+        }
+        else if (context instanceof OnFURTwelveQuestionInteractionListener) {
+            mListenerFUR = (OnFURTwelveQuestionInteractionListener) context;
         } else {
             throw new RuntimeException ( context.toString ()
                     + " must implement OnFollowUpSymptomsFirstQuestionListener" );
@@ -124,6 +129,7 @@ public class FUpS_9th_Question extends Fragment implements
     public void onDetach() {
         super.onDetach ();
         mListener = null;
+        mListenerFUR=null;
     }
 
     @Override
@@ -156,25 +162,36 @@ public class FUpS_9th_Question extends Fragment implements
 
     @Override
     public void onSkipClick() {
-        mListener.onNinthQuestion ();
+        if(Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
+            mListener.onNinthQuestion();
+        }
+        else {
+            mListenerFUR.onFURTwelveQuestion();
+        }
     }
 
     @Override
     public void onNinthAnswerSuccess(FollowUpSymptomResponse response) {
-        JsonConverter jsonConverter = JsonConverter.getInstance ();
-        if (!existRecord) {
-            medlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (),
-                    Constants.FOLLOW_UP_SYMPTOMS_ROW,
-                    9, jsonConverter.
-                            answersToAnswerJson ( answersDB ) );
-        } else {
-            medlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (),
-                    Constants.FOLLOW_UP_SYMPTOMS_ROW,
-                    9, jsonConverter.
-                            answersToAnswerJson ( answersDB ) );
+        if(Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
+            JsonConverter jsonConverter = JsonConverter.getInstance();
+            if (!existRecord) {
+                medlynkViewModel.insertAnswersToDB(manager.getAppointmentID(),
+                        Constants.FOLLOW_UP_SYMPTOMS_ROW,0,
+                        9, jsonConverter.
+                                answersToAnswerJson(answersDB));
+            } else {
+                medlynkViewModel.updateAnswersToDB(manager.getAppointmentID(),
+                        Constants.FOLLOW_UP_SYMPTOMS_ROW,0,
+                        9, jsonConverter.
+                                answersToAnswerJson(answersDB));
+            }
+            viewHolder.setProgressBarVisibilityStatus(View.GONE);
+            mListener.onNinthQuestion();
         }
-        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
-        mListener.onNinthQuestion ();
+        else {
+            viewHolder.setProgressBarVisibilityStatus(View.GONE);
+            mListenerFUR.onFURTwelveQuestion();
+        }
     }
 
     @Override
@@ -186,4 +203,9 @@ public class FUpS_9th_Question extends Fragment implements
     public interface OnFollowUpSymptomsNinthQuestionListener {
         void onNinthQuestion();
     }
+
+    public interface OnFURTwelveQuestionInteractionListener{
+        void onFURTwelveQuestion();
+    }
+
 }

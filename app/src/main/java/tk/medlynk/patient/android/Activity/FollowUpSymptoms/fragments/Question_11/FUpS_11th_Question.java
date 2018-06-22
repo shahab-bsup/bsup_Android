@@ -7,11 +7,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.neweraandroid.demo.R;
 
 import java.util.List;
 
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.FollowUpSymptomsActivity;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_22.NS_22th_question;
+import tk.medlynk.patient.android.Constants;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
 import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.FollowUpSymptomResponse;
@@ -31,6 +35,7 @@ public class FUpS_11th_Question extends Fragment implements
     public static final String TAG = "FUpS_11th_Question";
 
     private OnFollowUpSymptomsEleventhQuestionListener mListener;
+    private OnFURFourteenQuestionInteractionListener mListenerFUR;
     private FUpS_11th_VH viewHolder;
 
     public FUpS_11th_Question() {
@@ -74,6 +79,9 @@ public class FUpS_11th_Question extends Fragment implements
         super.onAttach ( context );
         if (context instanceof OnFollowUpSymptomsEleventhQuestionListener) {
             mListener = (OnFollowUpSymptomsEleventhQuestionListener) context;
+        }
+        else if (context instanceof OnFURFourteenQuestionInteractionListener) {
+            mListenerFUR = (OnFURFourteenQuestionInteractionListener) context;
         } else {
             throw new RuntimeException ( context.toString ()
                     + " must implement OnFollowUpSymptomsFirstQuestionListener" );
@@ -84,6 +92,7 @@ public class FUpS_11th_Question extends Fragment implements
     public void onDetach() {
         super.onDetach ();
         mListener = null;
+        mListenerFUR=null;
     }
 
     @Override
@@ -112,26 +121,41 @@ public class FUpS_11th_Question extends Fragment implements
 
     @Override
     public void onSkipClicked() {
-        System.out.println ( "FUpS_11th_Question.onSkipClicked" );
-        mListener.onEleventhQuestion ();
+        if(Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
+            System.out.println("FUpS_11th_Question.onSkipClicked");
+            mListener.onEleventhQuestion();
+        }
+        else {
+            mListenerFUR.onFURFourteenQuestion();
+        }
     }
 
     @Override
     public void onEleventhAnswerSuccess(FollowUpSymptomResponse response) {
-        System.out.println ( "FUpS_11th_Question.onEleventhAnswerSuccess" );
-        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
-        mListener.onEleventhQuestion ();
+        if(Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
+            System.out.println("FUpS_11th_Question.onEleventhAnswerSuccess");
+            viewHolder.setProgressBarVisibilityStatus(View.GONE);
+            mListener.onEleventhQuestion();
+        }
+        else {
+            viewHolder.setProgressBarVisibilityStatus(View.GONE);
+            mListenerFUR.onFURFourteenQuestion();
+        }
     }
 
     @Override
     public void onEleventhAnswerFailure() {
-        System.out.println ( "FUpS_11th_Question.onEleventhAnswerFailure" );
-        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
-        mListener.onEleventhQuestion ();
+
+        System.out.println("FUpS_11th_Question.onEleventhAnswerFailure");
+        viewHolder.setProgressBarVisibilityStatus(View.GONE);
+        Toast.makeText ( getActivity (), "try again later!", Toast.LENGTH_SHORT ).show ();
     }
 
 
     public interface OnFollowUpSymptomsEleventhQuestionListener {
         void onEleventhQuestion();
+    }
+    public interface OnFURFourteenQuestionInteractionListener{
+        void onFURFourteenQuestion();
     }
 }

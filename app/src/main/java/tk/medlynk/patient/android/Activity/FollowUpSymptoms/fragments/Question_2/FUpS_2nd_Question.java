@@ -18,6 +18,7 @@ import com.neweraandroid.demo.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.FollowUpSymptomsActivity;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.OnFollowUpSymptomAnswerListener;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_1.FUpS_1st_Question;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_1.FUpS__1st_VH;
@@ -50,6 +51,7 @@ public class FUpS_2nd_Question extends Fragment implements
     private List<Answer> answersForDB = new ArrayList<>();
 
     private OnFollowUpSymptomsSecondQuestionListener mListener;
+    private OnFURFifthQuestionInteractionListener mListenerFUR;
     private FUpS_2nd_VH viewHolder;
 
     public FUpS_2nd_Question() {
@@ -83,7 +85,7 @@ public class FUpS_2nd_Question extends Fragment implements
     private void dbOperation(final View view) {
         mMedlynkViewModel = ViewModelProviders.of(getActivity()).get(MedlynkViewModel.class);
         manager = new SharedPreferenceManager(getActivity());
-        mMedlynkViewModel.getAnswers(manager.getAppointmentID(), Constants.FOLLOW_UP_SYMPTOMS_ROW, 2)
+        mMedlynkViewModel.getAnswers(manager.getAppointmentID(), Constants.FOLLOW_UP_SYMPTOMS_ROW,0, 2)
                 .observe((LifecycleOwner) this, new Observer<DataBaseModel>() {
                     @Override
                     public void onChanged(@Nullable DataBaseModel dataBaseModel) {
@@ -114,7 +116,11 @@ public class FUpS_2nd_Question extends Fragment implements
         super.onAttach(context);
         if (context instanceof OnFollowUpSymptomsSecondQuestionListener) {
             mListener = (OnFollowUpSymptomsSecondQuestionListener) context;
-        } else {
+        }
+        else if(context instanceof OnFURFifthQuestionInteractionListener){
+            mListenerFUR=(OnFURFifthQuestionInteractionListener) context;
+        }
+        else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFollowUpSymptomsFirstQuestionListener");
         }
@@ -124,6 +130,7 @@ public class FUpS_2nd_Question extends Fragment implements
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        mListenerFUR=null;
     }
 
     @Override
@@ -139,21 +146,32 @@ public class FUpS_2nd_Question extends Fragment implements
 
     @Override
     public void onSkipClick() {
-        System.out.println("FUpS_2nd_Question.onSkipClick");
-        mListener.onSecondQuestion();
+        if(Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
+            System.out.println("FUpS_2nd_Question.onSkipClick");
+            mListener.onSecondQuestion();
+        }
+        else {
+            mListenerFUR.onFURFifthQuestion();
+        }
     }
 
     @Override
     public void onAnswerSuccess(FollowUpSymptomResponse response) {
-        JsonConverter JC = JsonConverter.getInstance ();
-        if (existsRecord == false)
-            mMedlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (), Constants.FOLLOW_UP_SYMPTOMS_ROW, 2, JC.answersToAnswerJson ( answersForDB ) );
-        else
-            mMedlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (), Constants.FOLLOW_UP_SYMPTOMS_ROW, 2, JC.answersToAnswerJson ( answersForDB ) );
+        if(Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
+            JsonConverter JC = JsonConverter.getInstance();
+            if (existsRecord == false)
+                mMedlynkViewModel.insertAnswersToDB(manager.getAppointmentID(), Constants.FOLLOW_UP_SYMPTOMS_ROW,0, 2, JC.answersToAnswerJson(answersForDB));
+            else
+                mMedlynkViewModel.updateAnswersToDB(manager.getAppointmentID(), Constants.FOLLOW_UP_SYMPTOMS_ROW,0, 2, JC.answersToAnswerJson(answersForDB));
 
-        System.out.println("FUpS_2nd_Question.onSecondAnswerSuccess");
-        viewHolder.setProgressBarVisibilityStatus(View.GONE);
-        mListener.onSecondQuestion();
+            System.out.println("FUpS_2nd_Question.onSecondAnswerSuccess");
+            viewHolder.setProgressBarVisibilityStatus(View.GONE);
+            mListener.onSecondQuestion();
+        }
+        else {
+            viewHolder.setProgressBarVisibilityStatus(View.GONE);
+            mListenerFUR.onFURFifthQuestion();
+        }
     }
 
     @Override
@@ -170,10 +188,14 @@ public class FUpS_2nd_Question extends Fragment implements
      * <p>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
+     * >Communicating with Other Fragments</a> for more information...
      */
     public interface OnFollowUpSymptomsSecondQuestionListener {
         // TODO: Update argument type and name
         void onSecondQuestion();
+    }
+
+    public interface OnFURFifthQuestionInteractionListener{
+        void onFURFifthQuestion();
     }
 }

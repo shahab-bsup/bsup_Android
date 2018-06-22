@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import tk.medlynk.patient.android.Activity.Progress.ProgressPageActivity;
 import tk.medlynk.patient.android.Activity.SearchDoctor.SearchActivity;
 import com.neweraandroid.demo.R;
 
@@ -31,6 +32,7 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(WelcomeActivity.this, "is in progress...", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(WelcomeActivity.this,ProgressPageActivity.class));
             }
         });
     }

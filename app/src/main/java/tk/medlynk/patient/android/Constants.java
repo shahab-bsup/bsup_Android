@@ -66,7 +66,7 @@ public class Constants {
 
     public static final int NEW_SYMPTOM_QUESTIONS_NUMBER = 18;
     public static final int FOLLOW_UP_SYMPTOMS_QUESTIONS_NUMBER = 15;
-    public static final int FOLLOW_UP_RESULTS_QUESTIONS_NUMBER = 15;
+    public static final int FOLLOW_UP_RESULTS_QUESTIONS_NUMBER = 18;
     public static final int REFILL_A_MEDICATION_QUESTIONS_NUMBER = 8;
 
 }

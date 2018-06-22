@@ -18,6 +18,7 @@ import com.neweraandroid.demo.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.FollowUpSymptomsActivity;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.OnFollowUpSymptomAnswerListener;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_2.FUpS_2nd_Question;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_2.FUpS_2nd_VH;
@@ -50,6 +51,7 @@ public class FUpS_3rd_Question extends Fragment
     private List<Answer> answersForDB = new ArrayList<>();
 
     private OnFollowUpSymptomsThirdQuestionListener mListener;
+    private OnFURSixthQuestionInteractionListener mListenerFUR;
     private FUpS_3rd_VH viewHolder;
 
     public FUpS_3rd_Question() {
@@ -84,7 +86,7 @@ public class FUpS_3rd_Question extends Fragment
     private void dbOperation(final View view) {
         mMedlynkViewModel = ViewModelProviders.of(getActivity()).get(MedlynkViewModel.class);
         manager = new SharedPreferenceManager(getActivity());
-        mMedlynkViewModel.getAnswers(manager.getAppointmentID(), Constants.FOLLOW_UP_SYMPTOMS_ROW, 3)
+        mMedlynkViewModel.getAnswers(manager.getAppointmentID(), Constants.FOLLOW_UP_SYMPTOMS_ROW,0, 3)
                 .observe((LifecycleOwner) this, new Observer<DataBaseModel>() {
                     @Override
                     public void onChanged(@Nullable DataBaseModel dataBaseModel) {
@@ -108,7 +110,11 @@ public class FUpS_3rd_Question extends Fragment
         super.onAttach ( context );
         if (context instanceof OnFollowUpSymptomsThirdQuestionListener) {
             mListener = (OnFollowUpSymptomsThirdQuestionListener) context;
-        } else {
+        }
+        else if(context instanceof OnFURSixthQuestionInteractionListener){
+            mListenerFUR =(OnFURSixthQuestionInteractionListener) context;
+        }
+        else {
             throw new RuntimeException ( context.toString ()
                     + " must implement OnFollowUpSymptomsFirstQuestionListener" );
         }
@@ -118,6 +124,7 @@ public class FUpS_3rd_Question extends Fragment
     public void onDetach() {
         super.onDetach ();
         mListener = null;
+        mListenerFUR=null;
     }
 
     @Override
@@ -134,24 +141,35 @@ public class FUpS_3rd_Question extends Fragment
 
     @Override
     public void onSkipClick() {
-        System.out.println ( "FUpS_3rd_Question.onSkipClick" );
-        mListener.onThirdQuestion ();
+        if(Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
+            System.out.println("FUpS_3rd_Question.onSkipClick");
+            mListener.onThirdQuestion();
+        }
+        else {
+            mListenerFUR.onFURSixthQuestion();
+        }
     }
 
     @Override
     public void onAnswerSuccess(FollowUpSymptomResponse response) {
-        JsonConverter JC = JsonConverter.getInstance ();
-        if (existsRecord == false)
-            mMedlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (), Constants.FOLLOW_UP_SYMPTOMS_ROW, 3, JC.answersToAnswerJson ( answersForDB ) );
-        else
-            mMedlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (), Constants.FOLLOW_UP_SYMPTOMS_ROW, 3, JC.answersToAnswerJson ( answersForDB ) );
+        if(Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
+            JsonConverter JC = JsonConverter.getInstance();
+            if (existsRecord == false)
+                mMedlynkViewModel.insertAnswersToDB(manager.getAppointmentID(), Constants.FOLLOW_UP_SYMPTOMS_ROW,0, 3, JC.answersToAnswerJson(answersForDB));
+            else
+                mMedlynkViewModel.updateAnswersToDB(manager.getAppointmentID(), Constants.FOLLOW_UP_SYMPTOMS_ROW,0, 3, JC.answersToAnswerJson(answersForDB));
 
-        System.out.println ( "FUpS_3rd_Question.onThirdAnswerSuccess" );
-        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
-        if( response.getAnswer().getRate() == 1 ){
-            mListener.onJumpToFUpsNinthQuestion();
-        }else{
-            mListener.onThirdQuestion ();
+            System.out.println("FUpS_3rd_Question.onThirdAnswerSuccess");
+            viewHolder.setProgressBarVisibilityStatus(View.GONE);
+            if (response.getAnswer().getRate() == 1) {
+                mListener.onJumpToFUpsNinthQuestion();
+            } else {
+                mListener.onThirdQuestion();
+            }
+        }
+        else {
+            viewHolder.setProgressBarVisibilityStatus(View.GONE);
+            mListenerFUR.onFURSixthQuestion();
         }
 
     }
@@ -165,8 +183,10 @@ public class FUpS_3rd_Question extends Fragment
 
     public interface OnFollowUpSymptomsThirdQuestionListener {
         void onThirdQuestion();
-
         void onJumpToFUpsNinthQuestion();
+    }
 
+    public interface OnFURSixthQuestionInteractionListener{
+        void onFURSixthQuestion();
     }
 }

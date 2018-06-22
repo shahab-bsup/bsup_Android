@@ -12,6 +12,7 @@ import tk.medlynk.patient.android.Model.InitiateResponse;
 import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
 import tk.medlynk.patient.android.Model.PreviuosDoctorsResponse;
 import tk.medlynk.patient.android.Model.AccessTokenResponse;
+import tk.medlynk.patient.android.Model.ProgressResponse;
 import tk.medlynk.patient.android.Model.RenewTokenResponse;
 import tk.medlynk.patient.android.Model.SearchDoctorResponse;
 
@@ -85,9 +86,14 @@ public interface MedlynkAPI {
     @PUT("/api/appointments/{appointment_id}/answers")
     Call<SymptomResponse> refillAnswer(@Path ( "appointment_id" ) int appointmentId, @Body HashMap<String, Object> body);
 
+    @GET("/api/appointments/{appointment_id}")
+    Call<ProgressResponse> getCurrentAppointmentProgressData(@Path ( "appointment_id" ) int appointmentId);
+
     @GET("/api/search-provider")
     Call<PreviuosDoctorsResponse> getPreviousDoctors( );
 
     @DELETE("/api/search-provider/{doctor_id}")
     Call<Boolean> deletePreviousDoctor(@Path("doctor_id") String doctor_id);
+
+
 }

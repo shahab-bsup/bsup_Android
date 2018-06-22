@@ -84,7 +84,7 @@ import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
         mMedlynkViewModel = ViewModelProviders.of(getActivity()).get(MedlynkViewModel.class);
         manager = new SharedPreferenceManager(getActivity());
 
-        mMedlynkViewModel.getAnswers(manager.getAppointmentID(), Constants.NEW_SYMPTOM_ROW, 12)
+        mMedlynkViewModel.getAnswers(manager.getAppointmentID(), Constants.NEW_SYMPTOM_ROW,0, 12)
                 .observe(this, new Observer<DataBaseModel>() {
                     @Override
                     public void onChanged(@Nullable DataBaseModel dataBaseModel) {
@@ -125,12 +125,12 @@ import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
         JsonConverter JC = JsonConverter.getInstance();
         if (existsRecord == false)
             mMedlynkViewModel.insertAnswersToDB(manager.getAppointmentID(),
-                    Constants.NEW_SYMPTOM_ROW,
+                    Constants.NEW_SYMPTOM_ROW,0,
                     12,
                     JC.answersToAnswerJson(answersForDB));
         else
             mMedlynkViewModel.updateAnswersToDB(manager.getAppointmentID(),
-                    Constants.NEW_SYMPTOM_ROW,
+                    Constants.NEW_SYMPTOM_ROW,0,
                     12,
                     JC.answersToAnswerJson(answersForDB));
 

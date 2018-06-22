@@ -86,7 +86,7 @@ public class NS_11th_question extends Fragment implements
         manager = new SharedPreferenceManager(getActivity());
 
         mMedlynkViewModel.getAnswers(manager.getAppointmentID(),
-                Constants.NEW_SYMPTOM_ROW,
+                Constants.NEW_SYMPTOM_ROW,0,
                 11)
                 .observe(this, new Observer<DataBaseModel> () {
                     @Override
@@ -130,12 +130,12 @@ public class NS_11th_question extends Fragment implements
         JsonConverter JC = JsonConverter.getInstance();
         if (existsRecord == false)
             mMedlynkViewModel.insertAnswersToDB(manager.getAppointmentID(),
-                    Constants.NEW_SYMPTOM_ROW,
+                    Constants.NEW_SYMPTOM_ROW,0,
                     11,
                     JC.answersToAnswerJson(answersForDB));
         else
             mMedlynkViewModel.updateAnswersToDB(manager.getAppointmentID(),
-                    Constants.NEW_SYMPTOM_ROW,
+                    Constants.NEW_SYMPTOM_ROW,0,
                     11,
                     JC.answersToAnswerJson(answersForDB));
 
