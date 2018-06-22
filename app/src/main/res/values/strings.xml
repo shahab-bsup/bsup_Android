@@ -129,7 +129,7 @@
         <item>Can do whatever I usually do</item>
     </string-array>
 
-    <string-array name="question_13_22_choices">
+    <string-array name="question_13_choices">
         <item>Home stretches</item>
         <item>Physiotherapist</item>
         <item>Message therapist</item>
@@ -258,5 +258,6 @@
     <string name="print_whole_appointment">print the whole appointment</string>
     <string name="welcome_back">Welcome back!</string>
     <string name="welcome_description">Please help your doctor understand your concern today. The information you provide below will be very helpful to make a diagnosis, and establish the best possible treatment plan. Please answer every question as best you can, they really do matter!</string>
+    <string name="read_by_doctor"> (Read by Your Doctor) </string>
 
 </resources>

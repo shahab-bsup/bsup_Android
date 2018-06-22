@@ -151,8 +151,8 @@ public class Refill_eighth_VH extends ViewHolder implements
         this.first_choice = itemView.findViewById(R.id.viewSelectionChoicesFirst);
         this.first_choice.setOnSingleItemSelectedListener(this);
         this.string_choices = itemView.getContext().getResources().getStringArray(R.array.refill_sixth_question_choices);
-        this.first_choice.setTextToButtons(this.string_choices[0], 0);
-        this.first_choice.setTextToButtons(this.string_choices[1], 1);
+        String[] strings = {string_choices[0], string_choices[1]};
+        first_choice.setDataSet ( strings );
         this.first_choice.setOnClearStateListener(this);
 
         first_input = itemView.findViewById(R.id.highest_glucometer_input);

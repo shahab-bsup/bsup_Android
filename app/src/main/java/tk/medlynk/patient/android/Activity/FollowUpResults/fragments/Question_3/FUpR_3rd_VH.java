@@ -41,9 +41,7 @@ public class FUpR_3rd_VH extends RecyclerView.ViewHolder implements ViewSelectio
         first = itemView.findViewById ( R.id.viewSelectionChoice );
         first.setOnSingleItemSelectedListener ( this );
         string_choices = itemView.getContext ().getResources ().getStringArray ( R.array.yes_no );
-        first.setTextToButtons ( string_choices[0], 0 );
-        first.setTextToButtons ( string_choices[1], 1 );
-
+        first.setDataSet ( string_choices );
         if (answerDB!=null){
             if (answerDB.getChoice().equals("a")){
                 first.previewOfDBResult(true,true,0);

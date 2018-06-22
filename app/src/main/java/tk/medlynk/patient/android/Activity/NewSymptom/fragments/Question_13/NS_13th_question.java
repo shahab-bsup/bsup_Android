@@ -56,10 +56,17 @@ public class NS_13th_question extends Fragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate ( R.layout.fragment_new__symptom_13th_question, container, false );
+        View view = inflater
+                .inflate ( R.layout.fragment_new__symptom_13th_question,
+                        container,
+                        false );
+        dbOperation ( view );
+        return view;
+    }
+
+    private void dbOperation(View view) {
         viewHolder = new NS_13th_VH ( view );
         viewHolder.setOnThirteenNSVHListener ( this );
-        return view;
     }
 
     @Override
@@ -81,7 +88,6 @@ public class NS_13th_question extends Fragment implements
 
     @Override
     public void onNextClicked(Answer answer) {
-        System.out.println ( "NS_13th_question.onNextClicked" );
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
         SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
         MedlynkRequests.newSymptomThirteenQuestionAnswer ( getActivity (),
@@ -93,8 +99,6 @@ public class NS_13th_question extends Fragment implements
 
     @Override
     public void onNextClicked(List<Answer> answers) {
-        System.out.println ( "NS_13th_question.onNextClicked" );
-        System.out.println ("list of answers");
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
         SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
         MedlynkRequests.newSymptomThirteenQuestionAnswer ( getActivity (),
@@ -105,27 +109,23 @@ public class NS_13th_question extends Fragment implements
 
     @Override
     public void onSkipClicked() {
-        System.out.println ( "NS_13th_question.onSkipClicked" );
         mListener.onThirteenQuestion ();
     }
 
     @Override
     public void onThirteenAnswerSuccess(NewSymptomAnswerResponse response) {
-        System.out.println ( "NS_13th_question.onThirteenAnswerSuccess" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onThirteenQuestion ();
     }
 
     @Override
     public void onThirteenAnswerFailure() {
-        System.out.println ( "NS_13th_question.onThirteenAnswerFailure" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onThirteenQuestion ();
     }
 
     @Override
     public void onUnauthorized() {
-        System.out.println ( "NS_13th_question.onUnauthorized" );
 
     }
 

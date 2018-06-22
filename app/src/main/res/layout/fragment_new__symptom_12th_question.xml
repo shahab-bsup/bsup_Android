@@ -57,10 +57,10 @@
                             app:number_of_views="4"
                             app:selectable="true"
                             app:selected_background="@drawable/answer_selected"
-                            app:selected_text_color="@color/black"
+                            app:selected_text_color="@color/white"
                             app:single_select="false"
                             app:unselected_background="@drawable/answer_not_selected"
-                            app:unselected_text_color="@color/white" />
+                            app:unselected_text_color="@color/colorPrimary" />
 
                         <com.medlynk.shahab.myviewselection.ViewSelection
                             android:id="@+id/viewSelectionFirst"
@@ -70,10 +70,10 @@
                             app:number_of_views="1"
                             app:selectable="true"
                             app:selected_background="@drawable/answer_selected"
-                            app:selected_text_color="@color/black"
+                            app:selected_text_color="@color/white"
                             app:single_select="true"
                             app:unselected_background="@drawable/answer_not_selected"
-                            app:unselected_text_color="@color/white" />
+                            app:unselected_text_color="@color/colorPrimary" />
 
                     </LinearLayout>
                 </LinearLayout>

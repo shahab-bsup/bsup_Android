@@ -4,11 +4,10 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ProgressBar;
 
 import tk.medlynk.patient.android.Constants;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
-import tk.medlynk.patient.android.Model.AppointmentsResponse;
+import tk.medlynk.patient.android.Model.AppointmentResponse;
 import tk.medlynk.patient.android.Model.SearchDoctorResponse;
 import tk.medlynk.patient.android.Networking.MedlynkRequests;
 
@@ -42,7 +41,7 @@ public class SelectDoctorActivity extends AppCompatActivity
     }
 
     @Override
-    public void onGetAppointmentSuccess(AppointmentsResponse response) {
+    public void onGetAppointmentSuccess(AppointmentResponse response) {
         System.out.println ( "SelectDoctorActivity.onGetAppointmentSuccess" );
         SharedPreferenceManager sharedPreferenceManager = new SharedPreferenceManager ( this );
         sharedPreferenceManager.setAppointmentID(response.getData ().getId ());

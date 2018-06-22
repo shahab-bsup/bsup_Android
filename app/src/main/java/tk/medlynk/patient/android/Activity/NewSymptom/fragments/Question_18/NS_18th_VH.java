@@ -43,9 +43,7 @@ public class NS_18th_VH extends RecyclerView.ViewHolder implements ViewSelection
         string_choices = itemView.getContext ().
                 getResources ().
                 getStringArray ( R.array.yes_no );
-        for (int i = 0; i < choices.getNumberOfViews (); i++) {
-            choices.setTextToButtons ( string_choices[i], i );
-        }
+        choices.setDataSet ( string_choices );
 
         if (answerDB != null) {
             if (answerDB.getChoice().equals("a")){

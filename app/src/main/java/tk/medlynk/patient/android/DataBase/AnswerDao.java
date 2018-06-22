@@ -25,6 +25,10 @@ public interface AnswerDao {
             "(appointmentId IN (:appointmentId)) AND (tableNumber IN (:tableNumber)) AND (questionSetId IN (:questionSetId))")
     LiveData<List<DataBaseModel>> getAnswersList(int appointmentId, int tableNumber,int questionSetId);
 
+    @Query("SELECT * FROM tbl_AnswersDataBase WHERE "+
+            "(appointmentId IN (:appointmentId)) AND (tableNumber IN (:tableNumber))")
+    LiveData<List<DataBaseModel>> getAnswersList(int appointmentId, int tableNumber);
+
     @Insert
     void insertRecord(DataBaseModel... answerRecord);
 

@@ -38,7 +38,6 @@ public class NS_9th_VH extends RecyclerView.ViewHolder
     private OnNinthNSVHListener onNinthNSVHListener;
     private TextView otherText;
     private String initial_other_text = "";
-    private boolean otherExists = false;
 
     public NS_9th_VH(View itemView) {
         super ( itemView );
@@ -60,13 +59,19 @@ public class NS_9th_VH extends RecyclerView.ViewHolder
         first = itemView.findViewById ( R.id.viewSelectionFirst );
         first.setOnSingleItemSelectedListener ( this );
         first.setOnClearStateListener ( this );
-        first.setTextToButtons ( string_choices[0], 0 );
+
+        //I know this is bad! Do not blame me please:D
+        String[] strings = {string_choices[0]};
+        first.setDataSet ( strings );
+
         second = itemView.findViewById ( R.id.viewSelectionSecond );
         second.setOnMultiItemSelectedListener ( this );
         second.setOnClearStateListener ( this );
-        for (int i = 0; i < second.getNumberOfViews (); i++) {
-            second.setTextToButtons ( string_choices[i+1], i );
-        }
+
+        //I know this is bad! Do not blame me please:D
+        String[] strings1 = {string_choices[1],
+        string_choices[2],string_choices[3],string_choices[4]};
+        second.setDataSet ( strings1 );
     }
 
     public void onUpdateUI(Answer answer){
@@ -253,7 +258,7 @@ public class NS_9th_VH extends RecyclerView.ViewHolder
     public void onOtherDialogDone(String otherText) {
         if( otherText.length () > 0 ){
             setOtherTextVisibilityStatus ( View.VISIBLE );
-            this.otherText.setText ( otherText );
+            setOtherText ( otherText );
             Answer answer = new Answer ();
             answer.setChoice ( "e" );
             answer.setOther ( otherText );
@@ -262,11 +267,7 @@ public class NS_9th_VH extends RecyclerView.ViewHolder
             button_next.setBackgroundResource ( R.drawable.enable_next_question );
         }else{
             setOtherTextVisibilityStatus ( View.GONE );
-            second.getButtons ().get ( 3 ).setBackgroundResource ( R.drawable.answer_not_selected );
-            second.getButtons ().get ( 3 ).setTextColor ( itemView.
-                    getContext ().
-                    getResources ().
-                    getColor ( R.color.white ) );
+            second.unSelect ( 3 );
         }
     }
 
@@ -277,8 +278,6 @@ public class NS_9th_VH extends RecyclerView.ViewHolder
     private class OnNextClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println ( "NS_9th_VH.NS_9th_VH" );
-            System.out.println ( "OnNextClickListener.onClick" );
             if( choices.size () > 0 ){
                 onNinthNSVHListener.onNextClicked ( choices );
             }else{
@@ -290,8 +289,6 @@ public class NS_9th_VH extends RecyclerView.ViewHolder
     private class OnSkipClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println ( "NS_9th_VH.NS_9th_VH" );
-            System.out.println ( "OnSkipClickListener.onClick" );
             onNinthNSVHListener.onSkipClicked ();
         }
     }

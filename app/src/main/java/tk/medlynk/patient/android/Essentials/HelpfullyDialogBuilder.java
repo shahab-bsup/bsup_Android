@@ -36,9 +36,9 @@ public class HelpfullyDialogBuilder extends AppCompatDialog implements ViewSelec
         button_skip = findViewById ( R.id.btnSkipQuestion );
         button_skip.setOnClickListener ( new OnSkipClickListener() );
         strings = context.getResources ().getStringArray ( R.array.helpfully_strings );
-        for (int i = 0; i < helpfully_options.getNumberOfViews (); i++) {
-            helpfully_options.setTextToButtons ( strings[i], i );
-        }
+//        for (int i = 0; i < helpfully_options.getNumberOfViews (); i++) {
+////            helpfully_options.setTextToButtons ( strings[i], i );
+//        }
     }
 
     public void setOnHelpfullyDialogListener(OnHelpfullyDialogListener helpfullyDialogListener) {

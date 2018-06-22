@@ -1,6 +1,7 @@
 package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_17;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -30,9 +31,12 @@ public class NS_17th_VH extends RecyclerView.ViewHolder implements ViewSelection
     List<Answer> answers = new ArrayList<> (  );
     private String[] string_choices;
     private OnSeventeenNSVHListener onSeventeenNSVHListener;
+    private TextView otherText;
+    private String initial_other_text = "";
 
     public NS_17th_VH(View itemView) {
         super ( itemView );
+        otherText = itemView.findViewById ( R.id.txtOther );
         progressBar = itemView.findViewById ( R.id.progress_bar );
         question_view = itemView.findViewById ( R.id.new_symptom_seventeen_question );
         question = question_view.findViewById ( R.id.txtQuestion );
@@ -44,10 +48,19 @@ public class NS_17th_VH extends RecyclerView.ViewHolder implements ViewSelection
         button_skip.setOnClickListener ( new OnSkipClickListener() );
         viewSelection = itemView.findViewById ( R.id.viewSelectionChoices );
         viewSelection.setOnMultiItemSelectedListener ( this );
-        string_choices = itemView.getContext ().getResources ().getStringArray ( R.array.question_17_choices );
-        for (int i = 0; i < viewSelection.getNumberOfViews (); i++) {
-            viewSelection.setTextToButtons ( string_choices[i], i );
-        }
+        string_choices = itemView
+                .getContext ()
+                .getResources ()
+                .getStringArray ( R.array.question_17_choices );
+        viewSelection.setDataSet ( string_choices );
+    }
+
+    private void setOtherText(String other) {
+        this.otherText.setText ( other );
+    }
+
+    private void setOtherTextVisibilityStatus(int status){
+        this.otherText.setVisibility ( status );
     }
 
     public void setOnSeventeenNSVHListener(OnSeventeenNSVHListener onSeventeenNSVHListener) {
@@ -60,9 +73,11 @@ public class NS_17th_VH extends RecyclerView.ViewHolder implements ViewSelection
 
     @Override
     public void onMultiItemSelected(View view, Integer integer) {
-        System.out.println ( "NS_17th_VH.onMultiItemSelected" );
         if( integer == 6 ){
-            DialogueBuilder dialogBuilder = new DialogueBuilder( itemView.getContext (), "other", "shahab" );
+            DialogueBuilder dialogBuilder =
+                    new DialogueBuilder( itemView.getContext (),
+                            "other",
+                            initial_other_text );
             dialogBuilder.setOnDialogListener( this );
             dialogBuilder.show ();
         }else{
@@ -113,7 +128,6 @@ public class NS_17th_VH extends RecyclerView.ViewHolder implements ViewSelection
 
     @Override
     public void onMultiItemDeselected(View view, Integer integer) {
-        System.out.println ( "NS_17th_VH.onMultiItemDeselected" );
         int i = integer;
         Iterator<Answer> answerIterator = answers.iterator ();
         switch (i){
@@ -188,6 +202,7 @@ public class NS_17th_VH extends RecyclerView.ViewHolder implements ViewSelection
             }
             case 6:{
                 while (answerIterator.hasNext ()){
+                    setOtherTextVisibilityStatus ( View.GONE );
                     Answer answer = answerIterator.next ();
                     if(  answer.getChoice () != null &&
                             answer.getChoice ().equals ( "g" ) ){
@@ -208,8 +223,9 @@ public class NS_17th_VH extends RecyclerView.ViewHolder implements ViewSelection
 
     @Override
     public void onOtherDialogDone(String otherText) {
-        System.out.println ( "NS_17th_VH.onOtherDialogDone" );
         if( otherText.length () > 0 ){
+            setOtherTextVisibilityStatus ( View.VISIBLE );
+            setOtherText ( otherText );
             Answer answer = new Answer ();
             answer.setChoice ( "g" );
             answer.setOther ( otherText );
@@ -217,11 +233,7 @@ public class NS_17th_VH extends RecyclerView.ViewHolder implements ViewSelection
             button_next.setEnabled ( true );
             button_next.setBackgroundResource ( R.drawable.enable_next_question );
         } else {
-            viewSelection.getButtons ().get ( 6 ).setBackgroundResource ( R.drawable.answer_not_selected );
-            viewSelection.getButtons ().get ( 6 ).setTextColor ( itemView.
-                    getContext ().
-                    getResources ().
-                    getColor ( R.color.white ) );
+            viewSelection.unSelect ( 6 );
         }
     }
 
@@ -259,8 +271,16 @@ public class NS_17th_VH extends RecyclerView.ViewHolder implements ViewSelection
                     break;
                 }
                 case "g":{
-                    viewSelection.previewOfDBResult ( true, false,
-                            6);
+//                    viewSelection.previewOfDBResult ( true,
+//                            false,
+//                            6);
+                    viewSelection.setSelect ( 3 );
+                    if( answer.getOther () != null &&
+                            !TextUtils.isEmpty ( answer.getOther () )){
+                        setOtherTextVisibilityStatus ( View.VISIBLE );
+                        setOtherText( answer.getOther () );
+                        initial_other_text = answer.getOther ();
+                    }
                     break;
                 }
             }

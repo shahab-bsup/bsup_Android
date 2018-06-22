@@ -46,9 +46,10 @@ public class NS_15th_VH extends RecyclerView.ViewHolder implements ViewSelection
         button_skip = itemView.findViewById ( R.id.btnSkipQuestion );
         button_skip.setOnClickListener ( new OnSkipClickListener() );
         choice = itemView.findViewById ( R.id.viewSelectionChoice );
-        choice.setTextToButtons ( itemView.getContext ()
+        String[] strings = { itemView.getContext ()
                 .getResources ().
-                        getString ( R.string.i_do_not_know ), 0 );
+                getString ( R.string.i_do_not_know )};
+        choice.setDataSet ( strings );
         choice.setOnSingleItemSelectedListener ( this );
         choice.setOnClearStateListener(this);
 

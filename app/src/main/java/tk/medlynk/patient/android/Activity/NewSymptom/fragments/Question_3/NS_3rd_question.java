@@ -96,12 +96,16 @@ public class NS_3rd_question extends Fragment implements
                         if (dataBaseModel != null) {
                             existsRecord = true;
                             JsonConverter jsonConverter = JsonConverter.getInstance ();
-                            answerDB = jsonConverter.answerJsonToAnswers ( dataBaseModel.getAnswerJson () )
+                            answerDB = jsonConverter.answerJsonToAnswers (
+                                    dataBaseModel.getAnswerJson () )
                                     .get ( 0 );
                             Log.d ( TAG, "onChanged: " + answerDB );
                         }
-                        viewHolder = new NS_3rd_VH ( view, answerDB );
+                        viewHolder = new NS_3rd_VH ( view );
                         viewHolder.setOnThirdNSVHListener ( NS_3rd_question.this );
+                        if (answerDB != null) {
+                            viewHolder.onUpdateUI ( answerDB );
+                        }
                     }
                 } );
     }

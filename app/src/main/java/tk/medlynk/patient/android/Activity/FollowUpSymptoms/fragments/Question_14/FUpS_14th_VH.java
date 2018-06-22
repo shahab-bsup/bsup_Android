@@ -72,13 +72,16 @@ public class FUpS_14th_VH extends RecyclerView.ViewHolder implements
         cardiac_button.setOnClickListener ( new OnCardiacButtonClickListener() );
         imaging_button = itemView.findViewById ( R.id.third_choice );
         imaging_button.setOnClickListener ( new OnImagingClickListener() );
-        for (int i = 0; i < first.getNumberOfViews (); i++) {
-            first.setTextToButtons ( string_choices[i], i );
-        }
+
+        //I know this is bad! Do not blame me please:D
+        String[] strings = {string_choices[0],
+                string_choices[1],string_choices[2],string_choices[3]};
+        first.setDataSet ( strings );
+
         imaging_button.setText ( string_choices[2] );
         cardiac_button.setText ( string_choices[3] );
-        second.setTextToButtons ( string_choices[4], 0 );
-        second.setTextToButtons ( string_choices[5], 1 );
+        String[] strings1 = {string_choices[4],string_choices[5]};
+        second.setDataSet ( strings1 );
         first_recyclerview = itemView.findViewById ( R.id.firstRecyclerView );
         first_recyclerview.setNestedScrollingEnabled ( false );
         firstButtonAdapter = new
@@ -240,19 +243,13 @@ public class FUpS_14th_VH extends RecyclerView.ViewHolder implements
             button_next.setEnabled ( true );
             button_next.setBackgroundResource ( R.drawable.enable_next_question );
         } else {
-            second.getButtons ().get ( 0 ).setBackgroundResource ( R.drawable.answer_not_selected );
-            second.getButtons ().get ( 0 ).setTextColor ( itemView.
-                    getContext ().
-                    getResources ().
-                    getColor ( R.color.white ) );
+            second.unSelect ( 0 );
         }
     }
 
     private class OnNextButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println ( "FUpS_14th_VH.FUpS_14th_VH" );
-            System.out.println ( "OnNextButtonClickListener.onClick" );
             if( answers.size() > 0 ){
                 Iterator<Answer> answerIterator = answers.iterator ();
                 while (answerIterator.hasNext ()){

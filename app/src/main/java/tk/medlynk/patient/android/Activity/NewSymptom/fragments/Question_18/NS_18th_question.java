@@ -18,9 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tk.medlynk.patient.android.Activity.NewSymptom.OnNewSymptomAnswerListener;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_16.NS_16th_VH;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_16.NS_16th_question;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_19.NS_19th_question;
 import tk.medlynk.patient.android.Constants;
 import tk.medlynk.patient.android.DataBase.DataBaseModel;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;

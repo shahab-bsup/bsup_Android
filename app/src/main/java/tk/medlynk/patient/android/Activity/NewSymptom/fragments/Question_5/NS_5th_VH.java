@@ -39,9 +39,11 @@ public class NS_5th_VH extends RecyclerView.ViewHolder implements ViewSelection.
         button_skip.setOnClickListener ( new OnSkipClickListener() );
         choices = itemView.findViewById ( R.id.new_symptom_fifth_answers );
         choices.setOnSingleItemSelectedListener ( this );
-        for (int i = 0; i < choices.getNumberOfViews (); i++) {
-            choices.setTextToButtons ( String.valueOf ( i + 1 ), i );
-        }
+
+        //I know this is bad! Do not blame me please:D
+        String[] strings = {"1", "2", "3", "4", "5",
+                "6", "7", "8", "9", "10"};
+        choices.setDataSet ( strings );
 
         if (answerDB != null) {
             choices.previewOfDBResult (true,true,answerDB.getRate() - 1);

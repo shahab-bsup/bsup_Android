@@ -46,7 +46,13 @@ public class FUpS_2nd_VH extends RecyclerView.ViewHolder implements ViewSelectio
         answer_input.addTextChangedListener ( new OnAnswerInputTextWatcher() );
         answer_input.setOnFocusChangeListener ( new OnAnswerFocusChangeListener() );
         none = itemView.findViewById ( R.id.viewSelectionChoice );
-        none.setTextToButtons ( itemView.getResources ().getString ( R.string.none), 0 );
+
+        //I know this is bad! Do not blame me please:D
+        String[] strings = {itemView
+                .getResources ()
+                .getString ( R.string.none)};
+        none.setDataSet ( strings );
+
         none.setOnSingleItemSelectedListener ( this );
         none.setOnClearStateListener(this);
 

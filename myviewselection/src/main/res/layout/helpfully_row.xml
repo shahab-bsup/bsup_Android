@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="right"
+    android:orientation="vertical">
+
+    <com.medlynk.shahab.myviewselection.CustomTextView
+        android:id="@+id/txtAnswerChoice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:text="home stretches" />
+
+    <android.support.v7.widget.RecyclerView
+        android:visibility="gone"
+        android:id="@+id/optionRecyclerView"
+        android:layout_width="match_parent"
+        android:layoutDirection="rtl"
+        android:layout_height="wrap_content" />
+
+    <com.medlynk.shahab.myviewselection.CustomTextView
+        android:id="@+id/helpfully_error"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/choose_one_helpfully_option"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="20sp" />
+
+</LinearLayout>

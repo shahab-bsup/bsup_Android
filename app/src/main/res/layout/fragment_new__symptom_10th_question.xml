@@ -83,8 +83,8 @@
                 app:single_select="true"
                 app:unselected_background="@drawable/answer_not_selected"
                 app:selected_background="@drawable/answer_selected"
-                app:unselected_text_color="@color/white"
-                app:selected_text_color="@color/black"
+                app:unselected_text_color="@color/colorPrimary"
+                app:selected_text_color="@color/white"
                 android:id="@+id/viewSelectionChoice" />
 
         </RelativeLayout>

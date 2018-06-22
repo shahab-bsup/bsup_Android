@@ -44,7 +44,14 @@ public class FUpR_18th_VH extends RecyclerView.ViewHolder implements ViewSelecti
         first = itemView.findViewById ( R.id.viewSelectionChoice );
         first.setOnSingleItemSelectedListener ( this );
         first.setOnClearStateListener(this);
-        first.setTextToButtons(itemView.getContext().getResources().getString(R.string.FUpR_18th_choice), 0);
+        //I know ths is bad! Do not Blame me please :D
+        String string = itemView
+                .getContext()
+                .getResources()
+                .getString(R.string.FUpR_18th_choice);
+        String[] strings = {string};
+        first.setDataSet ( strings );
+
         answer_input = itemView.findViewById ( R.id.follow_up_result_eighteen_answer );
         answer_input.addTextChangedListener ( new OnAnswerInputTextWatcher() );
         answer_input.setOnFocusChangeListener ( new OnAnswerFocusChangeListener() );

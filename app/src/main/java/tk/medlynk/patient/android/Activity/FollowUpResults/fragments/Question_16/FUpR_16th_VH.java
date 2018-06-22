@@ -42,19 +42,20 @@ public class FUpR_16th_VH extends RecyclerView.ViewHolder implements ViewSelecti
         this.button_skip.setOnClickListener(new OnSkipClickListener());
         first = itemView.findViewById ( R.id.viewSelectionChoice );
         first.setOnSingleItemSelectedListener ( this );
-        string_choices = itemView.getContext ().getResources ().getStringArray ( R.array.yes_no );
-        sub_string_choices = itemView.getContext().getResources().getStringArray(R.array.FUpR_16th_question_sub_Choices);
-        first.setTextToButtons ( string_choices[0], 0 );
-        first.setTextToButtons ( string_choices[1], 1 );
+        string_choices = itemView.getContext ()
+                .getResources ()
+                .getStringArray ( R.array.yes_no );
+        first.setDataSet ( string_choices );
+        sub_string_choices = itemView.getContext()
+                .getResources()
+                .getStringArray(R.array.FUpR_16th_question_sub_Choices);
         question_view_second = itemView.findViewById(R.id.follow_up_results_second_sub_question);
         sub_question = question_view_second.findViewById(R.id.txtQuestion);
         sub_question.setText(itemView.getContext().getResources().getString(R.string.FUpR_2nd_sub_question));
         second = itemView.findViewById(R.id.viewSelectionSubChoice);
         second.setOnSingleItemSelectedListener(this);
         second_question_layout = itemView.findViewById(R.id.sub_choice_layout);
-        for (int i = 0; i < second.getNumberOfViews(); i++) {
-            second.setTextToButtons(sub_string_choices[i], i);
-        }
+        second.setDataSet ( sub_string_choices );
     }
 
 

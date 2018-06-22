@@ -4,22 +4,27 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
- * Created by Shahab on 2/22/2018...
+ * Created by Shahab on 6/22/2018.
  */
 
-public class AppointmentsResponse implements Serializable {
+public class AppointmentsResponse implements Serializable
+{
+
     @SerializedName("data")
     @Expose
-    private Appointment data;
-    private final static long serialVersionUID = -2420979164143381626L;
+    private List<SingleAppointment> data = null;
 
-    public Appointment getData() {
+    private final static long serialVersionUID = 8859009251529085572L;
+
+    public List<SingleAppointment> getData() {
         return data;
     }
 
-    public void setData(Appointment data) {
+    public void setData(List<SingleAppointment> data) {
         this.data = data;
     }
+
 }

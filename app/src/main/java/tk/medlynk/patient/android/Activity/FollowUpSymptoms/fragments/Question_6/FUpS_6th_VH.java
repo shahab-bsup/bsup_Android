@@ -39,9 +39,12 @@ public class FUpS_6th_VH extends RecyclerView.ViewHolder implements ViewSelectio
         button_skip.setOnClickListener ( new OnSkipClickListener () );
         choices = itemView.findViewById ( R.id.viewSelectionChoices );
         choices.setOnSingleItemSelectedListener ( this );
-        for (int i = 0; i < choices.getNumberOfViews (); i++) {
-            choices.setTextToButtons ( String.valueOf ( i + 1 ), i );
-        }
+
+        //I know this is bad! Do not blame me please:D
+        String[] strings = {"1", "2", "3", "4", "5",
+                "6", "7", "8", "9", "10"};
+        choices.setDataSet ( strings );
+
         answer = new Answer ();
 
         if(answerDB!=null){

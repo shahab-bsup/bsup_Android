@@ -59,12 +59,17 @@ public class FUpS_9th_VH extends
         second.setOnMultiItemSelectedListener ( this );
         String string = itemView.getContext ()
                 .getString ( R.string.first_choice_follow_up_symptom_9th_10yj_choices );
-        string_choices = itemView.getContext ().getResources ().getStringArray ( R.array.follow_up_symptoms_9th_10th_choices );
-        first.setTextToButtons ( string, 0 );
+        string_choices = itemView
+                .getContext ()
+                .getResources ()
+                .getStringArray ( R.array.follow_up_symptoms_9th_10th_choices );
+
+        //I know this is bad! Do not blame me please:D
+        String[] strings = {string};
+        first.setDataSet ( strings );
+
         first.setOnClearStateListener ( this );
-        for (int i = 0; i < second.getNumberOfViews (); i++){
-            second.setTextToButtons ( string_choices[i], i );
-        }
+        second.setDataSet ( string_choices );
         second.setOnClearStateListener ( this );
     }
 
@@ -202,11 +207,7 @@ public class FUpS_9th_VH extends
             button_next.setEnabled ( true );
             button_next.setBackgroundResource ( R.drawable.enable_next_question );
         } else {
-            second.getButtons ().get ( 3 ).setBackgroundResource ( R.drawable.answer_not_selected );
-            second.getButtons ().get ( 3 ).setTextColor ( itemView.
-                    getContext ().
-                    getResources ().
-                    getColor ( R.color.white ) );
+            second.unSelect ( 3 );
         }
     }
 

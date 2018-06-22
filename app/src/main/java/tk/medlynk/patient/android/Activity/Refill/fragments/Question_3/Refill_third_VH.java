@@ -64,8 +64,12 @@ public class Refill_third_VH extends ViewHolder implements
         this.button_skip = (Button) itemView.findViewById(R.id.btnSkipQuestion);
         this.button_skip.setOnClickListener(new OnSkipClickListener());
         this.choice = (ViewSelection) itemView.findViewById(R.id.viewSelectionChoice);
+
+        //I know this is bad! Do not blame me please:D
         this.string_choice = itemView.getContext().getResources().getString(R.string.refill_third_question_choice);
-        this.choice.setTextToButtons(this.string_choice, 0);
+        String[] strings = {string_choice};
+        choice.setDataSet ( strings );
+
         this.choice.setOnSingleItemSelectedListener(this);
         this.choice.setOnClearStateListener(this);
         answer_input = itemView.findViewById(R.id.refill_side_effect_input);

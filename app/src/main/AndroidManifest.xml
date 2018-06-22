@@ -96,6 +96,7 @@
         <activity android:name="tk.medlynk.patient.android.Activity.FollowUpSymptoms.FollowUpSymptomsActivity" />
         <activity android:name="tk.medlynk.patient.android.Activity.FollowUpResults.FollowUpResultActivity" />
         <activity android:name="tk.medlynk.patient.android.Activity.Progress.ProgressPageActivity" />
+        <activity android:name="tk.medlynk.patient.android.Activity.Appointments.AppointmentsActivity"></activity>
     </application>
 
 </manifest>

@@ -1,6 +1,6 @@
 package tk.medlynk.patient.android.Activity.SelectDoctor;
 
-import tk.medlynk.patient.android.Model.AppointmentsResponse;
+import tk.medlynk.patient.android.Model.AppointmentResponse;
 
 /**
  * Created by Shahab on 2/22/2018.
@@ -8,7 +8,7 @@ import tk.medlynk.patient.android.Model.AppointmentsResponse;
 
 public interface OnGetAppointmentsListener {
 
-    void onGetAppointmentSuccess(AppointmentsResponse response);
+    void onGetAppointmentSuccess(AppointmentResponse response);
     void onGetAppointmentFailure();
 
 }

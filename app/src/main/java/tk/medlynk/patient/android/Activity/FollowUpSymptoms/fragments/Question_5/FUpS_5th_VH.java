@@ -41,10 +41,12 @@ public class FUpS_5th_VH extends RecyclerView.ViewHolder implements ViewSelectio
         button_skip.setOnClickListener ( new OnSkipClickListener () );
         choices = itemView.findViewById ( R.id.viewSelectionChoices );
         choices.setOnSingleItemSelectedListener ( this );
-        string_choices = itemView.getContext ().getResources ().getStringArray ( R.array.FUS_5th_choices_FUR_eighth_choices );
-        for (int i = 0; i < choices.getNumberOfViews (); i++) {
-            choices.setTextToButtons ( string_choices[i], i );
-        }
+        string_choices = itemView
+                .getContext ()
+                .getResources ()
+                .getStringArray ( R.array.FUS_5th_choices_FUR_eighth_choices );
+        choices.setDataSet ( string_choices );
+
         answer = new Answer ();
 
         if (answerDB!=null){
@@ -142,8 +144,7 @@ public class FUpS_5th_VH extends RecyclerView.ViewHolder implements ViewSelectio
         }else{
             button_next.setEnabled(false);
             button_next.setBackgroundResource(R.drawable.disable_next_question);
-            choices.getButtons().get(6).setBackgroundResource(R.drawable.answer_not_selected);
-            choices.getButtons().get(6).setTextColor(itemView.getContext().getResources().getColor(R.color.white));
+            choices.unSelect ( 6 );
         }
     }
 
