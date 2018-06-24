@@ -1,11 +1,9 @@
 package tk.medlynk.patient.android.Activity.NewSymptom.fragments.End_of_Question_Set;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,14 +11,10 @@ import android.view.ViewGroup;
 
 import com.neweraandroid.demo.R;
 
-import java.util.ArrayList;
-import java.util.List;
 
+import tk.medlynk.patient.android.Activity.NewSymptom.NewSymptomActivity;
+import tk.medlynk.patient.android.Activity.Progress.ProgressPageActivity;
 import tk.medlynk.patient.android.Activity.StartQuestionSet.StartAppointmentActivity;
-import tk.medlynk.patient.android.Constants;
-import tk.medlynk.patient.android.DataBase.DataBaseModel;
-import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
-import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,10 +32,6 @@ public class End_of_Question_Set extends Fragment implements End_of_Question_Set
 
     private View view;
     private End_of_Question_Set_VH viewHolder;
-
-    private MedlynkViewModel mMedlynkViewModel;
-    private int UnansweredQuestion=0;
-    private SharedPreferenceManager manager;
 
     public End_of_Question_Set() {
         // Required empty public constructor
@@ -66,7 +56,7 @@ public class End_of_Question_Set extends Fragment implements End_of_Question_Set
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view =  inflater.inflate ( R.layout.fragment_new__symptom_24th_question, container, false );
+        view =  inflater.inflate ( R.layout.fragment_new__symptom_end_of_question_set, container, false );
         viewHolder = new End_of_Question_Set_VH ( view );
         viewHolder.setOnEndOfQuestionSetVHListener ( this );
         return view;
@@ -94,65 +84,29 @@ public class End_of_Question_Set extends Fragment implements End_of_Question_Set
         System.out.println ( "End_of_Question_Set.onButtonClicked" );
         switch (buttonId){
             case 0:{
-                takeFirstUnansweredQuestion();
+                getActivity().startActivity(new Intent(getActivity(), NewSymptomActivity.class));
+                getActivity().finish();
                 break;
             }
             case 1:{
-
                 getActivity ().startActivity ( new Intent ( getActivity (), StartAppointmentActivity.class ) );
                 getActivity ().finish ();
-
                 break;
             }
             case 2:{
-
-
+                getActivity().startActivity(new Intent(getActivity(), ProgressPageActivity.class));
+                getActivity().finish();
                 break;
             }
             case 3:{
-
 
                 break;
             }
         }
     }
 
-    private void takeFirstUnansweredQuestion(){
-        manager = new SharedPreferenceManager ( getActivity () );
-        mMedlynkViewModel = ViewModelProviders.of ( getActivity () ).get ( MedlynkViewModel.class );
-        mMedlynkViewModel.getAnswersList(manager.getAppointmentID(), Constants.NEW_SYMPTOM_ROW,0)
-                .observe(this, new Observer<List<DataBaseModel>>() {
-                    @Override
-                    public void onChanged(@Nullable List<DataBaseModel> dataBaseModels) {
-                        if(dataBaseModels!=null){
-                            boolean existFlag;
-
-                            for (int questionNumber=1;questionNumber<=Constants.NEW_SYMPTOM_QUESTIONS_NUMBER;questionNumber++){
-                                existFlag=false;
-                                for (DataBaseModel db:dataBaseModels) {
-                                    if(questionNumber==db.getQuestionNumber()){
-                                        existFlag=true;
-                                        break;
-                                    }
-                                }
-
-                                if(existFlag==false){
-                                    UnansweredQuestion=questionNumber;
-                                    break;
-                                }
-                            }
-
-                            System.out.println("firstUnAnsweredQuestion " + UnansweredQuestion);
-
-                           mListener.firstUnAnsweredQuestion(UnansweredQuestion);
-                        }
-                    }
-                });
-    }
-
     public interface OnNewSymptomEndOfQuestionSetListener {
         // TODO: Update argument type and name
 
-        void firstUnAnsweredQuestion(int questionNumber);
     }
 }

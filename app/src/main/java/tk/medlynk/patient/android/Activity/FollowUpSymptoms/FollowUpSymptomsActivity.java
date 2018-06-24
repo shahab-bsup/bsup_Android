@@ -26,6 +26,9 @@ import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_7
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_8.FUpS_8th_Question;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_9.FUpS_9th_Question;
 import tk.medlynk.patient.android.Constants;
+import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.FirstUnansweredQuestion;
+import tk.medlynk.patient.android.OnFirstUnansweredQuestionListener;
 
 public class FollowUpSymptomsActivity extends AppCompatActivity implements
         FUpS_1st_Question.OnFollowUpSymptomsFirstQuestionListener,
@@ -43,13 +46,15 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
         FUpS_13th_Question.OnFollowUpSymptomsThirteenQuestionListener,
         FUpS_14th_Question.OnFollowUpSymptomsFourteenQuestionListener,
         FUpS_15th_Question.OnFollowUpSymptomsFifteenQuestionListener,
-        End_of_Question_Set.OnEndOfFollowUpSymptomListener {
+        End_of_Question_Set.OnEndOfFollowUpSymptomListener,
+        OnFirstUnansweredQuestionListener{
 
     private static final String TAG = FollowUpSymptomsActivity.class.getSimpleName();
     View toolbar_view;
     TextView toolbar_title;
     ImageView backButton;
     private String CURRENT_FRAGMENT = null;
+    private SharedPreferenceManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,11 +72,13 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
                 onBackPressed();
             }
         });
-        CURRENT_FRAGMENT = FUpS_1st_Question.TAG;
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
-                .add(R.id.followUpFragmentsContainer, new FUpS_1st_Question(), FUpS_1st_Question.TAG)
-                .commitNow();
+
+        manager = new SharedPreferenceManager(this);
+        FirstUnansweredQuestion firstUnansweredQuestion = FirstUnansweredQuestion.getInstance();
+
+        firstUnansweredQuestion.takeFirstUnansweredQuestion(this, this,
+                manager.getAppointmentID(), Constants.FOLLOW_UP_SYMPTOMS_ROW, 0, Constants.FOLLOW_UP_SYMPTOMS_QUESTIONS_NUMBER);
+
     }
 
     @Override
@@ -395,13 +402,12 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void firstUnAnsweredQuestion(int questionNumber) {
+    public void firstUnAnsweredQuestionResponse(int questionNumber) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         switch (questionNumber) {
             case 1: {
                 CURRENT_FRAGMENT = FUpS_1st_Question.TAG;
                 fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
-                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
                         .add(R.id.followUpFragmentsContainer, new FUpS_1st_Question(), FUpS_1st_Question.TAG)
                         .commitNow();
                 break;
@@ -409,7 +415,6 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
             case 2: {
                 CURRENT_FRAGMENT = FUpS_2nd_Question.TAG;
                 fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
-                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
                         .add(R.id.followUpFragmentsContainer, new FUpS_2nd_Question(), FUpS_2nd_Question.TAG)
                         .commitNow();
                 break;
@@ -417,7 +422,6 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
             case 3: {
                 CURRENT_FRAGMENT = FUpS_3rd_Question.TAG;
                 fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
-                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
                         .add(R.id.followUpFragmentsContainer, new FUpS_3rd_Question(), FUpS_3rd_Question.TAG)
                         .commitNow();
                 break;
@@ -425,7 +429,6 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
             case 4: {
                 CURRENT_FRAGMENT = FUpS_4th_Question.TAG;
                 fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
-                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
                         .add(R.id.followUpFragmentsContainer, new FUpS_4th_Question(), FUpS_4th_Question.TAG)
                         .commitNow();
                 break;
@@ -433,7 +436,6 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
             case 5: {
                 CURRENT_FRAGMENT = FUpS_5th_Question.TAG;
                 fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
-                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
                         .add(R.id.followUpFragmentsContainer, new FUpS_5th_Question(), FUpS_5th_Question.TAG)
                         .commitNow();
                 break;
@@ -441,7 +443,6 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
             case 6: {
                 CURRENT_FRAGMENT = FUpS_6th_Question.TAG;
                 fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
-                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
                         .add(R.id.followUpFragmentsContainer, new FUpS_6th_Question(), FUpS_6th_Question.TAG)
                         .commitNow();
                 break;
@@ -449,7 +450,6 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
             case 7: {
                 CURRENT_FRAGMENT = FUpS_7th_Question.TAG;
                 fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
-                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
                         .add(R.id.followUpFragmentsContainer, new FUpS_7th_Question(), FUpS_7th_Question.TAG)
                         .commitNow();
                 break;
@@ -457,7 +457,6 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
             case 8: {
                 CURRENT_FRAGMENT = FUpS_8th_Question.TAG;
                 fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
-                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
                         .add(R.id.followUpFragmentsContainer, new FUpS_8th_Question(), FUpS_8th_Question.TAG)
                         .commitNow();
                 break;
@@ -465,7 +464,6 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
             case 9: {
                 CURRENT_FRAGMENT = FUpS_9th_Question.TAG;
                 fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
-                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
                         .add(R.id.followUpFragmentsContainer, new FUpS_9th_Question(), FUpS_9th_Question.TAG)
                         .commitNow();
                 break;
@@ -473,7 +471,6 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
             case 10: {
                 CURRENT_FRAGMENT = FUpS_10th_Question.TAG;
                 fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
-                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
                         .add(R.id.followUpFragmentsContainer, new FUpS_10th_Question(), FUpS_10th_Question.TAG)
                         .commitNow();
                 break;
@@ -481,7 +478,6 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
             case 11: {
                 CURRENT_FRAGMENT = FUpS_11th_Question.TAG;
                 fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
-                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
                         .add(R.id.followUpFragmentsContainer, new FUpS_11th_Question(), FUpS_11th_Question.TAG)
                         .commitNow();
                 break;
@@ -489,7 +485,6 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
             case 12: {
                 CURRENT_FRAGMENT = FUpS_12th_Question.TAG;
                 fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
-                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
                         .add(R.id.followUpFragmentsContainer, new FUpS_12th_Question(), FUpS_12th_Question.TAG)
                         .commitNow();
                 break;
@@ -497,7 +492,6 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
             case 13: {
                 CURRENT_FRAGMENT = FUpS_13th_Question.TAG;
                 fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
-                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
                         .add(R.id.followUpFragmentsContainer, new FUpS_13th_Question(), FUpS_13th_Question.TAG)
                         .commitNow();
                 break;
@@ -505,7 +499,6 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
             case 14: {
                 CURRENT_FRAGMENT = FUpS_14th_Question.TAG;
                 fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
-                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
                         .add(R.id.followUpFragmentsContainer, new FUpS_14th_Question(), FUpS_14th_Question.TAG)
                         .commitNow();
                 break;
@@ -513,7 +506,6 @@ public class FollowUpSymptomsActivity extends AppCompatActivity implements
             case 15: {
                 CURRENT_FRAGMENT = FUpS_15th_Question.TAG;
                 fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
-                        .remove(getSupportFragmentManager().findFragmentByTag(End_of_Question_Set.TAG))
                         .add(R.id.followUpFragmentsContainer, new FUpS_15th_Question(), FUpS_15th_Question.TAG)
                         .commitNow();
                 break;

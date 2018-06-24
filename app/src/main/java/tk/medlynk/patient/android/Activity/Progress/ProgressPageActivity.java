@@ -9,7 +9,6 @@ import android.widget.LinearLayout;
 
 import com.neweraandroid.demo.R;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.lang.*;
 
