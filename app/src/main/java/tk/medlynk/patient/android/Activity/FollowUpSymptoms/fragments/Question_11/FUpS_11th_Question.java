@@ -14,7 +14,6 @@ import com.neweraandroid.demo.R;
 import java.util.List;
 
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.FollowUpSymptomsActivity;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_22.NS_22th_question;
 import tk.medlynk.patient.android.Constants;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
 import tk.medlynk.patient.android.Model.Answer;

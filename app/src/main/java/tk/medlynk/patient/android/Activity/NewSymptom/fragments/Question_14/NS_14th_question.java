@@ -83,7 +83,7 @@ public class NS_14th_question extends Fragment implements
                 .get ( MedlynkViewModel.class );
         manager = new SharedPreferenceManager ( getActivity () );
         medlynkViewModel.getAnswers ( manager.getAppointmentID (),
-                Constants.NEW_SYMPTOM_ROW,
+                Constants.NEW_SYMPTOM_ROW,0,
                 14 ).observe ( this, new Observer<DataBaseModel> () {
             @Override
             public void onChanged(@Nullable DataBaseModel dataBaseModel) {
@@ -166,22 +166,23 @@ public class NS_14th_question extends Fragment implements
         JsonConverter jsonConverter = JsonConverter.getInstance ();
         if (existsRecord) {
             if (answerDB.size () > 0) {
-                medlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (),
-                        Constants.NEW_SYMPTOM_ROW, 14,
+                medlynkViewModel
+                        .updateAnswersToDB ( manager.getAppointmentID (),
+                        Constants.NEW_SYMPTOM_ROW, 0, 14,
                         jsonConverter.answersToAnswerJson ( answerDB ) );
             } else {
                 medlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (),
-                        Constants.NEW_SYMPTOM_ROW, 14,
+                        Constants.NEW_SYMPTOM_ROW, 0, 14,
                         jsonConverter.medicationsToMedicationJson ( medicationsDB ) );
             }
         } else {
             if (answerDB.size () > 0) {
                 medlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (),
-                        Constants.NEW_SYMPTOM_ROW, 14,
+                        Constants.NEW_SYMPTOM_ROW, 0, 14,
                         jsonConverter.answersToAnswerJson ( answerDB ) );
             } else {
                 medlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (),
-                        Constants.NEW_SYMPTOM_ROW, 14,
+                        Constants.NEW_SYMPTOM_ROW, 0, 14,
                         jsonConverter.medicationsToMedicationJson ( medicationsDB ) );
             }
         }

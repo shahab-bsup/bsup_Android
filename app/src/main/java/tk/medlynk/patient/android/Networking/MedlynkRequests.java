@@ -51,6 +51,7 @@ import tk.medlynk.patient.android.CustomViews.SnackController;
 import tk.medlynk.patient.android.Essentials.Utils;
 import tk.medlynk.patient.android.Model.AccessTokenResponse;
 import tk.medlynk.patient.android.Model.Answer;
+import tk.medlynk.patient.android.Model.AppointmentResponse;
 import tk.medlynk.patient.android.Model.AppointmentsResponse;
 import tk.medlynk.patient.android.Model.CurrentUserResponse;
 import tk.medlynk.patient.android.Model.ErrorResponse;
@@ -406,20 +407,17 @@ public class MedlynkRequests {
     public static void getAppointments(Context context, final OnGetAppointmentsListener listener, String doctorId) {
         HashMap<String, String> body = new HashMap<> ();
         body.put ( Constants.PROVIDER_ID, doctorId );
-        Call<AppointmentsResponse> call = MedlynkRestAPI.getInstance().getMainRetrofit ( context )
+        Call<AppointmentResponse> call = MedlynkRestAPI
+                .getInstance().getMainRetrofit ( context )
                 .getAppointments ( body );
-        call.enqueue ( new Callback<AppointmentsResponse> () {
+        call.enqueue ( new Callback<AppointmentResponse> () {
             @Override
-            public void onResponse(Call<AppointmentsResponse> call, Response<AppointmentsResponse> response) {
-                if (response.isSuccessful ()) {
-                    listener.onGetAppointmentSuccess ( response.body () );
-                } else {
-
-                }
+            public void onResponse(Call<AppointmentResponse> call, Response<AppointmentResponse> response) {
+                listener.onGetAppointmentSuccess ( response.body () );
             }
 
             @Override
-            public void onFailure(Call<AppointmentsResponse> call, Throwable t) {
+            public void onFailure(Call<AppointmentResponse> call, Throwable t) {
 
             }
         } );
