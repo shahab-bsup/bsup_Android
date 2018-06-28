@@ -26,9 +26,11 @@ public class FUpS_5th_VH extends RecyclerView.ViewHolder implements ViewSelectio
     private final ViewSelection choices;
     private final String[] string_choices;
     private OnFUpSFifthVHListener onFUpSFifthVHListener;
-    private final Answer answer;
+    private  Answer answer;
+    private TextView otherText;
+    private String initial_other_text = "";
 
-    public FUpS_5th_VH(View itemView,Answer answerDB) {
+    public FUpS_5th_VH(View itemView) {
         super ( itemView );
         progressBar = itemView.findViewById ( R.id.progress_bar );
         question_view = itemView.findViewById ( R.id.follow_up_symptoms_fifth_question );
@@ -48,22 +50,59 @@ public class FUpS_5th_VH extends RecyclerView.ViewHolder implements ViewSelectio
         choices.setDataSet ( string_choices );
 
         answer = new Answer ();
+    }
 
-        if (answerDB!=null){
-            switch (answerDB.getChoice()){
-                case "a":{choices.updateViewSelectionUI(0);break;}
-                case "b":{choices.updateViewSelectionUI(1);break;}
-                case "c":{choices.updateViewSelectionUI(2);break;}
-                case "d":{choices.updateViewSelectionUI(3);break;}
-                case "e":{choices.updateViewSelectionUI(4);break;}
-                case "f":{choices.updateViewSelectionUI(5);break;}
-                case "g":{
-
-                }
-
+    public void onUpdateUI(Answer answerDB) {
+        switch (answerDB.getChoice ()){
+            case "a":{
+                choices.updateViewSelectionUI( 0);
+                answer=answerDB;
+                break;
             }
-
+            case "b":{
+                choices.updateViewSelectionUI(  1);
+                answer=answerDB;
+                break;
+            }
+            case "c":{
+                choices.updateViewSelectionUI(   2);
+                answer=answerDB;
+                break;
+            }
+            case "d":{
+                choices.updateViewSelectionUI(  3);
+                answer=answerDB;
+                break;
+            }
+            case "e":{
+                choices.updateViewSelectionUI(  4);
+                answer=answerDB;
+                break;
+            }
+            case "f":{
+                choices.updateViewSelectionUI(  5);
+                answer=answerDB;
+                break;
+            }
+            case "g":{
+                answer=answerDB;
+                choices.setSelect ( 6 );
+                setOtherTextVisibilityStatus ( View.VISIBLE );
+                setOtherText( answerDB.getOther () );
+                initial_other_text = answerDB.getOther ();
+                break;
+            }
         }
+        button_next.setEnabled ( true );
+        button_next.setBackgroundResource ( R.drawable.enable_next_question );
+    }
+
+    private void setOtherTextVisibilityStatus(int status){
+        this.otherText.setVisibility ( status );
+    }
+
+    private void setOtherText(String other) {
+        this.otherText.setText ( other );
     }
 
     public void setOnFUpSFifthVHListener(OnFUpSFifthVHListener onFUpSFifthVHListener) {
@@ -78,12 +117,24 @@ public class FUpS_5th_VH extends RecyclerView.ViewHolder implements ViewSelectio
     public void onSingleItemSelected(View view, int i) {
         System.out.println ( "FUpS_5th_VH.onSingleItemSelected" );
         if( i == -1 ){
+            setOtherTextVisibilityStatus ( View.GONE );
             button_next.setEnabled ( false );
             button_next.setBackgroundResource ( R.drawable.disable_next_question );
         }else{
-            button_next.setEnabled(true);
-            button_next.setBackgroundResource(R.drawable.enable_next_question);
-            setAnswerChoice(i);
+            button_next.setEnabled ( true );
+            button_next.setBackgroundResource ( R.drawable.enable_next_question );
+            if( i == 6 ){
+                DialogueBuilder dialogBuilder =
+                        new DialogueBuilder( itemView.getContext (),
+                                "other",
+                                initial_other_text);
+                dialogBuilder.setOnDialogListener( this );
+                dialogBuilder.show ();
+            }else{
+                setOtherTextVisibilityStatus ( View.GONE );
+                choices.unSelect ( 6 );
+                setAnswerChoice ( i );
+            }
         }
     }
 
@@ -97,31 +148,26 @@ public class FUpS_5th_VH extends RecyclerView.ViewHolder implements ViewSelectio
 
             case 1:{
                 answer.setChoice ( "b" );
-
                 break;
             }
 
             case 2:{
                 answer.setChoice ( "c" );
-
                 break;
             }
 
             case 3:{
                 answer.setChoice ( "d" );
-
                 break;
             }
 
             case 4:{
                 answer.setChoice ( "e" );
-
                 break;
             }
 
             case 5:{
                 answer.setChoice ( "f" );
-
                 break;
             }
 
@@ -139,12 +185,15 @@ public class FUpS_5th_VH extends RecyclerView.ViewHolder implements ViewSelectio
     @Override
     public void onOtherDialogDone(String otherText) {
         System.out.println ( "FUpS_5th_VH.onOtherDialogDone" );
-        if( otherText.length() >0  ){
-            answer.setOther(otherText);
+        if( otherText.length () > 0 ){
+            answer.setChoice ( "g" );
+            answer.setOther ( otherText );
+            setOtherTextVisibilityStatus ( View.VISIBLE );
+            setOtherText ( otherText );
         }else{
             button_next.setEnabled(false);
             button_next.setBackgroundResource(R.drawable.disable_next_question);
-            choices.unSelect ( 6 );
+            choices.setClear ();
         }
     }
 

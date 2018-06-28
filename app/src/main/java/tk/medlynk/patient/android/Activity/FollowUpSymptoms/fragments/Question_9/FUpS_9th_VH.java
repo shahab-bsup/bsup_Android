@@ -1,6 +1,7 @@
 package tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_9;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -36,7 +37,8 @@ public class FUpS_9th_VH extends
     private Answer choice ;
     private List<Answer> choices;
     private OnFUpSNinthVHListener onFUpSNinthVHListener;
-    private String otherString;
+    private TextView otherText;
+    private String initial_other_text = "";
 
 
     public FUpS_9th_VH(View itemView) {
@@ -77,13 +79,21 @@ public class FUpS_9th_VH extends
         this.onFUpSNinthVHListener = onFUpSNinthVHListener;
     }
 
+    private void setOtherText(String otherText) {
+        this.otherText.setText ( otherText );
+    }
+
+    private void setOtherTextVisibilityStatus(int status) {
+        this.otherText.setVisibility ( status );
+    }
+
     @Override
     public void onSingleItemSelected(View view, int i) {
-        System.out.println ( "FUpS_9th_VH.onSingleItemSelected" );
-        if( i == -1 ){
+        choices.clear();
+        if (i == -1) {
             button_next.setEnabled ( false );
             button_next.setBackgroundResource ( R.drawable.disable_next_question );
-        }else{
+        } else {
             second.setClear ();
             choice.setChoice ( "a" );
             button_next.setEnabled ( true );
@@ -93,38 +103,37 @@ public class FUpS_9th_VH extends
 
     @Override
     public void onMultiItemSelected(View view, Integer integer) {
-        System.out.println ( "FUpS_9th_VH.onMultiItemSelected" );
         first.setClear ();
-        if( integer == 3 ){
-            DialogueBuilder dialogBuilder = new DialogueBuilder( itemView.getContext (),"other", "shahab" );
-            dialogBuilder.setOnDialogListener( this );
+        if (integer == 3) {
+            DialogueBuilder dialogBuilder =
+                    new DialogueBuilder ( itemView.getContext (),
+                            "other",
+                            initial_other_text );
+            dialogBuilder.setOnDialogListener ( this );
             dialogBuilder.show ();
-        }else{
-            setAnswerChoices(integer);
+        } else {
+            setAnswerChoices ( integer );
         }
-
     }
 
     private void setAnswerChoices(Integer integer) {
         Answer answer = new Answer ();
-        switch (integer){
-            case 0:{
+        switch (integer) {
+            case 0: {
                 answer.setChoice ( "b" );
                 break;
             }
-            case 1:{
+            case 1: {
                 answer.setChoice ( "c" );
-
                 break;
             }
-            case 2:{
+            case 2: {
                 answer.setChoice ( "d" );
-
                 break;
             }
         }
         choices.add ( answer );
-        if( choices.size () == 1 ){
+        if (choices.size () == 1) {
             button_next.setEnabled ( true );
             button_next.setBackgroundResource ( R.drawable.enable_next_question );
         }
@@ -132,25 +141,24 @@ public class FUpS_9th_VH extends
 
     @Override
     public void onMultiItemDeselected(View view, Integer integer) {
-        System.out.println ( "FUpS_9th_VH.onMultiItemDeselected" );
         int i = integer;
         Iterator<Answer> answerIterator = choices.iterator ();
-        switch (i){
-            case 0:{
-                while (answerIterator.hasNext ()){
+        switch (i) {
+            case 0: {
+                while (answerIterator.hasNext ()) {
                     Answer answer = answerIterator.next ();
-                    if(  answer.getChoice () != null &&
-                            answer.getChoice ().equals ( "b" ) )
+                    if (answer.getChoice () != null &&
+                            answer.getChoice ().equals ( "b" ))
                         answerIterator.remove ();
                 }
 
                 break;
             }
-            case 1:{
-                while (answerIterator.hasNext ()){
+            case 1: {
+                while (answerIterator.hasNext ()) {
                     Answer answer = answerIterator.next ();
-                    if(  answer.getChoice () != null &&
-                            answer.getChoice ().equals ( "c" ) ){
+                    if (answer.getChoice () != null &&
+                            answer.getChoice ().equals ( "c" )) {
                         answerIterator.remove ();
                         break;
                     }
@@ -158,22 +166,23 @@ public class FUpS_9th_VH extends
 
                 break;
             }
-            case 2:{
-                while (answerIterator.hasNext ()){
+            case 2: {
+                while (answerIterator.hasNext ()) {
                     Answer answer = answerIterator.next ();
-                    if(  answer.getChoice () != null &&
-                            answer.getChoice ().equals ( "d" ) ){
+                    if (answer.getChoice () != null &&
+                            answer.getChoice ().equals ( "d" )) {
                         answerIterator.remove ();
                         break;
                     }
                 }
 
             }
-            case 3:{
-                while (answerIterator.hasNext ()){
+            case 3: {
+                while (answerIterator.hasNext ()) {
+                    setOtherTextVisibilityStatus ( View.GONE );
                     Answer answer = answerIterator.next ();
-                    if(  answer.getChoice () != null &&
-                            answer.getChoice ().equals ( "e" ) ){
+                    if (answer.getChoice () != null &&
+                            answer.getChoice ().equals ( "e" )) {
                         answerIterator.remove ();
                         break;
                     }
@@ -182,7 +191,7 @@ public class FUpS_9th_VH extends
                 break;
             }
         }
-        if( choices.size () == 0 ){
+        if (choices.size () == 0) {
             button_next.setEnabled ( false );
             button_next.setBackgroundResource ( R.drawable.disable_next_question );
         }
@@ -198,8 +207,9 @@ public class FUpS_9th_VH extends
 
     @Override
     public void onOtherDialogDone(String otherText) {
-        System.out.println ( "FUpS_9th_VH.onOtherDialogDone" );
-        if( otherText.length () > 0 ){
+        if (otherText.length () > 0) {
+            setOtherTextVisibilityStatus ( View.VISIBLE );
+            setOtherText ( otherText );
             Answer answer = new Answer ();
             answer.setChoice ( "e" );
             answer.setOther ( otherText );
@@ -213,33 +223,43 @@ public class FUpS_9th_VH extends
 
     public void onUpdateUI(List<Answer> answers) {
         for (Answer answer : answers) {
-            switch (answer.getChoice ()){
-                case "b":{
-                    second.updateViewSelectionUI(0);
-
+            switch (answer.getChoice ()) {
+                case "a":{
+                    first.updateViewSelectionUI(0);
+                    choice=answer;
                     break;
                 }
-                case "c":{
-                    second.updateViewSelectionUI( 1);
-
+                case "b": {
+                    second.updateViewSelectionUI( 0 );
+                    choices.add(answer);
                     break;
                 }
-                case "d":{
-                    second.updateViewSelectionUI( 2);
-
+                case "c": {
+                    second.updateViewSelectionUI(  1 );
+                    choices.add(answer);
                     break;
                 }
-                case "e":{
-                    second.updateViewSelectionUI(  3);
+                case "d": {
+                    second.updateViewSelectionUI(  2 );
+                    choices.add(answer);
+                    break;
+                }
+                case "e": {
+                    choices.add(answer);
+                    second.setSelect ( 3 );
+                    if( answer.getOther () != null &&
+                            !TextUtils.isEmpty ( answer.getOther () )){
+                        setOtherTextVisibilityStatus ( View.VISIBLE );
+                        setOtherText( answer.getOther () );
+                        initial_other_text = answer.getOther ();
+                    }
 
                     break;
                 }
             }
         }
-    }
-
-    public void onUpdateUI(Answer answer) {
-        first.updateViewSelectionUI(  0);
+        button_next.setEnabled ( true );
+        button_next.setBackgroundResource ( R.drawable.enable_next_question );
     }
 
     private class OnNextButtonClickListener implements View.OnClickListener {

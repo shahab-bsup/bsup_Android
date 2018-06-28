@@ -26,11 +26,10 @@ public class FUpS_3rd_VH extends RecyclerView.ViewHolder implements ViewSelectio
     private final String[] string_choices;
     private final ViewSelection choice_numbers;
     private final ViewSelection choices;
-
-    private OnFUpSThirdVHListener onFUpSThirdVHListener;
     private Answer answer;
+    private OnFUpSThirdVHListener onFUpSThirdVHListener;
 
-    public FUpS_3rd_VH(View itemView,Answer answerDB) {
+    public FUpS_3rd_VH(View itemView) {
         super ( itemView );
         progressBar = itemView.findViewById ( R.id.progress_bar );
         question_view = itemView.findViewById ( R.id.follow_up_symptoms_third_question );
@@ -49,18 +48,18 @@ public class FUpS_3rd_VH extends RecyclerView.ViewHolder implements ViewSelectio
         choice_numbers.setDataSet ( strings );
 
         choices = itemView.findViewById ( R.id.viewSelectionChoices );
-        string_choices = itemView
-                .getContext ()
-                .getResources ()
-                .getStringArray ( R.array.FUS_3rd_choices_FUR_sixth_choices );
+        string_choices = itemView.getContext ().getResources ().getStringArray ( R.array.FUS_3rd_choices_FUR_sixth_choices );
 
         choices.setDataSet ( string_choices );
         choices.setOnSingleItemSelectedListener ( this );
         answer = new Answer ();
+    }
 
-        if (answerDB!=null){
-            choices.updateViewSelectionUI(answerDB.getRate()-1);
-        }
+    public void onUpdateUI(Answer answerDB) {
+        choices.updateViewSelectionUI(answerDB.getRate()-1);
+        answer=answerDB;
+        button_next.setEnabled ( true );
+        button_next.setBackgroundResource ( R.drawable.enable_next_question );
     }
 
     public void setOnFUpSThirdVHListener(OnFUpSThirdVHListener onFUpSThirdVHListener) {

@@ -80,13 +80,12 @@ public class FUpS_1st_Question extends Fragment implements
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_follow__up__symptoms_1st__question, container, false);
-        if (Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
-            tableNumber=Constants.FOLLOW_UP_SYMPTOMS_ROW;
-            questionNumber=1;
-        }
-        else {
-            tableNumber=Constants.FOLLOW_UP_RESULTS_ROW;
-            questionNumber=4;
+        if (Constants.Context_Tag.equals(FollowUpSymptomsActivity.class.getSimpleName())) {
+            tableNumber = Constants.FOLLOW_UP_SYMPTOMS_ROW;
+            questionNumber = 1;
+        } else {
+            tableNumber = Constants.FOLLOW_UP_RESULTS_ROW;
+            questionNumber = 4;
         }
         dbOperation(view);
         return view;
@@ -96,7 +95,7 @@ public class FUpS_1st_Question extends Fragment implements
         mMedlynkViewModel = ViewModelProviders.of(getActivity()).get(MedlynkViewModel.class);
         manager = new SharedPreferenceManager(getActivity());
 
-        mMedlynkViewModel.getAnswers(manager.getAppointmentID(), tableNumber,0, questionNumber)
+        mMedlynkViewModel.getAnswers(manager.getAppointmentID(), tableNumber, 0, questionNumber)
                 .observe((LifecycleOwner) this, new Observer<DataBaseModel>() {
                     @Override
                     public void onChanged(@Nullable DataBaseModel dataBaseModel) {
@@ -108,8 +107,11 @@ public class FUpS_1st_Question extends Fragment implements
                                     .get(0);
                             Log.d(TAG, "onChanged: " + answerDB);
                         }
-                        viewHolder = new FUpS__1st_VH(view, answerDB);
+                        viewHolder = new FUpS__1st_VH(view);
                         viewHolder.setOnFUpSFirstVHListener(FUpS_1st_Question.this);
+                        if(answerDB!=null){
+                            viewHolder.onUpdateUI(answerDB);
+                        }
                     }
 
                 });
@@ -121,11 +123,9 @@ public class FUpS_1st_Question extends Fragment implements
         super.onAttach(context);
         if (context instanceof OnFollowUpSymptomsFirstQuestionListener) {
             mListener = (OnFollowUpSymptomsFirstQuestionListener) context;
-        }
-        else if(context instanceof OnFURFourthQuestionInteractionListener){
+        } else if (context instanceof OnFURFourthQuestionInteractionListener) {
             mListenerFUR = (OnFURFourthQuestionInteractionListener) context;
-        }
-        else {
+        } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFollowUpSymptomsFirstQuestionListener");
         }
@@ -154,20 +154,15 @@ public class FUpS_1st_Question extends Fragment implements
     @Override
     public void onAnswerSuccess(FollowUpSymptomResponse response) {
 
-        if (Constants.Context_Tag.equals(FollowUpSymptomsActivity.class.getSimpleName())) {
-            JsonConverter JC = JsonConverter.getInstance();
-            if (existsRecord == false)
-                mMedlynkViewModel.insertAnswersToDB(manager.getAppointmentID(), tableNumber,0, questionNumber, JC.answersToAnswerJson(answersForDB));
-            else
-                mMedlynkViewModel.updateAnswersToDB(manager.getAppointmentID(), tableNumber,0, questionNumber, JC.answersToAnswerJson(answersForDB));
+        JsonConverter JC = JsonConverter.getInstance();
+        if (existsRecord == false)
+            mMedlynkViewModel.insertAnswersToDB(manager.getAppointmentID(), tableNumber, 0, questionNumber, JC.answersToAnswerJson(answersForDB));
+        else
+            mMedlynkViewModel.updateAnswersToDB(manager.getAppointmentID(), tableNumber, 0, questionNumber, JC.answersToAnswerJson(answersForDB));
 
-            System.out.println("FUpS_1st_Question.onFirstAnswerSuccess");
-            viewHolder.setProgressBarVisibilityStatus(View.GONE);
-            mListener.onFirstQuestion();
-        } else {
-            viewHolder.setProgressBarVisibilityStatus(View.GONE);
-            mListenerFUR.onFURFourthQuestion();
-        }
+        System.out.println("FUpS_1st_Question.onFirstAnswerSuccess");
+        viewHolder.setProgressBarVisibilityStatus(View.GONE);
+        mListener.onFirstQuestion();
     }
 
     @Override

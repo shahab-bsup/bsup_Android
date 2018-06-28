@@ -49,6 +49,8 @@ public class FUpS_3rd_Question extends Fragment
     private Answer answerDB;
     private SharedPreferenceManager manager;
     private List<Answer> answersForDB = new ArrayList<>();
+    private int tableNumber;
+    private int questionNumber;
 
     private OnFollowUpSymptomsThirdQuestionListener mListener;
     private OnFURSixthQuestionInteractionListener mListenerFUR;
@@ -60,15 +62,15 @@ public class FUpS_3rd_Question extends Fragment
 
     public static FUpS_3rd_Question newInstance() {
         FUpS_3rd_Question fragment = new FUpS_3rd_Question();
-        Bundle args = new Bundle ();
-        fragment.setArguments ( args );
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate ( savedInstanceState );
-        if (getArguments () != null) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
 
         }
     }
@@ -78,15 +80,23 @@ public class FUpS_3rd_Question extends Fragment
                              ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate ( R.layout.fragment_follow__up__symptoms_3rd__question, container, false );
-       dbOperation(view);
+        View view = inflater.inflate(R.layout.fragment_follow__up__symptoms_3rd__question, container, false);
+
+        if (Constants.Context_Tag.equals(FollowUpSymptomsActivity.class.getSimpleName())) {
+            tableNumber = Constants.FOLLOW_UP_SYMPTOMS_ROW;
+            questionNumber = 3;
+        } else {
+            tableNumber = Constants.FOLLOW_UP_RESULTS_ROW;
+            questionNumber = 6;
+        }
+        dbOperation(view);
         return view;
     }
 
     private void dbOperation(final View view) {
         mMedlynkViewModel = ViewModelProviders.of(getActivity()).get(MedlynkViewModel.class);
         manager = new SharedPreferenceManager(getActivity());
-        mMedlynkViewModel.getAnswers(manager.getAppointmentID(), Constants.FOLLOW_UP_SYMPTOMS_ROW,0, 3)
+        mMedlynkViewModel.getAnswers(manager.getAppointmentID(), tableNumber, 0, questionNumber)
                 .observe((LifecycleOwner) this, new Observer<DataBaseModel>() {
                     @Override
                     public void onChanged(@Nullable DataBaseModel dataBaseModel) {
@@ -98,8 +108,11 @@ public class FUpS_3rd_Question extends Fragment
                                     .get(0);
                             Log.d(TAG, "onChanged: " + answerDB);
                         }
-                        viewHolder = new FUpS_3rd_VH(view, answerDB);
+                        viewHolder = new FUpS_3rd_VH(view);
                         viewHolder.setOnFUpSThirdVHListener(FUpS_3rd_Question.this);
+                        if (answerDB!=null){
+                            viewHolder.onUpdateUI(answerDB);
+                        }
                     }
 
                 });
@@ -107,33 +120,31 @@ public class FUpS_3rd_Question extends Fragment
 
     @Override
     public void onAttach(Context context) {
-        super.onAttach ( context );
+        super.onAttach(context);
         if (context instanceof OnFollowUpSymptomsThirdQuestionListener) {
             mListener = (OnFollowUpSymptomsThirdQuestionListener) context;
-        }
-        else if(context instanceof OnFURSixthQuestionInteractionListener){
-            mListenerFUR =(OnFURSixthQuestionInteractionListener) context;
-        }
-        else {
-            throw new RuntimeException ( context.toString ()
-                    + " must implement OnFollowUpSymptomsFirstQuestionListener" );
+        } else if (context instanceof OnFURSixthQuestionInteractionListener) {
+            mListenerFUR = (OnFURSixthQuestionInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFollowUpSymptomsFirstQuestionListener");
         }
     }
 
     @Override
     public void onDetach() {
-        super.onDetach ();
+        super.onDetach();
         mListener = null;
-        mListenerFUR=null;
+        mListenerFUR = null;
     }
 
     @Override
     public void onNextClick(Answer answer) {
-        System.out.println ( "FUpS_3rd_Question.onNextClick" );
-        viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
-        SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
-        MedlynkRequests.followUpSymptomAnswer( getActivity (),FUpS_3rd_Question.this,
-                manager.getAppointmentID (), "3",
+        System.out.println("FUpS_3rd_Question.onNextClick");
+        viewHolder.setProgressBarVisibilityStatus(View.VISIBLE);
+        SharedPreferenceManager manager = new SharedPreferenceManager(getActivity());
+        MedlynkRequests.followUpSymptomAnswer(getActivity(), FUpS_3rd_Question.this,
+                manager.getAppointmentID(), "3",
                 answer);
 
         answersForDB.add(answer);
@@ -141,52 +152,46 @@ public class FUpS_3rd_Question extends Fragment
 
     @Override
     public void onSkipClick() {
-        if(Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
+        if (Constants.Context_Tag.equals(FollowUpSymptomsActivity.class.getSimpleName())) {
             System.out.println("FUpS_3rd_Question.onSkipClick");
             mListener.onThirdQuestion();
-        }
-        else {
+        } else {
             mListenerFUR.onFURSixthQuestion();
         }
     }
 
     @Override
     public void onAnswerSuccess(FollowUpSymptomResponse response) {
-        if(Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
-            JsonConverter JC = JsonConverter.getInstance();
-            if (existsRecord == false)
-                mMedlynkViewModel.insertAnswersToDB(manager.getAppointmentID(), Constants.FOLLOW_UP_SYMPTOMS_ROW,0, 3, JC.answersToAnswerJson(answersForDB));
-            else
-                mMedlynkViewModel.updateAnswersToDB(manager.getAppointmentID(), Constants.FOLLOW_UP_SYMPTOMS_ROW,0, 3, JC.answersToAnswerJson(answersForDB));
+        JsonConverter JC = JsonConverter.getInstance();
+        if (existsRecord == false)
+            mMedlynkViewModel.insertAnswersToDB(manager.getAppointmentID(), tableNumber, 0, questionNumber, JC.answersToAnswerJson(answersForDB));
+        else
+            mMedlynkViewModel.updateAnswersToDB(manager.getAppointmentID(), tableNumber, 0, questionNumber, JC.answersToAnswerJson(answersForDB));
 
-            System.out.println("FUpS_3rd_Question.onThirdAnswerSuccess");
-            viewHolder.setProgressBarVisibilityStatus(View.GONE);
-            if (response.getAnswer().getRate() == 1) {
-                mListener.onJumpToFUpsNinthQuestion();
-            } else {
-                mListener.onThirdQuestion();
-            }
-        }
-        else {
-            viewHolder.setProgressBarVisibilityStatus(View.GONE);
-            mListenerFUR.onFURSixthQuestion();
+        System.out.println("FUpS_3rd_Question.onThirdAnswerSuccess");
+        viewHolder.setProgressBarVisibilityStatus(View.GONE);
+        if (response.getAnswer().getRate() == 1) {
+            mListener.onJumpToFUpsNinthQuestion();
+        } else {
+            mListener.onThirdQuestion();
         }
 
     }
 
     @Override
     public void onAnswerFailure() {
-        System.out.println ( "FUpS_3rd_Question.onThirdAnswerFailure" );
-        viewHolder.setProgressBarVisibilityStatus ( View.GONE );
+        System.out.println("FUpS_3rd_Question.onThirdAnswerFailure");
+        viewHolder.setProgressBarVisibilityStatus(View.GONE);
         Toast.makeText(getActivity(), "try again!", Toast.LENGTH_SHORT).show();
     }
 
     public interface OnFollowUpSymptomsThirdQuestionListener {
         void onThirdQuestion();
+
         void onJumpToFUpsNinthQuestion();
     }
 
-    public interface OnFURSixthQuestionInteractionListener{
+    public interface OnFURSixthQuestionInteractionListener {
         void onFURSixthQuestion();
     }
 }

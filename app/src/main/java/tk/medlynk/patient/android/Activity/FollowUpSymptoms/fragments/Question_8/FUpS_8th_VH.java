@@ -22,14 +22,14 @@ public class FUpS_8th_VH extends RecyclerView.ViewHolder implements ViewSelectio
     private final TextView second_question;
     private final Button button_next;
     private final Button button_skip;
-    private final Answer answer;
+    private Answer answer;
     private ViewSelection answerChoices, choice_numbers;
     private String[] choices_strings;
 
     private OnFUpSEighthVHListener onFUpSEighthVHListener;
 
 
-    public FUpS_8th_VH(View itemView,Answer answerDB) {
+    public FUpS_8th_VH(View itemView) {
         super ( itemView );
         progressBar = itemView.findViewById ( R.id.progress_bar );
         question_view = itemView.findViewById ( R.id.follow_up_symptoms_eighth_question );
@@ -43,22 +43,22 @@ public class FUpS_8th_VH extends RecyclerView.ViewHolder implements ViewSelectio
         choice_numbers = itemView.findViewById ( R.id.viewSelectionChoiceNumbers );
 
         //I know this is bad! Do not blame me please:D
-        String[] strings = {"1", "2", "3", "4", "5",
-                "6", "7", "8", "9", "10"};
+        String[] strings = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
         choice_numbers.setDataSet ( strings );
 
-        choices_strings = itemView
-                .getContext ()
-                .getResources ()
+        choices_strings = itemView.getContext ().getResources ()
                 .getStringArray ( R.array.FUS_7th_8th_choices_FUR_10th_11th_choices );
         answerChoices = itemView.findViewById ( R.id.viewSelectionChoices );
         answerChoices.setDataSet ( choices_strings );
         answerChoices.setOnSingleItemSelectedListener ( this );
         answer = new Answer ();
+    }
 
-        if (answerDB!=null){
-            answerChoices.updateViewSelectionUI(answerDB.getRate()-1);
-        }
+    public void onUpdateUI(Answer answerDB) {
+        answerChoices.updateViewSelectionUI(answerDB.getRate()-1);
+        answer=answerDB;
+        button_next.setEnabled ( true );
+        button_next.setBackgroundResource ( R.drawable.enable_next_question );
     }
 
     public void setOnFUpSEighthVHListener(OnFUpSEighthVHListener onFUpSEighthVHListener) {

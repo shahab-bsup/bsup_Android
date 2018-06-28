@@ -26,7 +26,7 @@ public class FUpS_6th_VH extends RecyclerView.ViewHolder implements ViewSelectio
     private Answer answer;
     private OnFUpSSixthVHListener onFUpSSixthVHListener;
 
-    public FUpS_6th_VH(View itemView,Answer answerDB) {
+    public FUpS_6th_VH(View itemView) {
         super ( itemView );
         progressBar = itemView.findViewById ( R.id.progress_bar );
         question_view = itemView.findViewById ( R.id.follow_up_symptoms_sixth_question );
@@ -41,15 +41,16 @@ public class FUpS_6th_VH extends RecyclerView.ViewHolder implements ViewSelectio
         choices.setOnSingleItemSelectedListener ( this );
 
         //I know this is bad! Do not blame me please:D
-        String[] strings = {"1", "2", "3", "4", "5",
-                "6", "7", "8", "9", "10"};
+        String[] strings = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
         choices.setDataSet ( strings );
-
         answer = new Answer ();
+    }
 
-        if(answerDB!=null){
-           choices.updateViewSelectionUI(answerDB.getRate()-1);
-        }
+    public void onUpdateUI(Answer answerDB) {
+        choices.updateViewSelectionUI(answerDB.getRate()-1);
+        answer=answerDB;
+        button_next.setEnabled ( true );
+        button_next.setBackgroundResource ( R.drawable.enable_next_question );
     }
 
     public void setProgressBarVisibilityStatus(int status ){
