@@ -55,7 +55,7 @@ public class FUpS_7th_Question_VH extends RecyclerView.ViewHolder implements Vie
         answer = new Answer ();
 
         if(answerDB!=null){
-            answerChoices.previewOfDBResult(true,true,answerDB.getRate()-1);
+            answerChoices.updateViewSelectionUI(answerDB.getRate()-1);
         }
     }
 

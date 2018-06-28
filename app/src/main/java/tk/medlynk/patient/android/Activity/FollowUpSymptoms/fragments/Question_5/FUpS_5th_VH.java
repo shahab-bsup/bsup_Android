@@ -51,12 +51,12 @@ public class FUpS_5th_VH extends RecyclerView.ViewHolder implements ViewSelectio
 
         if (answerDB!=null){
             switch (answerDB.getChoice()){
-                case "a":{choices.previewOfDBResult(true,true,0);break;}
-                case "b":{choices.previewOfDBResult(true,true,1);break;}
-                case "c":{choices.previewOfDBResult(true,true,2);break;}
-                case "d":{choices.previewOfDBResult(true,true,3);break;}
-                case "e":{choices.previewOfDBResult(true,true,4);break;}
-                case "f":{choices.previewOfDBResult(true,true,5);break;}
+                case "a":{choices.updateViewSelectionUI(0);break;}
+                case "b":{choices.updateViewSelectionUI(1);break;}
+                case "c":{choices.updateViewSelectionUI(2);break;}
+                case "d":{choices.updateViewSelectionUI(3);break;}
+                case "e":{choices.updateViewSelectionUI(4);break;}
+                case "f":{choices.updateViewSelectionUI(5);break;}
                 case "g":{
 
                 }

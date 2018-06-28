@@ -9,7 +9,6 @@ import android.widget.TextView;
 import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
 
-import tk.medlynk.patient.android.Activity.FollowUpResults.fragments.Question_3.FUpR_3rd_VH;
 import tk.medlynk.patient.android.Model.Answer;
 
 /**
@@ -49,9 +48,9 @@ public class FUpR_17th_VH extends RecyclerView.ViewHolder implements ViewSelecti
 
         if (answerDB!=null){
             switch (answerDB.getChoice()){
-                case "a":{first.previewOfDBResult(true,true,0);break;}
-                case "b":{first.previewOfDBResult(true,true,1);break;}
-                case "c":{first.previewOfDBResult(true,true,2);break;}
+                case "a":{first.updateViewSelectionUI(0);break;}
+                case "b":{first.updateViewSelectionUI(1);break;}
+                case "c":{first.updateViewSelectionUI(2);break;}
             }
 
         }

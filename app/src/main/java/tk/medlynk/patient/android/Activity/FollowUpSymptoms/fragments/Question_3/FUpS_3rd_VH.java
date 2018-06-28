@@ -59,7 +59,7 @@ public class FUpS_3rd_VH extends RecyclerView.ViewHolder implements ViewSelectio
         answer = new Answer ();
 
         if (answerDB!=null){
-            choices.previewOfDBResult(true,true,answerDB.getRate()-1);
+            choices.updateViewSelectionUI(answerDB.getRate()-1);
         }
     }
 

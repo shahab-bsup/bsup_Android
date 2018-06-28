@@ -68,6 +68,11 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.VH> {
             holder.button.setBackgroundDrawable ( context.getResources ().getDrawable ( R.drawable.unselected_state ) );
             holder.button.setTextColor ( unselected_color );
         }
+
+        if(subChoices.contains(Integer.toString(position+1))){
+            holder.button.setBackgroundDrawable ( context.getResources ().getDrawable ( R.drawable.selected_state ) );
+            holder.button.setTextColor ( selected_color );
+        }
     }
 
     @Override
@@ -190,6 +195,8 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.VH> {
             onOptionsClickListener.onCardiacOptionsClicked ();
         }
     }
+
+
 
     public interface OnOptionsClickListener{
         void onImagingOptionsClicked();

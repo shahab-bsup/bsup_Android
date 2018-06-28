@@ -102,8 +102,11 @@ public class NS_15th_question extends Fragment implements
                             answerDB = JC.answerJsonToAnswers ( dataBaseModel.getAnswerJson () )
                                     .get ( 0 );
                         }
-                        viewHolder = new NS_15th_VH ( view ,answerDB);
+                        viewHolder = new NS_15th_VH ( view );
                         viewHolder.setOnFifteenNSVHListener ( NS_15th_question.this );
+                        if (answerDB != null) {
+                            viewHolder.onUpdateUI ( answerDB );
+                        }
                     }
 
                 } );

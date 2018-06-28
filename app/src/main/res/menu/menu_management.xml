@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_Profile"
+        android:icon="@drawable/ic_action_person"
+        android:title="shahab golpaiegan" />
+
+    <item
+        android:id="@+id/action_tutorialVideo"
+        android:title="Tutorial Video" />
+    <item
+        android:id="@+id/action_rateApp"
+        android:title="Rate App" />
+    <item
+        android:id="@+id/action_appointments"
+        android:title="Appointments" />
+    <item
+        android:id="@+id/action_signOut"
+        android:title="Sign Out" />
+
+
+</menu>

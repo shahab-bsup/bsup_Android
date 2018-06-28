@@ -30,7 +30,7 @@ public class NS_10th_VH extends RecyclerView.ViewHolder implements ViewSelection
     private Answer answer;
 
 
-    public NS_10th_VH(View itemView,Answer answerDB) {
+    public NS_10th_VH(View itemView) {
         super ( itemView );
         progressBar = itemView.findViewById ( R.id.progress_bar );
         question_view = itemView.findViewById ( R.id.new_symptom_tenth_question );
@@ -53,17 +53,18 @@ public class NS_10th_VH extends RecyclerView.ViewHolder implements ViewSelection
         tenth_answer.addTextChangedListener ( new AnswerWatcher () );
         tenth_answer.setOnFocusChangeListener ( new AnswerFocusChangeListener () );
         answer = new Answer ();
+    }
 
-        if (answerDB != null) {
-            if(answerDB.getChoice().equals("b")){
-                choice.previewOfDBResult(true,
-                        true,
-                        0);
-            }
-            else if(answerDB.getChoice().equals("a")){
-                tenth_answer.setText(answerDB.getReply());
-            }
+    public void onUpdateUI(Answer answerDB) {
+        if(answerDB.getChoice().equals("b")){
+            choice.updateViewSelectionUI(  0);
         }
+        else if(answerDB.getChoice().equals("a")){
+            tenth_answer.setText(answerDB.getReply());
+        }
+        answer=answerDB;
+        button_next.setEnabled ( true );
+        button_next.setBackgroundResource ( R.drawable.enable_next_question );
     }
 
     public void setOnTenthNSVHListener(OnTenthNSVHListener onTenthNSVHListener) {

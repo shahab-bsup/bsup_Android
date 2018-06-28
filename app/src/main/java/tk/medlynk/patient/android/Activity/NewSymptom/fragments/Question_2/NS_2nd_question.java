@@ -93,8 +93,12 @@ public class NS_2nd_question extends Fragment implements
                                     .get ( 0 );
                             Log.d ( TAG, "onChanged: " + answerDB );
                         }
-                        viewHolder = new NS_2nd_VH ( view, answerDB );
+                        viewHolder = new NS_2nd_VH ( view);
                         viewHolder.setOnSecondNSVHListener ( NS_2nd_question.this );
+
+                        if (answerDB!=null){
+                           viewHolder.onUpdateUI(answerDB);
+                        }
                     }
 
                 } );

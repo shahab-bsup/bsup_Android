@@ -26,7 +26,7 @@ public class NS_18th_VH extends RecyclerView.ViewHolder implements ViewSelection
     private OnEighteenNSVHListener onEighteenNSVHListener;
     private Answer answer;
 
-    public NS_18th_VH(View itemView,Answer answerDB) {
+    public NS_18th_VH(View itemView) {
         super ( itemView );
         answer = new Answer ();
         progressBar = itemView.findViewById ( R.id.progress_bar );
@@ -44,15 +44,18 @@ public class NS_18th_VH extends RecyclerView.ViewHolder implements ViewSelection
                 getResources ().
                 getStringArray ( R.array.yes_no );
         choices.setDataSet ( string_choices );
+    }
 
-        if (answerDB != null) {
-            if (answerDB.getChoice().equals("a")){
-                choices.previewOfDBResult(true,true,0);
-            }
-            else if(answerDB.getChoice().equals("b")){
-                choices.previewOfDBResult(true,true,1);
-            }
+    public void onUpdateUI(Answer answerDB) {
+        if (answerDB.getChoice().equals("a")){
+            choices.updateViewSelectionUI(0);
         }
+        else if(answerDB.getChoice().equals("b")){
+            choices.updateViewSelectionUI(1);
+        }
+        answer=answerDB;
+        button_next.setEnabled ( true );
+        button_next.setBackgroundResource ( R.drawable.enable_next_question );
     }
 
 

@@ -25,7 +25,7 @@ public class NS_5th_VH extends RecyclerView.ViewHolder implements ViewSelection.
     private Answer answer;
     private OnFifthNSVHListener onFifthNSVHListener;
 
-    public NS_5th_VH(View itemView,Answer answerDB) {
+    public NS_5th_VH(View itemView) {
         super ( itemView );
         answer = new Answer ();
         progressBar = itemView.findViewById ( R.id.progress_bar );
@@ -44,11 +44,15 @@ public class NS_5th_VH extends RecyclerView.ViewHolder implements ViewSelection.
         String[] strings = {"1", "2", "3", "4", "5",
                 "6", "7", "8", "9", "10"};
         choices.setDataSet ( strings );
-
-        if (answerDB != null) {
-            choices.previewOfDBResult (true,true,answerDB.getRate() - 1);
-        }
     }
+
+    public void onUpdateUI(Answer answerDB) {
+        choices.updateViewSelectionUI(answerDB.getRate() - 1);
+        answer=answerDB;
+        button_next.setEnabled(true);
+        button_next.setBackgroundResource(R.drawable.enable_next_question);
+    }
+
 
     public void setOnFifthNSVHListener(OnFifthNSVHListener onFifthNSVHListener) {
         this.onFifthNSVHListener = onFifthNSVHListener;

@@ -48,6 +48,8 @@ public class FUpS_1st_Question extends Fragment implements
     private Answer answerDB;
     private SharedPreferenceManager manager;
     private List<Answer> answersForDB = new ArrayList<>();
+    private int tableNumber;
+    private int questionNumber;
 
     private OnFollowUpSymptomsFirstQuestionListener mListener;
     private OnFURFourthQuestionInteractionListener mListenerFUR;
@@ -78,6 +80,14 @@ public class FUpS_1st_Question extends Fragment implements
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_follow__up__symptoms_1st__question, container, false);
+        if (Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
+            tableNumber=Constants.FOLLOW_UP_SYMPTOMS_ROW;
+            questionNumber=1;
+        }
+        else {
+            tableNumber=Constants.FOLLOW_UP_RESULTS_ROW;
+            questionNumber=4;
+        }
         dbOperation(view);
         return view;
     }
@@ -85,7 +95,8 @@ public class FUpS_1st_Question extends Fragment implements
     private void dbOperation(final View view) {
         mMedlynkViewModel = ViewModelProviders.of(getActivity()).get(MedlynkViewModel.class);
         manager = new SharedPreferenceManager(getActivity());
-        mMedlynkViewModel.getAnswers(manager.getAppointmentID(), Constants.FOLLOW_UP_SYMPTOMS_ROW,0, 1)
+
+        mMedlynkViewModel.getAnswers(manager.getAppointmentID(), tableNumber,0, questionNumber)
                 .observe((LifecycleOwner) this, new Observer<DataBaseModel>() {
                     @Override
                     public void onChanged(@Nullable DataBaseModel dataBaseModel) {
@@ -146,9 +157,9 @@ public class FUpS_1st_Question extends Fragment implements
         if (Constants.Context_Tag.equals(FollowUpSymptomsActivity.class.getSimpleName())) {
             JsonConverter JC = JsonConverter.getInstance();
             if (existsRecord == false)
-                mMedlynkViewModel.insertAnswersToDB(manager.getAppointmentID(), Constants.FOLLOW_UP_SYMPTOMS_ROW,0, 1, JC.answersToAnswerJson(answersForDB));
+                mMedlynkViewModel.insertAnswersToDB(manager.getAppointmentID(), tableNumber,0, questionNumber, JC.answersToAnswerJson(answersForDB));
             else
-                mMedlynkViewModel.updateAnswersToDB(manager.getAppointmentID(), Constants.FOLLOW_UP_SYMPTOMS_ROW,0, 1, JC.answersToAnswerJson(answersForDB));
+                mMedlynkViewModel.updateAnswersToDB(manager.getAppointmentID(), tableNumber,0, questionNumber, JC.answersToAnswerJson(answersForDB));
 
             System.out.println("FUpS_1st_Question.onFirstAnswerSuccess");
             viewHolder.setProgressBarVisibilityStatus(View.GONE);

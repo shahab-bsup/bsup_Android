@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
 
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_2.NS_2nd_VH;
 import tk.medlynk.patient.android.Model.Answer;
 
 /**
@@ -30,7 +29,7 @@ public class NS_15th_VH extends RecyclerView.ViewHolder implements ViewSelection
     private OnFifteenNSVHListener onFifteenNSVHListener;
     private Answer answer;
 
-    public NS_15th_VH(View itemView,Answer answerDB) {
+    public NS_15th_VH(View itemView) {
         super ( itemView );
         answer = new Answer ();
         progressBar = itemView.findViewById ( R.id.progress_bar );
@@ -52,14 +51,19 @@ public class NS_15th_VH extends RecyclerView.ViewHolder implements ViewSelection
         choice.setDataSet ( strings );
         choice.setOnSingleItemSelectedListener ( this );
         choice.setOnClearStateListener(this);
+    }
 
-        if (answerDB != null) {
-            if (answerDB.getChoice ().equals ( "b" )) {
-                choice.previewOfDBResult ( true, true, 0 );
-            } else if (answerDB.getChoice ().equals ( "a" )) {
-                answer_input.setText ( answerDB.getReply () );
-            }
+    public void onUpdateUI(Answer answerDB) {
+        if (answerDB.getChoice ().equals ( "b" )) {
+            choice.updateViewSelectionUI(  0 );
+            answer=answerDB;
         }
+        else if (answerDB.getChoice ().equals ( "a" )) {
+            answer_input.setText ( answerDB.getReply () );
+            answer=answerDB;
+        }
+        button_next.setEnabled ( true );
+        button_next.setBackgroundResource ( R.drawable.enable_next_question );
     }
 
     public void setOnFifteenNSVHListener(OnFifteenNSVHListener onFifteenNSVHListener) {

@@ -81,7 +81,7 @@ public class Refill_third_VH extends ViewHolder implements
                 answer_input.setText(answerDB.getReply());
             }
             else if(answerDB.getChoice().equals("b")){
-                choice.previewOfDBResult(true,true,0);
+                choice.updateViewSelectionUI(0);
             }
         }
     }

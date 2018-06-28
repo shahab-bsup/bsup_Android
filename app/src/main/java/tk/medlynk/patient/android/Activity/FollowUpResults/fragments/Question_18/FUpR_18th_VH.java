@@ -61,7 +61,7 @@ public class FUpR_18th_VH extends RecyclerView.ViewHolder implements ViewSelecti
                answer_input.setText(answerDB.getReply());
            }
            else if(answerDB.getChoice().equals("b")){
-               first.previewOfDBResult(true,true,0);
+               first.updateViewSelectionUI(0);
            }
         }
     }

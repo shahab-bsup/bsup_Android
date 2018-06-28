@@ -111,33 +111,27 @@ public class NS_11th_VH extends RecyclerView.ViewHolder implements
     public void onUpdateUI(Answer answerDB) {
         switch (answerDB.getChoice ()){
             case "a":{
-                choices.previewOfDBResult ( true,
-                        true,
-                        0);
+                choices.updateViewSelectionUI( 0);
+                answer=answerDB;
                 break;
             }
             case "b":{
-                choices.previewOfDBResult ( true,
-                        true,
-                        1);
+                choices.updateViewSelectionUI(  1);
+                answer=answerDB;
                 break;
             }
             case "c":{
-                choices.previewOfDBResult ( true,
-                        true,
-                        2);
+                choices.updateViewSelectionUI(   2);
+                answer=answerDB;
                 break;
             }
             case "d":{
-                choices.previewOfDBResult ( true,
-                        true,
-                        3);
+                choices.updateViewSelectionUI(  3);
+                answer=answerDB;
                 break;
             }
             case "e":{
-//                choices.previewOfDBResult ( true,
-//                        true,
-//                        4);
+                answer=answerDB;
                 choices.setSelect ( 4 );
                 setOtherTextVisibilityStatus ( View.VISIBLE );
                 setOtherText( answerDB.getOther () );
@@ -145,6 +139,8 @@ public class NS_11th_VH extends RecyclerView.ViewHolder implements
                 break;
             }
         }
+        button_next.setEnabled ( true );
+        button_next.setBackgroundResource ( R.drawable.enable_next_question );
     }
 
     private void setOtherTextVisibilityStatus(int status){
@@ -177,17 +173,14 @@ public class NS_11th_VH extends RecyclerView.ViewHolder implements
             }
             case 1: {
                 answer.setChoice ( "b" );
-
                 break;
             }
             case 2: {
                 answer.setChoice ( "c" );
-
                 break;
             }
             case 3: {
                 answer.setChoice ( "d" );
-
                 break;
             }
         }

@@ -100,8 +100,11 @@ public class NS_7th_question extends Fragment implements
                             Log.d(TAG, "onChanged: " + answerDB);
                         }
 
-                        viewHolder = new NS_7th_VH(view, answerDB);
+                        viewHolder = new NS_7th_VH(view);
                         viewHolder.setOnSeventhNSVHListener(NS_7th_question.this);
+                        if (answerDB!=null){
+                            viewHolder.onUpdateUI(answerDB);
+                        }
                     }
                 });
     }

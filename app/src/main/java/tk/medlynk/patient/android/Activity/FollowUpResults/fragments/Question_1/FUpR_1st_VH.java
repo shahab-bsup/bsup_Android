@@ -22,16 +22,16 @@ import tk.medlynk.patient.android.Model.Answer;
  * Created by Shahab on 3/22/2018.
  */
 
-public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelection.OnMultiItemSelectedListener, ViewSelection.OnClearStateListener, ViewSelection.OnSingleItemSelectedListener, ButtonAdapter.OnOptionsClickListener, DialogueBuilder.OnOtherDialogListener {
+public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelection.OnMultiItemSelectedListener, ViewSelection.OnClearStateListener, ButtonAdapter.OnOptionsClickListener {
 
     private final String[] string_choices;
     private final Button button_next;
-    private final Button button_skip;
     private final View question_view;
     private final ProgressBar progressBar;
     private final TextView first_question;
-    private final ViewSelection first, second;
+    private final ViewSelection first;
     private final Button cardiac_button, imaging_button;
+    private final Button other_button;
     private final RecyclerView first_recyclerview, second_recyclerview;
     private final int white_color;
     private final Answer answer;
@@ -42,7 +42,7 @@ public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelectio
     private boolean isChoiceCExisted;
     private boolean isChoiceDExisted;
 
-    public FUpR_1st_VH(View itemView) {
+    public FUpR_1st_VH(View itemView,List<Answer> answersDB) {
         super ( itemView );
         white_color = itemView.getContext ().getResources ().getColor ( R.color.white );
         answer = new Answer();
@@ -56,25 +56,27 @@ public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelectio
         this.button_next =  itemView.findViewById(R.id.btnNextQuestion);
         this.button_next.setOnClickListener(new OnNextButtonClickListener ());
         this.button_next.setEnabled(false);
-        this.button_skip =  itemView.findViewById(R.id.btnSkipQuestion);
-        this.button_skip.setOnClickListener(new OnSkipClickListener ());
         first = itemView.findViewById ( R.id.viewSelectionFirst );
         first.setOnMultiItemSelectedListener ( this );
         first.setOnClearStateListener ( this );
-        second = itemView.findViewById ( R.id.viewSelectionSecond );
-        second.setOnSingleItemSelectedListener ( this );
-        second.setOnClearStateListener ( this );
         cardiac_button = itemView.findViewById ( R.id.fourth_choice );
         cardiac_button.setOnClickListener ( new OnCardiacButtonClickListener () );
         imaging_button = itemView.findViewById ( R.id.third_choice );
         imaging_button.setOnClickListener ( new OnImagingClickListener () );
         first.setDataSet ( string_choices );
-        imaging_button.setText ( string_choices[2] );
-        cardiac_button.setText ( string_choices[3] );
+        //imaging_button.setText ( string_choices[2] );
+        imaging_button.setText ( "Imaging" );
+        //cardiac_button.setText ( string_choices[3] );
+        cardiac_button.setText ( "Cardiac investigations" );
+
+        other_button= itemView.findViewById(R.id.fifth_choice);
+        other_button.setOnClickListener(new OnOtherButtonClickListener());
+        other_button.setText("Other");
 
         //I know this is bad! Do not blame me please!
-        String[] strings = {string_choices[4]};
-        second.setDataSet ( strings );
+        //String[] strings = {string_choices[4]};
+        //String[] strings = {"Other"};
+        //second.setDataSet ( strings );
 
         first_recyclerview = itemView.findViewById ( R.id.firstRecyclerView );
         first_recyclerview.setNestedScrollingEnabled ( false );
@@ -88,6 +90,62 @@ public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelectio
                 ButtonAdapter ( itemView.getContext (), "Cardiac Part" );
         secondButtonAdapter.setOnOptionsClickListener ( this );
         second_recyclerview.setAdapter ( secondButtonAdapter );
+
+       previewOfDBResult(answersDB);
+    }
+
+    public void previewOfDBResult(List<Answer> answersDB){
+
+        if(answersDB!=null){
+            for (Answer answer:answersDB) {
+                switch (answer.getChoice()){
+                    case "a":{
+                        first.updateViewSelectionUI(0);
+                        button_next.setEnabled ( true );
+                        button_next.setBackgroundResource ( R.drawable.enable_next_question );
+                        break;
+                    }
+                    case "b":{
+                        first.updateViewSelectionUI(1);
+                        button_next.setEnabled ( true );
+                        button_next.setBackgroundResource ( R.drawable.enable_next_question );
+                        break;
+                    }
+                    case "c":{
+                        imaging_button.setBackgroundResource ( R.drawable.answer_selected );
+                        imaging_button.setTextColor ( Color.parseColor ( "#000000" ) );
+                        isChoiceCExisted=true;
+                        answers.add(answer);
+                        for (String subChoice:answer.getSubChoices()) {
+                            firstButtonAdapter.getSubChoices().add(subChoice);
+                        }
+                        button_next.setEnabled ( true );
+                        button_next.setBackgroundResource ( R.drawable.enable_next_question );
+                        break;
+                    }
+                    case "d":{
+                        cardiac_button.setBackgroundResource ( R.drawable.answer_selected );
+                        cardiac_button.setTextColor ( Color.parseColor ( "#000000" ) );
+                        isChoiceDExisted=true;
+                        answers.add(answer);
+                        for (String subChoice:answer.getSubChoices()) {
+                            secondButtonAdapter.getSubChoices().add(subChoice);
+                        }
+                        button_next.setEnabled ( true );
+                        button_next.setBackgroundResource ( R.drawable.enable_next_question );
+                        break;
+                    }
+                    case "e":{
+                        other_button.setBackgroundResource(R.drawable.answer_selected);
+                        answers.add(answer);
+                        button_next.setEnabled ( true );
+                        button_next.setBackgroundResource ( R.drawable.enable_next_question );
+                    }
+                }
+
+            }
+        }
+
     }
 
     public void setOnFURFirstVHListener(OnFURFirstVHListener onFURFirstVHListener) {
@@ -105,12 +163,10 @@ public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelectio
         switch (i){
             case 0:{
                 answer.setChoice ( "a" );
-
                 break;
             }
             case 1:{
                 answer.setChoice ( "b" );
-
                 break;
             }
         }
@@ -157,37 +213,6 @@ public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelectio
     }
 
     @Override
-    public void onSingleItemSelected(View view, int i) {
-        switch (i){
-            case -1:{
-                Iterator<Answer> answerIterator = answers.iterator ();
-                while (answerIterator.hasNext ()){
-                    Answer answer = answerIterator.next ();
-                    if( answer.getChoice () != null && answer.getChoice ().equals ( "e" ) ){
-                        answerIterator.remove ();
-                        break;
-                    }
-                }
-
-                if( answers.size () == 0 ){
-                    button_next.setEnabled ( false );
-                    button_next.setBackgroundResource ( R.drawable.disable_next_question );
-                }
-                break;
-            }
-            case 0:{
-                DialogueBuilder dialogueBuilder = new DialogueBuilder ( itemView.getContext (),
-                        "other", "shahab" );
-                dialogueBuilder.setOnDialogListener ( this );
-                dialogueBuilder.show ();
-
-                break;
-            }
-
-        }
-    }
-
-    @Override
     public void onImagingOptionsClicked() {
         if( !isChoiceCExisted){
             imaging_button.setBackgroundResource ( R.drawable.answer_selected );
@@ -219,21 +244,6 @@ public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelectio
         }
     }
 
-    @Override
-    public void onOtherDialogDone(String otherText) {
-        System.out.println ( "FUpR_1st_VH.onOtherDialogDone" );
-        if( otherText.length () > 0 ){
-            Answer answer = new Answer ();
-            answer.setChoice ( "e" );
-            answer.setOther ( otherText );
-            answers.add ( answer );
-            button_next.setEnabled ( true );
-            button_next.setBackgroundResource ( R.drawable.enable_next_question );
-        } else {
-            second.unSelect ( 0 );
-        }
-    }
-
     private class OnNextButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
@@ -259,22 +269,12 @@ public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelectio
         }
     }
 
-
-
     public void setProgressBarVisibilityStatus(int status ){
         this.progressBar.setVisibility ( status );
     }
 
-    private class OnSkipClickListener implements View.OnClickListener {
-        @Override
-        public void onClick(View view) {
-            onFURFirstVHListener.onSkipClicked ();
-        }
-    }
-
     public interface OnFURFirstVHListener {
         void onNextClick(Answer answer);
-        void onSkipClicked();
         void onNextClick(List<Answer> answers);
     }
 
@@ -347,6 +347,49 @@ public class FUpR_1st_VH extends RecyclerView.ViewHolder implements ViewSelectio
                 button_next.setEnabled ( false );
                 button_next.setBackgroundResource ( R.drawable.disable_next_question );
             }
+        }
+    }
+
+    private class OnOtherButtonClickListener implements View.OnClickListener,DialogueBuilder.OnOtherDialogListener {
+        @Override
+        public void onClick(View view) {
+
+            Iterator<Answer> answerIterator = answers.iterator ();
+            while (answerIterator.hasNext ()) {
+                Answer answer = answerIterator.next();
+                if (answer.getChoice() != null && answer.getChoice().equals("e")) {
+                    answerIterator.remove();
+                    break;
+                }
+            }
+
+            other_button.setBackgroundResource(R.drawable.answer_selected);
+
+            DialogueBuilder dialogueBuilder = new DialogueBuilder ( itemView.getContext (),
+                    "other", "shahab" );
+            dialogueBuilder.setOnDialogListener(this);
+            dialogueBuilder.show ();
+
+            if( answers.size () == 0 ){
+                button_next.setEnabled ( false );
+                button_next.setBackgroundResource ( R.drawable.disable_next_question );
+            }
+        }
+
+        @Override
+        public void onOtherDialogDone(String otherText) {
+            System.out.println ( "FUpR_1st_VH.onOtherDialogDone" );
+            if( otherText.length () > 0 ){
+                Answer answer = new Answer ();
+                answer.setChoice ( "e" );
+                answer.setOther ( otherText );
+                answers.add ( answer );
+                button_next.setEnabled ( true );
+                button_next.setBackgroundResource ( R.drawable.enable_next_question );
+            } else {
+                other_button.setBackgroundResource(R.drawable.answer_not_selected);
+            }
+
         }
     }
 }

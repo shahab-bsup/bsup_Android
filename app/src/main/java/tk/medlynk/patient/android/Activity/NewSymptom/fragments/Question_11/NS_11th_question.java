@@ -20,6 +20,7 @@ import com.neweraandroid.demo.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import tk.medlynk.patient.android.Activity.NewSymptom.OnNewSymptomAnswerListener;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_7.NS_7th_VH;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_7.NS_7th_question;
 import tk.medlynk.patient.android.Constants;
@@ -40,7 +41,7 @@ import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
  * create an instance of this fragment.
  */
 public class NS_11th_question extends Fragment implements
-        OnEleventhAnswerListener,
+        OnNewSymptomAnswerListener,
         NS_11th_VH.OnEleventhNSVHListener {
 
     public static final String TAG = "NS_11th_question";
@@ -126,7 +127,7 @@ public class NS_11th_question extends Fragment implements
     }
 
     @Override
-    public void onEleventhAnswerSuccess(NewSymptomAnswerResponse response) {
+    public void onAnswerSuccess(NewSymptomAnswerResponse response) {
         JsonConverter JC = JsonConverter.getInstance();
         if (existsRecord == false)
             mMedlynkViewModel.insertAnswersToDB(manager.getAppointmentID(),
@@ -144,7 +145,7 @@ public class NS_11th_question extends Fragment implements
     }
 
     @Override
-    public void onEleventhAnswerFailure() {
+    public void onAnswerFailure() {
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         Toast.makeText ( getActivity (), "try again later!", Toast.LENGTH_SHORT ).show ();
     }
@@ -157,11 +158,9 @@ public class NS_11th_question extends Fragment implements
     @Override
     public void onNextClicked(Answer answer) {
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
-        SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
-        MedlynkRequests.newSymptomEleventhQuestionAnswer ( getActivity (),
-                NS_11th_question.this,
-                manager.getAppointmentID (),
-                answer);
+        MedlynkRequests.newSymptomQuestionsAnswer ( getActivity (), NS_11th_question.this,
+                manager.getAppointmentID (),"11"
+                ,answer);
 
         answersForDB.clear ();
         answersForDB.add ( answer );

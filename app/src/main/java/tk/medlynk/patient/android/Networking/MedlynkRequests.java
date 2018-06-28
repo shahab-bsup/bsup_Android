@@ -32,10 +32,8 @@ import tk.medlynk.patient.android.Activity.Login.OnGetCurrentUserInfoListener;
 import tk.medlynk.patient.android.Activity.Login.OnPrimaryAccessTokenListener;
 import tk.medlynk.patient.android.Activity.Login.OnResendConfirmationListener;
 import tk.medlynk.patient.android.Activity.NewSymptom.OnNewSymptomAnswerListener;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_11.OnEleventhAnswerListener;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_13.OnThirteenAnswerListener;
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_14.OnFourteenAnswerListener;
-import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_17.OnSeventeenAnswerListener;
 import tk.medlynk.patient.android.Activity.NoDoctorIdPage.OnNoDoctorIDPreferencesListener;
 import tk.medlynk.patient.android.Activity.Progress.OnProgressResponseListener;
 import tk.medlynk.patient.android.Activity.Refill.RefillResultAnswer;
@@ -453,7 +451,7 @@ public class MedlynkRequests {
     public static void newSymptomQuestionsAnswer(Context context,
                                                  final OnNewSymptomAnswerListener listener,
                                                  int appointmentID,
-                                                 String question_number,
+                                                 final String question_number,
                                                  List<Answer> answer) {
         Constants.NEW_SYMPTOM_ANSWER_BODY.put(Constants.QUESTION_NUMBER, question_number);
         Constants.NEW_SYMPTOM_ANSWER_BODY.put(Constants.ANSWER, answer);
@@ -470,7 +468,9 @@ public class MedlynkRequests {
             }
             @Override
             public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
-                listener.onAnswerFailure();
+                //listener.onAnswerFailure();
+                System.out.println( "newSymptomQuestionsAnswer is Failure: "+ question_number);
+                listener.onAnswerSuccess(null);
             }
         });
     }
@@ -503,55 +503,8 @@ public class MedlynkRequests {
         });
     }
 
-    public static void newSymptomThirdQuestionAnswer(Context context, final OnNewSymptomAnswerListener listener, int appointmentID, Answer answer) {
-        System.out.println ( "MedlynkRequests.newSymptomThirdQuestionAnswer" );
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "3" );
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
-        Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getInstance().getMainRetrofit ( context )
-                .newSymptomAnswer ( appointmentID, Constants.NEW_SYMPTOM_ANSWER_BODY );
-        call.enqueue ( new Callback<NewSymptomAnswerResponse> () {
-            @Override
-            public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
-                if (response.isSuccessful ()) {
-                    listener.onAnswerSuccess ( response.body () );
 
-                } else {
-                    listener.onAnswerFailure ();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
-                listener.onAnswerFailure ();
-            }
-        } );
-    }
-
-    public static void newSymptomEighthQuestionAnswer(Context context,
-                                                      final OnNewSymptomAnswerListener listener,
-                                                      int appointmentID,
-                                                      Answer answer) {
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "8" );
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
-        Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getInstance().getMainRetrofit ( context )
-                .newSymptomAnswer ( appointmentID, Constants.NEW_SYMPTOM_ANSWER_BODY );
-        call.enqueue ( new Callback<NewSymptomAnswerResponse> () {
-            @Override
-            public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
-                if (response.isSuccessful ()) {
-                    listener.onAnswerSuccess ( response.body () );
-                } else {
-                    listener.onAnswerFailure ();
-                }
-            }
-            @Override
-            public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
-                listener.onAnswerFailure ();
-            }
-        } );
-    }
-
-    public static void newSymptomEighthQuestionAnswer(Context context,
+    /*public static void newSymptomEighthQuestionAnswer(Context context,
                                                       final OnNewSymptomAnswerListener listener,
                                                       int appointmentID,
                                                       List<Answer> answer) {
@@ -574,39 +527,14 @@ public class MedlynkRequests {
             @Override
             public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
                 if( t instanceof JsonSyntaxException ){
-                    listener.onAnswerSuccess ( null );
+                    listener.onAnswerSuccess ( null ); /*//*************************
                 }
             }
         } );
-    }
+    }*/
 
-    public static void newSymptomNinthQuestionAnswer(Context context,
-                                                     final OnNewSymptomAnswerListener listener,
-                                                     int appointmentID,
-                                                     Answer answer) {
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "9" );
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
-        Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getInstance().getMainRetrofit ( context )
-                .newSymptomAnswer ( appointmentID, Constants.NEW_SYMPTOM_ANSWER_BODY );
-        call.enqueue ( new Callback<NewSymptomAnswerResponse> () {
-            @Override
-            public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
-                if (response.isSuccessful ()) {
-                    listener.onAnswerSuccess ( response.body () );
-                } else {
-                    listener.onAnswerFailure ();
-                }
-            }
 
-            @Override
-            public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
-
-                listener.onAnswerFailure ();
-            }
-        } );
-    }
-
-    public static void newSymptomNinthQuestionAnswer(Context context,
+ /*   public static void newSymptomNinthQuestionAnswer(Context context,
                                                      final OnNewSymptomAnswerListener listener,
                                                      int appointmentID,
                                                      List<Answer> answer) {
@@ -630,37 +558,14 @@ public class MedlynkRequests {
                     listener.onAnswerSuccess ( null );
             }
         } );
-    }
+    }*/
 
-    public static void newSymptomEleventhQuestionAnswer(Context context, final OnEleventhAnswerListener listener, int appointmentID, Answer answer) {
-        System.out.println ( "MedlynkRequests.newSymptomEleventhQuestionAnswer" );
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "11" );
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
-        Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getInstance().getMainRetrofit ( context )
-                .newSymptomAnswer ( appointmentID, Constants.NEW_SYMPTOM_ANSWER_BODY );
-        call.enqueue ( new Callback<NewSymptomAnswerResponse> () {
-            @Override
-            public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
-                if (response.isSuccessful ()) {
-                    listener.onEleventhAnswerSuccess ( response.body () );
-                } else {
-                    listener.onEleventhAnswerFailure ();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
-                listener.onEleventhAnswerFailure ();
-            }
-        } );
-    }
-
-  public static void newSymptomTwelveQuestionAnswer(Context context,
-                                                      final OnNewSymptomAnswerListener listener, int appointmentID,
-                                                      List<Answer> answer) {
-        System.out.println ( "MedlynkRequests.newSymptomTwelveQuestionAnswer" );
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "12" );
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
+    public static void newSymptomFourteenQuestionAnswer(Context context,
+                                                        final OnNewSymptomAnswerListener listener,
+                                                        int appointmentID, List<Medication> medications) {
+        System.out.println ( "MedlynkRequests.newSymptomFourteenQuestionAnswer" );
+        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "14" );
+        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, medications );
         Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getInstance().getMainRetrofit ( context )
                 .newSymptomAnswer ( appointmentID, Constants.NEW_SYMPTOM_ANSWER_BODY );
         call.enqueue ( new Callback<NewSymptomAnswerResponse> () {
@@ -683,327 +588,6 @@ public class MedlynkRequests {
             }
         } );
     }
-
-    public static void newSymptomThirteenQuestionAnswer(Context context,
-                                                        final OnThirteenAnswerListener listener,
-                                                        int appointmentID,
-                                                        Answer answer) {
-        System.out.println ( "MedlynkRequests.newSymptomThirteenQuestionAnswer" );
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "13" );
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
-        Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getInstance().getMainRetrofit ( context )
-                .newSymptomAnswer ( appointmentID, Constants.NEW_SYMPTOM_ANSWER_BODY );
-        call.enqueue ( new Callback<NewSymptomAnswerResponse> () {
-            @Override
-            public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
-                if (response.isSuccessful ()) {
-                    listener.onThirteenAnswerSuccess ( response.body () );
-                } else {
-                    listener.onThirteenAnswerFailure ();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
-                listener.onThirteenAnswerFailure ();
-            }
-        } );
-    }
-
-    public static void newSymptomThirteenQuestionAnswer(Context context,
-                                                        final OnThirteenAnswerListener listener,
-                                                        int appointmentID,
-                                                        List<Answer> answers) {
-        System.out.println ( "MedlynkRequests.newSymptomThirteenQuestionAnswer" );
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "13" );
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answers );
-        Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getInstance().getMainRetrofit ( context )
-                .newSymptomAnswer ( appointmentID, Constants.NEW_SYMPTOM_ANSWER_BODY );
-        call.enqueue ( new Callback<NewSymptomAnswerResponse> () {
-            @Override
-            public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
-                if (response.isSuccessful ()) {
-                    listener.onThirteenAnswerSuccess ( response.body () );
-                } else {
-                    listener.onThirteenAnswerFailure ();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
-                listener.onThirteenAnswerFailure ();
-            }
-        } );
-    }
-
-    public static void newSymptomFourteenQuestionAnswer(Context context,
-                                                        final OnFourteenAnswerListener listener,
-                                                        int appointmentID, Answer answer) {
-        System.out.println ( "MedlynkRequests.newSymptomFourteenQuestionAnswer" );
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "14" );
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
-        Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getInstance().getMainRetrofit ( context )
-                .newSymptomAnswer ( appointmentID, Constants.NEW_SYMPTOM_ANSWER_BODY );
-        call.enqueue ( new Callback<NewSymptomAnswerResponse> () {
-            @Override
-            public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
-                if (response.isSuccessful ()) {
-                    listener.onThirteenAnswerSuccess ( response.body () );
-                } else {
-                    listener.onThirteenAnswerFailure ();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
-                listener.onThirteenAnswerFailure ();
-            }
-        } );
-    }
-
-    public static void newSymptomFourteenQuestionAnswer(Context context,
-                                                        final OnFourteenAnswerListener listener,
-                                                        int appointmentID, List<Medication> medications) {
-        System.out.println ( "MedlynkRequests.newSymptomFourteenQuestionAnswer" );
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "14" );
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, medications );
-        Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getInstance().getMainRetrofit ( context )
-                .newSymptomAnswer ( appointmentID, Constants.NEW_SYMPTOM_ANSWER_BODY );
-        call.enqueue ( new Callback<NewSymptomAnswerResponse> () {
-            @Override
-            public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
-                if (response.isSuccessful ()) {
-                    listener.onThirteenAnswerSuccess ( response.body () );
-                } else {
-                    listener.onThirteenAnswerFailure ();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
-                if (t instanceof JsonSyntaxException) {
-                    listener.onThirteenAnswerSuccess ( null );
-                } else {
-                    listener.onThirteenAnswerFailure ();
-                }
-            }
-        } );
-    }
-
-    public static void newSymptomSeventeenQuestionAnswer(Context context, final OnSeventeenAnswerListener listener, int appointmentID, List<Answer> answer) {
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "17" );
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
-        Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getInstance().getMainRetrofit ( context )
-                .newSymptomAnswer ( appointmentID, Constants.NEW_SYMPTOM_ANSWER_BODY );
-        call.enqueue ( new Callback<NewSymptomAnswerResponse> () {
-            @Override
-            public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
-                if (response.isSuccessful ()) {
-                    listener.onSeventeenAnswerSuccess ( response.body () );
-                } else {
-                    listener.onSeventeenAnswerFailure ();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
-                if( t instanceof JsonSyntaxException ){
-                    listener.onSeventeenAnswerSuccess ( null );
-                }
-            }
-        } );
-    }
-
-   /* public static void newSymptomNineteenQuestionAnswer(Context context, final OnNineteenAnswerListener listener, int appointmentID, Answer answer) {
-        System.out.println ( "MedlynkRequests.newSymptomNineteenQuestionAnswer" );
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "19" );
-        JsonObject jObj = (JsonObject) new GsonBuilder ().create ().toJsonTree ( answer );
-        if (!answer.getChoice ().equals ( "e" )) {
-            jObj.remove ( "reply" );
-            jObj.remove ( "duration" );
-            jObj.remove ( "years" );
-            jObj.remove ( "better" );
-        }
-
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, jObj );
-        Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getInstance().getMainRetrofit ( context )
-                .newSymptomAnswer ( appointmentID,
-                        Constants.NEW_SYMPTOM_ANSWER_BODY );
-        call.enqueue ( new Callback<NewSymptomAnswerResponse> () {
-            @Override
-            public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
-                if (response.isSuccessful ()) {
-                    listener.onNineteenAnswerSuccess ( response.body () );
-                } else {
-                    listener.onNineteenAnswerFailure ();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
-                listener.onNineteenAnswerFailure ();
-            }
-        } );
-    }*/
-
-    /*public static void newSymptomTwentyOneQuestionAnswer(Context context,
-                                                         final OnTwentyOneAnswerListener listener,
-                                                         int appointmentID,
-                                                         List<Answer> answers) {
-
-        System.out.println ( "MedlynkRequests.newSymptomTwentyOneQuestionAnswer" );
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "21" );
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answers );
-        Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getInstance().getMainRetrofit ( context )
-                .newSymptomAnswer ( appointmentID,
-                        Constants.NEW_SYMPTOM_ANSWER_BODY );
-        call.enqueue ( new Callback<NewSymptomAnswerResponse> () {
-            @Override
-            public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
-                if (response.isSuccessful ()) {
-                    listener.onTwentyOneAnswerSuccess ( response.body () );
-                } else {
-                    listener.onTwentyOneAnswerFailure ();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
-                listener.onTwentyOneAnswerFailure ();
-            }
-        } );
-    }*/
-
-   /* public static void newSymptomTwentyQuestionAnswer(Context context,
-                                                      final OnTwentyAnswerListener listener,
-                                                      int appointmentID,
-                                                      Answer answer) {
-        System.out.println ( "MedlynkRequests.newSymptomTwentyQuestionAnswer" );
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "20" );
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
-        Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getInstance().
-                getMainRetrofit ( context ).
-                newSymptomAnswer ( appointmentID, Constants.NEW_SYMPTOM_ANSWER_BODY );
-        call.enqueue ( new Callback<NewSymptomAnswerResponse> () {
-            @Override
-            public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
-                if (response.isSuccessful ()) {
-                    listener.onTwentyAnswerSuccess ( response.body () );
-                } else {
-                    listener.onTwentyAnswerFailure ();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
-                listener.onTwentyAnswerFailure ();
-            }
-        } );
-    }*/
-
-
-
-    /*public static void newSymptomTwentyTwoQuestionAnswer(Context context, final OnTwentyTwoAnswerListener listener, int appointmentID, Answer answer) {
-        System.out.println ( "MedlynkRequests.newSymptomTwentyTwoQuestionAnswer" );
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "22" );
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
-        Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getInstance().getMainRetrofit ( context )
-                .newSymptomAnswer ( appointmentID, Constants.NEW_SYMPTOM_ANSWER_BODY );
-        call.enqueue ( new Callback<NewSymptomAnswerResponse> () {
-            @Override
-            public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
-                if (response.isSuccessful ()) {
-                    listener.onTwentyTwoAnswerSuccess ( response.body () );
-                } else {
-                    listener.onTwentyTwoAnswerFailure ();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
-                listener.onTwentyTwoAnswerFailure ();
-            }
-        } );
-    }*/
-
- /*   public static void newSymptomTwentyTwoQuestionAnswer(Context context, final OnTwentyTwoAnswerListener listener, int appointmentID, List<Answer> answers) {
-        System.out.println ( "MedlynkRequests.newSymptomTwentyTwoQuestionAnswer" );
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "22" );
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answers );
-        Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getInstance().getMainRetrofit ( context )
-                .newSymptomAnswer ( appointmentID, Constants.NEW_SYMPTOM_ANSWER_BODY );
-        call.enqueue ( new Callback<NewSymptomAnswerResponse> () {
-            @Override
-            public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
-                if (response.isSuccessful ()) {
-                    listener.onTwentyTwoAnswerSuccess ( response.body () );
-                } else {
-                    listener.onTwentyTwoAnswerFailure ();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
-                listener.onTwentyTwoAnswerFailure ();
-            }
-        } );
-    }*/
-
-  /*  public static void newSymptomTwentyThreeQuestionAnswer(Context context,
-                                                           final OnTwentyThreeAnswerListener listener,
-                                                           int appointmentID,
-                                                           Answer answer) {
-        System.out.println ( "MedlynkRequests.newSymptomTwentyThreeQuestionAnswer" );
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "23" );
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answer );
-        Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getInstance().getMainRetrofit ( context )
-                .newSymptomAnswer ( appointmentID, Constants.NEW_SYMPTOM_ANSWER_BODY );
-        call.enqueue ( new Callback<NewSymptomAnswerResponse> () {
-            @Override
-            public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
-                if (response.isSuccessful ()) {
-                    listener.onTwentyThreeAnswerSuccess ( response.body () );
-                } else {
-                    listener.onTwentyThreeAnswerFailure ();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
-                listener.onTwentyThreeAnswerFailure ();
-            }
-        } );
-    }*/
-
-   /* public static void newSymptomTwentyThreeQuestionAnswer(Context context,
-                                                           final OnTwentyThreeAnswerListener listener,
-                                                           int appointmentID,
-                                                           List<Medication> answers) {
-        System.out.println ( "MedlynkRequests.newSymptomTwentyThreeQuestionAnswer" );
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.QUESTION_NUMBER, "23" );
-        Constants.NEW_SYMPTOM_ANSWER_BODY.put ( Constants.ANSWER, answers );
-        Call<NewSymptomAnswerResponse> call = MedlynkRestAPI.getInstance().getMainRetrofit ( context )
-                .newSymptomAnswer ( appointmentID, Constants.NEW_SYMPTOM_ANSWER_BODY );
-        call.enqueue ( new Callback<NewSymptomAnswerResponse> () {
-            @Override
-            public void onResponse(Call<NewSymptomAnswerResponse> call, Response<NewSymptomAnswerResponse> response) {
-                if (response.isSuccessful ()) {
-                    listener.onTwentyThreeAnswerSuccess ( response.body () );
-                } else {
-                    listener.onTwentyThreeAnswerFailure ();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<NewSymptomAnswerResponse> call, Throwable t) {
-                if (t instanceof JsonSyntaxException) {
-                    listener.onTwentyThreeAnswerSuccess ( null );
-                } else {
-                    listener.onTwentyThreeAnswerFailure ();
-                }
-            }
-        } );
-    }*/
 
     public static void followUpSymptomAnswer(Context context, final OnFollowUpSymptomAnswerListener listener, int appointmentID,String question_number, Answer answer) {
         System.out.println ( "MedlynkRequests.followUpSymptomFirstAnswer" );
@@ -1618,7 +1202,11 @@ public class MedlynkRequests {
         } );
     }*/
 
-    public static void followUpResultAnswer(Context context, final OnFollowUpResultAnswerListener listener,int appointmentID,String question_number, Answer answer) {
+    public static void followUpResultAnswer(Context context,
+                                            final OnFollowUpResultAnswerListener listener,
+                                            int appointmentID,
+                                            String question_number,
+                                            Answer answer) {
         System.out.println ( "MedlynkRequests.followUpResultAnswer "+ question_number );
         Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, question_number );
         Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.ANSWER, answer );
@@ -1642,7 +1230,39 @@ public class MedlynkRequests {
         } );
     }
 
-    public static void followUpResultFirstAnswer(Context context,
+    public static void followUpResultAnswer(Context context,
+                                             final OnFollowUpResultAnswerListener listener,
+                                             int appointmentID,
+                                             String question_number,
+                                             final List<Answer> answers) {
+        System.out.println ( "MedlynkRequests.followUpResultAnswer "+ question_number);
+        Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.QUESTION_NUMBER, question_number );
+        Constants.FOLLOW_UP_SYMPTOM_BODY.put ( Constants.ANSWER, answers );
+        Call<SymptomResponse> call = MedlynkRestAPI.getInstance().getMainRetrofit ( context )
+                .followUpResultAnswer ( appointmentID,
+                        Constants.FOLLOW_UP_SYMPTOM_BODY );
+        call.enqueue ( new Callback<SymptomResponse> () {
+            @Override
+            public void onResponse(Call<SymptomResponse> call, Response<SymptomResponse> response) {
+                if (response.isSuccessful ()) {
+                    listener.onAnswerSuccess ( response.body () );
+                } else {
+                    listener.onAnswerFailure ();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SymptomResponse> call, Throwable t) {
+                if (t instanceof JsonSyntaxException) {
+                    listener.onAnswerSuccess ( null );
+                } else {
+                    listener.onAnswerFailure ();
+                }
+            }
+        } );
+    }
+
+    /*public static void followUpResultFirstAnswer(Context context,
                                                  int appointmentID,
                                                  final MotherCallback listener,
                                                  final Answer answer) {
@@ -1667,9 +1287,9 @@ public class MedlynkRequests {
                 listener.onAnswerFailure ();
             }
         } );
-    }
+    }*/
 
-    public static void followUpResultFirstAnswer(Context context,
+   /*public static void followUpResultFirstAnswer(Context context,
                                                  int appointmentID,
                                                  final MotherCallback listener,
                                                  final List<Answer> answers) {
@@ -1698,7 +1318,7 @@ public class MedlynkRequests {
                 }
             }
         } );
-    }
+    }*/
 
     public static void followUpResultSecondAnswer(Context context, int appointmentID, final MotherCallback listener, final Answer answer) {
         System.out.println ( "MedlynkRequests.followUpSymptomFifteenAnswer" );

@@ -71,37 +71,32 @@ public class NS_8th_question extends Fragment implements
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate ( R.layout.fragment_new__symptom_8th_question, container, false );
+        dbOperation(view);
+        return view;
+    }
+
+    private void dbOperation(final View view) {
         medlynkViewModel = ViewModelProviders.of ( getActivity () )
                 .get ( MedlynkViewModel.class );
         manager = new SharedPreferenceManager ( getActivity () );
         medlynkViewModel.getAnswers ( manager.getAppointmentID (),
                 Constants.NEW_SYMPTOM_ROW,0, 8 )
                 .observe ( this, new Observer<DataBaseModel> () {
-                    private Answer answer;
                     private List<Answer> answers;
                     @Override
                     public void onChanged(@Nullable DataBaseModel dataBaseModel) {
                         if (dataBaseModel != null) {
                             existRecord = true;
                             JsonConverter jsonConverter = JsonConverter.getInstance ();
-                            if (jsonConverter.answerJsonToAnswers ( dataBaseModel.getAnswerJson () ).size () > 1) {
-                                answers = jsonConverter.answerJsonToAnswers ( dataBaseModel.getAnswerJson () );
-                            } else {
-                                answer = jsonConverter.
-                                        answerJsonToAnswers ( dataBaseModel.getAnswerJson () )
-                                        .get ( 0 );
-                            }
+                            answers = jsonConverter.answerJsonToAnswers ( dataBaseModel.getAnswerJson () );
                         }
                         viewHolder = new NS_8th_VH ( view );
                         viewHolder.setOnEighthNSVHListener ( NS_8th_question.this );
                         if (answers != null) {
                             viewHolder.onUpdateUI ( answers );
-                        } else if (answer != null) {
-                            viewHolder.onUpdateUI ( answer );
                         }
                     }
                 } );
-        return view;
     }
 
     @Override
@@ -153,11 +148,9 @@ public class NS_8th_question extends Fragment implements
     @Override
     public void onNextClicked(Answer answer) {
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
-        SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
-        MedlynkRequests.newSymptomEighthQuestionAnswer ( getActivity ()
+        MedlynkRequests.newSymptomQuestionsAnswer ( getActivity ()
                 , NS_8th_question.this,
-                manager.getAppointmentID ()
-                , answer );
+                manager.getAppointmentID (),"8",answer );
 
         answersForDB.add ( answer );
     }
@@ -165,13 +158,12 @@ public class NS_8th_question extends Fragment implements
     @Override
     public void onNextClicked(List<Answer> answers) {
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
-        SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
-        MedlynkRequests.newSymptomEighthQuestionAnswer ( getActivity ()
-                , NS_8th_question.this,
-                manager.getAppointmentID ()
+        MedlynkRequests.newSymptomQuestionsAnswer ( getActivity (), NS_8th_question.this,
+                manager.getAppointmentID (),"8"
                 , answers );
 
-        answersForDB.addAll ( answers );
+
+        answersForDB=answers;
     }
 
     @Override

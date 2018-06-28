@@ -61,7 +61,7 @@ public class FUpS_2nd_VH extends RecyclerView.ViewHolder implements ViewSelectio
                 answer_input.setText(answerDB.getReply());
             }
             else if(answerDB.getChoice().equals("b")){
-                none.previewOfDBResult(true,true,0);
+                none.updateViewSelectionUI(0);
             }
 
         }

@@ -237,43 +237,41 @@ public class NS_17th_VH extends RecyclerView.ViewHolder implements ViewSelection
         }
     }
 
-    public void onUpdateUI(List<Answer> answers) {
-        for (Answer answer : answers) {
+    public void onUpdateUI(List<Answer> answersDB) {
+        for (Answer answer : answersDB) {
             switch (answer.getChoice ()){
                 case "a":{
-                    viewSelection.previewOfDBResult ( true, false,
-                            0);
+                    viewSelection.updateViewSelectionUI(  0);
+                    answers.add(answer);
                     break;
                 }
                 case "b":{
-                    viewSelection.previewOfDBResult ( true, false,
-                            1);
+                    viewSelection.updateViewSelectionUI(1);
+                    answers.add(answer);
                     break;
                 }
                 case "c":{
-                    viewSelection.previewOfDBResult ( true, false,
-                            2);
+                    viewSelection.updateViewSelectionUI(  2);
+                    answers.add(answer);
                     break;
                 }
                 case "d":{
-                    viewSelection.previewOfDBResult ( true, false,
-                            3);
+                    viewSelection.updateViewSelectionUI( 3);
+                    answers.add(answer);
                     break;
                 }
                 case "e":{
-                    viewSelection.previewOfDBResult ( true, false,
-                            4);
+                    viewSelection.updateViewSelectionUI(  4);
+                    answers.add(answer);
                     break;
                 }
                 case "f":{
-                    viewSelection.previewOfDBResult ( true, false,
-                            5);
+                    viewSelection.updateViewSelectionUI( 5);
+                    answers.add(answer);
                     break;
                 }
                 case "g":{
-//                    viewSelection.previewOfDBResult ( true,
-//                            false,
-//                            6);
+                    answers.add(answer);
                     viewSelection.setSelect ( 3 );
                     if( answer.getOther () != null &&
                             !TextUtils.isEmpty ( answer.getOther () )){

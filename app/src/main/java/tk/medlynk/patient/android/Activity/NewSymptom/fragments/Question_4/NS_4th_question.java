@@ -95,8 +95,11 @@ public class NS_4th_question extends Fragment implements
                             Log.d(TAG, "onChanged: " + answerDB);
                         }
 
-                        viewHolder = new NS_4thVH(view,answerDB);
+                        viewHolder = new NS_4thVH(view);
                         viewHolder.setOnFourthNSVHListener(NS_4th_question.this);
+                        if (answerDB!=null){
+                            viewHolder.onUpdateUI(answerDB);
+                        }
                     }
                 });
 

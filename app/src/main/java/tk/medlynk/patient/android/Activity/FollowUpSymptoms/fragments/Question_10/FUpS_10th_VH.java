@@ -216,30 +216,22 @@ public class FUpS_10th_VH extends RecyclerView.ViewHolder implements
         for (Answer answer : answers) {
             switch (answer.getChoice ()){
                 case "b":{
-                    second.previewOfDBResult ( true,
-                            false,
-                            0);
+                    second.updateViewSelectionUI(  0);
 
                     break;
                 }
                 case "c":{
-                    second.previewOfDBResult ( true,
-                            false,
-                            1);
+                    second.updateViewSelectionUI(  1);
 
                     break;
                 }
                 case "d":{
-                    second.previewOfDBResult ( true,
-                            false,
-                            2);
+                    second.updateViewSelectionUI(  2);
 
                     break;
                 }
                 case "e":{
-                    second.previewOfDBResult ( true,
-                            false,
-                            3);
+                    second.updateViewSelectionUI(   3);
 
                     break;
                 }
@@ -248,8 +240,7 @@ public class FUpS_10th_VH extends RecyclerView.ViewHolder implements
     }
 
     public void onUpdateUI(Answer answer) {
-        first.previewOfDBResult ( true,
-                true, 0);
+        first.updateViewSelectionUI(  0);
     }
 
     private class OnNextButtonClickListener implements View.OnClickListener {

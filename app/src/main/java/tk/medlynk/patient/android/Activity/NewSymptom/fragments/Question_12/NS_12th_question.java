@@ -95,8 +95,11 @@ import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
                             answersDB = JC.answerJsonToAnswers(dataBaseModel.getAnswerJson());
                         }
 
-                        viewHolder = new NS_12th_VH(view, answersDB);
+                        viewHolder = new NS_12th_VH(view);
                         viewHolder.setOnNinthNSVHListener(NS_12th_question.this);
+                        if (answersDB!=null){
+                            viewHolder.onUpdateUI(answersDB);
+                        }
                     }
                 });
 
@@ -156,7 +159,6 @@ import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
         public void onNextClicked(Answer answer) {
             System.out.println ( "NS_12th_question.onNextClicked" );
             viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
-            SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
             MedlynkRequests.newSymptomQuestionsAnswer ( getActivity (),
                     NS_12th_question.this,
                     manager.getAppointmentID (),"12",
@@ -171,10 +173,8 @@ import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
             System.out.println ( "NS_12th_question.onNextClicked" );
             System.out.println ("list of answers");
             viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
-            SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
-            MedlynkRequests.newSymptomTwelveQuestionAnswer ( getActivity (),
-                    NS_12th_question.this,
-                    manager.getAppointmentID (),
+            MedlynkRequests.newSymptomQuestionsAnswer ( getActivity (), NS_12th_question.this,
+                    manager.getAppointmentID (),"12",
                     answers
             );
 

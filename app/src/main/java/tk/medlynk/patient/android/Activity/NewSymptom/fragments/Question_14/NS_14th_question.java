@@ -15,6 +15,7 @@ import com.neweraandroid.demo.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import tk.medlynk.patient.android.Activity.NewSymptom.OnNewSymptomAnswerListener;
 import tk.medlynk.patient.android.Constants;
 import tk.medlynk.patient.android.DataBase.DataBaseModel;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
@@ -36,7 +37,7 @@ import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
  */
 public class NS_14th_question extends Fragment implements
         NS_14th_VH.OnFourteenNSVHListener,
-        OnFourteenAnswerListener {
+        OnNewSymptomAnswerListener {
 
     public static final String TAG = "NS_14th_question";
 
@@ -135,10 +136,8 @@ public class NS_14th_question extends Fragment implements
     @Override
     public void onNextClicked(Answer answer) {
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
-        SharedPreferenceManager manager = new
-                SharedPreferenceManager ( getActivity () );
-        MedlynkRequests.newSymptomFourteenQuestionAnswer ( getActivity (),
-                this, manager.getAppointmentID (),
+        MedlynkRequests.newSymptomQuestionsAnswer ( getActivity (), this,
+                manager.getAppointmentID (),"14",
                 answer );
         this.answerDB.clear ();
         this.answerDB.add ( answer );
@@ -147,11 +146,8 @@ public class NS_14th_question extends Fragment implements
     @Override
     public void onNextClicked(List<Medication> answers) {
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
-        SharedPreferenceManager manager = new
-                SharedPreferenceManager ( getActivity () );
-        MedlynkRequests.newSymptomFourteenQuestionAnswer ( getActivity (),
-                this, manager.getAppointmentID (),
-                answers );
+        MedlynkRequests.newSymptomFourteenQuestionAnswer ( getActivity (), this,
+                manager.getAppointmentID (), answers );
         this.medicationsDB.clear ();
         this.medicationsDB.addAll ( answers );
     }
@@ -162,7 +158,7 @@ public class NS_14th_question extends Fragment implements
     }
 
     @Override
-    public void onThirteenAnswerSuccess(NewSymptomAnswerResponse response) {
+    public void onAnswerSuccess(NewSymptomAnswerResponse response) {
         JsonConverter jsonConverter = JsonConverter.getInstance ();
         if (existsRecord) {
             if (answerDB.size () > 0) {
@@ -190,7 +186,7 @@ public class NS_14th_question extends Fragment implements
     }
 
     @Override
-    public void onThirteenAnswerFailure() {
+    public void onAnswerFailure() {
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
     }
 

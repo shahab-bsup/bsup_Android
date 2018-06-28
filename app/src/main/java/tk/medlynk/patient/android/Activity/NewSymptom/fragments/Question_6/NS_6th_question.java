@@ -101,9 +101,11 @@ public class NS_6th_question extends Fragment implements
                                     .get(0);
                             Log.d(TAG, "onChanged: " + answerDB);
                         }
-
-                        viewHolder = new NS_6th_VH(view,answerDB);
+                        viewHolder = new NS_6th_VH(view);
                         viewHolder.setOnSixthNSVHListener(NS_6th_question.this);
+                        if (answerDB!=null){
+                            viewHolder.onUpdateUI(answerDB);
+                        }
                     }
                 });
 

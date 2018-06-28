@@ -11,6 +11,7 @@ import com.neweraandroid.demo.R;
 
 import java.util.List;
 
+import tk.medlynk.patient.android.Activity.NewSymptom.OnNewSymptomAnswerListener;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
 import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
@@ -25,7 +26,7 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
  * create an instance of this fragment.
  */
 public class NS_13th_question extends Fragment implements
-        NS_13th_VH.OnThirteenNSVHListener, OnThirteenAnswerListener {
+        NS_13th_VH.OnThirteenNSVHListener, OnNewSymptomAnswerListener {
 
     public final static String TAG = "NS_13th_question";
 
@@ -56,10 +57,7 @@ public class NS_13th_question extends Fragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater
-                .inflate ( R.layout.fragment_new__symptom_13th_question,
-                        container,
-                        false );
+        View view = inflater.inflate ( R.layout.fragment_new__symptom_13th_question, container, false );
         dbOperation ( view );
         return view;
     }
@@ -90,9 +88,8 @@ public class NS_13th_question extends Fragment implements
     public void onNextClicked(Answer answer) {
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
         SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
-        MedlynkRequests.newSymptomThirteenQuestionAnswer ( getActivity (),
-                NS_13th_question.this,
-                manager.getAppointmentID (),
+        MedlynkRequests.newSymptomQuestionsAnswer ( getActivity (), NS_13th_question.this,
+                manager.getAppointmentID (),"13",
                 answer
         );
     }
@@ -101,9 +98,8 @@ public class NS_13th_question extends Fragment implements
     public void onNextClicked(List<Answer> answers) {
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
         SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
-        MedlynkRequests.newSymptomThirteenQuestionAnswer ( getActivity (),
-                NS_13th_question.this,
-                manager.getAppointmentID (),
+        MedlynkRequests.newSymptomQuestionsAnswer ( getActivity (), NS_13th_question.this,
+                manager.getAppointmentID (),"13",
                 answers );
     }
 
@@ -113,13 +109,13 @@ public class NS_13th_question extends Fragment implements
     }
 
     @Override
-    public void onThirteenAnswerSuccess(NewSymptomAnswerResponse response) {
+    public void onAnswerSuccess(NewSymptomAnswerResponse response) {
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onThirteenQuestion ();
     }
 
     @Override
-    public void onThirteenAnswerFailure() {
+    public void onAnswerFailure() {
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onThirteenQuestion ();
     }

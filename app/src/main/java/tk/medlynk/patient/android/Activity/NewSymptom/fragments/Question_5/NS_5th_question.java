@@ -98,8 +98,11 @@ public class NS_5th_question extends Fragment implements
                             Log.d(TAG, "onChanged: " + answerDB);
                         }
 
-                        viewHolder = new NS_5th_VH(view, answerDB);
+                        viewHolder = new NS_5th_VH(view);
                         viewHolder.setOnFifthNSVHListener(NS_5th_question.this);
+                        if (answerDB!=null){
+                            viewHolder.onUpdateUI(answerDB);
+                        }
                     }
                 });
 
