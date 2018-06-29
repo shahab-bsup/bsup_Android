@@ -24,33 +24,38 @@ public class FUpR_3rd_VH extends RecyclerView.ViewHolder implements ViewSelectio
     private final ProgressBar progressBar;
     private final TextView third_question;
     private final ViewSelection first;
-    private final Answer answer = new Answer();
+    private Answer answer;
     private OnFURThirdVHListener onFURThirdVHListener;
 
-    public FUpR_3rd_VH(View itemView,Answer answerDB) {
-        super ( itemView );
-        progressBar =  itemView.findViewById( R.id.progress_bar);
+    public FUpR_3rd_VH(View itemView) {
+        super(itemView);
+        progressBar = itemView.findViewById(R.id.progress_bar);
         question_view = itemView.findViewById(R.id.follow_up_results_third_question);
-        third_question =  question_view.findViewById(R.id.txtQuestion);
+        third_question = question_view.findViewById(R.id.txtQuestion);
         third_question.setText(itemView.getContext().getString(R.string.FUPR_third_question));
-        button_next =  itemView.findViewById(R.id.btnNextQuestion);
-        button_next.setOnClickListener(new OnNextButtonClickListener ());
+        button_next = itemView.findViewById(R.id.btnNextQuestion);
+        button_next.setOnClickListener(new OnNextButtonClickListener());
         button_next.setEnabled(false);
-        button_skip =  itemView.findViewById(R.id.btnSkipQuestion);
-        button_skip.setOnClickListener(new OnSkipClickListener ());
-        first = itemView.findViewById ( R.id.viewSelectionChoice );
-        first.setOnSingleItemSelectedListener ( this );
-        string_choices = itemView.getContext ().getResources ().getStringArray ( R.array.yes_no );
-        first.setDataSet ( string_choices );
-        if (answerDB!=null){
-            if (answerDB.getChoice().equals("a")){
-                first.updateViewSelectionUI(0);
-            }
-            else if(answerDB.getChoice().equals("b")){
-                first.updateViewSelectionUI(1);
-            }
+        button_skip = itemView.findViewById(R.id.btnSkipQuestion);
+        button_skip.setOnClickListener(new OnSkipClickListener());
+        first = itemView.findViewById(R.id.viewSelectionChoice);
+        first.setOnSingleItemSelectedListener(this);
+        string_choices = itemView.getContext().getResources().getStringArray(R.array.yes_no);
+        first.setDataSet(string_choices);
 
+        answer=new Answer();
+    }
+
+    public void onUpdateUI(Answer answerDB) {
+        if (answerDB.getChoice().equals("a")){
+            first.updateViewSelectionUI(0);
         }
+        else if(answerDB.getChoice().equals("b")){
+            first.updateViewSelectionUI(1);
+        }
+        answer=answerDB;
+        button_next.setEnabled(true);
+        button_next.setBackgroundResource(R.drawable.enable_next_question);
     }
 
     public void setProgressBarVisibilityStatus( int status ){

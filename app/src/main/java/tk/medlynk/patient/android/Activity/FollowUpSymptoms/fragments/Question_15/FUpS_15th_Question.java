@@ -94,8 +94,11 @@ public class FUpS_15th_Question extends Fragment implements
                             answerDB = JC.answerJsonToAnswers(dataBaseModel.getAnswerJson())
                                     .get(0);
                         }
-                        viewHolder = new FUpS_15th_VH(view, answerDB);
+                        viewHolder = new FUpS_15th_VH(view);
                         viewHolder.setOnFUpSFifteenVHListener(FUpS_15th_Question.this);
+                        if (answerDB!=null){
+                            viewHolder.onUpdateUI(answerDB);
+                        }
                     }
 
                 });

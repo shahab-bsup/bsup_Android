@@ -1,20 +1,33 @@
 package tk.medlynk.patient.android.Activity.Refill.fragments.Question_6;
 
+import android.arch.lifecycle.LifecycleOwner;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import tk.medlynk.patient.android.Activity.Refill.fragments.Question_3.Refill_third_Question;
+import tk.medlynk.patient.android.Activity.Refill.fragments.Question_3.Refill_third_VH;
 import tk.medlynk.patient.android.Activity.Refill.fragments.Question_6.Refill_sixth_VH.OnRefillSixthVHListener;
+import tk.medlynk.patient.android.Constants;
+import tk.medlynk.patient.android.DataBase.DataBaseModel;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.JsonConverter;
 import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.MotherCallback;
 import tk.medlynk.patient.android.Model.SymptomResponse;
 import tk.medlynk.patient.android.Networking.MedlynkRequests;
+import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
 
 import com.neweraandroid.demo.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Refill_sixth_Question extends Fragment implements OnRefillSixthVHListener, MotherCallback {
@@ -22,8 +35,23 @@ public class Refill_sixth_Question extends Fragment implements OnRefillSixthVHLi
     private onRefillSixthQuestionInteractionListener mListener;
     private Refill_sixth_VH viewHolder;
 
+    private MedlynkViewModel mMedlynkViewModel;
+    private boolean existsRecord = false;
+    private List<Answer> answersDB=new ArrayList<>();
+    private SharedPreferenceManager manager;
+    private List<Answer> answersForDB = new ArrayList<>();
+
+
     @Override
     public void onAnswerSuccess(SymptomResponse response) {
+        JsonConverter JC = JsonConverter.getInstance ();
+        if (existsRecord == false)
+            mMedlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (), Constants.REFILL_A_MEDICATION_ROW,
+                    manager.getQuestionSetID(),6, JC.answersToAnswerJson ( answersForDB ) );
+        else
+            mMedlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (), Constants.REFILL_A_MEDICATION_ROW,
+                    manager.getQuestionSetID(),6, JC.answersToAnswerJson ( answersForDB ) );
+
         System.out.println("Refill_sixth_Question.onAnswerSuccess");
         viewHolder.setProgressBarVisibilityStatus(View.GONE);
         mListener.onRefillSixthQuestion();
@@ -54,9 +82,33 @@ public class Refill_sixth_Question extends Fragment implements OnRefillSixthVHLi
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_refill_sixth__question, container, false);
-        this.viewHolder = new Refill_sixth_VH(view);
-        this.viewHolder.setOnRefillSixthVHListener(this);
+        dbOperation(view);
         return view;
+    }
+
+    private void dbOperation(final View view) {
+        mMedlynkViewModel = ViewModelProviders.of ( getActivity () ).get ( MedlynkViewModel.class );
+        manager = new SharedPreferenceManager ( getActivity () );
+        mMedlynkViewModel.getAnswers ( manager.getAppointmentID (), Constants.REFILL_A_MEDICATION_ROW,
+                manager.getQuestionSetID(),6 )
+                .observe ( (LifecycleOwner) this, new Observer<DataBaseModel>() {
+                    @Override
+                    public void onChanged(@Nullable DataBaseModel dataBaseModel) {
+                        if (dataBaseModel != null) {
+                            existsRecord = true;
+                            JsonConverter JC = JsonConverter.getInstance ();
+                            answersDB = JC.answerJsonToAnswers ( dataBaseModel.getAnswerJson () );
+                            Log.d ( TAG, "onChanged: " + answersDB );
+                        }
+                        viewHolder = new Refill_sixth_VH( view );
+                        viewHolder.setOnRefillSixthVHListener ( Refill_sixth_Question.this );
+
+                        if (answersDB!=null) {
+                            viewHolder.onUpdateUI(answersDB);
+                        }
+                    }
+
+                } );
     }
 
     public void onAttach(Context context) {
@@ -77,12 +129,13 @@ public class Refill_sixth_Question extends Fragment implements OnRefillSixthVHLi
     public void onNextClicked(Answer answer) {
         System.out.println("Refill_sixth_Question.onNextClicked");
         viewHolder.setProgressBarVisibilityStatus(View.VISIBLE);
-        SharedPreferenceManager manager = new SharedPreferenceManager(getActivity());
         MedlynkRequests.refill_sixth_question(getActivity(),
                 manager.getAppointmentID(),
                 manager.getQuestionSetID(),
                 this,
                 answer);
+
+        answersForDB.add(answer);
     }
 
     @Override
@@ -96,6 +149,8 @@ public class Refill_sixth_Question extends Fragment implements OnRefillSixthVHLi
                 manager.getQuestionSetID(),
                 this,
                 answers);
+
+        answersForDB=answers;
     }
 
     public void onSkipClicked() {

@@ -68,6 +68,7 @@
 
                         <include layout="@layout/refill_second_part_layout"
                             android:id="@+id/refill_second"></include>
+
                         <com.medlynk.shahab.myviewselection.ViewSelection
                             android:layout_marginTop="20dp"
                             android:id="@+id/viewSelectionChoicesSecond"

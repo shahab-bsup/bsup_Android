@@ -96,8 +96,11 @@ public class FUpR_17th_Question extends Fragment implements
                                     .get ( 0 );
                             Log.d ( TAG, "onChanged: " + answerDB );
                         }
-                        viewHolder = new FUpR_17th_VH( view, answerDB );
+                        viewHolder = new FUpR_17th_VH( view );
                         viewHolder.setOnFURSeventeenVHListener ( FUpR_17th_Question.this );
+                        if (answerDB!=null) {
+                            viewHolder.onUpdateUI(answerDB);
+                        }
                     }
 
                 } );

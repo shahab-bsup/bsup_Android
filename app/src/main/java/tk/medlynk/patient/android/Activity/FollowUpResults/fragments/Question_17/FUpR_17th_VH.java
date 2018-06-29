@@ -24,11 +24,11 @@ public class FUpR_17th_VH extends RecyclerView.ViewHolder implements ViewSelecti
     private final ProgressBar progressBar;
     private final TextView third_question;
     private final ViewSelection first;
-    private final Answer answer = new Answer();
+    private Answer answer;
     private OnFURSeventeenVHListener onFURSeventeenVHListener;
 
 
-    public FUpR_17th_VH(View itemView,Answer answerDB) {
+    public FUpR_17th_VH(View itemView) {
         super ( itemView );
         progressBar =  itemView.findViewById( R.id.progress_bar);
         question_view = itemView.findViewById(R.id.follow_up_results_seventeen_question);
@@ -46,14 +46,19 @@ public class FUpR_17th_VH extends RecyclerView.ViewHolder implements ViewSelecti
                 .getStringArray ( R.array.FUpR_17th_choices );
         first.setDataSet ( string_choices );
 
-        if (answerDB!=null){
-            switch (answerDB.getChoice()){
-                case "a":{first.updateViewSelectionUI(0);break;}
-                case "b":{first.updateViewSelectionUI(1);break;}
-                case "c":{first.updateViewSelectionUI(2);break;}
-            }
+        answer=new Answer();
+    }
 
+    public void onUpdateUI(Answer answerDB) {
+        switch (answerDB.getChoice()){
+            case "a":{first.updateViewSelectionUI(0);break;}
+            case "b":{first.updateViewSelectionUI(1);break;}
+            case "c":{first.updateViewSelectionUI(2);break;}
         }
+
+        answer=answerDB;
+        button_next.setEnabled(true);
+        button_next.setBackgroundResource(R.drawable.enable_next_question);
     }
 
     public void setOnFURSeventeenVHListener(OnFURSeventeenVHListener onFURSeventeenVHListener) {

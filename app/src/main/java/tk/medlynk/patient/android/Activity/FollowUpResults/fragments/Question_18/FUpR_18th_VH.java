@@ -27,10 +27,10 @@ public class FUpR_18th_VH extends RecyclerView.ViewHolder implements ViewSelecti
     private final TextView question;
     private final ViewSelection first;
     private final AppCompatEditText answer_input;
-    private final Answer answer = new Answer();
+    private Answer answer;
     private OnFUREighteenVHListener onFUREighteenVHListener;
 
-    public FUpR_18th_VH(View itemView,Answer answerDB) {
+    public FUpR_18th_VH(View itemView) {
         super ( itemView );
         progressBar =  itemView.findViewById( R.id.progress_bar);
         question_view = itemView.findViewById(R.id.follow_up_results_eighteen_question);
@@ -56,14 +56,20 @@ public class FUpR_18th_VH extends RecyclerView.ViewHolder implements ViewSelecti
         answer_input.addTextChangedListener ( new OnAnswerInputTextWatcher() );
         answer_input.setOnFocusChangeListener ( new OnAnswerFocusChangeListener() );
 
-        if (answerDB!=null){
-           if (answerDB.getChoice().equals("a")){
-               answer_input.setText(answerDB.getReply());
-           }
-           else if(answerDB.getChoice().equals("b")){
-               first.updateViewSelectionUI(0);
-           }
+        answer=new Answer();
+    }
+
+    public void onUpdateUI(Answer answerDB) {
+
+        if (answerDB.getChoice().equals("a")){
+            answer_input.setText(answerDB.getReply());
         }
+        else if(answerDB.getChoice().equals("b")){
+            first.updateViewSelectionUI(0);
+        }
+        answer=answerDB;
+        button_next.setEnabled(true);
+        button_next.setBackgroundResource(R.drawable.enable_next_question);
     }
 
     public void setProgressBarVisibilityStatus(int status ){

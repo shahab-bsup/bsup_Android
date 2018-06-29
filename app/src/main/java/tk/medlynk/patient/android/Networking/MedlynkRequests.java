@@ -25,7 +25,6 @@ import tk.medlynk.patient.android.Activity.FollowUpSymptoms.OnFollowUpSymptomAns
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_11.OnEleventFollowUphAnswerListener;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_12.OnFollowUpTwelveAnswerListener;
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_13.OnThirteenFollowUpAnswerListener;
-import tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_14.OnFourteenFollowUpAnswerListener;
 import tk.medlynk.patient.android.Activity.Login.OnGetCurrentUserInfoListener;
 import tk.medlynk.patient.android.Activity.Login.OnPrimaryAccessTokenListener;
 import tk.medlynk.patient.android.Activity.Login.OnResendConfirmationListener;
@@ -863,7 +862,7 @@ public class MedlynkRequests {
         } );
     }
 
-    public static void followUpSymptomFourteenAnswer(Context context,
+/*    public static void followUpSymptomFourteenAnswer(Context context,
                                                      int appointmentID,
                                                      final OnFourteenFollowUpAnswerListener listener,
                                                      Answer answer) {
@@ -917,7 +916,7 @@ public class MedlynkRequests {
                 }
             }
         } );
-    }
+    }*/
 
    /* public static void followUpSymptomFifteenAnswer(Context context,
                                                     int appointmentID,
@@ -1166,7 +1165,8 @@ public class MedlynkRequests {
     }*/
 
 
-    public static void refill_questionAnswer(Context context, final RefillResultAnswer listener, int appointmentID,String question_number,int question_set_id, Answer answer) {
+    public static void refill_questionAnswer(Context context, final RefillResultAnswer listener,
+                                             int appointmentID,String question_number,int question_set_id, Answer answer) {
         System.out.println ( "MedlynkRequests.refill_question "+question_number );
 
         Constants.REFILL_A_MEDICATION_BODY.put ( Constants.QUESTION_NUMBER, question_number );
@@ -1196,66 +1196,10 @@ public class MedlynkRequests {
         } );
     }
 
-    public static void refill_second_question(Context context,
-                                              int appointmentID,
-                                              int question_set_id,
-                                              final MotherCallback listener,
-                                              Answer answer) {
-        System.out.println ( "MedlynkRequests.refill_second_question" );
-        Constants.REFILL_A_MEDICATION_BODY.put ( Constants.QUESTION_NUMBER, "2" );
-        Constants.REFILL_A_MEDICATION_BODY.put ( Constants.QUESTION_SET_ID, String.valueOf ( question_set_id ) );
-        Constants.REFILL_A_MEDICATION_BODY.put ( Constants.ANSWER, answer );
-        Call<SymptomResponse> call = MedlynkRestAPI.getInstance().getMainRetrofit ( context )
-                .refillAnswer ( appointmentID, Constants.REFILL_A_MEDICATION_BODY );
-        call.enqueue ( new Callback<SymptomResponse> () {
-            @Override
-            public void onResponse(Call<SymptomResponse> call, Response<SymptomResponse> response) {
-                if (response.isSuccessful ()) {
-                    listener.onAnswerSuccess ( response.body () );
-                } else {
-                    listener.onAnswerFailure ();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<SymptomResponse> call, Throwable t) {
-                listener.onAnswerFailure ();
-            }
-        } );
-    }
-
-    /*public static void refill_third_question(Context context,
-                                             int appointmentID,
-                                             int question_set_id,
-                                             final MotherCallback listener,
-                                             Answer answer) {
-        System.out.println ( "MedlynkRequests.refill_third_question" );
-        Constants.REFILL_A_MEDICATION_BODY.put ( Constants.QUESTION_NUMBER, "3" );
-        Constants.REFILL_A_MEDICATION_BODY.put ( Constants.QUESTION_SET_ID, String.valueOf ( question_set_id ) );
-        Constants.REFILL_A_MEDICATION_BODY.put ( Constants.ANSWER, answer );
-        Call<SymptomResponse> call = MedlynkRestAPI.getInstance().getMainRetrofit ( context )
-                .refillAnswer ( appointmentID, Constants.REFILL_A_MEDICATION_BODY );
-        call.enqueue ( new Callback<SymptomResponse> () {
-            @Override
-            public void onResponse(Call<SymptomResponse> call, Response<SymptomResponse> response) {
-                if (response.isSuccessful ()) {
-                    listener.onAnswerSuccess ( response.body () );
-                } else {
-                    listener.onAnswerFailure ();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<SymptomResponse> call, Throwable t) {
-                listener.onAnswerFailure ();
-            }
-        } );
-    }*/
-
     public static void refill_fourth_question(Context context,
                                               int appointmentID,
                                               int question_set_id,
-                                              final MotherCallback listener,
+                                              final RefillResultAnswer listener,
                                               Answer answer) {
         System.out.println ( "MedlynkRequests.refill_fourth_question" );
         Constants.REFILL_A_MEDICATION_BODY.put ( Constants.QUESTION_NUMBER, "4" );
