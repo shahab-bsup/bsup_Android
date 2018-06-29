@@ -15,6 +15,8 @@ import com.neweraandroid.demo.R;
 
 import java.util.List;
 
+import tk.medlynk.patient.android.Activity.FollowUpResults.FollowUpResultActivity;
+import tk.medlynk.patient.android.Activity.Progress.ProgressPageActivity;
 import tk.medlynk.patient.android.Activity.StartQuestionSet.StartAppointmentActivity;
 import tk.medlynk.patient.android.Constants;
 import tk.medlynk.patient.android.DataBase.DataBaseModel;
@@ -32,10 +34,6 @@ import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
 public class End_of_Question_Set extends Fragment implements End_of_Question_Set_VH.OnEndOfQuestionSetVHListener {
 
     public static final String TAG = "End_of_Question_Set";
-
-    private MedlynkViewModel mMedlynkViewModel;
-    private int UnansweredQuestion=0;
-    private SharedPreferenceManager manager;
 
     private OnEndOfFollowUpResultListener mListener;
 
@@ -65,7 +63,7 @@ public class End_of_Question_Set extends Fragment implements End_of_Question_Set
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view =  inflater.inflate ( R.layout.fragment_new__symptom_24th_question, container, false );
+        view =  inflater.inflate ( R.layout.fragment_new__symptom_end_of_question_set, container, false );
         viewHolder = new End_of_Question_Set_VH( view );
         viewHolder.setOnEndOfQuestionSetVHListener ( this );
         return view;
@@ -93,19 +91,19 @@ public class End_of_Question_Set extends Fragment implements End_of_Question_Set
         System.out.println ( "End_of_Question_Set.onButtonClicked" );
         switch (buttonId){
             case 0:{
-                takeFirstUnansweredQuestion();
+                getActivity ().startActivity ( new Intent ( getActivity (), FollowUpResultActivity.class ) );
+                getActivity ().finish ();
                 break;
             }
             case 1:{
 
                 getActivity ().startActivity ( new Intent ( getActivity (), StartAppointmentActivity.class ) );
                 getActivity ().finish ();
-
                 break;
             }
             case 2:{
-
-
+                getActivity().startActivity(new Intent(getActivity(), ProgressPageActivity.class));
+                getActivity().finish();
                 break;
             }
             case 3:{
@@ -116,41 +114,7 @@ public class End_of_Question_Set extends Fragment implements End_of_Question_Set
         }
     }
 
-    private void takeFirstUnansweredQuestion(){
-        manager = new SharedPreferenceManager ( getActivity () );
-        mMedlynkViewModel = ViewModelProviders.of ( getActivity () ).get ( MedlynkViewModel.class );
-        mMedlynkViewModel.getAnswersList(manager.getAppointmentID(), Constants.FOLLOW_UP_RESULTS_ROW,0)
-                .observe(this, new Observer<List<DataBaseModel>>() {
-                    @Override
-                    public void onChanged(@Nullable List<DataBaseModel> dataBaseModels) {
-                        if(dataBaseModels!=null){
-                            boolean existFlag;
-
-                            for (int questionNumber=1;questionNumber<=Constants.FOLLOW_UP_RESULTS_QUESTIONS_NUMBER;questionNumber++){
-                                existFlag=false;
-                                for (DataBaseModel db:dataBaseModels) {
-                                    if(questionNumber==db.getQuestionNumber()){
-                                        existFlag=true;
-                                        break;
-                                    }
-                                }
-
-                                if(existFlag==false){
-                                    UnansweredQuestion=questionNumber;
-                                    break;
-                                }
-                            }
-
-                            System.out.println("firstUnAnsweredQuestion " + UnansweredQuestion);
-
-                            mListener.firstUnAnsweredQuestion(UnansweredQuestion);
-                        }
-                    }
-                });
-    }
-
     public interface OnEndOfFollowUpResultListener {
         // TODO: Update argument type and name
-        void firstUnAnsweredQuestion(int questionNumber);
     }
 }

@@ -3,6 +3,7 @@ package tk.medlynk.patient.android.ViewModel;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
+import android.support.v7.app.AppCompatActivity;
 
 import java.util.List;
 

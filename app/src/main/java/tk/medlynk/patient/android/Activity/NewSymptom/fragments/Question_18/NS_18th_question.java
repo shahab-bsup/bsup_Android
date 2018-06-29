@@ -95,8 +95,12 @@ public class NS_18th_question extends Fragment implements
                             answerDB = JC.answerJsonToAnswers ( dataBaseModel.getAnswerJson () )
                                     .get ( 0 );
                         }
-                        viewHolder = new NS_18th_VH( view ,answerDB);
+                        viewHolder = new NS_18th_VH( view );
                         viewHolder.setOnEighteenNSVHListener ( NS_18th_question.this );
+
+                        if (answerDB!=null){
+                            viewHolder.onUpdateUI(answerDB);
+                        }
                     }
 
                 } );
@@ -153,7 +157,6 @@ public class NS_18th_question extends Fragment implements
     public void onNextClicked(Answer answer) {
         System.out.println ( "NS_18th_question.onNextClicked" );
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
-        SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
         MedlynkRequests.newSymptomQuestionsAnswer ( getActivity (), NS_18th_question.this,
                 manager.getAppointmentID (),"18",
                 answer);

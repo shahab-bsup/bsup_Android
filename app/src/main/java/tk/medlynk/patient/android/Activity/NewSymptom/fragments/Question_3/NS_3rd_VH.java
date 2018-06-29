@@ -108,11 +108,11 @@ public class NS_3rd_VH extends RecyclerView.ViewHolder implements ViewSelection.
                     break;
                 }
                 case "e":{
-                    choice.previewOfDBResult ( true, true, 0 );
+                    choice.updateViewSelectionUI(  0 );
                     break;
                 }
                 case "f":{
-                    choice.previewOfDBResult ( true, true, 1 );
+                    choice.updateViewSelectionUI( 1 );
                     break;
                 }
             }

@@ -147,9 +147,7 @@ public class ViewSelection extends LinearLayout {
 
     }
 
-    public void previewOfDBResult(boolean selectable,
-                                  boolean single_select,
-                                  int numOfView) {
+    public void updateViewSelectionUI(int numOfView) {
         regularAdapter.setSelect ( numOfView );
     }
 

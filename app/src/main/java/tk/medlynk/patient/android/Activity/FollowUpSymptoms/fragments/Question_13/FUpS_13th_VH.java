@@ -10,9 +10,6 @@ import android.widget.TextView;
 import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
 
-import java.util.List;
-
-import tk.medlynk.patient.android.Activity.FollowUpResults.fragments.Question_16.FUpR_16th_VH;
 import tk.medlynk.patient.android.Model.Answer;
 
 /**
@@ -117,16 +114,12 @@ public class FUpS_13th_VH extends RecyclerView.ViewHolder implements ViewSelecti
     public void onUpdateUI(Answer answer) {
         switch (answer.getChoice ()){
             case "a":{
-                first.previewOfDBResult ( true,
-                        true,
-                        0);
+                first.updateViewSelectionUI( 0);
                 onUpdateSecondUI ( answer );
                 break;
             }
             case "b":{
-            first.previewOfDBResult ( true,
-                    true,
-                    1);
+            first.updateViewSelectionUI(1);
                 second_question_layout.setVisibility(View.GONE);
             }
         }
@@ -136,22 +129,16 @@ public class FUpS_13th_VH extends RecyclerView.ViewHolder implements ViewSelecti
         second_question_layout.setVisibility( View.VISIBLE);
         switch (answer.getSubChoice ()){
             case "1":{
-                second.previewOfDBResult ( true,
-                        true,
-                        0);
+                second.updateViewSelectionUI(  0);
                 break;
             }
             case "2":{
-                second.previewOfDBResult ( true,
-                        true,
-                        1);
+                second.updateViewSelectionUI( 1);
 
                 break;
             }
             case "3":{
-                second.previewOfDBResult ( true,
-                        true,
-                        2);
+                second.updateViewSelectionUI(  2);
 
                 break;
             }

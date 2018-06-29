@@ -158,10 +158,8 @@ public class NS_3rd_question extends Fragment implements
     public void onNextClicked(Answer answer) {
         System.out.println ( "NS_3rd_question.onNextClicked" );
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
-        SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
-        MedlynkRequests.newSymptomThirdQuestionAnswer ( getActivity (),
-                NS_3rd_question.this,
-                manager.getAppointmentID (),
+        MedlynkRequests.newSymptomQuestionsAnswer ( getActivity (), NS_3rd_question.this,
+                manager.getAppointmentID (),"3",
                 answer );
         answers.add ( answer );
     }

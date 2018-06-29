@@ -44,10 +44,10 @@ public class FUpR_3rd_VH extends RecyclerView.ViewHolder implements ViewSelectio
         first.setDataSet ( string_choices );
         if (answerDB!=null){
             if (answerDB.getChoice().equals("a")){
-                first.previewOfDBResult(true,true,0);
+                first.updateViewSelectionUI(0);
             }
             else if(answerDB.getChoice().equals("b")){
-                first.previewOfDBResult(true,true,1);
+                first.updateViewSelectionUI(1);
             }
 
         }

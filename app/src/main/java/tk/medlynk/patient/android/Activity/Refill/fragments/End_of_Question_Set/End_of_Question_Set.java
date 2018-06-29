@@ -15,6 +15,8 @@ import com.neweraandroid.demo.R;
 
 import java.util.List;
 
+import tk.medlynk.patient.android.Activity.Progress.ProgressPageActivity;
+import tk.medlynk.patient.android.Activity.Refill.Refill_A_Medication_Activity;
 import tk.medlynk.patient.android.Activity.StartQuestionSet.StartAppointmentActivity;
 import tk.medlynk.patient.android.Constants;
 import tk.medlynk.patient.android.DataBase.DataBaseModel;
@@ -93,22 +95,21 @@ public class End_of_Question_Set extends Fragment implements End_of_Question_Set
         System.out.println ( "End_of_Question_Set.onButtonClicked" );
         switch (buttonId) {
             case 0: {
+                break;
+            }
+            case 1: {
+                getActivity().startActivity(new Intent(getActivity(), Refill_A_Medication_Activity.class));
+                getActivity().finish();
+                break;
+            }
+            case 2: {
                 getActivity ().startActivity ( new Intent( getActivity (), StartAppointmentActivity.class ) );
                 getActivity ().finish ();
                 break;
             }
-            case 1: {
-                takeFirstUnansweredQuestion();
-                break;
-            }
-            case 2: {
-
-
-                break;
-            }
             case 3: {
-
-
+                getActivity().startActivity(new Intent(getActivity(), ProgressPageActivity.class));
+                getActivity().finish();
                 break;
             }
             case 4: {
@@ -118,41 +119,7 @@ public class End_of_Question_Set extends Fragment implements End_of_Question_Set
         }
     }
 
-    private void takeFirstUnansweredQuestion(){
-        manager = new SharedPreferenceManager( getActivity () );
-        mMedlynkViewModel = ViewModelProviders.of ( getActivity () ).get ( MedlynkViewModel.class );
-        mMedlynkViewModel.getAnswersList(manager.getAppointmentID(), Constants.REFILL_A_MEDICATION_ROW,manager.getQuestionSetID())
-                .observe(this, new Observer<List<DataBaseModel>>() {
-                    @Override
-                    public void onChanged(@Nullable List<DataBaseModel> dataBaseModels) {
-                        if(dataBaseModels!=null){
-                            boolean existFlag;
-
-                            for (int questionNumber=1;questionNumber<=Constants.REFILL_A_MEDICATION_QUESTIONS_NUMBER;questionNumber++){
-                                existFlag=false;
-                                for (DataBaseModel db:dataBaseModels) {
-                                    if(questionNumber==db.getQuestionNumber()){
-                                        existFlag=true;
-                                        break;
-                                    }
-                                }
-
-                                if(existFlag==false){
-                                    UnansweredQuestion=questionNumber;
-                                    break;
-                                }
-                            }
-
-                            System.out.println("firstUnAnsweredQuestion " + UnansweredQuestion);
-
-                            mListener.firstUnAnsweredQuestion(UnansweredQuestion);
-                        }
-                    }
-                });
-    }
-
     public interface OnEndOfRefillListener {
         // TODO: Update argument type and name
-        void firstUnAnsweredQuestion(int questionNumber);
     }
 }

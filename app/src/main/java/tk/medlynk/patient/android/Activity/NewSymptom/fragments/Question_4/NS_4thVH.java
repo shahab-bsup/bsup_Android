@@ -26,7 +26,7 @@ public class NS_4thVH extends RecyclerView.ViewHolder implements ViewSelection.O
     private OnFourthNSVHListener onFourthNSVHListener;
     private Answer answer;
 
-    public NS_4thVH(View itemView, Answer answerDB) {
+    public NS_4thVH(View itemView) {
         super(itemView);
         answer = new Answer();
         progressBar = itemView.findViewById(R.id.progress_bar);
@@ -52,10 +52,13 @@ public class NS_4thVH extends RecyclerView.ViewHolder implements ViewSelection.O
                 .getResources()
                 .getStringArray(R.array.question_4_choices);
         choices.setDataSet ( answerChoices );
+    }
 
-        if (answerDB != null) {
-            choices.previewOfDBResult (true,true,answerDB.getRate() - 1);
-        }
+    public void onUpdateUI(Answer answerDB) {
+        choices.updateViewSelectionUI(answerDB.getRate() - 1);
+        answer=answerDB;
+        button_next.setEnabled(true);
+        button_next.setBackgroundResource(R.drawable.enable_next_question);
     }
 
     public void setProgressBarVisibilityStatus(int status) {

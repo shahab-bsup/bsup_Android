@@ -19,7 +19,9 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="30dp"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:textStyle="bold"
+        android:text="You started 2 sets of questions for your appointment 4096"/>
 
     <LinearLayout
         android:id="@+id/refill_Layout"
@@ -101,5 +103,73 @@
             android:background="@color/black" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginRight="25dp">
+            <tk.medlynk.patient.android.CustomViews.CustomTextView
+                android:id="@+id/text_setsNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textSize="48dp"
+                android:layout_marginRight="30dp"
+                android:paddingLeft="5dp"
+                android:text="2"/>
+            <tk.medlynk.patient.android.CustomViews.CustomTextView
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="Sets started"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="25dp">
+            <tk.medlynk.patient.android.CustomViews.CustomTextView
+                android:id="@+id/text_questionsAnsweredNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textSize="48dp"
+                android:paddingLeft="5dp"
+                android:text="18"/>
+            <tk.medlynk.patient.android.CustomViews.CustomTextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="Questions answered"
+                android:textAlignment="center"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnNewQuestionSet2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/enabled_custom_button"
+        android:text="New question set"
+        android:textColor="@color/white" />
+    <Button
+        android:id="@+id/btnPrint2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/enabled_custom_button"
+        android:text="Print all question sets"
+        android:textColor="@color/white" />
 
 </LinearLayout>

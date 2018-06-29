@@ -26,9 +26,9 @@ public class FUpS_4th_VH extends RecyclerView.ViewHolder implements ViewSelectio
     private final ViewSelection choice_numbers;
     private final ViewSelection choices;
     private OnFUpSFourthVHListener onFUpSFourthVHListener;
-    private final Answer answer;
+    private Answer answer;
 
-    public FUpS_4th_VH(View itemView,Answer answerDB) {
+    public FUpS_4th_VH(View itemView) {
         super ( itemView );
         progressBar = itemView.findViewById ( R.id.progress_bar );
         question_view = itemView.findViewById ( R.id.follow_up_symptoms_fourth_question );
@@ -43,18 +43,20 @@ public class FUpS_4th_VH extends RecyclerView.ViewHolder implements ViewSelectio
         choice_numbers = itemView.findViewById ( R.id.viewSelectionChoiceNumbers );
 
         //I know this is bad! Do not blame me please:D
-        String[] strings = {"1", "2", "3", "4", "5",
-                "6", "7", "8", "9", "10"};
+        String[] strings = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
         choice_numbers.setDataSet ( strings );
 
         choices = itemView.findViewById ( R.id.viewSelectionChoices );
         choices.setDataSet ( string_choices );
         choices.setOnSingleItemSelectedListener ( this );
         answer = new Answer ();
+    }
 
-        if (answerDB!=null){
-            choices.previewOfDBResult(true,true,answerDB.getRate()-1);
-        }
+    public void onUpdateUI(Answer answerDB) {
+        choices.updateViewSelectionUI(answerDB.getRate()-1);
+        answer=answerDB;
+        button_next.setEnabled ( true );
+        button_next.setBackgroundResource ( R.drawable.enable_next_question );
     }
 
 

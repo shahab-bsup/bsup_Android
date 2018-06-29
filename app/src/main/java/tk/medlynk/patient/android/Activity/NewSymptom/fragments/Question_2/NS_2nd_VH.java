@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
 
+import java.util.List;
+
 import tk.medlynk.patient.android.Model.Answer;
 
 /**
@@ -31,7 +33,7 @@ public class NS_2nd_VH extends RecyclerView.ViewHolder implements ViewSelection.
     private Answer answer;
 
 
-    public NS_2nd_VH(View itemView, Answer answerDB) {
+    public NS_2nd_VH(View itemView) {
         super ( itemView );
 
         progressBar = itemView.findViewById ( R.id.progress_bar );
@@ -54,14 +56,19 @@ public class NS_2nd_VH extends RecyclerView.ViewHolder implements ViewSelection.
         second_answer = itemView.findViewById ( R.id.new_symptom_second_answer );
         second_answer.addTextChangedListener ( new AnswerWatcher () );
         second_answer.setOnFocusChangeListener ( new AnswerFocusChangeListener () );
-        answer = new Answer ();
-        if (answerDB != null) {
-            if (answerDB.getChoice ().equals ( "b" )) {
-                choice.previewOfDBResult ( true, true, 0 );
-            } else if (answerDB.getChoice ().equals ( "a" )) {
-                second_answer.setText ( answerDB.getReply () );
-            }
+        answer=new Answer();
+    }
+
+    public void onUpdateUI(Answer answerDB) {
+        if (answerDB.getChoice ().equals ( "b" )) {
+            choice.updateViewSelectionUI(  0 );
+        } else if (answerDB.getChoice ().equals ( "a" )) {
+            second_answer.setText ( answerDB.getReply () );
         }
+
+        answer=answerDB;
+        button_next.setEnabled ( true );
+        button_next.setBackgroundResource ( R.drawable.enable_next_question );
     }
 
     public void setProgressBarVisibilityStatus(int status) {
@@ -80,7 +87,7 @@ public class NS_2nd_VH extends RecyclerView.ViewHolder implements ViewSelection.
             button_next.setEnabled ( false );
             button_next.setBackgroundResource ( R.drawable.disable_next_question );
         } else if (i == 0) {
-            answer = new Answer ();
+            answer=new Answer();
             answer.setChoice ( "b" );
             second_answer.setText ( "" );
             button_next.setEnabled ( true );
@@ -134,6 +141,7 @@ public class NS_2nd_VH extends RecyclerView.ViewHolder implements ViewSelection.
         @Override
         public void afterTextChanged(Editable editable) {
             if (editable.length () > 0) {
+                answer=new Answer();
                 answer.setChoice ( "a" );
                 answer.setReply ( editable.toString () );
                 button_next.setEnabled ( true );

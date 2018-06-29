@@ -85,6 +85,7 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
 
     @Override
     public void onSingleItemSelected(View view, int i) {
+        choices.clear();
         if (i == -1) {
             button_next.setEnabled ( false );
             button_next.setBackgroundResource ( R.drawable.disable_next_question );
@@ -120,12 +121,10 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
             }
             case 1: {
                 answer.setChoice ( "c" );
-
                 break;
             }
             case 2: {
                 answer.setChoice ( "d" );
-
                 break;
             }
         }
@@ -221,31 +220,28 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
     public void onUpdateUI(List<Answer> answers) {
         for (Answer answer : answers) {
             switch (answer.getChoice ()) {
+                case "a":{
+                    first.updateViewSelectionUI(0);
+                    choice=answer;
+                    break;
+                }
                 case "b": {
-                    second.previewOfDBResult ( true,
-                            false,
-                            0 );
-
+                    second.updateViewSelectionUI( 0 );
+                    choices.add(answer);
                     break;
                 }
                 case "c": {
-                    second.previewOfDBResult ( true,
-                            false,
-                            1 );
-
+                    second.updateViewSelectionUI(  1 );
+                    choices.add(answer);
                     break;
                 }
                 case "d": {
-                    second.previewOfDBResult ( true,
-                            false,
-                            2 );
-
+                    second.updateViewSelectionUI(  2 );
+                    choices.add(answer);
                     break;
                 }
                 case "e": {
-//                    second.previewOfDBResult ( true,
-//                            false,
-//                            3 );
+                    choices.add(answer);
                     second.setSelect ( 3 );
                     if( answer.getOther () != null &&
                             !TextUtils.isEmpty ( answer.getOther () )){
@@ -256,9 +252,10 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
 
                     break;
                 }
-
             }
         }
+        button_next.setEnabled ( true );
+        button_next.setBackgroundResource ( R.drawable.enable_next_question );
     }
 
     private void setOtherText(String otherText) {
@@ -269,16 +266,11 @@ public class NS_8th_VH extends RecyclerView.ViewHolder implements
         this.otherText.setVisibility ( status );
     }
 
-    //called once there is only one answer for this fragment
-    public void onUpdateUI(Answer answer) {
-        first.previewOfDBResult ( true, true, 0 );
-    }
+
 
     public interface OnEighthNSVHListener {
         void onNextClicked(Answer answer);
-
         void onNextClicked(List<Answer> answers);
-
         void onSkipClicked();
     }
 

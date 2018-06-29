@@ -89,7 +89,6 @@ public class NS_10th_question extends Fragment implements
     private void dbOperation(final View view) {
         mMedlynkViewModel = ViewModelProviders.of(getActivity()).get(MedlynkViewModel.class);
         manager = new SharedPreferenceManager(getActivity());
-
         mMedlynkViewModel.getAnswers(manager.getAppointmentID(), Constants.NEW_SYMPTOM_ROW,0, 10)
                 .observe(this, new Observer<DataBaseModel>() {
                     @Override
@@ -102,8 +101,11 @@ public class NS_10th_question extends Fragment implements
                                     .get(0);
                         }
 
-                        viewHolder = new NS_10th_VH(view, answerDB);
+                        viewHolder = new NS_10th_VH(view);
                         viewHolder.setOnTenthNSVHListener(NS_10th_question.this);
+                        if (answerDB != null) {
+                            viewHolder.onUpdateUI ( answerDB );
+                        }
                     }
                 });
 

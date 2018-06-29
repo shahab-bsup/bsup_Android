@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.medlynk.shahab.myviewselection.ViewSelection;
@@ -103,9 +102,7 @@ public class NS_14th_VH extends RecyclerView.ViewHolder implements
     }
 
     public void onUpdateUI(Answer answer) {
-        choice.previewOfDBResult ( true,
-                true,
-                0);
+        choice.updateViewSelectionUI(  0);
     }
 
     public void onUpdateUI(List<Medication> medications) {

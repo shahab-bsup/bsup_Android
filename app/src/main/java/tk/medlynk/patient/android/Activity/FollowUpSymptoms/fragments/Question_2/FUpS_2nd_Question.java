@@ -49,6 +49,8 @@ public class FUpS_2nd_Question extends Fragment implements
     private Answer answerDB;
     private SharedPreferenceManager manager;
     private List<Answer> answersForDB = new ArrayList<>();
+    private int tableNumber;
+    private int questionNumber;
 
     private OnFollowUpSymptomsSecondQuestionListener mListener;
     private OnFURFifthQuestionInteractionListener mListenerFUR;
@@ -78,6 +80,13 @@ public class FUpS_2nd_Question extends Fragment implements
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_follow__up__symptoms_2nd__question, container, false);
+        if (Constants.Context_Tag.equals(FollowUpSymptomsActivity.class.getSimpleName())) {
+            tableNumber = Constants.FOLLOW_UP_SYMPTOMS_ROW;
+            questionNumber = 2;
+        } else {
+            tableNumber = Constants.FOLLOW_UP_RESULTS_ROW;
+            questionNumber = 5;
+        }
         dbOperation(view);
         return view;
     }
@@ -85,7 +94,7 @@ public class FUpS_2nd_Question extends Fragment implements
     private void dbOperation(final View view) {
         mMedlynkViewModel = ViewModelProviders.of(getActivity()).get(MedlynkViewModel.class);
         manager = new SharedPreferenceManager(getActivity());
-        mMedlynkViewModel.getAnswers(manager.getAppointmentID(), Constants.FOLLOW_UP_SYMPTOMS_ROW,0, 2)
+        mMedlynkViewModel.getAnswers(manager.getAppointmentID(), tableNumber, 0, questionNumber)
                 .observe((LifecycleOwner) this, new Observer<DataBaseModel>() {
                     @Override
                     public void onChanged(@Nullable DataBaseModel dataBaseModel) {
@@ -97,8 +106,11 @@ public class FUpS_2nd_Question extends Fragment implements
                                     .get(0);
                             Log.d(TAG, "onChanged: " + answerDB);
                         }
-                        viewHolder = new FUpS_2nd_VH(view, answerDB);
+                        viewHolder = new FUpS_2nd_VH(view);
                         viewHolder.setOnFUpSSecondVHListener(FUpS_2nd_Question.this);
+                        if (answerDB!=null){
+                            viewHolder.onUpdateUI(answerDB);
+                        }
                     }
 
                 });
@@ -116,11 +128,9 @@ public class FUpS_2nd_Question extends Fragment implements
         super.onAttach(context);
         if (context instanceof OnFollowUpSymptomsSecondQuestionListener) {
             mListener = (OnFollowUpSymptomsSecondQuestionListener) context;
-        }
-        else if(context instanceof OnFURFifthQuestionInteractionListener){
-            mListenerFUR=(OnFURFifthQuestionInteractionListener) context;
-        }
-        else {
+        } else if (context instanceof OnFURFifthQuestionInteractionListener) {
+            mListenerFUR = (OnFURFifthQuestionInteractionListener) context;
+        } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFollowUpSymptomsFirstQuestionListener");
         }
@@ -130,7 +140,7 @@ public class FUpS_2nd_Question extends Fragment implements
     public void onDetach() {
         super.onDetach();
         mListener = null;
-        mListenerFUR=null;
+        mListenerFUR = null;
     }
 
     @Override
@@ -146,32 +156,26 @@ public class FUpS_2nd_Question extends Fragment implements
 
     @Override
     public void onSkipClick() {
-        if(Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
+        if (Constants.Context_Tag.equals(FollowUpSymptomsActivity.class.getSimpleName())) {
             System.out.println("FUpS_2nd_Question.onSkipClick");
             mListener.onSecondQuestion();
-        }
-        else {
+        } else {
             mListenerFUR.onFURFifthQuestion();
         }
     }
 
     @Override
     public void onAnswerSuccess(FollowUpSymptomResponse response) {
-        if(Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
-            JsonConverter JC = JsonConverter.getInstance();
-            if (existsRecord == false)
-                mMedlynkViewModel.insertAnswersToDB(manager.getAppointmentID(), Constants.FOLLOW_UP_SYMPTOMS_ROW,0, 2, JC.answersToAnswerJson(answersForDB));
-            else
-                mMedlynkViewModel.updateAnswersToDB(manager.getAppointmentID(), Constants.FOLLOW_UP_SYMPTOMS_ROW,0, 2, JC.answersToAnswerJson(answersForDB));
 
-            System.out.println("FUpS_2nd_Question.onSecondAnswerSuccess");
-            viewHolder.setProgressBarVisibilityStatus(View.GONE);
-            mListener.onSecondQuestion();
-        }
-        else {
-            viewHolder.setProgressBarVisibilityStatus(View.GONE);
-            mListenerFUR.onFURFifthQuestion();
-        }
+        JsonConverter JC = JsonConverter.getInstance();
+        if (existsRecord == false)
+            mMedlynkViewModel.insertAnswersToDB(manager.getAppointmentID(), tableNumber, 0, questionNumber, JC.answersToAnswerJson(answersForDB));
+        else
+            mMedlynkViewModel.updateAnswersToDB(manager.getAppointmentID(), tableNumber, 0, questionNumber, JC.answersToAnswerJson(answersForDB));
+
+        System.out.println("FUpS_2nd_Question.onSecondAnswerSuccess");
+        viewHolder.setProgressBarVisibilityStatus(View.GONE);
+        mListener.onSecondQuestion();
     }
 
     @Override
@@ -195,7 +199,7 @@ public class FUpS_2nd_Question extends Fragment implements
         void onSecondQuestion();
     }
 
-    public interface OnFURFifthQuestionInteractionListener{
+    public interface OnFURFifthQuestionInteractionListener {
         void onFURFifthQuestion();
     }
 }

@@ -82,7 +82,7 @@ public class RegularAdapter extends RecyclerView.Adapter<RegularAdapter.MyViewHo
     }
 
     public void setSelect(int numOfView) {
-        this.selections.set ( numOfView, true );
+        this.selections.set ( numOfView,true );
         notifyDataSetChanged ();
     }
 

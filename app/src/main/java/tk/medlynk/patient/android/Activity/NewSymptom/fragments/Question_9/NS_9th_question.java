@@ -100,21 +100,14 @@ public class NS_9th_question extends Fragment implements
                 if( dataBaseModel != null ){
                     existRecord = true;
                     JsonConverter jsonConverter = JsonConverter.getInstance ();
-                    if( jsonConverter.answerJsonToAnswers ( dataBaseModel.getAnswerJson () ).size () > 1 ){
-                        answers = new ArrayList<> (  );
-                        answers = jsonConverter.answerJsonToAnswers ( dataBaseModel.getAnswerJson () );
-                    } else{
-                        answer = new Answer ();
-                        answer = jsonConverter
-                                .answerJsonToAnswers ( dataBaseModel.getAnswerJson ()).get ( 0 );
-                    }
+                    answers = new ArrayList<> (  );
+                    answers = jsonConverter.answerJsonToAnswers ( dataBaseModel.getAnswerJson () );
+
                 }
                 viewHolder = new NS_9th_VH ( view );
                 viewHolder.setOnNinthNSVHListener ( NS_9th_question.this );
                 if( answers != null ){
                     viewHolder.onUpdateUI ( answers );
-                }else if( answer != null ){
-                    viewHolder.onUpdateUI ( answer );
                 }
             }
         } );
@@ -167,10 +160,8 @@ public class NS_9th_question extends Fragment implements
     @Override
     public void onNextClicked(Answer answer) {
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
-        SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
-        MedlynkRequests.newSymptomNinthQuestionAnswer ( getActivity (),
-                NS_9th_question.this,
-                manager.getAppointmentID (),
+        MedlynkRequests.newSymptomQuestionsAnswer ( getActivity (), NS_9th_question.this,
+                manager.getAppointmentID (),"9",
                 answer);
 
         answersDB.clear ();
@@ -180,10 +171,8 @@ public class NS_9th_question extends Fragment implements
     @Override
     public void onNextClicked(List<Answer> answers) {
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
-        SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
-        MedlynkRequests.newSymptomNinthQuestionAnswer ( getActivity (),
-                NS_9th_question.this,
-                manager.getAppointmentID (),
+        MedlynkRequests.newSymptomQuestionsAnswer ( getActivity (), NS_9th_question.this,
+                manager.getAppointmentID (),"9",
                 answers);
 
         answersDB.clear ();

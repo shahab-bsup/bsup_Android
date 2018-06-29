@@ -202,9 +202,9 @@
     <string-array name="FUpR_1th_choices">
         <item>Blood tests</item>
         <item>Urine tests</item>
-        <item>Imaging</item>
-        <item>Cardiac investigations</item>
-        <item>Other</item>
+        <!--<item>Imaging</item>-->
+        <!--<item>Cardiac investigations</item>-->
+        <!--<item>Other</item>-->
     </string-array>
 
     <string-array name="FUpS_14th_first_sub_choices">
