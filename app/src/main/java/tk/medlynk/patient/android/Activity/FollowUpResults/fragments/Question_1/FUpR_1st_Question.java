@@ -91,8 +91,11 @@ public class FUpR_1st_Question extends Fragment
                             JsonConverter JC = JsonConverter.getInstance ();
                             answersDB = JC.answerJsonToAnswers ( dataBaseModel.getAnswerJson () );
                         }
-                        viewHolder = new FUpR_1st_VH( view, answersDB );
+                        viewHolder = new FUpR_1st_VH( view );
                         viewHolder.setOnFURFirstVHListener ( FUpR_1st_Question.this );
+                        if (answersDB!=null){
+                            viewHolder.onUpdateUI(answersDB);
+                        }
                     }
 
                 } );

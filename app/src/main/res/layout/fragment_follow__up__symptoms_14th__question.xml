@@ -55,11 +55,11 @@
                         app:unselected_text_color="@color/white" />
 
                     <Button
+                        android:id="@+id/third_choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/answer_not_selected"
                         android:layout_margin="5dp"
-                        android:id="@+id/third_choice"
                         android:textColor="@color/white"
                         />
 
@@ -72,13 +72,13 @@
                         android:id="@+id/firstRecyclerView" />
 
                     <Button
+                        android:id="@+id/fourth_choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/answer_not_selected"
                         android:layout_margin="5dp"
                         android:padding="5dp"
                         android:textColor="@color/white"
-                        android:id="@+id/fourth_choice"
                         />
 
                     <android.support.v7.widget.RecyclerView
@@ -89,8 +89,27 @@
                         app:spanCount="2"
                         android:id="@+id/secondRecyclerView" />
 
+                    <Button
+                        android:id="@+id/fifth_choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/answer_not_selected"
+                        android:layout_margin="5dp"
+                        android:padding="5dp"
+                        android:textColor="@color/white"
+                        />
+                    <Button
+                        android:id="@+id/sixth_choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/answer_not_selected"
+                        android:layout_margin="5dp"
+                        android:padding="5dp"
+                        android:textColor="@color/white"
+                        />
 
-                    <com.medlynk.shahab.myviewselection.ViewSelection
+
+                  <!--  <com.medlynk.shahab.myviewselection.ViewSelection
                         android:id="@+id/viewSelectionSecond"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -101,7 +120,7 @@
                         app:selected_text_color="@color/black"
                         app:single_select="true"
                         app:unselected_background="@drawable/answer_not_selected"
-                        app:unselected_text_color="@color/white" />
+                        app:unselected_text_color="@color/white" />-->
 
                 </LinearLayout>
 

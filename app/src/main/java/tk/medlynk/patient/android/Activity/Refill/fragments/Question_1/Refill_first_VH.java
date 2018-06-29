@@ -23,9 +23,9 @@ public class Refill_first_VH extends ViewHolder {
     private TextView question;
     private View question_view;
     private OnRefillFirstQuestionClickListener refillFirstQuestionClickListener;
-    private final Answer answer = new Answer();
+    private Answer answer;
 
-    public Refill_first_VH(View itemView,Answer answerDB) {
+    public Refill_first_VH(View itemView) {
         super(itemView);
         this.progressBar =  itemView.findViewById(R.id.progress_bar);
         this.question_view = itemView.findViewById(R.id.refill_first_question);
@@ -38,11 +38,16 @@ public class Refill_first_VH extends ViewHolder {
         this.answer_input = itemView.findViewById(R.id.refill_first_answer);
         this.answer_input.addTextChangedListener(new OnAnswerInputTextWatcher());
 
-        if (answerDB!=null){
-            if(!answerDB.getReply().equals("")){
-                answer_input.setText(answerDB.getReply());
-            }
+        answer = new Answer();
+    }
+
+    public void onUpdateUI(Answer answerDB) {
+        if(!answerDB.getReply().equals("")){
+            answer_input.setText(answerDB.getReply());
         }
+        answer=answerDB;
+        button.setEnabled(true);
+        button.setBackgroundResource(R.drawable.enable_next_question);
     }
 
     public void setFirstRefillAnswer(String answer){

@@ -104,8 +104,12 @@ public class Refill_seventh_Question extends Fragment implements
                                     .get ( 0 );
                             Log.d ( TAG, "onChanged: " + answerDB );
                         }
-                        viewHolder = new Refill_seventh_VH( view, answerDB );
+                        viewHolder = new Refill_seventh_VH( view );
                         viewHolder.setOnRefillSeventhVHListener ( Refill_seventh_Question.this );
+
+                        if (answerDB!=null) {
+                            viewHolder.onUpdateUI(answerDB);
+                        }
                     }
 
                 } );

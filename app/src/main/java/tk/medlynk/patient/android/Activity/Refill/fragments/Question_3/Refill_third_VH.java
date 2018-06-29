@@ -52,7 +52,7 @@ public class Refill_third_VH extends ViewHolder implements
         }
     }
 
-    public Refill_third_VH(View itemView,Answer answerDB) {
+    public Refill_third_VH(View itemView) {
         super(itemView);
         this.progressBar =  itemView.findViewById(R.id.progress_bar);
         this.question_view = itemView.findViewById(R.id.refill_third_question);
@@ -76,14 +76,20 @@ public class Refill_third_VH extends ViewHolder implements
         answer_input.addTextChangedListener ( new OnAnswerInputTextWatcher() );
         answer_input.setOnFocusChangeListener ( new OnAnswerFocusChangeListener() );
 
-        if(answerDB!=null){
-            if (answerDB.getChoice().equals("a")){
-                answer_input.setText(answerDB.getReply());
-            }
-            else if(answerDB.getChoice().equals("b")){
-                choice.updateViewSelectionUI(0);
-            }
+        answer=new Answer();
+    }
+
+    public void onUpdateUI(Answer answerDB) {
+        if (answerDB.getChoice().equals("a")){
+            answer_input.setText(answerDB.getReply());
         }
+        else if(answerDB.getChoice().equals("b")){
+            choice.updateViewSelectionUI(0);
+        }
+
+        answer=answerDB;
+        button_next.setEnabled(true);
+        button_next.setBackgroundResource(R.drawable.enable_next_question);
     }
 
     public void setProgressBarVisibilityStatus(int status ){

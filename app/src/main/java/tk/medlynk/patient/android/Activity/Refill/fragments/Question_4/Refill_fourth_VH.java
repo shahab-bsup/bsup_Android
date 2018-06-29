@@ -25,7 +25,7 @@ public class Refill_fourth_VH extends ViewHolder implements
     private final View question_view;
     private final TextView second_question;
     private final String[] string_choices;
-    private final Answer answer = new Answer();
+    private Answer answer;
 
     @Override
     public void onPercentageClicked(int s) {
@@ -72,11 +72,39 @@ public class Refill_fourth_VH extends ViewHolder implements
         this.button_skip.setOnClickListener(new OnSkipClickListener());
         this.choices = itemView.findViewById(R.id.viewSelectionChoices);
         this.choices.setOnSingleItemSelectedListener(this);
-        this.string_choices = itemView
-                .getContext()
-                .getResources()
+        this.string_choices = itemView.getContext().getResources()
                 .getStringArray(R.array.refill_fourth_question_choices);
         choices.setDataSet ( string_choices );
+
+        answer = new Answer();
+    }
+
+    public void onUpdateUI(Answer answerDB) {
+        switch (answerDB.getChoice()){
+            case "a":{
+                choices.updateViewSelectionUI(0);
+                this.answer=answerDB;
+                break;
+            }
+            case "b":{
+                choices.updateViewSelectionUI(1);
+                this.answer=answerDB;
+                break;
+            }
+            case "c":{
+                choices.updateViewSelectionUI(2);
+                this.answer=answerDB;
+                break;
+            }
+            case "d":{
+                choices.updateViewSelectionUI(3);
+                this.answer=answerDB;
+                break;
+            }
+        }
+
+        button_next.setEnabled(true);
+        button_next.setBackgroundResource(R.drawable.enable_next_question);
     }
 
     public void setOnRefillFourthVHListener(OnRefillFourthVHListener onRefillFourthQuestionClickListener) {

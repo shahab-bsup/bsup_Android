@@ -104,8 +104,12 @@ public class Refill_third_Question extends Fragment implements
                                     .get ( 0 );
                             Log.d ( TAG, "onChanged: " + answerDB );
                         }
-                        viewHolder = new Refill_third_VH( view, answerDB );
+                        viewHolder = new Refill_third_VH( view );
                         viewHolder.setOnRefillThirdVHListener ( Refill_third_Question.this );
+
+                        if (answerDB!=null) {
+                            viewHolder.onUpdateUI(answerDB);
+                        }
                     }
 
                 } );

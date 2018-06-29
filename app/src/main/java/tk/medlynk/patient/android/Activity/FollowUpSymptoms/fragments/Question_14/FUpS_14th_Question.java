@@ -1,7 +1,11 @@
 package tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_14;
 
+import android.arch.lifecycle.LifecycleOwner;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,12 +13,18 @@ import android.view.ViewGroup;
 
 import com.neweraandroid.demo.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import tk.medlynk.patient.android.Activity.FollowUpSymptoms.OnFollowUpSymptomAnswerListener;
+import tk.medlynk.patient.android.Constants;
+import tk.medlynk.patient.android.DataBase.DataBaseModel;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.JsonConverter;
 import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.FollowUpSymptomResponse;
 import tk.medlynk.patient.android.Networking.MedlynkRequests;
+import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,12 +36,18 @@ import tk.medlynk.patient.android.Networking.MedlynkRequests;
  */
 public class FUpS_14th_Question extends Fragment implements
         FUpS_14th_VH.OnFUpSFourteenVHListener,
-OnFourteenFollowUpAnswerListener{
+        OnFollowUpSymptomAnswerListener {
 
     public static final String TAG = "FUpS_14th_Question";
 
     private OnFollowUpSymptomsFourteenQuestionListener mListener;
     private FUpS_14th_VH viewHolder;
+
+    private MedlynkViewModel mMedlynkViewModel;
+    private boolean existsRecord = false;
+    private List<Answer> answersDB;
+    private SharedPreferenceManager manager;
+    private List<Answer> answersForDB = new ArrayList<>();
 
     public FUpS_14th_Question() {
         // Required empty public constructor
@@ -58,9 +74,31 @@ OnFourteenFollowUpAnswerListener{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate ( R.layout.fragment_follow__up__symptoms_14th__question, container, false );
-        viewHolder = new FUpS_14th_VH( view );
-        viewHolder.setOnFUpSFourteenVHListener( this );
+        dbOperation(view);
         return view;
+    }
+
+    private void dbOperation(final View view) {
+        mMedlynkViewModel = ViewModelProviders.of ( getActivity () ).get ( MedlynkViewModel.class );
+        manager = new SharedPreferenceManager ( getActivity () );
+        mMedlynkViewModel.getAnswers ( manager.getAppointmentID (), Constants.FOLLOW_UP_SYMPTOMS_ROW,0, 14 )
+                .observe ( (LifecycleOwner) this, new Observer<DataBaseModel>() {
+                    @Override
+                    public void onChanged(@Nullable DataBaseModel dataBaseModel) {
+                        if (dataBaseModel != null) {
+                            existsRecord = true;
+                            answersDB = new ArrayList<>();
+                            JsonConverter JC = JsonConverter.getInstance ();
+                            answersDB = JC.answerJsonToAnswers ( dataBaseModel.getAnswerJson () );
+                        }
+                        viewHolder = new FUpS_14th_VH( view );
+                        viewHolder.setOnFUpSFourteenVHListener ( FUpS_14th_Question.this );
+                        if (answersDB!=null){
+                            viewHolder.onUpdateUI(answersDB);
+                        }
+                    }
+
+                } );
     }
 
 
@@ -85,9 +123,10 @@ OnFourteenFollowUpAnswerListener{
     public void onNextClick(List<Answer> answers) {
         System.out.println ( "FUpS_14th_Question.onNextClick" );
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
-        SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
-        MedlynkRequests.followUpSymptomFourteenAnswer ( getActivity (),
-                manager.getAppointmentID (), this, answers);
+        MedlynkRequests.followUpSymptomAnswer ( getActivity (),this,
+                manager.getAppointmentID (),"14" , answers);
+
+        answersForDB=answers;
     }
 
     @Override
@@ -100,20 +139,27 @@ OnFourteenFollowUpAnswerListener{
     public void onNextClick(Answer answer) {
         System.out.println("FUpS_14th_Question.onNextClick");
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
-        SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
-        MedlynkRequests.followUpSymptomFourteenAnswer ( getActivity (),
-                manager.getAppointmentID (), this, answer);
+        MedlynkRequests.followUpSymptomAnswer ( getActivity (),this,
+                manager.getAppointmentID (), "14", answer);
+
+        answersForDB.add(answer);
     }
 
     @Override
-    public void onThirteenAnswerSuccess(FollowUpSymptomResponse response) {
+    public void onAnswerSuccess(FollowUpSymptomResponse response) {
+        JsonConverter JC = JsonConverter.getInstance ();
+        if (existsRecord == false)
+            mMedlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (), Constants.FOLLOW_UP_SYMPTOMS_ROW,0, 14, JC.answersToAnswerJson ( answersForDB ) );
+        else
+            mMedlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (), Constants.FOLLOW_UP_SYMPTOMS_ROW,0, 14, JC.answersToAnswerJson ( answersForDB ) );
+
         System.out.println ( "FUpS_14th_Question.onThirteenAnswerSuccess" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onFourteenQuestion ();
     }
 
     @Override
-    public void onThirteenAnswerFailure() {
+    public void onAnswerFailure() {
         System.out.println ( "FUpS_14th_Question.onThirteenAnswerFailure" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
     }

@@ -21,9 +21,9 @@ public class Refill_fifth_VH extends ViewHolder implements OnSingleItemSelectedL
     private TextView question ;
     private View question_view;
     private String[] string_choices;
-    private final Answer answer = new Answer();
+    private Answer answer;
 
-    public Refill_fifth_VH(View itemView,Answer answerDB) {
+    public Refill_fifth_VH(View itemView) {
         super(itemView);
         progressBar =  itemView.findViewById( R.id.progress_bar);
         this.question_view = itemView.findViewById(R.id.refill_fifth_question);
@@ -40,23 +40,21 @@ public class Refill_fifth_VH extends ViewHolder implements OnSingleItemSelectedL
                 .getContext()
                 .getResources().getStringArray(R.array.yes_no);
         first.setDataSet ( string_choices );
-        if (answerDB!=null){
-            if (answerDB.getChoice().equals("a")){
-                first.updateViewSelectionUI(0);
-            }
-            else if(answerDB.getChoice().equals("b")){
-                first.updateViewSelectionUI(1);
-            }
-        }
 
-        if (answerDB!=null){
-            if (answerDB.getChoice().equals("a")){
-                first.updateViewSelectionUI(0);
-            }
-            else if(answerDB.getChoice().equals("b")){
-                first.updateViewSelectionUI(1);
-            }
+        answer = new Answer();
+    }
+
+    public void onUpdateUI(Answer answerDB) {
+
+        if (answerDB.getChoice().equals("a")){
+            first.updateViewSelectionUI(0);
         }
+        else if(answerDB.getChoice().equals("b")){
+            first.updateViewSelectionUI(1);
+        }
+        answer=answerDB;
+        button_next.setEnabled(true);
+        button_next.setBackgroundResource(R.drawable.enable_next_question);
     }
 
     public void setProgressBarVisibilityStatus( int status ){

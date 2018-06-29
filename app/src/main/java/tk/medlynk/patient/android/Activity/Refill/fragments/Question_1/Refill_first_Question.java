@@ -103,8 +103,12 @@ public class Refill_first_Question extends Fragment implements
                                     .get ( 0 );
                             Log.d ( TAG, "onChanged: " + answerDB );
                         }
-                        viewHolder = new Refill_first_VH( view, answerDB );
+                        viewHolder = new Refill_first_VH( view );
                         viewHolder.setRefillFirstQuestionClickListener ( Refill_first_Question.this );
+
+                        if(answerDB!=null){
+                            viewHolder.onUpdateUI(answerDB);
+                        }
                     }
 
                 } );

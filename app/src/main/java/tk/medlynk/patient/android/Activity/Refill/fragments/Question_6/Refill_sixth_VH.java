@@ -124,6 +124,32 @@ public class Refill_sixth_VH extends ViewHolder implements OnSingleItemSelectedL
         this.first.setOnClearStateListener(this);
     }
 
+    public void onUpdateUI( List<Answer> answerDB) {
+        for (Answer answer:answerDB) {
+            switch (answer.getChoice()){
+                case "a":{
+                    this.first.updateViewSelectionUI(0);
+                    this.answer=answer;
+                    break;
+                }
+                case "b":{
+                    String[] strings1 = {string_choices[1], answer.getReading()};
+                    this.second.setDataSet(strings1);
+                    this.second.updateViewSelectionUI(0);
+                    this.answers.add(answer);
+                    break;
+                }
+                case "c":{
+                    this.second.updateViewSelectionUI(1);
+                    this.answers.add(answer);
+                    break;
+                }
+            }
+        }
+
+
+    }
+
     public void setOnRefillSixthVHListener(OnRefillSixthVHListener onRefillSixthVHListener) {
         this.onRefillSixthVHListener = onRefillSixthVHListener;
     }

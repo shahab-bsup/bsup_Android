@@ -35,7 +35,7 @@ public class Refill_second_VH extends ViewHolder implements OnSingleItemSelected
     private final AppCompatEditText duration_input;
     private final Button days, weeks, months, years;
     private List<Button> buttons = new ArrayList<>();
-    private Answer answer = new Answer();
+    private Answer answer ;
 
     public Refill_second_VH(View itemView) {
         super(itemView);
@@ -79,6 +79,60 @@ public class Refill_second_VH extends ViewHolder implements OnSingleItemSelected
         duration_input = itemView.findViewById(R.id.duration_input);
         duration_input.setOnFocusChangeListener(new OnDurationFocusChangedListener());
 
+        answer = new Answer();
+    }
+
+    public void onUpdateUI(Answer answerDB) {
+        switch (answerDB.getChoice()){
+            case "a":{
+                first.updateViewSelectionUI(0);
+                this.answer=answerDB;
+                break;
+            }
+            case "b":{
+                first.updateViewSelectionUI(1);
+                this.answer=answerDB;
+                break;
+            }
+            case "c":{
+                first.updateViewSelectionUI(2);
+                this.answer=answerDB;
+                break;
+            }
+            case "d":{
+                first.updateViewSelectionUI(3);
+                this.answer=answerDB;
+                break;
+            }
+            case "e":{
+                duration_input.setText(String.valueOf(answerDB.getSince()));
+                days.callOnClick();
+                break;
+            }
+            case "f":{
+                duration_input.setText(String.valueOf(answerDB.getSince()));
+                weeks.callOnClick();
+                break;
+            }
+            case "g":{
+                duration_input.setText(String.valueOf(answerDB.getSince()));
+                months.callOnClick();
+                break;
+            }
+            case "h":{
+                duration_input.setText(String.valueOf(answerDB.getSince()));
+                years.callOnClick();
+                break;
+            }
+            case "i":{
+                second.updateViewSelectionUI(0);
+                this.answer=answerDB;
+                break;
+            }
+        }
+
+        button_next.setEnabled(true);
+        button_next.setBackgroundResource(R.drawable.enable_next_question);
     }
 
     public void setProgressBarVisibilityStatus(int status ){
@@ -178,22 +232,18 @@ public class Refill_second_VH extends ViewHolder implements OnSingleItemSelected
         switch (i){
             case 0:{
                 answer.setChoice("a");
-
                 break;
             }
             case 1:{
                 answer.setChoice("b");
-
                 break;
             }
             case 2:{
                 answer.setChoice("c");
-
                 break;
             }
             case 3:{
                 answer.setChoice("d");
-
                 break;
             }
         }

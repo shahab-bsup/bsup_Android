@@ -27,7 +27,6 @@ public class FUpS_5th_VH extends RecyclerView.ViewHolder implements ViewSelectio
     private final String[] string_choices;
     private OnFUpSFifthVHListener onFUpSFifthVHListener;
     private  Answer answer;
-    private TextView otherText;
     private String initial_other_text = "";
 
     public FUpS_5th_VH(View itemView) {
@@ -87,8 +86,6 @@ public class FUpS_5th_VH extends RecyclerView.ViewHolder implements ViewSelectio
             case "g":{
                 answer=answerDB;
                 choices.setSelect ( 6 );
-                setOtherTextVisibilityStatus ( View.VISIBLE );
-                setOtherText( answerDB.getOther () );
                 initial_other_text = answerDB.getOther ();
                 break;
             }
@@ -97,13 +94,9 @@ public class FUpS_5th_VH extends RecyclerView.ViewHolder implements ViewSelectio
         button_next.setBackgroundResource ( R.drawable.enable_next_question );
     }
 
-    private void setOtherTextVisibilityStatus(int status){
-        this.otherText.setVisibility ( status );
-    }
 
-    private void setOtherText(String other) {
-        this.otherText.setText ( other );
-    }
+
+
 
     public void setOnFUpSFifthVHListener(OnFUpSFifthVHListener onFUpSFifthVHListener) {
         this.onFUpSFifthVHListener = onFUpSFifthVHListener;
@@ -117,7 +110,6 @@ public class FUpS_5th_VH extends RecyclerView.ViewHolder implements ViewSelectio
     public void onSingleItemSelected(View view, int i) {
         System.out.println ( "FUpS_5th_VH.onSingleItemSelected" );
         if( i == -1 ){
-            setOtherTextVisibilityStatus ( View.GONE );
             button_next.setEnabled ( false );
             button_next.setBackgroundResource ( R.drawable.disable_next_question );
         }else{
@@ -131,7 +123,6 @@ public class FUpS_5th_VH extends RecyclerView.ViewHolder implements ViewSelectio
                 dialogBuilder.setOnDialogListener( this );
                 dialogBuilder.show ();
             }else{
-                setOtherTextVisibilityStatus ( View.GONE );
                 choices.unSelect ( 6 );
                 setAnswerChoice ( i );
             }
@@ -188,8 +179,6 @@ public class FUpS_5th_VH extends RecyclerView.ViewHolder implements ViewSelectio
         if( otherText.length () > 0 ){
             answer.setChoice ( "g" );
             answer.setOther ( otherText );
-            setOtherTextVisibilityStatus ( View.VISIBLE );
-            setOtherText ( otherText );
         }else{
             button_next.setEnabled(false);
             button_next.setBackgroundResource(R.drawable.disable_next_question);

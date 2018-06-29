@@ -166,8 +166,7 @@
     </string-array>
     <string-array name="refill_fourth_question_choices">
         <item>Hard to tell, I never han any symptoms</item>
-        <item>"Seems to be working well, 
- my symptoms are completely gone"</item>
+        <item>"Seems to be working well,my symptoms are completely gone"</item>
         <item>My symptoms are about %X better</item>
         <item>Does not seem to be working at all / my symptoms have not improved even a little</item>
     </string-array>
@@ -193,10 +192,10 @@
     <string-array name="FUpS_14th_choices">
         <item>Blood tests</item>
         <item>Urine tests</item>
-        <item>Imaging</item>
+       <!-- <item>Imaging</item>
         <item>Cardiac investigations</item>
         <item>Other</item>
-        <item>None of the above</item>
+        <item>None of the above</item>-->
     </string-array>
 
     <string-array name="FUpR_1th_choices">
