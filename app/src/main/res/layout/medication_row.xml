@@ -20,10 +20,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:background="@drawable/unselected_state"
+        android:background="@drawable/answer_not_selected"
         android:text="@string/delete_medication"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="10sp" />
+        android:textColor="@color/colorPrimary"
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/txtMedicationName"
@@ -41,7 +41,7 @@
         android:imeOptions="actionDone"
         android:inputType="text"
         android:padding="10dp"
-        android:textSize="10sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/medication_name_error"
@@ -55,7 +55,6 @@
 
     <TextView
         android:id="@+id/txtHowOften"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/medication_name_error"
@@ -65,50 +64,79 @@
     <LinearLayout
         android:id="@+id/how_often_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_below="@id/txtHowOften"
         android:orientation="horizontal">
 
-        <Button
+        <tk.medlynk.patient.android.CustomViews.CustomTextView
             android:id="@+id/how_often_per_direction"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@drawable/unselected_state"
+            android:background="@drawable/answer_not_selected"
+            android:ellipsize="marquee"
+            android:gravity="center"
             android:text="@string/how_often_medication_per_directions"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp" />
 
-            android:textSize="10sp" />
-
-        <Button
+        <tk.medlynk.patient.android.CustomViews.CustomTextView
             android:id="@+id/how_often_per_often"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@drawable/unselected_state"
+            android:background="@drawable/answer_not_selected"
+            android:ellipsize="marquee"
+            android:gravity="center"
             android:text="@string/how_often_medication_often"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp" />
+    </LinearLayout>
 
-            android:textSize="10sp" />
+    <LinearLayout
+        android:id="@+id/how_often_layout_second_row"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/how_often_layout"
+        android:orientation="horizontal">
 
-        <Button
+        <tk.medlynk.patient.android.CustomViews.CustomTextView
             android:id="@+id/how_often_per_occasionally"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_below="@id/how_often_layout"
+            android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@drawable/unselected_state"
-
+            android:background="@drawable/answer_not_selected"
+            android:ellipsize="marquee"
+            android:gravity="center"
             android:text="@string/how_often_medication_occasionally"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="10sp" />
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp" />
+
+        <tk.medlynk.patient.android.CustomViews.CustomTextView
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_below="@id/how_often_layout"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/answer_not_selected"
+            android:ellipsize="marquee"
+            android:gravity="center"
+            android:text="@string/how_often_medication_occasionally"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp"
+            android:visibility="invisible" />
+
     </LinearLayout>
 
     <TextView
         android:id="@+id/how_often_error"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/how_often_layout"
+        android:layout_below="@id/how_often_layout_second_row"
         android:text="@string/select_one_ooption"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="15sp"
@@ -116,7 +144,6 @@
 
     <TextView
         android:id="@+id/txtHowHelpFul"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/how_often_error"
@@ -124,51 +151,79 @@
         android:textSize="15sp" />
 
     <LinearLayout
-        android:id="@+id/how_helpful_layout"
+        android:id="@+id/how_helpful_layout_first_row"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_below="@id/txtHowHelpFul"
         android:orientation="horizontal">
 
-        <Button
+        <tk.medlynk.patient.android.CustomViews.CustomTextView
             android:id="@+id/how_helpful_helps_a_lot"
-
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
+            android:layout_margin="10dp"
             android:layout_weight="1"
-            android:background="@drawable/unselected_state"
+            android:background="@drawable/answer_not_selected"
+            android:ellipsize="marquee"
+            android:gravity="center"
             android:text="@string/how_helpful_medication_a_lot"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="10sp" />
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp" />
 
-        <Button
+        <tk.medlynk.patient.android.CustomViews.CustomTextView
             android:id="@+id/how_helpful_helps_a_little"
-
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
+            android:layout_margin="10dp"
             android:layout_weight="1"
-            android:background="@drawable/unselected_state"
+            android:background="@drawable/answer_not_selected"
+            android:ellipsize="marquee"
+            android:gravity="center"
             android:text="@string/how_helpful_medication_helps_a_little"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="10sp" />
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp" />
 
-        <Button
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/helpfully_layout_second_row"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/how_helpful_layout_first_row"
+        android:orientation="horizontal">
+
+        <tk.medlynk.patient.android.CustomViews.CustomTextView
             android:id="@+id/how_helpful_not_helping"
-
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
+            android:layout_margin="10dp"
             android:layout_weight="1"
-            android:background="@drawable/unselected_state"
+            android:background="@drawable/answer_not_selected"
+            android:ellipsize="marquee"
+            android:gravity="center"
             android:text="@string/how_helpful_medication_not_helping"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="10sp" />
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp" />
+
+        <tk.medlynk.patient.android.CustomViews.CustomTextView
+            android:id="@+id/how_helpful_unsure"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/answer_not_selected"
+            android:ellipsize="marquee"
+            android:gravity="center"
+            android:text="@string/how_helpful_medication_unsure"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/how_helpful_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/how_helpful_layout"
+        android:layout_below="@id/helpfully_layout_second_row"
         android:text="@string/select_one_ooption"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="15sp"
@@ -190,7 +245,7 @@
         android:imeOptions="actionDone"
         android:inputType="text"
         android:padding="10dp"
-        android:textSize="10sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/side_effect_error"
@@ -204,13 +259,12 @@
 
     <Button
         android:id="@+id/btnNoSideEffect"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/side_effect_error"
-        android:background="@drawable/unselected_state"
+        android:background="@drawable/answer_not_selected"
         android:text="None"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="10sp" />
+        android:textColor="@color/colorPrimary"
+        android:textSize="15sp" />
 
 </RelativeLayout>

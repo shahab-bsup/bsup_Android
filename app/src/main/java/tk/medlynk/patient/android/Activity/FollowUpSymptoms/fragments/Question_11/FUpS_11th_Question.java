@@ -1,8 +1,11 @@
 package tk.medlynk.patient.android.Activity.FollowUpSymptoms.fragments.Question_11;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,14 +14,20 @@ import android.widget.Toast;
 
 import com.neweraandroid.demo.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import tk.medlynk.patient.android.Activity.FollowUpSymptoms.FollowUpSymptomsActivity;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_13.NS_13th_VH;
+import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_13.NS_13th_question;
 import tk.medlynk.patient.android.Constants;
+import tk.medlynk.patient.android.DataBase.DataBaseModel;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.JsonConverter;
 import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.FollowUpSymptomResponse;
 import tk.medlynk.patient.android.Networking.MedlynkRequests;
+import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,6 +45,12 @@ public class FUpS_11th_Question extends Fragment implements
     private OnFollowUpSymptomsEleventhQuestionListener mListener;
     private OnFURFourteenQuestionInteractionListener mListenerFUR;
     private FUpS_11th_VH viewHolder;
+    private SharedPreferenceManager manager;
+    private MedlynkViewModel medlynkViewModel;
+    private boolean existRecord = false;
+    private List<Answer> answersForDB = new ArrayList<> (  );
+    private int tableNumber;
+    private int questionNumber;
 
     public FUpS_11th_Question() {
         // Required empty public constructor
@@ -61,17 +76,50 @@ public class FUpS_11th_Question extends Fragment implements
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate ( R.layout.fragment_follow__up__symptoms_11th__question, container, false );
+        manager = new SharedPreferenceManager ( getActivity () );
+        if (Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
+            tableNumber=Constants.FOLLOW_UP_SYMPTOMS_ROW;
+            questionNumber=11;
+        }
+        else {
+            tableNumber=Constants.FOLLOW_UP_RESULTS_ROW;
+            questionNumber=14;
+        }
+        dbOperation ( view );
         viewHolder = new FUpS_11th_VH( view );
         viewHolder.setOnFUpSEleventhVHListener( this );
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onEleventhQuestion ();
-        }
+    private void dbOperation(final View view) {
+        medlynkViewModel = ViewModelProviders.of ( getActivity () )
+                .get ( MedlynkViewModel.class );
+        medlynkViewModel.getAnswers ( manager.getAppointmentID (),
+                tableNumber,
+                0, questionNumber )
+                .observe ( this, new Observer<DataBaseModel> () {
+                    public List<Answer> answerDB;
+
+                    @Override
+                    public void onChanged(@Nullable DataBaseModel dataBaseModel) {
+                        if (dataBaseModel != null) {
+                            existRecord = true;
+                            JsonConverter jsonConverter =
+                                    JsonConverter.getInstance ();
+                            answerDB = new ArrayList<> ();
+                            answerDB = jsonConverter
+                                    .answerJsonToAnswers ( dataBaseModel
+                                            .getAnswerJson () );
+                        }
+                        viewHolder = new FUpS_11th_VH ( view );
+                        viewHolder.setOnFUpSEleventhVHListener ( FUpS_11th_Question.this );
+                        if (answerDB != null) {
+                            viewHolder.onUpdateUI ( answerDB );
+                        }
+                    }
+                } );
     }
+
 
     @Override
     public void onAttach(Context context) {
@@ -96,7 +144,6 @@ public class FUpS_11th_Question extends Fragment implements
 
     @Override
     public void onNextClicked(List<Answer> answers) {
-        System.out.println ( "FUpS_11th_Question.onNextClicked" );
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
         SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
         MedlynkRequests.followUpEleventhQuestionAnswer ( getActivity (),
@@ -104,11 +151,12 @@ public class FUpS_11th_Question extends Fragment implements
                 manager.getAppointmentID (),
                 answers
         );
+        answersForDB.clear ();
+        answersForDB.addAll ( answers );
     }
 
     @Override
     public void onNextClicked(Answer answer) {
-        System.out.println ( "FUpS_11th_Question.onNextClicked" );
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
         SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
         MedlynkRequests.followUpEleventhQuestionAnswer ( getActivity (),
@@ -116,12 +164,13 @@ public class FUpS_11th_Question extends Fragment implements
                 manager.getAppointmentID (),
                 answer
         );
+        answersForDB.clear ();
+        answersForDB.add ( answer );
     }
 
     @Override
     public void onSkipClicked() {
         if(Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
-            System.out.println("FUpS_11th_Question.onSkipClicked");
             mListener.onEleventhQuestion();
         }
         else {
@@ -131,8 +180,21 @@ public class FUpS_11th_Question extends Fragment implements
 
     @Override
     public void onEleventhAnswerSuccess(FollowUpSymptomResponse response) {
+        JsonConverter jsonConverter = JsonConverter.getInstance ();
+        if (existRecord) {
+            medlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (),
+                    tableNumber,
+                    0,
+                    questionNumber,
+                    jsonConverter.answersToAnswerJson ( answersForDB ) );
+        } else {
+            medlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (),
+                    tableNumber,
+                    0,
+                    questionNumber,
+                    jsonConverter.answersToAnswerJson ( answersForDB ) );
+        }
         if(Constants.Context_Tag.equals ( FollowUpSymptomsActivity.class.getSimpleName () )) {
-            System.out.println("FUpS_11th_Question.onEleventhAnswerSuccess");
             viewHolder.setProgressBarVisibilityStatus(View.GONE);
             mListener.onEleventhQuestion();
         }
@@ -144,7 +206,6 @@ public class FUpS_11th_Question extends Fragment implements
 
     @Override
     public void onEleventhAnswerFailure() {
-
         System.out.println("FUpS_11th_Question.onEleventhAnswerFailure");
         viewHolder.setProgressBarVisibilityStatus(View.GONE);
         Toast.makeText ( getActivity (), "try again later!", Toast.LENGTH_SHORT ).show ();

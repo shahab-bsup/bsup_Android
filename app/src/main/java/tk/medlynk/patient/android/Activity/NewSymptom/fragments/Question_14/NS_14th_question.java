@@ -163,21 +163,29 @@ public class NS_14th_question extends Fragment implements
         if (existsRecord) {
             if (answerDB.size () > 0) {
                 medlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (),
-                        Constants.NEW_SYMPTOM_ROW,0, 14,
+                        Constants.NEW_SYMPTOM_ROW,
+                        0,
+                        14,
                         jsonConverter.answersToAnswerJson ( answerDB ) );
             } else {
                 medlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (),
-                        Constants.NEW_SYMPTOM_ROW, 0,14,
+                        Constants.NEW_SYMPTOM_ROW,
+                        0,
+                        14,
                         jsonConverter.medicationsToMedicationJson ( medicationsDB ) );
             }
         } else {
             if (answerDB.size () > 0) {
                 medlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (),
-                        Constants.NEW_SYMPTOM_ROW,0, 14,
+                        Constants.NEW_SYMPTOM_ROW,
+                        0,
+                        14,
                         jsonConverter.answersToAnswerJson ( answerDB ) );
             } else {
                 medlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (),
-                        Constants.NEW_SYMPTOM_ROW,0, 14,
+                        Constants.NEW_SYMPTOM_ROW,
+                        0,
+                        14,
                         jsonConverter.medicationsToMedicationJson ( medicationsDB ) );
             }
         }

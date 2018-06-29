@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
+    <tk.medlynk.patient.android.CustomViews.CustomTextView
         android:id="@+id/expand_button"
-        style="@style/TextAppearance.AppCompat.Medium"
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:elevation="6dp"
-        android:foreground="?selectableItemBackground"
-        android:padding="16dp" />
+        android:background="@drawable/answer_not_selected"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:gravity="center"
+        android:text="shahab"
+        android:padding="10dp" />
 
     <net.cachapa.expandablelayout.ExpandableLayout
         android:id="@+id/expandable_layout"
@@ -22,8 +25,8 @@
         app:el_expanded="false">
 
         <include
-            layout="@layout/sub_choices_row"
             android:id="@+id/subchoices_row"
+            layout="@layout/sub_choices_row"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

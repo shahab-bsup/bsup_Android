@@ -79,7 +79,7 @@
             android:layout_margin="10dp"
             android:layout_toRightOf="@id/months"
             android:background="@drawable/answer_not_selected"
-            android:text="Days"
+            android:text="Years"
             android:textColor="@color/white" />
     </RelativeLayout>
 

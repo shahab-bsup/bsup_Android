@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:background="@color/white"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context="tk.medlynk.patient.android.Activity.NewSymptom.NewSymptomActivity">
 
-    <include android:id="@+id/new_symptom_toolbar_layout"
+    <include
+        android:id="@+id/new_symptom_toolbar_layout"
         layout="@layout/toolbar_layout_2"></include>
 
     <FrameLayout
-        android:layout_below="@id/new_symptom_toolbar_layout"
-        android:layout_marginTop="20dp"
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/fragment_container">
-    </FrameLayout>
+        android:layout_below="@id/new_symptom_toolbar_layout"
+        android:layout_marginTop="20dp"></FrameLayout>
 
 </LinearLayout>

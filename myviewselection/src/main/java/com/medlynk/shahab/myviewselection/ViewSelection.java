@@ -26,14 +26,9 @@ public class ViewSelection extends LinearLayout {
     private int selected_text_color;
     private int unselected_text_color;
     private int unselectable_text_color;
-    private OnHelpfullyOptionClickListener onHelpfullyOptionClickListener;
-    private OnSingleItemSelectedListener onSingleItemSelectedListener;
     private OnClearStateListener onClearStateListener;
-    private OnMultiItemSelectedListener onMultiItemSelectedListener;
     private Context context;
     private RegularAdapter regularAdapter;
-    private boolean isHelpfullyAdapter = false;
-    private HelpfullyAdapter helpfullyAdapter;
 
     public ViewSelection(Context context) {
         super ( context );
@@ -51,17 +46,6 @@ public class ViewSelection extends LinearLayout {
         makeView ( context, attrs );
     }
 
-    public void setOnHelpfullyOptionClickListener(OnHelpfullyOptionClickListener
-                                                          onHelpfullyOptionClickListener) {
-        this.onHelpfullyOptionClickListener = onHelpfullyOptionClickListener;
-        helpfullyAdapter.setOnHelpfullyClickListener(
-                onHelpfullyOptionClickListener);
-    }
-
-    public void showHelpfullyError(int position, int visibility_status){
-        helpfullyAdapter.presentHelpfullyError ( position, visibility_status );
-    }
-
     public void setOnClearStateListener(OnClearStateListener onClearStateListener) {
         this.onClearStateListener = onClearStateListener;
     }
@@ -75,10 +59,9 @@ public class ViewSelection extends LinearLayout {
         if (onMultiItemSelectedListener == null) {
             throw new RuntimeException ( context.toString () + " must implement " +
                     ViewSelection.OnMultiItemSelectedListener.class.getSimpleName () );
-        } else if( !isHelpfullyAdapter ) {
-            regularAdapter.setOnMultiItemSelectedListener ( this, onMultiItemSelectedListener );
         } else {
-            helpfullyAdapter.setOnMultiItemSelectedListener ( this, onMultiItemSelectedListener );
+            regularAdapter.setOnMultiItemSelectedListener ( this,
+                    onMultiItemSelectedListener );
         }
     }
 
@@ -117,7 +100,6 @@ public class ViewSelection extends LinearLayout {
         unselectable_text_color = typedArray.getInt ( R.styleable.ViewSelection_unselectable_text_color, R.color.unselectable_text_color );
         selectable = typedArray.getBoolean ( R.styleable.ViewSelection_selectable, false );
         single_select = typedArray.getBoolean ( R.styleable.ViewSelection_single_select, false );
-        isHelpfullyAdapter = typedArray.getBoolean ( R.styleable.ViewSelection_helpfully_adapter, false );
         numOfViews = typedArray.getInt ( R.styleable.ViewSelection_number_of_views, 1 );
         button_type = typedArray.getBoolean ( R.styleable.ViewSelection_button_type, false );
         edittext_type = typedArray.getBoolean ( R.styleable.ViewSelection_edittext_type, false );
@@ -134,17 +116,9 @@ public class ViewSelection extends LinearLayout {
                 .setTextViewType ( true );
         SelectionPolicy selectionPolicy = builder.build ();
 
-        if (isHelpfullyAdapter) {
-            helpfullyAdapter = new
-                    HelpfullyAdapter ( context, selectionPolicy );
-            recyclerView.setAdapter ( helpfullyAdapter );
-            linearLayout.addView ( recyclerView );
-        } else {
-            regularAdapter = new RegularAdapter ( context, selectionPolicy );
-            recyclerView.setAdapter ( regularAdapter );
-            linearLayout.addView ( recyclerView );
-        }
-
+        regularAdapter = new RegularAdapter ( context, selectionPolicy );
+        recyclerView.setAdapter ( regularAdapter );
+        linearLayout.addView ( recyclerView );
     }
 
     public void updateViewSelectionUI(int numOfView) {
@@ -152,21 +126,15 @@ public class ViewSelection extends LinearLayout {
     }
 
     public void setDataSet(String[] strings) {
-        if(isHelpfullyAdapter){
-            helpfullyAdapter.setDataSet ( strings );
-        }else{
-            regularAdapter.setDataSet ( strings );
-        }
+        regularAdapter.setDataSet ( strings );
     }
 
     public void setClear() {
         if (onClearStateListener == null) {
             throw new RuntimeException ( getCurrentContext ().toString () + "" +
                     " must implement OnClearStateListener" );
-        } else if( !isHelpfullyAdapter ){
+        } else  {
             regularAdapter.clearSelectionHistory ();
-        } else{
-            helpfullyAdapter.clearSelectionHistory ();
         }
         onClearStateListener.onClearState ( ViewSelection.this );
     }
@@ -177,11 +145,8 @@ public class ViewSelection extends LinearLayout {
 
     public interface OnMultiItemSelectedListener {
         void onMultiItemSelected(View view, Integer position);
-        void onMultiItemDeselected(View view, Integer position);
-    }
 
-    public interface OnHelpfullyOptionClickListener{
-        void onHelpfullyClicked(int position, int helpfully_option);
+        void onMultiItemDeselected(View view, Integer position);
     }
 
     public interface OnClearStateListener {

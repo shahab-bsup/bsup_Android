@@ -54,30 +54,22 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <com.medlynk.shahab.myviewselection.ViewSelection
-                            android:id="@+id/viewSelectionFirst"
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycler_view_ns13"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:selectable="true"
-                            app:helpfully_adapter="true"
-                            app:selected_background="@drawable/answer_selected"
-                            app:selected_text_color="@color/black"
-                            app:single_select="false"
-                            app:unselected_background="@drawable/answer_not_selected"
-                            app:unselected_text_color="@color/colorPrimary" />
+                            android:layout_height="wrap_content" />
 
-                        <com.medlynk.shahab.myviewselection.ViewSelection
-                            android:id="@+id/viewSelectionSecond"
-                            android:layout_width="match_parent"
+                        <tk.medlynk.patient.android.CustomViews.CustomTextView
+                            android:id="@+id/not_tried_anyone_above"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:button_type="true"
-                            app:number_of_views="1"
-                            app:selectable="true"
-                            app:selected_background="@drawable/answer_selected"
-                            app:selected_text_color="@color/white"
-                            app:single_select="true"
-                            app:unselected_background="@drawable/answer_not_selected"
-                            app:unselected_text_color="@color/colorPrimary" />
+                            android:background="@drawable/answer_not_selected"
+                            android:layout_margin="5dp"
+                            android:padding="10dp"
+                            android:textColor="@color/colorPrimary"
+                            android:text="@string/have_not_tried"
+                            />
+
                     </LinearLayout>
 
                 </LinearLayout>

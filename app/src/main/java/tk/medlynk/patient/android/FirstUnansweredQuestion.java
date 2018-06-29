@@ -30,8 +30,12 @@ public class FirstUnansweredQuestion {
     private FirstUnansweredQuestion() {
     }
 
-    public void takeFirstUnansweredQuestion( FragmentActivity activity, final OnFirstUnansweredQuestionListener listener,
-                                             int appointmentId, int tableNumber, int questionSetId,final int questionNumbers ){
+    public void takeFirstUnansweredQuestion( FragmentActivity activity,
+                                             final OnFirstUnansweredQuestionListener listener,
+                                             int appointmentId,
+                                             int tableNumber,
+                                             int questionSetId,
+                                             final int questionNumbers ){
         runFunction=true;
         mMedlynkViewModel = ViewModelProviders.of(activity).get ( MedlynkViewModel.class );
         mMedlynkViewModel.getAnswersList(appointmentId,tableNumber,questionSetId)

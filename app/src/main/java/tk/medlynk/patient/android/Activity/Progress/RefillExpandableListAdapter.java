@@ -21,7 +21,8 @@ public class RefillExpandableListAdapter extends BaseExpandableListAdapter {
     private List<String> expandableListTitle;
     private List<ProgressInfo> expandableListDetail;
 
-    public RefillExpandableListAdapter(Context context,String refillExpandableListTitle,
+    public RefillExpandableListAdapter(Context context,
+                                       String refillExpandableListTitle,
                                        List<ProgressInfo> refillExpandableDetail ){
         this.context=context;
         this.expandableListTitle.add(refillExpandableListTitle);

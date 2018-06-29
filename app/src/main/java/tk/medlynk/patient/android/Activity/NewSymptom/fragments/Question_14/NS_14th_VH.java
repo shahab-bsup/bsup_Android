@@ -29,7 +29,7 @@ public class NS_14th_VH extends RecyclerView.ViewHolder implements
     private View question_view;
     private Button button_next;
     private Button button_skip;
-    private Button add_a_medication;
+    private TextView add_a_medication;
     private TextView question;
     private ViewSelection choice;
     private OnFourteenNSVHListener onFourteenNSVHListener;

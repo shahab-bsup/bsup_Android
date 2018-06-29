@@ -31,6 +31,9 @@ public class NewSymptomAnswerResponse implements Serializable {
     @SerializedName("answer")
     @Expose
     private Answer answer;
+    @SerializedName("answers")
+    @Expose
+    private Answer answers;
     @SerializedName("created_at")
     @Expose
     private String createdAt;

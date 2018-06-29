@@ -1,47 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/helps_a_lot"
+    <LinearLayout
+        android:id="@+id/first_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <tk.medlynk.patient.android.CustomViews.CustomTextView
+            android:id="@+id/helps_a_lot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Helps a lot"
+            android:textSize="15sp" />
+
+        <tk.medlynk.patient.android.CustomViews.CustomTextView
+            android:id="@+id/helps_a_little"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Helps a little"
+            android:textSize="15sp" />
+
+        <tk.medlynk.patient.android.CustomViews.CustomTextView
+            android:id="@+id/not_helping"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Not helping"
+            android:textSize="15sp" />
+
+        <tk.medlynk.patient.android.CustomViews.CustomTextView
+            android:id="@+id/unsure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Unsure"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <tk.medlynk.patient.android.CustomViews.CustomTextView
+        android:id="@+id/subChoiceError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_below="@+id/first_row"
+        android:layout_margin="10dp"
         android:gravity="center"
         android:padding="10dp"
-        android:text="Helps a lot"
+        android:visibility="gone"
+        android:text="@string/choose_one_helpfully_option"
+        android:textColor="@android:color/holo_green_light"
         android:textSize="15sp" />
 
-    <TextView
-        android:id="@+id/helps_a_little"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="Helps a little"
-        android:textSize="15sp" />
-
-    <TextView
-        android:id="@+id/not_helping"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="Not helping"
-        android:textSize="15sp" />
-
-    <TextView
-        android:id="@+id/unsure"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="Unsure"
-        android:textSize="15sp" />
-
-</LinearLayout>
+</RelativeLayout>

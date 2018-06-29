@@ -1,7 +1,10 @@
 package tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_13;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,13 +12,18 @@ import android.view.ViewGroup;
 
 import com.neweraandroid.demo.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import tk.medlynk.patient.android.Activity.NewSymptom.OnNewSymptomAnswerListener;
+import tk.medlynk.patient.android.Constants;
+import tk.medlynk.patient.android.DataBase.DataBaseModel;
 import tk.medlynk.patient.android.Essentials.SharedPreferenceManager;
+import tk.medlynk.patient.android.JsonConverter;
 import tk.medlynk.patient.android.Model.Answer;
 import tk.medlynk.patient.android.Model.NewSymptomAnswerResponse;
 import tk.medlynk.patient.android.Networking.MedlynkRequests;
+import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,6 +40,11 @@ public class NS_13th_question extends Fragment implements
 
     private OnNewSymptomThirteenQuestionListener mListener;
     private NS_13th_VH viewHolder;
+    private SharedPreferenceManager manager;
+    private boolean existRecord = false;
+    private List<Answer> answerDB;
+    private List<Answer> answersForDB = new ArrayList<> ();
+    private MedlynkViewModel medlynkViewModel;
 
     public NS_13th_question() {
         // Required empty public constructor...
@@ -58,13 +71,36 @@ public class NS_13th_question extends Fragment implements
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate ( R.layout.fragment_new__symptom_13th_question, container, false );
+        manager = new SharedPreferenceManager ( getActivity () );
         dbOperation ( view );
         return view;
     }
 
-    private void dbOperation(View view) {
-        viewHolder = new NS_13th_VH ( view );
-        viewHolder.setOnThirteenNSVHListener ( this );
+    private void dbOperation(final View view) {
+        medlynkViewModel = ViewModelProviders.of ( getActivity () )
+                .get ( MedlynkViewModel.class );
+        medlynkViewModel.getAnswers ( manager.getAppointmentID (),
+                Constants.NEW_SYMPTOM_ROW,
+                0, 13 )
+                .observe ( this, new Observer<DataBaseModel> () {
+                    @Override
+                    public void onChanged(@Nullable DataBaseModel dataBaseModel) {
+                        if (dataBaseModel != null) {
+                            existRecord = true;
+                            JsonConverter jsonConverter =
+                                    JsonConverter.getInstance ();
+                            answerDB = new ArrayList<> ();
+                            answerDB = jsonConverter
+                                    .answerJsonToAnswers ( dataBaseModel
+                                            .getAnswerJson () );
+                        }
+                        viewHolder = new NS_13th_VH ( view );
+                        viewHolder.setOnThirteenNSVHListener ( NS_13th_question.this );
+                        if (answerDB != null) {
+                            viewHolder.onUpdateUI ( answerDB );
+                        }
+                    }
+                } );
     }
 
     @Override
@@ -79,6 +115,11 @@ public class NS_13th_question extends Fragment implements
     }
 
     @Override
+    public void onResume() {
+        super.onResume ();
+    }
+
+    @Override
     public void onDetach() {
         super.onDetach ();
         mListener = null;
@@ -87,20 +128,23 @@ public class NS_13th_question extends Fragment implements
     @Override
     public void onNextClicked(Answer answer) {
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
-        SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
         MedlynkRequests.newSymptomQuestionsAnswer ( getActivity (), NS_13th_question.this,
-                manager.getAppointmentID (),"13",
-                answer
-        );
+                manager.getAppointmentID (), "13",
+                answer );
+        answersForDB.clear ();
+        answersForDB.add ( answer );
     }
 
     @Override
     public void onNextClicked(List<Answer> answers) {
         viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
-        SharedPreferenceManager manager = new SharedPreferenceManager ( getActivity () );
-        MedlynkRequests.newSymptomQuestionsAnswer ( getActivity (), NS_13th_question.this,
-                manager.getAppointmentID (),"13",
+        MedlynkRequests.newSymptomQuestionsAnswer ( getActivity (),
+                NS_13th_question.this,
+                manager.getAppointmentID (),
+                "13",
                 answers );
+        answersForDB.clear ();
+        answersForDB.addAll ( answers );
     }
 
     @Override
@@ -110,6 +154,18 @@ public class NS_13th_question extends Fragment implements
 
     @Override
     public void onAnswerSuccess(NewSymptomAnswerResponse response) {
+        JsonConverter jsonConverter = JsonConverter.getInstance ();
+        if (existRecord) {
+            medlynkViewModel.updateAnswersToDB ( manager.getAppointmentID (),
+                    Constants.NEW_SYMPTOM_ROW, 0,
+                    13,
+                    jsonConverter.answersToAnswerJson ( answersForDB ) );
+        } else {
+            medlynkViewModel.insertAnswersToDB ( manager.getAppointmentID (),
+                    Constants.NEW_SYMPTOM_ROW, 0,
+                    13,
+                    jsonConverter.answersToAnswerJson ( answersForDB ) );
+        }
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onThirteenQuestion ();
     }

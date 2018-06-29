@@ -41,7 +41,9 @@ import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
  * Use the {@link NS_1th_question#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NS_1th_question extends Fragment implements View.OnClickListener, OnNewSymptomAnswerListener {
+public class NS_1th_question extends Fragment implements
+        View.OnClickListener,
+        OnNewSymptomAnswerListener {
 
     private MedlynkViewModel mMedlynkViewModel;
     private boolean existsRecord = false;

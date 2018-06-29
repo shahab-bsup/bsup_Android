@@ -134,7 +134,8 @@ public class FUpS_10th_Question extends Fragment
     @Override
     public void onNextClicked(Answer answer) {
         viewHolder.setProgressBarVisibilityStatus(View.VISIBLE);
-        MedlynkRequests.followUpSymptomAnswer(getActivity(), FUpS_10th_Question.this,
+        MedlynkRequests.followUpSymptomAnswer(getActivity(),
+                FUpS_10th_Question.this,
                 manager.getAppointmentID(),"10",
                 answer);
         answersDB.clear();

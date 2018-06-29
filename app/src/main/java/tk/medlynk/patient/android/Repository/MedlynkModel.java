@@ -50,7 +50,11 @@ public class MedlynkModel {
         new InsertAsyncTask ( mAnswerDao ).execute ( answerRecord );
     }
 
-    public void UpdateAnswerRecord(int appointmentId, int tableNumber, int questionSetId, int questionNumber,String answersJson){
+    public void UpdateAnswerRecord(int appointmentId,
+                                   int tableNumber,
+                                   int questionSetId,
+                                   int questionNumber,
+                                   String answersJson){
 
         DataBaseModel answerRecord=new DataBaseModel ();
         answerRecord.setAppointmentId ( appointmentId );

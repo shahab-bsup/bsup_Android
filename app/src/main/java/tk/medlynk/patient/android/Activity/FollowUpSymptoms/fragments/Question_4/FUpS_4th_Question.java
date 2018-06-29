@@ -95,7 +95,8 @@ public class FUpS_4th_Question extends Fragment implements
     private void dbOperation(final View view) {
         mMedlynkViewModel = ViewModelProviders.of(getActivity()).get(MedlynkViewModel.class);
         manager = new SharedPreferenceManager(getActivity());
-        mMedlynkViewModel.getAnswers(manager.getAppointmentID(), tableNumber,0, questionNumber)
+        mMedlynkViewModel.getAnswers(manager.getAppointmentID(),
+                tableNumber,0, questionNumber)
                 .observe((LifecycleOwner) this, new Observer<DataBaseModel>() {
                     @Override
                     public void onChanged(@Nullable DataBaseModel dataBaseModel) {

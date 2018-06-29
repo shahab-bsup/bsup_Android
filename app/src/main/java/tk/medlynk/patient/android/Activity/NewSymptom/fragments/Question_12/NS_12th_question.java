@@ -137,27 +137,23 @@ import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
                     12,
                     JC.answersToAnswerJson(answersForDB));
 
-        System.out.println ( "NS_12th_question.onTwelveAnswerSuccess" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         mListener.onTwelveQuestion ();
     }
 
     @Override
     public void onAnswerFailure() {
-        System.out.println ( "NS_12th_question.onTwelveAnswerFailure" );
         viewHolder.setProgressBarVisibilityStatus ( View.GONE );
         Toast.makeText ( getActivity (), "try again later!", Toast.LENGTH_SHORT ).show ();
     }
 
         @Override
         public void onUnauthorized() {
-            System.out.println ( "NS_12th_question.onUnauthorized" );
 
         }
 
         @Override
         public void onNextClicked(Answer answer) {
-            System.out.println ( "NS_12th_question.onNextClicked" );
             viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
             MedlynkRequests.newSymptomQuestionsAnswer ( getActivity (),
                     NS_12th_question.this,
@@ -170,8 +166,6 @@ import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
 
         @Override
         public void onNextClicked(List<Answer> answers) {
-            System.out.println ( "NS_12th_question.onNextClicked" );
-            System.out.println ("list of answers");
             viewHolder.setProgressBarVisibilityStatus ( View.VISIBLE );
             MedlynkRequests.newSymptomQuestionsAnswer ( getActivity (), NS_12th_question.this,
                     manager.getAppointmentID (),"12",
@@ -184,7 +178,6 @@ import tk.medlynk.patient.android.ViewModel.MedlynkViewModel;
 
         @Override
         public void onSkipClicked() {
-            System.out.println ( "NS_12th_question.onSkipClicked" );
             mListener.onTwelveQuestion ();
         }
 

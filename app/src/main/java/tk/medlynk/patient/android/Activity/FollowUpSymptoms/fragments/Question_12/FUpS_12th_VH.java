@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.medlynk.shahab.myviewselection.ViewSelection;
 import com.neweraandroid.demo.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import tk.medlynk.patient.android.Activity.NewSymptom.fragments.Question_14.NS_14th_VH;
@@ -25,37 +26,36 @@ public class FUpS_12th_VH extends RecyclerView.ViewHolder implements ViewSelecti
 
     private final ProgressBar progressBar;
     private final View question_view;
-    private final TextView second_question;
     private final Button button_next;
     private final Button button_skip;
-    private Button add_a_medication;
+    private TextView add_a_medication;
     private ViewSelection choice;
     private RecyclerView medications;
     private MedicationsAdapter medicationAdapter;
     private Answer answer;
+    private List<Medication> answers;
+    private TextView question;
     private OnFUpSTwelveVHListener onFUpSTwelveVHListener;
 
     public FUpS_12th_VH(View itemView) {
         super ( itemView );
-        answer = new Answer ();
         progressBar = itemView.findViewById ( R.id.progress_bar );
-        question_view = itemView.findViewById ( R.id.follow_up_symptoms_twelve_question );
-        second_question = question_view.findViewById ( R.id.txtQuestion );
-        second_question.setText ( itemView.getContext ().getString ( R.string.follow_up_symptoms_12th_question ) );
+        answers = new ArrayList<> ();
+        answer = new Answer ();
+        question_view = itemView.findViewById ( R.id.new_symptom_fourteen_question );
+        question = question_view.findViewById ( R.id.txtQuestion );
+        question.setText ( R.string.new_symptom_fourteen_question );
         button_next = itemView.findViewById ( R.id.btnNextQuestion );
-        button_next.setOnClickListener ( new OnNextButtonClickListener () );
+        button_next.setOnClickListener ( new OnNextClickListener () );
         button_next.setEnabled ( false );
         button_skip = itemView.findViewById ( R.id.btnSkipQuestion );
         button_skip.setOnClickListener ( new OnSkipClickListener () );
         choice = itemView.findViewById ( R.id.viewSelectionChoices );
-
-        //I know this is bad! Do not blame me please:D
         String[] strings = {itemView
                 .getContext ()
                 .getResources ()
                 .getString ( R.string.question_14 )};
         choice.setDataSet ( strings );
-
         choice.setOnSingleItemSelectedListener ( this );
         choice.setOnClearStateListener ( this );
         add_a_medication = itemView.findViewById ( R.id.add_medication );
@@ -73,7 +73,6 @@ public class FUpS_12th_VH extends RecyclerView.ViewHolder implements ViewSelecti
 
     @Override
     public void onSingleItemSelected(View view, int position) {
-        System.out.println ( "FUpS_12th_VH.onSingleItemSelected" );
         if (position == 0) {
             answer.setChoice ( "a" );
             button_next.setEnabled ( true );
@@ -87,22 +86,30 @@ public class FUpS_12th_VH extends RecyclerView.ViewHolder implements ViewSelecti
 
     @Override
     public void onEmptyMedication() {
-        System.out.println ( "FUpS_12th_VH.onEmptyMedication" );
         button_next.setEnabled ( false );
         button_next.setBackgroundResource ( R.drawable.enable_next_question );
     }
 
     @Override
     public void onClearState(View view) {
-        System.out.println ( "FUpS_12th_VH.onClearState" );
         answer = new Answer ();
     }
 
-    private class OnNextButtonClickListener implements View.OnClickListener {
+    public void onUpdateUI(List<Medication> answers) {
+        for (Medication medication : answers) {
+            medicationAdapter.setMedications ( medication );
+        }
+        button_next.setEnabled ( true );
+        button_next.setBackgroundResource ( R.drawable.enable_next_question );
+    }
+
+    public void onUpdateUI(Answer answer) {
+        choice.updateViewSelectionUI(  0);
+    }
+
+    private class OnNextClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println ( "FUpS_12th_VH.FUpS_12th_VH" );
-            System.out.println ( "OnNextButtonClickListener.onClick" );
             if (medicationAdapter.getDataSet ().size () > 0) {
                 boolean hasError = false;
                 for (Medication medication : medicationAdapter.getDataSet ()) {
@@ -144,8 +151,6 @@ public class FUpS_12th_VH extends RecyclerView.ViewHolder implements ViewSelecti
     private class OnSkipClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println ( "FUpS_12th_VH.FUpS_12th_VH" );
-            System.out.println ( "OnSkipClickListener.onClick" );
             onFUpSTwelveVHListener.onSkipClicked ();
         }
     }
@@ -163,7 +168,6 @@ public class FUpS_12th_VH extends RecyclerView.ViewHolder implements ViewSelecti
     private class OnAddAMedicationClicked implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println ( "OnAddAMedicationClicked.onClick" );
             choice.setClear ();
             medicationAdapter.setMedications ( new Medication () );
             if( medicationAdapter.getDataSet ().size () == 1 ){

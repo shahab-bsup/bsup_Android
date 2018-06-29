@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import kotlin.jvm.Transient;
+
 /**
  * Created by Shahab on 3/24/2018.
  */
@@ -29,9 +31,13 @@ public class Medication implements Serializable {
     @Expose
     private String sideEffects = "";
 
+    @Transient
     private boolean frequentlyError;
+    @Transient
     private boolean helpfullyError;
+    @Transient
     private boolean sideEffectError;
+    @Transient
     private boolean nameError ;
 
     public boolean isFrequentlyError() {

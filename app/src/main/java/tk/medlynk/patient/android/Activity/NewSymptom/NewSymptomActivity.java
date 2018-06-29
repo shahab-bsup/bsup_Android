@@ -81,20 +81,28 @@ public class NewSymptomActivity extends AppCompatActivity implements
         });
 
         manager = new SharedPreferenceManager(this);
-        FirstUnansweredQuestion firstUnansweredQuestion = FirstUnansweredQuestion.getInstance();
+        FirstUnansweredQuestion firstUnansweredQuestion =
+                FirstUnansweredQuestion.getInstance();
 
         firstUnansweredQuestion.takeFirstUnansweredQuestion(this, this,
-                manager.getAppointmentID(), Constants.NEW_SYMPTOM_ROW, 0, Constants.NEW_SYMPTOM_QUESTIONS_NUMBER);
+                manager.getAppointmentID(),
+                Constants.NEW_SYMPTOM_ROW,
+                0,
+                Constants.NEW_SYMPTOM_QUESTIONS_NUMBER);
 
     }
 
     @Override
     public void onIntroFragmentInteraction() {
         Log.d(TAG, "onIntroFragmentInteraction: ");
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager()
+                .beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.in_right, R.anim.out_right)
-                .remove(getSupportFragmentManager().findFragmentByTag(IntroFragment.TAG))
-                .add(R.id.fragment_container, new NS_1th_question(), NS_1th_question.TAG)
+                .remove(getSupportFragmentManager()
+                        .findFragmentByTag(IntroFragment.TAG))
+                .add(R.id.fragment_container,
+                        new NS_1th_question(),
+                        NS_1th_question.TAG)
                 .commitNow();
     }
 
